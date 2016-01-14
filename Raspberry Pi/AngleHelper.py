@@ -30,7 +30,7 @@ class AngleHelper(object):
         :param CUW: The current U width as it looks in the camera (in pixels).
         '''
         side3 = self.UWIDTH
-        side1 = DFC
-        side2 = DFC + (1-(CUW/self.CameraUWidth))*self.UWIDTH
+        side1 = DFC #This is not what we have talked about. I think you have to get DFC1 and DFC2 
+        side2 = DFC + (1-(CUW/self.CameraUWidth))*self.UWIDTH #why is this right?
         return 180 - degrees(acos(radians((side1**2 + side3**2 - side2**2)/(2*side1*side3))))
         # This method is not 100% accurate, but it is close to that.
