@@ -7,19 +7,28 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 
-public class Sensors 
+public class Sensors
 {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
-	
-	public IMUAdvanced navx;
-	SerialPort serial_port;
-	
-	public Sensors ()
+
+	AHRS ahrs;
+
+	public Sensors()
 	{
-		serial_port = new SerialPort(57600, SerialPort.Port.kMXP);
-		navx = new IMUAdvanced(serial_port);
+		try
+		{
+			ahrs = new AHRS(SPI.Port.kMXP);
+		}
+		catch (RuntimeException ex)
+		{
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
 	}
 }
