@@ -9,16 +9,19 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SerialPort;
 
 public class Sensors
 {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
-	AHRS ahrs;
+	public AHRS ahrs;
+	
+	public Counter flywheelCounter;
 
 	public Sensors()
 	{
@@ -30,5 +33,8 @@ public class Sensors
 		{
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+		
+		flywheelCounter = new Counter(0);
+		flywheelCounter.setDistancePerPulse(1/6); //6 bolts per round
 	}
 }

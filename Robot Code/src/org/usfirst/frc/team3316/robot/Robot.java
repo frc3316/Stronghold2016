@@ -9,6 +9,7 @@ import org.usfirst.frc.team3316.robot.humanIO.SDB;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
+import org.usfirst.frc.team3316.robot.subsystems.Flywheel;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -42,6 +43,7 @@ public class Robot extends IterativeRobot
     /*
      * Subsystems
      */
+    public static Flywheel flywheel;
     
     Command autonomousCommand;
 
@@ -51,47 +53,34 @@ public class Robot extends IterativeRobot
      */
     public void robotInit() 
     {
-    	System.out.println("Started robotInit()");
     	/*
     	 * Above all else
     	 */
     	logger = new DBugLogger();
-    	System.out.println("logger initialized");
-    	
     	config = new Config();
-    	System.out.println("config initialized");
-    	
     	timer = new Timer();
-    	System.out.println("timer initialized");
-    	
+
     	/*
     	 * Human IO (that does not require subsystems)
     	 */
     	joysticks = new Joysticks();
-    	System.out.println("joysticks initialized");
     	
     	/*
     	 * Robot IO
     	 */
     	actuators = new Actuators();
-    	System.out.println("actuators initialized");
-    	
     	sensors = new Sensors();
-    	System.out.println("sensors initialized");
     	
     	/*
     	 * Subsystems
     	 */
-    	
+    	flywheel = new Flywheel();
 
     	/*
     	 * Human IO (that requires subsystems)
     	 */
     	joysticks.initButtons();
-    	System.out.println("joysticks buttons initialized");
-    	
     	sdb = new SDB();
-    	System.out.println("sdb initialized");
     }
 	
 	public void disabledPeriodic() 
