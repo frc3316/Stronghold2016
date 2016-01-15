@@ -18,13 +18,13 @@ public class Sensors
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
-	AHRS ahrs;
+	public AHRS navX;
 
 	public Sensors()
 	{
 		try
 		{
-			ahrs = new AHRS(SPI.Port.kMXP);
+			navX = new AHRS(SPI.Port.kMXP);
 		}
 		catch (RuntimeException ex)
 		{
