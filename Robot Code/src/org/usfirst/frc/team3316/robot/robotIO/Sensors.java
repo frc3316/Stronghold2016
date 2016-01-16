@@ -35,6 +35,6 @@ public class Sensors
 		}
 		
 		flywheelCounter = new Counter(0);
-		flywheelCounter.setDistancePerPulse(1/6); //6 bolts per round
+		flywheelCounter.setDistancePerPulse(1.0 / 6.0); //6 bolts per round
 	}
 }

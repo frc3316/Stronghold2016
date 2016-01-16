@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -37,6 +40,8 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
+			
+			put("Flywheel speed", Robot.flywheel.getRate());
 		}
 		
 		private void put (String name, double d)
@@ -137,6 +142,10 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
+		
+		SmartDashboard.putData(new JoystickFlywheel());
+		SmartDashboard.putData(new BangbangFlywheel());
+		SmartDashboard.putData(new PIDFlywheel());
 		
 		logger.info("Finished initSDB()");
 	}
