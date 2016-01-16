@@ -9,6 +9,8 @@ import org.usfirst.frc.team3316.robot.humanIO.SDB;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
+import org.usfirst.frc.team3316.robot.subsystems.Chassis;
+import org.usfirst.frc.team3316.robot.subsystems.DBugSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -42,6 +44,7 @@ public class Robot extends IterativeRobot
     /*
      * Subsystems
      */
+    public static Chassis chassis;
     
     Command autonomousCommand;
 
@@ -82,7 +85,8 @@ public class Robot extends IterativeRobot
     	/*
     	 * Subsystems
     	 */
-    	
+    	chassis = new Chassis();
+    	System.out.println("chassis subsystem initialized");
 
     	/*
     	 * Human IO (that requires subsystems)
@@ -129,8 +133,4 @@ public class Robot extends IterativeRobot
         LiveWindow.run();
     }
     
-    private void printTheTruth()
-    {
-    	System.out.println("Vita is the Melech!!");
-    }
 }

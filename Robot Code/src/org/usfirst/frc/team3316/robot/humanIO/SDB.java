@@ -12,11 +12,13 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.subsystems.DBugSubsystem;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SDB 
@@ -34,9 +36,17 @@ public class SDB
 		
 		public void run ()
 		{
-			/*
-			 * Insert put methods here
-			 */
+			//navX
+			put("navX Yaw Axis", Robot.sensors.navX.getYaw());
+			put("navX Roll Axis", Robot.sensors.navX.getRoll());
+			put("navX Pitch Axis", Robot.sensors.navX.getPitch());
+			put("navX Pressure", Robot.sensors.navX.getPressure());
+			put("navX Barometric Pressure", Robot.sensors.navX.getBarometricPressure());
+			put("navX Angle", Robot.sensors.navX.getAngle());
+			
+			//Chassis
+			put("Left Chassis Encoder Raw", Robot.sensors.leftChassisEncoder.getRaw());
+			put("Right Chassis Encoder Raw", Robot.sensors.rightChassisEncoder.getRaw());
 		}
 		
 		private void put (String name, double d)
