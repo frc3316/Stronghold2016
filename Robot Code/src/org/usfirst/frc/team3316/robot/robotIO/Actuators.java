@@ -7,6 +7,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.TalonSRX;
 
 public class Actuators 
@@ -14,10 +15,10 @@ public class Actuators
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 	
-	public TalonSRX flywheel;
+	public Talon flywheel;
 	
 	public Actuators ()
 	{
-		flywheel = new TalonSRX(0);
+		flywheel = new Talon(0);
 	}
 }
