@@ -7,15 +7,17 @@ class AngleHelper(object):
     '''
     A class that handles the angle to U calculating.
     '''
-    def __init__(self,UWidth,centerUWidth):
+    def __init__(self,UWidth,centerUWidth,knownDistance):
         '''
         This method initialising the variables for the AngleHelper instance.
         :param UWidth: The real life width of the U.
         :param centerUWidth: The U width as it looks in the camera when it is in the center (in pixels).
+        :param knownDistance: The distance which the centerUWidth wast taken from.
         :return: None
         '''
         self.UWIDTH = UWidth
-        self.CameraUWidth = centerUWidth
+        self.cameraUWidth = centerUWidth
+        self.CUWKnownDistance = knownDistance
 
     def getAngle(self,DFC,CUW):
         '''
@@ -27,6 +29,8 @@ class AngleHelper(object):
         '''
         side3 = self.UWIDTH
         side1 = DFC
-        side2 = DFC + (1-(CUW/self.CameraUWidth))*self.UWIDTH
+        currentDistanceCenterUWidth = (self.CUWKnownDistance/DFC)*self.cameraUWidth # The U width as it looks in
+        # the camera (in pixels) from the current distance.
+        side2 = DFC + (1-(float(CUW)/float(currentDistanceCenterUWidth)))*self.UWIDTH
         return 180 - degrees(acos(radians((side1**2 + side3**2 - side2**2)/(2*side1*side3))))
         # This method is not 100% accurate, but it is close to that.

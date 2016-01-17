@@ -32,7 +32,5 @@ class NetworkManager(object):
             print 'Input for sendData ivalid, need to be a list of floats/ints/strings'
         self.sock.sendall(','.join(lst) + "\n")
         data = self.sock.recv(1024)
-
-
         if data[:2] != "Ok":
             print("Problem Sending Results")

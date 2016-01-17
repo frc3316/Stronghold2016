@@ -12,7 +12,7 @@ class VisionManager(object):
     A class that manages all the computer vision for the FRC 2016.
     '''
     def __init__(self,minColor,maxColor,minimumBoundingRectSize,cam,knownHeight,knownWidth,focalLength,
-                 robotMeasurements,TOWER_HEIGHT,centerUWidth):
+                 robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance):
         '''
         This method initialising the variables for the VisionManager instance.
         :param minColor: The min color to be passed in the mask. (in the format: np.array([B,G,R])).
@@ -30,9 +30,10 @@ class VisionManager(object):
         :param knownWidth: The real life width of the object (U).
         :param TOWER_HEIGHT: The height of the tower.
         :param centerUWidth: The U width as it looks in the camera when it is in the center (in pixels).
+        :param currentUWidthDistance: The distance which the centerUWidth was calculated from.
         :return: None.
         '''
-        self.angleHelper = AngleHelper(knownWidth,centerUWidth)
+        self.angleHelper = AngleHelper(knownWidth,centerUWidth,currentUWidthDistance)
         self.distanceHelper = DistanceHelper(knownHeight,focalLength)
         self.TOWER_HEIGHT = TOWER_HEIGHT
         self.KNOWN_HEIGHT = knownHeight
@@ -140,7 +141,7 @@ class VisionManager(object):
                 self.currentImageObject.XShift = XShift
                 self.currentImageObject.YShift = YShift
 
-        self.currentImageObject.didUpdateVar = True
+            self.currentImageObject.didUpdateVar = True
 
     def updateRobotScales(self):
         '''
@@ -151,9 +152,9 @@ class VisionManager(object):
             if not self.currentImageObject.didUpdateVars:
                 self.updateTowerScales()
                 self.currentImageObject.didUpdateVars = True
-        self.robotObject.distanceFromTower = self.currentImageObject.distanceFromCamera
+            self.robotObject.distanceFromTower = self.currentImageObject.distanceFromCamera
 
-        self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
+            self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
                                                            self.currentImageObject.objectWidth)
-        self.robotObject.XPosition = self.distanceHelper.getXRobotPosition(self.robotObject)
-        self.robotObject.Yposition = self.distanceHelper.getYRobotPosition(self.robotObject)
+            self.robotObject.XPosition = self.distanceHelper.getXRobotPosition(self.robotObject)
+            self.robotObject.Yposition = self.distanceHelper.getYRobotPosition(self.robotObject)
