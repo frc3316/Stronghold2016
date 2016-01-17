@@ -11,6 +11,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SPI;
 
@@ -22,6 +23,7 @@ public class Sensors
 	public AHRS ahrs;
 	
 	public Counter flywheelCounter;
+	public DigitalInput hallEffect;
 
 	public Sensors()
 	{
@@ -34,7 +36,9 @@ public class Sensors
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
 		
-		flywheelCounter = new Counter(0);
-		flywheelCounter.setDistancePerPulse(1.0 / 6.0); //6 bolts per round
+		hallEffect = new DigitalInput(0);
+		
+		flywheelCounter = new Counter(hallEffect);
+		flywheelCounter.setDistancePerPulse(1.0); //1 bolts per round
 	}
 }
