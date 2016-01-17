@@ -4,7 +4,6 @@ import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
-import org.usfirst.frc.team3316.robot.subsystems.Chassis.NavigationTask;
 import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 
 import com.kauailabs.navx.frc.AHRS;
