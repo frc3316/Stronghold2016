@@ -12,6 +12,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.subsystems.Chassis;
 import org.usfirst.frc.team3316.robot.subsystems.DBugSubsystem;
 
 import com.ni.vision.NIVision;
@@ -43,10 +44,12 @@ public class SDB
 			put("navX Pressure", Robot.sensors.navX.getPressure());
 			put("navX Barometric Pressure", Robot.sensors.navX.getBarometricPressure());
 			put("navX Angle", Robot.sensors.navX.getAngle());
+			put("navX Z displacement", Robot.sensors.navX.getDisplacementZ());
 			
 			//Chassis
 			put("Left Chassis Encoder Raw", Robot.sensors.leftChassisEncoder.getRaw());
 			put("Right Chassis Encoder Raw", Robot.sensors.rightChassisEncoder.getRaw());
+			put("isOnDefense", Robot.chassis.isOnDefense);
 		}
 		
 		private void put (String name, double d)

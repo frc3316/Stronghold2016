@@ -87,6 +87,11 @@ public class Robot extends IterativeRobot
     	 */
     	chassis = new Chassis();
     	System.out.println("chassis subsystem initialized");
+    	
+    	/*
+    	 * Timer inits
+    	 */
+    	chassis.timerInit();
 
     	/*
     	 * Human IO (that requires subsystems)
