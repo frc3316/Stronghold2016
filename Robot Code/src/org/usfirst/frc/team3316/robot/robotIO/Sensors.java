@@ -39,6 +39,6 @@ public class Sensors
 		hallEffect = new DigitalInput(0);
 		
 		flywheelCounter = new Counter(hallEffect);
-		flywheelCounter.setDistancePerPulse(1.0); //1 bolts per round
+		flywheelCounter.setDistancePerPulse(1.0 / 6.0); //6 bolts per round
 	}
 }
