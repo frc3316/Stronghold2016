@@ -107,7 +107,7 @@ public class Main
 		JSch jsch = new JSch();
 		Session session = null;
 		
-		String host = "172.22.11.2";
+		String host = "roborio-3316-frc.local";
 		String user = "admin";
 		String pass = "";
 		int port = 22;

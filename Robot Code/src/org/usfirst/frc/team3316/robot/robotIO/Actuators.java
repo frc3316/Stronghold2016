@@ -15,14 +15,16 @@ public class Actuators {
 	DBugLogger logger = Robot.logger;
 
 	// Chassis
-	public Talon leftChassisTalon, rightChassisTalon;
+	public Talon leftChassis1, leftChassis2, rightChassis1, rightChassis2;
 
 	public Actuators() {
 		try {
 			// Chassis
-			leftChassisTalon = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT"));
+			leftChassis1 = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+			leftChassis2 = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
 			
-			rightChassisTalon = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT"));
+			rightChassis1 = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+			rightChassis2 = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 			
 		} catch (ConfigException e) {
 			logger.severe(e);

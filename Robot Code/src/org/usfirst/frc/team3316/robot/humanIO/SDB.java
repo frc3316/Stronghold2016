@@ -38,17 +38,18 @@ public class SDB
 		public void run ()
 		{
 			//navX
-			put("navX Yaw Axis", Robot.sensors.navX.getYaw());
-			put("navX Roll Axis", Robot.sensors.navX.getRoll());
-			put("navX Pitch Axis", Robot.sensors.navX.getPitch());
-			put("navX Pressure", Robot.sensors.navX.getPressure());
-			put("navX Barometric Pressure", Robot.sensors.navX.getBarometricPressure());
-			put("navX Angle", Robot.sensors.navX.getAngle());
-			put("navX Z displacement", Robot.sensors.navX.getDisplacementZ());
+			put("navX Yaw Axis", Robot.sensors.navx.getYaw());
+			
+			System.out.println("Yaw:" + Robot.sensors.navx.getYaw());
+			
+			put("navX Roll Axis", Robot.sensors.navx.getRoll());
+			put("navX Pitch Axis", Robot.sensors.navx.getPitch());
+			put("navX Pressure", Robot.sensors.navx.getPressure());
+			put("navX Barometric Pressure", Robot.sensors.navx.getBarometricPressure());
+			put("navX Angle", Robot.sensors.navx.getAngle());
+			put("navX Z displacement", Robot.sensors.navx.getDisplacementZ());
 			
 			//Chassis
-			put("Left Chassis Encoder Raw", Robot.sensors.leftChassisEncoder.getRaw());
-			put("Right Chassis Encoder Raw", Robot.sensors.rightChassisEncoder.getRaw());
 			put("isOnDefense", Robot.chassis.isOnDefense);
 		}
 		

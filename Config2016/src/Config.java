@@ -76,8 +76,14 @@ public class Config {
 			addToConstants("JOYSTICK_LEFT", 0);
 			addToConstants("JOYSTICK_RIGHT", 1);
 			addToConstants("JOYSTICK_OPERATOR", 2);
-			addToConstants("DEFENSE_ANGLE_TIMEOUT", 500);
-			addToConstants("DEFENSE_ANGLE_RANGE", 10);
+			addToConstants("DEFENSE_ANGLE_TIMEOUT", 500.0);
+			addToConstants("DEFENSE_ANGLE_RANGE", 10.0);
 			addToConstants("ANGLE_MOVING_AVG_SIZE", 10);
+			
+			addToConstants("CHASSIS_MOTOR_LEFT_1", 5);
+			addToConstants("CHASSIS_MOTOR_LEFT_2", 6);
+			
+			addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
+			addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 	}
 }

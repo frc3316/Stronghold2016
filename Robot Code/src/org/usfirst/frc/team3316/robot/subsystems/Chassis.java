@@ -12,18 +12,17 @@ import edu.wpi.first.wpilibj.*;
 
 public class Chassis extends DBugSubsystem
 {
-	
+
 	// Actuators
-	private Talon leftMotor, rightMotor;
-	
+	private SpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
+
 	// Sensors
-	private Encoder leftEncoder, rightEncoder;
-	private AHRS navX; // For the navX
-	
+	private AHRS navx; // For the navX
+
 	// Variables
 	public boolean isOnDefense = false; // For the navX
 	private int counter = 0; // For the navX
-	
+
 	// Other
 	private MovingAverage movingAvg; // For the navX
 	private TimerTask navXTasker; // For the navX
@@ -31,21 +30,21 @@ public class Chassis extends DBugSubsystem
 	public Chassis()
 	{
 		// Actuators
-		leftMotor = Robot.actuators.leftChassisTalon;
-		rightMotor = Robot.actuators.rightChassisTalon;
+		leftMotor1 = Robot.actuators.leftChassis1;
+		rightMotor2 = Robot.actuators.rightChassis2;
+		leftMotor2 = Robot.actuators.leftChassis2;
+		rightMotor1 = Robot.actuators.rightChassis1;
 
 		// Sensors
-		leftEncoder = Robot.sensors.leftChassisEncoder;
-		rightEncoder = Robot.sensors.rightChassisEncoder;
-		navX = Robot.sensors.navX;
-		
+		navx = Robot.sensors.navx;
+
 		// Create moving average
 		try
 		{
 			movingAvg = new MovingAverage(
 					(int) config.get("ANGLE_MOVING_AVG_SIZE"), 20, () ->
 					{
-						return navX.getPitch();
+						return getPitch();
 					});
 		}
 		catch (ConfigException e)
@@ -55,74 +54,86 @@ public class Chassis extends DBugSubsystem
 	}
 
 	public void initDefaultCommand()
-	{}
+	{
+	}
 
 	/*
 	 * SET Methods
 	 */
 	public void setMotors(double v)
 	{
-		rightMotor.set(v);
-		leftMotor.set(-v);
+		leftMotor1.set(v);
+		leftMotor2.set(v);
+		rightMotor1.set(-v);
+		rightMotor2.set(-v);
 	}
 
 	/*
 	 * GET Methods
 	 */
-	public double getDistance()
-	{
-		try
-		{
-			double leftDist = leftEncoder.getRaw()
-					* (double) Robot.config.get("CHASSIS_WHEEL_DIAMETER") * Math.PI;
-			double rightDist = rightEncoder.getRaw()
-					* (double) Robot.config.get("CHASSIS_WHEEL_DIAMETER") * Math.PI;
+	/*
+	 * public double getDistance() { try { double leftDist =
+	 * leftEncoder.getRaw() (double) Robot.config.get("CHASSIS_WHEEL_DIAMETER")
+	 * * Math.PI; double rightDist = rightEncoder.getRaw() (double)
+	 * Robot.config.get("CHASSIS_WHEEL_DIAMETER") * Math.PI;
+	 * 
+	 * return (leftDist + rightDist) / 2;
+	 * 
+	 * } catch (ConfigException e) { logger.severe(e); }
+	 * 
+	 * return 0; }
+	 */
 
-			return (leftDist + rightDist) / 2;
-
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
-
-		return 0;
-	}
-
-	//Timer
-	public void timerInit ()
+	// Timer
+	public void timerInit()
 	{
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
 	}
-	
+
 	// navX Class
-	private class navX extends TimerTask {
-		
+	private class navX extends TimerTask
+	{
+
 		public void run()
 		{
-			try {
-				if (Math.abs(movingAvg.get()) <= (double) Robot.config.get("DEFENSE_ANGLE_RANGE")) {
+			try
+			{
+				if (Math.abs(movingAvg.get()) <= (double) Robot.config
+						.get("DEFENSE_ANGLE_RANGE"))
+				{
 					counter++;
-				} else {
+				}
+				else
+				{
 					counter = 0;
 					isOnDefense = true;
 				}
-			} catch (ConfigException e) {
+			}
+			catch (ConfigException e)
+			{
 				logger.severe(e);
 			}
-			
-			try {
-				if (counter >= (int)Math.round((double)Robot.config.get("DEFENSE_ANGLE_TIMEOUT") / 20)) // isTimedOut
+
+			try
+			{
+				if (counter >= (int) Math.round(
+						(double) Robot.config.get("DEFENSE_ANGLE_TIMEOUT")
+								/ 20)) // isTimedOut
 				{
 					isOnDefense = false;
 					counter = 0;
 				}
-			} catch (ConfigException e) {
+			}
+			catch (ConfigException e)
+			{
 				logger.severe(e);
 			}
 		}
-		
 	}
-
+	
+	public double getPitch ()
+	{
+		return navx.getRoll();
+	}
 }

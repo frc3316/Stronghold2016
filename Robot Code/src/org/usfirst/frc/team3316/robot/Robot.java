@@ -54,52 +54,40 @@ public class Robot extends IterativeRobot
      */
     public void robotInit() 
     {
-    	System.out.println("Started robotInit()");
     	/*
     	 * Above all else
     	 */
     	logger = new DBugLogger();
-    	System.out.println("logger initialized");
-    	
+    	timer = new Timer();
     	config = new Config();
-    	System.out.println("config initialized");
     	
     	/*
     	 * Human IO (that does not require subsystems)
     	 */
     	joysticks = new Joysticks();
-    	System.out.println("joysticks initialized");
     	
     	/*
     	 * Robot IO
     	 */
     	actuators = new Actuators();
-    	System.out.println("actuators initialized");
     	
     	sensors = new Sensors();
-    	System.out.println("sensors initialized");
     	
     	/*
     	 * Subsystems
     	 */
     	chassis = new Chassis();
-    	System.out.println("chassis subsystem initialized");
 
     	/*
     	 * Human IO (that requires subsystems)
     	 */
     	joysticks.initButtons();
-    	System.out.println("joysticks buttons initialized");
     	
     	sdb = new SDB();
-    	System.out.println("sdb initialized");
     	
     	/*
     	 * Timer
     	 */
-    	timer = new Timer();
-    	System.out.println("timer initialized");
-    	
     	sdb.timerInit();
     	chassis.timerInit();
     }

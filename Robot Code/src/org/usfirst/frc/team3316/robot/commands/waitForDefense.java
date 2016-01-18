@@ -10,7 +10,7 @@ public class waitForDefense extends DBugCommand {
 	private AHRS navX;
 
 	public waitForDefense() {
-		navX = Robot.sensors.navX;
+		navX = Robot.sensors.navx;
 	}
 
 	protected void init() {
