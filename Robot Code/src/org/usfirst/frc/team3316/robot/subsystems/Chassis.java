@@ -12,15 +12,21 @@ import edu.wpi.first.wpilibj.*;
 
 public class Chassis extends DBugSubsystem
 {
-
-	private Talon leftMotor, rightMotor;
-	private Encoder leftEncoder, rightEncoder;
-	private AHRS navX;
-	private MovingAverage movingAvg;
-	public boolean isOnDefense = false;
-	private int counter = 0;
 	
-	private navX navXTasker;
+	// Actuators
+	private Talon leftMotor, rightMotor;
+	
+	// Sensors
+	private Encoder leftEncoder, rightEncoder;
+	private AHRS navX; // For the navX
+	
+	// Variables
+	public boolean isOnDefense = false; // For the navX
+	private int counter = 0; // For the navX
+	
+	// Other
+	private MovingAverage movingAvg; // For the navX
+	private TimerTask navXTasker; // For the navX
 
 	public Chassis()
 	{
@@ -32,8 +38,8 @@ public class Chassis extends DBugSubsystem
 		leftEncoder = Robot.sensors.leftChassisEncoder;
 		rightEncoder = Robot.sensors.rightChassisEncoder;
 		navX = Robot.sensors.navX;
-
-		// Utilities
+		
+		// Create moving average
 		try
 		{
 			movingAvg = new MovingAverage(
@@ -49,8 +55,7 @@ public class Chassis extends DBugSubsystem
 	}
 
 	public void initDefaultCommand()
-	{
-	}
+	{}
 
 	/*
 	 * SET Methods
@@ -84,19 +89,20 @@ public class Chassis extends DBugSubsystem
 		return 0;
 	}
 
-	//Timer Initialize
+	//Timer
 	public void timerInit ()
 	{
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
 	}
+	
 	// navX Class
 	private class navX extends TimerTask {
 		
 		public void run()
 		{
 			try {
-				if (Math.abs(navX.getPitch()) <= (double) Robot.config.get("DEFENSE_ANGLE_RANGE")) {
+				if (Math.abs(movingAvg.get()) <= (double) Robot.config.get("DEFENSE_ANGLE_RANGE")) {
 					counter++;
 				} else {
 					counter = 0;

@@ -85,7 +85,6 @@ public class SDB
 		variablesInSDB = new Hashtable <String, Class <?> > ();
 		
 		initSDB();
-		timerInit();
 	}
 	
 	public void timerInit ()
