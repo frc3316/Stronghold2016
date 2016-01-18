@@ -64,9 +64,6 @@ public class Robot extends IterativeRobot
     	config = new Config();
     	System.out.println("config initialized");
     	
-    	timer = new Timer();
-    	System.out.println("timer initialized");
-    	
     	/*
     	 * Human IO (that does not require subsystems)
     	 */
@@ -87,11 +84,6 @@ public class Robot extends IterativeRobot
     	 */
     	chassis = new Chassis();
     	System.out.println("chassis subsystem initialized");
-    	
-    	/*
-    	 * Timer inits
-    	 */
-    	chassis.timerInit();
 
     	/*
     	 * Human IO (that requires subsystems)
@@ -101,6 +93,15 @@ public class Robot extends IterativeRobot
     	
     	sdb = new SDB();
     	System.out.println("sdb initialized");
+    	
+    	/*
+    	 * Timer
+    	 */
+    	timer = new Timer();
+    	System.out.println("timer initialized");
+    	
+    	sdb.timerInit();
+    	chassis.timerInit();
     }
 	
 	public void disabledPeriodic() 
