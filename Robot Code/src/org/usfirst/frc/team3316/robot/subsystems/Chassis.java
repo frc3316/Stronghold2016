@@ -22,7 +22,6 @@ public class Chassis extends DBugSubsystem
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
-	
 
 	// Other
 	private MovingAverage movingAvg; // For the navX
@@ -43,7 +42,7 @@ public class Chassis extends DBugSubsystem
 		try
 		{
 			movingAvg = new MovingAverage(
-					(int) config.get("ANGLE_MOVING_AVG_SIZE"), 20, () ->
+					(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
 					{
 						return getPitch();
 					});
@@ -54,7 +53,7 @@ public class Chassis extends DBugSubsystem
 		}
 	}
 
-	public void initDefaultCommand() 
+	public void initDefaultCommand()
 	{
 		setDefaultCommand(new TankDrive());
 	}
@@ -66,15 +65,16 @@ public class Chassis extends DBugSubsystem
 	{
 		leftMotor1.set(left);
 		leftMotor2.set(left);
-		
+
 		rightMotor1.set(-right);
 		rightMotor2.set(-right);
 	}
-	
+
 	/*
 	 * GET Methods
 	 */
-	public boolean isOnDefense() {
+	public boolean isOnDefense()
+	{
 		return isOnDefense;
 	}
 
@@ -89,13 +89,13 @@ public class Chassis extends DBugSubsystem
 	private class navX extends TimerTask
 	{
 		private int counter = 0; // For the navX
-		
+
 		public void run()
 		{
 			try
 			{
 				if (Math.abs(movingAvg.get()) <= (double) Robot.config
-						.get("DEFENSE_ANGLE_RANGE"))
+						.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
 				{
 					counter++;
 				}
@@ -103,18 +103,21 @@ public class Chassis extends DBugSubsystem
 				{
 					counter = 0;
 				}
+
+				if (counter >= (int) Math.round(
+						(double) ((double) config.get("CHASSIS_DEFENSE_ANGLE_TIMEOUT") / 20.0)))
+				{ // isTimedOut
+					counter = 0;
+					isOnDefense = false;
+				}
+				else if (counter == 0)
+				{
+					isOnDefense = true;
+				}
 			}
 			catch (ConfigException e)
 			{
 				logger.severe(e);
-			}
-			
-			if (counter > 25) { //isTimedOut of 500ms
-				counter = 0;
-				isOnDefense = false;
-			}
-			else if(counter == 0) {
-				isOnDefense = true;
 			}
 		}
 	}

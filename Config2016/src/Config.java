@@ -99,10 +99,6 @@ public class Config
 				addToConstants("JOYSTICK_LEFT", 0);
 				addToConstants("JOYSTICK_RIGHT", 1);
 				addToConstants("JOYSTICK_OPERATOR", 2);
-
-				addToConstants("DEFENSE_ANGLE_TIMEOUT", 500.0);
-				addToConstants("DEFENSE_ANGLE_RANGE", 4.0);
-				addToConstants("ANGLE_MOVING_AVG_SIZE", 10);
 			}
 		}
 
@@ -119,6 +115,10 @@ public class Config
 
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
+				
+				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
+				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
+				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
 			}
 		}
 		
