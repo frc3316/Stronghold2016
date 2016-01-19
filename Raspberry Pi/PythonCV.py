@@ -8,11 +8,11 @@ from FPSCounter import *
 import cv2
 import numpy as np
 
-LB = np.array([75,230,235])
-UB = np.array([105,255,255])
-MBR = 500 # Minimum bounding rect.
-KH = 36 # Known height. (of U).
-KW = 50.8 # Known width.  (of U).
+LB = np.array([75,230,235]) # Lower bond.
+UB = np.array([105,255,255]) # Upper bond.
+MBR = 500 # Minimum bounding rectangle
+KH = 36 # Known height (of U).
+KW = 50.8 # Known width  (of U).
 FL = 1240 # Focal length.
 RW = 100 # Robot width.
 RH = 0 # Robot height.
@@ -66,10 +66,20 @@ while True:
         #cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
         #    (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
 
-    cv2.imshow("Current Image",visionManager.threshImage)
-    FPSCounter.stop()
-    print(FPSCounter.fps())
+        FPSCounter.stop()
+        print(FPSCounter.fps())
+        #cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),\
+        #            (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
 
+    #display:    
+    cv2.imshow("Current Image",visionManager.currentImage)
+    #cv2.imshow("Thresh Image", visionManager.threshImage)
+
+    #save image:
+    l = cv2.waitKey(5) & 0xFF
+    if l == 115:
+        cv2.imwrite("Current Image.png",visionManager.currentImage)
+    #stop
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
