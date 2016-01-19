@@ -47,7 +47,8 @@ public class SDB
 			put("navX Pressure", Robot.sensors.navx.getPressure());
 			put("navX Barometric Pressure", Robot.sensors.navx.getBarometricPressure());
 			put("navX Angle", Robot.sensors.navx.getAngle());
-			put("navX Z displacement", Robot.sensors.navx.getDisplacementZ());
+			put("navX Z Displacement", Robot.sensors.navx.getDisplacementZ());
+			put("navX Z Acceleration", Robot.sensors.navx.getRawAccelZ());
 			
 			//Chassis
 			put("isOnDefense", Robot.chassis.isOnDefense);

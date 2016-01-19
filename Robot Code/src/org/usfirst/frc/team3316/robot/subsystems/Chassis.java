@@ -90,7 +90,6 @@ public class Chassis extends DBugSubsystem
 						.get("DEFENSE_ANGLE_RANGE"))
 				{
 					counter++;
-					isOnDefense = false;
 				}
 				else
 				{
@@ -102,7 +101,11 @@ public class Chassis extends DBugSubsystem
 			{
 				logger.severe(e);
 			}
-			SmartDashboard.putNumber("Moving Average", movingAvg.get());
+			
+			if (counter > 25) {
+				counter = 0;
+				isOnDefense = false;
+			}
 		}
 	}
 
