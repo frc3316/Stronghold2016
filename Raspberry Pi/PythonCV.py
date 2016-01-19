@@ -7,8 +7,7 @@ from NetworkManager import *
 from FPSCounter import *
 import cv2
 import numpy as np
-#LB = np.array([75,230,240])
-#UB = np.array([100,255,255])
+
 LB = np.array([75,230,235])
 UB = np.array([105,255,255])
 MBR = 500 # Minimum bounding rect.
@@ -27,12 +26,10 @@ FPSCounter.start()
 brightness = -0.1
 saturation = 15
 exposure = -1
-
 cam = cv2.VideoCapture(0)
 cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
 cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
 cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure)
-
 
 visionManager = VisionManager(LB,UB,MBR,cam,KH,KW,FL,[RH,RW,RL],TH, CUW, CUWD)
 #networkManager = NetworkManager("localhost",8080)
@@ -59,18 +56,20 @@ while True:
     
     # Print results
     if visionManager.currentImageObject is not None:
+        pass
         #print("D",visionManager.currentImageObject.distanceFromCamera)
         #print("A",visionManager.robotObject.angle)
         #print("X",visionManager.robotObject.XPosition)
         #print("Y",visionManager.robotObject.Yposition)
         #print("XShift",visionManager.currentImageObject.XShift)
         #print("YShift",visionManager.currentImageObject.YShift)
-        FPSCounter.stop()
-    #print(FPSCounter.fps())
-    # cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
-    #     (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
-    # cv2.imshow("Current Image",visionManager.currentImage)
-    #cv2.imshow("c", visionManager.currentImage)
+        #cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
+        #    (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
+
+    cv2.imshow("Current Image",visionManager.threshImage)
+    FPSCounter.stop()
+    print(FPSCounter.fps())
+
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
