@@ -1,10 +1,6 @@
 '''
 Created by: Leon Agmon Nacht.
 '''
-
-'''
-Testing Comments with Rafael ;)
-'''
 from math import acos,degrees,radians
 
 class AngleHelper(object):
@@ -32,14 +28,12 @@ class AngleHelper(object):
         :param CUW: The current U width as it looks in the camera (in pixels).
         '''
         side3 = self.UWIDTH
-<<<<<<< HEAD
         side1 = DFC
         currentDistanceCenterUWidth = (self.CUWKnownDistance/DFC)*self.cameraUWidth # The U width as it looks in
         # the camera (in pixels) from the current distance.
         side2 = DFC + (1-(float(CUW)/float(currentDistanceCenterUWidth)))*self.UWIDTH
-=======
-        side1 = DFC #This is not what we have talked about. I think you have to get DFC1 and DFC2 
-        side2 = DFC + (1-(CUW/self.CameraUWidth))*self.UWIDTH #why is this right?
->>>>>>> dbe544ef5f346279279b20898ba26f71ca222999
-        return 180 - degrees(acos(radians((side1**2 + side3**2 - side2**2)/(2*side1*side3))))
+        result = (side1**2 + side3**2 - side2**2)/(2*side1*side3)
+        if result <= 1:
+            return 180 - degrees(acos(result))
+        else: return 999
         # This method is not 100% accurate, but it is close to that.

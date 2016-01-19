@@ -126,10 +126,10 @@ class VisionManager(object):
         if boundingRect is not None:
             (x, y, w, h) = boundingRect
             if self.currentImageObject is None:
-                DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject)
+                DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject,self.TOWER_HEIGHT)
                 self.currentImageObject = ImageObject(w,h,x,y,DFC)
             else:
-                DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject)
+                DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject,self.TOWER_HEIGHT)
                 self.currentImageObject.objectHeight = h
                 self.currentImageObject.objectWidth = w
                 self.currentImageObject.objectX = x

@@ -11,12 +11,12 @@ UB = np.array([255,0,255])
 MBR = 500 # Minimum bounding rect.
 KH = 36 # Known height. (of U).
 KW = 50.8 # Known width.  (of U).
-FL = 1400 # Focal length.
+FL = 1240 # Focal length.
 RW = 100 # Robot width.
 RH = 0 # Robot height.
 RL = 100 # Robot length.
 TH = 40 # The height of the tower
-CUW = 200 # (Center U Width) The U width as it looks in the camera when it is in the center (in pixels).
+CUW = 260 # (Center U Width) The U width as it looks in the camera when it is in the center (in pixels).
 CUWD = 240 # The distance which the CUW was calculated from.
 cam = cv2.VideoCapture(0)
 visionManager = VisionManager(LB,UB,MBR,cam,KH,KW,FL,[RH,RW,RL],TH, CUW, CUWD)
@@ -44,14 +44,13 @@ while True:
     # Print results
     if visionManager.currentImageObject is not None:
         #print("D",visionManager.currentImageObject.distanceFromCamera)
-        #print("A",visionManager.robotObject.angle)
+        print("A",visionManager.robotObject.angle)
         #print("X",visionManager.robotObject.XPosition)
         #print("Y",visionManager.robotObject.Yposition)
         #print("XShift",visionManager.currentImageObject.XShift)
         #print("YShift",visionManager.currentImageObject.YShift)
 
-        cv2.imshow("Current Image",visionManager.maskedImage)
-        print(visionManager.currentImageObject.objectWidth)
+        cv2.imshow("Current Image",visionManager.maskedImage )
     #cv2.imshow("c", visionManager.currentImage)
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
