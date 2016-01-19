@@ -89,7 +89,6 @@ public class Robot extends IterativeRobot
     	 * Timer
     	 */
     	sdb.timerInit();
-    	chassis.timerInit();
     }
 	
 	public void disabledPeriodic() 

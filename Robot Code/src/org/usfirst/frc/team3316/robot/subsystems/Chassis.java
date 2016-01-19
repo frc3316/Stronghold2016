@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
+import java.util.Timer;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
@@ -22,6 +23,13 @@ public class Chassis extends DBugSubsystem
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
+	
+	private static Timer timer;
+	
+	static
+	{
+		timer = new Timer();		
+	}
 
 	// Other
 	private MovingAverage movingAvg; // For the navX
@@ -51,6 +59,10 @@ public class Chassis extends DBugSubsystem
 		{
 			logger.severe(e);
 		}
+		
+		//Timer init
+		navXTasker = new navX();
+		timer.schedule(navXTasker, 0, 20);
 	}
 
 	public void initDefaultCommand()
@@ -76,13 +88,6 @@ public class Chassis extends DBugSubsystem
 	public boolean isOnDefense()
 	{
 		return isOnDefense;
-	}
-
-	// Timer
-	public void timerInit()
-	{
-		navXTasker = new navX();
-		Robot.timer.schedule(navXTasker, 0, 20);
 	}
 
 	// navX Class
