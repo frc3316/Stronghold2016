@@ -11,7 +11,6 @@ import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends DBugSubsystem
 {
