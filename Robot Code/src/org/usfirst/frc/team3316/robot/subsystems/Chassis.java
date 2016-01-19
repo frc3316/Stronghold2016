@@ -21,8 +21,8 @@ public class Chassis extends DBugSubsystem
 	private AHRS navx; // For the navX
 
 	// Variables
-	public boolean isOnDefense = false; // For the navX
-	private int counter = 0; // For the navX
+	private boolean isOnDefense = false; // For the navX
+	
 
 	// Other
 	private MovingAverage movingAvg; // For the navX
@@ -70,6 +70,13 @@ public class Chassis extends DBugSubsystem
 		rightMotor1.set(-right);
 		rightMotor2.set(-right);
 	}
+	
+	/*
+	 * GET Methods
+	 */
+	public boolean isOnDefense() {
+		return isOnDefense;
+	}
 
 	// Timer
 	public void timerInit()
@@ -81,7 +88,8 @@ public class Chassis extends DBugSubsystem
 	// navX Class
 	private class navX extends TimerTask
 	{
-
+		private int counter = 0; // For the navX
+		
 		public void run()
 		{
 			try
@@ -94,7 +102,6 @@ public class Chassis extends DBugSubsystem
 				else
 				{
 					counter = 0;
-					isOnDefense = true;
 				}
 			}
 			catch (ConfigException e)
@@ -102,9 +109,12 @@ public class Chassis extends DBugSubsystem
 				logger.severe(e);
 			}
 			
-			if (counter > 25) {
+			if (counter > 25) { //isTimedOut of 500ms
 				counter = 0;
 				isOnDefense = false;
+			}
+			else if(counter == 0) {
+				isOnDefense = true;
 			}
 		}
 	}

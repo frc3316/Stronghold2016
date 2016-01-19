@@ -51,7 +51,7 @@ public class SDB
 			put("navX Z Acceleration", Robot.sensors.navx.getRawAccelZ());
 			
 			//Chassis
-			put("isOnDefense", Robot.chassis.isOnDefense);
+			put("isOnDefense", Robot.chassis.isOnDefense());
 		}
 		
 		private void put (String name, double d)
