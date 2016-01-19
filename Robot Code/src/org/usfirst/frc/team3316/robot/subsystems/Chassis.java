@@ -87,6 +87,8 @@ public class Chassis extends DBugSubsystem
 	// Timer
 	public void timerInit()
 	{
+		movingAvg.timerInit();
+		
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
 	}
