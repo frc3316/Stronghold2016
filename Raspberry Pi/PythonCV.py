@@ -6,8 +6,8 @@ from VisionManager import *
 from NetworkManager import *
 import cv2
 import numpy as np
-LB = np.array([0,0,250])
-UB = np.array([255,0,255])
+LB = np.array([75,230,235])
+UB = np.array([105,255,255]) #U
 MBR = 500 # Minimum bounding rect.
 KH = 36 # Known height. (of U).
 KW = 50.8 # Known width.  (of U).
@@ -21,6 +21,17 @@ CUWD = 240 # The distance which the CUW was calculated from.
 cam = cv2.VideoCapture(0)
 visionManager = VisionManager(LB,UB,MBR,cam,KH,KW,FL,[RH,RW,RL],TH, CUW, CUWD)
 #networkManager = NetworkManager("localhost",8080)
+
+#Adjusting parameters:
+brightness = -0.1
+cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
+
+saturation = 15
+cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
+
+exposure = -1
+cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure)
+#####
 
 while True:
     visionManager.updateImage()
@@ -42,16 +53,16 @@ while True:
     #                             visionManager.robotObject.Yposition])
 
     # Print results
-    if visionManager.currentImageObject is not None:
+    # if visionManager.currentImageObject is not None:
         #print("D",visionManager.currentImageObject.distanceFromCamera)
-        print("A",visionManager.robotObject.angle)
-        #print("X",visionManager.robotObject.XPosition)
-        #print("Y",visionManager.robotObject.Yposition)
-        #print("XShift",visionManager.currentImageObject.XShift)
-        #print("YShift",visionManager.currentImageObject.YShift)
+##        print("A",visionManager.robotObject.angle)
+##        print("X",visionManager.robotObject.XPosition)
+##        print("Y",visionManager.robotObject.Yposition)
+##        print("XShift",visionManager.currentImageObject.XShift)
+##        print("YShift",visionManager.currentImageObject.YShift)
 
-        cv2.imshow("Current Image",visionManager.maskedImage )
-    #cv2.imshow("c", visionManager.currentImage)
+    cv2.imshow("Current Image",visionManager.maskedImage)
+    cv2.imshow("c", visionManager.currentImage)
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
