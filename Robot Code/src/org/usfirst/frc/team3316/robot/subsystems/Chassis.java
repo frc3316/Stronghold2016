@@ -3,6 +3,7 @@ package org.usfirst.frc.team3316.robot.subsystems;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.chassis.commands.TankDrive;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 
@@ -12,7 +13,6 @@ import edu.wpi.first.wpilibj.*;
 
 public class Chassis extends DBugSubsystem
 {
-
 	// Actuators
 	private SpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
 
@@ -53,19 +53,21 @@ public class Chassis extends DBugSubsystem
 		}
 	}
 
-	public void initDefaultCommand()
+	public void initDefaultCommand() 
 	{
+		setDefaultCommand(new TankDrive());
 	}
 
 	/*
-	 * SET Methods
+	 * Set Method
 	 */
-	public void setMotors(double v)
+	public void set(double left, double right)
 	{
-		leftMotor1.set(v);
-		leftMotor2.set(v);
-		rightMotor1.set(-v);
-		rightMotor2.set(-v);
+		leftMotor1.set(left);
+		leftMotor2.set(left);
+		
+		rightMotor1.set(-right);
+		rightMotor2.set(-right);
 	}
 
 	// Timer
@@ -115,8 +117,8 @@ public class Chassis extends DBugSubsystem
 			}
 		}
 	}
-	
-	public double getPitch ()
+
+	public double getPitch()
 	{
 		return navx.getRoll();
 	}

@@ -41,9 +41,13 @@ public class Joysticks
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 	
+	public Joystick joystickLeft, joystickRight, joystickOperator;
+	
 	public Joysticks ()
 	{
-		
+		joystickLeft = new Joystick(0);
+		joystickRight = new Joystick(1);
+		joystickOperator = new Joystick(2);
 	}
 	
 	public void initButtons ()
