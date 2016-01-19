@@ -68,27 +68,9 @@ public class Chassis extends DBugSubsystem
 		rightMotor2.set(-v);
 	}
 
-	/*
-	 * GET Methods
-	 */
-	/*
-	 * public double getDistance() { try { double leftDist =
-	 * leftEncoder.getRaw() (double) Robot.config.get("CHASSIS_WHEEL_DIAMETER")
-	 * * Math.PI; double rightDist = rightEncoder.getRaw() (double)
-	 * Robot.config.get("CHASSIS_WHEEL_DIAMETER") * Math.PI;
-	 * 
-	 * return (leftDist + rightDist) / 2;
-	 * 
-	 * } catch (ConfigException e) { logger.severe(e); }
-	 * 
-	 * return 0; }
-	 */
-
 	// Timer
 	public void timerInit()
 	{
-		movingAvg.timerInit();
-		
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
 	}

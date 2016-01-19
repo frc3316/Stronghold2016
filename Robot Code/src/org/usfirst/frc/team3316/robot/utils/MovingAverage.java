@@ -1,23 +1,25 @@
 package org.usfirst.frc.team3316.robot.utils;
 
+import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.DoubleSupplier;
 
-import org.usfirst.frc.team3316.robot.Robot;
-
 public class MovingAverage
 {
+	private static Timer timer;
+	
 	private double [] lastValues;
 	private int index = 0;
 	
-	private int updateRate;
-	
 	private TimerTask insertTask;
 	
-	DoubleSupplier supplier;
+	static
+	{
+		timer = new Timer();
+	}
 	
 	/**
-	 * Constructor
+	 * Constructs a new moving average and starts it
 	 * @param size the number of values to keep track of
 	 * @param updateRate the rate that a value is taken from func
 	 * @param supplier a function that returns a double
@@ -30,31 +32,15 @@ public class MovingAverage
 			lastValues[i] = 0;
 		}
 		
-		this.updateRate = updateRate;
-		
-		this.supplier = supplier;
-	}
-	
-	/**
-	 * Schedules a timertask that updates the moving average in the timer object in robot
-	 * Should be called only after timer was initialized 
-	 */
-	public void timerInit ()
-	{
-		if (insertTask != null)
-		{
-			return;
-		}
-		
 		insertTask = new TimerTask() 
 		{
 			public void run() 
 			{
-				insert(supplier.getAsDouble());				
+				insert(supplier.getAsDouble());	
 			}
 		};
 		
-		Robot.timer.schedule(insertTask, 0, updateRate);
+		timer.schedule(insertTask, 0, updateRate);
 	}
 	
 	private void insert (double value)
@@ -64,6 +50,9 @@ public class MovingAverage
 		index %= lastValues.length;
 	}
 	
+	/**
+	 * Returns the average of all the current saved samples
+	 */
 	public double get ()
 	{
 		double sum = 0;
