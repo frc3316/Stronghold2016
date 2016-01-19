@@ -31,6 +31,7 @@ public abstract class Drive extends Command
     protected void execute()
     {
     	set();
+    	Robot.chassis.set(left, right);
     }
 
     protected boolean isFinished() 

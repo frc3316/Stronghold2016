@@ -101,7 +101,7 @@ public class Config
 				addToConstants("JOYSTICK_OPERATOR", 2);
 
 				addToConstants("DEFENSE_ANGLE_TIMEOUT", 500.0);
-				addToConstants("DEFENSE_ANGLE_RANGE", 10.0);
+				addToConstants("DEFENSE_ANGLE_RANGE", 4.0);
 				addToConstants("ANGLE_MOVING_AVG_SIZE", 10);
 			}
 		}

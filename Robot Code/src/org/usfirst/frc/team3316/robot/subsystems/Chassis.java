@@ -10,6 +10,7 @@ import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends DBugSubsystem
 {
@@ -89,6 +90,7 @@ public class Chassis extends DBugSubsystem
 						.get("DEFENSE_ANGLE_RANGE"))
 				{
 					counter++;
+					isOnDefense = false;
 				}
 				else
 				{
@@ -100,21 +102,7 @@ public class Chassis extends DBugSubsystem
 			{
 				logger.severe(e);
 			}
-
-			try
-			{
-				if (counter >= (int) Math.round(
-						(double) Robot.config.get("DEFENSE_ANGLE_TIMEOUT")
-								/ 20)) // isTimedOut
-				{
-					isOnDefense = false;
-					counter = 0;
-				}
-			}
-			catch (ConfigException e)
-			{
-				logger.severe(e);
-			}
+			SmartDashboard.putNumber("Moving Average", movingAvg.get());
 		}
 	}
 
