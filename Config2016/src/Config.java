@@ -1,15 +1,13 @@
 import java.util.Hashtable;
 
-public class Config
-{
+public class Config {
 	public Hashtable<String, Object> variablesB;
 	public Hashtable<String, Object> constantsB;
 
 	public Hashtable<String, Object> variablesA;
 	public Hashtable<String, Object> constantsA;
 
-	public Config()
-	{
+	public Config() {
 		variablesB = new Hashtable<String, Object>();
 		constantsB = new Hashtable<String, Object>();
 
@@ -19,62 +17,44 @@ public class Config
 		initConfig();
 	}
 
-	private void addToConstantsA(String key, Object value)
-	{
-		if (constantsA.containsKey(key))
-		{
+	private void addToConstantsA(String key, Object value) {
+		if (constantsA.containsKey(key)) {
 			constantsA.replace(key, value);
-		}
-		else
-		{
+		} else {
 			constantsA.put(key, value);
 		}
 	}
 
-	private void addToVariablesA(String key, Object value)
-	{
-		if (variablesA.containsKey(key))
-		{
+	private void addToVariablesA(String key, Object value) {
+		if (variablesA.containsKey(key)) {
 			variablesA.replace(key, value);
-		}
-		else
-		{
+		} else {
 			variablesA.put(key, value);
 		}
 	}
 
-	private void addToConstantsB(String key, Object value)
-	{
-		if (constantsB.containsKey(key))
-		{
+	private void addToConstantsB(String key, Object value) {
+		if (constantsB.containsKey(key)) {
 			constantsB.replace(key, value);
-		}
-		else
-		{
+		} else {
 			constantsB.put(key, value);
 		}
 	}
 
-	private void addToVariablesB(String key, Object value)
-	{
-		if (variablesB.containsKey(key))
-		{
+	private void addToVariablesB(String key, Object value) {
+		if (variablesB.containsKey(key)) {
 			variablesB.replace(key, value);
-		}
-		else
-		{
+		} else {
 			variablesB.put(key, value);
 		}
 	}
 
-	private void addToConstants(String key, Object value)
-	{
+	private void addToConstants(String key, Object value) {
 		addToConstantsA(key, value);
 		addToConstantsB(key, value);
 	}
 
-	private void addToVariables(String key, Object value)
-	{
+	private void addToVariables(String key, Object value) {
 		addToVariablesA(key, value);
 		addToVariablesB(key, value);
 	}
@@ -86,55 +66,15 @@ public class Config
 	 * Specify the which table to add the constant or variable to only if there
 	 * is a difference between the two robots
 	 */
-	private void initConfig()
-	{
+	private void initConfig() {
 		/*
 		 * Human IO
 		 */
-		{
 			/*
 			 * Constants
 			 */
-			{
-				addToConstants("JOYSTICK_LEFT", 0);
-				addToConstants("JOYSTICK_RIGHT", 1);
-				addToConstants("JOYSTICK_OPERATOR", 2);
-			}
-		}
-
-		/*
-		 * RobotIO
-		 */
-		{
-			/*
-			 * Constants
-			 */
-			{
-				addToConstants("CHASSIS_MOTOR_LEFT_1", 5);
-				addToConstants("CHASSIS_MOTOR_LEFT_2", 6);
-
-				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
-				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
-				
-				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
-				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
-				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
-			}
-		}
-		
-		/*
-		 * Chassis
-		 */
-		{
-			/*
-			 * Variables
-			 */
-			{
-				addToVariables("chassis_TankDrive_DeadBand", 0.05);
-				
-				addToVariables("chassis_TankDrive_InvertX", false);
-				addToVariables("chassis_TankDrive_InvertY", true);
-			}
-		}
+			addToConstants("JOYSTICK_LEFT", 0);
+			addToConstants("JOYSTICK_RIGHT", 1);
+			addToConstants("JOYSTICK_OPERATOR", 2);
 	}
 }
