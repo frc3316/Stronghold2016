@@ -58,11 +58,12 @@ public class PIDFlywheel extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setPID(SmartDashboard.getNumber("PID P", 0),
-				SmartDashboard.getNumber("PID I", 0),
-				SmartDashboard.getNumber("PID D", 0));
+		pid.setPID(SmartDashboard.getNumber("PID P", 0)*0.001,
+				SmartDashboard.getNumber("PID I", 0)*0.001,
+				SmartDashboard.getNumber("PID D", 0)*0.001);
 		
 		pid.setSetpoint(SmartDashboard.getNumber("Setpoint Speed", 0));
+		Robot.flywheel.setMotors(-v);
 	}
 
 	protected boolean isFinished()
