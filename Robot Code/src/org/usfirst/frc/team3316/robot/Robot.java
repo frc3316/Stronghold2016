@@ -12,6 +12,7 @@ import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
 import org.usfirst.frc.team3316.robot.subsystems.DBugSubsystem;
 import org.usfirst.frc.team3316.robot.subsystems.Intake;
+import org.usfirst.frc.team3316.robot.subsystems.Transport;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot
      */
     public static Chassis chassis;
     public static Intake intake;
+    public static Transport transport;
     
     Command autonomousCommand;
 
@@ -80,6 +82,7 @@ public class Robot extends IterativeRobot
     	 */
     	chassis = new Chassis();
     	intake = new Intake();
+    	transport = new Transport();
 
     	/*
     	 * Human IO (that requires subsystems)

@@ -21,6 +21,9 @@ public class Actuators {
 	//Intake
 	public DoubleSolenoid intakeSolenoid;
 	public Talon intakeMotor;
+	
+	//Transport
+	public Talon transportMotor;
 
 	public Actuators() {
 		try {
@@ -34,6 +37,9 @@ public class Actuators {
 			//Intake
 			intakeSolenoid = new DoubleSolenoid((int) Robot.config.get("INTAKE_SOLENOID_FORWARD_CHANNEL"), (int) Robot.config.get("INTAKE_SOLENOID_REVERSE_CHANNEL"));
 			intakeMotor = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
+			
+			//Transport
+			transportMotor = new Talon((int) Robot.config.get("TRANSPORT_MOTOR"));
 			
 		} catch (ConfigException e) {
 			logger.severe(e);

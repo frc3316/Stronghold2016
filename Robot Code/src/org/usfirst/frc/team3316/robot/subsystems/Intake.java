@@ -28,8 +28,7 @@ public class Intake extends DBugSubsystem
 	}
 
 	public void initDefaultCommand()
-	{
-	}
+	{}
 
 	public void openIntake()
 	{
