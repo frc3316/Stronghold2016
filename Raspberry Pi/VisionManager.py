@@ -33,7 +33,7 @@ class VisionManager(object):
         :param currentUWidthDistance: The distance which the centerUWidth was calculated from.
         :return: None.
         '''
-        self.angleHelper = AngleHelper(knownWidth,centerUWidth,currentUWidthDistance)
+        self.angleHelper = AngleHelper(knownWidth,knownHeight,centerUWidth,currentUWidthDistance)
         self.distanceHelper = DistanceHelper(knownHeight,focalLength)
         self.TOWER_HEIGHT = TOWER_HEIGHT
         self.KNOWN_HEIGHT = knownHeight
@@ -55,6 +55,7 @@ class VisionManager(object):
         self.cam = cam
         self.robotObject = RobotObject(robotMeasurements[0],robotMeasurements[1],robotMeasurements[2])
 
+        self.focalLength = focalLength
     def __setImageScales(self):
         '''
         This private method sets the scales of the image(self.currentImage).
@@ -74,7 +75,7 @@ class VisionManager(object):
             self.currentImageObject.didUpdateVar = False
 
         didGetImage,frame = self.cam.read()
-        frame = cv2.resize(frame, (320,240), interpolation = cv2.INTER_AREA)
+        #frame = cv2.resize(frame, (320,240), interpolation = cv2.INTER_AREA)
         if didGetImage:
             if self.currentImage == None and self.imageHeight == None and self.imageWidth == None:
                 self.currentImage = frame
@@ -156,6 +157,8 @@ class VisionManager(object):
             self.robotObject.distanceFromTower = self.currentImageObject.distanceFromCamera
 
             self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
-                                                           self.currentImageObject.objectWidth)
+                                                               self.currentImageObject.objectWidth,
+                                                               self.focalLength,
+                                                               self.currentImageObject.objectHeight)
             self.robotObject.XPosition = self.distanceHelper.getXRobotPosition(self.robotObject)
             self.robotObject.Yposition = self.distanceHelper.getYRobotPosition(self.robotObject)

@@ -19,8 +19,8 @@ class DistanceHelper(object):
     def getDistanceFromTower(self,objectHeight,robotObject,towerHeight = 305):
         '''
         This method calculates the distance of the object from the camera.
-        :param The height of the object (in pixels) as viewed in the camera.
-        :param robotObject: An instanceo of RobotObject.
+        :param objectHeight: The height of the object (in pixels) as viewed in the camera.
+        :param robotObject: An instance of RobotObject.
         :param towerHeight: The height of the tower in cm.
         :return: The distance of the object from the camera.
         '''
