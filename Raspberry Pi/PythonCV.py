@@ -18,7 +18,7 @@ FL = 1125 # Focal length.
 RW = 100 # Robot width.
 RH = 0 # Robot height.
 RL = 100 # Robot length.
-TH = 36 # The height of the tower
+TH = 50 # The height of the tower
 CUW = 260 # (Center U Width) The U width as it looks in the camera when it is in the center (in pixels).
 CUWD = 220 # The distance which the CUW was calculated from.
 
