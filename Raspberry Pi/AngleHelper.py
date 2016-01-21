@@ -32,32 +32,26 @@ class AngleHelper(object):
         :param CUH: The current U height as it looks in the camera (in pixels).
         :return: The angle of the object from the tower, in degrees.
         '''
+        
+        projectedUWidth = (float(CUH)/float(CUW))*self.UWIDTH
 
-        rectangleWidth = CUW*(self.UHEIGHT/CUH)
+        if projectedUWidth/DFC > 1:
+            return 999
 
-        adjustment = (self.UWIDTH)*(rectangleWidth) + \
-                     self.UHEIGHT * sqrt(self.UWIDTH ** 2 + self.UHEIGHT ** 2 - rectangleWidth ** 2)/(self.UHEIGHT ** 2 + self.UWIDTH ** 2)
+        alpha1 = degrees(acos(projectedUWidth/DFC))
 
-        return adjustment
+        if self.UHEIGHT/projectedUWidth > 1:
+            return 444
 
-        # adjustment = (as + b * sqrt(a^2 + b^2 - s^2))/(a^2 + b^2)
-        # a = UHeight
-        # b = UWidth
-        # s = rectangle width
+        alpha2 = degrees(acos(self.UHEIGHT/projectedUWidth))
+##        print ("alpha 1:", alpha1)
+##        print ("alpha 2:", alpha2)
+##        print ("projectedUWidth", projectedUWidth)
+##        print ("projectedUWidth", projectedUWidth)
+##        print ("self.UWIDTH", self.UWIDTH)
+##        print ("projectedUWidth/self.UWIDTH", projectedUWidth/self.UWIDTH)
 
-# alpha = (1/adjustment)*CUW
-
-        # return adjustment  # degrees(asin(radians((DFC/self.UWIDTH)*sin(alpha)-alpha)))
-        #
-        # projectedUWidth = (float(CUH)/float(CUW))*self.UWIDTH
-        # if projectedUWidth/DFC > 1:
-        #     return 999
-        # alpha1 = degrees(acos(projectedUWidth/DFC))
-        # if self.UHEIGHT/projectedUWidth > 1:
-        #     return 444
-        # alpha2 = degrees(acos(self.UHEIGHT/projectedUWidth))
-        # print(alpha1,alpha2,projectedUWidth/self.UWIDTH, projectedUWidth, self.UWIDTH)
-        # return 180 - alpha1 - alpha2
+        return 180 - alpha1 - alpha2
 
     #print(DFC,CUW,FL)
 #print((float(CUW)/float(CUH))*self.UWIDTH)
@@ -80,3 +74,4 @@ class AngleHelper(object):
 #     return 180 - degrees(acos(result))
 # else: return 999
 # This method is not 100% accurate, but it is close to that.
+

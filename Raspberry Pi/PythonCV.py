@@ -7,8 +7,8 @@ from NetworkManager import *
 from FPSCounter import *
 import cv2
 import numpy as np
-LB = np.array([0,0,255])
-UB = np.array([255,255,255])
+LB = np.array([37,0,234])
+UB = np.array([120,73,255])
 # LB = np.array([75,230,235]) # Lower bond.
 # UB = np.array([105,255,255]) # Upper bond.
 MBR = 500 # Minimum bounding rectangle
@@ -58,7 +58,7 @@ while True:
     # Print results
     if visionManager.currentImageObject is not None:
         #print("D",visionManager.currentImageObject.distanceFromCamera)
-         print("A",visionManager.robotObject.angle)
+         print("Angle: ",visionManager.robotObject.angle)
         #print("X",visionManager.robotObject.XPosition)
         #print("Y",visionManager.robotObject.Yposition)
         #print("XShift",visionManager.currentImageObject.XShift)
@@ -72,18 +72,18 @@ while True:
         #            (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
 
     #display:    
-    #cv2.imshow("Current Image",visionManager.currentImage)
+    cv2.imshow("Current Image",visionManager.currentImage)
     cv2.imshow("Thresh Image", visionManager.maskedImage)
 
 
     #save image:
-    # l = cv2.waitKey(5) & 0xFF
-    # if l == 115:
-    #     cv2.imwrite("Current Image.png",visionManager.currentImage)
-    #stop
-    k = cv2.waitKey(5) & 0xFF
-    if k == 27:
-        break
+    l = cv2.waitKey(5) & 0xFF
+    if l == 115:
+        cv2.imwrite("Current Image.png",visionManager.currentImage)
+    # stop
+    # k = cv2.waitKey(5) & 0xFF
+    # if k == 27:
+    #     break
 
 cv2.destroyAllWindows()
 visionManager.cam.release()
