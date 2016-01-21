@@ -23,7 +23,8 @@ RL = 100 # Robot length.
 TH = 50 # The height of the tower
 CUW = 260 # (Center U Width) The U width as it looks in the camera when it is in the center (in pixels).
 CUWD = 220 # The distance which the CUW was calculated from.
-HA = 53
+HAX = 53 #The head angle of the camera (x)
+HAY = 40 #The head angle of the camera (y)
 
 FPSCounter = FPS()
 FPSCounter.start()
@@ -42,10 +43,12 @@ while True:
     visionManager.updateImage()
     visionManager.updateTowerScales()
     visionManager.updateRobotScales()
-    FPSCounter.update()
+    FPSCounter.update()   
+    
     # For Fainaro:
     if visionManager.currentImageObject is not None:
-        (x,y,h,w) = (visionManager.currentImageObject.objectX,
+        
+        (x, y, h, w) = (visionManager.currentImageObject.objectX,
                      visionManager.currentImageObject.objectY,
                      visionManager.currentImageObject.objectHeight,
                      visionManager.currentImageObject.objectWidth)
@@ -59,9 +62,9 @@ while True:
     #                             visionManager.robotObject.Yposition])
     
     # Print results
-    if visionManager.currentImageObject is not None:
+    #if visionManager.currentImageObject is not None:
         #print("D",visionManager.currentImageObject.distanceFromCamera)
-         print("Angle: ",visionManager.robotObject.angle)
+        #print("Angle: ",visionManager.robotObject.angle)
         #print("X",visionManager.robotObject.XPosition)
         #print("Y",visionManager.robotObject.Yposition)
         #print("XShift",visionManager.currentImageObject.XShift)
@@ -78,16 +81,27 @@ while True:
     cv2.imshow("Current Image",visionManager.currentImage)
     cv2.imshow("Thresh Image", visionManager.maskedImage)
 
+    if visionManager.currentImageObject is not None:
+        (xA, yA, hA, wA) = (visionManager.currentImageObject.objectX,
+                         visionManager.currentImageObject.objectY,
+                         visionManager.currentImageObject.objectHeight,
+                         visionManager.currentImageObject.objectWidth)
+        #(xA,yA) = top left corner, (xA, yA, hA, wA) = the center of the object
+
+        (xO, yO) = (xA + wA/2, yA + hA) # center of the object
+        (xC, yC) = (visionManager.imageWidth/2, visionManager.imageHeight/2) #middle of the frame
+
+        azimuthalAngle = float((xO-xC)*HAX)/float(visionManager.imageWidth)
+        polarAngle = float((yO-yC)*HAY)/float(visionManager.imageHeight)
+        
+        print (azimuthalAngle, polarAngle)
+        
+
     # save image:
     l = cv2.waitKey(5) & 0xFF
-    if l == 115:
+    if l == 115: #s
         if visionManager.currentImageObject is not None:
-        (x,y,h,w) = (visionManager.currentImageObject.objectX,
-                     visionManager.currentImageObject.objectY,
-                     visionManager.currentImageObject.objectHeight,
-                     visionManager.currentImageObject.objectWidth)
-        print (x,y,h,w)
-        cv2.imwrite("Current Image.png",visionManager.currentImage)
+            cv2.imwrite("Current Image.png",visionManager.currentImage)
     # stop
     # k = cv2.waitKey(5) & 0xFF
     # if k == 27:
