@@ -72,18 +72,18 @@ while True:
         #            (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
 
     #display:    
-    #cv2.imshow("Current Image",visionManager.currentImage)
+    cv2.imshow("Current Image",visionManager.currentImage)
     cv2.imshow("Thresh Image", visionManager.maskedImage)
 
 
-    #save image:
-    # l = cv2.waitKey(5) & 0xFF
-    # if l == 115:
-    #     cv2.imwrite("Current Image.png",visionManager.currentImage)
-    #stop
-    k = cv2.waitKey(5) & 0xFF
-    if k == 27:
-        break
+    # save image:
+    l = cv2.waitKey(5) & 0xFF
+    if l == 115:
+        cv2.imwrite("Current Image.png",visionManager.currentImage)
+    # stop
+    # k = cv2.waitKey(5) & 0xFF
+    # if k == 27:
+    #     break
 
 cv2.destroyAllWindows()
 visionManager.cam.release()
