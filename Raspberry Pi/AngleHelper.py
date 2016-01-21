@@ -44,14 +44,27 @@ class AngleHelper(object):
             return 444
 
         alpha2 = degrees(acos(self.UHEIGHT/projectedUWidth))
-##        print ("alpha 1:", alpha1)
-##        print ("alpha 2:", alpha2)
-##        print ("projectedUWidth", projectedUWidth)
-##        print ("projectedUWidth", projectedUWidth)
-##        print ("self.UWIDTH", self.UWIDTH)
-##        print ("projectedUWidth/self.UWIDTH", projectedUWidth/self.UWIDTH)
+        # print ("alpha 1:", alpha1)
+        # print ("alpha 2:", alpha2)
+        # print ("projectedUWidth", projectedUWidth)
+        # print ("projectedUWidth", projectedUWidth)
+        # print ("self.UWIDTH", self.UWIDTH)
+        # print ("projectedUWidth/self.UWIDTH", projectedUWidth/self.UWIDTH)
 
         return 180 - alpha1 - alpha2
+
+    def getAzimuthicAngle(self, DFC, CUW, CUH, HA):
+        '''
+        This method returns the azimuthic angle of the object from the robot.
+        :param DFC: The distance of the robot from the camera in real life.
+        :param CUW: The current U width as it looks in the camera (in pixels).
+        :param CUH: The current U height as it looks in the camera (in pixels).
+        :param HA: The head angle of the camera (
+        :return: The azimuthic angle of the object from the robot, in degrees.
+        '''
+
+        Centerfloat(DFC)/float(CUW)*float(HA)/2
+
 
     #print(DFC,CUW,FL)
 #print((float(CUW)/float(CUH))*self.UWIDTH)

@@ -23,6 +23,7 @@ RL = 100 # Robot length.
 TH = 50 # The height of the tower
 CUW = 260 # (Center U Width) The U width as it looks in the camera when it is in the center (in pixels).
 CUWD = 220 # The distance which the CUW was calculated from.
+HA = 53
 
 FPSCounter = FPS()
 FPSCounter.start()
@@ -80,6 +81,12 @@ while True:
     # save image:
     l = cv2.waitKey(5) & 0xFF
     if l == 115:
+        if visionManager.currentImageObject is not None:
+        (x,y,h,w) = (visionManager.currentImageObject.objectX,
+                     visionManager.currentImageObject.objectY,
+                     visionManager.currentImageObject.objectHeight,
+                     visionManager.currentImageObject.objectWidth)
+        print (x,y,h,w)
         cv2.imwrite("Current Image.png",visionManager.currentImage)
     # stop
     # k = cv2.waitKey(5) & 0xFF
