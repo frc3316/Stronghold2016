@@ -6,6 +6,11 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 public class StopRoll extends DBugCommand
 {
 
+	public StopRoll()
+	{
+		requires(Robot.transport);
+	}
+	
 	protected void init()
 	{}
 

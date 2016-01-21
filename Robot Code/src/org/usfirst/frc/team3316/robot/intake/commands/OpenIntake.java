@@ -5,10 +5,6 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class OpenIntake extends DBugCommand
 {
-	
-	public OpenIntake() {
-		requires(Robot.intake);
-	}
 
 	protected void init()
 	{}
