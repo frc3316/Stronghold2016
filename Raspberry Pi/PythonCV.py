@@ -2,13 +2,15 @@
     This is the main module that handles and uses all other modules for the Python CV in the First Robotics Competition 2016.
     Created by: Leon Agmon Nacht.
     '''
+
 from VisionManager import *
 from NetworkManager import *
 from FPSCounter import *
 import cv2
 import numpy as np
-LB = np.array([0,0,255])
-UB = np.array([255,255,255])
+
+LB = np.array([37,0,234])
+UB = np.array([120,73,255])
 # LB = np.array([75,230,235]) # Lower bond.
 # UB = np.array([105,255,255]) # Upper bond.
 MBR = 500 # Minimum bounding rectangle
@@ -58,7 +60,7 @@ while True:
     # Print results
     if visionManager.currentImageObject is not None:
         #print("D",visionManager.currentImageObject.distanceFromCamera)
-         print("A",visionManager.robotObject.angle)
+         print("Angle: ",visionManager.robotObject.angle)
         #print("X",visionManager.robotObject.XPosition)
         #print("Y",visionManager.robotObject.Yposition)
         #print("XShift",visionManager.currentImageObject.XShift)
@@ -74,7 +76,6 @@ while True:
     #display:    
     cv2.imshow("Current Image",visionManager.currentImage)
     cv2.imshow("Thresh Image", visionManager.maskedImage)
-
 
     # save image:
     l = cv2.waitKey(5) & 0xFF
