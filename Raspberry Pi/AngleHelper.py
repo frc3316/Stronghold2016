@@ -32,18 +32,12 @@ class AngleHelper(object):
         :param CUH: The current U height as it looks in the camera (in pixels).
         :return: The angle of the object from the tower, in degrees.
         '''
-        #print(DFC,CUW,FL)
-        #print((float(CUW)/float(CUH))*self.UWIDTH)
-        #remainder = sqrt(self.UHEIGHT**2 + DFC**2)
-        realLifeProjectedUWidth = (float(CUW)/float(CUH))*self.UWIDTH
-        side2 = sqrt(self.UWIDTH**2 - realLifeProjectedUWidth**2)
-        print((self.UWIDTH**2 + DFC**2 - (realLifeProjectedUWidth+side2)**2)/(2*self.UWIDTH*DFC))
-        #return 180 - degrees(acos((self.UWIDTH**2 + DFC**2 - (realLifeProjectedUWidth+side2)**2)/(2*self.UWIDTH*DFC)))
-
-        # alpha1 = 90 - degrees(acos(realLifeProjectedUWidth/DFC))
-        # print("1",realLifeProjectedUWidth/DFC)
-        # #print("alpha1",alpha1)
-        # alpha2 = 90 - degrees(acos(realLifeProjectedUWidth/self.UWIDTH))
-        # print("2",realLifeProjectedUWidth/self.UWIDTH)
-        # #print("alpha2",alpha2)
-        # return 180 - alpha1 - alpha2
+        projectedUWidth = (float(CUH)/float(CUW))*self.UWIDTH
+        if projectedUWidth/DFC > 1:
+            return 999
+        alpha1 = degrees(acos(projectedUWidth/DFC))
+        if self.UHEIGHT/projectedUWidth > 1:
+            return 444
+        alpha2 = degrees(acos(self.UHEIGHT/projectedUWidth))
+        print(alpha1,alpha2,projectedUWidth/self.UWIDTH, projectedUWidth, self.UWIDTH)
+        return 180 - alpha1 - alpha2
