@@ -72,7 +72,7 @@ class VisionManager(object):
         :return: None.
         '''
         if self.currentImageObject is not None:
-            self.currentImageObject.didUpdateVar = False
+            self.currentImageObject.didUpdateVar = False	
 
         didGetImage,frame = self.cam.read()
         frame = cv2.resize(frame, (320,240), interpolation = cv2.INTER_AREA)

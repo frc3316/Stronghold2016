@@ -6,6 +6,7 @@
 from VisionManager import *
 from NetworkManager import *
 from FPSCounter import *
+from time import sleep
 import cv2
 import numpy as np
 
@@ -62,18 +63,18 @@ while True:
     #                             visionManager.robotObject.Yposition])
     
     # Print results
-    if visionManager.currentImageObject is not None:
+    # if visionManager.currentImageObject is not None:
         #print("D",visionManager.currentImageObject.distanceFromCamera)
         #print("Angle: ",visionManager.robotObject.angle)
         #print("X",visionManager.robotObject.XPosition)
         #print("Y",visionManager.robotObject.Yposition)
         #print("XShift",visionManager.currentImageObject.XShift)
         #print("YShift",visionManager.currentImageObject.YShift)
-        cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
+        #cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
         #    (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
 
-        FPSCounter.stop()
-        print(FPSCounter.fps())
+    FPSCounter.stop()
+    print(FPSCounter.fps())
         #cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),\
         #            (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
 
@@ -106,6 +107,7 @@ while True:
     # k = cv2.waitKey(5) & 0xFF
     # if k == 27:
     #     break
+    sleep (0.01)
 
 cv2.destroyAllWindows()
 visionManager.cam.release()
