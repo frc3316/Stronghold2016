@@ -1,7 +1,10 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -14,7 +17,8 @@ public class Intake extends DBugSubsystem
 	private SpeedController intakeMotor;
 
 	// Sensors
-	private DigitalInput intakeLS, intakeRS, intakePS;
+	private DigitalInput intakeLS, intakeRS, intakeTS, intakeBS;
+	private AnalogPotentiometer intakePot;
 
 	public Intake()
 	{
@@ -25,11 +29,14 @@ public class Intake extends DBugSubsystem
 		// Sensors
 		intakeLS = Robot.sensors.intakeLS;
 		intakeRS = Robot.sensors.intakeRS;
-		intakePS = Robot.sensors.intakePS;
+		intakeTS = Robot.sensors.intakeTS;
+		intakeBS = Robot.sensors.intakeBS;
+		intakePot = Robot.sensors.intakePot;
 	}
 
 	public void initDefaultCommand()
-	{}
+	{
+	}
 
 	public void openIntake()
 	{
@@ -60,13 +67,33 @@ public class Intake extends DBugSubsystem
 	{
 		return !isBallIn();
 	}
-	
-	public boolean isIntakeOpen() {
-		return intakePS.get();
+
+	public boolean isIntakeOpen()
+	{
+		try
+		{
+			return intakeBS.get() && intakePot
+					.get() >= (double) config.get("INTAKE_POT_HIGH_TRESH");
+		}
+		catch (ConfigException e)
+		{
+			logger.severe(e);
+		}
+		return intakeBS.get();
 	}
-	
-	public boolean isIntakeClose() {
-		return !isIntakeOpen();
+
+	public boolean isIntakeClose()
+	{
+		try
+		{
+			return !intakeBS.get() && intakePot
+					.get() <= (double) config.get("INTAKE_POT_LOW_TRESH");
+		}
+		catch (ConfigException e)
+		{
+			logger.severe(e);
+		}
+		return !intakeBS.get();
 	}
 
 }

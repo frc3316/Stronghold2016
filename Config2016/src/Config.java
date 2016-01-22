@@ -106,7 +106,13 @@ public class Config {
 				
 				addToConstants("INTAKE_LS", 0);
 				addToConstants("INTAKE_RS", 1);
-				addToConstants("INTAKE_RS", 4);
+				addToConstants("INTAKE_TS", 4);
+				addToConstants("INTAKE_BS", 5);
+				addToConstants("INTAKE_POT", 6);
+				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
+				addToConstants("INTAKE_POT_OFFSET", 0.0);
+				addToConstants("INTAKE_POT_LOW_TRESH", 1.0);
+				addToConstants("INTAKE_POT_HIGH_TRESH", 130.5);
 				
 				/*
 				 * Transport

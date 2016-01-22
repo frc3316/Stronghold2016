@@ -10,6 +10,8 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -28,11 +30,12 @@ public class Sensors
 	public AHRS navx;
 
 	// Intake
-	public DigitalInput intakeLS, intakeRS, intakePS;
+	public DigitalInput intakeLS, intakeRS, intakeTS, intakeBS;
+	public AnalogPotentiometer intakePot;
 
-	//Transport
+	// Transport
 	public Encoder transportEncoder;
-	
+
 	public Sensors()
 	{
 		try
@@ -54,7 +57,12 @@ public class Sensors
 			// Intake
 			intakeLS = new DigitalInput((int) Robot.config.get("INTAKE_LS")); // LS - Left Switch
 			intakeRS = new DigitalInput((int) Robot.config.get("INTAKE_RS")); // RS - Right Switch
-			intakePS = new DigitalInput((int) Robot.config.get("INTAKE_PS")); // PS - Position Switch
+			intakeTS = new DigitalInput((int) Robot.config.get("INTAKE_TS")); // PS - Top Switch
+			intakeBS = new DigitalInput((int) Robot.config.get("INTAKE_BS")); // BS - Bottom Switch
+			intakePot = new AnalogPotentiometer((int) Robot.config.get("INTAKE_POT"), 
+					(double) Robot.config.get("INTAKE_POT_FULL_RANGE"), 
+					(double) Robot.config.get("INTAKE_POT_OFFSET"));
+			
 			
 			//Transport
 			transportEncoder = new Encoder((int)config.get("TRANSPORT_ENCODER_A"), 
