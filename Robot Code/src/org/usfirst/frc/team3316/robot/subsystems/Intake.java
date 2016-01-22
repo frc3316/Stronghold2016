@@ -14,7 +14,7 @@ public class Intake extends DBugSubsystem
 	private SpeedController intakeMotor;
 
 	// Sensors
-	private DigitalInput intakeLS, intakeRS;
+	private DigitalInput intakeLS, intakeRS, intakePS;
 
 	public Intake()
 	{
@@ -25,6 +25,7 @@ public class Intake extends DBugSubsystem
 		// Sensors
 		intakeLS = Robot.sensors.intakeLS;
 		intakeRS = Robot.sensors.intakeRS;
+		intakePS = Robot.sensors.intakePS;
 	}
 
 	public void initDefaultCommand()
@@ -58,6 +59,14 @@ public class Intake extends DBugSubsystem
 	public boolean isBallOut()
 	{
 		return !isBallIn();
+	}
+	
+	public boolean isIntakeOpen() {
+		return intakePS.get();
+	}
+	
+	public boolean isIntakeClose() {
+		return !isIntakeOpen();
 	}
 
 }

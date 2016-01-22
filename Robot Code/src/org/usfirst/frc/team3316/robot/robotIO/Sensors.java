@@ -28,8 +28,11 @@ public class Sensors
 	public AHRS navx;
 
 	// Intake
-	public DigitalInput intakeLS, intakeRS;
+	public DigitalInput intakeLS, intakeRS, intakePS;
 
+	//Transport
+	public Encoder transportEncoder;
+	
 	public Sensors()
 	{
 		try
@@ -49,8 +52,15 @@ public class Sensors
 			}
 
 			// Intake
-			intakeLS = new DigitalInput((int) Robot.config.get("INTAKE_LS"));
-			intakeLS = new DigitalInput((int) Robot.config.get("INTAKE_RS"));
+			intakeLS = new DigitalInput((int) Robot.config.get("INTAKE_LS")); // LS - Left Switch
+			intakeRS = new DigitalInput((int) Robot.config.get("INTAKE_RS")); // RS - Right Switch
+			intakePS = new DigitalInput((int) Robot.config.get("INTAKE_PS")); // PS - Position Switch
+			
+			//Transport
+			transportEncoder = new Encoder((int)config.get("TRANSPORT_ENCODER_A"), 
+					 (int)config.get("TRANSPORT_ENCODER_B"), 
+					 (boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"), 
+					 CounterBase.EncodingType.k4X);
 		}
 		catch (ConfigException e)
 		{

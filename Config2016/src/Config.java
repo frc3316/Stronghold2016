@@ -94,7 +94,6 @@ public class Config {
 				 */
 				addToConstants("CHASSIS_MOTOR_LEFT_1", 5);
 				addToConstants("CHASSIS_MOTOR_LEFT_2", 6);
-
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 				
@@ -107,11 +106,16 @@ public class Config {
 				
 				addToConstants("INTAKE_LS", 0);
 				addToConstants("INTAKE_RS", 1);
+				addToConstants("INTAKE_RS", 4);
 				
 				/*
 				 * Transport
 				 */
 				addToConstants("TRANSPORT_MOTOR", 3);
+				
+				addToConstants("TRANSPORT_ENCODER_A", 2);
+				addToConstants("TRANSPORT_ENCODER_B", 3);
+				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
 			}
 		}
 		

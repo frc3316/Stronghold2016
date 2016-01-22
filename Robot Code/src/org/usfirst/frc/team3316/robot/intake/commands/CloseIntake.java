@@ -16,7 +16,7 @@ public class CloseIntake extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return true;
+		return Robot.intake.isIntakeClose();
 	}
 
 	protected void fin()
