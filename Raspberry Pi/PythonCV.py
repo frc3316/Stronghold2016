@@ -109,8 +109,8 @@ while True:
     ###################
     
     # if visionManager.currentImageObject is not None:
-        # print("D",visionManager.currentImageObject.distanceFromCamera)
-        # print("Angle: ",visionManager.robotObject.angle)
+        print("Distance: ",visionManager.currentImageObject.distanceFromCamera)
+        print("Angle: ",visionManager.robotObject.angle)
         # print("X",visionManager.robotObject.XPosition)
         # print("Y",visionManager.robotObject.Yposition)
         # print("XShift",visionManager.currentImageObject.XShift)
