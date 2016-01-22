@@ -122,13 +122,6 @@ public class Config {
 				addToConstants("TRANSPORT_ENCODER_A", 2);
 				addToConstants("TRANSPORT_ENCODER_B", 3);
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
-				
-				/*
-				 * Flywheel
-				 */
-				addToConstants("FLYWHEEL_MOTOR", 0);
-
-				addToConstants("FLYWHEEL_HALL_EFFECT", 0);
 			}
 		}
 
@@ -156,22 +149,5 @@ public class Config {
 			}
 		}
 
-		/*
-		 * Flywheel
-		 */
-		{
-			/*
-			 * Variables
-			 */
-			{
-				addToVariables("flywheel_PID_setpoint", 0.0);
-				addToVariables("flywheel_PID_KP", 0.0);
-				addToVariables("flywheel_PID_KI", 0.0);
-				addToVariables("flywheel_PID_KD", 0.0);
-
-				addToVariables("flywheel_bangbang_setpoint", 0.0);
-				addToVariables("flywheel_bangbang_voltage", 0.0);
-			}
-		}
 	}
 }

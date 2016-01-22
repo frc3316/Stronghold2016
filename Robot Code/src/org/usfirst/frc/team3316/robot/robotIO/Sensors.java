@@ -32,10 +32,6 @@ public class Sensors {
 	// Transport
 	public Encoder transportEncoder;
 
-	// Flywheel
-	public Counter flywheelCounter;
-	public DigitalInput flywheelHE;
-
 	public Sensors() {
 		try {
 			// Chassis
@@ -69,14 +65,6 @@ public class Sensors {
 			transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"),
 					(int) config.get("TRANSPORT_ENCODER_B"),
 					(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"), CounterBase.EncodingType.k4X);
-
-			// Flywheel
-			flywheelHE = new DigitalInput((int) Robot.config.get("FLYWHEEL_HALL_EFFECT")); // HE
-																							// -
-																							// Hall
-																							// Effect
-			flywheelCounter = new Counter(flywheelHE);
-			flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round
 
 		} catch (ConfigException e) {
 			logger.severe(e);

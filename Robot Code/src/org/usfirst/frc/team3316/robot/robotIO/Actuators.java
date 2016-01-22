@@ -26,9 +26,6 @@ public class Actuators {
 	// Transport
 	public Talon transportMotor;
 
-	// Flywheel
-	public Talon flywheelMotor;
-
 	public Actuators() {
 
 		try {
@@ -46,9 +43,6 @@ public class Actuators {
 
 			// Transport
 			transportMotor = new Talon((int) Robot.config.get("TRANSPORT_MOTOR"));
-
-			// Flywheel
-			flywheelMotor = new Talon((int) Robot.config.get("FLYWHEEL_MOTOR"));
 
 		} catch (ConfigException e) {
 			logger.severe(e);

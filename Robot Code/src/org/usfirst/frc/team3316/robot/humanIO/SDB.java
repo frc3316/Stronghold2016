@@ -11,9 +11,6 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
-import org.usfirst.frc.team3316.robot.flywheel.commands.BangbangFlywheel;
-import org.usfirst.frc.team3316.robot.flywheel.commands.JoystickFlywheel;
-import org.usfirst.frc.team3316.robot.flywheel.commands.PIDFlywheel;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -51,10 +48,6 @@ public class SDB
 			
 			//Chassis
 			put("isOnDefense", Robot.chassis.isOnDefense());
-			
-			//Flywheel
-			put("Flywheel speed", Robot.flywheel.getRate());
-			put("Hall effect", Robot.sensors.flywheelHE.get());
 		}
 		
 		private void put (String name, double d)
@@ -154,19 +147,6 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
-		
-		//Flywheel
-		SmartDashboard.putData(new JoystickFlywheel());
-		SmartDashboard.putData(new BangbangFlywheel());
-		SmartDashboard.putData(new PIDFlywheel());
-		
-		putConfigVariableInSDB("flywheel_bangbang_setpoint");
-		putConfigVariableInSDB("flywheel_bangbang_voltage");
-		putConfigVariableInSDB("flywheel_PID_setpoint");
-		putConfigVariableInSDB("flywheel_PID_KP");
-		putConfigVariableInSDB("flywheel_PID_KI");
-		putConfigVariableInSDB("flywheel_PID_KD");
-		
 		
 		logger.info("Finished initSDB()");
 	}
