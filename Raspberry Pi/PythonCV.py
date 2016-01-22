@@ -14,8 +14,8 @@ import numpy as np
 #############
 
 #Colors:
-LB = np.array([37,0,234]) # Lower bond
-UB = np.array([120,73,255]) # Upper bond
+LB = np.array([37,0,231]) # Lower bond
+UB = np.array([108,40,255]) # Upper bond
 
 # Bounding rectangle
 MBR = 500 # Minimum bounding rectangle
@@ -92,7 +92,7 @@ while True:
         azimuthalAngle = float((xO-xC)*HAX)/float(visionManager.imageWidth) # x, y plane
         polarAngle = float((yO-yC)*HAY)/float(visionManager.imageHeight) # azimuthal, z plane
         
-        print (azimuthalAngle, polarAngle)
+        # print (azimuthalAngle, polarAngle)
 
     #############################
     # Send data to java process #
@@ -121,7 +121,7 @@ while True:
         #       (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
         
     FPSCounter.stop()
-    print(FPSCounter.fps())
+    # print(FPSCounter.fps())
     
     # display:
     cv2.imshow("Current Image", visionManager.currentImage)
