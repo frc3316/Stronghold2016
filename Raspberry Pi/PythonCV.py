@@ -78,7 +78,7 @@ while True:
                      visionManager.currentImageObject.objectY,
                      visionManager.currentImageObject.objectHeight,
                      visionManager.currentImageObject.objectWidth)     
-        #(x, y) = top left corner, h+ is down, w+ is right
+        # (x, y) = top left corner, h+ is down, w+ is right
         
         cv2.rectangle(visionManager.maskedImage, (x, y), (x + w, y + h), (0, 255, 0), 2)
 

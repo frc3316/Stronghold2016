@@ -9,7 +9,7 @@ class DistanceHelper(object):
         '''
         A class that handles the calculations of the distance from the U to an object(Robot).
         :param knownHeight: The known height of the U.
-        :param focalLength: The focal lenght of the U.
+        :param focalLength: The focal length of the U.
         :return: None.
         '''
 
