@@ -10,7 +10,6 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class Joysticks 
 {
@@ -45,9 +44,16 @@ public class Joysticks
 	
 	public Joysticks ()
 	{
-		joystickLeft = new Joystick(0);
-		joystickRight = new Joystick(1);
-		joystickOperator = new Joystick(2);
+		try
+		{
+			joystickLeft = new Joystick((int) Robot.config.get("JOYSTICK_LEFT"));
+			joystickRight = new Joystick((int) Robot.config.get("JOYSTICK_RIGHT"));
+			joystickOperator = new Joystick((int) Robot.config.get("JOYSTICK_OPERATOR"));
+		}
+		catch (ConfigException e)
+		{
+			logger.severe(e);
+		}
 	}
 	
 	public void initButtons ()

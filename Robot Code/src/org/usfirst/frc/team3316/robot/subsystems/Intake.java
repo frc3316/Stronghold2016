@@ -3,7 +3,6 @@ package org.usfirst.frc.team3316.robot.subsystems;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -86,14 +85,14 @@ public class Intake extends DBugSubsystem
 	{
 		try
 		{
-			return !intakeBS.get() && intakePot
+			return intakeTS.get() && intakePot
 					.get() <= (double) config.get("INTAKE_POT_LOW_TRESH");
 		}
 		catch (ConfigException e)
 		{
 			logger.severe(e);
 		}
-		return !intakeBS.get();
+		return intakeTS.get();
 	}
 
 }
