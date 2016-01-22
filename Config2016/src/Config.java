@@ -70,11 +70,73 @@ public class Config {
 		/*
 		 * Human IO
 		 */
+		{
 			/*
 			 * Constants
 			 */
-			addToConstants("JOYSTICK_LEFT", 0);
-			addToConstants("JOYSTICK_RIGHT", 1);
-			addToConstants("JOYSTICK_OPERATOR", 2);
+			{
+				addToConstants("JOYSTICK_LEFT", 0);
+				addToConstants("JOYSTICK_RIGHT", 1);
+				addToConstants("JOYSTICK_OPERATOR", 2);
+			}
+		}
+
+		/*
+		 * RobotIO
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+				/*
+				 * Chassis
+				 */
+				addToConstants("CHASSIS_MOTOR_LEFT_1", 5);
+				addToConstants("CHASSIS_MOTOR_LEFT_2", 6);
+
+				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
+				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
+				
+				/*
+				 * Intake
+				 */
+				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 0);
+				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 1);
+				addToConstants("INTAKE_MOTOR", 0);
+				
+				addToConstants("INTAKE_LS", 0);
+				addToConstants("INTAKE_RS", 1);
+				
+				/*
+				 * Transport
+				 */
+				addToConstants("TRANSPORT_MOTOR", 3);
+			}
+		}
+		
+		/*
+		 * Chassis
+		 */
+		{
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("chassis_TankDrive_DeadBand", 0.05);
+				
+				addToVariables("chassis_TankDrive_InvertX", false);
+				addToVariables("chassis_TankDrive_InvertY", true);
+			}
+			
+			/*
+			 * Constants
+			 */
+			{
+				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
+				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
+				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
+			}
+		}
 	}
 }
