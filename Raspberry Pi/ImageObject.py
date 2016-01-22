@@ -19,6 +19,6 @@ class ImageObject(object):
         self.objectX = X
         self.objectY = Y
         self.distanceFromCamera = DFC
-        self.XShift = None # The shift of the ImageObject instance from the center of the camera (In the X axis).
-        self.YShift = None # The shift of the ImageObject instance from the center of the camera (In the X axis).
+        self.polarAngle = None # Azimuthal, z plane.
+        self.azimuthalAngle = None # x, y plane.
         self.didUpdateVars = False # Did VisionManager updated the var after updating the image?.

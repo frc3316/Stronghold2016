@@ -13,7 +13,7 @@ import numpy as np
 # constants #
 #############
 
-#Colors:
+# Colors:
 LB = np.array([37,0,231]) # Lower bond
 UB = np.array([108,40,255]) # Upper bond
 
@@ -82,18 +82,6 @@ while True:
         
         cv2.rectangle(visionManager.maskedImage, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-        #########################################
-        # Azimuthal and polar angle calculation #
-        #########################################
-        
-        (xO, yO) = (x + w/2, y + h/2) # center of the object
-        (xC, yC) = (visionManager.imageWidth/2, visionManager.imageHeight/2) # center of the frame
-
-        azimuthalAngle = float((xO-xC)*HAX)/float(visionManager.imageWidth) # x, y plane
-        polarAngle = float((yO-yC)*HAY)/float(visionManager.imageHeight) # azimuthal, z plane
-        
-        # print (azimuthalAngle, polarAngle)
-
     #############################
     # Send data to java process #
     #############################
@@ -109,8 +97,8 @@ while True:
     ###################
     
     # if visionManager.currentImageObject is not None:
-        print("Distance: ",visionManager.currentImageObject.distanceFromCamera)
-        print("Angle: ",visionManager.robotObject.angle)
+        # print("D",visionManager.currentImageObject.distanceFromCamera)
+        # print("A",visionManager.robotObject.angle)
         # print("X",visionManager.robotObject.XPosition)
         # print("Y",visionManager.robotObject.Yposition)
         # print("XShift",visionManager.currentImageObject.XShift)
@@ -124,7 +112,7 @@ while True:
     # print(FPSCounter.fps())
     
     # display:
-    cv2.imshow("Current Image", visionManager.currentImage)
+    # cv2.imshow("Current Image", visionManager.currentImage)
     # cv2.imshow("Thresh Image", visionManager.threshImage)
     cv2.imshow("Masked Image", visionManager.maskedImage)
 
@@ -135,16 +123,16 @@ while True:
     # choose only one to be active!
     
     # save image:
-    k = cv2.waitKey(5) & 0xFF
-    if k == 115: # pressed s
-        if visionManager.currentImageObject is not None:
-            cv2.imwrite("Current Image.png",visionManager.currentImage)
-    # stop
     # k = cv2.waitKey(5) & 0xFF
-    # if k == 27:
-    #     break
+    # if k == 115: # pressed s
+    #     if visionManager.currentImageObject is not None:
+    #         cv2.imwrite("Current Image.png",visionManager.currentImage)
+    #  stop
+    k = cv2.waitKey(5) & 0xFF
+    if k == 27:
+        break
     
-    sleep (0.01) # so the pi won't crush and cut the connection
+    # sleep(0.01) # so the pi won't crush and cut the connection
 
 cv2.destroyAllWindows()
 visionManager.cam.release()

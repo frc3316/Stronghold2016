@@ -46,30 +46,32 @@ class DistanceHelper(object):
 
         return sin(radians(robotObject.angle))*robotObject.distanceFromTower
 
-    def getXShiftOfTower(self,cameraSize,imageObject):
+    def getPolarAngle(self,cameraSize,imageObject,HAY):
         '''
         This method calculates the X shift of the imageObject from the center of the frame.
         :param cameraSize: A list that represents the size of the frame:
         - cameraSize[0] = frame width.
         - cameraSize[1] = frame height.
         :param imageObject: The object the method should calculate the shift for.
+        :param HAY: The head angle of the camera (y).
         :return: The X shift of the imageObject from the center of the frame
         '''
+        (xC, yC) = (cameraSize[0]/2, cameraSize[1]/2) # Center of the frame
+        # Center of the object:
+        (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2, imageObject.objectY + imageObject.objectHeight/2)
+        return float((yO-yC)*HAY)/float(cameraSize[1]) # Azimuthal, z plane.
 
-        frameCenter = cameraSize[0]/2
-        return frameCenter - (imageObject.objectX + imageObject.objectWidth/2)
-
-        # If the object is left from the center of the frame, the result will be positive.
-
-    def getYShiftOfTower(self,cameraSize,imageObject):
+    def getAzimuthalAngle(self,cameraSize,imageObject,HAX):
         '''
         This method calculates the Y shift of the imageObject from the center of the frame.
         :param cameraSize: A list that represents the size of the frame:
         - cameraSize[0] = frame width.
         - cameraSize[1] = frame height.
         :param imageObject: The object the method should calculate the shift for.
+        :param HAX: The head angle of the camera (x).
         :return: The Y shift of the imageObject from the center of the frame
         '''
-
-        frameCenter = cameraSize[1]/2
-        return frameCenter - (imageObject.objectY + imageObject.objectHeight/2)
+        (xC, yC) = (cameraSize[0]/2, cameraSize[1]/2) # Center of the frame
+        # Center of the object:
+        (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2, imageObject.objectY + imageObject.objectHeight/2)
+        return float((xO-xC)*HAX)/float(cameraSize[0]) # x,y plane.
