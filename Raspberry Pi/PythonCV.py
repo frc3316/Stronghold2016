@@ -127,6 +127,7 @@ while True:
     # if k == 115: # pressed s
     #     if visionManager.currentImageObject is not None:
     #         cv2.imwrite("Current Image.png",visionManager.currentImage)
+
     #  stop
     k = cv2.waitKey(5) & 0xFF
     if k == 27:

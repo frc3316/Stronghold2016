@@ -56,6 +56,7 @@ class DistanceHelper(object):
         :param HAY: The head angle of the camera (y).
         :return: The X shift of the imageObject from the center of the frame
         '''
+
         (xC, yC) = (cameraSize[0]/2, cameraSize[1]/2) # Center of the frame
         # Center of the object:
         (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2, imageObject.objectY + imageObject.objectHeight/2)
@@ -71,6 +72,7 @@ class DistanceHelper(object):
         :param HAX: The head angle of the camera (x).
         :return: The Y shift of the imageObject from the center of the frame
         '''
+
         (xC, yC) = (cameraSize[0]/2, cameraSize[1]/2) # Center of the frame
         # Center of the object:
         (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2, imageObject.objectY + imageObject.objectHeight/2)

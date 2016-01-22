@@ -55,6 +55,7 @@ class VisionManager(object):
         self.robotObject = RobotObject(robotMeasurements[0],robotMeasurements[1],robotMeasurements[2])
 
         self.focalLength = focalLength
+
     def __setImageScales(self):
         '''
         This private method sets the scales of the image(self.currentImage).
@@ -71,6 +72,7 @@ class VisionManager(object):
         This method updates the current image of the VisionManager instance.
         :return: None.
         '''
+
         if self.currentImageObject is not None:
             self.currentImageObject.didUpdateVar = False	
 
