@@ -45,9 +45,16 @@ public class Joysticks
 	
 	public Joysticks ()
 	{
-		joystickLeft = new Joystick(0);
-		joystickRight = new Joystick(1);
-		joystickOperator = new Joystick(2);
+		try
+		{
+			joystickLeft = new Joystick((int) Robot.config.get("JOYSTICK_LEFT"));
+			joystickRight = new Joystick((int) Robot.config.get("JOYSTICK_RIGHT"));
+			joystickOperator = new Joystick((int) Robot.config.get("JOYSTICK_OPERATOR"));
+		}
+		catch (ConfigException e)
+		{
+			logger.severe(e);
+		}
 	}
 	
 	public void initButtons ()

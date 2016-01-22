@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public abstract class DBugCommand extends Command 
 {
-	DBugLogger logger = Robot.logger;
-	Config config = Robot.config;
+	protected DBugLogger logger = Robot.logger;
+	protected Config config = Robot.config;
 
     protected final void initialize() 
     {

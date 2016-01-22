@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.commands.flywheel;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -47,23 +48,28 @@ public class PIDFlywheel extends DBugCommand
 	{
 		v = 0;
 
-		SmartDashboard.putNumber("Setpoint Speed", 0);
+		Robot.sdb.putConfigVariableInSDB("flywheel_PID_setpoint");
+		Robot.sdb.putConfigVariableInSDB("flywheel_PID_KP");
+		Robot.sdb.putConfigVariableInSDB("flywheel_PID_KI");
+		Robot.sdb.putConfigVariableInSDB("flywheel_PID_KD");
 
-		SmartDashboard.putNumber("PID P", 0);
-		SmartDashboard.putNumber("PID I", 0);
-		SmartDashboard.putNumber("PID D", 0);
-		
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID(SmartDashboard.getNumber("PID P", 0)*0.001,
-				SmartDashboard.getNumber("PID I", 0)*0.001,
-				SmartDashboard.getNumber("PID D", 0)*0.001);
-		
-		pid.setSetpoint(SmartDashboard.getNumber("Setpoint Speed", 0));
-		Robot.flywheel.setMotors(-v);
+		try
+		{
+			pid.setPID((double) Robot.config.get("flywheel_PID_KP") / 1000,
+					(double) Robot.config.get("flywheel_PID_KI") / 1000,
+					(double) Robot.config.get("flywheel_PID_KD") / 1000);
+			pid.setSetpoint((double) Robot.config.get("flywheel_PID_setpoint"));
+			Robot.flywheel.setMotors(-v);
+		}
+		catch (ConfigException e)
+		{
+			logger.severe(e);
+		}
 	}
 
 	protected boolean isFinished()
@@ -74,7 +80,7 @@ public class PIDFlywheel extends DBugCommand
 	protected void fin()
 	{
 		pid.disable();
-		
+
 		Robot.flywheel.setMotors(0);
 	}
 

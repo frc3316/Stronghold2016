@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.commands.flywheel;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -22,19 +23,26 @@ public class BangbangFlywheel extends DBugCommand
 	{
 		v = 0;
 		
-		SmartDashboard.putNumber("Setpoint Speed", 0);
-		SmartDashboard.putNumber("Bangbang Voltage", 0);
+		Robot.sdb.putConfigVariableInSDB("flywheel_bangbang_setpoint");
+		Robot.sdb.putConfigVariableInSDB("flywheel_bangbang_voltage");
 	}
 
 	protected void execute()
 	{
-		if (Robot.flywheel.getRate() < SmartDashboard.getNumber("Setpoint Speed", 0))
+		try
 		{
-			v = SmartDashboard.getNumber("Bangbang Voltage", 0);
+			if (Robot.flywheel.getRate() < (double) config.get("flywheel_bangbang_setpoint"))
+			{
+				v = (double) config.get("flywheel_bangbang_voltage");
+			}
+			else
+			{
+				v = 0;
+			}
 		}
-		else
+		catch (ConfigException e)
 		{
-			v = 0;
+			logger.severe(e);
 		}
 		
 		Robot.flywheel.setMotors(v);
