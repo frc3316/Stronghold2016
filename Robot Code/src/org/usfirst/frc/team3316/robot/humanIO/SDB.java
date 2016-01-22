@@ -9,11 +9,11 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+import org.usfirst.frc.team3316.robot.flywheel.commands.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.flywheel.commands.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.flywheel.commands.PIDFlywheel;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
