@@ -1,10 +1,8 @@
-'''
-Created by: Leon Agmon Nacht.
-'''
 class ImageObject(object):
     '''
     This class represents an object in the image, and the object is represented as an rectangle.
     '''
+
     def __init__(self,W,H,X,Y,DFC):
         '''
         This method initialising the variables for the ImageObject instance.
@@ -13,7 +11,7 @@ class ImageObject(object):
         :param X: The X coordinate  of the object in the image.
         :param Y: The Y coordinate of the object in the image.
         :param DFC: The distance of the object from the camera.
-        :return: None.
+        :return: None
         '''
 
         self.objectWidth = W

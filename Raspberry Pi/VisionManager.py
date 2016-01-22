@@ -1,6 +1,3 @@
-'''
-Created by: Leon Agmon Nacht.
-'''
 import cv2
 from AngleHelper import *
 from DistanceHelper import *
@@ -11,6 +8,7 @@ class VisionManager(object):
     '''
     A class that manages all the computer vision for the FRC 2016.
     '''
+
     def __init__(self,minColor,maxColor,minimumBoundingRectSize,cam,knownHeight,knownWidth,focalLength,
                  robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance):
         '''
@@ -31,8 +29,9 @@ class VisionManager(object):
         :param TOWER_HEIGHT: The height of the tower.
         :param centerUWidth: The U width as it looks in the camera when it is in the center (in pixels).
         :param currentUWidthDistance: The distance which the centerUWidth was calculated from.
-        :return: None.
+        :return: None
         '''
+
         self.angleHelper = AngleHelper(knownWidth,knownHeight,centerUWidth,currentUWidthDistance)
         self.distanceHelper = DistanceHelper(knownHeight,focalLength)
         self.TOWER_HEIGHT = TOWER_HEIGHT
@@ -60,8 +59,9 @@ class VisionManager(object):
         '''
         This private method sets the scales of the image(self.currentImage).
         This method is auto called, and should not be called manually.
-        :return:
+        :return: None
         '''
+
         height, width = self.currentImage.shape[:2]
         self.imageHeight = height
         self.imageWidth = width
@@ -90,6 +90,7 @@ class VisionManager(object):
         This method updates self.maskedImage, self.threshImage, using self.currentImage.
         :return: None
         '''
+
         hsv = cv2.cvtColor(self.currentImage, cv2.COLOR_BGR2HSV)
 
         # Threshold the HSV image to get only blue colors.
@@ -100,7 +101,7 @@ class VisionManager(object):
         self.maskedImage = res
 
         thresh = cv2.threshold(mask, 25, 255, cv2.THRESH_BINARY)[1]
-        # dilate the thresholded image to fill in holes, then find contours on thresholded image.
+        # dilate the threshed image to fill in holes, then find contours on thresholded image.
         thresh = cv2.dilate(thresh, None, iterations=2)
         self.threshImage = thresh
 
@@ -110,6 +111,7 @@ class VisionManager(object):
         self.current_image.
         :return: None if no object, else the bounding rect in the format of (x, y, w, h).
         '''
+
         self.updateMaskThresh()
         thresh = self.threshImage
         (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -124,6 +126,7 @@ class VisionManager(object):
         This method updates the vars holding the scales and distance from camera of the object.
         :return: None
         '''
+
         boundingRect = self.calculateBoundingRect()
         if boundingRect is not None:
             (x, y, w, h) = boundingRect
@@ -148,8 +151,9 @@ class VisionManager(object):
     def updateRobotScales(self):
         '''
         This method updates the self.robotObject vars.
-        :return:
+        :return: None
         '''
+
         if self.currentImageObject is not None:
             if not self.currentImageObject.didUpdateVars:
                 self.updateTowerScales()

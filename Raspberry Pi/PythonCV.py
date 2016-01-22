@@ -1,6 +1,7 @@
 '''
 This is the main module that handles and uses all other modules for the Python CV
 '''
+
 from VisionManager import *
 from NetworkManager import *
 from FPSCounter import *
@@ -33,8 +34,8 @@ CUW = 260 # (Center U Width) The U width as it looks in the camera when it is in
 CUWD = 220 # The distance which the CUW was calculated from.
 
 # Camera:
-HAX = 53 #The head angle of the camera (x)
-HAY = 40 #The head angle of the camera (y)
+HAX = 53 # The head angle of the camera (x)
+HAY = 40 # The head angle of the camera (y)
 
 ##################################
 # Camera and FPS counter setting #
@@ -122,8 +123,9 @@ while True:
     FPSCounter.stop()
     print(FPSCounter.fps())
     
-    #display:    
-    cv2.imshow("Current Image",visionManager.currentImage)
+    # display:
+    cv2.imshow("Current Image", visionManager.currentImage)
+    # cv2.imshow("Thresh Image", visionManager.threshImage)
     cv2.imshow("Masked Image", visionManager.maskedImage)
 
     #########################
@@ -133,8 +135,8 @@ while True:
     # choose only one to be active!
     
     # save image:
-    l = cv2.waitKey(5) & 0xFF
-    if l == 115: #s
+    k = cv2.waitKey(5) & 0xFF
+    if k == 115: # pressed s
         if visionManager.currentImageObject is not None:
             cv2.imwrite("Current Image.png",visionManager.currentImage)
     # stop

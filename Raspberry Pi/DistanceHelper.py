@@ -1,11 +1,10 @@
-'''
-Created by: Leon Agmon Nacht.
-'''
 from math import sqrt,sin,cos,radians
+
 class DistanceHelper(object):
     '''
     A class that handles the distance calculating.
     '''
+
     def __init__(self,knownHeight,focalLength):
         '''
         A class that handles the calculations of the distance from the U to an object(Robot).
@@ -13,6 +12,7 @@ class DistanceHelper(object):
         :param focalLength: The focal lenght of the U.
         :return: None.
         '''
+
         self.knownHeight = knownHeight
         self.focalLength = focalLength
 
@@ -24,6 +24,7 @@ class DistanceHelper(object):
         :param towerHeight: The height of the tower in cm.
         :return: The distance of the object from the camera.
         '''
+
         remainder = float(self.knownHeight * self.focalLength) / float(objectHeight)
         return sqrt(remainder**2 - (towerHeight-(self.knownHeight/2)-robotObject.height)**2)
 
@@ -33,6 +34,7 @@ class DistanceHelper(object):
         :param robotObject: An instance of RobotObject.
         :return: The X position of the robotObject.
         '''
+
         return cos(radians(robotObject.angle))*robotObject.distanceFromTower
 
     def getYRobotPosition(self,robotObject):
@@ -41,6 +43,7 @@ class DistanceHelper(object):
         :param robotObject: An instance of RobotObject.
         :return: The Y position of the robotObject.
         '''
+
         return sin(radians(robotObject.angle))*robotObject.distanceFromTower
 
     def getXShiftOfTower(self,cameraSize,imageObject):
@@ -52,10 +55,11 @@ class DistanceHelper(object):
         :param imageObject: The object the method should calculate the shift for.
         :return: The X shift of the imageObject from the center of the frame
         '''
+
         frameCenter = cameraSize[0]/2
         return frameCenter - (imageObject.objectX + imageObject.objectWidth/2)
-        # If the object is left from the center of the frame,
-        # the result will be positive.
+
+        # If the object is left from the center of the frame, the result will be positive.
 
     def getYShiftOfTower(self,cameraSize,imageObject):
         '''
@@ -66,5 +70,6 @@ class DistanceHelper(object):
         :param imageObject: The object the method should calculate the shift for.
         :return: The Y shift of the imageObject from the center of the frame
         '''
+
         frameCenter = cameraSize[1]/2
         return frameCenter - (imageObject.objectY + imageObject.objectHeight/2)
