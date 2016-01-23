@@ -19,6 +19,6 @@ class ImageObject(object):
         self.objectX = X
         self.objectY = Y
         self.distanceFromCamera = DFC
-        self.polarAngle = None # Azimuthal, z plane.
-        self.azimuthalAngle = None # x, y plane.
+        self.azimuthalAngle = None # x,y plane.
+        self.polarAngle = None # Azimuthal,z plane.
         self.didUpdateVars = False # Did VisionManager updated the var after updating the image?.

@@ -10,7 +10,7 @@ class VisionManager(object):
     '''
 
     def __init__(self,minColor,maxColor,minimumBoundingRectSize,cam,knownHeight,knownWidth,focalLength,
-                 robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance):
+                 robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance,HAX,HAY):
         '''
         This method initialising the variables for the VisionManager instance.
         :param minColor: The min color to be passed in the mask. (in the format: np.array([B,G,R])).
@@ -55,6 +55,8 @@ class VisionManager(object):
         self.robotObject = RobotObject(robotMeasurements[0],robotMeasurements[1],robotMeasurements[2])
 
         self.focalLength = focalLength
+        self.HAX = HAX
+        self.HAY = HAY
 
     def __setImageScales(self):
         '''
@@ -143,10 +145,10 @@ class VisionManager(object):
                 self.currentImageObject.objectY = y
                 self.currentImageObject.distanceFromCamera = DFC
 
-                XShift = self.distanceHelper.getXShiftOfTower([self.imageWidth,self.imageHeight],self.currentImageObject)
-                YShift = self.distanceHelper.getYShiftOfTower([self.imageWidth,self.imageHeight],self.currentImageObject)
-                self.currentImageObject.XShift = XShift
-                self.currentImageObject.YShift = YShift
+                azimuthalAngle = self.distanceHelper.getAzimuthalAngle(self.cameraWidth, self.currentImageObject,self.HAX)
+                polarAngle = self.distanceHelper.getPolarAngle(self.cameraHeight, self.currentImageObject,self.HAY)
+                self.currentImageObject.azimathalAngle = azimuthalAngle
+                self.currentImageObject.polarAngle = polarAngle
 
             self.currentImageObject.didUpdateVar = True
 
@@ -161,10 +163,10 @@ class VisionManager(object):
                 self.updateTowerScales()
                 self.currentImageObject.didUpdateVars = True
             self.robotObject.distanceFromTower = self.currentImageObject.distanceFromCamera
-
-            self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
-                                                               self.currentImageObject.objectWidth,
-                                                               self.focalLength,
-                                                               self.currentImageObject.objectHeight)
-            self.robotObject.XPosition = self.distanceHelper.getXRobotPosition(self.robotObject)
-            self.robotObject.Yposition = self.distanceHelper.getYRobotPosition(self.robotObject)
+            # those?
+            # self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
+            #                                                    self.currentImageObject.objectWidth,
+            #                                                    self.focalLength,
+            #                                                    self.currentImageObject.objectHeight)
+            # self.robotObject.XPosition = self.distanceHelper.getXRobotPosition(self.robotObject)
+            # self.robotObject.Yposition = self.distanceHelper.getYRobotPosition(self.robotObject)

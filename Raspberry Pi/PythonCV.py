@@ -54,7 +54,7 @@ cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
 cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
 cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
 
-visionManager = VisionManager(LB,UB,MBR,cam,KH,KW,FL,[RH,RW,RL],TH, CUW, CUWD)
+visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
 #networkManager = NetworkManager("localhost",8080)
 
 ###################
@@ -101,8 +101,8 @@ while True:
         # print("A",visionManager.robotObject.angle)
         # print("X",visionManager.robotObject.XPosition)
         # print("Y",visionManager.robotObject.Yposition)
-        # print("XShift",visionManager.currentImageObject.XShift)
-        # print("YShift",visionManager.currentImageObject.YShift)
+        # print("azimuthalAngle",visionManager.currentImageObject.azimuthalAngle)
+        # print("polarAngle",visionManager.currentImageObject.polarAngle)
 
         # put the FPS on the picture
         # cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
