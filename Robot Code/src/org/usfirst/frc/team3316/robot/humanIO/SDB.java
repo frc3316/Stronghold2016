@@ -39,6 +39,8 @@ public class SDB
 			
 			put("Flywheel speed", Robot.flywheel.getRate());
 			put("Hall effect", Robot.sensors.hallEffect.get());
+			
+			put("Talon Electrical Current", Robot.sensors.pdp.getCurrent(2));
 		}
 		
 		private void put (String name, double d)
@@ -90,9 +92,8 @@ public class SDB
 	 */
 	public boolean putConfigVariableInSDB (String key)
 	{
-		try
-		{
-			Object value = config.get(key);
+		Object value = config.get(key);
+			if(value != null) {
 			Class <?> type = value.getClass();
 			
 			boolean constant = Character.isUpperCase(key.codePointAt(0));
@@ -124,10 +125,7 @@ public class SDB
 			
 			return true;
 		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+
 		return false;
 	}
 	

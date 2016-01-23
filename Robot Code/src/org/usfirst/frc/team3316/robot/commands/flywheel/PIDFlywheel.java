@@ -9,57 +9,76 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class PIDFlywheel extends DBugCommand {
-	PIDController pid;
-	double v = 0;
+public class PIDFlywheel extends DBugCommand
+{
+	private PIDController pid;
+	private double v = 0;
+	private boolean isFin;
 
-	public PIDFlywheel() {
+	public PIDFlywheel()
+	{
 		requires(Robot.flywheel);
 
-		pid = new PIDController(0, 0, 0, new PIDSource() {
-			public void setPIDSourceType(PIDSourceType pidSource) {
+		pid = new PIDController(0, 0, 0, new PIDSource()
+		{
+			public void setPIDSourceType(PIDSourceType pidSource)
+			{
 				return;
 			}
 
-			public double pidGet() {
+			public double pidGet()
+			{
 				return 0;
 			}
 
-			public PIDSourceType getPIDSourceType() {
+			public PIDSourceType getPIDSourceType()
+			{
 				return PIDSourceType.kRate;
 			}
-		}, new PIDOutput() {
-			public void pidWrite(double output) {
+		}, new PIDOutput()
+		{
+			public void pidWrite(double output)
+			{
 				v = output;
 			}
 		});
 	}
 
-	protected void init() {
+	protected void init()
+	{
 		v = 0;
 
 		pid.enable();
 	}
 
-	protected void execute() {
-		pid.setPID((double) SmartDashboard.getNumber("flywheel_PID_KP", 0.0) / 1000,
-				(double) SmartDashboard.getNumber("flywheel_PID_KI", 0.0) / 1000,
-				(double) SmartDashboard.getNumber("flywheel_PID_KD", 0.0) / 1000);
-		pid.setSetpoint((double) SmartDashboard.getNumber("flywheel_PID_setpoint", 0.0));
-		Robot.flywheel.setMotors(-v);
+	protected void execute()
+	{
+		pid.setPID(
+				(double) SmartDashboard.getNumber("flywheel_PID_KP", 0.0)
+						/ 1000,
+				(double) SmartDashboard.getNumber("flywheel_PID_KI", 0.0)
+						/ 1000,
+				(double) SmartDashboard.getNumber("flywheel_PID_KD", 0.0)
+						/ 1000);
+		pid.setSetpoint((double) SmartDashboard
+				.getNumber("flywheel_PID_setpoint", 0.0));
+		isFin = Robot.flywheel.setMotors(-v);
 	}
 
-	protected boolean isFinished() {
-		return false;
+	protected boolean isFinished()
+	{
+		return !isFin;
 	}
 
-	protected void fin() {
+	protected void fin()
+	{
 		pid.disable();
 
 		Robot.flywheel.setMotors(0);
 	}
 
-	protected void interr() {
+	protected void interr()
+	{
 		fin();
 	}
 }

@@ -97,6 +97,7 @@ public class Config
 		addToConstants("JOYSTICK_LEFT", 0);
 		addToConstants("JOYSTICK_RIGHT", 1);
 		addToConstants("JOYSTICK_OPERATOR", 2);
+		addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 1000.0);
 
 		/*
 		 * Variables

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
 
 public class Sensors
@@ -24,6 +25,8 @@ public class Sensors
 	
 	public Counter flywheelCounter;
 	public DigitalInput hallEffect;
+	
+	public PowerDistributionPanel pdp;
 
 	public Sensors()
 	{
@@ -40,5 +43,7 @@ public class Sensors
 		
 		flywheelCounter = new Counter(hallEffect);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); //6 bolts per round
+		
+		pdp = new PowerDistributionPanel();
 	}
 }

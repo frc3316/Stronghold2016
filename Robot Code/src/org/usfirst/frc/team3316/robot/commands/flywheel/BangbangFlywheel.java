@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class BangbangFlywheel extends DBugCommand
 {
 	double v = 0;
+	private boolean isFin;
 
 	public BangbangFlywheel()
 	{
@@ -22,35 +23,29 @@ public class BangbangFlywheel extends DBugCommand
 	protected void init()
 	{
 		v = 0;
-		
+
 		Robot.sdb.putConfigVariableInSDB("flywheel_bangbang_setpoint");
 		Robot.sdb.putConfigVariableInSDB("flywheel_bangbang_voltage");
 	}
 
 	protected void execute()
 	{
-		try
+		if (Robot.flywheel
+				.getRate() < (double) config.get("flywheel_bangbang_setpoint"))
 		{
-			if (Robot.flywheel.getRate() < (double) config.get("flywheel_bangbang_setpoint"))
-			{
-				v = (double) config.get("flywheel_bangbang_voltage");
-			}
-			else
-			{
-				v = 0;
-			}
+			v = (double) config.get("flywheel_bangbang_voltage");
 		}
-		catch (ConfigException e)
+		else
 		{
-			logger.severe(e);
+			v = 0;
 		}
-		
-		Robot.flywheel.setMotors(v);
+
+		isFin = Robot.flywheel.setMotors(v);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return !isFin;
 	}
 
 	protected void fin()
