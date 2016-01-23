@@ -29,6 +29,8 @@ class VisionManager(object):
         :param TOWER_HEIGHT: The height of the tower.
         :param centerUWidth: The U width as it looks in the camera when it is in the center (in pixels).
         :param currentUWidthDistance: The distance which the centerUWidth was calculated from.
+        :param HAX: The head angle of the camera (x).
+        :param HAY: The head angle of the camera (y).
         :return: None
         '''
 
@@ -163,10 +165,8 @@ class VisionManager(object):
                 self.updateTowerScales()
                 self.currentImageObject.didUpdateVars = True
             self.robotObject.distanceFromTower = self.currentImageObject.distanceFromCamera
-            # those?
-            # self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
-            #                                                    self.currentImageObject.objectWidth,
-            #                                                    self.focalLength,
-            #                                                    self.currentImageObject.objectHeight)
-            # self.robotObject.XPosition = self.distanceHelper.getXRobotPosition(self.robotObject)
-            # self.robotObject.Yposition = self.distanceHelper.getYRobotPosition(self.robotObject)
+            self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
+                                                            self.currentImageObject.objectWidth,
+                                                            self.focalLength, self.currentImageObject.objectHeight)
+            self.robotObject.XPosition = self.distanceHelper.getXRobotPosition(self.robotObject)
+            self.robotObject.Yposition = self.distanceHelper.getYRobotPosition(self.robotObject)
