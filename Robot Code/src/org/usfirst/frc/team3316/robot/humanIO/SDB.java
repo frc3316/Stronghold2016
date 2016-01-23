@@ -43,6 +43,8 @@ public class SDB
 			
 			put("Flywheel speed", Robot.flywheel.getRate());
 			put("Hall effect", Robot.sensors.hallEffect.get());
+			
+			put("Flywheel Electrical Current", Robot.sensors.pdp.getCurrent(2));
 		}
 		
 		private void put (String name, double d)
