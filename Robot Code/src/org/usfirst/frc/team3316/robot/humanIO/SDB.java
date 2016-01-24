@@ -156,6 +156,23 @@ public class SDB
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
 		
+		//Flywheel
+		SmartDashboard.putData(new JoystickFlywheel());
+		SmartDashboard.putData(new BangbangFlywheel());
+		SmartDashboard.putData(new PIDFlywheel());
+		
+		//Bangbang
+		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
+		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
+		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
+		
+		//PID
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
+		putConfigVariableInSDB("flywheel_PID_KP");
+		putConfigVariableInSDB("flywheel_PID_KI");
+		putConfigVariableInSDB("flywheel_PID_KD");
+		putConfigVariableInSDB("flywheel_PID_KF");
+		
 		logger.info("Finished initSDB()");
 	}
 }
