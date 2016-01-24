@@ -42,20 +42,20 @@ public class Joysticks
 	
 	public Joystick joystickLeft, joystickRight, joystickOperator;
 	
+	/**
+	 * Initializes the joysticks.
+	 */
 	public Joysticks ()
 	{
-		try
-		{
 			joystickLeft = new Joystick((int) Robot.config.get("JOYSTICK_LEFT"));
 			joystickRight = new Joystick((int) Robot.config.get("JOYSTICK_RIGHT"));
 			joystickOperator = new Joystick((int) Robot.config.get("JOYSTICK_OPERATOR"));
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
 	}
 	
+	/**
+	 * Initializes the joystick buttons.
+	 * This is done separately because they usually require the subsystems to be already instantiated. 
+	 */
 	public void initButtons ()
 	{
 	

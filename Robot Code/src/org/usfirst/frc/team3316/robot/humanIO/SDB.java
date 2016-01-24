@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -34,20 +37,10 @@ public class SDB
 			 * Insert put methods here
 			 */
 			//navX
-			put("navX Yaw Axis", Robot.sensors.navx.getYaw());
+			put("Flywheel speed", Robot.flywheel.getRate());
+			put("Hall effect", Robot.sensors.hallEffect.get());
 			
-			System.out.println("Yaw:" + Robot.sensors.navx.getYaw());
-			
-			put("navX Roll Axis", Robot.sensors.navx.getRoll());
-			put("navX Pitch Axis", Robot.sensors.navx.getPitch());
-			put("navX Pressure", Robot.sensors.navx.getPressure());
-			put("navX Barometric Pressure", Robot.sensors.navx.getBarometricPressure());
-			put("navX Angle", Robot.sensors.navx.getAngle());
-			put("navX Z Displacement", Robot.sensors.navx.getDisplacementZ());
-			put("navX Z Acceleration", Robot.sensors.navx.getRawAccelZ());
-			
-			//Chassis
-			put("isOnDefense", Robot.chassis.isOnDefense());
+			put("Flywheel Electrical Current", Robot.sensors.pdp.getCurrent(2));
 		}
 		
 		private void put (String name, double d)
@@ -98,9 +91,8 @@ public class SDB
 	 */
 	public boolean putConfigVariableInSDB (String key)
 	{
-		try
-		{
-			Object value = config.get(key);
+		Object value = config.get(key);
+			if(value != null) {
 			Class <?> type = value.getClass();
 			
 			boolean constant = Character.isUpperCase(key.codePointAt(0));
@@ -132,10 +124,7 @@ public class SDB
 			
 			return true;
 		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+
 		return false;
 	}
 	
@@ -147,6 +136,22 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
+		
+		//Flywheel
+		SmartDashboard.putData(new JoystickFlywheel());
+		SmartDashboard.putData(new BangbangFlywheel());
+		SmartDashboard.putData(new PIDFlywheel());
+		
+		//Bangbang
+		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
+		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
+		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
+		
+		//PID
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
+		putConfigVariableInSDB("flywheel_PID_KP");
+		putConfigVariableInSDB("flywheel_PID_KI");
+		putConfigVariableInSDB("flywheel_PID_KD");
 		
 		logger.info("Finished initSDB()");
 	}

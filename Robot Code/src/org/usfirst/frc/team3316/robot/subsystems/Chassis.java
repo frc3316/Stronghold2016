@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.chassis.commands.TankDrive;
+import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 
@@ -22,12 +22,12 @@ public class Chassis extends DBugSubsystem
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
-	
+
 	private static Timer timer;
-	
+
 	static
 	{
-		timer = new Timer();		
+		timer = new Timer();
 	}
 
 	// Other
@@ -46,20 +46,13 @@ public class Chassis extends DBugSubsystem
 		navx = Robot.sensors.navx;
 
 		// Create moving average
-		try
-		{
-			movingAvg = new MovingAverage(
-					(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
-					{
-						return getPitch();
-					});
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
-		
-		//Timer init
+		movingAvg = new MovingAverage(
+				(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
+				{
+					return getPitch();
+				});
+
+		// Timer init
 		navXTasker = new navX();
 		timer.schedule(navXTasker, 0, 20);
 	}
@@ -96,32 +89,25 @@ public class Chassis extends DBugSubsystem
 
 		public void run()
 		{
-			try
+			if (Math.abs(movingAvg.get()) <= (double) Robot.config
+					.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
 			{
-				if (Math.abs(movingAvg.get()) <= (double) Robot.config
-						.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
-				{
-					counter++;
-				}
-				else
-				{
-					counter = 0;
-				}
-
-				if (counter >= (int) Math.round(
-						(double) ((double) config.get("CHASSIS_DEFENSE_ANGLE_TIMEOUT") / 20.0)))
-				{ // isTimedOut
-					counter = 0;
-					isOnDefense = false;
-				}
-				else if (counter == 0)
-				{
-					isOnDefense = true;
-				}
+				counter++;
 			}
-			catch (ConfigException e)
+			else
 			{
-				logger.severe(e);
+				counter = 0;
+			}
+
+			if (counter >= (int) Math.round((double) ((double) config
+					.get("CHASSIS_DEFENSE_ANGLE_TIMEOUT") / 20.0)))
+			{ // isTimedOut
+				counter = 0;
+				isOnDefense = false;
+			}
+			else if (counter == 0)
+			{
+				isOnDefense = true;
 			}
 		}
 	}
