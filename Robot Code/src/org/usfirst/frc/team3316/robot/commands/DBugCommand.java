@@ -7,7 +7,7 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Class for bundling stuff that we want in every command.
  */
 public abstract class DBugCommand extends Command 
 {
@@ -20,6 +20,9 @@ public abstract class DBugCommand extends Command
     	init();
     }
     
+    /**
+     * Same as Command.initialize()
+     */
     protected abstract void init(); 
 
     protected abstract void execute();
@@ -32,6 +35,9 @@ public abstract class DBugCommand extends Command
     	fin();
     }
     
+    /**
+     * Same as Command.end()
+     */
     protected abstract void fin();
 
     protected final void interrupted() 
@@ -40,5 +46,8 @@ public abstract class DBugCommand extends Command
     	interr();
     }
     
+    /**
+     * Same as Command.interrupted()
+     */
     protected abstract void interr();
 }

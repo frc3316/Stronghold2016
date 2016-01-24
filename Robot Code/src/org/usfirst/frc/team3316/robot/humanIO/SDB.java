@@ -143,9 +143,13 @@ public class SDB
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new PIDFlywheel());
 		
-		putConfigVariableInSDB("flywheel_bangbang_setpoint");
-		putConfigVariableInSDB("flywheel_bangbang_voltage");
-		putConfigVariableInSDB("flywheel_PID_setpoint");
+		//Bangbang
+		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
+		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
+		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
+		
+		//PID
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
 		putConfigVariableInSDB("flywheel_PID_KP");
 		putConfigVariableInSDB("flywheel_PID_KI");
 		putConfigVariableInSDB("flywheel_PID_KD");

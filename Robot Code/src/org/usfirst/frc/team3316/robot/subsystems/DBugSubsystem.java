@@ -4,15 +4,17 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Class for bundling stuff that we want in every subsystem.
  */
 public abstract class DBugSubsystem extends Subsystem 
 {
-	DBugLogger logger = Robot.logger;
-	Config config = Robot.config;
+	static DBugLogger logger = Robot.logger;
+	static Config config = Robot.config;
+	static PowerDistributionPanel pdp = Robot.sensors.pdp;
 	
     public abstract void initDefaultCommand();
 }

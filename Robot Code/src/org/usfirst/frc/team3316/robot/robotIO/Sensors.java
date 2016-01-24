@@ -21,13 +21,13 @@ public class Sensors
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
+	public PowerDistributionPanel pdp;
+	
 	public AHRS ahrs;
 	
 	public Counter flywheelCounter;
 	public DigitalInput hallEffect;
 	
-	public PowerDistributionPanel pdp;
-
 	public Sensors()
 	{
 		try

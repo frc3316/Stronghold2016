@@ -91,23 +91,37 @@ public class Config
 		/*
 		 * Human IO
 		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+				addToConstants("JOYSTICK_LEFT", 0);
+				addToConstants("JOYSTICK_RIGHT", 1);
+				addToConstants("JOYSTICK_OPERATOR", 2);
+				addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 1000.0); //TOOD: Measure this and make it useful
+			}
+		}
+		
 		/*
-		 * Constants
+		 * Flywheel
 		 */
-		addToConstants("JOYSTICK_LEFT", 0);
-		addToConstants("JOYSTICK_RIGHT", 1);
-		addToConstants("JOYSTICK_OPERATOR", 2);
-		addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 1000.0);
+		{
+			/*
+			 * Variables
+			 */
+			{
+				//Bangbang - TO REMOVE AFTER TESTINGS
+				addToVariables("flywheel_Bangbang_Setpoint", 0.0);
+				addToVariables("flywheel_Bangbang_OnVoltage", 0.0);
+				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
-		/*
-		 * Variables
-		 */
-		addToVariables("flywheel_PID_setpoint", 0.0);
-		addToVariables("flywheel_PID_KP", 0.0);
-		addToVariables("flywheel_PID_KI", 0.0);
-		addToVariables("flywheel_PID_KD", 0.0);
-
-		addToVariables("flywheel_bangbang_setpoint", 0.0);
-		addToVariables("flywheel_bangbang_voltage", 0.0);
+				//PID - TO REMOVE AFTER TESTINGS
+				addToVariables("flywheel_PID_Setpoint", 0.0);
+				addToVariables("flywheel_PID_KP", 0.0);
+				addToVariables("flywheel_PID_KI", 0.0);
+				addToVariables("flywheel_PID_KD", 0.0);
+			}
+		}
 	}
 }

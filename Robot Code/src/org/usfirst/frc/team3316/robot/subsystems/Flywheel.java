@@ -7,6 +7,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.TalonSRX;
 
@@ -23,15 +24,22 @@ public class Flywheel extends DBugSubsystem
 		timer = new Timer();
 	}
 
-	private double talonCurrent;
-
+	/**
+	 * Class for filtering out noise from the FPGA rate calculation. Essentially
+	 * this is a low pass filter.
+	 * 
+	 * @author D-Bug
+	 *
+	 */
 	private class RateTask extends TimerTask
 	{
 		public void run()
 		{
 			double delta = counter.getRate() - rate;
 
-			if (delta < 10)
+			if (delta < 10) // random constant, couldv'e been anything (when
+							// there is noise the delta is in the scale of 10^5
+							// - 10^6).
 			{
 				rate = counter.getRate();
 			}
@@ -46,21 +54,34 @@ public class Flywheel extends DBugSubsystem
 		timer.schedule(new RateTask(), 0, 10);
 	}
 
+	/**
+	 * Sets the flywheel a certain % voltage.
+	 * 
+	 * @param v
+	 *            The % voltage to set. Positive is for shooting.
+	 * @return Whether setting was successful. Will return false if motor
+	 *         reaches stall current as measured by the PDP.
+	 */
 	public boolean setMotors(double v)
 	{
-		talonCurrent = Robot.sensors.pdp.getCurrent(2);
+		double talonCurrent = pdp.getCurrent(2);
 
-			if (talonCurrent >= (double) Robot.config
-					.get("FLYWHEEL_MOTOR_HIGH_THRESH"))
-			{
-				talon.set(0);
-				return false;
-			}
-			
-		talon.set(v);
+		if (Math.abs(talonCurrent) >= (double) Robot.config
+				.get("FLYWHEEL_MOTOR_HIGH_THRESH"))
+		{
+			talon.set(0);
+			return false; //Current going to motor is too high - abort
+		}
+
+		talon.set(-v);
 		return true;
 	}
 
+	/**
+	 * Returns the turning rate of the flywheel.
+	 * 
+	 * @return The speed in rounds per second.
+	 */
 	public double getRate()
 	{
 		return rate;

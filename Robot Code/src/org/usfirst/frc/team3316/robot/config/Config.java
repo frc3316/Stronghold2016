@@ -84,9 +84,8 @@ public class Config
 	
 	/**
 	 * Returns the value attached to a requested key
-	 * @param key the key to look for
-	 * @return returns the corresponding value
-	 * @throws ConfigException if the key does not exist
+	 * @param key The key to look for.
+	 * @return Returns the corresponding value. If not exisiting returns null.
 	 */
 	public Object get (String key) 
 	{
@@ -98,6 +97,7 @@ public class Config
 		{
 			return variables.get(key);
 		}
+		
 		logger.severe(new ConfigException(key + " Not Found!"));
 		return null;
 	}

@@ -3,6 +3,11 @@ package org.usfirst.frc.team3316.robot.commands.flywheel;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
+/**
+ * Command that lets a driver set a voltage to the flywheel using the operator joystick.
+ * @author D-Bug
+ *
+ */
 public class JoystickFlywheel extends DBugCommand
 {
 	private boolean isFin;
@@ -18,7 +23,7 @@ public class JoystickFlywheel extends DBugCommand
 
 	protected void execute()
 	{
-		double v = Robot.joysticks.joystickOperator.getRawAxis(1);
+		double v = -Robot.joysticks.joystickOperator.getRawAxis(1);
 
 		isFin = Robot.flywheel.setMotors(v);
 	}

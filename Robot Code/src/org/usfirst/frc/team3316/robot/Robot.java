@@ -23,103 +23,112 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot 
+public class Robot extends IterativeRobot
 {
 	public static Config config;
-    public static DBugLogger logger;
-    public static Timer timer;
-    
-    /*
-     * Human IO
-     */
-    public static Joysticks joysticks;
-    public static SDB sdb;
-    /*
-     * Robot IO
-     */
-    public static Actuators actuators;
-    public static Sensors sensors;
-    
-    /*
-     * Subsystems
-     */
-    public static Flywheel flywheel;
-    
-    Command autonomousCommand;
+	public static DBugLogger logger;
+	public static Timer timer;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() 
-    {
-    	/*
-    	 * Above all else
-    	 */
-    	logger = new DBugLogger();
-    	config = new Config();
-    	timer = new Timer();
+	/*
+	 * Human IO
+	 */
+	public static Joysticks joysticks;
+	public static SDB sdb;
+	/*
+	 * Robot IO
+	 */
+	public static Actuators actuators;
+	public static Sensors sensors;
 
-    	/*
-    	 * Human IO (that does not require subsystems)
-    	 */
-    	joysticks = new Joysticks();
-    	
-    	/*
-    	 * Robot IO
-    	 */
-    	actuators = new Actuators();
-    	sensors = new Sensors();
-    	
-    	/*
-    	 * Subsystems
-    	 */
-    	flywheel = new Flywheel();
+	/*
+	 * Subsystems
+	 */
+	public static Flywheel flywheel;
 
-    	/*
-    	 * Human IO (that requires subsystems)
-    	 */
-    	joysticks.initButtons();
-    	sdb = new SDB();
-    }
-	
-	public void disabledPeriodic() 
+	Command autonomousCommand;
+
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit()
+	{
+		/*
+		 * Above all else
+		 */
+		logger = new DBugLogger();
+		config = new Config();
+		timer = new Timer();
+
+		/*
+		 * Human IO (that does not require subsystems)
+		 */
+		joysticks = new Joysticks();
+
+		/*
+		 * Robot IO
+		 */
+		actuators = new Actuators();
+		sensors = new Sensors();
+
+		/*
+		 * Subsystems
+		 */
+		flywheel = new Flywheel();
+
+		/*
+		 * Human IO (that requires subsystems)
+		 */
+		joysticks.initButtons();
+		sdb = new SDB();
+
+		logger.info(returnTheTruth());
+	}
+
+	public void disabledPeriodic()
 	{
 		Scheduler.getInstance().run();
 	}
 
-    public void autonomousInit() 
-    {
-        if (autonomousCommand != null) autonomousCommand.start();
-    }
+	public void autonomousInit()
+	{
+		if (autonomousCommand != null)
+			autonomousCommand.start();
+	}
 
-    public void autonomousPeriodic() 
-    {
-        Scheduler.getInstance().run();
-    }
+	public void autonomousPeriodic()
+	{
+		Scheduler.getInstance().run();
+	}
 
-    public void teleopInit() 
-    {
-        if (autonomousCommand != null) autonomousCommand.cancel();
-    }
+	public void teleopInit()
+	{
+		if (autonomousCommand != null)
+			autonomousCommand.cancel();
+	}
 
-    public void disabledInit()
-    {
+	public void disabledInit()
+	{
 
-    }
+	}
 
-    public void teleopPeriodic()
-    {
-        Scheduler.getInstance().run();
-    }
-    
-    public void testPeriodic() 
-    {
-        LiveWindow.run();
-    }
-    
-    private void printTheTruth()
-    {
-    	System.out.println("Vita is the Melech!!");
-    }
+	public void teleopPeriodic()
+	{
+		Scheduler.getInstance().run();
+	}
+
+	public void testPeriodic()
+	{
+		LiveWindow.run();
+	}
+
+	private void printTheTruth()
+	{
+		System.out.println("Vita is the Melech!!");
+	}
+
+	private String returnTheTruth()
+	{
+		return "Vita is the Melech!!";
+	}
 }

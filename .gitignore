@@ -1,1 +1,5 @@
 Robot Code\bin\
+Robot Code\build\
+Robot Code\dist\
+*.class
+*.pyc

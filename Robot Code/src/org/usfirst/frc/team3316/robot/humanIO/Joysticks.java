@@ -43,6 +43,9 @@ public class Joysticks
 	
 	public Joystick joystickLeft, joystickRight, joystickOperator;
 	
+	/**
+	 * Initializes the joysticks.
+	 */
 	public Joysticks ()
 	{
 			joystickLeft = new Joystick((int) Robot.config.get("JOYSTICK_LEFT"));
@@ -50,6 +53,10 @@ public class Joysticks
 			joystickOperator = new Joystick((int) Robot.config.get("JOYSTICK_OPERATOR"));
 	}
 	
+	/**
+	 * Initializes the joystick buttons.
+	 * This is done separately because they usually require the subsystems to be already instantiated. 
+	 */
 	public void initButtons ()
 	{
 	

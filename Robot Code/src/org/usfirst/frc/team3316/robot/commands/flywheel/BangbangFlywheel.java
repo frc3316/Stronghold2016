@@ -9,7 +9,11 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/**
+ * Bang-bang control to reach a the speed specified in the config.
+ * @author D-Bug
+ *
+ */
 public class BangbangFlywheel extends DBugCommand
 {
 	double v = 0;
@@ -23,21 +27,18 @@ public class BangbangFlywheel extends DBugCommand
 	protected void init()
 	{
 		v = 0;
-
-		Robot.sdb.putConfigVariableInSDB("flywheel_bangbang_setpoint");
-		Robot.sdb.putConfigVariableInSDB("flywheel_bangbang_voltage");
 	}
 
 	protected void execute()
 	{
 		if (Robot.flywheel
-				.getRate() < (double) config.get("flywheel_bangbang_setpoint"))
+				.getRate() < (double) config.get("flywheel_Bangbang_Setpoint"))
 		{
-			v = (double) config.get("flywheel_bangbang_voltage");
+			v = (double) config.get("flywheel_Bangbang_OnVoltage");
 		}
 		else
 		{
-			v = 0;
+			v = (double) config.get("flywheel_Bangbang_OffVoltage"); //We want the slowing down to be less aggressive, therefore this isn't simply 0
 		}
 
 		isFin = Robot.flywheel.setMotors(v);
