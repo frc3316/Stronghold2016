@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PIDFlywheel extends DBugCommand
 {
-	PIDController pid;
-	double v = 0;
+	private PIDController pid;
+	private double v = 0;
+	private boolean isFin;
 
 	public PIDFlywheel()
 	{
@@ -47,33 +48,32 @@ public class PIDFlywheel extends DBugCommand
 	{
 		v = 0;
 
-		SmartDashboard.putNumber("Setpoint Speed", 0);
-
-		SmartDashboard.putNumber("PID P", 0);
-		SmartDashboard.putNumber("PID I", 0);
-		SmartDashboard.putNumber("PID D", 0);
-		
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID(SmartDashboard.getNumber("PID P", 0),
-				SmartDashboard.getNumber("PID I", 0),
-				SmartDashboard.getNumber("PID D", 0));
-		
-		pid.setSetpoint(SmartDashboard.getNumber("Setpoint Speed", 0));
+		pid.setPID(
+				(double) SmartDashboard.getNumber("flywheel_PID_KP", 0.0)
+						/ 1000,
+				(double) SmartDashboard.getNumber("flywheel_PID_KI", 0.0)
+						/ 1000,
+				(double) SmartDashboard.getNumber("flywheel_PID_KD", 0.0)
+						/ 1000);
+		pid.setSetpoint((double) SmartDashboard
+				.getNumber("flywheel_PID_setpoint", 0.0));
+		isFin = Robot.flywheel.setMotors(-v);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return !isFin;
 	}
 
 	protected void fin()
 	{
 		pid.disable();
-		
+
 		Robot.flywheel.setMotors(0);
 	}
 

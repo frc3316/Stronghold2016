@@ -88,20 +88,18 @@ public class Config
 	 * @return returns the corresponding value
 	 * @throws ConfigException if the key does not exist
 	 */
-	public Object get (String key) throws ConfigException
+	public Object get (String key) 
 	{
 		if (constants.containsKey(key))
 		{
 			return constants.get(key);
 		}
-		else if (variables.containsKey(key))
+		else if(variables.containsKey(key))
 		{
 			return variables.get(key);
 		}
-		else
-		{
-			throw new ConfigException(key);
-		}
+		logger.severe(new ConfigException(key + " Not Found!"));
+		return null;
 	}
 	
 	private void addToVariables (String key, Object value)

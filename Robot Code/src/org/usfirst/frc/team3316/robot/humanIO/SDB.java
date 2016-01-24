@@ -16,10 +16,6 @@ import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.Image;
-
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SDB 
@@ -96,9 +92,8 @@ public class SDB
 	 */
 	public boolean putConfigVariableInSDB (String key)
 	{
-		try
-		{
-			Object value = config.get(key);
+		Object value = config.get(key);
+			if(value != null) {
 			Class <?> type = value.getClass();
 			
 			boolean constant = Character.isUpperCase(key.codePointAt(0));
@@ -130,10 +125,7 @@ public class SDB
 			
 			return true;
 		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+
 		return false;
 	}
 	
@@ -146,9 +138,18 @@ public class SDB
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
 		
+		//Flywheel
 		SmartDashboard.putData(new JoystickFlywheel());
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new PIDFlywheel());
+		
+		putConfigVariableInSDB("flywheel_bangbang_setpoint");
+		putConfigVariableInSDB("flywheel_bangbang_voltage");
+		putConfigVariableInSDB("flywheel_PID_setpoint");
+		putConfigVariableInSDB("flywheel_PID_KP");
+		putConfigVariableInSDB("flywheel_PID_KI");
+		putConfigVariableInSDB("flywheel_PID_KD");
+		
 		
 		logger.info("Finished initSDB()");
 	}
