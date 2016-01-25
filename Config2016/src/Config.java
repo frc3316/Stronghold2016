@@ -102,7 +102,7 @@ public class Config {
 				 */
 				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 0);
 				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 1);
-				addToConstants("INTAKE_MOTOR", 4);
+				addToConstants("INTAKE_MOTOR", 0);
 
 				addToConstants("INTAKE_LS", 7);
 				addToConstants("INTAKE_RS", 1);

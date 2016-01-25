@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+import org.usfirst.frc.team3316.robot.intake.commands.RollIn;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -147,6 +148,8 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
+		
+		SmartDashboard.putData(new RollIn());
 		
 		logger.info("Finished initSDB()");
 	}
