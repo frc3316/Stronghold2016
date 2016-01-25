@@ -23,10 +23,9 @@ public abstract class DBugSubsystem extends Subsystem
 	private class SpeedControllerData
 	{
 		SpeedController sc;
-		boolean reverse;
-
-		int pdpChannel;
-		double maxCurrent;
+		boolean reverse; // Negative factor of velocity
+		int pdpChannel; // The channel in the PDP of the speed controller
+		double maxCurrent; // The high threshold for current control
 
 		public SpeedControllerData(SpeedController sc, boolean reverse,
 				int pdpChannel, double maxCurrent)
@@ -81,9 +80,11 @@ public abstract class DBugSubsystem extends Subsystem
 			if (pdp.getCurrent((int) d.getPdpChannel()) < d.getMaxCurrent())
 			{
 				sc.set(v * (d.getReverse() ? -1 : 1));
+				return false;
 			}
 			else {
 				sc.set(0);
+				return true;
 			}
 		}
 
