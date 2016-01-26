@@ -69,29 +69,21 @@ public class Intake extends DBugSubsystem
 
 	public boolean isIntakeOpen()
 	{
-		try
-		{
-			return intakeBS.get() && intakePot
-					.get() >= (double) config.get("INTAKE_POT_HIGH_TRESH");
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+		//TODO: Update when sensors are final
+		/*
+		 * return intakeBS.get() && intakePot .get() >= (double)
+		 * config.get("INTAKE_POT_HIGH_TRESH");
+		 */
 		return intakeBS.get();
 	}
 
 	public boolean isIntakeClose()
 	{
-		try
-		{
-			return intakeTS.get() && intakePot
-					.get() <= (double) config.get("INTAKE_POT_LOW_TRESH");
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+		//TODO: Update when sensors are final
+		/*
+		 * return intakeTS.get() && intakePot .get() <= (double)
+		 * config.get("INTAKE_POT_LOW_TRESH");
+		 */
 		return intakeTS.get();
 	}
 
