@@ -6,9 +6,8 @@ import java.util.List;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,76 +17,37 @@ public abstract class DBugSubsystem extends Subsystem
 {
 	static DBugLogger logger = Robot.logger;
 	static Config config = Robot.config;
-	static PowerDistributionPanel pdp = Robot.sensors.pdp;
 
-	private class SpeedControllerData
-	{
-		SpeedController sc;
-		boolean reverse; // Negative factor of velocity
-		int pdpChannel; // The channel in the PDP of the speed controller
-		double maxCurrent; // The high threshold for current control
-
-		public SpeedControllerData(SpeedController sc, boolean reverse,
-				int pdpChannel, double maxCurrent)
-		{
-			this.sc = sc;
-			this.reverse = reverse;
-			this.pdpChannel = pdpChannel;
-			this.maxCurrent = maxCurrent;
-		}
-
-		/*
-		 * GET Methods
-		 */
-
-		public SpeedController getSpeedController()
-		{
-			return sc;
-		}
-
-		public boolean getReverse()
-		{
-			return reverse;
-		}
-
-		public int getPdpChannel()
-		{
-			return pdpChannel;
-		}
-
-		public double getMaxCurrent()
-		{
-			return maxCurrent;
-		}
-	}
-
-	private List<SpeedControllerData> controllers = new ArrayList<>();
+	private List<DBugSpeedController> controllers = new ArrayList<>();
 
 	public abstract void initDefaultCommand();
 
-	protected void addSpeedController(SpeedController sc, boolean reverse,
-			int pdpChannel, double maxCurrent)
+	/**
+	 * Add the D-Bug Speed Controllers of this subsystem to a list.
+	 * @param sc The D-Bug Speed Controller.
+	 */
+	protected void addSpeedController(DBugSpeedController sc)
 	{
-		controllers.add(
-				new SpeedControllerData(sc, reverse, pdpChannel, maxCurrent));
+		controllers.add(sc);
 	}
 
+	/**
+	 * This method sets the voltage for all the D-Bug Speed Controllers you've added.
+	 * 
+	 * @param v
+	 *            The voltage (velocity) to set for all the D-Bug Speed Controllers
+	 *            you've added.
+	 * @return A boolean of the process success - true if it succeeded or false if
+	 *         it failed.
+	 */
 	protected boolean setMotors(double v)
 	{
-		for (SpeedControllerData d : controllers)
+		for (DBugSpeedController d : controllers)
 		{
-			SpeedController sc = d.getSpeedController();
-			if (pdp.getCurrent((int) d.getPdpChannel()) < d.getMaxCurrent())
-			{
-				sc.set(v * (d.getReverse() ? -1 : 1));
+			if (!d.setMotor(v))
 				return false;
-			}
-			else {
-				sc.set(0);
-				return true;
-			}
 		}
 
-		return false;
+		return true;
 	}
 }

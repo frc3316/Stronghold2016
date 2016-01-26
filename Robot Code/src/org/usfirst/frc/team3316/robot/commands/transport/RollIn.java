@@ -2,7 +2,6 @@ package org.usfirst.frc.team3316.robot.commands.transport;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 public class RollIn extends DBugCommand
 {
@@ -21,7 +20,7 @@ public class RollIn extends DBugCommand
 
 	protected void execute()
 	{
-		Robot.transport.setMotor(rollInSpeed);
+		Robot.transport.setMotors(rollInSpeed);
 	}
 
 	protected boolean isFinished()

@@ -4,15 +4,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.Counter;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Talon;
 
 public class Flywheel extends DBugSubsystem
 {
-	private Talon talon;
+	private DBugSpeedController flywheelMotor1, flywheelMotor2;
 	private Counter counter;
 
 	double rate = 0;
@@ -47,9 +45,17 @@ public class Flywheel extends DBugSubsystem
 
 	public Flywheel()
 	{
-		talon = Robot.actuators.flywheelMotor;
+		// Actuators
+		flywheelMotor1 = Robot.actuators.flywheelMotor1;
+		flywheelMotor2 = Robot.actuators.flywheelMotor2;
+
+		addSpeedController(flywheelMotor1);
+		addSpeedController(flywheelMotor2);
+
+		// Sensors
 		counter = Robot.sensors.flywheelCounter;
 
+		// Other stuff
 		timer.schedule(new RateTask(), 0, 10);
 	}
 
@@ -63,17 +69,7 @@ public class Flywheel extends DBugSubsystem
 	 */
 	public boolean setMotors(double v)
 	{
-		double talonCurrent = pdp.getCurrent(2);
-
-		if (Math.abs(talonCurrent) >= (double) Robot.config
-				.get("FLYWHEEL_MOTOR_HIGH_THRESH"))
-		{
-			talon.set(0);
-			return false; //Current going to motor is too high - abort
-		}
-
-		talon.set(-v);
-		return true;
+		return setMotors(v);
 	}
 
 	/**

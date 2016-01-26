@@ -5,12 +5,9 @@ package org.usfirst.frc.team3316.robot.robotIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.*;
-
-import edu.wpi.first.wpilibj.Talon;
 
 public class Actuators
 {
@@ -18,42 +15,69 @@ public class Actuators
 	DBugLogger logger = Robot.logger;
 
 	// Chassis
-	public Talon leftChassis1, leftChassis2, rightChassis1, rightChassis2;
+	public DBugSpeedController leftChassis1, leftChassis2, rightChassis1,
+			rightChassis2;
 
 	// Intake
 	public DoubleSolenoid intakeSolenoid;
-	public Talon intakeMotor;
+	public DBugSpeedController intakeMotor;
 
 	// Transport
-	public Talon transportMotor;
+	public DBugSpeedController transportMotor1, transportMotor2;
 
 	// Flywheel
-	public Talon flywheelMotor;
+	public DBugSpeedController flywheelMotor1, flywheelMotor2;
 
 	public Actuators()
 	{
-
 		// Chassis
-		leftChassis1 = new Talon(
-				(int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-		leftChassis2 = new Talon(
-				(int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+		leftChassis1 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1")),
+				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"));
+		leftChassis2 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2")),
+				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"));
 
-		rightChassis1 = new Talon(
-				(int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-		rightChassis2 = new Talon(
-				(int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		rightChassis1 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1")),
+				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"));
+		rightChassis2 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2")),
+				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"));
 
 		// Intake
 		intakeSolenoid = new DoubleSolenoid(
 				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD_CHANNEL"),
 				(int) Robot.config.get("INTAKE_SOLENOID_REVERSE_CHANNEL"));
-		intakeMotor = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
+
+		intakeMotor = new DBugSpeedController(
+				new Talon((int) Robot.config.get("INTAKE_MOTOR")),
+				(boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
+				(int) Robot.config.get("INTAKE_MOTOR_PDP_CHANNEL"),
+				(double) Robot.config.get("INTAKE_MOTOR_MAX_CURRENT"));
 
 		// Transport
-		transportMotor = new Talon((int) Robot.config.get("TRANSPORT_MOTOR"));
+		transportMotor1 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("TRANSPORT_MOTOR_1")),
+				(boolean) Robot.config.get("TRANSPORT_MOTOR_1_REVERSE"),
+				(int) Robot.config.get("TRANSPORT_MOTOR_1_PDP_CHANNEL"),
+				(double) Robot.config.get("TRANSPORT_MOTOR_1_MAX_CURRENT"));
+		transportMotor2 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("TRANSPORT_MOTOR_2")),
+				(boolean) Robot.config.get("TRANSPORT_MOTOR_2_REVERSE"),
+				(int) Robot.config.get("TRANSPORT_MOTOR_2_PDP_CHANNEL"),
+				(double) Robot.config.get("TRANSPORT_MOTOR_2_MAX_CURRENT"));
 
 		// Flywheel
-		flywheelMotor = new Talon((int) Robot.config.get("FLYWHEEL_MOTOR"));
+		flywheelMotor1 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("FLYWHEEL_MOTOR_1")),
+				(boolean) Robot.config.get("FLYWHEEL_MOTOR_1_REVERSE"),
+				(int) Robot.config.get("FLYWHEEL_MOTOR_1_PDP_CHANNEL"),
+				(double) Robot.config.get("FLYWHEEL_MOTOR_1_MAX_CURRENT"));
+		flywheelMotor2 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("FLYWHEEL_MOTOR_2")),
+				(boolean) Robot.config.get("FLYWHEEL_MOTOR_2_REVERSE"),
+				(int) Robot.config.get("FLYWHEEL_MOTOR_2_PDP_CHANNEL"),
+				(double) Robot.config.get("FLYWHEEL_MOTOR_2_MAX_CURRENT"));
 	}
 }

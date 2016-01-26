@@ -1,19 +1,18 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.SpeedController;
 
 public class Intake extends DBugSubsystem
 {
 	// Actuators
 	private DoubleSolenoid intakeSolendoid;
-	private SpeedController intakeMotor;
+	private DBugSpeedController intakeMotor;
 
 	// Sensors
 	private DigitalInput intakeLS, intakeRS, intakeTS, intakeBS;
@@ -24,6 +23,8 @@ public class Intake extends DBugSubsystem
 		// Actuators
 		intakeSolendoid = Robot.actuators.intakeSolenoid;
 		intakeMotor = Robot.actuators.intakeMotor;
+
+		addSpeedController(intakeMotor);
 
 		// Sensors
 		intakeLS = Robot.sensors.intakeLS;
@@ -47,9 +48,9 @@ public class Intake extends DBugSubsystem
 		intakeSolendoid.set(Value.kReverse);
 	}
 
-	public void setMotor(double v)
+	public boolean setMotor(double v)
 	{
-		intakeMotor.set(v);
+		return setMotors(v);
 	}
 
 	public boolean isBallIn()
@@ -69,7 +70,7 @@ public class Intake extends DBugSubsystem
 
 	public boolean isIntakeOpen()
 	{
-		//TODO: Update when sensors are final
+		// TODO: Update when sensors are final
 		/*
 		 * return intakeBS.get() && intakePot .get() >= (double)
 		 * config.get("INTAKE_POT_HIGH_TRESH");
@@ -79,7 +80,7 @@ public class Intake extends DBugSubsystem
 
 	public boolean isIntakeClose()
 	{
-		//TODO: Update when sensors are final
+		// TODO: Update when sensors are final
 		/*
 		 * return intakeTS.get() && intakePot .get() <= (double)
 		 * config.get("INTAKE_POT_LOW_TRESH");
