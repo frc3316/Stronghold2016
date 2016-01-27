@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.chassis.motion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
@@ -8,6 +9,9 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 public class MotionPlanner
 {
+	static Config config = Robot.config;
+	static DBugLogger logger = Robot.logger;
+
 	public static class Step
 	{
 		double accel, velocity, position, time;
@@ -27,58 +31,60 @@ public class MotionPlanner
 			this.position = other.position;
 			this.time = other.time;
 		}
+
+		public String toString()
+		{
+			return time + "\t" + position + "\t" + velocity + "\t" + accel
+					+ "\n";
+		}
 	}
 
 	public static class PlannedMotion
 	{
-		private Step [] steps;
-		
-		public PlannedMotion (Step [] steps)
+		private Step[] steps;
+
+		public PlannedMotion(Step[] steps)
 		{
 			this.steps = steps;
 		}
-		
-		public Step[] getSteps ()
+
+		public Step[] getSteps()
 		{
 			return steps;
 		}
-		
-		public String toString ()
+
+		public String toString()
 		{
 			String toReturn = "";
-			
+
 			toReturn += "Number of steps: " + steps.length + "\n";
 			toReturn += "Time\tPosition\tVelocity\tAcceleration\n";
-			
+
 			for (int i = 0; i < steps.length; i++)
 			{
-				Step step = steps[i];
-				toReturn += step.time + "\t" + step.position + "\t" + step.velocity + "\t" + step.accel + "\n";
+				toReturn += steps[i].toString();
 			}
-			
+
 			return toReturn;
 		}
 	}
-	
-	static Config config = Robot.config;
-	static DBugLogger logger = Robot.logger;
 
 	static double maxAccel, maxDecel, maxVelocity, timeStep;
 
 	static
 	{
 		maxAccel = (double) config.get("motionPlanner_MaxAccel");
-		maxDecel = -1 * (double) config.get("motionPlanner_Maxdecel");
+		maxDecel = (double) config.get("motionPlanner_Maxdecel");
 		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
 		timeStep = (double) config.get("motionPlanner_TimeStep");
 	}
 
 	public static PlannedMotion planMotion(double distance)
 	{
+		updateParameters();
+	
 		ArrayList<Step> accelList = calculateAccelSteps(maxVelocity, maxAccel);
-		ArrayList<Step> decelList = calculateAccelSteps(maxVelocity, maxDecel);
-
-		flipDecelList(decelList, distance);
+		ArrayList<Step> decelList = calculateDecelSteps(maxVelocity, maxDecel);
 
 		double accelDistance = accelList.get(accelList.size() - 1).position
 				- accelList.get(0).position; // how much we go in the accel part
@@ -86,14 +92,13 @@ public class MotionPlanner
 		double decelDistance = decelList.get(decelList.size() - 1).position
 				- decelList.get(0).position; // how much we go in the decel
 												// part
-
 		/*
 		 * Distances combined are what we were looking for? Adding the lists is
 		 * easy!
 		 */
 		if (accelDistance + decelDistance == distance)
 		{
-			ArrayList<Step> finalList = addTwoStepLists(accelList, decelList);
+			List<Step> finalList = addTwoStepLists(accelList, decelList);
 
 			return new PlannedMotion(finalList.toArray(new Step[0]));
 		}
@@ -128,14 +133,13 @@ public class MotionPlanner
 				double accelToCheck = (decelList.get(complementIndex).velocity
 						- currentStep.velocity) / (timeStep);
 
-				if (accelToCheck >= (maxDecel * -1) && accelToCheck <= maxAccel) // maxDecel
-																					// is
-																					// neg
+				if (accelToCheck >= (maxDecel) && accelToCheck <= maxAccel) // maxDecel
+																			// is
+																			// neg
 				{
-					ArrayList<Step> finalList = addTwoStepLists(
-							(ArrayList<Step>) accelList.subList(0, index + 1),
-							(ArrayList<Step>) decelList.subList(complementIndex,
-									decelList.size()));
+					List<Step> finalList = addTwoStepLists(
+							accelList.subList(0, index + 1), decelList.subList(
+									complementIndex, decelList.size()));
 
 					return new PlannedMotion(finalList.toArray(new Step[0]));
 				}
@@ -151,26 +155,39 @@ public class MotionPlanner
 			// We're going to add the new steps to the accel list, and then add
 			// to it the decel list
 
-			double distanceToReach = distance - decelDistance;
+			double distanceToReach = distance
+					- (decelDistance + maxVelocity * timeStep);
 
 			Step newStep;
 			Step lastStep = accelList.get(accelList.size() - 1);
-			
+
 			while (lastStep.position < distanceToReach)
 			{
 				newStep = new Step(0, 0, 0, 0);
 				newStep.velocity = maxVelocity;
 				newStep.time = lastStep.time + timeStep;
-				newStep.position = lastStep.position + (newStep.velocity * timeStep);
-				
+				newStep.position = lastStep.position
+						+ (newStep.velocity * timeStep);
+
 				accelList.add(new Step(newStep));
 				lastStep = newStep;
 			}
-			
-			ArrayList<Step> finalList = addTwoStepLists(accelList, decelList);
-			
+
+			List<Step> finalList = addTwoStepLists(accelList, decelList);
+
 			return new PlannedMotion(finalList.toArray(new Step[0]));
 		}
+	}
+
+	/**
+	 * Updates variables from the config
+	 */
+	private static void updateParameters()
+	{
+		maxAccel = (double) config.get("motionPlanner_MaxAccel");
+		maxDecel = (double) config.get("motionPlanner_Maxdecel");
+		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
+		timeStep = (double) config.get("motionPlanner_TimeStep");
 	}
 
 	/**
@@ -183,7 +200,7 @@ public class MotionPlanner
 	{
 		ArrayList<Step> steps = new ArrayList<>();
 
-		Step currentStep = new Step(0, 0, accel, 0);
+		Step currentStep = new Step(accel, 0, 0, 0);
 		steps.add(new Step(currentStep));
 
 		while (currentStep.velocity < maxVelocity)
@@ -203,36 +220,38 @@ public class MotionPlanner
 
 			steps.add(new Step(currentStep));
 		}
+
 		return steps;
 	}
 
-	/**
-	 * Flips a list of accelerating steps into decelerating steps.
-	 * 
-	 * @param decelList
-	 *            The list to flip.
-	 * @param maxPosition
-	 *            The final distance of the total motion.
-	 */
-	private static void flipDecelList(ArrayList<Step> decelList,
-			double maxPosition)
+	private static ArrayList<Step> calculateDecelSteps(double maxVelocity,
+			double decel)
 	{
-		double maxVelocity = decelList.get(decelList.size() - 1).velocity; // velocity
-																			// of
-																			// last
-																			// step
+		ArrayList<Step> steps = new ArrayList<>();
 
-		/*
-		 * Flipping distances, velocities and acceleration
-		 */
-		for (Step step : decelList)
+		Step currentStep = new Step(decel, maxVelocity, 0, 0);
+
+		steps.add(new Step(currentStep));
+
+		while (currentStep.velocity > 0)
 		{
-			step.position = maxPosition - step.position;
-			step.velocity = maxVelocity - step.velocity;
-			step.accel *= -1; // Flip acceleration sign because positive
-								// acceleration was used for creating the list.
-								// Again, this is assuming trapezoid profile.
+			currentStep.accel = decel; // Trapezoid profile
+
+			currentStep.velocity += currentStep.accel * timeStep;
+
+			if (currentStep.velocity < 0)
+			{
+				currentStep.velocity = 0;
+			}
+
+			currentStep.position += currentStep.velocity * timeStep;
+
+			currentStep.time += timeStep;
+
+			steps.add(new Step(currentStep));
 		}
+
+		return steps;
 	}
 
 	/**
@@ -241,10 +260,13 @@ public class MotionPlanner
 	 * @return A reference to the first list (which is now the combined list).
 	 *         Ruins the 2 lists in the process.
 	 */
-	private static ArrayList<Step> addTwoStepLists(ArrayList<Step> firstList,
-			ArrayList<Step> lastList)
+	private static List<Step> addTwoStepLists(List<Step> firstList,
+			List<Step> lastList)
 	{
 		double firstTotalTime = firstList.get(firstList.size() - 1).time;
+
+		double timeOffset = (lastList.get(0).time
+				- firstList.get(firstList.size() - 1).time) - timeStep;
 
 		double firstsPositionInLast = lastList.get(0).position;
 
@@ -254,7 +276,7 @@ public class MotionPlanner
 
 		for (Step step : lastList)
 		{
-			step.time += firstTotalTime;
+			step.time -= timeOffset;
 			step.position = firstTotalPosition
 					+ (step.position - firstsPositionInLast);
 		}
@@ -272,30 +294,24 @@ public class MotionPlanner
 	private static int findIndexByDistanceFromEnd(ArrayList<Step> list,
 			double distanceToFind)
 	{
-		int low, high, middle;
-		low = 0;
-		high = list.size() - 1;
+		int index = -1;
+		double minDifferenceDistance = Double.MAX_VALUE;
 
-		double currentDistance = 0;
-
-		do
+		for (int i = 0; i < list.size(); i++)
 		{
-			middle = (low + high) / 2;
+			Step step = list.get(i);
+			double distance = list.get(list.size() - 1).position
+					- step.position;
 
-			currentDistance = list.get(list.size() - 1).position
-					- list.get(middle).position;
+			double differenceDistance = Math.abs(distance - distanceToFind);
 
-			if (currentDistance > distanceToFind)
+			if (differenceDistance < minDifferenceDistance)
 			{
-				low = middle;
+				minDifferenceDistance = differenceDistance;
+				index = i;
 			}
-			else
-			{
-				high = middle;
-			}
+		}
 
-		} while (middle != low);
-
-		return middle;
+		return index;
 	}
 }
