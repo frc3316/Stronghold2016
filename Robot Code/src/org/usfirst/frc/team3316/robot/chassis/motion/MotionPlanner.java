@@ -7,6 +7,8 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
+import MotionPlanner.Step;
+
 public class MotionPlanner
 {
 	static Config config = Robot.config;
@@ -263,22 +265,19 @@ public class MotionPlanner
 	private static List<Step> addTwoStepLists(List<Step> firstList,
 			List<Step> lastList)
 	{
-		double firstTotalTime = firstList.get(firstList.size() - 1).time;
-
+		//how much excess time there is between the two lists
 		double timeOffset = (lastList.get(0).time
-				- firstList.get(firstList.size() - 1).time) - timeStep;
-
-		double firstsPositionInLast = lastList.get(0).position;
-
-		double firstTotalPosition = (firstList
-				.get(firstList.size() - 1).position - firstList.get(0).position)
-				+ firstList.get(firstList.size() - 1).velocity * timeStep;
+				- firstList.get(firstList.size() - 1).time) - timeStep; 
+		
+		//how much excess position there is between the two lists
+		double positionOffset = (lastList.get(0).position
+				- firstList.get(firstList.size() - 1).position)
+				- firstList.get(firstList.size() - 1).velocity * timeStep; 
 
 		for (Step step : lastList)
 		{
 			step.time -= timeOffset;
-			step.position = firstTotalPosition
-					+ (step.position - firstsPositionInLast);
+			step.position -= positionOffset;
 		}
 
 		firstList.addAll(lastList);

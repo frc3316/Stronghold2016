@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,7 +119,7 @@ public class MotionPlanner
 				// else, find the index of complementary step and check
 				// velocities
 				double distanceToFind = distance - distanceAfterCurrentStep;
-				
+
 				int complementIndex = findIndexByDistanceFromEnd(decelList,
 						distanceToFind);
 
@@ -244,21 +245,19 @@ public class MotionPlanner
 	private static List<Step> addTwoStepLists(List<Step> firstList,
 			List<Step> lastList)
 	{
-		double firstTotalTime = firstList.get(firstList.size() - 1).time;
-
-		double timeOffset = (lastList.get(0).time - firstList.get(firstList.size() - 1).time) - timeStep;
+		//how much excess time there is between the two lists
+		double timeOffset = (lastList.get(0).time
+				- firstList.get(firstList.size() - 1).time) - timeStep; 
 		
-		double firstsPositionInLast = lastList.get(0).position;
-
-		double firstTotalPosition = (firstList
-				.get(firstList.size() - 1).position - firstList.get(0).position)
-				+ firstList.get(firstList.size() - 1).velocity * timeStep;
+		//how much excess position there is between the two lists
+		double positionOffset = (lastList.get(0).position
+				- firstList.get(firstList.size() - 1).position)
+				- firstList.get(firstList.size() - 1).velocity * timeStep; 
 
 		for (Step step : lastList)
 		{
 			step.time -= timeOffset;
-			step.position = firstTotalPosition
-					+ (step.position - firstsPositionInLast);
+			step.position -= positionOffset;
 		}
 
 		firstList.addAll(lastList);
@@ -280,10 +279,11 @@ public class MotionPlanner
 		for (int i = 0; i < list.size(); i++)
 		{
 			Step step = list.get(i);
-			double distance = list.get(list.size() - 1).position - step.position;
-			
+			double distance = list.get(list.size() - 1).position
+					- step.position;
+
 			double differenceDistance = Math.abs(distance - distanceToFind);
-			
+
 			if (differenceDistance < minDifferenceDistance)
 			{
 				minDifferenceDistance = differenceDistance;
