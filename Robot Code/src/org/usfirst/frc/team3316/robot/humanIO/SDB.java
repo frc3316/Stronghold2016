@@ -12,6 +12,9 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -137,21 +140,29 @@ public class SDB
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
 		
-		//Flywheel
+		// Flywheel
 		SmartDashboard.putData(new JoystickFlywheel());
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new PIDFlywheel());
 		
-		//Bangbang
+		// Bangbang
 		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
 		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
 		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
 		
-		//PID
+		// PID
 		putConfigVariableInSDB("flywheel_PID_Setpoint");
 		putConfigVariableInSDB("flywheel_PID_KP");
 		putConfigVariableInSDB("flywheel_PID_KI");
 		putConfigVariableInSDB("flywheel_PID_KD");
+		
+		/*
+		 * For testing
+		 */
+		// Intake
+		SmartDashboard.putData("Intake RollIn", new RollIn());
+		SmartDashboard.putData("Intake RollOut", new RollOut());
+		SmartDashboard.putData("Intake StopRoll", new StopRoll());
 		
 		logger.info("Finished initSDB()");
 	}

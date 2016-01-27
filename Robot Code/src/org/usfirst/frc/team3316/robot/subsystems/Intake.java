@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends DBugSubsystem
 {
@@ -32,6 +33,8 @@ public class Intake extends DBugSubsystem
 		intakeTS = Robot.sensors.intakeTS;
 		intakeBS = Robot.sensors.intakeBS;
 		intakePot = Robot.sensors.intakePot;
+		
+		SmartDashboard.putNumber("Max Current", 0.0);
 	}
 
 	public void initDefaultCommand()
@@ -50,7 +53,7 @@ public class Intake extends DBugSubsystem
 
 	public boolean setMotor(double v)
 	{
-		return setMotors(v);
+		return intakeMotor.setMotor(v);
 	}
 
 	public boolean isBallIn()

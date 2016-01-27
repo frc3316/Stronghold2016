@@ -75,8 +75,8 @@ public class Robot extends IterativeRobot
 		/*
 		 * Robot IO
 		 */
-		actuators = new Actuators();
 		sensors = new Sensors();
+		actuators = new Actuators();
 
 		/*
 		 * Subsystems
