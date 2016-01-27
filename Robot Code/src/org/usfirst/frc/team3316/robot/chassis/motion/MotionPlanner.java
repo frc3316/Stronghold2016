@@ -29,6 +29,37 @@ public class MotionPlanner
 		}
 	}
 
+	public static class PlannedMotion
+	{
+		private Step [] steps;
+		
+		public PlannedMotion (Step [] steps)
+		{
+			this.steps = steps;
+		}
+		
+		public Step[] getSteps ()
+		{
+			return steps;
+		}
+		
+		public String toString ()
+		{
+			String toReturn = "";
+			
+			toReturn += "Number of steps: " + steps.length + "\n";
+			toReturn += "Time\tPosition\tVelocity\tAcceleration\n";
+			
+			for (int i = 0; i < steps.length; i++)
+			{
+				Step step = steps[i];
+				toReturn += step.time + "\t" + step.position + "\t" + step.velocity + "\t" + step.accel + "\n";
+			}
+			
+			return toReturn;
+		}
+	}
+	
 	static Config config = Robot.config;
 	static DBugLogger logger = Robot.logger;
 
@@ -42,7 +73,7 @@ public class MotionPlanner
 		timeStep = (double) config.get("motionPlanner_TimeStep");
 	}
 
-	public static Step[] planMotion(double distance)
+	public static PlannedMotion planMotion(double distance)
 	{
 		ArrayList<Step> accelList = calculateAccelSteps(maxVelocity, maxAccel);
 		ArrayList<Step> decelList = calculateAccelSteps(maxVelocity, maxDecel);
@@ -64,7 +95,7 @@ public class MotionPlanner
 		{
 			ArrayList<Step> finalList = addTwoStepLists(accelList, decelList);
 
-			return finalList.toArray(new Step[0]);
+			return new PlannedMotion(finalList.toArray(new Step[0]));
 		}
 		/*
 		 * Distance is too much - We need to trim the lists when velocities are
@@ -106,7 +137,7 @@ public class MotionPlanner
 							(ArrayList<Step>) decelList.subList(complementIndex,
 									decelList.size()));
 
-					return finalList.toArray(new Step[0]);
+					return new PlannedMotion(finalList.toArray(new Step[0]));
 				}
 			}
 
@@ -138,7 +169,7 @@ public class MotionPlanner
 			
 			ArrayList<Step> finalList = addTwoStepLists(accelList, decelList);
 			
-			return finalList.toArray(new Step[0]);
+			return new PlannedMotion(finalList.toArray(new Step[0]));
 		}
 	}
 
