@@ -1,15 +1,10 @@
 package org.usfirst.frc.team3316.robot.chassis.motion;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.Queue;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
-
-import com.sun.java_cup.internal.runtime.virtual_parse_stack;
 
 public class MotionPlanner
 {
@@ -32,11 +27,6 @@ public class MotionPlanner
 			this.position = other.position;
 			this.time = other.time;
 		}
-	}
-
-	public static class PlannedMotion
-	{
-
 	}
 
 	static Config config = Robot.config;
@@ -115,7 +105,7 @@ public class MotionPlanner
 							(ArrayList<Step>) accelList.subList(0, index + 1),
 							(ArrayList<Step>) decelList.subList(complementIndex,
 									decelList.size()));
-					
+
 					return finalList.toArray(new Step[0]);
 				}
 			}
@@ -127,10 +117,29 @@ public class MotionPlanner
 		 */
 		else
 		{
+			// We're going to add the new steps to the accel list, and then add
+			// to it the decel list
 
+			double distanceToReach = distance - decelDistance;
+
+			Step newStep;
+			Step lastStep = accelList.get(accelList.size() - 1);
+			
+			while (lastStep.position < distanceToReach)
+			{
+				newStep = new Step(0, 0, 0, 0);
+				newStep.velocity = maxVelocity;
+				newStep.time = lastStep.time + timeStep;
+				newStep.position = lastStep.position + (newStep.velocity * timeStep);
+				
+				accelList.add(new Step(newStep));
+				lastStep = newStep;
+			}
+			
+			ArrayList<Step> finalList = addTwoStepLists(accelList, decelList);
+			
+			return finalList.toArray(new Step[0]);
 		}
-
-		return null;
 	}
 
 	/**
