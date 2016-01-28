@@ -53,7 +53,7 @@ public class Intake extends DBugSubsystem
 
 	public boolean setMotor(double v)
 	{
-		return intakeMotor.setMotor(v);
+		return setMotors(v);
 	}
 
 	public boolean isBallIn()
