@@ -109,6 +109,8 @@ public class Config
 			/*
 			 * Constants
 			 */
+			addToConstants("CURRENT_CONTROL_COUNTER", 10);
+			
 			{
 				/*
 				 * Chassis
@@ -131,12 +133,7 @@ public class Config
 
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
 				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 2);
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 5.5); // TODO:
-																	// Check
-																	// what this
-																	// value
-																	// should
-																	// be.
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 8.5);
 
 				addToConstants("INTAKE_LS", 7);
 				addToConstants("INTAKE_RS", 1);
@@ -245,6 +242,7 @@ public class Config
 																		// useful.
 				addToConstants("FLYWHEEL_COUNTER", 0);
 			}
+			
 			/*
 			 * Variables
 			 */
@@ -260,6 +258,19 @@ public class Config
 				addToVariables("flywheel_PID_KP", 0.0);
 				addToVariables("flywheel_PID_KI", 0.0);
 				addToVariables("flywheel_PID_KD", 0.0);
+			}
+		}
+		
+		/*
+		 * Intake
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+				addToConstants("INTAKE_ROLL_IN_SPEED", 1.0);
+				addToConstants("INTAKE_ROLL_OUT_SPEED", -1.0);
 			}
 		}
 	}

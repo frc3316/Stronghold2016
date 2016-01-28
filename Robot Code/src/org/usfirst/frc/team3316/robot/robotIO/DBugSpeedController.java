@@ -6,7 +6,6 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DBugSpeedController
 {
@@ -19,6 +18,7 @@ public class DBugSpeedController
 	private boolean isSetLimit;
 	public int pdpChannel; // The channel in the PDP of the speed controller
 	public double maxCurrent; // The high threshold for current control
+	private int counter = 0;
 
 	/**
 	 * This method is using for adding a new speed controller to this subsystem.
@@ -42,7 +42,7 @@ public class DBugSpeedController
 		this.isSetLimit = true;
 		this.pdpChannel = pdpChannel;
 		this.maxCurrent = maxCurrent;
-		
+
 		sc.setInverted(reverse);
 	}
 
@@ -62,7 +62,7 @@ public class DBugSpeedController
 		this.sc = sc;
 		this.reverse = reverse;
 		isSetLimit = false;
-		
+
 		sc.setInverted(reverse);
 	}
 
@@ -71,20 +71,27 @@ public class DBugSpeedController
 	 * 
 	 * @param v
 	 *            The voltage (velocity) to set for this D-Bug Speed Controller.
-	 * @return A boolean of the process success - true if it succeeded or false if
-	 *         it failed.
+	 * @return A boolean of the process success - true if it succeeded or false
+	 *         if it failed.
 	 */
 	public boolean setMotor(double v)
 	{
-		if (Robot.sensors.pdp.getCurrent(2) < SmartDashboard.getNumber("Max Current"))
+		if (!isSetLimit || Robot.sensors.pdp.getCurrent(pdpChannel) < maxCurrent)
 		{
 			sc.set(v);
 		}
 		else
 		{
+			counter++;
+		}
+
+		if (counter >= (int) config.get("CURRENT_CONTROL_COUNTER"))
+		{
 			sc.set(0);
-			
-			logger.severe("Current overflow at D-Bug Speed Controller on PDP channel " + pdpChannel + ".");
+
+			logger.severe(
+					"Current overflow at D-Bug Speed Controller on PDP channel "
+							+ pdpChannel + ".");
 			return false;
 		}
 

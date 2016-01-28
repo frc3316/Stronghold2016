@@ -2,7 +2,6 @@ package org.usfirst.frc.team3316.robot.commands.intake;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,18 +16,18 @@ public class RollOut extends DBugCommand
 
 	protected void init()
 	{
-		SmartDashboard.putNumber("Intake Motor", 0.0);
+		rollOutSpeed = (double) config.get("INTAKE_ROLL_OUT_SPEED");
 	}
 
 	protected void execute()
 	{
 		rollOutSpeed = SmartDashboard.getNumber("Intake Motor");
-		Robot.intake.setMotor(rollOutSpeed);
+		isFin = !Robot.intake.setMotor(rollOutSpeed);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return isFin;
 	}
 
 	protected void fin()

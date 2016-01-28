@@ -33,8 +33,6 @@ public class Intake extends DBugSubsystem
 		intakeTS = Robot.sensors.intakeTS;
 		intakeBS = Robot.sensors.intakeBS;
 		intakePot = Robot.sensors.intakePot;
-		
-		SmartDashboard.putNumber("Max Current", 0.0);
 	}
 
 	public void initDefaultCommand()

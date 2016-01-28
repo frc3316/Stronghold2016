@@ -10,7 +10,6 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
  */
 public class JoystickFlywheel extends DBugCommand
 {
-	private boolean isFin;
 
 	public JoystickFlywheel()
 	{
@@ -25,12 +24,12 @@ public class JoystickFlywheel extends DBugCommand
 	{
 		double v = -Robot.joysticks.joystickOperator.getRawAxis(1);
 
-		isFin = Robot.flywheel.setMotors(v);
+		isFin = !Robot.flywheel.setMotors(v);
 	}
 
 	protected boolean isFinished()
 	{
-		return !isFin;
+		return isFin;
 	}
 
 	protected void fin()

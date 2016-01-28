@@ -13,6 +13,8 @@ public abstract class DBugCommand extends Command
 {
 	protected DBugLogger logger = Robot.logger;
 	protected Config config = Robot.config;
+	
+	protected boolean isFin = false;
 
     protected final void initialize() 
     {
