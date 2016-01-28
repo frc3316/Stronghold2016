@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RollOut extends DBugCommand
 {
+	//TODO: Add commenting
+
 	private double rollOutSpeed;
 
 	public RollOut()

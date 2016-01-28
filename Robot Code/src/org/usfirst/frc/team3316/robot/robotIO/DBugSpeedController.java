@@ -13,6 +13,8 @@ public class DBugSpeedController
 	Config config = Robot.config;
 	PowerDistributionPanel pdp = Robot.sensors.pdp;
 
+	//TODO: Fix access levels. Either all public or all private (with getters and setters).
+	
 	private SpeedController sc;
 	public boolean reverse; // Negative factor of velocity
 	private boolean isSetLimit;
@@ -80,6 +82,9 @@ public class DBugSpeedController
 		{
 			sc.set(v);
 		}
+		//TODO: Counter isn't necessary if max current is the real stall current
+		//TODO: Measure the stall current
+		//TODO: Logic of load current should be moved to the command
 		else
 		{
 			counter++;
@@ -97,4 +102,7 @@ public class DBugSpeedController
 
 		return true;
 	}
+	
+	//TODO: Add get current method
+	//TODO: Add get voltage method
 }

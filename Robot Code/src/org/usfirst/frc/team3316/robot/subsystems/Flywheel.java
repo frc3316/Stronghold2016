@@ -22,7 +22,7 @@ public class Flywheel extends DBugSubsystem
 	}
 
 	/**
-	 * Class for filtering out noise from the FPGA rate calculation. Essentially
+	 * Class for filtering out noise from the FPGA rate calculation. Essentially,
 	 * this is a low pass filter.
 	 * 
 	 * @author D-Bug

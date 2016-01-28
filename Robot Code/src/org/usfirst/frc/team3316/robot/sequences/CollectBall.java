@@ -9,6 +9,8 @@ import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallIn;
 
 public class CollectBall extends DBugCommandGroup
 {
+	//Has this been checked with the prototype?
+	
 	public CollectBall() {
 		addSequential(new OpenIntake());
 		addParallel(new RollIn());

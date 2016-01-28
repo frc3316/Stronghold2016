@@ -12,6 +12,8 @@ public class EjectBall extends DBugCommandGroup
 {
 	public EjectBall()
 	{
+		//Has this been checked with the prototype?
+		
 		addSequential(new WaitForBallIn());
 		addSequential(new OpenIntake());
 		addParallel(new RollOut());

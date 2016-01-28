@@ -14,7 +14,8 @@ public abstract class DBugCommand extends Command
 	protected DBugLogger logger = Robot.logger;
 	protected Config config = Robot.config;
 	
-	protected boolean isFin = false;
+	protected boolean isFin = false; 
+	//TODO: Eliminate the isFinished method by changing it here: return isFin. 
 
     protected final void initialize() 
     {

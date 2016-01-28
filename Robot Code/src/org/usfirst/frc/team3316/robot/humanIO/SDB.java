@@ -145,6 +145,8 @@ public class SDB
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new PIDFlywheel());
 		
+		//TODO: Code the relevant flywheel variables into the config and remove them from here
+		
 		// Bangbang
 		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
 		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
@@ -163,6 +165,8 @@ public class SDB
 		SmartDashboard.putData("Intake RollIn", new RollIn());
 		SmartDashboard.putData("Intake RollOut", new RollOut());
 		SmartDashboard.putData("Intake StopRoll", new StopRoll());
+		
+		//TODO: Are we still testing?
 		
 		logger.info("Finished initSDB()");
 	}

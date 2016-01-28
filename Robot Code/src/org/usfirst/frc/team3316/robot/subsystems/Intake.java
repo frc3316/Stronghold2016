@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends DBugSubsystem
 {
+	//TODO: Add commenting
+	
 	// Actuators
 	private DoubleSolenoid intakeSolendoid;
 	private DBugSpeedController intakeMotor;
@@ -49,6 +51,7 @@ public class Intake extends DBugSubsystem
 		intakeSolendoid.set(Value.kReverse);
 	}
 
+	//TODO: Change name to setMotors
 	public boolean setMotor(double v)
 	{
 		return setMotors(v);

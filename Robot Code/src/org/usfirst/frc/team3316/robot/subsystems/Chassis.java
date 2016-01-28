@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.*;
 
 public class Chassis extends DBugSubsystem
 {
+	//TODO: Add commenting
+	
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
@@ -43,6 +45,7 @@ public class Chassis extends DBugSubsystem
 		leftMotor2 = Robot.actuators.leftChassis2;
 		rightMotor1 = Robot.actuators.rightChassis1;
 
+		// TODO: No point in adding them if theres no
 		addSpeedController(leftMotor1);
 		addSpeedController(leftMotor2);
 		addSpeedController(rightMotor1);
@@ -71,6 +74,7 @@ public class Chassis extends DBugSubsystem
 	/*
 	 * Set Method
 	 */
+	// TODO: Change name to setMotors so it is consistent with other subsystems
 	public void set(double left, double right)
 	{
 		leftMotor1.setMotor(left);

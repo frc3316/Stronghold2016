@@ -30,6 +30,11 @@ public class Actuators
 
 	public Actuators()
 	{
+		// TODO: When the speed controllers are defined like this, we cannot
+		// interchange between different types of speed controllers (f.e.
+		// Victors for robot A and Talons for robot B). Need to fix this so
+		// it'll save us time in the future.
+		
 		// Chassis
 		leftChassis1 = new DBugSpeedController(
 				new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1")),

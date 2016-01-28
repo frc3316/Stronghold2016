@@ -33,6 +33,9 @@ public abstract class DBugSubsystem extends Subsystem
 		controllers.add(sc);
 	}
 
+	// TODO: Move this method to a new class (Chassis should not have
+	// unnecessary methods). All of the other subsystems should extend that
+	// class.
 	/**
 	 * This method sets the voltage for all the D-Bug Speed Controllers you've
 	 * added.
