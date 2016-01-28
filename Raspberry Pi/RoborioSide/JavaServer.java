@@ -43,16 +43,17 @@ class JavaServer {
             // If data received:
             if (!fromClient.equals("null")) {
 
-                out.println(toClient);
                 for (int i = 0; i < fromClient.length(); i++){
                     char c = fromClient.charAt(i);
                     if (!(c == ',')) {
                         currentIntStr += c;
                     }
                     else if (c == ','){
-
+                        // Adding the found data from python to the data array:
                         dataNumbers[numOfCommasRead] = Integer.parseInt(currentIntStr);
+                        // Updating the number of data numbers found:
                         numOfCommasRead += 1;
+                        // Resetting the current number string:
                         currentIntStr = "";
                     }
                     else {
@@ -61,6 +62,7 @@ class JavaServer {
                     }
 
                 }
+                // Converting the last number from the python side to int:
                 dataNumbers[numOfCommasRead] = Integer.parseInt(currentIntStr);
 
             }
