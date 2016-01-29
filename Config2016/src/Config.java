@@ -152,6 +152,8 @@ public class Config
 				addToConstants("FLYWHEEL_COUNTER", 0);
 			}
 		}
+		
+		
 
 		/*
 		 * Chassis
@@ -174,8 +176,17 @@ public class Config
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
+				
+				/*
+				 * Motion Planner
+				 */
+				{
+					addToVariables("motionPlanner_MaxAccel", 4);
+					addToVariables("motionPlanner_MaxDecel", -6);
+					addToVariables("motionPlanner_MaxVelocity", 3);
+					addToVariables("motionPlanner_TimeStep", 0.01);
+				}
 			}
-
 		}
 
 		/*

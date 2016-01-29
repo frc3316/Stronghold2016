@@ -7,8 +7,6 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
-import MotionPlanner.Step;
-
 public class MotionPlanner
 {
 	static Config config = Robot.config;
@@ -75,10 +73,7 @@ public class MotionPlanner
 
 	static
 	{
-		maxAccel = (double) config.get("motionPlanner_MaxAccel");
-		maxDecel = (double) config.get("motionPlanner_Maxdecel");
-		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
-		timeStep = (double) config.get("motionPlanner_TimeStep");
+		updateParameters();
 	}
 
 	public static PlannedMotion planMotion(double distance)
@@ -187,7 +182,7 @@ public class MotionPlanner
 	private static void updateParameters()
 	{
 		maxAccel = (double) config.get("motionPlanner_MaxAccel");
-		maxDecel = (double) config.get("motionPlanner_Maxdecel");
+		maxDecel = (double) config.get("motionPlanner_MaxDecel");
 		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
 		timeStep = (double) config.get("motionPlanner_TimeStep");
 	}
