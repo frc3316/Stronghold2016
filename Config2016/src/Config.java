@@ -150,6 +150,20 @@ public class Config
 				addToConstants("FLYWHEEL_MOTOR", 0);
 
 				addToConstants("FLYWHEEL_COUNTER", 0);
+				
+				/*
+				 * Turret
+				 */
+				addToConstants("TURRET_POT", 4);
+				addToConstants("TURRET_POT_FULL_RAGNE", 1);
+		 		addToConstants("TURRET_POT_OFFSET", 0.0);
+				
+				/*
+				 * Hood
+				 */
+				addToConstants("HOOD_POT", 5);
+				addToConstants("HOOD_POT_FULL_RAGNE", 1);
+				addToConstants("HOOD_POT_OFFSET", 30.0);
 			}
 		}
 
