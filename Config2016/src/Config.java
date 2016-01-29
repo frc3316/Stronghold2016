@@ -104,10 +104,9 @@ public class Config {
 				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 1);
 				addToConstants("INTAKE_MOTOR", 0);
 
-				addToConstants("INTAKE_LS", 7);
-				addToConstants("INTAKE_RS", 1);
-				addToConstants("INTAKE_TS", 4);
-				addToConstants("INTAKE_BS", 5);
+				addToConstants("INTAKE_LEFT_SWITCH", 7);
+				addToConstants("INTAKE_RIGHT_SWITCH", 1);
+				addToConstants("INTAKE_CENTER_SWITCH", 4);
 				addToConstants("INTAKE_POT", 6);
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);

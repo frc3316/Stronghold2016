@@ -16,7 +16,8 @@ public class Intake extends DBugSubsystem
 	private SpeedController intakeMotor;
 
 	// Sensors
-	private DigitalInput intakeLS, intakeRS, intakeTS, intakeBS;
+	private DigitalInput intakeLeftSwitch, intakeRightSwitch,
+			intakeCenterSwitch;
 	private AnalogPotentiometer intakePot;
 
 	public Intake()
@@ -26,10 +27,10 @@ public class Intake extends DBugSubsystem
 		intakeMotor = Robot.actuators.intakeMotor;
 
 		// Sensors
-		intakeLS = Robot.sensors.intakeLS;
-		intakeRS = Robot.sensors.intakeRS;
-		intakeTS = Robot.sensors.intakeTS;
-		intakeBS = Robot.sensors.intakeBS;
+		intakeLeftSwitch = Robot.sensors.intakeLeftSwitch;
+		intakeRightSwitch = Robot.sensors.intakeRightSwitch;
+		intakeCenterSwitch = Robot.sensors.intakeCenterSwitch;
+
 		intakePot = Robot.sensors.intakePot;
 	}
 
@@ -54,7 +55,9 @@ public class Intake extends DBugSubsystem
 
 	public boolean isBallIn()
 	{
-		if (intakeLS.get() && intakeRS.get())
+		if ((intakeLeftSwitch.get() && intakeRightSwitch.get())
+				|| (intakeLeftSwitch.get() && intakeCenterSwitch.get())
+				|| (intakeCenterSwitch.get() && intakeRightSwitch.get()))
 		{
 			return true;
 		}
@@ -69,22 +72,30 @@ public class Intake extends DBugSubsystem
 
 	public boolean isIntakeOpen()
 	{
-		//TODO: Update when sensors are final
-		/*
-		 * return intakeBS.get() && intakePot .get() >= (double)
-		 * config.get("INTAKE_POT_HIGH_TRESH");
-		 */
-		return intakeBS.get();
+		try
+		{
+			return intakePot
+					.get() >= (double) config.get("INTAKE_POT_HIGH_TRESH");
+		}
+		catch (ConfigException e)
+		{
+			logger.severe(e);
+		}
+		return false;
 	}
 
 	public boolean isIntakeClose()
 	{
-		//TODO: Update when sensors are final
-		/*
-		 * return intakeTS.get() && intakePot .get() <= (double)
-		 * config.get("INTAKE_POT_LOW_TRESH");
-		 */
-		return intakeTS.get();
+		try
+		{
+			return intakePot
+					.get() <= (double) config.get("INTAKE_POT_LOW_TRESH");
+		}
+		catch (ConfigException e)
+		{
+			logger.severe(e);
+		}
+		return false;
 	}
 
 }
