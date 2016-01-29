@@ -202,6 +202,8 @@ public class Config
 																		// be.
 			}
 		}
+		
+		
 
 		/*
 		 * Chassis
@@ -246,7 +248,6 @@ public class Config
 				addToVariables("motionPlanner_MaxVelocity", 5.0);
 				addToVariables("motionPlanner_TimeStep", 0.02);
 			}
-
 		}
 
 		/*
