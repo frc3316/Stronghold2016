@@ -25,7 +25,7 @@ public class MotionPlanner
 		updateParameters();
 	}
 
-	public static PlannedMotion planMotion(double distance)
+	public static PlannedMotion planMotion ( double distance )
 	{
 		updateParameters();
 
@@ -111,5 +111,4 @@ public class MotionPlanner
 		maxDecel = (double) config.get("motionPlanner_Maxdecel");
 		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
 	}
-
 }
