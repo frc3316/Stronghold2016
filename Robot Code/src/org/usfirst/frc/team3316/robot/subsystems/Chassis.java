@@ -20,6 +20,8 @@ public class Chassis extends DBugSubsystem
 
 	// Sensors
 	private AHRS navx; // For the navX
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
@@ -30,6 +32,9 @@ public class Chassis extends DBugSubsystem
 	{
 		timer = new Timer();
 	}
+
+	private double rightSpeed = 0;
+	private double leftSpeed = 0;
 
 	// Other
 	private MovingAverage movingAvg; // For the navX
@@ -50,6 +55,8 @@ public class Chassis extends DBugSubsystem
 
 		// Sensors
 		navx = Robot.sensors.navx;
+		leftEncoder = Robot.sensors.chassisLeftEncoder;
+		leftEncoder = Robot.sensors.chassisRightEncoder;
 
 		// Create moving average
 		movingAvg = new MovingAverage(
@@ -121,5 +128,26 @@ public class Chassis extends DBugSubsystem
 	public double getPitch()
 	{
 		return navx.getRoll();
+	}
+
+	public double getLeftSpeed()
+	{
+		return leftEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+
+	public double getRightSpeed()
+	{
+		return rightEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+	
+	public double getDistance() {
+		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
+	}
+	
+	public void resetEncoders() {
+		rightEncoder.reset();
+		leftEncoder.reset();
 	}
 }
