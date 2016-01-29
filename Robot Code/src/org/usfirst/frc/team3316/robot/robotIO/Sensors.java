@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.SPI;
 
-public class Sensors
-{
+public class Sensors {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
@@ -39,19 +38,20 @@ public class Sensors
 	public Counter flywheelCounter;
 	public DigitalInput hallEffect;
 
-	public Sensors()
-	{
+	// Turret
+	public AnalogPotentiometer turretPot;
+
+	// Hood
+	public AnalogPotentiometer hoodPot;
+
+	public Sensors() {
 		pdp = new PowerDistributionPanel();
 		
 		// Chassis
-		try
-		{
+		try {
 			navx = new AHRS(SPI.Port.kMXP);
-		}
-		catch (RuntimeException ex)
-		{
-			DriverStation.reportError(
-					"Error instantiating navX MXP:  " + ex.getMessage(), true);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
 
 		// Intake
@@ -66,17 +66,21 @@ public class Sensors
 				(double) Robot.config.get("INTAKE_POT_OFFSET"));
 
 		// Transport
-		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"),
-				(int) config.get("TRANSPORT_ENCODER_B"),
-				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"),
-				CounterBase.EncodingType.k4X);
+		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"), (int) config.get("TRANSPORT_ENCODER_B"),
+				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"), CounterBase.EncodingType.k4X);
 
 		// Flywheel
-		hallEffect = new DigitalInput(
-				(int) Robot.config.get("FLYWHEEL_COUNTER"));
+		hallEffect = new DigitalInput((int) Robot.config.get("FLYWHEEL_COUNTER"));
 
 		flywheelCounter = new Counter(hallEffect);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round
 
+		// Turret
+		turretPot = new AnalogPotentiometer((int) Robot.config.get("TURRET_POT"),
+				(double) Robot.config.get("TURRET_POT_FULL_RANGE"), (double) Robot.config.get("TURRET_POT_OFFSET"));
+
+		// Hood
+		hoodPot = new AnalogPotentiometer((int) Robot.config.get("HOOD_POT"),
+				(double) Robot.config.get("HOOD_POT_FULL_RANGE"), (double) Robot.config.get("HOOD_POT_OFFSET"));
 	}
 }

@@ -199,6 +199,20 @@ public class Config
 																		// value
 																		// should
 																		// be.
+				
+				/*
+				 * Turret
+				 */
+				addToConstants("TURRET_POT", 4);
+				addToConstants("TURRET_POT_FULL_RAGNE", 1);
+		 		addToConstants("TURRET_POT_OFFSET", 0.0);
+				
+				/*
+				 * Hood
+				 */
+				addToConstants("HOOD_POT", 5);
+				addToConstants("HOOD_POT_FULL_RAGNE", 1);
+				addToConstants("HOOD_POT_OFFSET", 30.0);
 			}
 		}
 

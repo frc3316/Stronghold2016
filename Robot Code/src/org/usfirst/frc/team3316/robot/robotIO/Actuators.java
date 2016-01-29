@@ -29,6 +29,12 @@ public class Actuators
 
 	// Flywheel
 	public DBugSpeedController flywheelMotor1, flywheelMotor2;
+	
+	// Turret
+	public DBugSpeedController turretMotor;
+	
+	//Hood
+	public DBugSpeedController hoodMotor;
 
 	public Actuators()
 	{
