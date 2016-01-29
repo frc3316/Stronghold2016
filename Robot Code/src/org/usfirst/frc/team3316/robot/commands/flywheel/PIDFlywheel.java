@@ -10,17 +10,16 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class PIDFlywheel extends DBugCommand
 {
-	//TODO: Add commenting
-	
+	// TODO: Add commenting
+
 	private PIDController pid;
 	private double v = 0;
-	private boolean isFin;
 
 	public PIDFlywheel()
 	{
 		requires(Robot.flywheel);
 
-		//TODO: Add F term to PID
+		// TODO: Add F term to PID
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
@@ -30,7 +29,7 @@ public class PIDFlywheel extends DBugCommand
 
 			public double pidGet()
 			{
-				return 0;
+				return Robot.flywheel.getRate();
 			}
 
 			public PIDSourceType getPIDSourceType()
@@ -55,18 +54,18 @@ public class PIDFlywheel extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("flywheel_PID_KP") / 1000,
-				(double) config.get("flywheel_PID_KI") / 1000,
-				(double) config.get("flywheel_PID_KD") / 1000);
+		pid.setPID((double) config.get("flywheel_PID_KP"),
+				(double) config.get("flywheel_PID_KI"),
+				(double) config.get("flywheel_PID_KD"));
 
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 
-		isFin = Robot.flywheel.setMotors(v);
+		isFin = !Robot.flywheel.setMotors(v);
 	}
 
 	protected boolean isFinished()
 	{
-		return !isFin;
+		return isFin;
 	}
 
 	protected void fin()
