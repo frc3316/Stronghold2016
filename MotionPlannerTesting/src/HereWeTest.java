@@ -8,7 +8,7 @@ public class HereWeTest
 	public static void main(String[] args)
 	{
 		MotionPlanner.setStuff(4.2, -6.7, 4, 0.01);
-		MotionPlanner.PlannedMotion motion = MotionPlanner.planMotion(3);
+		MotionPlanner.PlannedMotion motion = MotionPlanner.planMotion(5);
 		
 		try
 		{
