@@ -10,10 +10,10 @@ public class HereWeTest
 {
 	public static void main(String[] args)
 	{
-		MotionPlanner.setStuff(6.566, -4.352, 4);
-		MotionPlanner.PlannedMotion motion = MotionPlanner.planMotion(8);
+		MotionPlanner.setStuff(6.566, -4.352, 3);
+		MotionPlanner.PlannedMotion motion = MotionPlanner.planMotion(3.5);
 		
-		Step[] steps = motion.convertToStepArray(0.01);
+		Step[] steps = motion.convertToStepArray(0.04);
 		
 		try
 		{

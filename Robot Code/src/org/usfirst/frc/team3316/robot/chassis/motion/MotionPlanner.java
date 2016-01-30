@@ -245,6 +245,12 @@ public class MotionPlanner
 			tDecel = tTotal - tAccel;
 			tCruise = 0;
 		}
+		
+		System.out.println("Accel time: " + tAccel);
+		System.out.println("Cruise time: " + tCruise);
+		System.out.println("Decel time: " + tDecel);
+		
+		System.out.println("Maximum velocity reached:" + vMax);
 
 		motion = new PlannedMotion(maxAccel, maxDecel, maxVelocity, vMax,
 				tAccel, tCruise, tDecel);

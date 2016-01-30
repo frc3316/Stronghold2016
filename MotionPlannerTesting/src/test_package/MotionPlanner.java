@@ -2,7 +2,6 @@ package test_package;
 //package org.usfirst.frc.team3316.robot.chassis.motion;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /*
 import org.usfirst.frc.team3316.robot.Robot;
@@ -202,6 +201,12 @@ public class MotionPlanner
 				
 				currentTime += timeStep;
 			}
+			
+			currentTime = accelTime + cruiseTime + decelTime;
+			
+			steps.add(new Step(getAcceleration(currentTime),
+					getVelocity(currentTime), getPosition(currentTime),
+					currentTime));
 
 			return steps.toArray(new Step[0]);
 		}
@@ -222,7 +227,9 @@ public class MotionPlanner
 
 		// tTriangle is the time it would take if the velocity graph was a
 		// triangle
-		double tTriangle = Math.sqrt((2 * distance * (maxAccel * -maxDecel)));
+		double tTriangle = Math.sqrt((2 * distance * (maxAccel - maxDecel)) / (maxAccel * -maxDecel));
+		
+		System.out.println("T triangle: " + tTriangle);
 
 		// Maximum velocity in a triangle profile
 		double vMaxTriangle = tTriangle
@@ -239,7 +246,7 @@ public class MotionPlanner
 		{
 			vMax = maxVelocity;
 			tAccel = vMax / maxAccel;
-			tDecel = vMax / maxDecel;
+			tDecel = vMax / -maxDecel;
 
 			tCruise = (distance / vMax) - ((tAccel + tDecel) / 2);
 		}
@@ -252,6 +259,13 @@ public class MotionPlanner
 			tDecel = tTotal - tAccel;
 			tCruise = 0;
 		}
+		System.out.println("Total time: " + tTotal);
+		
+		System.out.println("Accel time: " + tAccel);
+		System.out.println("Cruise time: " + tCruise);
+		System.out.println("Decel time: " + tDecel);
+		
+		System.out.println("Maximum velocity reached:" + vMax);
 
 		motion = new PlannedMotion(maxAccel, maxDecel, maxVelocity, vMax,
 				tAccel, tCruise, tDecel);
