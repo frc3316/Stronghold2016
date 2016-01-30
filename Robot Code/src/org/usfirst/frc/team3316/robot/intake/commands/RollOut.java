@@ -37,9 +37,12 @@ public class RollOut extends DBugCommand
 	}
 
 	protected void fin()
-	{}
+	{
+		Robot.intake.setMotor(0);
+	}
 
 	protected void interr()
-	{}
-
+	{
+		fin();
+	}
 }
