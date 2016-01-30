@@ -118,12 +118,25 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 
+				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
+				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+
 				/*
 				 * Intake
 				 */
 				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 0);
 				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 1);
-				addToConstants("INTAKE_MOTOR", 4);
+
+				addToConstants("INTAKE_MOTOR", 0);
+
+				addToConstants("INTAKE_MOTOR_REVERSE", false);
+				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 2);
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 5.5); // TODO:
+																	// Check
+																	// what this
+																	// value
+																	// should
+																	// be.
 
 				addToConstants("INTAKE_LS", 7);
 				addToConstants("INTAKE_RS", 1);
@@ -138,7 +151,27 @@ public class Config
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR", 3);
+				addToConstants("TRANSPORT_MOTOR_1", 3);
+				addToConstants("TRANSPORT_MOTOR_2", 10);
+
+				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);
+				addToConstants("TRANSPORT_MOTOR_2_REVERSE", true);
+				addToConstants("TRANSPORT_MOTOR_1_PDP_CHANNEL", 5);
+				addToConstants("TRANSPORT_MOTOR_2_PDP_CHANNEL", 6);
+				addToConstants("TRANSPORT_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
+																			// Check
+																			// what
+																			// this
+																			// value
+																			// should
+																			// be.
+				addToConstants("TRANSPORT_MOTOR_2_MAX_CURRENT", 1000.0); // TODO:
+																			// Check
+																			// what
+																			// this
+																			// value
+																			// should
+																			// be.
 
 				addToConstants("TRANSPORT_ENCODER_A", 2);
 				addToConstants("TRANSPORT_ENCODER_B", 3);
@@ -147,9 +180,26 @@ public class Config
 				/*
 				 * Flywheel
 				 */
-				addToConstants("FLYWHEEL_MOTOR", 0);
-
-				addToConstants("FLYWHEEL_COUNTER", 0);
+				addToConstants("FLYWHEEL_MOTOR_1", 4);
+				addToConstants("FLYWHEEL_MOTOR_1_REVERSE", false);
+				addToConstants("FLYWHEEL_MOTOR_1_PDP_CHANNEL", 3);
+				addToConstants("FLYWHEEL_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
+				addToConstants("FLYWHEEL_MOTOR_2", 11);
+				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
+				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
+				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 1000.0);// TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
 			}
 		}
 
@@ -192,7 +242,8 @@ public class Config
 																		// and
 																		// make
 																		// it
-																		// useful
+																		// useful.
+				addToConstants("FLYWHEEL_COUNTER", 0);
 			}
 			/*
 			 * Variables

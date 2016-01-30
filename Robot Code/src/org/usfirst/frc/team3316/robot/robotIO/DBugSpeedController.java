@@ -6,12 +6,13 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DBugSpeedController
 {
-	static DBugLogger logger = Robot.logger;
-	static Config config = Robot.config;
-	static PowerDistributionPanel pdp = Robot.sensors.pdp;
+	DBugLogger logger = Robot.logger;
+	Config config = Robot.config;
+	PowerDistributionPanel pdp = Robot.sensors.pdp;
 
 	private SpeedController sc;
 	public boolean reverse; // Negative factor of velocity
@@ -75,7 +76,7 @@ public class DBugSpeedController
 	 */
 	public boolean setMotor(double v)
 	{
-		if (!isSetLimit || pdp.getCurrent(pdpChannel) < maxCurrent)
+		if (Robot.sensors.pdp.getCurrent(2) < SmartDashboard.getNumber("Max Current"))
 		{
 			sc.set(v);
 		}
