@@ -152,6 +152,8 @@ public class Config
 				addToConstants("FLYWHEEL_COUNTER", 0);
 			}
 		}
+		
+		
 
 		/*
 		 * Chassis
@@ -188,15 +190,17 @@ public class Config
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
-
-				// TODO: Check what the following variables should be, and
-				// change them.
-				addToVariables("motionPlanner_MaxAccel", 2.0);
-				addToVariables("motionPlanner_MaxDecel", -2.0);
-				addToVariables("motionPlanner_MaxVelocity", 5.0);
-				addToVariables("motionPlanner_TimeStep", 0.02);
+				
+				/*
+				 * Motion Planner
+				 */
+				{
+					addToVariables("motionPlanner_MaxAccel", 2.0);
+					addToVariables("motionPlanner_MaxDecel", -2.0);
+					addToVariables("motionPlanner_MaxVelocity", 5.0);
+					addToVariables("motionPlanner_TimeStep", 0.02);
+				}
 			}
-
 		}
 
 		/*

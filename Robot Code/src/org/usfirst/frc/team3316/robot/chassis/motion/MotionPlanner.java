@@ -37,8 +37,9 @@ public class MotionPlanner
 			return time + "\t" + position + "\t" + velocity + "\t" + accel
 					+ "\n";
 		}
-		
-		public double getVelocity() {
+
+		public double getVelocity()
+		{
 			return velocity;
 		}
 	}
@@ -77,24 +78,32 @@ public class MotionPlanner
 
 	static
 	{
-		maxAccel = (double) config.get("motionPlanner_MaxAccel");
-		maxDecel = (double) config.get("motionPlanner_MaxDecel");
-		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
-		timeStep = (double) config.get("motionPlanner_TimeStep");
+		updateParameters();
 	}
 
 	public static PlannedMotion planMotion(double distance)
 	{
-		updateParameters();
-	
 		ArrayList<Step> accelList = calculateAccelSteps(maxVelocity, maxAccel);
 		ArrayList<Step> decelList = calculateDecelSteps(maxVelocity, maxDecel);
 
 		double accelDistance = accelList.get(accelList.size() - 1).position
-				- accelList.get(0).position; // how much we go in the accel part
+				- accelList.get(0).position; // how
+												// much
+												// we
+												// go
+												// in
+												// the
+												// accel
+												// part
 
 		double decelDistance = decelList.get(decelList.size() - 1).position
-				- decelList.get(0).position; // how much we go in the decel
+				- decelList.get(0).position; // how
+												// much
+												// we
+												// go
+												// in
+												// the
+												// decel
 												// part
 		/*
 		 * Distances combined are what we were looking for? Adding the lists is
@@ -120,7 +129,8 @@ public class MotionPlanner
 				// list
 				double distanceAfterCurrentStep = (currentStep.position
 						- accelList.get(0).position)
-						+ currentStep.velocity * timeStep;
+						+ currentStep.velocity * timeStep
+						+ currentStep.accel * Math.pow(timeStep, 2);
 
 				if (distanceAfterCurrentStep > distance)
 				{
@@ -267,14 +277,16 @@ public class MotionPlanner
 	private static List<Step> addTwoStepLists(List<Step> firstList,
 			List<Step> lastList)
 	{
-		//how much excess time there is between the two lists
+		// how much excess time there is between the two lists
 		double timeOffset = (lastList.get(0).time
-				- firstList.get(firstList.size() - 1).time) - timeStep; 
-		
-		//how much excess position there is between the two lists
+				- firstList.get(firstList.size() - 1).time) - timeStep;
+
+		// how much excess position there is between the two lists
 		double positionOffset = (lastList.get(0).position
 				- firstList.get(firstList.size() - 1).position)
-				- firstList.get(firstList.size() - 1).velocity * timeStep; 
+				- firstList.get(firstList.size() - 1).velocity * timeStep
+				- firstList.get(firstList.size() - 1).accel
+						* Math.pow(timeStep, 2);
 
 		for (Step step : lastList)
 		{
