@@ -7,14 +7,14 @@ public class HereWeTest
 {
 	public static void main(String[] args)
 	{
-		MotionPlanner.setStuff(4.2, -6.7, 4, 0.01);
-		MotionPlanner.PlannedMotion motion = MotionPlanner.planMotion(5);
+		MotionPlanner.setStuff(10, -10, 2, 0.01);
+		MotionPlanner.PlannedMotion motion = MotionPlanner.planMotion(0.5);
 		
 		try
 		{
 			String content = motion.toString();
 
-			File file = new File("C:/Users/Idan/Desktop/FileOfTest.txt");
+			File file = new File("C:/Users/D-Bug/Desktop/FileOfTest.txt");
 
 			// if file doesnt exists, then create it
 			if (!file.exists())
