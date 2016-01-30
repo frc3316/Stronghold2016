@@ -1,17 +1,22 @@
-package org.usfirst.frc.team3316.robot.chassis.motion;
+package test_package;
+//package org.usfirst.frc.team3316.robot.chassis.motion;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+*/
 
 public class MotionPlanner
 {
+	/*
 	static Config config = Robot.config;
 	static DBugLogger logger = Robot.logger;
-
+	 */
+	
 	public static class Step
 	{
 		double accel, velocity, position, time;
@@ -194,6 +199,8 @@ public class MotionPlanner
 				steps.add(new Step(getAcceleration(currentTime),
 						getVelocity(currentTime), getPosition(currentTime),
 						currentTime));
+				
+				currentTime += timeStep;
 			}
 
 			return steps.toArray(new Step[0]);
@@ -204,12 +211,12 @@ public class MotionPlanner
 
 	static
 	{
-		updateParameters();
+		//updateParameters();
 	}
 
 	public static PlannedMotion planMotion(double distance)
 	{
-		updateParameters();
+		//updateParameters();
 
 		PlannedMotion motion;
 
@@ -252,9 +259,17 @@ public class MotionPlanner
 		return motion;
 	}
 
+	public static void setStuff (double maxAccel, double maxDecel, double maxVelocity)
+	{
+		MotionPlanner.maxAccel = maxAccel;
+		MotionPlanner.maxDecel = maxDecel;
+		MotionPlanner.maxVelocity = maxVelocity;
+	}
+	
 	/**
 	 * Updates variables from the config
 	 */
+	/*
 	private static void updateParameters()
 	{
 		maxAccel = (double) config.get("motionPlanner_MaxAccel");
@@ -262,4 +277,6 @@ public class MotionPlanner
 		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
 		timeStep = (double) config.get("motionPlanner_TimeStep");
 	}
+	*/
+	
 }
