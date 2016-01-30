@@ -48,11 +48,6 @@ public class Intake extends DBugSubsystemCC
 		intakeSolendoid.set(Value.kReverse);
 	}
 
-	public boolean setMotors(double v)
-	{
-		return setMotors(v);
-	}
-
 	public boolean isBallIn()
 	{
 		if ((intakeLeftSwitch.get() && intakeRightSwitch.get()))
@@ -92,4 +87,9 @@ public class Intake extends DBugSubsystemCC
 		return intakeSolendoid.get() == Value.kReverse;
 	}
 
+	public double getCurrent ()
+	{
+		return intakeMotor.getCurrent();
+	}
+	
 }

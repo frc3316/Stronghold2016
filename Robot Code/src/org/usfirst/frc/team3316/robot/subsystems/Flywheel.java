@@ -67,9 +67,12 @@ public class Flywheel extends DBugSubsystemCC
 	 * @return Whether setting was successful. Will return false if motor
 	 *         reaches stall current as measured by the PDP.
 	 */
+	/**
+	 * Delete this method (already defined in super)
+	 */
 	public boolean setMotors(double v)
 	{
-		return setMotors(v);
+		return super.setMotors(v);
 	}
 
 	/**

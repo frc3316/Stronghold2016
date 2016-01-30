@@ -120,24 +120,28 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 
+				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); //Change this after prototype
+				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); //Change this after prototype
+				
+				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); //Change this after prototype
+				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); //Change this after prototype
+				
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
 				/*
 				 * Intake
 				 */
-				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 0);
-				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 1);
-				addToConstants("INTAKE_MOTOR", 0);
+				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); //changed for prototype
+				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); //changed for prototype
+				addToConstants("INTAKE_MOTOR", 3); //changed for prototype
 
 				addToConstants("INTAKE_LEFT_SWITCH", 7);
 				addToConstants("INTAKE_RIGHT_SWITCH", 1);
 
-				addToConstants("INTAKE_MOTOR", 0);
-
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
-				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 2);
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 15.0); // TODO: Check the stall current
+				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 3); //changed for prototype 
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 666.6); // TODO: Check the stall current
 
 				addToConstants("INTAKE_POT", 6);
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
@@ -146,8 +150,8 @@ public class Config
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR_1", 3);
-				addToConstants("TRANSPORT_MOTOR_2", 10);
+				addToConstants("TRANSPORT_MOTOR_1", 8);
+				addToConstants("TRANSPORT_MOTOR_2", 9);
 
 				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);
 				addToConstants("TRANSPORT_MOTOR_2_REVERSE", true);

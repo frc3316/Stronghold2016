@@ -78,7 +78,7 @@ public class Actuators
 				(int) Robot.config.get("INTAKE_SOLENOID_REVERSE_CHANNEL"));
 
 		intakeMotor = new DBugSpeedController(
-				new Talon((int) Robot.config.get("INTAKE_MOTOR")),
+				new VictorSP((int) Robot.config.get("INTAKE_MOTOR")),
 				(boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
 				(int) Robot.config.get("INTAKE_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("INTAKE_MOTOR_MAX_CURRENT"));

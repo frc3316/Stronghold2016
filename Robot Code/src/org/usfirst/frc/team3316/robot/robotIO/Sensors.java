@@ -41,6 +41,8 @@ public class Sensors
 
 	public Sensors()
 	{
+		pdp = new PowerDistributionPanel();
+		
 		// Chassis
 		try
 		{
@@ -62,12 +64,6 @@ public class Sensors
 				(int) Robot.config.get("INTAKE_POT"),
 				(double) Robot.config.get("INTAKE_POT_FULL_RANGE"),
 				(double) Robot.config.get("INTAKE_POT_OFFSET"));
-
-		// Transport
-		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"),
-				(int) config.get("TRANSPORT_ENCODER_B"),
-				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"),
-				CounterBase.EncodingType.k4X);
 
 		// Transport
 		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"),

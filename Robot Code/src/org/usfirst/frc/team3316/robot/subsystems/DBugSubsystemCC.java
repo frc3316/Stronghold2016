@@ -38,9 +38,10 @@ public abstract class DBugSubsystemCC extends DBugSubsystem
 	 * @return A boolean of the process success - true if it succeeded or false
 	 *         if it failed.
 	 */
-	protected boolean setMotors(double v)
+	public boolean setMotors(double v)
 	{
 		boolean ok = true;
+		
 		for (DBugSpeedController d : controllers)
 		{
 			if (!d.setMotor(v))
@@ -57,6 +58,8 @@ public abstract class DBugSubsystemCC extends DBugSubsystem
 				d.setMotor(0);
 			}
 
+			logger.severe(this.getName() + " is burning to the ground");
+			
 			return false;
 		}
 

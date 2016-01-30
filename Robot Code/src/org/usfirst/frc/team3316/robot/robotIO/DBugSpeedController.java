@@ -86,10 +86,10 @@ public class DBugSpeedController
 	 */
 	public boolean setMotor(double v)
 	{
-		if (!isSetLimit
-				|| Robot.sensors.pdp.getCurrent(pdpChannel) < maxCurrent)
+		if (!isSetLimit || getCurrent() < maxCurrent)
 		{
 			sc.set(v);
+			return true;
 		}
 		else
 		{
@@ -99,11 +99,10 @@ public class DBugSpeedController
 							+ pdpChannel + ".");
 			return false;
 		}
-
-		return true;
 	}
 
-	public double getCurrent() {
+	public double getCurrent()
+	{
 		return pdp.getCurrent(pdpChannel);
 	}
 

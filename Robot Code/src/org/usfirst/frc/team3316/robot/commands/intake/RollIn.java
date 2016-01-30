@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class RollIn extends DBugCommand
 {
 	private double speed;
-
+	
 	public RollIn()
 	{
 		requires(Robot.intake);
@@ -16,12 +16,11 @@ public class RollIn extends DBugCommand
 
 	protected void init()
 	{
-		speed = (double) config.get("intake_RollIn_Speed");
 	}
 
 	protected void execute()
 	{
-		speed = (double) Robot.config.get("intake_RollIn_Speed");
+		speed = (double) config.get("intake_RollIn_Speed");
 		isFin = !Robot.intake.setMotors(speed);
 	}
 

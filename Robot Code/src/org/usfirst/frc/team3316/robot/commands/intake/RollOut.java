@@ -9,7 +9,7 @@ public class RollOut extends DBugCommand
 {
 	//TODO: Add commenting
 
-	private double rollOutSpeed;
+	private double speed;
 
 	public RollOut()
 	{
@@ -18,13 +18,13 @@ public class RollOut extends DBugCommand
 
 	protected void init()
 	{
-		rollOutSpeed = (double) config.get("INTAKE_ROLL_OUT_SPEED");
 	}
 
 	protected void execute()
 	{
-		rollOutSpeed = SmartDashboard.getNumber("Intake Motor");
-		isFin = !Robot.intake.setMotors(rollOutSpeed);
+		speed = (double) config.get("intake_RollOut_Speed");
+		isFin = !Robot.intake.setMotors(speed);
+		System.out.println(speed);
 	}
 
 	protected boolean isFinished()
@@ -34,10 +34,12 @@ public class RollOut extends DBugCommand
 
 	protected void fin()
 	{
+		Robot.intake.setMotors(0);
 	}
 
 	protected void interr()
 	{
+		fin();
 	}
 
 }

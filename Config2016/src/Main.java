@@ -49,6 +49,7 @@ public class Main
 		frame.setVisible(true);
 
 		uploadConfigButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				writeConfig();
 				transferConfig();
@@ -56,6 +57,7 @@ public class Main
 		});
 		
 		getlogsButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				fetchLogs();
 			}

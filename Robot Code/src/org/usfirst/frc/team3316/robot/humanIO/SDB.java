@@ -12,6 +12,8 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
@@ -39,6 +41,8 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
+			
+			put("Intake Current", Robot.intake.getCurrent());
 		}
 		
 		private void put (String name, double d)
@@ -141,31 +145,16 @@ public class SDB
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
 		
-		// Flywheel
-		SmartDashboard.putData(new JoystickFlywheel());
-		SmartDashboard.putData(new BangbangFlywheel());
-		SmartDashboard.putData(new PIDFlywheel());
-		
-		//TODO: Code the relevant flywheel variables into the config and remove them from here
-		
-		// Bangbang
-		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
-		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
-		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
-		
-		// PID
-		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		putConfigVariableInSDB("flywheel_PID_KP");
-		putConfigVariableInSDB("flywheel_PID_KI");
-		putConfigVariableInSDB("flywheel_PID_KD");
-		
 		/*
 		 * For testing
 		 */
 		// Intake
 		SmartDashboard.putData("Intake RollIn", new RollIn());
 		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake StopRoll", new StopRoll());
+		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
+
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
 		
 		logger.info("Finished initSDB()");
 	}
