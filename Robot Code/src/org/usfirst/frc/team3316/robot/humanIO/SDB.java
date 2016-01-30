@@ -11,7 +11,10 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+import org.usfirst.frc.team3316.robot.intake.commands.CloseIntake;
+import org.usfirst.frc.team3316.robot.intake.commands.OpenIntake;
 import org.usfirst.frc.team3316.robot.intake.commands.RollIn;
+import org.usfirst.frc.team3316.robot.intake.commands.RollOut;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,24 +34,6 @@ public class SDB
 		
 		public void run ()
 		{
-			/*
-			 * Insert put methods here
-			 */
-			//navX
-			put("navX Yaw Axis", Robot.sensors.navx.getYaw());
-			
-			System.out.println("Yaw:" + Robot.sensors.navx.getYaw());
-			
-			put("navX Roll Axis", Robot.sensors.navx.getRoll());
-			put("navX Pitch Axis", Robot.sensors.navx.getPitch());
-			put("navX Pressure", Robot.sensors.navx.getPressure());
-			put("navX Barometric Pressure", Robot.sensors.navx.getBarometricPressure());
-			put("navX Angle", Robot.sensors.navx.getAngle());
-			put("navX Z Displacement", Robot.sensors.navx.getDisplacementZ());
-			put("navX Z Acceleration", Robot.sensors.navx.getRawAccelZ());
-			
-			//Chassis
-			put("isOnDefense", Robot.chassis.isOnDefense());
 		}
 		
 		private void put (String name, double d)
@@ -150,6 +135,10 @@ public class SDB
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
 		
 		SmartDashboard.putData(new RollIn());
+		SmartDashboard.putData(new RollOut());
+		
+		SmartDashboard.putData(new CloseIntake());
+		SmartDashboard.putData(new OpenIntake());
 		
 		logger.info("Finished initSDB()");
 	}

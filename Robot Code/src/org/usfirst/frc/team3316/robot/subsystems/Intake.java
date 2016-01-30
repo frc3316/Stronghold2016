@@ -16,8 +16,7 @@ public class Intake extends DBugSubsystem
 	private SpeedController intakeMotor;
 
 	// Sensors
-	private DigitalInput intakeLeftSwitch, intakeRightSwitch,
-			intakeCenterSwitch;
+	private DigitalInput intakeLeftSwitch, intakeRightSwitch;
 	private AnalogPotentiometer intakePot;
 
 	public Intake()
@@ -29,7 +28,6 @@ public class Intake extends DBugSubsystem
 		// Sensors
 		intakeLeftSwitch = Robot.sensors.intakeLeftSwitch;
 		intakeRightSwitch = Robot.sensors.intakeRightSwitch;
-		intakeCenterSwitch = Robot.sensors.intakeCenterSwitch;
 
 		intakePot = Robot.sensors.intakePot;
 	}
@@ -55,9 +53,7 @@ public class Intake extends DBugSubsystem
 
 	public boolean isBallIn()
 	{
-		if ((intakeLeftSwitch.get() && intakeRightSwitch.get())
-				|| (intakeLeftSwitch.get() && intakeCenterSwitch.get())
-				|| (intakeCenterSwitch.get() && intakeRightSwitch.get()))
+		if ((intakeLeftSwitch.get() && intakeRightSwitch.get()))
 		{
 			return true;
 		}
@@ -72,30 +68,26 @@ public class Intake extends DBugSubsystem
 
 	public boolean isIntakeOpen()
 	{
-		try
-		{
-			return intakePot
-					.get() >= (double) config.get("INTAKE_POT_HIGH_TRESH");
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
-		return false;
+		/*
+		 * try { return intakePot .get() >= (double)
+		 * config.get("INTAKE_POT_HIGH_TRESH"); } catch (ConfigException e) {
+		 * logger.severe(e); } return false;
+		 */
+
+		// Changed for prototype reasons, need to switch it back to pot input
+		return intakeSolendoid.get() == Value.kForward;
 	}
 
 	public boolean isIntakeClose()
 	{
-		try
-		{
-			return intakePot
-					.get() <= (double) config.get("INTAKE_POT_LOW_TRESH");
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
-		return false;
+		/*
+		 * try { return intakePot .get() <= (double)
+		 * config.get("INTAKE_POT_LOW_TRESH"); } catch (ConfigException e) {
+		 * logger.severe(e); } return false;
+		 */
+
+		// Changed for prototype reasons, need to switch it back to pot input
+		return intakeSolendoid.get() == Value.kReverse;
 	}
 
 }
