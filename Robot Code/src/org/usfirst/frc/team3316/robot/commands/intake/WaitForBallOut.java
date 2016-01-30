@@ -1,10 +1,11 @@
-package org.usfirst.frc.team3316.robot.intake.commands;
+package org.usfirst.frc.team3316.robot.commands.intake;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class WaitForBallIn extends DBugCommand
+public class WaitForBallOut extends DBugCommand
 {
+	//TODO: Add commenting
 
 	protected void init()
 	{}
@@ -14,7 +15,7 @@ public class WaitForBallIn extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return Robot.intake.isBallIn();
+		return Robot.intake.isBallOut();
 	}
 
 	protected void fin()

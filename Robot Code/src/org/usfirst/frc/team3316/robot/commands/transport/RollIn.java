@@ -1,45 +1,40 @@
-package org.usfirst.frc.team3316.robot.transport.commands;
+package org.usfirst.frc.team3316.robot.commands.transport;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 public class RollIn extends DBugCommand
 {
-	
+	//TODO: Add commenting
+
 	private double rollInSpeed;
 
 	public RollIn()
 	{
 		requires(Robot.transport);
 	}
-	
+
 	protected void init()
 	{
-		try
-		{
-			rollInSpeed = (double) Robot.config.get("TRANSPORT_ROLL_IN_SPEED");
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+		rollInSpeed = (double) Robot.config.get("TRANSPORT_ROLL_IN_SPEED");
 	}
 
 	protected void execute()
 	{
-		Robot.transport.setMotor(rollInSpeed);
+		isFin = !Robot.transport.setMotors(rollInSpeed);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return isFin;
 	}
 
 	protected void fin()
-	{}
+	{
+	}
 
 	protected void interr()
-	{}
+	{
+	}
 
 }

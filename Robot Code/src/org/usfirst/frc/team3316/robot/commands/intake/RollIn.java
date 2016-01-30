@@ -1,8 +1,9 @@
-package org.usfirst.frc.team3316.robot.intake.commands;
+package org.usfirst.frc.team3316.robot.commands.intake;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RollIn extends DBugCommand
 {
@@ -15,30 +16,23 @@ public class RollIn extends DBugCommand
 
 	protected void init()
 	{
+		speed = (double) config.get("intake_RollIn_Speed");
 	}
 
 	protected void execute()
 	{
-		try
-		{
-			speed = (double) Robot.config.get("intake_RollIn_Speed");
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
-		
-		Robot.intake.setMotor(speed);
+		speed = (double) Robot.config.get("intake_RollIn_Speed");
+		isFin = !Robot.intake.setMotors(speed);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return isFin;
 	}
 
 	protected void fin()
 	{
-		Robot.intake.setMotor(0);
+		Robot.intake.setMotors(0);
 	}
 
 	protected void interr()

@@ -109,6 +109,8 @@ public class Config
 			/*
 			 * Constants
 			 */
+			addToConstants("CURRENT_CONTROL_COUNTER", 10);
+			
 			{
 				/*
 				 * Chassis
@@ -117,6 +119,9 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_LEFT_2", 6);
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
+
+				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
+				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
 				/*
 				 * Intake
@@ -128,6 +133,12 @@ public class Config
 				addToConstants("INTAKE_LEFT_SWITCH", 7);
 				addToConstants("INTAKE_RIGHT_SWITCH", 1);
 
+				addToConstants("INTAKE_MOTOR", 0);
+
+				addToConstants("INTAKE_MOTOR_REVERSE", false);
+				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 2);
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 15.0); // TODO: Check the stall current
+
 				addToConstants("INTAKE_POT", 6);
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
@@ -135,11 +146,55 @@ public class Config
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR", 3);
+				addToConstants("TRANSPORT_MOTOR_1", 3);
+				addToConstants("TRANSPORT_MOTOR_2", 10);
+
+				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);
+				addToConstants("TRANSPORT_MOTOR_2_REVERSE", true);
+				addToConstants("TRANSPORT_MOTOR_1_PDP_CHANNEL", 5);
+				addToConstants("TRANSPORT_MOTOR_2_PDP_CHANNEL", 6);
+				addToConstants("TRANSPORT_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
+																			// Check
+																			// what
+																			// this
+																			// value
+																			// should
+																			// be.
+				addToConstants("TRANSPORT_MOTOR_2_MAX_CURRENT", 1000.0); // TODO:
+																			// Check
+																			// what
+																			// this
+																			// value
+																			// should
+																			// be.
 
 				addToConstants("TRANSPORT_ENCODER_A", 2);
 				addToConstants("TRANSPORT_ENCODER_B", 3);
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
+
+				/*
+				 * Flywheel
+				 */
+				addToConstants("FLYWHEEL_MOTOR_1", 4);
+				addToConstants("FLYWHEEL_MOTOR_1_REVERSE", false);
+				addToConstants("FLYWHEEL_MOTOR_1_PDP_CHANNEL", 3);
+				addToConstants("FLYWHEEL_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
+				addToConstants("FLYWHEEL_MOTOR_2", 11);
+				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
+				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
+				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 1000.0);// TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
 			}
 		}
 
@@ -147,6 +202,15 @@ public class Config
 		 * Chassis
 		 */
 		{
+			/*
+			 * Constants
+			 */
+			{
+				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
+				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
+				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
+			}
+
 			/*
 			 * Variables
 			 */
@@ -157,16 +221,44 @@ public class Config
 				addToVariables("chassis_TankDrive_InvertY", true);
 			}
 
+		}
+
+		/*
+		 * Flywheel
+		 */
+		{
 			/*
 			 * Constants
 			 */
 			{
-				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
-				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
-				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
+				addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 1000.0); // TOOD:
+																		// Measure
+																		// this
+																		// and
+																		// make
+																		// it
+																		// useful.
+				addToConstants("FLYWHEEL_COUNTER", 0);
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+
+				// Bangbang - TO REMOVE AFTER TESTINGS
+				addToVariables("flywheel_Bangbang_Setpoint", 0.0);
+				addToVariables("flywheel_Bangbang_OnVoltage", 0.0);
+				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
+
+				// PID - TO REMOVE AFTER TESTINGS
+				addToVariables("flywheel_PID_Setpoint", 0.0);
+				addToVariables("flywheel_PID_KP", 0.0);
+				addToVariables("flywheel_PID_KI", 0.0);
+				addToVariables("flywheel_PID_KD", 0.0);
 			}
 		}
-
+		
 		/*
 		 * Intake
 		 */
@@ -175,7 +267,6 @@ public class Config
 			 * Constants
 			 */
 			{
-
 			}
 
 			/*

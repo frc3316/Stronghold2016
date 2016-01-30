@@ -1,27 +1,21 @@
-package org.usfirst.frc.team3316.robot.transport.commands;
+package org.usfirst.frc.team3316.robot.commands.intake;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class StopRoll extends DBugCommand
+public class WaitForBallIn extends DBugCommand
 {
+	//TODO: Add commenting
 
-	public StopRoll()
-	{
-		requires(Robot.transport);
-	}
-	
 	protected void init()
 	{}
 
 	protected void execute()
-	{
-		Robot.transport.setMotor(0);
-	}
+	{}
 
 	protected boolean isFinished()
 	{
-		return true;
+		return Robot.intake.isBallIn();
 	}
 
 	protected void fin()
@@ -29,5 +23,5 @@ public class StopRoll extends DBugCommand
 
 	protected void interr()
 	{}
-
+	
 }

@@ -1,23 +1,28 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
-import edu.wpi.first.wpilibj.SpeedController;
-
-public class Transport extends DBugSubsystem
+public class Transport extends DBugSubsystemCC
 {
+	private DBugSpeedController transportMotor1, transportMotor2;
 
-	private SpeedController transportMotor;
-	
-	public Transport() {
-		transportMotor = Robot.actuators.transportMotor;
+	public Transport()
+	{
+		transportMotor1 = Robot.actuators.transportMotor1;
+		transportMotor2 = Robot.actuators.transportMotor2;
+
+		addSpeedController(transportMotor1);
+		addSpeedController(transportMotor2);
 	}
-	
+
 	public void initDefaultCommand()
-	{}
-	
-	public void setMotor(double v) {
-		transportMotor.set(v);
+	{
+	}
+
+	public boolean setMotors(double v)
+	{
+		return setMotors(v);
 	}
 
 }

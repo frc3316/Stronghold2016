@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3316.robot.chassis.commands;
+package org.usfirst.frc.team3316.robot.commands.chassis;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public abstract class Drive extends Command 
 {
+	//TODO: Add commenting
+	
 	protected static Config config = Robot.config;
 	protected static DBugLogger logger = Robot.logger;
 	
@@ -31,7 +33,7 @@ public abstract class Drive extends Command
     protected void execute()
     {
     	set();
-    	Robot.chassis.set(left, right);
+    	Robot.chassis.setMotors(left, right);
     }
 
     protected boolean isFinished() 
@@ -41,7 +43,7 @@ public abstract class Drive extends Command
 
     protected void end() 
     {
-    	Robot.chassis.set(0, 0);
+    	Robot.chassis.setMotors(0, 0);
     }
 
     protected void interrupted() 

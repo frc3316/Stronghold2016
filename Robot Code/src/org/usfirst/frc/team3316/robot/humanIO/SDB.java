@@ -9,12 +9,14 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
-import org.usfirst.frc.team3316.robot.intake.commands.CloseIntake;
-import org.usfirst.frc.team3316.robot.intake.commands.OpenIntake;
-import org.usfirst.frc.team3316.robot.intake.commands.RollIn;
-import org.usfirst.frc.team3316.robot.intake.commands.RollOut;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +36,9 @@ public class SDB
 		
 		public void run ()
 		{
+			/*
+			 * Insert put methods here
+			 */
 		}
 		
 		private void put (String name, double d)
@@ -84,9 +89,8 @@ public class SDB
 	 */
 	public boolean putConfigVariableInSDB (String key)
 	{
-		try
-		{
-			Object value = config.get(key);
+		Object value = config.get(key);
+			if(value != null) {
 			Class <?> type = value.getClass();
 			
 			boolean constant = Character.isUpperCase(key.codePointAt(0));
@@ -118,10 +122,7 @@ public class SDB
 			
 			return true;
 		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+
 		return false;
 	}
 	
@@ -133,18 +134,38 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
-		
+
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
 		
-		SmartDashboard.putData(new RollIn());
-		SmartDashboard.putData(new RollOut());
+		// Flywheel
+		SmartDashboard.putData(new JoystickFlywheel());
+		SmartDashboard.putData(new BangbangFlywheel());
+		SmartDashboard.putData(new PIDFlywheel());
 		
-		SmartDashboard.putData(new CloseIntake());
-		SmartDashboard.putData(new OpenIntake());
+		//TODO: Code the relevant flywheel variables into the config and remove them from here
+		
+		// Bangbang
+		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
+		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
+		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
+		
+		// PID
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
+		putConfigVariableInSDB("flywheel_PID_KP");
+		putConfigVariableInSDB("flywheel_PID_KI");
+		putConfigVariableInSDB("flywheel_PID_KD");
+		
+		/*
+		 * For testing
+		 */
+		// Intake
+		SmartDashboard.putData("Intake RollIn", new RollIn());
+		SmartDashboard.putData("Intake RollOut", new RollOut());
+		SmartDashboard.putData("Intake StopRoll", new StopRoll());
 		
 		logger.info("Finished initSDB()");
 	}

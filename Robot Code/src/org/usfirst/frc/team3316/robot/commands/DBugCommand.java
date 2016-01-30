@@ -7,12 +7,15 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Class for bundling stuff that we want in every command.
  */
 public abstract class DBugCommand extends Command 
 {
 	protected DBugLogger logger = Robot.logger;
 	protected Config config = Robot.config;
+	
+	protected boolean isFin = false; 
+	//TODO: Eliminate the isFinished method by changing it here: return isFin. 
 
     protected final void initialize() 
     {
@@ -20,6 +23,9 @@ public abstract class DBugCommand extends Command
     	init();
     }
     
+    /**
+     * Same as Command.initialize()
+     */
     protected abstract void init(); 
 
     protected abstract void execute();
@@ -32,6 +38,9 @@ public abstract class DBugCommand extends Command
     	fin();
     }
     
+    /**
+     * Same as Command.end()
+     */
     protected abstract void fin();
 
     protected final void interrupted() 
@@ -40,5 +49,8 @@ public abstract class DBugCommand extends Command
     	interr();
     }
     
+    /**
+     * Same as Command.interrupted()
+     */
     protected abstract void interr();
 }

@@ -1,32 +1,35 @@
-package org.usfirst.frc.team3316.robot.chassis.commands;
+package org.usfirst.frc.team3316.robot.commands.chassis;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+//TODO: Fix ConfigException import
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class TankDrive extends Drive 
+public class TankDrive extends Drive
 {
+	//TODO: Add commenting
+	
 	protected static Joystick joystickLeft, joystickRight;
-	
+
 	static boolean invertY, invertX;
-	
+
 	static double deadBand = 0.0;
-	
-	public TankDrive ()
+
+	public TankDrive()
 	{
 		super();
 		joystickLeft = Robot.joysticks.joystickLeft;
 		joystickRight = Robot.joysticks.joystickRight;
 	}
-	
-	protected void set() 
+
+	protected void set()
 	{
 		left = getLeftY();
 		right = getRightY();
 	}
-	
-	protected static double getLeftY ()
+
+	protected static double getLeftY()
 	{
 		updateConfigVariables();
 		double y = deadBand(joystickLeft.getY());
@@ -36,8 +39,8 @@ public class TankDrive extends Drive
 		}
 		return y;
 	}
-	
-	protected static double getLeftX ()
+
+	protected static double getLeftX()
 	{
 		updateConfigVariables();
 		double x = deadBand(joystickLeft.getX());
@@ -47,8 +50,8 @@ public class TankDrive extends Drive
 		}
 		return x;
 	}
-	
-	protected static double getRightY ()
+
+	protected static double getRightY()
 	{
 		updateConfigVariables();
 		double y = deadBand(joystickRight.getY());
@@ -56,10 +59,10 @@ public class TankDrive extends Drive
 		{
 			return -y;
 		}
-		return y; 
+		return y;
 	}
-	
-	protected static double getRightX() 
+
+	protected static double getRightX()
 	{
 		updateConfigVariables();
 		double x = deadBand(joystickRight.getX());
@@ -69,8 +72,8 @@ public class TankDrive extends Drive
 		}
 		return x;
 	}
-	
-	private static double deadBand (double x)
+
+	private static double deadBand(double x)
 	{
 		if (Math.abs(x) < deadBand)
 		{
@@ -78,19 +81,12 @@ public class TankDrive extends Drive
 		}
 		return x;
 	}
-	
-	private static void updateConfigVariables ()
+
+	private static void updateConfigVariables()
 	{
-		try
-		{
-			deadBand = (double)config.get("chassis_TankDrive_DeadBand");
-			
-			invertX = (boolean)config.get("chassis_TankDrive_InvertX");
-			invertY = (boolean)config.get("chassis_TankDrive_InvertY");
-		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+		deadBand = (double) config.get("chassis_TankDrive_DeadBand");
+
+		invertX = (boolean) config.get("chassis_TankDrive_InvertX");
+		invertY = (boolean) config.get("chassis_TankDrive_InvertY");
 	}
 }

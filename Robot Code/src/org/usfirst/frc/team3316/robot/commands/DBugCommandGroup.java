@@ -7,12 +7,14 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Class for bundling stuff that we want in every command group.
  */
 public abstract class DBugCommandGroup extends CommandGroup 
 {
 	DBugLogger logger = Robot.logger;
 	Config config = Robot.config;
+	
+	//TODO: Think if we want to add isFin here too.
 	
 	protected final void initialize() 
     {
@@ -20,6 +22,9 @@ public abstract class DBugCommandGroup extends CommandGroup
     	init();
     }
     
+    /**
+     * Same as Command.initialize()
+     */
     protected void init() {}
     
     protected final void end() 
@@ -28,6 +33,9 @@ public abstract class DBugCommandGroup extends CommandGroup
     	fin();
     }
     
+    /**
+     * Same as Command.end()
+     */
     protected void fin() {}
 
     protected final void interrupted() 
@@ -36,5 +44,8 @@ public abstract class DBugCommandGroup extends CommandGroup
     	interr();
     }
     
+    /**
+     * Same as Command.interrupted()
+     */
     protected void interr() {}
 }

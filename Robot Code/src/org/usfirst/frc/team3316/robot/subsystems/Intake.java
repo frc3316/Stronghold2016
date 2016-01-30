@@ -1,19 +1,19 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
+import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.SpeedController;
 
-public class Intake extends DBugSubsystem
+public class Intake extends DBugSubsystemCC
 {
+
 	// Actuators
 	private DoubleSolenoid intakeSolendoid;
-	private SpeedController intakeMotor;
+	private DBugSpeedController intakeMotor;
 
 	// Sensors
 	private DigitalInput intakeLeftSwitch, intakeRightSwitch;
@@ -24,6 +24,8 @@ public class Intake extends DBugSubsystem
 		// Actuators
 		intakeSolendoid = Robot.actuators.intakeSolenoid;
 		intakeMotor = Robot.actuators.intakeMotor;
+
+		addSpeedController(intakeMotor);
 
 		// Sensors
 		intakeLeftSwitch = Robot.sensors.intakeLeftSwitch;
@@ -46,9 +48,9 @@ public class Intake extends DBugSubsystem
 		intakeSolendoid.set(Value.kReverse);
 	}
 
-	public void setMotor(double v)
+	public boolean setMotors(double v)
 	{
-		intakeMotor.set(v);
+		return setMotors(v);
 	}
 
 	public boolean isBallIn()

@@ -1,35 +1,29 @@
-package org.usfirst.frc.team3316.robot.intake.commands;
+package org.usfirst.frc.team3316.robot.commands.intake;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class StopRoll extends DBugCommand
+public class CloseIntake extends DBugCommand
 {
-	public StopRoll()
-	{
-		requires(Robot.intake);
-	}
+	//TODO: Add commenting
 
 	protected void init()
-	{
-	}
+	{}
 
 	protected void execute()
 	{
-		Robot.intake.setMotor(0);
+		Robot.intake.closeIntake();
 	}
 
 	protected boolean isFinished()
 	{
-		return true;
+		return Robot.intake.isIntakeClose();
 	}
 
 	protected void fin()
-	{
-	}
+	{}
 
 	protected void interr()
-	{
-	}
+	{}
 
 }
