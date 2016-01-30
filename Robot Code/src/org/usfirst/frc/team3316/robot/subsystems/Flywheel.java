@@ -8,7 +8,7 @@ import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.Counter;
 
-public class Flywheel extends DBugSubsystem
+public class Flywheel extends DBugSubsystemCC
 {
 	private DBugSpeedController flywheelMotor1, flywheelMotor2;
 	private Counter counter;

@@ -7,12 +7,10 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Intake extends DBugSubsystem
+public class Intake extends DBugSubsystemCC
 {
-	//TODO: Add commenting
-	
+
 	// Actuators
 	private DoubleSolenoid intakeSolendoid;
 	private DBugSpeedController intakeMotor;
@@ -51,8 +49,7 @@ public class Intake extends DBugSubsystem
 		intakeSolendoid.set(Value.kReverse);
 	}
 
-	//TODO: Change name to setMotors
-	public boolean setMotor(double v)
+	public boolean setMotors(double v)
 	{
 		return setMotors(v);
 	}

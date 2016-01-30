@@ -7,20 +7,24 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
 
+/**
+ * A unique speed controller class team 3316. This class contains a special
+ * setMotor method, which stops the motor if it's in stall.
+ * 
+ * @author D-Bug
+ *
+ */
 public class DBugSpeedController
 {
 	DBugLogger logger = Robot.logger;
 	Config config = Robot.config;
 	PowerDistributionPanel pdp = Robot.sensors.pdp;
 
-	//TODO: Fix access levels. Either all public or all private (with getters and setters).
-	
 	private SpeedController sc;
-	public boolean reverse; // Negative factor of velocity
+	private boolean reverse; // Negative factor of velocity
 	private boolean isSetLimit;
-	public int pdpChannel; // The channel in the PDP of the speed controller
-	public double maxCurrent; // The high threshold for current control
-	private int counter = 0;
+	private int pdpChannel; // The channel in the PDP of the speed controller
+	private double maxCurrent; // The high threshold for current control
 
 	/**
 	 * This method is using for adding a new speed controller to this subsystem.
@@ -34,7 +38,7 @@ public class DBugSpeedController
 	 * @param pdpChannel
 	 *            The channel of the speed controller on the PDP.
 	 * @param maxCurrent
-	 *            The highest current that the speed controller can get.
+	 *            The stall current of the motor.
 	 */
 	public DBugSpeedController(SpeedController sc, boolean reverse,
 			int pdpChannel, double maxCurrent)
@@ -58,11 +62,15 @@ public class DBugSpeedController
 	 * @param reverse
 	 *            Set true if you want to reverse the voltage of the motor,
 	 *            otherwise set false.
+	 * @param pdpChannel
+	 *            The pdp channel of the D-Bug speed controller.
 	 */
-	public DBugSpeedController(SpeedController sc, boolean reverse)
+	public DBugSpeedController(SpeedController sc, boolean reverse,
+			int pdpChannel)
 	{
 		this.sc = sc;
 		this.reverse = reverse;
+		this.pdpChannel = pdpChannel;
 		isSetLimit = false;
 
 		sc.setInverted(reverse);
@@ -78,22 +86,14 @@ public class DBugSpeedController
 	 */
 	public boolean setMotor(double v)
 	{
-		if (!isSetLimit || Robot.sensors.pdp.getCurrent(pdpChannel) < maxCurrent)
+		if (!isSetLimit
+				|| Robot.sensors.pdp.getCurrent(pdpChannel) < maxCurrent)
 		{
 			sc.set(v);
 		}
-		//TODO: Counter isn't necessary if max current is the real stall current
-		//TODO: Measure the stall current
-		//TODO: Logic of load current should be moved to the command
 		else
 		{
-			counter++;
-		}
-
-		if (counter >= (int) config.get("CURRENT_CONTROL_COUNTER"))
-		{
 			sc.set(0);
-
 			logger.severe(
 					"Current overflow at D-Bug Speed Controller on PDP channel "
 							+ pdpChannel + ".");
@@ -102,7 +102,9 @@ public class DBugSpeedController
 
 		return true;
 	}
-	
-	//TODO: Add get current method
-	//TODO: Add get voltage method
+
+	public double getCurrent() {
+		return pdp.getCurrent(pdpChannel);
+	}
+
 }

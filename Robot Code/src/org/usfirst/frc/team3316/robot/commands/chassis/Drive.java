@@ -33,7 +33,7 @@ public abstract class Drive extends Command
     protected void execute()
     {
     	set();
-    	Robot.chassis.set(left, right);
+    	Robot.chassis.setMotors(left, right);
     }
 
     protected boolean isFinished() 
@@ -43,7 +43,7 @@ public abstract class Drive extends Command
 
     protected void end() 
     {
-    	Robot.chassis.set(0, 0);
+    	Robot.chassis.setMotors(0, 0);
     }
 
     protected void interrupted() 

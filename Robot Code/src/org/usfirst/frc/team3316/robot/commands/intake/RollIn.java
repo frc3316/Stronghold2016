@@ -24,7 +24,7 @@ public class RollIn extends DBugCommand
 	protected void execute()
 	{
 		rollInSpeed = SmartDashboard.getNumber("Intake Motor");
-		isFin = !Robot.intake.setMotor(rollInSpeed);
+		isFin = !Robot.intake.setMotors(rollInSpeed);
 	}
 
 	protected boolean isFinished()

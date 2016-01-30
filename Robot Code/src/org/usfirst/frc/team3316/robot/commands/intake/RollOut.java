@@ -24,7 +24,7 @@ public class RollOut extends DBugCommand
 	protected void execute()
 	{
 		rollOutSpeed = SmartDashboard.getNumber("Intake Motor");
-		isFin = !Robot.intake.setMotor(rollOutSpeed);
+		isFin = !Robot.intake.setMotors(rollOutSpeed);
 	}
 
 	protected boolean isFinished()

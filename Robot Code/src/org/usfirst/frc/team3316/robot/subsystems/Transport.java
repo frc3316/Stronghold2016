@@ -3,10 +3,8 @@ package org.usfirst.frc.team3316.robot.subsystems;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
-public class Transport extends DBugSubsystem
+public class Transport extends DBugSubsystemCC
 {
-	//TODO: Add commenting
-
 	private DBugSpeedController transportMotor1, transportMotor2;
 
 	public Transport()

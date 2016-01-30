@@ -16,7 +16,7 @@ public class StopRoll extends DBugCommand
 
 	protected void execute()
 	{
-		Robot.intake.setMotor(0);
+		Robot.intake.setMotors(0);
 	}
 
 	protected boolean isFinished()

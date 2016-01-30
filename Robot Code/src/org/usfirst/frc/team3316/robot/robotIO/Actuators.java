@@ -17,6 +17,8 @@ public class Actuators
 	// Chassis
 	public DBugSpeedController leftChassis1, leftChassis2, rightChassis1,
 			rightChassis2;
+	private SpeedController leftChassis1SC, leftChassis2SC, rightChassis1SC,
+			rightChassis2SC;
 
 	// Intake
 	public DoubleSolenoid intakeSolenoid;
@@ -30,25 +32,45 @@ public class Actuators
 
 	public Actuators()
 	{
-		// TODO: When the speed controllers are defined like this, we cannot
-		// interchange between different types of speed controllers (f.e.
-		// Victors for robot A and Talons for robot B). Need to fix this so
-		// it'll save us time in the future.
-		
 		// Chassis
-		leftChassis1 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1")),
-				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"));
-		leftChassis2 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2")),
-				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"));
+		if (config.robotA)
+		{
+			// Speed controllers of robotA are all Victors (VictorSP).
+			leftChassis1SC = new VictorSP(
+					(int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+			leftChassis2SC = new VictorSP(
+					(int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+			rightChassis1SC = new VictorSP(
+					(int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+			rightChassis2SC = new VictorSP(
+					(int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		}
+		else
+		{
+			// Speed controllers of robotB are all Talons.
+			leftChassis1SC = new Talon(
+					(int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+			leftChassis1SC = new Talon(
+					(int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+			rightChassis1SC = new Talon(
+					(int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+			rightChassis2SC = new Talon(
+					(int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		}
+		
+		leftChassis1 = new DBugSpeedController(leftChassis1SC,
+				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"),
+				(int) config.get("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL"));
+		leftChassis2 = new DBugSpeedController(leftChassis2SC,
+				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"),
+				(int) config.get("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL"));
 
-		rightChassis1 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1")),
-				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"));
-		rightChassis2 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2")),
-				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"));
+		rightChassis1 = new DBugSpeedController(rightChassis1SC,
+				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"),
+				(int) config.get("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL"));
+		rightChassis2 = new DBugSpeedController(rightChassis2SC,
+				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"),
+				(int) config.get("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL"));
 
 		// Intake
 		intakeSolenoid = new DoubleSolenoid(
