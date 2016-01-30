@@ -5,12 +5,14 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class StopRoll extends DBugCommand
 {
-	public StopRoll() {
+	public StopRoll()
+	{
 		requires(Robot.intake);
 	}
-	
+
 	protected void init()
-	{}
+	{
+	}
 
 	protected void execute()
 	{
@@ -23,9 +25,11 @@ public class StopRoll extends DBugCommand
 	}
 
 	protected void fin()
-	{}
+	{
+	}
 
 	protected void interr()
-	{}
-	
+	{
+	}
+
 }

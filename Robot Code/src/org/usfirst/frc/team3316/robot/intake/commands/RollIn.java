@@ -4,11 +4,9 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class RollIn extends DBugCommand
 {
-	private double rollInSpeed;
+	private double speed;
 
 	public RollIn()
 	{
@@ -17,23 +15,20 @@ public class RollIn extends DBugCommand
 
 	protected void init()
 	{
-		/*
+	}
+
+	protected void execute()
+	{
 		try
 		{
-			rollInSpeed = (double) Robot.config.get("INATKE_ROLL_IN_SPEED");
+			speed = (double) Robot.config.get("intake_RollIn_Speed");
 		}
 		catch (ConfigException e)
 		{
 			logger.severe(e);
 		}
-		*/
-		SmartDashboard.putNumber("Intake Voltage", 0.0);
-	}
-
-	protected void execute()
-	{
-		rollInSpeed = (double) SmartDashboard.getNumber("Intake Voltage", 0.0);
-		Robot.intake.setMotor(rollInSpeed);
+		
+		Robot.intake.setMotor(speed);
 	}
 
 	protected boolean isFinished()

@@ -182,8 +182,22 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToConstants("INTAKE_POT_LOW_TRESH", 1.0);
-				addToConstants("INTAKE_POT_HIGH_TRESH", 130.5);
+				addToVariables("intake_Pot_LowThresh", 1.0);
+				addToVariables("intake_Pot_HightThresh", 130.5);				
+			}
+			
+			/*
+			 * Roll In
+			 */
+			{
+				addToVariables("intake_RollIn_Speed", 0.5);
+			}
+			
+			/*
+			 * Roll Out
+			 */
+			{
+				addToVariables("intake_RollOut_Speed", -0.5);
 			}
 		}
 	}

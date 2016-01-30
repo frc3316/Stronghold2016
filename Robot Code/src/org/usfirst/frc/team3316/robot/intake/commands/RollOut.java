@@ -6,27 +6,29 @@ import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 public class RollOut extends DBugCommand
 {
-	private double rollOutSpeed;
+	private double speed;
 	
-	public RollOut() {
+	public RollOut() 
+	{
 		requires(Robot.intake);
 	}
 	
 	protected void init()
 	{
+	}
+
+	protected void execute()
+	{
 		try
 		{
-			rollOutSpeed = (double) Robot.config.get("INATKE_ROLL_OUT_SPEED");
+			speed = (double) Robot.config.get("intake_RollOut_Speed");
 		}
 		catch (ConfigException e)
 		{
 			logger.severe(e);
 		}
-	}
-
-	protected void execute()
-	{
-		Robot.intake.setMotor(rollOutSpeed);
+		
+		Robot.intake.setMotor(speed);
 	}
 
 	protected boolean isFinished()

@@ -134,6 +134,12 @@ public class SDB
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
 		
+		/*
+		 * Remove these after finishing testing on prototype
+		 */
+		putConfigVariableInSDB("intake_RollIn_Speed");
+		putConfigVariableInSDB("intake_RollOut_Speed");
+		
 		SmartDashboard.putData(new RollIn());
 		SmartDashboard.putData(new RollOut());
 		
