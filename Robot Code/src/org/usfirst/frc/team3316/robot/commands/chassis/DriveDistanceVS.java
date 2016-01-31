@@ -2,29 +2,39 @@ package org.usfirst.frc.team3316.robot.commands.chassis;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner;
-import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner.Step;
+import org.usfirst.frc.team3316.robot.chassis.motion.PlannedMotion;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Timer;
 
-public class DriveDistance extends DBugCommand
+/**
+ * Drive Distance Velocity Setpoint. Drives a certain distance in a straight
+ * line by setting a changing velocity setpoint according to a planned motion.
+ * 
+ * @author D-Bug
+ *
+ */
+public class DriveDistanceVS extends DBugCommand
 {
 	private PIDController pidRight, pidLeft;
-	private double dist;
-	private double pidRightSpeed, pidLeftSpeed;
-	private Step[] motion;
-	private int counter = 0;
+	private double pidRightOutput, pidLeftOutput;
 
+	private double dist;
+
+	private PlannedMotion motion;
+
+	private double initTime = 0;
 	private double initDist = 0;
 
-	public DriveDistance(double dist)
+	public DriveDistanceVS(double dist)
 	{
 		this.dist = dist;
 
-		motion = MotionPlanner.planMotion(dist).getSteps();
+		motion = MotionPlanner.planMotion(dist);
 
 		pidRight = new PIDController(0, 0, 0, new PIDSource()
 		{
@@ -48,7 +58,7 @@ public class DriveDistance extends DBugCommand
 
 			public void pidWrite(double output)
 			{
-				pidRightSpeed = output;
+				pidRightOutput = output;
 			}
 		});
 
@@ -74,7 +84,7 @@ public class DriveDistance extends DBugCommand
 
 			public void pidWrite(double output)
 			{
-				pidLeftSpeed = output;
+				pidLeftOutput = output;
 			}
 		});
 	}
@@ -100,35 +110,35 @@ public class DriveDistance extends DBugCommand
 		pidRight.enable();
 		pidLeft.enable();
 
-		counter = 0;
-
+		initTime = Timer.getFPGATimestamp();
 		initDist = Robot.chassis.getDistance();
 	}
 
 	protected void execute()
 	{
+		double currentTime = Timer.getFPGATimestamp() - initTime;
 
-		pidRight.setSetpoint(motion[counter].getVelocity());
-		pidLeft.setSetpoint(motion[counter].getVelocity());
+		pidRight.setSetpoint(motion.getVelocity(currentTime));
+		pidLeft.setSetpoint(motion.getVelocity(currentTime));
 
-		Robot.chassis.set(pidLeftSpeed, pidRightSpeed);
+		Robot.chassis.set(pidLeftOutput, pidRightOutput);
 	}
 
 	protected boolean isFinished()
 	{
-		if (counter < motion.length - 1)
-		{
-			counter++;
-		}
-
 		return (Robot.chassis.getDistance() - initDist >= dist);
 	}
 
 	protected void fin()
 	{
+		pidRight.reset();
+		pidLeft.reset();
+
+		Robot.chassis.set(0, 0);
 	}
 
 	protected void interr()
 	{
+		fin();
 	}
 }
