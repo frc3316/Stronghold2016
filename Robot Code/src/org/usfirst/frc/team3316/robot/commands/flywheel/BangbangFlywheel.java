@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class BangbangFlywheel extends DBugCommand
 {
-	double v = 0;
-	private boolean isFin;
+	private double v = 0;
 
 	public BangbangFlywheel()
 	{
@@ -54,12 +53,12 @@ public class BangbangFlywheel extends DBugCommand
 																		// 0
 		}
 
-		isFin = Robot.flywheel.setMotors(v);
+		isFin = !Robot.flywheel.setMotors(v);
 	}
 
 	protected boolean isFinished()
 	{
-		return !isFin;
+		return isFin;
 	}
 
 	protected void fin()

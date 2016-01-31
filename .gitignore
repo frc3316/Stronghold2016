@@ -1,5 +1,9 @@
 Robot Code\bin\
+<<<<<<< HEAD
+*.class
+=======
 Robot Code\build\
 Robot Code\dist\
 *.class
 *.pyc
+>>>>>>> current_control

@@ -8,13 +8,14 @@ public class StopRoll extends DBugCommand
 	public StopRoll() {
 		requires(Robot.intake);
 	}
-	
+
 	protected void init()
-	{}
+	{
+	}
 
 	protected void execute()
 	{
-		Robot.intake.setMotor(0);
+		Robot.intake.setMotors(0);
 	}
 
 	protected boolean isFinished()
@@ -23,9 +24,11 @@ public class StopRoll extends DBugCommand
 	}
 
 	protected void fin()
-	{}
+	{
+	}
 
 	protected void interr()
-	{}
-	
+	{
+	}
+
 }

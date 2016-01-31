@@ -5,6 +5,7 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class RollIn extends DBugCommand
 {
+	//TODO: Add commenting
 
 	private double rollInSpeed;
 
@@ -20,12 +21,12 @@ public class RollIn extends DBugCommand
 
 	protected void execute()
 	{
-		Robot.transport.setMotors(rollInSpeed);
+		isFin = !Robot.transport.setMotors(rollInSpeed);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return isFin;
 	}
 
 	protected void fin()

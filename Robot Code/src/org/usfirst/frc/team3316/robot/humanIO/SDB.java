@@ -12,6 +12,8 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
@@ -39,11 +41,8 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			//navX
-			put("Flywheel speed", Robot.flywheel.getRate());
-			put("Hall effect", Robot.sensors.hallEffect.get());
 			
-			put("Flywheel Electrical Current", Robot.sensors.pdp.getCurrent(2));
+			put("Intake Current", Robot.intake.getCurrent());
 		}
 		
 		private void put (String name, double d)
@@ -139,22 +138,12 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
-		
-		// Flywheel
-		SmartDashboard.putData(new JoystickFlywheel());
-		SmartDashboard.putData(new BangbangFlywheel());
-		SmartDashboard.putData(new PIDFlywheel());
-		
-		// Bangbang
-		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
-		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
-		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
-		
-		// PID
-		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		putConfigVariableInSDB("flywheel_PID_KP");
-		putConfigVariableInSDB("flywheel_PID_KI");
-		putConfigVariableInSDB("flywheel_PID_KD");
+
+		/*
+		 * Remove these after finishing testing on prototype
+		 */
+		putConfigVariableInSDB("intake_RollIn_Speed");
+		putConfigVariableInSDB("intake_RollOut_Speed");
 		
 		/*
 		 * For testing
@@ -162,7 +151,10 @@ public class SDB
 		// Intake
 		SmartDashboard.putData("Intake RollIn", new RollIn());
 		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake StopRoll", new StopRoll());
+		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
+
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
 		
 		logger.info("Finished initSDB()");
 	}

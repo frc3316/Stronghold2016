@@ -12,8 +12,9 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.*;
 
-public class Chassis extends DBugSubsystem
+public class Chassis extends DBugSubsystemCC
 {
+	
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
@@ -71,7 +72,7 @@ public class Chassis extends DBugSubsystem
 	/*
 	 * Set Method
 	 */
-	public void set(double left, double right)
+	public void setMotors(double left, double right)
 	{
 		leftMotor1.setMotor(left);
 		leftMotor2.setMotor(left);
