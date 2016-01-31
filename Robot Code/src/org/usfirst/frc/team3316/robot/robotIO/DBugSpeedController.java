@@ -6,8 +6,14 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * A unique speed controller class team 3316. This class contains a special
+ * setMotor method, which stops the motor if it's in stall.
+ * 
+ * @author D-Bug
+ *
+ */
 public class DBugSpeedController
 {
 	DBugLogger logger = Robot.logger;
@@ -15,10 +21,10 @@ public class DBugSpeedController
 	PowerDistributionPanel pdp = Robot.sensors.pdp;
 
 	private SpeedController sc;
-	public boolean reverse; // Negative factor of velocity
+	private boolean reverse; // Negative factor of velocity
 	private boolean isSetLimit;
-	public int pdpChannel; // The channel in the PDP of the speed controller
-	public double maxCurrent; // The high threshold for current control
+	private int pdpChannel; // The channel in the PDP of the speed controller
+	private double maxCurrent; // The high threshold for current control
 
 	/**
 	 * This method is using for adding a new speed controller to this subsystem.
@@ -32,7 +38,7 @@ public class DBugSpeedController
 	 * @param pdpChannel
 	 *            The channel of the speed controller on the PDP.
 	 * @param maxCurrent
-	 *            The highest current that the speed controller can get.
+	 *            The stall current of the motor.
 	 */
 	public DBugSpeedController(SpeedController sc, boolean reverse,
 			int pdpChannel, double maxCurrent)
@@ -42,7 +48,7 @@ public class DBugSpeedController
 		this.isSetLimit = true;
 		this.pdpChannel = pdpChannel;
 		this.maxCurrent = maxCurrent;
-		
+
 		sc.setInverted(reverse);
 	}
 
@@ -56,13 +62,17 @@ public class DBugSpeedController
 	 * @param reverse
 	 *            Set true if you want to reverse the voltage of the motor,
 	 *            otherwise set false.
+	 * @param pdpChannel
+	 *            The pdp channel of the D-Bug speed controller.
 	 */
-	public DBugSpeedController(SpeedController sc, boolean reverse)
+	public DBugSpeedController(SpeedController sc, boolean reverse,
+			int pdpChannel)
 	{
 		this.sc = sc;
 		this.reverse = reverse;
+		this.pdpChannel = pdpChannel;
 		isSetLimit = false;
-		
+
 		sc.setInverted(reverse);
 	}
 
@@ -71,23 +81,29 @@ public class DBugSpeedController
 	 * 
 	 * @param v
 	 *            The voltage (velocity) to set for this D-Bug Speed Controller.
-	 * @return A boolean of the process success - true if it succeeded or false if
-	 *         it failed.
+	 * @return A boolean of the process success - true if it succeeded or false
+	 *         if it failed.
 	 */
 	public boolean setMotor(double v)
 	{
-		if (Robot.sensors.pdp.getCurrent(2) < SmartDashboard.getNumber("Max Current"))
+		if (!isSetLimit || getCurrent() < maxCurrent)
 		{
 			sc.set(v);
+			return true;
 		}
 		else
 		{
 			sc.set(0);
-			
-			logger.severe("Current overflow at D-Bug Speed Controller on PDP channel " + pdpChannel + ".");
+			logger.severe(
+					"Current overflow at D-Bug Speed Controller on PDP channel "
+							+ pdpChannel + ".");
 			return false;
 		}
-
-		return true;
 	}
+
+	public double getCurrent()
+	{
+		return pdp.getCurrent(pdpChannel);
+	}
+
 }

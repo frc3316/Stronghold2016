@@ -85,7 +85,7 @@ public class Config
 	/**
 	 * Returns the value attached to a requested key
 	 * @param key The key to look for.
-	 * @return Returns the corresponding value. If not exisiting returns null.
+	 * @return Returns the corresponding value. If doesn't exist, returns null.
 	 */
 	public Object get (String key) 
 	{

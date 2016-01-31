@@ -14,6 +14,8 @@ public abstract class DBugCommandGroup extends CommandGroup
 	DBugLogger logger = Robot.logger;
 	Config config = Robot.config;
 	
+	//TODO: Think if we want to add isFin here too.
+	
 	protected final void initialize() 
     {
     	logger.fine(this.getName() + " initialize");

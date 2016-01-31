@@ -29,12 +29,11 @@ public class Sensors
 	public AHRS navx;
 
 	// Intake
-	public DigitalInput intakeLS, intakeRS, intakeTS, intakeBS;
+	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
 	public AnalogPotentiometer intakePot;
 
 	// Transport
-	public Encoder transportEncoder; // TODO: There will be 2 identical
-										// transport encoders
+	public Encoder transportEncoder;
 
 	// Flywheel
 	public Counter flywheelCounter;
@@ -43,7 +42,7 @@ public class Sensors
 	public Sensors()
 	{
 		pdp = new PowerDistributionPanel();
-
+		
 		// Chassis
 		try
 		{
@@ -56,22 +55,11 @@ public class Sensors
 		}
 
 		// Intake
-		intakeLS = new DigitalInput((int) Robot.config.get("INTAKE_LS")); // LS
-																			// -
-																			// Left
-																			// Switch
-		intakeRS = new DigitalInput((int) Robot.config.get("INTAKE_RS")); // RS
-																			// -
-																			// Right
-																			// Switch
-		intakeTS = new DigitalInput((int) Robot.config.get("INTAKE_TS")); // PS
-																			// -
-																			// Top
-																			// Switch
-		intakeBS = new DigitalInput((int) Robot.config.get("INTAKE_BS")); // BS
-																			// -
-																			// Bottom
-																			// Switch
+		intakeLeftSwitch = new DigitalInput(
+				(int) Robot.config.get("INTAKE_LEFT_SWITCH"));
+		intakeRightSwitch = new DigitalInput(
+				(int) Robot.config.get("INTAKE_RIGHT_SWITCH"));
+
 		intakePot = new AnalogPotentiometer(
 				(int) Robot.config.get("INTAKE_POT"),
 				(double) Robot.config.get("INTAKE_POT_FULL_RANGE"),

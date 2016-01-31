@@ -2,13 +2,14 @@ package org.usfirst.frc.team3316.robot.commands.intake;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RollOut extends DBugCommand
 {
-	private double rollOutSpeed;
+	//TODO: Add commenting
+
+	private double speed;
 
 	public RollOut()
 	{
@@ -17,26 +18,28 @@ public class RollOut extends DBugCommand
 
 	protected void init()
 	{
-		SmartDashboard.putNumber("Intake Motor", 0.0);
 	}
 
 	protected void execute()
 	{
-		rollOutSpeed = SmartDashboard.getNumber("Intake Motor");
-		Robot.intake.setMotor(rollOutSpeed);
+		speed = (double) config.get("intake_RollOut_Speed");
+		isFin = !Robot.intake.setMotors(speed);
+		System.out.println(speed);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return isFin;
 	}
 
 	protected void fin()
 	{
+		Robot.intake.setMotors(0);
 	}
 
 	protected void interr()
 	{
+		fin();
 	}
 
 }

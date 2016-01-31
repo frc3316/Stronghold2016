@@ -8,7 +8,7 @@ import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.Counter;
 
-public class Flywheel extends DBugSubsystem
+public class Flywheel extends DBugSubsystemCC
 {
 	private DBugSpeedController flywheelMotor1, flywheelMotor2;
 	private Counter counter;
@@ -22,7 +22,7 @@ public class Flywheel extends DBugSubsystem
 	}
 
 	/**
-	 * Class for filtering out noise from the FPGA rate calculation. Essentially
+	 * Class for filtering out noise from the FPGA rate calculation. Essentially,
 	 * this is a low pass filter.
 	 * 
 	 * @author D-Bug
@@ -67,9 +67,12 @@ public class Flywheel extends DBugSubsystem
 	 * @return Whether setting was successful. Will return false if motor
 	 *         reaches stall current as measured by the PDP.
 	 */
+	/**
+	 * Delete this method (already defined in super)
+	 */
 	public boolean setMotors(double v)
 	{
-		return setMotors(v);
+		return super.setMotors(v);
 	}
 
 	/**

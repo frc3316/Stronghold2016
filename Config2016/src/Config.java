@@ -109,6 +109,8 @@ public class Config
 			/*
 			 * Constants
 			 */
+			addToConstants("CURRENT_CONTROL_COUNTER", 10);
+			
 			{
 				/*
 				 * Chassis
@@ -118,41 +120,38 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 
+				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); //Change this after prototype
+				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); //Change this after prototype
+				
+				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); //Change this after prototype
+				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); //Change this after prototype
+				
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
 				/*
 				 * Intake
 				 */
-				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 0);
-				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 1);
+				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); //changed for prototype
+				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); //changed for prototype
+				addToConstants("INTAKE_MOTOR", 3); //changed for prototype
 
-				addToConstants("INTAKE_MOTOR", 0);
+				addToConstants("INTAKE_LEFT_SWITCH", 7);
+				addToConstants("INTAKE_RIGHT_SWITCH", 1);
 
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
-				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 2);
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 5.5); // TODO:
-																	// Check
-																	// what this
-																	// value
-																	// should
-																	// be.
+				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 3); //changed for prototype 
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 666.6); // TODO: Check the stall current
 
-				addToConstants("INTAKE_LS", 7);
-				addToConstants("INTAKE_RS", 1);
-				addToConstants("INTAKE_TS", 4);
-				addToConstants("INTAKE_BS", 5);
 				addToConstants("INTAKE_POT", 6);
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
-				addToConstants("INTAKE_POT_LOW_TRESH", 1.0);
-				addToConstants("INTAKE_POT_HIGH_TRESH", 130.5);
 
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR_1", 3);
-				addToConstants("TRANSPORT_MOTOR_2", 10);
+				addToConstants("TRANSPORT_MOTOR_1", 8);
+				addToConstants("TRANSPORT_MOTOR_2", 9);
 
 				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);
 				addToConstants("TRANSPORT_MOTOR_2_REVERSE", true);
@@ -245,6 +244,7 @@ public class Config
 																		// useful.
 				addToConstants("FLYWHEEL_COUNTER", 0);
 			}
+			
 			/*
 			 * Variables
 			 */
@@ -260,6 +260,39 @@ public class Config
 				addToVariables("flywheel_PID_KP", 0.0);
 				addToVariables("flywheel_PID_KI", 0.0);
 				addToVariables("flywheel_PID_KD", 0.0);
+			}
+		}
+		
+		/*
+		 * Intake
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+			}
+
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("intake_Pot_LowThresh", 1.0);
+				addToVariables("intake_Pot_HightThresh", 130.5);				
+			}
+			
+			/*
+			 * Roll In
+			 */
+			{
+				addToVariables("intake_RollIn_Speed", 0.5);
+			}
+			
+			/*
+			 * Roll Out
+			 */
+			{
+				addToVariables("intake_RollOut_Speed", -0.5);
 			}
 		}
 	}
