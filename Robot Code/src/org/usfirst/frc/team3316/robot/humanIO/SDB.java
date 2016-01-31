@@ -39,11 +39,6 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			//navX
-			put("Flywheel speed", Robot.flywheel.getRate());
-			put("Hall effect", Robot.sensors.hallEffect.get());
-			
-			put("Flywheel Electrical Current", Robot.sensors.pdp.getCurrent(2));
 		}
 		
 		private void put (String name, double d)
@@ -139,30 +134,16 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
+
+		putConfigVariableInSDB("chassis_PIDRight_Kp");
+		putConfigVariableInSDB("chassis_PIDRight_Ki");
+		putConfigVariableInSDB("chassis_PIDRight_Kd");
+		putConfigVariableInSDB("chassis_PIDRight_Kf");
 		
-		// Flywheel
-		SmartDashboard.putData(new JoystickFlywheel());
-		SmartDashboard.putData(new BangbangFlywheel());
-		SmartDashboard.putData(new PIDFlywheel());
-		
-		// Bangbang
-		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
-		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
-		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
-		
-		// PID
-		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		putConfigVariableInSDB("flywheel_PID_KP");
-		putConfigVariableInSDB("flywheel_PID_KI");
-		putConfigVariableInSDB("flywheel_PID_KD");
-		
-		/*
-		 * For testing
-		 */
-		// Intake
-		SmartDashboard.putData("Intake RollIn", new RollIn());
-		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake StopRoll", new StopRoll());
+		putConfigVariableInSDB("chassis_PIDLeft_Kp");
+		putConfigVariableInSDB("chassis_PIDLeft_Ki");
+		putConfigVariableInSDB("chassis_PIDLeft_Kd");
+		putConfigVariableInSDB("chassis_PIDLeft_Kf");
 		
 		logger.info("Finished initSDB()");
 	}

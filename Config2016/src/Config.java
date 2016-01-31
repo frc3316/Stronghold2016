@@ -216,20 +216,6 @@ public class Config
 				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
 				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
 				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
-				
-				
-				// PID
-				addToConstants("CHASSIS_PID_RIGHT_MIN_SPEED", -5.0); //  Units: Meters per second.
-				addToConstants("CHASSIS_PID_RIGHT_MAX_SPEED", 5.0); //  Units: Meters per second.
-				addToConstants("CHASSIS_PID_LEFT_MIN_SPEED", -5.0); //  Units: Meters per second.
-				addToConstants("CHASSIS_PID_LEFT_MAX_SPEED", 5.0); //  Units: Meters per second.
-				
-				addToConstants("CHASSIS_PID_RIGHT_KP", 0.0);
-				addToConstants("CHASSIS_PID_RIGHT_KI", 0.0);
-				addToConstants("CHASSIS_PID_RIGHT_KD", 0.0);
-				addToConstants("CHASSIS_PID_LEFT_KP", 0.0);
-				addToConstants("CHASSIS_PID_LEFT_KI", 0.0);
-				addToConstants("CHASSIS_PID_LEFT_KD", 0.0);
 			}
 
 			/*
@@ -247,6 +233,22 @@ public class Config
 				addToVariables("motionPlanner_MaxDecel", -2.0);
 				addToVariables("motionPlanner_MaxVelocity", 5.0);
 				addToVariables("motionPlanner_TimeStep", 0.02);
+			}
+			
+			/*
+			 * Drive Distance
+			 */
+			{
+				// PID
+				addToVariables("chassis_PIDRight_Kp", 0.0);
+				addToVariables("chassis_PIDRight_Ki", 0.0);
+				addToVariables("chassis_PIDRight_Kd", 0.0);
+				addToVariables("chassis_PIDRight_Kf", 0.0);
+				
+				addToVariables("chassis_PIDLeft_Kp", 0.0);
+				addToVariables("chassis_PIDLeft_Ki", 0.0);
+				addToVariables("chassis_PIDLeft_Kd", 0.0);
+				addToVariables("chassis_PIDLeft_Kf", 0.0);
 			}
 		}
 

@@ -18,127 +18,21 @@ import edu.wpi.first.wpilibj.Timer;
  * @author D-Bug
  *
  */
-public class DriveDistanceVS extends DBugCommand
+public class DriveDistanceVS extends DriveDistance
 {
-	private PIDController pidRight, pidLeft;
-	private double pidRightOutput, pidLeftOutput;
-
-	private double dist;
-
-	private PlannedMotion motion;
-
-	private double initTime = 0;
-	private double initDist = 0;
-
 	public DriveDistanceVS(double dist)
 	{
-		this.dist = dist;
-
-		motion = MotionPlanner.planMotion(dist);
-
-		pidRight = new PIDController(0, 0, 0, new PIDSource()
-		{
-
-			public void setPIDSourceType(PIDSourceType pidSource)
-			{
-				return;
-			}
-
-			public double pidGet()
-			{
-				return Robot.chassis.getRightSpeed();
-			}
-
-			public PIDSourceType getPIDSourceType()
-			{
-				return PIDSourceType.kRate;
-			}
-		}, new PIDOutput()
-		{
-
-			public void pidWrite(double output)
-			{
-				pidRightOutput = output;
-			}
-		});
-
-		pidLeft = new PIDController(0, 0, 0, new PIDSource()
-		{
-
-			public void setPIDSourceType(PIDSourceType pidSource)
-			{
-				return;
-			}
-
-			public double pidGet()
-			{
-				return Robot.chassis.getLeftSpeed();
-			}
-
-			public PIDSourceType getPIDSourceType()
-			{
-				return PIDSourceType.kRate;
-			}
-		}, new PIDOutput()
-		{
-
-			public void pidWrite(double output)
-			{
-				pidLeftOutput = output;
-			}
-		});
+		super(dist);
 	}
-
-	protected void init()
+	
+	protected void setPIDs()
 	{
-		pidRight.setInputRange(
-				(double) config.get("CHASSIS_PID_RIGHT_MIN_SPEED"),
-				(double) config.get("CHASSIS_PID_RIGHT_MAX_SPEED"));
-		pidLeft.setInputRange((double) config.get("CHASSIS_PID_LEFT_MIN_SPEED"),
-				(double) config.get("CHASSIS_PID_LEFT_MAX_SPEED"));
-
-		pidRight.setOutputRange(-1, 1);
-		pidLeft.setOutputRange(-1, 1);
-
-		pidRight.setPID((double) config.get("CHASSIS_PID_RIGHT_KP"),
-				(double) config.get("CHASSIS_PID_RIGHT_KI"),
-				(double) config.get("CHASSIS_PID_RIGHT_KD"));
-		pidLeft.setPID((double) config.get("CHASSIS_PID_LEFT_KP"),
-				(double) config.get("CHASSIS_PID_LEFT_KI"),
-				(double) config.get("CHASSIS_PID_LEFT_KD"));
-
-		pidRight.enable();
-		pidLeft.enable();
-
-		initTime = Timer.getFPGATimestamp();
-		initDist = Robot.chassis.getDistance();
-	}
-
-	protected void execute()
-	{
-		double currentTime = Timer.getFPGATimestamp() - initTime;
-
-		pidRight.setSetpoint(motion.getVelocity(currentTime));
 		pidLeft.setSetpoint(motion.getVelocity(currentTime));
-
-		Robot.chassis.set(pidLeftOutput, pidRightOutput);
+		pidRight.setSetpoint(motion.getVelocity(currentTime));
 	}
 
 	protected boolean isFinished()
 	{
 		return (Robot.chassis.getDistance() - initDist >= dist);
-	}
-
-	protected void fin()
-	{
-		pidRight.reset();
-		pidLeft.reset();
-
-		Robot.chassis.set(0, 0);
-	}
-
-	protected void interr()
-	{
-		fin();
 	}
 }
