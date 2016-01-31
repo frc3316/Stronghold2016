@@ -4,16 +4,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import test_package.MotionPlanner.Step;
+import test_package.PlannedMotion.Step;
 
 public class HereWeTest
 {
 	public static void main(String[] args)
 	{
-		MotionPlanner.setStuff(6.566, -4.352, 3);
-		MotionPlanner.PlannedMotion motion = MotionPlanner.planMotion(3.5);
+		MotionPlanner.setStuff(4.881, -7.43, 3.5);
+		PlannedMotion motion = MotionPlanner.planMotion(-3.5);
 		
-		Step[] steps = motion.convertToStepArray(0.04);
+		Step[] steps = motion.convertToStepArray(0.03);
 		
 		try
 		{
@@ -22,6 +22,7 @@ public class HereWeTest
 			
 			for (Step step : steps)
 			{
+				System.out.println(MotionPlanner.distanceToBrake(step.velocity));
 				content += step.toString();
 			}
 
