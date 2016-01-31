@@ -34,18 +34,18 @@ public class MotionPlanner
 		// updateParameters();
 
 		double maxAccel, maxDecel, maxVelocity;
-		
+
 		maxAccel = MotionPlanner.maxAccel;
 		maxDecel = MotionPlanner.maxDecel;
 		maxVelocity = MotionPlanner.maxVelocity;
-		
+
 		if (distance < 0)
 		{
 			maxAccel *= -1;
 			maxDecel *= -1;
 			maxVelocity *= -1;
 		}
-				
+
 		PlannedMotion motion;
 
 		// tTriangle is the time it would take if the velocity graph were a
@@ -91,15 +91,18 @@ public class MotionPlanner
 	}
 
 	/**
-	 * Assuming a constant deceleration
+	 * Assuming a constant deceleration, returns the distance it would take to
+	 * brake with the current velocity.
 	 * 
 	 * @param currentVelocity
-	 * @return
+	 *            The current velocity
+	 * @return The distance it would take to brake. Positive when velocity is
+	 *         positive and negative when velocity is negative.
 	 */
 	public static double distanceToBrake(double currentVelocity)
 	{
 		// By the equation: v^2 = (v0)^2 + 2a*x
-		return Math.pow(currentVelocity, 2) / (-2 * maxDecel);
+		return Math.signum(currentVelocity) * Math.pow(currentVelocity, 2) / (-2 * maxDecel);
 	}
 
 	public static void setStuff(double maxAccel, double maxDecel,

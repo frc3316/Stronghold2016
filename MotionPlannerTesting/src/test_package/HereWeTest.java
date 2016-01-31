@@ -11,7 +11,7 @@ public class HereWeTest
 	public static void main(String[] args)
 	{
 		MotionPlanner.setStuff(4.881, -7.43, 3.5);
-		PlannedMotion motion = MotionPlanner.planMotion(-3.5);
+		PlannedMotion motion = MotionPlanner.planMotion(3.5);
 		
 		Step[] steps = motion.convertToStepArray(0.03);
 		
