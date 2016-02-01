@@ -240,15 +240,19 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_PIDRight_Kp", 0.0);
-				addToVariables("chassis_PIDRight_Ki", 0.0);
-				addToVariables("chassis_PIDRight_Kd", 0.0);
-				addToVariables("chassis_PIDRight_Kf", 0.0);
+				addToVariables("chassis_PIDRight_KP", 0.0);
+				addToVariables("chassis_PIDRight_KI", 0.0);
+				addToVariables("chassis_PIDRight_KD", 0.0);
+				addToVariables("chassis_PIDRight_KF", 0.0);
 				
-				addToVariables("chassis_PIDLeft_Kp", 0.0);
-				addToVariables("chassis_PIDLeft_Ki", 0.0);
-				addToVariables("chassis_PIDLeft_Kd", 0.0);
-				addToVariables("chassis_PIDLeft_Kf", 0.0);
+				addToVariables("chassis_PIDLeft_KP", 0.0);
+				addToVariables("chassis_PIDLeft_KI", 0.0);
+				addToVariables("chassis_PIDLeft_KD", 0.0);
+				addToVariables("chassis_PIDLeft_KF", 0.0);
+				
+				// Velocity Error Setpoint
+				addToVariables("chassis_DriveDistance_KV", 0.0);
+				addToVariables("chassis_DriveDistance_KA", 0.0);
 			}
 		}
 

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3316.robot.commands.chassis;
+package org.usfirst.frc.team3316.robot.commands.chassis.autonomous;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner;
@@ -25,10 +25,12 @@ public class DriveDistanceVS extends DriveDistance
 		super(dist);
 	}
 	
-	protected void setPIDs()
+	protected void set()
 	{
 		pidLeft.setSetpoint(motion.getVelocity(currentTime));
 		pidRight.setSetpoint(motion.getVelocity(currentTime));
+		
+		Robot.chassis.set(pidLeftOutput, pidRightOutput);
 	}
 
 	protected boolean isFinished()

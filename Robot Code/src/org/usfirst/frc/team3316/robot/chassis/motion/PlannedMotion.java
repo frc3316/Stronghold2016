@@ -217,4 +217,13 @@ public class PlannedMotion
 		return new Step(getAcceleration(time), getVelocity(time),
 				getPosition(time), time);
 	}
+	
+	/**
+	 * Returns the total time it takes to finish this motion.
+	 * @return The total time in seconds.
+	 */
+	public double getTotalTime ()
+	{
+		return accelTime + cruiseTime + decelTime;
+	}
 }

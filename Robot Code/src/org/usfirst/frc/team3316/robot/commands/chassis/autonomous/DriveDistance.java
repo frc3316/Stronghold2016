@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3316.robot.commands.chassis;
+package org.usfirst.frc.team3316.robot.commands.chassis.autonomous;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner;
@@ -96,15 +96,15 @@ public abstract class DriveDistance extends DBugCommand
 		pidLeft.setOutputRange(-1, 1);
 
 		//PID values are the same for all subclasses for until we finish testings
-		pidRight.setPID((double) config.get("chassis_PIDRight_Kp"),
-				(double) config.get("chassis_PIDRight_Ki"),
-				(double) config.get("chassis_PIDRight_Kd"),
-				(double) config.get("chassis_PIDRight_Kf"));
+		pidRight.setPID((double) config.get("chassis_PIDRight_KP"),
+				(double) config.get("chassis_PIDRight_KI"),
+				(double) config.get("chassis_PIDRight_KF"),
+				(double) config.get("chassis_PIDRight_KF"));
 		
-		pidLeft.setPID((double) config.get("chassis_PIDLeft_Kp"),
-				(double) config.get("chassis_PIDLeft_Ki"),
-				(double) config.get("chassis_PIDLeft_Kd"),
-				(double) config.get("chassis_PIDLeft_Kf"));
+		pidLeft.setPID((double) config.get("chassis_PIDLeft_KP"),
+				(double) config.get("chassis_PIDLeft_KI"),
+				(double) config.get("chassis_PIDLeft_KD"),
+				(double) config.get("chassis_PIDLeft_KF"));
 
 		pidRight.enable();
 		pidLeft.enable();
@@ -117,12 +117,10 @@ public abstract class DriveDistance extends DBugCommand
 	{
 		currentTime = Timer.getFPGATimestamp() - initTime;
 
-		setPIDs();
-
-		Robot.chassis.set(pidLeftOutput, pidRightOutput);
+		set();
 	}
 
-	protected abstract void setPIDs();
+	protected abstract void set();
 
 	protected abstract boolean isFinished();
 
