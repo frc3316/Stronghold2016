@@ -17,8 +17,9 @@ public class DBugSpeedController
 	private SpeedController sc;
 	public boolean reverse; // Negative factor of velocity
 	private boolean isSetLimit;
-	public int pdpChannel; // The channel in the PDP of the speed controller
-	public double maxCurrent; // The high threshold for current control
+	public int pdpChannel = 0; // The channel in the PDP of the speed controller
+	public double maxCurrent = Double.MAX_VALUE; // The high threshold for
+													// current control
 
 	/**
 	 * This method is using for adding a new speed controller to this subsystem.
@@ -42,7 +43,7 @@ public class DBugSpeedController
 		this.isSetLimit = true;
 		this.pdpChannel = pdpChannel;
 		this.maxCurrent = maxCurrent;
-		
+
 		sc.setInverted(reverse);
 	}
 
@@ -62,7 +63,7 @@ public class DBugSpeedController
 		this.sc = sc;
 		this.reverse = reverse;
 		isSetLimit = false;
-		
+
 		sc.setInverted(reverse);
 	}
 
@@ -71,20 +72,20 @@ public class DBugSpeedController
 	 * 
 	 * @param v
 	 *            The voltage (velocity) to set for this D-Bug Speed Controller.
-	 * @return A boolean of the process success - true if it succeeded or false if
-	 *         it failed.
+	 * @return A boolean of the process success - true if it succeeded or false
+	 *         if it failed.
 	 */
 	public boolean setMotor(double v)
 	{
-		if (Robot.sensors.pdp.getCurrent(2) < SmartDashboard.getNumber("Max Current"))
+		if (Robot.sensors.pdp.getCurrent(pdpChannel) < maxCurrent || !isSetLimit)
 		{
 			sc.set(v);
 		}
 		else
 		{
 			sc.set(0);
-			
-			logger.severe("Current overflow at D-Bug Speed Controller on PDP channel " + pdpChannel + ".");
+
+			logger.severe("Current overflow on PDP channel: " + pdpChannel);
 			return false;
 		}
 

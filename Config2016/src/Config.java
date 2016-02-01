@@ -141,7 +141,7 @@ public class Config
 				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 0);
 				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 1);
 
-				addToConstants("INTAKE_MOTOR", 0);
+				addToConstants("INTAKE_MOTOR", 3);
 
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
 				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 2);
@@ -165,7 +165,7 @@ public class Config
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR_1", 3);
+				addToConstants("TRANSPORT_MOTOR_1", 7);
 				addToConstants("TRANSPORT_MOTOR_2", 13);
 
 				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);

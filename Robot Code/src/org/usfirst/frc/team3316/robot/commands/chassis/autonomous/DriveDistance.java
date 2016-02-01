@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Abstract class for testing autonomous driving with motion planner. Reduces
@@ -95,12 +96,13 @@ public abstract class DriveDistance extends DBugCommand
 		pidRight.setOutputRange(-1, 1);
 		pidLeft.setOutputRange(-1, 1);
 
-		//PID values are the same for all subclasses for until we finish testings
+		// PID values are the same for all subclasses for until we finish
+		// testings
 		pidRight.setPID((double) config.get("chassis_PIDRight_KP"),
 				(double) config.get("chassis_PIDRight_KI"),
 				(double) config.get("chassis_PIDRight_KF"),
 				(double) config.get("chassis_PIDRight_KF"));
-		
+
 		pidLeft.setPID((double) config.get("chassis_PIDLeft_KP"),
 				(double) config.get("chassis_PIDLeft_KI"),
 				(double) config.get("chassis_PIDLeft_KD"),
@@ -116,6 +118,9 @@ public abstract class DriveDistance extends DBugCommand
 	protected void execute()
 	{
 		currentTime = Timer.getFPGATimestamp() - initTime;
+
+		SmartDashboard.putNumber("Motion profile velocity",
+				motion.getVelocity(currentTime));
 
 		set();
 	}

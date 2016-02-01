@@ -108,7 +108,7 @@ public class MotionPlanner
 	private static void updateParameters()
 	{
 		maxAccel = (double) config.get("motionPlanner_MaxAccel");
-		maxDecel = (double) config.get("motionPlanner_Maxdecel");
+		maxDecel = (double) config.get("motionPlanner_MaxDecel");
 		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
 	}
 }

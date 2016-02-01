@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.chassis.autonomous.DriveDistanceVES;
+import org.usfirst.frc.team3316.robot.commands.chassis.autonomous.DriveDistanceVS;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
@@ -143,7 +145,7 @@ public class SDB
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 																// THIS COMMAND
-
+		//PID stuff
 		putConfigVariableInSDB("chassis_PIDRight_KP");
 		putConfigVariableInSDB("chassis_PIDRight_KI");
 		putConfigVariableInSDB("chassis_PIDRight_KD");
@@ -153,6 +155,18 @@ public class SDB
 		putConfigVariableInSDB("chassis_PIDLeft_KI");
 		putConfigVariableInSDB("chassis_PIDLeft_KD");
 		putConfigVariableInSDB("chassis_PIDLeft_KF");
+		
+		putConfigVariableInSDB("chassis_DriveDistance_KV");
+		putConfigVariableInSDB("chassis_DriveDistance_KA");
+		
+		//Motion Planner stuff
+		putConfigVariableInSDB("motionPlanner_MaxAccel");
+		putConfigVariableInSDB("motionPlanner_MaxDecel");
+		putConfigVariableInSDB("motionPlanner_MaxVelocity");
+		
+		//Drive distance stuff
+		SmartDashboard.putData(new DriveDistanceVS(2));
+		SmartDashboard.putData(new DriveDistanceVES(2));
 		
 		logger.info("Finished initSDB()");
 	}

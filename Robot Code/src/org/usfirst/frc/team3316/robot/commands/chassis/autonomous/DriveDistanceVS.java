@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drive Distance Velocity Setpoint. Drives a certain distance in a straight
@@ -29,6 +30,9 @@ public class DriveDistanceVS extends DriveDistance
 	{
 		pidLeft.setSetpoint(motion.getVelocity(currentTime));
 		pidRight.setSetpoint(motion.getVelocity(currentTime));
+		
+		SmartDashboard.putNumber("PID Left Output", pidLeftOutput);
+		SmartDashboard.putNumber("PID Right Output", pidRightOutput);
 		
 		Robot.chassis.set(pidLeftOutput, pidRightOutput);
 	}
