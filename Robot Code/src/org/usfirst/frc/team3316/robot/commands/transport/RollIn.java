@@ -3,10 +3,14 @@ package org.usfirst.frc.team3316.robot.commands.transport;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
+/**
+ * Sets the transport to roll at the % voltage specified in the config
+ * 
+ * @author D-Bug
+ *
+ */
 public class RollIn extends DBugCommand
 {
-	//TODO: Add commenting
-
 	private double rollInSpeed;
 
 	public RollIn()
@@ -16,7 +20,7 @@ public class RollIn extends DBugCommand
 
 	protected void init()
 	{
-		rollInSpeed = (double) Robot.config.get("TRANSPORT_ROLL_IN_SPEED");
+		rollInSpeed = (double) Robot.config.get("transport_RollIn_Speed");
 	}
 
 	protected void execute()
