@@ -40,6 +40,9 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
+			
+			put("Left Speed", Robot.chassis.getLeftSpeed());
+			put("Right Speed", Robot.chassis.getRightSpeed());
 		}
 
 		private void put(String name, double d)
@@ -80,7 +83,7 @@ public class SDB
 	public void timerInit()
 	{
 		updateSDBTask = new UpdateSDBTask();
-		Robot.timer.schedule(updateSDBTask, 0, 100);
+		Robot.timer.schedule(updateSDBTask, 0, 10);
 	}
 
 	/**
@@ -150,7 +153,7 @@ public class SDB
 		putConfigVariableInSDB("chassis_PIDLeft_Ki");
 		putConfigVariableInSDB("chassis_PIDLeft_Kd");
 		putConfigVariableInSDB("chassis_PIDLeft_Kf");
-
+		
 		logger.info("Finished initSDB()");
 	}
 }

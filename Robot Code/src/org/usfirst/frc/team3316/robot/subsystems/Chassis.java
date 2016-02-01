@@ -33,9 +33,6 @@ public class Chassis extends DBugSubsystem
 		timer = new Timer();
 	}
 
-	private double rightSpeed = 0;
-	private double leftSpeed = 0;
-
 	// Other
 	private MovingAverage movingAvg; // For the navX
 	private TimerTask navXTasker; // For the navX

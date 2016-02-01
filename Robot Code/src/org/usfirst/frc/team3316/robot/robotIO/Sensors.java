@@ -62,20 +62,15 @@ public class Sensors
 				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),
 				(boolean) Robot.config.get("CHASSIS_LEFT_ENCODER_REVERSE"),
 				EncodingType.k4X);
-		chassisLeftEncoder.setDistancePerPulse(
-				(double) config.get("CHASSIS_LEFT_GEAR_RATIO")
-						* ((double) config.get("CHASSIS_LEFT_WHEEL_DIAMETER")
-								* Math.PI));
+		
+		chassisLeftEncoder.setDistancePerPulse((double) config.get("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE"));
 
 		chassisRightEncoder = new Encoder(
 				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
 				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),
 				(boolean) Robot.config.get("CHASSIS_RIGHT_ENCODER_REVERSE"),
 				EncodingType.k4X);
-		chassisLeftEncoder.setDistancePerPulse(
-				(double) config.get("CHASSIS_RIGHT_GEAR_RATIO")
-						* ((double) config.get("CHASSIS_RIGHT_WHEEL_DIAMETER")
-								* Math.PI));
+		chassisRightEncoder.setDistancePerPulse((double) config.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
 
 		// Intake
 		intakeLS = new DigitalInput((int) Robot.config.get("INTAKE_LS")); // LS
