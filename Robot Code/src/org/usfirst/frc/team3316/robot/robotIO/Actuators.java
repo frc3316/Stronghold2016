@@ -33,7 +33,7 @@ public class Actuators
 	// Turret
 	public DBugSpeedController turretMotor;
 	
-	//Hood
+	// Hood
 	public DBugSpeedController hoodMotor;
 
 	public Actuators()
@@ -112,5 +112,13 @@ public class Actuators
 				(boolean) Robot.config.get("FLYWHEEL_MOTOR_2_REVERSE"),
 				(int) Robot.config.get("FLYWHEEL_MOTOR_2_PDP_CHANNEL"),
 				(double) Robot.config.get("FLYWHEEL_MOTOR_2_MAX_CURRENT"));
+		
+		// Turret
+		turretMotor = new DBugSpeedController(
+						new Talon((int) Robot.config.get("TURRET_MOTOR")),
+						(boolean) Robot.config.get("TURRET_MOTOR_REVERSE"),
+						(int) Robot.config.get("TURRET_MOTOR_PDP_CHANNEL"),
+						(double) Robot.config.get("TURRET_MOTOR_MAX_CURRENT"));
+
 	}
 }
