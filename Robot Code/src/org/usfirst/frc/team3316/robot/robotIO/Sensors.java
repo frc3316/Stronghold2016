@@ -42,8 +42,10 @@ public class Sensors
 	public Sensors()
 	{
 		pdp = new PowerDistributionPanel();
-		
-		// Chassis
+
+		/*
+		 * Chassis
+		 */
 		try
 		{
 			navx = new AHRS(SPI.Port.kMXP);
@@ -54,7 +56,9 @@ public class Sensors
 					"Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
 
-		// Intake
+		/*
+		 * Intake
+		 */
 		intakeLeftSwitch = new DigitalInput(
 				(int) Robot.config.get("INTAKE_LEFT_SWITCH"));
 		intakeRightSwitch = new DigitalInput(
@@ -65,18 +69,24 @@ public class Sensors
 				(double) Robot.config.get("INTAKE_POT_FULL_RANGE"),
 				(double) Robot.config.get("INTAKE_POT_OFFSET"));
 
-		// Transport
+		/*
+		 * Transport
+		 */
 		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"),
 				(int) config.get("TRANSPORT_ENCODER_B"),
 				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"),
 				CounterBase.EncodingType.k4X);
+		
+		// transportEncoder.setDistancePerPulse(???);
+		//TODO: check the distance per pulse of the transport encoder
 
-		// Flywheel
+		/*
+		 * Flywheel
+		 */
 		hallEffect = new DigitalInput(
 				(int) Robot.config.get("FLYWHEEL_COUNTER"));
 
 		flywheelCounter = new Counter(hallEffect);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round
-
 	}
 }

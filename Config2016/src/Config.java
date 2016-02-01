@@ -150,21 +150,11 @@ public class Config
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR_1", 8);
-				addToConstants("TRANSPORT_MOTOR_2", 9);
+				addToConstants("TRANSPORT_MOTOR", 8);
 
-				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);
-				addToConstants("TRANSPORT_MOTOR_2_REVERSE", true);
-				addToConstants("TRANSPORT_MOTOR_1_PDP_CHANNEL", 5);
-				addToConstants("TRANSPORT_MOTOR_2_PDP_CHANNEL", 6);
-				addToConstants("TRANSPORT_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
-																			// Check
-																			// what
-																			// this
-																			// value
-																			// should
-																			// be.
-				addToConstants("TRANSPORT_MOTOR_2_MAX_CURRENT", 1000.0); // TODO:
+				addToConstants("TRANSPORT_MOTOR_REVERSE", false);
+				addToConstants("TRANSPORT_MOTOR_PDP_CHANNEL", 5);
+				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 1000.0); // TODO:
 																			// Check
 																			// what
 																			// this
