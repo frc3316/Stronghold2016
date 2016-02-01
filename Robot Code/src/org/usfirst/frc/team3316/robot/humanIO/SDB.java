@@ -52,7 +52,7 @@ public class SDB
 
 		private void put(String name, int i)
 		{
-			SmartDashboard.putInt(name, i);
+			SmartDashboard.putNumber(name, i);
 		}
 
 		private void put(String name, boolean b)
@@ -83,7 +83,7 @@ public class SDB
 	public void timerInit()
 	{
 		updateSDBTask = new UpdateSDBTask();
-		Robot.timer.schedule(updateSDBTask, 0, 10);
+		Robot.timer.schedule(updateSDBTask, 0, 100);
 	}
 
 	/**
@@ -144,15 +144,15 @@ public class SDB
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 																// THIS COMMAND
 
-		putConfigVariableInSDB("chassis_PIDRight_Kp");
-		putConfigVariableInSDB("chassis_PIDRight_Ki");
-		putConfigVariableInSDB("chassis_PIDRight_Kd");
-		putConfigVariableInSDB("chassis_PIDRight_Kf");
+		putConfigVariableInSDB("chassis_PIDRight_KP");
+		putConfigVariableInSDB("chassis_PIDRight_KI");
+		putConfigVariableInSDB("chassis_PIDRight_KD");
+		putConfigVariableInSDB("chassis_PIDRight_KF");
 
-		putConfigVariableInSDB("chassis_PIDLeft_Kp");
-		putConfigVariableInSDB("chassis_PIDLeft_Ki");
-		putConfigVariableInSDB("chassis_PIDLeft_Kd");
-		putConfigVariableInSDB("chassis_PIDLeft_Kf");
+		putConfigVariableInSDB("chassis_PIDLeft_KP");
+		putConfigVariableInSDB("chassis_PIDLeft_KI");
+		putConfigVariableInSDB("chassis_PIDLeft_KD");
+		putConfigVariableInSDB("chassis_PIDLeft_KF");
 		
 		logger.info("Finished initSDB()");
 	}

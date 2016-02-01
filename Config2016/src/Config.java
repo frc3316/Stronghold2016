@@ -154,8 +154,8 @@ public class Config
 
 				addToConstants("INTAKE_LS", 7);
 				addToConstants("INTAKE_RS", 1);
-				addToConstants("INTAKE_TS", 4);
-				addToConstants("INTAKE_BS", 5);
+				addToConstants("INTAKE_TS", 12);
+				addToConstants("INTAKE_BS", 6);
 				addToConstants("INTAKE_POT", 6);
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
@@ -166,7 +166,7 @@ public class Config
 				 * Transport
 				 */
 				addToConstants("TRANSPORT_MOTOR_1", 3);
-				addToConstants("TRANSPORT_MOTOR_2", 10);
+				addToConstants("TRANSPORT_MOTOR_2", 13);
 
 				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);
 				addToConstants("TRANSPORT_MOTOR_2_REVERSE", true);
@@ -187,8 +187,8 @@ public class Config
 																			// should
 																			// be.
 
-				addToConstants("TRANSPORT_ENCODER_A", 2);
-				addToConstants("TRANSPORT_ENCODER_B", 3);
+				addToConstants("TRANSPORT_ENCODER_A", 10);
+				addToConstants("TRANSPORT_ENCODER_B", 11);
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
 
 				/*
@@ -204,7 +204,7 @@ public class Config
 																		// value
 																		// should
 																		// be.
-				addToConstants("FLYWHEEL_MOTOR_2", 11);
+				addToConstants("FLYWHEEL_MOTOR_2", 14);
 				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
 				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
 				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 1000.0);// TODO:

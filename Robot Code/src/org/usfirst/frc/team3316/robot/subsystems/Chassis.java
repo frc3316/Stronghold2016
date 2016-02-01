@@ -53,7 +53,7 @@ public class Chassis extends DBugSubsystem
 		// Sensors
 		navx = Robot.sensors.navx;
 		leftEncoder = Robot.sensors.chassisLeftEncoder;
-		leftEncoder = Robot.sensors.chassisRightEncoder;
+		rightEncoder = Robot.sensors.chassisRightEncoder;
 
 		// Create moving average
 		movingAvg = new MovingAverage(
