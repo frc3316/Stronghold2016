@@ -12,6 +12,11 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
+import org.usfirst.frc.team3316.robot.commands.hood.moveDown;
+import org.usfirst.frc.team3316.robot.commands.hood.moveUp;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
@@ -146,15 +151,41 @@ public class SDB
 		putConfigVariableInSDB("intake_RollOut_Speed");
 		
 		/*
+		 * Hood
+		 */
+		
+		// PID Control
+		putConfigVariableInSDB("hood_Pid_Kp");
+		putConfigVariableInSDB("hood_Pid_Ki");
+		putConfigVariableInSDB("hood_Pid_Kd");
+		
+		// Bangbang Control
+		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
+		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
+		putConfigVariableInSDB("hood_Bangbang_SetPoint");
+		
+		putConfigVariableInSDB("hood_Left_Speed");
+		putConfigVariableInSDB("hood_Right_Speed");
+		
+		putConfigVariableInSDB("hood_Pot_LowThresh");
+		putConfigVariableInSDB("hood_Pot_HighThresh");	
+		
+		/*
 		 * For testing
 		 */
 		// Intake
 		SmartDashboard.putData("Intake RollIn", new RollIn());
 		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
+		SmartDashboard.putData("Intake StopRoll", new StopRoll());
 
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
+		
+		SmartDashboard.putData(new moveDown());
+		SmartDashboard.putData(new moveUp());
+		SmartDashboard.putData(new HoodBangbang());
+		SmartDashboard.putData(new HoodJoysticks());
+		SmartDashboard.putData(new HoodPID());
 		
 		logger.info("Finished initSDB()");
 	}

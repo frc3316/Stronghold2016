@@ -375,6 +375,9 @@ public class Config
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 				addToVariables("hood_Bangbang_SetPoint", 0.0);
 				
+				addToVariables("hood_Up_Speed", 1.0);
+				addToVariables("hood_Down_Speed", -1.0);
+				
 				addToVariables("hood_Pot_LowThresh", 0.0);
 				addToVariables("hood_Pot_HighThresh", 400.0);	
 			}

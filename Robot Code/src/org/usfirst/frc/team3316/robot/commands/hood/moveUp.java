@@ -14,7 +14,7 @@ public class moveUp extends DBugCommand
 
 	protected void execute()
 	{
-		isFin = Robot.turret.setMotors(speed);
+		isFin = !Robot.turret.setMotors(speed);
 	}
 
 	protected boolean isFinished()
