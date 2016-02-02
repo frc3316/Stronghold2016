@@ -145,6 +145,8 @@ public class SDB
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
 		
+		putConfigVariableInSDB("chassis_TankDrive_InvertY");
+		
 		/*
 		 * For testing
 		 */

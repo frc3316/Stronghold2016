@@ -12,15 +12,16 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.*;
 
-public class Chassis extends DBugSubsystemCC
+public class Chassis extends DBugSubsystem
 {
-	
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
 
 	// Sensors
 	private AHRS navx; // For the navX
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
@@ -43,14 +44,6 @@ public class Chassis extends DBugSubsystemCC
 		rightMotor2 = Robot.actuators.rightChassis2;
 		leftMotor2 = Robot.actuators.leftChassis2;
 		rightMotor1 = Robot.actuators.rightChassis1;
-
-		addSpeedController(leftMotor1);
-		addSpeedController(leftMotor2);
-		addSpeedController(rightMotor1);
-		addSpeedController(rightMotor2);
-
-		// Sensors
-		navx = Robot.sensors.navx;
 
 		// Create moving average
 		movingAvg = new MovingAverage(
@@ -122,5 +115,26 @@ public class Chassis extends DBugSubsystemCC
 	public double getPitch()
 	{
 		return navx.getRoll();
+	}
+
+	public double getLeftSpeed()
+	{
+		return leftEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+
+	public double getRightSpeed()
+	{
+		return rightEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+	
+	public double getDistance() {
+		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
+	}
+	
+	public void resetEncoders() {
+		rightEncoder.reset();
+		leftEncoder.reset();
 	}
 }

@@ -232,7 +232,7 @@ public class Config
 				addToVariables("chassis_TankDrive_DeadBand", 0.05);
 
 				addToVariables("chassis_TankDrive_InvertX", false);
-				addToVariables("chassis_TankDrive_InvertY", true);
+				addToVariables("chassis_TankDrive_InvertY", false);
 			}
 
 		}

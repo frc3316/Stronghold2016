@@ -4,12 +4,16 @@
 package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class Joysticks
 {
@@ -59,7 +63,13 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		// TODO: We can start configuring buttons for driver commands (will be
-		// useful for testing code when we will need it)
+		JoystickButton btn2 = new JoystickButton(joystickOperator, 2);
+		JoystickButton btn3 = new JoystickButton(joystickOperator, 3);
+		
+		btn2.whileHeld(new RollIn());
+		btn3.whileHeld(new RollOut());
+		
+		JoystickButton intakeButton = new JoystickButton(joystickOperator, 1);
+		intakeButton.whenPressed(new ToggleIntake());
 	}
 }
