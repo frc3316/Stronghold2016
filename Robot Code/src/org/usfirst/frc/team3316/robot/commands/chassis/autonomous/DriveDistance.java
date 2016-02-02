@@ -53,7 +53,7 @@ public abstract class DriveDistance extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kRate;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
@@ -79,7 +79,7 @@ public abstract class DriveDistance extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kRate;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
@@ -118,7 +118,7 @@ public abstract class DriveDistance extends DBugCommand
 	protected void execute()
 	{
 		currentTime = Timer.getFPGATimestamp() - initTime;
-
+		
 		SmartDashboard.putNumber("Motion profile velocity",
 				motion.getVelocity(currentTime));
 
@@ -131,8 +131,11 @@ public abstract class DriveDistance extends DBugCommand
 
 	protected void fin()
 	{
-		pidRight.reset();
 		pidLeft.reset();
+		pidRight.reset();
+		
+		pidLeft.disable();
+		pidRight.disable();
 
 		Robot.chassis.set(0, 0);
 	}
