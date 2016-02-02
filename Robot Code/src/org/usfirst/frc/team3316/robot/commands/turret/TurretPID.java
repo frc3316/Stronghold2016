@@ -11,10 +11,11 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 public class TurretPID extends DBugCommand
 {
 	private PIDController pid;
-	private double output;
-
-	protected void init()
-	{
+	private double pidOutput;
+	private double angle;
+	
+	public TurretPID() {
+		
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
@@ -34,10 +35,17 @@ public class TurretPID extends DBugCommand
 		{
 			public void pidWrite(double output)
 			{
-				TurretPID.this.output = output;
+				pidOutput = output;
 			}
 		});
 		
+		pid.setOutputRange(-1, 1);
+	}
+
+	protected void init()
+	{
+		angle = 0;
+		pid.enable();
 	}
 
 	protected void execute()
@@ -45,24 +53,25 @@ public class TurretPID extends DBugCommand
 		pid.setPID((double) config.get("turret_Pid_Kp"),
 					(double) config.get("turret_Pid_Ki"),
 					(double) config.get("turret_Pid_Kd"));
+		
+		pid.setSetpoint((double) config.get("turret_Pid_Angle"));
+		
+		Robot.turret.setMotors(pidOutput);
 	}
 
 	protected boolean isFinished()
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	protected void fin()
 	{
-		// TODO Auto-generated method stub
-		
+		Robot.turret.setMotors(0);
 	}
 
 	protected void interr()
 	{
-		// TODO Auto-generated method stub
-		
+		fin();
 	}
 
 }
