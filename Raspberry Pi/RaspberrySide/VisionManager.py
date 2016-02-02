@@ -89,6 +89,7 @@ class VisionManager(object):
             else:
                 self.currentImage = frame
         else:
+            # CR: Create logger for these (see `import logging`)
             print("Couldn't Read Image from self.cam")
 
     def updateMaskThresh(self):
@@ -161,9 +162,9 @@ class VisionManager(object):
         '''
 
         if self.currentImageObject is not None:
-            if not self.currentImageObject.didUpdateVars:
+            if not self.currentImageObject.didUpdateVar:
                 self.updateTowerScales()
-                self.currentImageObject.didUpdateVars = True
+                self.currentImageObject.didUpdateVar = True
             self.robotObject.distanceFromTower = self.currentImageObject.distanceFromCamera
             self.robotObject.angle = self.angleHelper.getAngle(self.currentImageObject.distanceFromCamera,
                                                             self.currentImageObject.objectWidth,
