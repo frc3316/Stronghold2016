@@ -19,15 +19,15 @@ public class TurretBangbang extends DBugCommand {
 		setPoint = (double) config.get("turret_Bangbang_SetPoint");
 		
 		if (Robot.turret.getAngle() <= setPoint) {
-			Robot.turret.setMotors(onVoltage);
+			isFin = !Robot.turret.setMotors(onVoltage);
 		}
 		else {
-			Robot.turret.setMotors(offVoltage);
+			isFin = !Robot.turret.setMotors(offVoltage);
 		}
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return isFin;
 	}
 
 	protected void fin() {

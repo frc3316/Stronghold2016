@@ -16,11 +16,11 @@ public class TurretJoysticks extends DBugCommand {
 	protected void execute() {
 		speed = Robot.joysticks.joystickOperator.getX();
 		
-		Robot.turret.setMotors(speed);
+		isFin = !Robot.turret.setMotors(speed);
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return isFin;
 	}
 
 	protected void fin() {

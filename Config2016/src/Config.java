@@ -341,6 +341,9 @@ public class Config
 				addToVariables("turret_Bangbang_OffVoltage", 0.0);
 				addToVariables("turret_Bangbang_SetPoint", 0.0);
 				
+				addToVariables("turret_Left_Speed", 1.0);
+				addToVariables("turret_Right_Speed", -1.0);
+				
 				addToVariables("turret_Pot_LowThresh", 0.0);
 				addToVariables("turret_Pot_HighThresh", 400.0);	
 			}

@@ -17,6 +17,11 @@ import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
+import org.usfirst.frc.team3316.robot.commands.turret.moveLeft;
+import org.usfirst.frc.team3316.robot.commands.turret.moveRight;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -146,15 +151,42 @@ public class SDB
 		putConfigVariableInSDB("intake_RollOut_Speed");
 		
 		/*
+		 * Turret
+		 */
+		
+		// PID Control
+		putConfigVariableInSDB("turret_Pid_Kp");
+		putConfigVariableInSDB("turret_Pid_Ki");
+		putConfigVariableInSDB("turret_Pid_Kd");
+		
+		// Bangbang Control
+		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
+		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
+		putConfigVariableInSDB("turret_Bangbang_SetPoint");
+		
+		putConfigVariableInSDB("turret_Left_Speed");
+		putConfigVariableInSDB("turret_Right_Speed");
+		
+		putConfigVariableInSDB("turret_Pot_LowThresh");
+		putConfigVariableInSDB("turret_Pot_HighThresh");	
+		
+		
+		/*
 		 * For testing
 		 */
 		// Intake
 		SmartDashboard.putData("Intake RollIn", new RollIn());
 		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
+		SmartDashboard.putData("Intake StopRoll", new StopRoll());
 
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
+		
+		SmartDashboard.putData(new moveLeft());
+		SmartDashboard.putData(new moveRight());
+		SmartDashboard.putData(new TurretBangbang());
+		SmartDashboard.putData(new TurretJoysticks());
+		SmartDashboard.putData(new TurretPID());
 		
 		logger.info("Finished initSDB()");
 	}
