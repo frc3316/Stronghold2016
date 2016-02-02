@@ -29,5 +29,4 @@ class AngleHelper(object):
         :param CUH: The current U height as it looks in the camera (in pixels).
         :return: The angle of the object from the tower, in degrees.
         '''
-        # CR: Explain this
-        return 999
+        return 999 # Not implemented, meanwhile 999

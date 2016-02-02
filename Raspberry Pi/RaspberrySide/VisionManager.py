@@ -3,7 +3,7 @@ from AngleHelper import *
 from DistanceHelper import *
 from ImageObject import *
 from RobotObject import *
-
+from Utils import *
 class VisionManager(object):
     '''
     A class that manages all the computer vision for the FRC 2016.
@@ -89,8 +89,7 @@ class VisionManager(object):
             else:
                 self.currentImage = frame
         else:
-            # CR: Create logger for these (see `import logging`)
-            print("Couldn't Read Image from self.cam")
+            logger.error("Couldn't Read Image from self.cam!")
 
     def updateMaskThresh(self):
         '''
@@ -148,8 +147,8 @@ class VisionManager(object):
                 self.currentImageObject.objectY = y
                 self.currentImageObject.distanceFromCamera = DFC
 
-                azimuthalAngle = self.distanceHelper.getAzimuthalAngle(self.cameraWidth, self.currentImageObject,self.HAX)
-                polarAngle = self.distanceHelper.getPolarAngle(self.cameraHeight, self.currentImageObject,self.HAY)
+                azimuthalAngle = self.distanceHelper.getAzimuthalAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAX)
+                polarAngle = self.distanceHelper.getPolarAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAY)
                 self.currentImageObject.azimathalAngle = azimuthalAngle
                 self.currentImageObject.polarAngle = polarAngle
 

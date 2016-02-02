@@ -1,4 +1,5 @@
 import socket
+from Utils import *
 class NetworkManager(object):
     '''
     A class that handles the networking to the Java process.
@@ -18,21 +19,21 @@ class NetworkManager(object):
         sock.connect((HOST, PORT))
         self.sock = sock
 
-    def sendData(self,lst):
+    def sendData(self,values,names):
         '''
         This method is responsible on sending data as a string to the Host self.HOST on port self.PORT.
-        :param lst: The list to be sent.
+        The data is represented as a dictionary { "name": val, "name": val,...}
+        :param values: a list of values to send.
+        :param names: a list of the names of the values.
         :return: None
         '''
-
         try:
-            for i in range(len(lst)):
-                lst[i] = str(int(lst[i]))
+            resultDic = {}
+            for i in range(len(names)):
+                strValue = '{0:.2f}'.format(float(values[i]))
+                resultDic[names[i]] = strValue
+            stringToSend = str(resultDic).replace(" ","")
+            self.sock.sendall(stringToSend)
+
         except ValueError:
-            print ('Input for sendData ivalid, need to be a list of floats/ints/strings')
-
-        self.sock.sendall(','.join(lst) + "\n")
-        data = self.sock.recv(1024)
-
-        if data[:2] != "Ok":
-            print ("Problem Sending Results")
+            logger.warning('Input for sendData invalid, or error in sending data')
