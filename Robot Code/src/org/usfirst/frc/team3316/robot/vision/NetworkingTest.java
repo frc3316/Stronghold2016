@@ -12,16 +12,13 @@ public class NetworkingTest
 		{
 			if (VisionServer.Data != null)
 			{
-				for(String key : VisionServer.Data.keySet()) {
-					System.out.print("Key: " + key + "; Val: " + VisionServer.Data.get(key) + ",");
-				}
-				System.out.println();
+				System.out.println(VisionServer.Data);
 			}
 			else
 			{
-				System.out.println("Is Null :O");
+				//System.out.println("Is Null :O");
 			}
-			Thread.sleep(1000);
+			Thread.sleep(1);
 		}
 	}
 }

@@ -11,11 +11,12 @@ class VisionServer implements Runnable
 	public static Map<String, Double> Data;
 	public void run()
 	{
+		ServerSocket server = null;
 		try
 		{
 			// A socket listening on port 8080 for connection.
 			// Known leak.
-			ServerSocket server = new ServerSocket(8080);
+			server = new ServerSocket(8080);
 
 			System.out.println("wait for connection on port 8080");
 			// The socket to the python side.
@@ -33,5 +34,16 @@ class VisionServer implements Runnable
 		{
 			e.printStackTrace();
 		} 
+		finally {
+			try
+			{
+				server.close();
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
