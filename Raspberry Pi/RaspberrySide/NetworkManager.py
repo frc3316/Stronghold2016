@@ -30,10 +30,14 @@ class NetworkManager(object):
         try:
             resultDic = {}
             for i in range(len(names)):
-                strValue = '{0:.2f}'.format(float(values[i]))
+                if values[i] is None:
+                    strValue = '331600000.00'
+                else:
+                    strValue = '{0:.2f}'.format(float(values[i]))
                 resultDic[names[i]] = strValue
             stringToSend = str(resultDic).replace(" ","")
-            self.sock.sendall(stringToSend)
+            print(stringToSend)
+            self.sock.sendall(stringToSend + "\n")
 
         except ValueError:
             logger.warning('Input for sendData invalid, or error in sending data')
