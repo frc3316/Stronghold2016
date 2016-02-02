@@ -22,7 +22,6 @@ lockFile = LockFile("LockFile.loc")
 
 if len(sys.argv) > 1:
     JAVA_IP = sys.argv[1]
-    print(JAVA_IP)
 else:
     JAVA_IP = "127.0.0.1"
 
@@ -76,7 +75,7 @@ if __name__ == "__main__":
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
-        # networkManager = NetworkManager(JAVA_IP,8080)
+        networkManager = NetworkManager(JAVA_IP,8080)
 
         ###################
         # The code itself #
@@ -113,15 +112,12 @@ if __name__ == "__main__":
             # Send data to java process #
             #############################
 
-            # if visionManager.currentImageObject is not None:
-            #    values = [visionManager.currentImageObject.distanceFromCamera,
-            #              visionManager.robotObject.angle,
-            #              visionManager.robotObject.XPosition,
-            #              visionManager.robotObject.Yposition,
-            #              visionManager.currentImageObject.azimuthalAngle,
-            #              visionManager.currentImageObject.polarAngle]
-            #    names = ["DFC", "A", "X", "Y", "AA", "PA"]
-            #    networkManager.sendData(values, names)
+            if visionManager.currentImageObject is not None and visionManager.robotObject is not None:
+               values = [visionManager.currentImageObject.distanceFromCamera,
+                         visionManager.currentImageObject.azimuthalAngle,
+                         visionManager.currentImageObject.polarAngle]
+               names = ["DistanceFromCamera", "AzimuthalAngle", "PolarAngle"]
+               networkManager.sendData(values, names)
 
             ###################
             # Results printer #
