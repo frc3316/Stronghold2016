@@ -1,5 +1,7 @@
 import java.util.Hashtable;
 
+import org.usfirst.frc.team3316.robot.Robot;
+
 public class Config
 {
 	public Hashtable<String, Object> variablesB;
@@ -203,8 +205,13 @@ public class Config
 				/*
 				 * Turret
 				 */
+				addToConstants("TURRET_MOTOR", 0);
+				addToConstants("TURRET_MOTOR_REVERSE", false);
+				addToConstants("TURRET_MOTOR_PDP_CHANNEL", 0);
+				addToConstants("TURRET_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check the stall current
+				
 				addToConstants("TURRET_POT", 4);
-				addToConstants("TURRET_POT_FULL_RAGNE", 1);
+				addToConstants("TURRET_POT_FULL_RAGNE", 400.0);
 		 		addToConstants("TURRET_POT_OFFSET", 0.0);
 				
 				/*
@@ -307,6 +314,35 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollOut_Speed", -0.5);
+			}
+		}
+		
+		/*
+		 * Turret
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+				// PID Control
+				addToVariables("turret_Pid_Kp", 0.0);
+				addToVariables("turret_Pid_Ki", 0.0);
+				addToVariables("turret_Pid_Kd", 0.0);
+				
+				// Bangbang Control
+				addToVariables("turret_Bangbang_OnVoltage", 0.0);
+				addToVariables("turret_Bangbang_OffVoltage", 0.0);
+				addToVariables("turret_Bangbang_SetPoint", 0.0);
+				
+				addToVariables("turret_Pot_LowThresh", 0.0);
+				addToVariables("turret_Pot_HighThresh", 400.0);	
 			}
 		}
 	}

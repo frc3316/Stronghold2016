@@ -12,9 +12,10 @@ public class TurretPID extends DBugCommand
 {
 	private PIDController pid;
 	private double pidOutput;
-	private double angle;
-	
+
 	public TurretPID() {
+		
+		requires(Robot.turret);
 		
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
@@ -24,7 +25,7 @@ public class TurretPID extends DBugCommand
 			}
 			public double pidGet()
 			{
-				return Robot.sensors.turretPot.get();
+				return Robot.turret.getAngle();
 			}
 
 			public PIDSourceType getPIDSourceType()
@@ -44,7 +45,6 @@ public class TurretPID extends DBugCommand
 
 	protected void init()
 	{
-		angle = 0;
 		pid.enable();
 	}
 

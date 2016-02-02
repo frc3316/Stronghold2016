@@ -22,11 +22,15 @@ public class Turret extends DBugSubsystemCC
 	{
 	}
 
+	/**
+	 * Set the voltage for the motors of this subsystem.
+	 * @par v - The voltage for the motors (between 1.0 to -1.0).
+	 */
 	public boolean setMotors(double v)
 	{
 		// If the turret is able to move.
-		if (getAngle() > (double) config.get("turret_Low_Thresh")
-				&& getAngle() < (double) config.get("turret_High_Thresh")) {
+		if (getAngle() > (double) config.get("turret_Pot_LowThresh")
+				&& getAngle() < (double) config.get("turret_Pot_HighThresh")) {
 			return super.setMotors(v);
 		}
 		
@@ -34,6 +38,9 @@ public class Turret extends DBugSubsystemCC
 		return false;
 	}
 
+	/**
+	 * @return The angle of the turret by the potentiometer.
+	 */
 	public double getAngle()
 	{
 		return turretPot.get();
