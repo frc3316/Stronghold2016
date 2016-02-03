@@ -45,6 +45,9 @@ public class SDB
 			
 			put("Left Speed", Robot.chassis.getLeftSpeed());
 			put("Right Speed", Robot.chassis.getRightSpeed());
+			
+			put("Joystick Left", Robot.joysticks.joystickLeft.getY());
+			put("Joystick Right", Robot.joysticks.joystickRight.getY());
 		}
 
 		private void put(String name, double d)
@@ -85,7 +88,7 @@ public class SDB
 	public void timerInit()
 	{
 		updateSDBTask = new UpdateSDBTask();
-		Robot.timer.schedule(updateSDBTask, 0, 100);
+		Robot.timer.schedule(updateSDBTask, 0, 10);
 	}
 
 	/**
