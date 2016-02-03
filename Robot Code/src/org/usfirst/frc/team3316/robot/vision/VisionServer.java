@@ -5,45 +5,51 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
-class VisionServer implements Runnable
-{
+class VisionServer implements Runnable {
 	public static Map<String, Double> Data;
-	public void run()
-	{
-		ServerSocket server = null;
-		try
-		{
-			// A socket listening on port 8080 for connection.
-			// Known leak.
-			server = new ServerSocket(8080);
 
-			System.out.println("wait for connection on port 8080");
-			// The socket to the python side.
-			VisionSocketReader worker = new VisionSocketReader();
-			new Thread(worker).start();
+	private Map<String, Double> parseLine(String s) {
+		// Input e.g.: {"Var1":33.16,"Var2":22.12}
+		Map<String, Double> data = new HashMap<String, Double>();
 
-			while (true)
-			{
-				Socket client = server.accept();
-				worker.change(client);
-				System.out.println("got connection on port 8080");
-			}
+		String vars[] = s.split(",");
+		for (String var : vars) {
+			String parts[] = var.split(":", 2);
+
+			String key = parts[0].substring(parts[0].indexOf('\'') + 1, parts[0].lastIndexOf('\'') - 1);
+
+			double value = Double
+					.parseDouble(parts[1].substring(parts[1].indexOf('\'') + 1, parts[1].lastIndexOf('\'') - 1));
+
+			data.put(key, value);
 		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		} 
-		finally {
-			try
-			{
-				server.close();
-			}
-			catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+		return data;
+	}
+
+	public void run() {
+		
+		DatagramSocket serverSocket = null;
+		try {
+			serverSocket = new DatagramSocket(8080);
+		} catch (SocketException e) {
+			System.err.println("Error with creating the UDP Socket.");
 		}
+
+		byte[] receiveData = new byte[1024];
+
+		while (true) {
+			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+			
+			try {
+				serverSocket.receive(receivePacket);
+			} catch (IOException e) {
+				System.err.println("Error receiving data.");
+			}
+			
+			String sentence = new String( receivePacket.getData() );
+			VisionServer.Data = parseLine(sentence);
+		}
+		
 	}
 }
