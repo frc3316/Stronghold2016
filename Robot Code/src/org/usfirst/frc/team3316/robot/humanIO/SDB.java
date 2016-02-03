@@ -9,14 +9,18 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
-import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.Image;
-
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SDB 
@@ -37,6 +41,8 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
+			
+			put("Intake Current", Robot.intake.getCurrent());
 		}
 		
 		private void put (String name, double d)
@@ -72,7 +78,6 @@ public class SDB
 		variablesInSDB = new Hashtable <String, Class <?> > ();
 		
 		initSDB();
-		timerInit();
 	}
 	
 	public void timerInit ()
@@ -88,9 +93,8 @@ public class SDB
 	 */
 	public boolean putConfigVariableInSDB (String key)
 	{
-		try
-		{
-			Object value = config.get(key);
+		Object value = config.get(key);
+			if(value != null) {
 			Class <?> type = value.getClass();
 			
 			boolean constant = Character.isUpperCase(key.codePointAt(0));
@@ -122,10 +126,7 @@ public class SDB
 			
 			return true;
 		}
-		catch (ConfigException e)
-		{
-			logger.severe(e);
-		}
+
 		return false;
 	}
 	
@@ -137,6 +138,23 @@ public class SDB
 	private void initSDB ()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
+
+		/*
+		 * Remove these after finishing testing on prototype
+		 */
+		putConfigVariableInSDB("intake_RollIn_Speed");
+		putConfigVariableInSDB("intake_RollOut_Speed");
+		
+		/*
+		 * For testing
+		 */
+		// Intake
+		SmartDashboard.putData("Intake RollIn", new RollIn());
+		SmartDashboard.putData("Intake RollOut", new RollOut());
+		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
+
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
 		
 		logger.info("Finished initSDB()");
 	}

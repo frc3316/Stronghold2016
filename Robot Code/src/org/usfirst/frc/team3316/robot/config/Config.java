@@ -84,24 +84,22 @@ public class Config
 	
 	/**
 	 * Returns the value attached to a requested key
-	 * @param key the key to look for
-	 * @return returns the corresponding value
-	 * @throws ConfigException if the key does not exist
+	 * @param key The key to look for.
+	 * @return Returns the corresponding value. If doesn't exist, returns null.
 	 */
-	public Object get (String key) throws ConfigException
+	public Object get (String key) 
 	{
 		if (constants.containsKey(key))
 		{
 			return constants.get(key);
 		}
-		else if (variables.containsKey(key))
+		else if(variables.containsKey(key))
 		{
 			return variables.get(key);
 		}
-		else
-		{
-			throw new ConfigException(key);
-		}
+		
+		logger.severe(new ConfigException(key + " Not Found!"));
+		return null;
 	}
 	
 	private void addToVariables (String key, Object value)
