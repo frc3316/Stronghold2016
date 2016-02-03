@@ -26,20 +26,16 @@ public abstract class DriveDistance extends DBugCommand
 
 	protected double dist;
 	
-	protected boolean reverse;
-
 	protected PlannedMotion motion;
 
 	protected double initTime = 0;
 	protected double initDist = 0;
 	protected double currentTime = 0;
 
-	public DriveDistance(double dist, boolean reverse)
+	public DriveDistance(double dist)
 	{
 		this.dist = dist;
 		
-		this.reverse = reverse;
-
 		motion = MotionPlanner.planMotion(dist);
 
 		pidRight = new PIDController(0, 0, 0, new PIDSource()
@@ -64,7 +60,7 @@ public abstract class DriveDistance extends DBugCommand
 
 			public void pidWrite(double output)
 			{
-				pidRightOutput = output * (reverse ? -1 : 1);
+				pidRightOutput = output;
 			}
 		});
 
@@ -90,7 +86,7 @@ public abstract class DriveDistance extends DBugCommand
 
 			public void pidWrite(double output)
 			{
-				pidLeftOutput = output * (reverse ? -1 : 1);
+				pidLeftOutput = output;
 			}
 		});
 	}

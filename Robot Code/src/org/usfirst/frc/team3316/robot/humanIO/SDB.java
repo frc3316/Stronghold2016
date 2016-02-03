@@ -165,8 +165,8 @@ public class SDB
 		putConfigVariableInSDB("motionPlanner_MaxVelocity");
 		
 		//Drive distance stuff
-		SmartDashboard.putData(new DriveDistanceVS(2, false));
-		SmartDashboard.putData(new DriveDistanceVES(2, false));
+		SmartDashboard.putData(new DriveDistanceVS(2));
+		SmartDashboard.putData(new DriveDistanceVES(2));
 		
 		logger.info("Finished initSDB()");
 	}
