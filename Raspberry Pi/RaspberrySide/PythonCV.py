@@ -69,7 +69,8 @@ if __name__ == "__main__":
         FPSCounter.start()
 
         cam = cv2.VideoCapture(0)
-
+        cam.set(3,640)
+        cam.set(4,480)
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
@@ -81,7 +82,6 @@ if __name__ == "__main__":
         # The code itself #
         ###################
 
-        # CR: Add IPC lock
         while True:
 
             visionManager.updateImage()
@@ -121,7 +121,7 @@ if __name__ == "__main__":
                networkManager.sendData(values, names)
 
             ###################
-            # Results printer #
+            # Results logger  #
             ###################
 
             if visionManager.isObjectDetected:
@@ -166,7 +166,7 @@ if __name__ == "__main__":
             if k == 27:
                 break
 
-            # sleep(0.01) # so the pi won't crush and cut the connection
+            # sleep(0.01) # so the pi won't crush
     finally:
         logger.debug("----------------")
         logger.debug("Finished Running")
