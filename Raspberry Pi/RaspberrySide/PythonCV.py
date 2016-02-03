@@ -83,12 +83,13 @@ if __name__ == "__main__":
 
         # CR: Add IPC lock
         while True:
+
             visionManager.updateImage()
             visionManager.updateTowerScales()
             visionManager.updateRobotScales()
             FPSCounter.update()
 
-            if visionManager.currentImageObject is not None: # if an object was detected
+            if visionManager.isObjectDetected: # if an object was detected
 
                 ######################
                 # Rectangle creation #
@@ -112,7 +113,7 @@ if __name__ == "__main__":
             # Send data to java process #
             #############################
 
-            if visionManager.currentImageObject is not None and visionManager.robotObject is not None:
+            if visionManager.isObjectDetected and visionManager.robotObject is not None:
                values = [visionManager.currentImageObject.distanceFromCamera,
                          visionManager.currentImageObject.azimuthalAngle,
                          visionManager.currentImageObject.polarAngle]
@@ -123,7 +124,7 @@ if __name__ == "__main__":
             # Results printer #
             ###################
 
-            if visionManager.currentImageObject is not None:
+            if visionManager.isObjectDetected:
                 logger.debug("------------------")
                 logger.debug("Robot Information:")
                 logger.debug("------------------")
@@ -157,7 +158,7 @@ if __name__ == "__main__":
             # save image:
             # k = cv2.waitKey(5) & 0xFF
             # if k == 115: # pressed s
-            #     if visionManager.currentImageObject is not None:
+            #     if visionManager.isObjectDetected:
             #         cv2.imwrite("Current Image.png",visionManager.currentImage)
 
             #  stop

@@ -14,10 +14,8 @@ class NetworkManager(object):
 
         self.HOST = HOST
         self.PORT = PORT
-
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((HOST, PORT))
-        self.sock = sock
+        self.isConnected = False
+        self.connect()
 
     def sendData(self,values,names):
         '''
@@ -27,17 +25,39 @@ class NetworkManager(object):
         :param names: a list of the names of the values.
         :return: None
         '''
-        try:
+        if not self.isConnected:
+            self.connect()
+
+        try: # try parsing data:
             resultDic = {}
             for i in range(len(names)):
                 if values[i] is None:
-                    strValue = '331600000.00'
+                    strValue = '3316.00'
                 else:
                     strValue = '{0:.2f}'.format(float(values[i]))
                 resultDic[names[i]] = strValue
             stringToSend = str(resultDic).replace(" ","")
-            print(stringToSend)
-            self.sock.sendall(stringToSend + "\n")
-
+            try: # try sending data:
+                self.sock.sendall(stringToSend + "\n")
+            except:
+                self.isConnected = False
         except ValueError:
             logger.warning('Input for sendData invalid, or error in sending data')
+    def connect(self):
+        '''
+        A method that opens a socket to the wanted HOST,PORT.
+        :return: None.
+        '''
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(1)
+            sock.connect((self.HOST, self.PORT))
+            sock.settimeout(None)
+            self.sock = sock
+            self.isConnected = True
+        except:
+            self.isConnected = False
+        if not self.isConnected:
+            logger.warning("---------------------------")
+            logger.warning("Connection To Jave Timeout!")
+            logger.warning("---------------------------")
