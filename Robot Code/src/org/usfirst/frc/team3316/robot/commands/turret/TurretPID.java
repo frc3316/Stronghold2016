@@ -56,12 +56,12 @@ public class TurretPID extends DBugCommand
 		
 		pid.setSetpoint((double) config.get("turret_Pid_Angle"));
 		
-		Robot.turret.setMotors(pidOutput);
+		isFin = !Robot.turret.setMotors(pidOutput);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return isFin;
 	}
 
 	protected void fin()
