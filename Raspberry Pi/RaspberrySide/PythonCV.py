@@ -25,6 +25,10 @@ if len(sys.argv) > 1:
 else:
     JAVA_IP = "127.0.0.1"
 
+if len(sys.argv) > 2:
+    isShowingImage = int(sys.argv[2])
+else:
+    isShowingImage = 1
 # Colors:
 LB = np.array([37,0,231]) # Lower bond
 UB = np.array([108,40,255]) # Upper bond
@@ -145,9 +149,10 @@ if __name__ == "__main__":
             logger.debug("------------------")
 
             # display:
-            # cv2.imshow("Current Image", visionManager.currentImage)
-            # cv2.imshow("Thresh Image", visionManager.threshImage)
-            cv2.imshow("Masked Image", visionManager.maskedImage)
+            if isShowingImage:
+                # cv2.imshow("Current Image", visionManager.currentImage)
+                # cv2.imshow("Thresh Image", visionManager.threshImage)
+                cv2.imshow("Masked Image", visionManager.maskedImage)
 
             #########################
             # Wait for key pressing #
