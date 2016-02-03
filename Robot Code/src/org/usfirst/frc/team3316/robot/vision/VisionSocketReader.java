@@ -13,7 +13,6 @@ public class VisionSocketReader implements Runnable
 
 	public void change(Socket s) throws IOException
 	{
-		s.setSoTimeout(3000);
 		this.buffer = new BufferedReader(
 				new InputStreamReader(s.getInputStream()));
 	}
@@ -64,11 +63,14 @@ public class VisionSocketReader implements Runnable
 					VisionServer.Data = parseLine(nextLine);
 				}
 			}
-			else
-			{
-				System.out.println("NO.");
+			
+			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
 		}
 	}
 }
