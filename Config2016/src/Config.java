@@ -1,7 +1,5 @@
 import java.util.Hashtable;
 
-import org.usfirst.frc.team3316.robot.Robot;
-
 public class Config
 {
 	public Hashtable<String, Object> variablesB;
