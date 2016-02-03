@@ -24,7 +24,7 @@ public class Sensors
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
-	public PowerDistributionPanel pdp;
+	//public PowerDistributionPanel pdp;
 	
 	// Chassis
 	public AHRS navx;
@@ -42,7 +42,7 @@ public class Sensors
 
 	public Sensors()
 	{
-		pdp = new PowerDistributionPanel();
+		//pdp = new PowerDistributionPanel();
 		
 		/*
 		 * Vision

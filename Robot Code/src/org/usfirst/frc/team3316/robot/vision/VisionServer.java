@@ -8,8 +8,8 @@ import java.util.Map;
 public class VisionServer implements Runnable {
 	public static Map<String, Double> Data;
 	
-	public VisionServer() {
-		
+	static {
+		Data = new HashMap<String, Double>();
 	}
 
 	private Map<String, Double> parseLine(String s) {
