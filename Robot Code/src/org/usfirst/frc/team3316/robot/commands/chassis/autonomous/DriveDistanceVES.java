@@ -12,9 +12,9 @@ import org.usfirst.frc.team3316.robot.Robot;
  */
 public class DriveDistanceVES extends DriveDistance
 {
-	public DriveDistanceVES(double dist)
+	public DriveDistanceVES(double dist, boolean reverse)
 	{
-		super(dist);
+		super(dist, reverse);
 	}
 
 	protected void set()

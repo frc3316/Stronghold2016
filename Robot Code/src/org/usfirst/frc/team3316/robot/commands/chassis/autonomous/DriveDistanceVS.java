@@ -21,9 +21,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveDistanceVS extends DriveDistance
 {
-	public DriveDistanceVS(double dist)
+	public DriveDistanceVS(double dist, boolean reverse)
 	{
-		super(dist);
+		super(dist, reverse);
 	}
 	
 	protected void set()
