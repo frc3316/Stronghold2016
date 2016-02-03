@@ -16,6 +16,7 @@ class NetworkManager(object):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.bind(('', PORT))
         self.sendData()
+
     def sendData(self,values,names):
         '''
         This method is responsible on sending data as a string to the Host self.HOST on port self.PORT.
@@ -24,7 +25,6 @@ class NetworkManager(object):
         :param names: a list of the names of the values.
         :return: None
         '''
-
         try: # try parsing data:
             resultDic = {}
             for i in range(len(names)):
@@ -35,6 +35,24 @@ class NetworkManager(object):
                 resultDic[names[i]] = strValue
             stringToSend = str(resultDic).replace(" ","")
             self.sock.sendto(stringToSend + "\n", (self.HOST, self.PORT))
-
         except ValueError:
             logger.warning('Input for sendData invalid, or error in sending data')
+			
+    def connect(self):
+        '''
+        A method that opens a socket to the wanted HOST,PORT.
+        :return: None.
+        '''
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(1)
+            sock.connect((self.HOST, self.PORT))
+            sock.settimeout(None)
+            self.sock = sock
+            self.isConnected = True
+        except:
+            self.isConnected = False
+        if not self.isConnected:
+            logger.warning("---------------------------")
+            logger.warning("Connection To Jave Timeout!")
+            logger.warning("---------------------------")
