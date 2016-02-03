@@ -106,4 +106,9 @@ public class DBugSpeedController
 		return pdp.getCurrent(pdpChannel);
 	}
 
+	public double getVoltage()
+	{
+		return sc.get();
+	}
+
 }

@@ -11,6 +11,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
@@ -27,6 +28,7 @@ public class Sensors
 
 	// Chassis
 	public AHRS navx;
+	public Encoder chassisLeftEncoder, chassisRightEncoder;
 
 	// Intake
 	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
@@ -55,6 +57,21 @@ public class Sensors
 			DriverStation.reportError(
 					"Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+		
+		chassisLeftEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),
+				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),
+				(boolean) Robot.config.get("CHASSIS_LEFT_ENCODER_REVERSE"),
+				EncodingType.k4X);
+		
+		chassisLeftEncoder.setDistancePerPulse((double) config.get("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE"));
+
+		chassisRightEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
+				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),
+				(boolean) Robot.config.get("CHASSIS_RIGHT_ENCODER_REVERSE"),
+				EncodingType.k4X);
+		chassisRightEncoder.setDistancePerPulse((double) config.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
 
 		/*
 		 * Intake

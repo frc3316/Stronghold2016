@@ -14,16 +14,19 @@ import edu.wpi.first.wpilibj.*;
 
 public class Chassis extends DBugSubsystemCC
 {
-	
+
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
 
 	// Sensors
 	private AHRS navx; // For the navX
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
+	private double yawOffset = 0;
 
 	private static Timer timer;
 
@@ -33,7 +36,8 @@ public class Chassis extends DBugSubsystemCC
 	}
 
 	// Other
-	private MovingAverage movingAvg; // For the navX
+	private MovingAverage movingAvgPitch; // For the navX
+	private MovingAverage movingAvgRoll; // For the navX
 	private TimerTask navXTasker; // For the navX
 
 	public Chassis()
@@ -51,12 +55,19 @@ public class Chassis extends DBugSubsystemCC
 
 		// Sensors
 		navx = Robot.sensors.navx;
+		leftEncoder = Robot.sensors.chassisLeftEncoder;
+		rightEncoder = Robot.sensors.chassisRightEncoder;
 
 		// Create moving average
-		movingAvg = new MovingAverage(
+		movingAvgPitch = new MovingAverage(
 				(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
 				{
 					return getPitch();
+				});
+		movingAvgRoll = new MovingAverage(
+				(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
+				{
+					return getRoll();
 				});
 
 		// Timer init
@@ -96,8 +107,10 @@ public class Chassis extends DBugSubsystemCC
 
 		public void run()
 		{
-			if (Math.abs(movingAvg.get()) <= (double) Robot.config
-					.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
+			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config
+					.get("CHASSIS_DEFENSE_ANGLE_RANGE")
+					|| Math.abs(movingAvgRoll.get()) <= (double) Robot.config
+							.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
 			{
 				counter++;
 			}
@@ -122,5 +135,54 @@ public class Chassis extends DBugSubsystemCC
 	public double getPitch()
 	{
 		return navx.getRoll();
+	}
+
+	public double getRoll()
+	{
+		return navx.getPitch();
+	}
+
+    public double getYaw ()
+    {
+    	return fixYaw(navx.getYaw());
+    }
+    
+    // Returns the same heading in the range (-180) to (180)
+    private static double fixYaw (double heading)
+    {
+    	double toReturn = heading % 360;
+    	
+    	if (toReturn < -180)
+    	{
+    		toReturn += 360;
+    	}
+    	else if (toReturn > 180)
+    	{
+    		toReturn -= 360;
+    	}
+    	return toReturn;
+    }
+
+	public double getLeftSpeed()
+	{
+		return leftEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+
+	public double getRightSpeed()
+	{
+		return rightEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+
+	public double getDistance()
+	{
+		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
+	}
+
+	public void resetEncoders()
+	{
+		rightEncoder.reset();
+		leftEncoder.reset();
 	}
 }

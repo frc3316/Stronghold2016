@@ -120,26 +120,22 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 
-				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-
-				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+
+				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
+				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
+
+				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
+				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
+
+				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
+				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE",
+						((6 * Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE",
+						((6 * Math.PI) / 32) * 0.0254);
 
 				/*
 				 * Intake
@@ -316,14 +312,14 @@ public class Config
 			{
 
 			}
-			
+
 			/*
 			 * Variables
 			 */
 			{
 
 			}
-			
+
 			/*
 			 * Roll In
 			 */
