@@ -15,7 +15,6 @@ class NetworkManager(object):
         self.PORT = PORT
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.bind(('', PORT))
-        self.sendData()
 
     def sendData(self,values,names):
         '''
