@@ -121,7 +121,7 @@ if __name__ == "__main__":
                networkManager.sendData(values, names)
 
             ###################
-            # Results printer #
+            # Results logger  #
             ###################
 
             if visionManager.isObjectDetected:
