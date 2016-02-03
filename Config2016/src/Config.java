@@ -209,7 +209,7 @@ public class Config
 				addToConstants("TURRET_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check the stall current
 				
 				addToConstants("TURRET_POT", 4);
-				addToConstants("TURRET_POT_FULL_RAGNE", 400.0);
+				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
 		 		addToConstants("TURRET_POT_OFFSET", 0.0);
 				
 				/*
@@ -221,7 +221,7 @@ public class Config
 				addToConstants("HOOD_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check the stall current
 		 		
 				addToConstants("HOOD_POT", 5);
-				addToConstants("HOOD_POT_FULL_RAGNE", 100.0);
+				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
 				addToConstants("HOOD_POT_OFFSET", 30.0);
 			}
 		}
@@ -334,18 +334,16 @@ public class Config
 			 * Variables
 			 */
 			{
+				addToVariables("turret_Angle_SetPoint", 0.0);
+				
 				// PID Control
-				addToVariables("turret_Pid_Kp", 0.0);
-				addToVariables("turret_Pid_Ki", 0.0);
-				addToVariables("turret_Pid_Kd", 0.0);
+				addToVariables("turret_PID_KP", 0.0);
+				addToVariables("turret_PID_KI", 0.0);
+				addToVariables("turret_PID_KD", 0.0);
 				
 				// Bangbang Control
 				addToVariables("turret_Bangbang_OnVoltage", 0.0);
 				addToVariables("turret_Bangbang_OffVoltage", 0.0);
-				addToVariables("turret_Bangbang_SetPoint", 0.0);
-				
-				addToVariables("turret_Left_Speed", 1.0);
-				addToVariables("turret_Right_Speed", -1.0);
 				
 				addToVariables("turret_Pot_LowThresh", 0.0);
 				addToVariables("turret_Pot_HighThresh", 400.0);	
@@ -367,17 +365,14 @@ public class Config
 			 */
 			{
 				// PID Control
-				addToVariables("hood_Pid_Kp", 0.0);
-				addToVariables("hood_Pid_Ki", 0.0);
-				addToVariables("hood_Pid_Kd", 0.0);
+				addToVariables("hood_PID_KP", 0.0);
+				addToVariables("hood_PID_KI", 0.0);
+				addToVariables("hood_PID_KD", 0.0);
 				
 				// Bangbang Control
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 				addToVariables("hood_Bangbang_SetPoint", 0.0);
-				
-				addToVariables("hood_Up_Speed", 1.0);
-				addToVariables("hood_Down_Speed", -1.0);
 				
 				addToVariables("hood_Pot_LowThresh", 0.0);
 				addToVariables("hood_Pot_HighThresh", 400.0);	

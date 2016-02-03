@@ -9,14 +9,9 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
-import org.usfirst.frc.team3316.robot.commands.hood.moveDown;
-import org.usfirst.frc.team3316.robot.commands.hood.moveUp;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
@@ -25,10 +20,7 @@ import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
-import org.usfirst.frc.team3316.robot.commands.turret.moveLeft;
-import org.usfirst.frc.team3316.robot.commands.turret.moveRight;
 import org.usfirst.frc.team3316.robot.config.Config;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -160,17 +152,14 @@ public class SDB
 		 */
 		
 		// PID Control
-		putConfigVariableInSDB("hood_Pid_Kp");
-		putConfigVariableInSDB("hood_Pid_Ki");
-		putConfigVariableInSDB("hood_Pid_Kd");
+		putConfigVariableInSDB("hood_PID_KP");
+		putConfigVariableInSDB("hood_PID_KI");
+		putConfigVariableInSDB("hood_PID_KD");
 		
 		// Bangbang Control
 		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
 		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
 		putConfigVariableInSDB("hood_Bangbang_SetPoint");
-		
-		putConfigVariableInSDB("hood_Left_Speed");
-		putConfigVariableInSDB("hood_Right_Speed");
 		
 		putConfigVariableInSDB("hood_Pot_LowThresh");
 		putConfigVariableInSDB("hood_Pot_HighThresh");	
@@ -180,17 +169,14 @@ public class SDB
 		 */
 		
 		// PID Control
-		putConfigVariableInSDB("turret_Pid_Kp");
-		putConfigVariableInSDB("turret_Pid_Ki");
-		putConfigVariableInSDB("turret_Pid_Kd");
+		putConfigVariableInSDB("turret_PID_KP");
+		putConfigVariableInSDB("turret_PID_KI");
+		putConfigVariableInSDB("turret_PID_KD");
 		
 		// Bangbang Control
 		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
 		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
 		putConfigVariableInSDB("turret_Bangbang_SetPoint");
-		
-		putConfigVariableInSDB("turret_Left_Speed");
-		putConfigVariableInSDB("turret_Right_Speed");
 		
 		putConfigVariableInSDB("turret_Pot_LowThresh");
 		putConfigVariableInSDB("turret_Pot_HighThresh");	
@@ -208,15 +194,11 @@ public class SDB
 		SmartDashboard.putData(new CloseIntake());
 		
 		// Hood
-		SmartDashboard.putData(new moveDown());
-		SmartDashboard.putData(new moveUp());
 		SmartDashboard.putData(new HoodBangbang());
 		SmartDashboard.putData(new HoodJoysticks());
 		SmartDashboard.putData(new HoodPID());
 
 		// Turret
-		SmartDashboard.putData(new moveLeft());
-		SmartDashboard.putData(new moveRight());
 		SmartDashboard.putData(new TurretBangbang());
 		SmartDashboard.putData(new TurretJoysticks());
 		SmartDashboard.putData(new TurretPID());

@@ -21,7 +21,6 @@ public class HoodPID extends DBugCommand
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
-				pidSource = PIDSourceType.kRate;
 			}
 			public double pidGet()
 			{
@@ -30,7 +29,7 @@ public class HoodPID extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return null;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{

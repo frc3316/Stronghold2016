@@ -21,7 +21,6 @@ public class TurretPID extends DBugCommand
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
-				pidSource = PIDSourceType.kRate;
 			}
 			public double pidGet()
 			{
@@ -30,7 +29,7 @@ public class TurretPID extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return null;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
@@ -50,11 +49,11 @@ public class TurretPID extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("turret_Pid_Kp"),
-					(double) config.get("turret_Pid_Ki"),
-					(double) config.get("turret_Pid_Kd"));
+		pid.setPID((double) config.get("turret_PID_KP"),
+					(double) config.get("turret_PID_KI"),
+					(double) config.get("turret_PID_KD"));
 		
-		pid.setSetpoint((double) config.get("turret_Pid_Angle"));
+		pid.setSetpoint((double) config.get("turret_Angle_SetPoint"));
 		
 		isFin = !Robot.turret.setMotors(pidOutput);
 	}
