@@ -43,7 +43,7 @@ class VisionManager(object):
         self.currentImage = None
         self.maskedImage = None
         self.threshImage = None
-
+        self.isObjectDetected = False # is self detected an object (U).
         # Mark: Scales.
         self.currentImageObject = None # The current biggest Object in the masked image (probably the tower).
         self.imageHeight = None
@@ -77,7 +77,7 @@ class VisionManager(object):
         :return: None.
         '''
 
-        if self.currentImageObject is not None:
+        if self.isObjectDetected:
             self.currentImageObject.didUpdateVar = False	
 
         didGetImage,frame = self.cam.read()
@@ -121,10 +121,15 @@ class VisionManager(object):
         self.updateMaskThresh()
         thresh = self.threshImage
         (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        if cnts != []:
+        if cnts:
             c = max(cnts, key = cv2.contourArea)
             if cv2.contourArea(c) > self.minimumBoundingRectSize:
+                self.isObjectDetected = True
                 return cv2.boundingRect(c)
+            else:
+                self.isObjectDetected = False
+        else:
+            self.isObjectDetected = False
         return None
 
     def updateTowerScales(self):
@@ -160,7 +165,7 @@ class VisionManager(object):
         :return: None
         '''
 
-        if self.currentImageObject is not None:
+        if self.isObjectDetected:
             if not self.currentImageObject.didUpdateVar:
                 self.updateTowerScales()
                 self.currentImageObject.didUpdateVar = True
