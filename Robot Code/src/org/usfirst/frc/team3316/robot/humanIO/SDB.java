@@ -20,6 +20,7 @@ import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -43,6 +44,7 @@ public class SDB
 			 */
 			
 			put("Intake Current", Robot.intake.getCurrent());
+			put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
 		}
 		
 		private void put (String name, double d)
