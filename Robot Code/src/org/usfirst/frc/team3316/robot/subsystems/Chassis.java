@@ -26,7 +26,6 @@ public class Chassis extends DBugSubsystemCC
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
-	private double yawOffset = 0;
 
 	private static Timer timer;
 
