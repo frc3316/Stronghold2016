@@ -98,15 +98,15 @@ public abstract class DriveDistance extends DBugCommand
 
 		// PID values are the same for all subclasses for until we finish
 		// testings
-		pidRight.setPID((double) config.get("chassis_PIDRight_KP"),
-				(double) config.get("chassis_PIDRight_KI"),
-				(double) config.get("chassis_PIDRight_KF"),
-				(double) config.get("chassis_PIDRight_KF"));
+		pidRight.setPID((double) config.get("chassis_PIDRight_KP") / 1000,
+				(double) config.get("chassis_PIDRight_KI") / 1000,
+				(double) config.get("chassis_PIDRight_KF") / 1000,
+				(double) config.get("chassis_PIDRight_KF") / 1000);
 
-		pidLeft.setPID((double) config.get("chassis_PIDLeft_KP"),
-				(double) config.get("chassis_PIDLeft_KI"),
-				(double) config.get("chassis_PIDLeft_KD"),
-				(double) config.get("chassis_PIDLeft_KF"));
+		pidLeft.setPID((double) config.get("chassis_PIDLeft_KP") / 1000,
+				(double) config.get("chassis_PIDLeft_KI") / 1000,
+				(double) config.get("chassis_PIDLeft_KD") / 1000,
+				(double) config.get("chassis_PIDLeft_KF") / 1000);
 
 		pidRight.enable();
 		pidLeft.enable();
