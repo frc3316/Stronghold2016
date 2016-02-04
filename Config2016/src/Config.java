@@ -110,7 +110,7 @@ public class Config
 			 * Constants
 			 */
 			addToConstants("CURRENT_CONTROL_COUNTER", 10);
-			
+
 			{
 				/*
 				 * Chassis
@@ -120,28 +120,48 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 
-				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); //Change this after prototype
-				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); //Change this after prototype
-				
-				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); //Change this after prototype
-				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); //Change this after prototype
-				
+				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); // Change
+																		// this
+																		// after
+																		// prototype
+				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); // Change
+																		// this
+																		// after
+																		// prototype
+
+				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); // Change
+																		// this
+																		// after
+																		// prototype
+				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); // Change
+																		// this
+																		// after
+																		// prototype
+
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
 				/*
 				 * Intake
 				 */
-				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); //changed for prototype
-				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); //changed for prototype
-				addToConstants("INTAKE_MOTOR", 3); //changed for prototype
+				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); // changed
+																		// for
+																		// prototype
+				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); // changed
+																		// for
+																		// prototype
+				addToConstants("INTAKE_MOTOR", 3); // changed for prototype
 
 				addToConstants("INTAKE_LEFT_SWITCH", 7);
 				addToConstants("INTAKE_RIGHT_SWITCH", 1);
 
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
-				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 3); //changed for prototype 
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 666.6); // TODO: Check the stall current
+				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 3); // changed for
+																// prototype
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 666.6); // TODO:
+																	// Check the
+																	// stall
+																	// current
 
 				addToConstants("INTAKE_POT", 6);
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
@@ -150,27 +170,17 @@ public class Config
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR_1", 8);
-				addToConstants("TRANSPORT_MOTOR_2", 9);
+				addToConstants("TRANSPORT_MOTOR", 8);
 
-				addToConstants("TRANSPORT_MOTOR_1_REVERSE", false);
-				addToConstants("TRANSPORT_MOTOR_2_REVERSE", true);
-				addToConstants("TRANSPORT_MOTOR_1_PDP_CHANNEL", 5);
-				addToConstants("TRANSPORT_MOTOR_2_PDP_CHANNEL", 6);
-				addToConstants("TRANSPORT_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
-																			// Check
-																			// what
-																			// this
-																			// value
-																			// should
-																			// be.
-				addToConstants("TRANSPORT_MOTOR_2_MAX_CURRENT", 1000.0); // TODO:
-																			// Check
-																			// what
-																			// this
-																			// value
-																			// should
-																			// be.
+				addToConstants("TRANSPORT_MOTOR_REVERSE", false);
+				addToConstants("TRANSPORT_MOTOR_PDP_CHANNEL", 5);
+				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 1000.0); // TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
 
 				addToConstants("TRANSPORT_ENCODER_A", 2);
 				addToConstants("TRANSPORT_ENCODER_B", 3);
@@ -268,15 +278,15 @@ public class Config
 																		// useful.
 				addToConstants("FLYWHEEL_COUNTER", 0);
 			}
-			
+
 			/*
 			 * Variables
 			 */
 			{
 
 				// Bangbang - TO REMOVE AFTER TESTINGS
-				addToVariables("flywheel_Bangbang_Setpoint", 0.0);
-				addToVariables("flywheel_Bangbang_OnVoltage", 0.0);
+				addToVariables("flywheel_Bangbang_Setpoint", 40.0);
+				addToVariables("flywheel_Bangbang_OnVoltage", 1.0);
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
 				// PID - TO REMOVE AFTER TESTINGS
@@ -286,7 +296,7 @@ public class Config
 				addToVariables("flywheel_PID_KD", 0.0);
 			}
 		}
-		
+
 		/*
 		 * Intake
 		 */
@@ -302,16 +312,16 @@ public class Config
 			 */
 			{
 				addToVariables("intake_Pot_LowThresh", 1.0);
-				addToVariables("intake_Pot_HightThresh", 130.5);				
+				addToVariables("intake_Pot_HightThresh", 130.5);
 			}
-			
+
 			/*
 			 * Roll In
 			 */
 			{
 				addToVariables("intake_RollIn_Speed", 0.5);
 			}
-			
+
 			/*
 			 * Roll Out
 			 */
@@ -376,6 +386,42 @@ public class Config
 				
 				addToVariables("hood_Pot_LowThresh", 0.0);
 				addToVariables("hood_Pot_HighThresh", 400.0);	
+			}
+		}
+
+		/*
+		 * Transport
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+
+			}
+			
+			/*
+			 * Roll In
+			 */
+
+			{
+				addToVariables("transport_RollIn_Speed", 0.5);
+			}
+
+			/*
+			 * Bangbang
+			 */
+			{
+				addToVariables("transport_Bangbang_Setpoint", 0.0);
+				addToVariables("transport_Bangbang_OnVoltage", 1.0);
+				addToVariables("transport_Bangbang_OffVoltage", 0.0);
 			}
 		}
 	}

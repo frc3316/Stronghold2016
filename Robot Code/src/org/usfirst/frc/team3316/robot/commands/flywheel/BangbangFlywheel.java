@@ -39,18 +39,7 @@ public class BangbangFlywheel extends DBugCommand
 		}
 		else
 		{
-			v = (double) config.get("flywheel_Bangbang_OffVoltage"); // We want
-																		// the
-																		// slowing
-																		// down
-																		// to be
-																		// less
-																		// aggressive,
-																		// therefore
-																		// this
-																		// isn't
-																		// simply
-																		// 0
+			v = (double) config.get("flywheel_Bangbang_OffVoltage");
 		}
 
 		isFin = !Robot.flywheel.setMotors(v);

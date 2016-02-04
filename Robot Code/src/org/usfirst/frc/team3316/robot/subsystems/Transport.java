@@ -3,26 +3,28 @@ package org.usfirst.frc.team3316.robot.subsystems;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
+import edu.wpi.first.wpilibj.Encoder;
+
 public class Transport extends DBugSubsystemCC
 {
-	private DBugSpeedController transportMotor1, transportMotor2;
-
+	private DBugSpeedController motor;
+	
+	private Encoder encoder;
+	
 	public Transport()
 	{
-		transportMotor1 = Robot.actuators.transportMotor1;
-		transportMotor2 = Robot.actuators.transportMotor2;
-
-		addSpeedController(transportMotor1);
-		addSpeedController(transportMotor2);
+		motor = Robot.actuators.transportMotor;
+		addSpeedController(motor);
+		
+		encoder = Robot.sensors.transportEncoder;
 	}
 
 	public void initDefaultCommand()
 	{
 	}
-
-	public boolean setMotors(double v)
+	
+	public double getRate ()
 	{
-		return setMotors(v);
+		return encoder.getRate();
 	}
-
 }

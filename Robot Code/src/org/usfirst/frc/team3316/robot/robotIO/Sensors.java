@@ -44,17 +44,26 @@ public class Sensors {
 	// Hood
 	public AnalogPotentiometer hoodPot;
 
-	public Sensors() {
+	public Sensors()
+	{
 		pdp = new PowerDistributionPanel();
-		
-		// Chassis
-		try {
+
+		/*
+		 * Chassis
+		 */
+		try
+		{
 			navx = new AHRS(SPI.Port.kMXP);
-		} catch (RuntimeException ex) {
-			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
+		catch (RuntimeException ex)
+		{
+			DriverStation.reportError(
+					"Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
 
-		// Intake
+		/*
+		 * Intake
+		 */
 		intakeLeftSwitch = new DigitalInput(
 				(int) Robot.config.get("INTAKE_LEFT_SWITCH"));
 		intakeRightSwitch = new DigitalInput(
@@ -65,12 +74,22 @@ public class Sensors {
 				(double) Robot.config.get("INTAKE_POT_FULL_RANGE"),
 				(double) Robot.config.get("INTAKE_POT_OFFSET"));
 
-		// Transport
-		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"), (int) config.get("TRANSPORT_ENCODER_B"),
-				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"), CounterBase.EncodingType.k4X);
+		/*
+		 * Transport
+		 */
+		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"),
+				(int) config.get("TRANSPORT_ENCODER_B"),
+				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"),
+				CounterBase.EncodingType.k4X);
+		
+		// transportEncoder.setDistancePerPulse(???);
+		//TODO: check the distance per pulse of the transport encoder
 
-		// Flywheel
-		hallEffect = new DigitalInput((int) Robot.config.get("FLYWHEEL_COUNTER"));
+		/*
+		 * Flywheel
+		 */
+		hallEffect = new DigitalInput(
+				(int) Robot.config.get("FLYWHEEL_COUNTER"));
 
 		flywheelCounter = new Counter(hallEffect);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round

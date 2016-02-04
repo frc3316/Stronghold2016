@@ -25,7 +25,7 @@ public class Actuators
 	public DBugSpeedController intakeMotor;
 
 	// Transport
-	public DBugSpeedController transportMotor1, transportMotor2;
+	public DBugSpeedController transportMotor;
 
 	// Flywheel
 	public DBugSpeedController flywheelMotor1, flywheelMotor2;
@@ -38,7 +38,9 @@ public class Actuators
 
 	public Actuators()
 	{
-		// Chassis
+		/*
+		 * Chassis
+		 */
 		if (config.robotA)
 		{
 			// Speed controllers of robotA are all Victors (VictorSP).
@@ -78,7 +80,9 @@ public class Actuators
 				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"),
 				(int) config.get("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL"));
 
-		// Intake
+		/*
+		 * Intake
+		 */
 		intakeSolenoid = new DoubleSolenoid(
 				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD_CHANNEL"),
 				(int) Robot.config.get("INTAKE_SOLENOID_REVERSE_CHANNEL"));
@@ -89,19 +93,18 @@ public class Actuators
 				(int) Robot.config.get("INTAKE_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("INTAKE_MOTOR_MAX_CURRENT"));
 
-		// Transport
-		transportMotor1 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("TRANSPORT_MOTOR_1")),
-				(boolean) Robot.config.get("TRANSPORT_MOTOR_1_REVERSE"),
-				(int) Robot.config.get("TRANSPORT_MOTOR_1_PDP_CHANNEL"),
-				(double) Robot.config.get("TRANSPORT_MOTOR_1_MAX_CURRENT"));
-		transportMotor2 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("TRANSPORT_MOTOR_2")),
-				(boolean) Robot.config.get("TRANSPORT_MOTOR_2_REVERSE"),
-				(int) Robot.config.get("TRANSPORT_MOTOR_2_PDP_CHANNEL"),
-				(double) Robot.config.get("TRANSPORT_MOTOR_2_MAX_CURRENT"));
+		/*
+		 * Transport
+		 */
+		transportMotor = new DBugSpeedController(
+				new Talon((int) Robot.config.get("TRANSPORT_MOTOR")),
+				(boolean) Robot.config.get("TRANSPORT_MOTOR_REVERSE"),
+				(int) Robot.config.get("TRANSPORT_MOTOR_PDP_CHANNEL"),
+				(double) Robot.config.get("TRANSPORT_MOTOR_MAX_CURRENT"));
 
-		// Flywheel
+		/*
+		 * Flywheel
+		 */
 		flywheelMotor1 = new DBugSpeedController(
 				new Talon((int) Robot.config.get("FLYWHEEL_MOTOR_1")),
 				(boolean) Robot.config.get("FLYWHEEL_MOTOR_1_REVERSE"),
