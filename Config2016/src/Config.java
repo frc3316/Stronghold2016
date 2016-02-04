@@ -131,8 +131,9 @@ public class Config
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
 				
-				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", ((6*Math.PI) / 32) * 0.0254);
-				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", ((6*Math.PI) / 32) * 0.0254);
+				//For some reason the encoders give 4 times less the correct speed
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
 				
 				
 				/*

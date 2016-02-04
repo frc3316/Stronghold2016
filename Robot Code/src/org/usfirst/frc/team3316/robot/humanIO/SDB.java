@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.chassis.motion.MeasureKinematics;
 import org.usfirst.frc.team3316.robot.commands.chassis.autonomous.DriveDistanceVES;
 import org.usfirst.frc.team3316.robot.commands.chassis.autonomous.DriveDistanceVS;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
@@ -170,6 +171,11 @@ public class SDB
 		//Drive distance stuff
 		SmartDashboard.putData(new DriveDistanceVS(2));
 		SmartDashboard.putData(new DriveDistanceVES(2));
+		
+		SmartDashboard.putData("Measure 0.5 sec", new MeasureKinematics(0.5));
+		SmartDashboard.putData("Measure 1 sec", new MeasureKinematics(1));
+		SmartDashboard.putData("Measure 1.5 sec", new MeasureKinematics(1.5));
+		SmartDashboard.putData("Measure 2 sec", new MeasureKinematics(2));
 		
 		logger.info("Finished initSDB()");
 	}
