@@ -253,6 +253,21 @@ public class Config
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
 			}
+			
+			/*
+			 * Retract Omni
+			 */
+			{
+				addToVariables("chassis_RetractOmni_Timeout", 0.0);
+			}
+			
+			/*
+			 * Extend Omni
+			 */
+			{
+				addToVariables("chassis_ExtendOmni_Timeout", 0.0);
+				addToVariables("chassis_ExtendOmni_CancelTimeout", 1.5);
+			}
 
 		}
 

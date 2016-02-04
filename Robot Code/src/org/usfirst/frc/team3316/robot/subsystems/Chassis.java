@@ -58,13 +58,13 @@ public class Chassis extends DBugSubsystemCC
 		shortPistonsLeft = Robot.actuators.shortPistonsLeft;
 		shortPistonsRight = Robot.actuators.shortPistonsRight;
 
+		// Sensors
+		navx = Robot.sensors.navx;
+		
 		heLeftFront = Robot.sensors.chassisHELeftFront;
 		heLeftBack = Robot.sensors.chassisHELeftBack;
 		heRightFront = Robot.sensors.chassisHERightFront;
 		heRightBack = Robot.sensors.chassisHERightBack;
-
-		// Sensors
-		navx = Robot.sensors.navx;
 
 		// Create moving average
 		movingAvg = new MovingAverage(
@@ -116,7 +116,7 @@ public class Chassis extends DBugSubsystemCC
 		return true;
 	}
 	
-	public boolean openShortPistons ()
+	public boolean openShortPistonsLeft ()
 	{
 		if (longPistons.get().equals(Value.kReverse))
 		{
@@ -126,14 +126,32 @@ public class Chassis extends DBugSubsystemCC
 		else
 		{
 			shortPistonsLeft.set(Value.kForward);
+			return true;
+		}
+	}
+	
+	public boolean openShortPistonsRight ()
+	{
+		if (longPistons.get().equals(Value.kReverse))
+		{
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			return false;
+		}
+		else
+		{
 			shortPistonsRight.set(Value.kForward);
 			return true;
 		}
 	}
 	
-	public boolean closeShortPistons()
+	public boolean closeShortPistonsLeft ()
 	{
 		shortPistonsLeft.set(Value.kReverse);
+		return true;
+	}
+	
+	public boolean closeShortPistonsRight ()
+	{
 		shortPistonsRight.set(Value.kReverse);
 		return true;
 	}
