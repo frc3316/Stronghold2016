@@ -244,9 +244,9 @@ public class Config
 
 				// TODO: Check what the following variables should be, and
 				// change them.
-				addToVariables("motionPlanner_MaxAccel", 2.0);
-				addToVariables("motionPlanner_MaxDecel", -2.0);
-				addToVariables("motionPlanner_MaxVelocity", 3.5);
+				addToVariables("motionPlanner_MaxAccel", 2.5);
+				addToVariables("motionPlanner_MaxDecel", -1.5);
+				addToVariables("motionPlanner_MaxVelocity", 1.0);
 				addToVariables("motionPlanner_TimeStep", 0.02);
 			}
 			
@@ -255,15 +255,15 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_PIDRight_KP", 0.01 * 1000);
-				addToVariables("chassis_PIDRight_KI", 0.0 * 1000);
-				addToVariables("chassis_PIDRight_KD", 0.00 * 1000);
-				addToVariables("chassis_PIDRight_KF", 0.3 * 1000);
+				addToVariables("chassis_PIDRight_KP", 100.0);
+				addToVariables("chassis_PIDRight_KI", 0.00);
+				addToVariables("chassis_PIDRight_KD", 75.0);
+				addToVariables("chassis_PIDRight_KF", 450.0);
 				
-				addToVariables("chassis_PIDLeft_KP", 0.01 * 1000);
-				addToVariables("chassis_PIDLeft_KI", 0.0 * 1000);
-				addToVariables("chassis_PIDLeft_KD", 0.00 * 1000);
-				addToVariables("chassis_PIDLeft_KF", 0.3 * 1000);
+				addToVariables("chassis_PIDLeft_KP", 100.0);
+				addToVariables("chassis_PIDLeft_KI", 0.0);
+				addToVariables("chassis_PIDLeft_KD", 75.0);
+				addToVariables("chassis_PIDLeft_KF", 450.0);
 				
 				// Velocity Error Setpoint
 				addToVariables("chassis_DriveDistance_KV", 0.0);

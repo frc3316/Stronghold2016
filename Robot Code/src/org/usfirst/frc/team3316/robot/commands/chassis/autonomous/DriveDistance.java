@@ -35,8 +35,6 @@ public abstract class DriveDistance extends DBugCommand
 	public DriveDistance(double dist)
 	{
 		this.dist = dist;
-		
-		motion = MotionPlanner.planMotion(dist);
 
 		pidRight = new PIDController(0, 0, 0, new PIDSource()
 		{
@@ -53,7 +51,7 @@ public abstract class DriveDistance extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kDisplacement;
+				return PIDSourceType.kRate;
 			}
 		}, new PIDOutput()
 		{
@@ -79,7 +77,7 @@ public abstract class DriveDistance extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kDisplacement;
+				return PIDSourceType.kRate;
 			}
 		}, new PIDOutput()
 		{
@@ -93,6 +91,8 @@ public abstract class DriveDistance extends DBugCommand
 
 	protected void init()
 	{
+		motion = MotionPlanner.planMotion(dist);
+		
 		pidRight.setOutputRange(-1, 1);
 		pidLeft.setOutputRange(-1, 1);
 
