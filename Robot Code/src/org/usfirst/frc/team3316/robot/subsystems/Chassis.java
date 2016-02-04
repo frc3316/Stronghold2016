@@ -11,19 +11,20 @@ import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Chassis extends DBugSubsystemCC
 {
-	
+
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
-	
-	private DoubleSolenoid longPistons, shortPistonsleft, shortPistonsRight;
+
+	private DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
 
 	// Sensors
 	private AHRS navx; // For the navX
-	
+
 	private DigitalInput heLeftFront, heLeftBack, heRightFront, heRightBack;
 
 	// Variables
@@ -52,11 +53,11 @@ public class Chassis extends DBugSubsystemCC
 		addSpeedController(leftMotor2);
 		addSpeedController(rightMotor1);
 		addSpeedController(rightMotor2);
-		
+
 		longPistons = Robot.actuators.longPistons;
-		shortPistonsleft = Robot.actuators.shortPistonsLeft;
+		shortPistonsLeft = Robot.actuators.shortPistonsLeft;
 		shortPistonsRight = Robot.actuators.shortPistonsRight;
-		
+
 		heLeftFront = Robot.sensors.chassisHELeftFront;
 		heLeftBack = Robot.sensors.chassisHELeftBack;
 		heRightFront = Robot.sensors.chassisHERightFront;
@@ -92,6 +93,69 @@ public class Chassis extends DBugSubsystemCC
 
 		rightMotor1.setMotor(right);
 		rightMotor2.setMotor(right);
+	}
+
+	public boolean openLongPistons()
+	{
+		if (shortPistonsRight.get().equals(Value.kForward)
+				|| shortPistonsLeft.get().equals(Value.kForward))
+		{
+			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
+			return false;
+		}
+		else
+		{
+			longPistons.set(Value.kForward);
+			return true;
+		}
+	}
+	
+	public boolean closeLongPistons()
+	{
+		longPistons.set(Value.kReverse);
+		return true;
+	}
+	
+	public boolean openShortPistons ()
+	{
+		if (longPistons.get().equals(Value.kReverse))
+		{
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			return false;
+		}
+		else
+		{
+			shortPistonsLeft.set(Value.kForward);
+			shortPistonsRight.set(Value.kForward);
+			return true;
+		}
+	}
+	
+	public boolean closeShortPistons()
+	{
+		shortPistonsLeft.set(Value.kReverse);
+		shortPistonsRight.set(Value.kReverse);
+		return true;
+	}
+	
+	public boolean getHELeftFront ()
+	{
+		return heLeftFront.get();
+	}
+	
+	public boolean getHELeftBack ()
+	{
+		return heLeftBack.get();
+	}
+	
+	public boolean getHERightFront ()
+	{
+		return heRightFront.get();
+	}
+	
+	public boolean getHERightBack ()
+	{
+		return heRightBack.get();
 	}
 
 	/*
