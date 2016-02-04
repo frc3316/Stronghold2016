@@ -133,6 +133,7 @@ public class Config
 																		// this
 																		// after
 																		// prototype
+				
 				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); // Change
 																		// this
 																		// after
@@ -140,14 +141,32 @@ public class Config
 
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				
+				addToConstants("CHASSIS_LONG_PISTONS_MODULE", 1);
+				addToConstants("CHASSIS_LONG_PISTONS_FORWARD", 0);
+				addToConstants("CHASSIS_LONG_PISTONS_REVERSE", 1);
+				
+				addToConstants("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 1);
+				addToConstants("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 2);
+				addToConstants("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 3);
+				
+				addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 1);
+				addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 4);
+				addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 5);
+				
+				addToConstants("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
+				addToConstants("CHASSIS_HALL_EFFECT_LEFT_BACK", 13);
+				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 14);
+				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_BACK", 15);
+				
 
 				/*
 				 * Intake
 				 */
-				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); // changed
+				addToConstants("INTAKE_SOLENOID_FORWARD", 6); // changed
 																		// for
 																		// prototype
-				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); // changed
+				addToConstants("INTAKE_SOLENOID_REVERSE", 7); // changed
 																		// for
 																		// prototype
 				addToConstants("INTAKE_MOTOR", 3); // changed for prototype

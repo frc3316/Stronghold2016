@@ -18,9 +18,13 @@ public class Chassis extends DBugSubsystemCC
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
+	
+	private DoubleSolenoid longPistons, shortPistonsleft, shortPistonsRight;
 
 	// Sensors
 	private AHRS navx; // For the navX
+	
+	private DigitalInput heLeftFront, heLeftBack, heRightFront, heRightBack;
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
@@ -48,6 +52,15 @@ public class Chassis extends DBugSubsystemCC
 		addSpeedController(leftMotor2);
 		addSpeedController(rightMotor1);
 		addSpeedController(rightMotor2);
+		
+		longPistons = Robot.actuators.longPistons;
+		shortPistonsleft = Robot.actuators.shortPistonsLeft;
+		shortPistonsRight = Robot.actuators.shortPistonsRight;
+		
+		heLeftFront = Robot.sensors.chassisHELeftFront;
+		heLeftBack = Robot.sensors.chassisHELeftBack;
+		heRightFront = Robot.sensors.chassisHERightFront;
+		heRightBack = Robot.sensors.chassisHERightBack;
 
 		// Sensors
 		navx = Robot.sensors.navx;
