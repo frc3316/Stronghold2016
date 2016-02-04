@@ -99,6 +99,8 @@ public class Config
 				addToConstants("JOYSTICK_LEFT", 0);
 				addToConstants("JOYSTICK_RIGHT", 1);
 				addToConstants("JOYSTICK_OPERATOR", 2);
+				
+				addToConstants("BUTTON_TOGGLE_OMNI", 2);
 			}
 		}
 

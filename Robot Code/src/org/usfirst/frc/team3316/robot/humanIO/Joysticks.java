@@ -4,12 +4,14 @@
 package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class Joysticks
 {
@@ -59,7 +61,8 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		// TODO: We can start configuring buttons for driver commands (will be
-		// useful for testing code when we will need it)
+		JoystickButton toggleOmni = new JoystickButton(joystickRight,
+				(int) config.get("BUTTON_TOGGLE_OMNI"));
+		toggleOmni.whenPressed(new ToggleOmni());
 	}
 }
