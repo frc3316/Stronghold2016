@@ -29,6 +29,10 @@ public class Actuators
 
 	// Flywheel
 	public DBugSpeedController flywheelMotor1, flywheelMotor2;
+	
+	// Climbing
+	public DoubleSolenoid climbingSolenoid;
+	public DBugSpeedController climbingMotor1, climbingMotor2, climbingMotor3, climbingMotor4;
 
 	public Actuators()
 	{
@@ -109,5 +113,34 @@ public class Actuators
 				(boolean) Robot.config.get("FLYWHEEL_MOTOR_2_REVERSE"),
 				(int) Robot.config.get("FLYWHEEL_MOTOR_2_PDP_CHANNEL"),
 				(double) Robot.config.get("FLYWHEEL_MOTOR_2_MAX_CURRENT"));
+		
+		/*
+		 * Climbing
+		 */
+		climbingMotor1 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CLIMBING_MOTOR_1")),
+				(boolean) Robot.config.get("CLIMBING_MOTOR_1_REVERSE"),
+				(int) Robot.config.get("CLIMBING_MOTOR_1_PDP_CHANNEL"),
+				(double) Robot.config.get("CLIMBING_MOTOR_1_MAX_CURRENT"));
+		climbingMotor2 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CLIMBING_MOTOR_2")),
+				(boolean) Robot.config.get("CLIMBING_MOTOR_2_REVERSE"),
+				(int) Robot.config.get("CLIMBING_MOTOR_2_PDP_CHANNEL"),
+				(double) Robot.config.get("CLIMBING_MOTOR_2_MAX_CURRENT"));
+		climbingMotor3 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CLIMBING_MOTOR_3")),
+				(boolean) Robot.config.get("CLIMBING_MOTOR_3_REVERSE"),
+				(int) Robot.config.get("CLIMBING_MOTOR_3_PDP_CHANNEL"),
+				(double) Robot.config.get("CLIMBING_MOTOR_3_MAX_CURRENT"));
+		climbingMotor4 = new DBugSpeedController(
+				new Talon((int) Robot.config.get("CLIMBING_MOTOR_4")),
+				(boolean) Robot.config.get("CLIMBING_MOTOR_4_REVERSE"),
+				(int) Robot.config.get("CLIMBING_MOTOR_4_PDP_CHANNEL"),
+				(double) Robot.config.get("CLIMBING_MOTOR_4_MAX_CURRENT"));
+		
+		climbingSolenoid = new DoubleSolenoid(
+				(int) Robot.config.get("CLIMBING_SOLENOID_FORWARD_CHANNEL"),
+				(int) Robot.config.get("CLIMBING_SOLENOID_REVERSE_CHANNEL"));
+		
 	}
 }

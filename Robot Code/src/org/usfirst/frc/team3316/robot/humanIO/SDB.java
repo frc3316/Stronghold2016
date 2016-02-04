@@ -9,6 +9,10 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.climbing.CloseArmPiston;
+import org.usfirst.frc.team3316.robot.commands.climbing.MoveDown;
+import org.usfirst.frc.team3316.robot.commands.climbing.MoveUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.OpenArmPiston;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
@@ -20,6 +24,7 @@ import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -144,6 +149,7 @@ public class SDB
 		 */
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
+		putConfigVariableInSDB("climbing_Speed");
 		
 		/*
 		 * For testing
@@ -156,17 +162,24 @@ public class SDB
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
 		
-		//Flywheel
+		// Climbing
+		SmartDashboard.putData(new ClimbingSequence());
+		SmartDashboard.putData(new OpenArmPiston());
+		SmartDashboard.putData(new CloseArmPiston());
+		SmartDashboard.putData(new MoveUp());
+		SmartDashboard.putData(new MoveDown());
+		
+		// Flywheel
 		SmartDashboard.putData(new JoystickFlywheel());
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new PIDFlywheel());
 		
-		//Bangbang
+		// Bangbang
 		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
 		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
 		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
 		
-		//PID
+		// PID
 		putConfigVariableInSDB("flywheel_PID_Setpoint");
 		putConfigVariableInSDB("flywheel_PID_KP");
 		putConfigVariableInSDB("flywheel_PID_KI");

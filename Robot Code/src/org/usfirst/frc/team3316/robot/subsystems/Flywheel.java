@@ -7,12 +7,9 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.Counter;
-<<<<<<< HEAD
-=======
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
->>>>>>> Added talon voltage to SDB
 
 public class Flywheel extends DBugSubsystemCC
 {
@@ -80,25 +77,7 @@ public class Flywheel extends DBugSubsystemCC
 	 */
 	public boolean setMotors(double v)
 	{
-<<<<<<< HEAD
 		return super.setMotors(v);
-=======
-		 talonCurrent = pdp.getCurrent(2);
-
-		if (Math.abs(talonCurrent) >= (double) Robot.config
-				.get("FLYWHEEL_MOTOR_HIGH_THRESH"))
-		{
-			talon.set(0);
-			return false; //Current going to motor is too high - abort
-		}
-
-		talon.set(-v);
-		
-		talonVoltage = talon.get();
-		SmartDashboard.putNumber("Talon Voltage", talonVoltage);
-		
-		return true;
->>>>>>> Added talon voltage to SDB
 	}
 
 	/**

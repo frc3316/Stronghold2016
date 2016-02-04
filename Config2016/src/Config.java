@@ -202,13 +202,62 @@ public class Config
 				addToConstants("FLYWHEEL_MOTOR_2", 11);
 				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
 				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
-				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 1000.0);// TODO:
+				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 1000.0); // TODO:
 																		// Check
 																		// what
 																		// this
 																		// value
 																		// should
 																		// be.
+
+				/*
+				 * Climbing
+				 */
+				addToConstants("CLIMBING_MOTOR_1", 12);
+				addToConstants("CLIMBING_MOTOR_1_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_1_PDP_CHANNEL", 10);
+				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
+				addToConstants("CLIMBING_MOTOR_2", 13);
+				addToConstants("CLIMBING_MOTOR_2_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_2_PDP_CHANNEL", 11);
+				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 1000.0); // TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
+				addToConstants("CLIMBING_MOTOR_3", 13);
+				addToConstants("CLIMBING_MOTOR_3_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_3_PDP_CHANNEL", 12);
+				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 1000.0); // TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
+				addToConstants("CLIMBING_MOTOR_4", 13);
+				addToConstants("CLIMBING_MOTOR_4_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_4_PDP_CHANNEL", 14);
+				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 1000.0); // TODO:
+																		// Check
+																		// what
+																		// this
+																		// value
+																		// should
+																		// be.
+				addToConstants("CLIMBING_POT", 2);
+				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
+				addToConstants("CLIMBING_POT_OFFSET", 0.0);
+				addToConstants("CLIMBING_SWITCH", 2);
+
 			}
 		}
 
@@ -317,14 +366,14 @@ public class Config
 			{
 
 			}
-			
+
 			/*
 			 * Variables
 			 */
 			{
 
 			}
-			
+
 			/*
 			 * Roll In
 			 */
@@ -340,6 +389,26 @@ public class Config
 				addToVariables("transport_Bangbang_Setpoint", 0.0);
 				addToVariables("transport_Bangbang_OnVoltage", 1.0);
 				addToVariables("transport_Bangbang_OffVoltage", 0.0);
+			}
+		}
+		
+		/*
+		 * Climbing
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+				addToConstants("CLIMBING_POT_THRESHOLD", 2000.0); // TODO: Change it.
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("climbing_Speed", 0.0);
+				addToVariables("climbing_Speed", 0.0);
 			}
 		}
 	}

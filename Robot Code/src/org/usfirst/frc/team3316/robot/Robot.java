@@ -11,6 +11,7 @@ import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
+import org.usfirst.frc.team3316.robot.subsystems.Climbing;
 import org.usfirst.frc.team3316.robot.subsystems.Flywheel;
 import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
@@ -51,6 +52,7 @@ public class Robot extends IterativeRobot
 	public static Intake intake;
 	public static Transport transport;
 	public static Flywheel flywheel;
+	public static Climbing climbing;
 
 	Command autonomousCommand;
 
@@ -85,6 +87,7 @@ public class Robot extends IterativeRobot
 		intake = new Intake();
 		transport = new Transport();
 		flywheel = new Flywheel();
+		climbing = new Climbing();
 
 		/*
 		 * Human IO (that requires subsystems)
