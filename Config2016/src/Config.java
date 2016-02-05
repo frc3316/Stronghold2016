@@ -264,10 +264,6 @@ public class Config
 				addToVariables("chassis_PIDLeft_KI", 0.0);
 				addToVariables("chassis_PIDLeft_KD", 75.0);
 				addToVariables("chassis_PIDLeft_KF", 450.0);
-				
-				// Velocity Error Setpoint
-				addToVariables("chassis_DriveDistance_KV", 0.0);
-				addToVariables("chassis_DriveDistance_KA", 0.0);
 			}
 		}
 

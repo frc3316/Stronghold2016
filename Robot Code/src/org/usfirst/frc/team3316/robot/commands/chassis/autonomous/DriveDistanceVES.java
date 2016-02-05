@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.commands.chassis.autonomous;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 /**
  * Drive Distance Velocity Error Setpoint. Drives a certain distance in a
@@ -12,6 +13,12 @@ import org.usfirst.frc.team3316.robot.Robot;
  */
 public class DriveDistanceVES extends DriveDistance
 {
+    private double [][] values = new double [][] // TODO: Calibrate these values.
+    {
+        {0, 0.5, 1},
+        {1, 0.63, 0.1}
+    };
+    
 	public DriveDistanceVES(double dist)
 	{
 		super(dist);
@@ -20,32 +27,12 @@ public class DriveDistanceVES extends DriveDistance
 	protected void set()
 	{
 		double profileVelocity = motion.getVelocity(currentTime);
-		double profileAcceleration = motion.getAcceleration(currentTime);
+		double profilePosition = motion.getPosition(currentTime);
 
-		double currentVelocity = (Robot.chassis.getLeftSpeed()
-				+ Robot.chassis.getRightSpeed()) / 2;
+		pidLeft.setSetpoint(profileVelocity);
+		pidRight.setSetpoint(profileVelocity);
 
-		double kV = (double) config.get("chassis_DriveDistance_KV"); // Conversion
-																		// variable
-																		// between
-																		// speed
-																		// and %
-																		// volts
-	
-		double kA = (double) config.get("chassis_DriveDistance_KA"); // Conversion
-																		// variable
-																		// between
-																		// speed
-																		// and %
-																		// volts
-
-		double error = profileVelocity - currentVelocity;
-
-		pidLeft.setSetpoint(error);
-		pidRight.setSetpoint(error);
-
-		double feedForward = (profileVelocity * kV)
-				+ (profileAcceleration * kA);
+		double feedForward = Math.max(0, Utils.valueInterpolation(profilePosition / dist, values));
 
 		Robot.chassis.set(feedForward + pidLeftOutput,
 				feedForward + pidRightOutput);
