@@ -16,7 +16,7 @@ public class HoodBangbang extends DBugCommand {
 	protected void execute() {
 		onVoltage = (double) config.get("hood_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("hood_Bangbang_OffVoltage");
-		setPoint = (double) config.get("hood_Bangbang_SetPoint");
+		setPoint = (double) config.get("hood_Angle_SetPoint");
 		
 		if (Robot.hood.getAngle() <= setPoint) {
 			isFin = !Robot.hood.setMotors(onVoltage);
