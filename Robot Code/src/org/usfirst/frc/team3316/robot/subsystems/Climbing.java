@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.climbing.Stop;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -40,14 +41,26 @@ public class Climbing extends DBugSubsystemCC
 		addSpeedController(climbingMotor2);
 		addSpeedController(climbingMotor3);
 		addSpeedController(climbingMotor4);
-	}
+	}		
 
 	public void initDefaultCommand()
 	{
+		setDefaultCommand(new Stop());
 	}
 
 	public boolean setMotors(double v)
 	{
+		if (getAngle() < (double) config.get("climbing_Pot_LowThresh"))
+		{
+			logger.severe("Someone is trying to break climbing pot. Aborting");
+			v = Math.max(v, 0);
+		}
+		else if (getAngle() > (double) config.get("climbing_Pot_HighThresh"))
+		{
+			logger.severe("Someone is trying to break climbing pot. Aborting");
+			v = Math.min(v, 0);
+		}
+		
 		return super.setMotors(v);
 	}
 

@@ -47,7 +47,6 @@ public class SDB
 			 * Insert put methods here
 			 */
 			
-			put("Intake Current", Robot.intake.getCurrent());
 		}
 		
 		private void put (String name, double d)
@@ -147,20 +146,7 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
 		putConfigVariableInSDB("climbing_Speed");
-		
-		/*
-		 * For testing
-		 */
-		// Intake
-		SmartDashboard.putData("Intake RollIn", new RollIn());
-		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
-
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
 		
 		// Climbing
 		SmartDashboard.putData(new ClimbingSequence());
@@ -168,23 +154,6 @@ public class SDB
 		SmartDashboard.putData(new CloseArmPiston());
 		SmartDashboard.putData(new MoveUp());
 		SmartDashboard.putData(new MoveDown());
-		
-		// Flywheel
-		SmartDashboard.putData(new JoystickFlywheel());
-		SmartDashboard.putData(new BangbangFlywheel());
-		SmartDashboard.putData(new PIDFlywheel());
-		
-		// Bangbang
-		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
-		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
-		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
-		
-		// PID
-		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		putConfigVariableInSDB("flywheel_PID_KP");
-		putConfigVariableInSDB("flywheel_PID_KI");
-		putConfigVariableInSDB("flywheel_PID_KD");
-		putConfigVariableInSDB("flywheel_PID_KF");
 		
 		logger.info("Finished initSDB()");
 	}
