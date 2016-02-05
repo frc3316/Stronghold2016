@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -20,6 +21,7 @@ public class Hood extends DBugSubsystemCC
 
 	public void initDefaultCommand()
 	{
+		setDefaultCommand(new StopHood());
 	}
 
 	/**
