@@ -233,7 +233,7 @@ public class Config
 																		// value
 																		// should
 																		// be.
-				addToConstants("CLIMBING_MOTOR_3", 13);
+				addToConstants("CLIMBING_MOTOR_3", 14);
 				addToConstants("CLIMBING_MOTOR_3_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_3_PDP_CHANNEL", 12);
 				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 1000.0); // TODO:
@@ -243,7 +243,7 @@ public class Config
 																		// value
 																		// should
 																		// be.
-				addToConstants("CLIMBING_MOTOR_4", 13);
+				addToConstants("CLIMBING_MOTOR_4", 15);
 				addToConstants("CLIMBING_MOTOR_4_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_4_PDP_CHANNEL", 14);
 				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 1000.0); // TODO:
@@ -253,10 +253,14 @@ public class Config
 																		// value
 																		// should
 																		// be.
+				addToConstants("CLIMBING_SOLENOID_FORWARD_CHANNEL", 0);
+				addToConstants("CLIMBING_SOLENOID_REVERSE_CHANNEL", 1);
+				
 				addToConstants("CLIMBING_POT", 2);
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
-				addToConstants("CLIMBING_SWITCH", 2);
+				
+				addToConstants("CLIMBING_SWITCH", 8);
 
 			}
 		}
