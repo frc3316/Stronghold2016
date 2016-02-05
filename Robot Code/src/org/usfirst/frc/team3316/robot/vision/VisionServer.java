@@ -5,8 +5,12 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
-class VisionServer implements Runnable {
+public class VisionServer implements Runnable {
 	public static Map<String, Double> Data;
+	
+	static {
+		Data = new HashMap<String, Double>();
+	}
 
 	private Map<String, Double> parseLine(String s) {
 		// Input e.g.: {"Var1":33.16,"Var2":22.12}
