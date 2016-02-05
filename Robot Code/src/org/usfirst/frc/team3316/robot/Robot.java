@@ -12,8 +12,10 @@ import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
 import org.usfirst.frc.team3316.robot.subsystems.Flywheel;
+import org.usfirst.frc.team3316.robot.subsystems.Hood;
 import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
+import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -51,6 +53,8 @@ public class Robot extends IterativeRobot
 	public static Intake intake;
 	public static Transport transport;
 	public static Flywheel flywheel;
+	public static Turret turret;
+	public static Hood hood;
 
 	Command autonomousCommand;
 
@@ -85,6 +89,8 @@ public class Robot extends IterativeRobot
 		intake = new Intake();
 		transport = new Transport();
 		flywheel = new Flywheel();
+		turret = new Turret();
+		hood = new Hood();
 
 		/*
 		 * Human IO (that requires subsystems)

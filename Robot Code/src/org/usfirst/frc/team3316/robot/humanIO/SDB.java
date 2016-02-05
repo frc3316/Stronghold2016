@@ -9,16 +9,18 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
 import org.usfirst.frc.team3316.robot.config.Config;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -42,7 +44,8 @@ public class SDB
 			 * Insert put methods here
 			 */
 			
-			put("Intake Current", Robot.intake.getCurrent());
+			put("Hood Angle", Robot.hood.getAngle());
+			put("Turret Angle", Robot.turret.getAngle());
 		}
 		
 		private void put (String name, double d)
@@ -142,19 +145,22 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
 		
-		/*
-		 * For testing
-		 */
-		// Intake
-		SmartDashboard.putData("Intake RollIn", new RollIn());
-		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
+		putConfigVariableInSDB("hood_Pot_LowThresh");
+		putConfigVariableInSDB("hood_Pot_HighThresh");	
+		
+		putConfigVariableInSDB("turret_Pot_LowThresh");
+		putConfigVariableInSDB("turret_Pot_HighThresh");	
+		
+		// Hood
+		SmartDashboard.putData(new HoodBangbang());
+		SmartDashboard.putData(new HoodJoysticks());
+		SmartDashboard.putData(new HoodPID());
 
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
+		// Turret
+		SmartDashboard.putData(new TurretBangbang());
+		SmartDashboard.putData(new TurretJoysticks());
+		SmartDashboard.putData(new TurretPID());
 		
 		logger.info("Finished initSDB()");
 	}

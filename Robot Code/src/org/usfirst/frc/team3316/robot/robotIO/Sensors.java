@@ -18,8 +18,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.SPI;
 
-public class Sensors
-{
+public class Sensors {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
@@ -38,6 +37,12 @@ public class Sensors
 	// Flywheel
 	public Counter flywheelCounter;
 	public DigitalInput hallEffect;
+
+	// Turret
+	public AnalogPotentiometer turretPot;
+
+	// Hood
+	public AnalogPotentiometer hoodPot;
 
 	public Sensors()
 	{
@@ -88,5 +93,13 @@ public class Sensors
 
 		flywheelCounter = new Counter(hallEffect);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round
+
+		// Turret
+		turretPot = new AnalogPotentiometer((int) Robot.config.get("TURRET_POT"),
+				(double) Robot.config.get("TURRET_POT_FULL_RANGE"), (double) Robot.config.get("TURRET_POT_OFFSET"));
+
+		// Hood
+		hoodPot = new AnalogPotentiometer((int) Robot.config.get("HOOD_POT"),
+				(double) Robot.config.get("HOOD_POT_FULL_RANGE"), (double) Robot.config.get("HOOD_POT_OFFSET"));
 	}
 }

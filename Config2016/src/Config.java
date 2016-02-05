@@ -158,7 +158,7 @@ public class Config
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
 				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 3); // changed for
 																// prototype
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 666.6); // TODO:
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0); // TODO:
 																	// Check the
 																	// stall
 																	// current
@@ -174,7 +174,7 @@ public class Config
 
 				addToConstants("TRANSPORT_MOTOR_REVERSE", false);
 				addToConstants("TRANSPORT_MOTOR_PDP_CHANNEL", 5);
-				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 1000.0); // TODO:
+				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0); // TODO:
 																		// Check
 																		// what
 																		// this
@@ -192,7 +192,7 @@ public class Config
 				addToConstants("FLYWHEEL_MOTOR_1", 4);
 				addToConstants("FLYWHEEL_MOTOR_1_REVERSE", false);
 				addToConstants("FLYWHEEL_MOTOR_1_PDP_CHANNEL", 3);
-				addToConstants("FLYWHEEL_MOTOR_1_MAX_CURRENT", 1000.0); // TODO:
+				addToConstants("FLYWHEEL_MOTOR_1_MAX_CURRENT", 10.0); // TODO:
 																		// Check
 																		// what
 																		// this
@@ -202,13 +202,37 @@ public class Config
 				addToConstants("FLYWHEEL_MOTOR_2", 11);
 				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
 				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
-				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 1000.0);// TODO:
+				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 10.0); // TODO:
 																		// Check
 																		// what
 																		// this
 																		// value
 																		// should
 																		// be.
+				
+				/*
+				 * Turret
+				 */
+				addToConstants("TURRET_MOTOR", 0);
+				addToConstants("TURRET_MOTOR_REVERSE", false);
+				addToConstants("TURRET_MOTOR_PDP_CHANNEL", 0);
+				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check the stall current
+				
+				addToConstants("TURRET_POT", 4);
+				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
+		 		addToConstants("TURRET_POT_OFFSET", 0.0);
+				
+				/*
+				 * Hood
+				 */
+		 		addToConstants("HOOD_MOTOR", 12);
+				addToConstants("HOOD_MOTOR_REVERSE", false);
+				addToConstants("HOOD_MOTOR_PDP_CHANNEL", 10);
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check the stall current
+		 		
+				addToConstants("HOOD_POT", 5);
+				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
+				addToConstants("HOOD_POT_OFFSET", 30.0);
 			}
 		}
 
@@ -303,6 +327,65 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollOut_Speed", -0.5);
+			}
+		}
+		
+		/*
+		 * Turret
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("turret_Angle_SetPoint", 0.0);
+				
+				// PID Control
+				addToVariables("turret_PID_KP", 0.0);
+				addToVariables("turret_PID_KI", 0.0);
+				addToVariables("turret_PID_KD", 0.0);
+				
+				// Bangbang Control
+				addToVariables("turret_Bangbang_OnVoltage", 0.0);
+				addToVariables("turret_Bangbang_OffVoltage", 0.0);
+				
+				addToVariables("turret_Pot_LeftThresh", 0.0);
+				addToVariables("turret_Pot_RightThresh", 400.0);	
+			}
+		}
+		
+		/*
+		 * Hood
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+				// PID Control
+				addToVariables("hood_PID_KP", 0.0);
+				addToVariables("hood_PID_KI", 0.0);
+				addToVariables("hood_PID_KD", 0.0);
+				
+				// Bangbang Control
+				addToVariables("hood_Bangbang_OnVoltage", 0.0);
+				addToVariables("hood_Bangbang_OffVoltage", 0.0);
+				addToVariables("hood_Angle_SetPoint", 0.0);
+				
+				addToVariables("hood_Pot_BottomThresh", 0.0);
+				addToVariables("hood_Pot_TopThresh", 400.0);	
 			}
 		}
 
