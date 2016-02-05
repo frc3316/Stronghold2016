@@ -25,19 +25,29 @@ public class Hood extends DBugSubsystemCC
 	}
 
 	/**
-	 * Set the voltage for the motors of this subsystem.
+	 * Set the voltage for the motors of this subsystem. If the hood is past the
+	 * allowed position (about to break itself) it allows movement only in one
+	 * direction.
+	 * 
 	 * @par v - The voltage for the motors (between 1.0 to -1.0).
 	 */
 	public boolean setMotors(double v)
 	{
-		// If the hood is able to move.
-		if (getAngle() > (double) config.get("hood_Pot_LowThresh")
-				&& getAngle() < (double) config.get("hood_Pot_HighThresh")) {
-			return super.setMotors(v);
+		// Checks if the hood is able to move in a certain direction. We assume
+		// forward is for moving up and negative for moving down.
+
+		if (getAngle() < (double) config.get("hood_Pot_BottomThresh"))
+		{
+			logger.severe("Hood trying to move lower than bottom thresh. Aborting.");
+			v = Math.max(v, 0);
 		}
-		
-		super.setMotors(0);
-		return false;
+		else if (getAngle() > (double) config.get("hood_Pot_TopThresh"))
+		{
+			logger.severe("Hood trying to move higher than top thresh. Aborting.");
+			v = Math.min(v, 0);
+		}
+
+		return super.setMotors(v);
 	}
 
 	/**

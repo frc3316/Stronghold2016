@@ -355,8 +355,8 @@ public class Config
 				addToVariables("turret_Bangbang_OnVoltage", 0.0);
 				addToVariables("turret_Bangbang_OffVoltage", 0.0);
 				
-				addToVariables("turret_Pot_LowThresh", 0.0);
-				addToVariables("turret_Pot_HighThresh", 400.0);	
+				addToVariables("turret_Pot_LeftThresh", 0.0);
+				addToVariables("turret_Pot_RightThresh", 400.0);	
 			}
 		}
 		
@@ -384,8 +384,8 @@ public class Config
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 				addToVariables("hood_Bangbang_SetPoint", 0.0);
 				
-				addToVariables("hood_Pot_LowThresh", 0.0);
-				addToVariables("hood_Pot_HighThresh", 400.0);	
+				addToVariables("hood_Pot_BottomThresh", 0.0);
+				addToVariables("hood_Pot_TopThresh", 400.0);	
 			}
 		}
 
