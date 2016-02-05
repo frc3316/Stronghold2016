@@ -158,13 +158,15 @@ public class Config
 				
 				addToConstants("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
 				addToConstants("CHASSIS_HALL_EFFECT_LEFT_BACK", 13);
-				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 14);
-				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_BACK", 15);
+				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 11);
+				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_BACK", 10);
 				
 
 				/*
 				 * Intake
 				 */
+				addToConstants("INTAKE_SOLENOID_MODULE", 0);
+				
 				addToConstants("INTAKE_SOLENOID_FORWARD", 6); // changed
 																		// for
 																		// prototype
