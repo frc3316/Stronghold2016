@@ -8,8 +8,9 @@ public class MoveUp extends DBugCommand
 
 	private double speed, initAngle;
 	private boolean onTarget;
-	
-	public MoveUp() {
+
+	public MoveUp()
+	{
 		requires(Robot.climbing);
 	}
 
@@ -24,9 +25,8 @@ public class MoveUp extends DBugCommand
 
 		isFin = !Robot.climbing.setMotors(speed);
 
-		onTarget = Robot.climbing
-				.getAngle() >= ((double) config.get("CLIMBING_POT_THRESHOLD")
-						+ initAngle);
+		// The setpoint in the config is the difference in pot angle that we want
+		onTarget = Robot.climbing.getAngle() >= ((double) config.get("climbing_Setpoint") + initAngle);
 	}
 
 	protected boolean isFinished()
