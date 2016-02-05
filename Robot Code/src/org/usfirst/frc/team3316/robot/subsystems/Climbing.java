@@ -9,21 +9,18 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-public class Climbing extends DBugSubsystemCC
-{
+public class Climbing extends DBugSubsystemCC {
 
 	// Sensors
 	private AnalogPotentiometer climbingPot;
 	private DigitalInput climbingSwitch;
 
 	// Actuators
-	private DBugSpeedController climbingMotor1, climbingMotor2, climbingMotor3,
-			climbingMotor4;
-	
+	private DBugSpeedController climbingMotor1, climbingMotor2, climbingMotor3, climbingMotor4;
+
 	private DoubleSolenoid climbingSolenoid;
 
-	public Climbing()
-	{
+	public Climbing() {
 		// Sensors
 		climbingPot = Robot.sensors.climbingPot;
 
@@ -41,50 +38,41 @@ public class Climbing extends DBugSubsystemCC
 		addSpeedController(climbingMotor2);
 		addSpeedController(climbingMotor3);
 		addSpeedController(climbingMotor4);
-	}		
+	}
 
-	public void initDefaultCommand()
-	{
+	public void initDefaultCommand() {
 		setDefaultCommand(new Stop());
 	}
 
-	public boolean setMotors(double v)
-	{
-		if (getAngle() < (double) config.get("climbing_Pot_LowThresh"))
-		{
+	public boolean setMotors(double v) {
+		if (getAngle() < (double) config.get("climbing_Pot_LowThresh")) {
 			logger.severe("Someone is trying to break climbing pot. Aborting");
 			v = Math.max(v, 0);
-		}
-		else if (getAngle() > (double) config.get("climbing_Pot_HighThresh"))
-		{
+		} else if (getAngle() > (double) config.get("climbing_Pot_HighThresh")) {
 			logger.severe("Someone is trying to break climbing pot. Aborting");
 			v = Math.min(v, 0);
 		}
-		
+
 		return super.setMotors(v);
 	}
 
-	public double getAngle()
-	{
+	public double getAngle() {
 		return climbingPot.get();
 	}
 
-	public void openArmPiston()
-	{
+	public void lockArmPiston() {
 		climbingSolenoid.set(Value.kForward);
 	}
-	
-	public void closeArmPiston()
-	{
+
+	public void releaseArmPiston() {
 		climbingSolenoid.set(Value.kReverse);
 	}
-	
+
 	public boolean isOnRung() {
 		return climbingSwitch.get();
 	}
-	
+
 	public boolean isNotOnRung() {
 		return !isOnRung();
 	}
-
 }

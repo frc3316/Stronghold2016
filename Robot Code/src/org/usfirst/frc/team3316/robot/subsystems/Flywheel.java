@@ -7,9 +7,6 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.Counter;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Flywheel extends DBugSubsystemCC
 {
@@ -17,8 +14,6 @@ public class Flywheel extends DBugSubsystemCC
 	private Counter counter;
 
 	double rate = 0;
-	double talonCurrent;
-	double talonVoltage;
 	private static Timer timer;
 
 	static

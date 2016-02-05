@@ -9,10 +9,10 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.climbing.CloseArmPiston;
-import org.usfirst.frc.team3316.robot.commands.climbing.MoveDown;
-import org.usfirst.frc.team3316.robot.commands.climbing.MoveUp;
-import org.usfirst.frc.team3316.robot.commands.climbing.OpenArmPiston;
+import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
+import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
+import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
@@ -150,10 +150,10 @@ public class SDB
 		
 		// Climbing
 		SmartDashboard.putData(new ClimbingSequence());
-		SmartDashboard.putData(new OpenArmPiston());
-		SmartDashboard.putData(new CloseArmPiston());
-		SmartDashboard.putData(new MoveUp());
-		SmartDashboard.putData(new MoveDown());
+		SmartDashboard.putData(new lockArmPiston());
+		SmartDashboard.putData(new ReleaseArmPiston());
+		SmartDashboard.putData(new PullUp());
+		SmartDashboard.putData(new ReleaseDown());
 		
 		logger.info("Finished initSDB()");
 	}
