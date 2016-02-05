@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.chassis.CrossBangbang;
+import org.usfirst.frc.team3316.robot.commands.chassis.CrossDefense;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
@@ -20,6 +22,7 @@ import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.CrossingSequence;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -43,6 +46,10 @@ public class SDB
 			 */
 			
 			put("Intake Current", Robot.intake.getCurrent());
+			
+			put("Chassis Yaw", Robot.chassis.getYaw());
+			put("Chassis Pitch", Robot.chassis.getPitch());
+			put("isOnDefense", Robot.chassis.isOnDefense());
 		}
 		
 		private void put (String name, double d)
@@ -141,20 +148,25 @@ public class SDB
 
 		/*
 		 * Remove these after finishing testing on prototype
-		 */
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
+		 */		
+		putConfigVariableInSDB("chassis_CrossDefense_Pid_Kp");
+		putConfigVariableInSDB("chassis_CrossDefense_Pid_Ki");
+		putConfigVariableInSDB("chassis_CrossDefense_Pid_Kd");
+		putConfigVariableInSDB("chassis_CrossDefense_Pid_Setpoint");
+		putConfigVariableInSDB("chassis_Crossing_Defense_Left_Speed");
+		putConfigVariableInSDB("chassis_Crossing_Defense_Right_Speed");
+		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
+		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
+		putConfigVariableInSDB("chassis_Cross_Bangbang_offVoltage");
+		putConfigVariableInSDB("chassis_Cross_Bangbang_onVoltage");
 		
 		/*
 		 * For testing
 		 */
-		// Intake
-		SmartDashboard.putData("Intake RollIn", new RollIn());
-		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
-
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
+		SmartDashboard.putData(new CrossDefense(false));
+		SmartDashboard.putData(new CrossBangbang());
+		
+		SmartDashboard.putData(new CrossingSequence());
 		
 		logger.info("Finished initSDB()");
 	}

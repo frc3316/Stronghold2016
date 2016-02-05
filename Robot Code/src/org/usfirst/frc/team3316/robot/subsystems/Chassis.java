@@ -11,6 +11,7 @@ import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Chassis extends DBugSubsystemCC
 {
@@ -107,9 +108,7 @@ public class Chassis extends DBugSubsystemCC
 		public void run()
 		{
 			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config
-					.get("CHASSIS_DEFENSE_ANGLE_RANGE")
-					|| Math.abs(movingAvgRoll.get()) <= (double) Robot.config
-							.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
+					.get("chassis_Defense_Pitch_Thresh"))
 			{
 				counter++;
 			}
@@ -128,6 +127,9 @@ public class Chassis extends DBugSubsystemCC
 			{
 				isOnDefense = true;
 			}
+			
+			SmartDashboard.putNumber("Robot Pitch Angle", Math.abs(movingAvgPitch.get()));
+			SmartDashboard.putNumber("isOnDefense_Counter", counter);
 		}
 	}
 

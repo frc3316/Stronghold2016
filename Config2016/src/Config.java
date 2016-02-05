@@ -122,6 +122,11 @@ public class Config
 
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				
+				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 13);
+				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 14);
+				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 2);
+				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1);
 
 				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
 				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
@@ -178,8 +183,8 @@ public class Config
 																		// should
 																		// be.
 
-				addToConstants("TRANSPORT_ENCODER_A", 2);
-				addToConstants("TRANSPORT_ENCODER_B", 3);
+				addToConstants("TRANSPORT_ENCODER_A", 6);
+				addToConstants("TRANSPORT_ENCODER_B", 10);
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
 
 				/*
@@ -217,7 +222,6 @@ public class Config
 			 */
 			{
 				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
-				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
 				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
 			}
 
@@ -229,6 +233,21 @@ public class Config
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
+				
+				// Cross Defense
+				addToVariables("chassis_Crossing_Defense_Left_Speed", 0.5);
+				addToVariables("chassis_Crossing_Defense_Right_Speed", 0.5);
+				
+				addToVariables("chassis_CrossDefense_Pid_Kp", 0.0);
+				addToVariables("chassis_CrossDefense_Pid_Ki", 0.0);
+				addToVariables("chassis_CrossDefense_Pid_Kd", 0.0);
+				addToVariables("chassis_CrossDefense_Pid_Setpoint", 0.0);
+				
+				addToVariables("chassis_Defense_Pitch_Thresh", 4.0);
+				addToVariables("chassis_Defense_Roll_Thresh", 4.0);
+				
+				addToVariables("chassis_Cross_Bangbang_offVoltage", -0.3);
+				addToVariables("chassis_Cross_Bangbang_onVoltage", 0.3);
 			}
 
 		}

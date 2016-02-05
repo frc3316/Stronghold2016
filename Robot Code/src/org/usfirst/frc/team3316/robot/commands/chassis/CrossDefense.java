@@ -56,25 +56,21 @@ public class CrossDefense extends DBugCommand
 
 		pid.setOutputRange(-1, 1);
 
-		leftSpeed = (reverse ? -1 : 1)
-				* (double) config.get("chassis_Crossing_Defense_Left_Speed");
-		rightSpeed = (reverse ? -1 : 1)
-				* (double) config.get("chassis_Crossing_Defense_Right_Speed");
+
 	}
 
 	protected void init()
 	{
-		pid.enable();
+		
 	}
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("chassis_CrossDefense_Pid_Kp"),
-				(double) config.get("chassis_CrossDefense_Pid_Ki"),
-				(double) config.get("chassis_CrossDefense_Pid_Kd"));
-
-		pid.setSetpoint(
-				(double) config.get("chassis_CrossDefense_Pid_Setpoint"));
+		
+		leftSpeed = (reverse ? -1 : 1)
+				* (double) config.get("chassis_Crossing_Defense_Left_Speed");
+		rightSpeed = (reverse ? -1 : 1)
+				* (double) config.get("chassis_Crossing_Defense_Right_Speed");
 
 		Robot.chassis.setMotors(leftSpeed, rightSpeed);
 	}
