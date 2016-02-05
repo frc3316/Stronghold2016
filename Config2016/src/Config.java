@@ -80,10 +80,11 @@ public class Config
 	}
 
 	/*
-	 * NOTE: constants and variables that are common to both robot A and robot B should be added with addToConstants()
-	 * or addToVariables()
+	 * NOTE: constants and variables that are common to both robot A and robot B should be added with
+	 * addToConstants() or addToVariables()
 	 * 
-	 * Specify the which table to add the constant or variable to only if there is a difference between the two robots
+	 * Specify the which table to add the constant or variable to only if there is a difference between the
+	 * two robots
 	 */
 	private void initConfig()
 	{
@@ -119,23 +120,11 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 
-				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
+				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); // Change this after prototype
+				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); // Change this after prototype
 
-				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
+				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); // Change this after prototype
+				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); // Change this after prototype
 
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
@@ -358,9 +347,9 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("climbing_Pot_LowThresh", 100.0); //Check this value
-				addToVariables("climbing_Pot_HighThresh", 3400.0); //Check this value
-				
+				addToVariables("climbing_Pot_LowThresh", 100.0); // Check this value
+				addToVariables("climbing_Pot_HighThresh", 3400.0); // Check this value
+
 				addToVariables("climbing_Speed", 0.0);
 				addToVariables("climbing_Setpoint", 900.0);
 			}

@@ -3,9 +3,14 @@ package org.usfirst.frc.team3316.robot.commands.climbing;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
+/**
+ * Command for climbing. Sets the climbing motors until we reach the target angle of the pot.
+ * 
+ * @author D-Bug
+ *
+ */
 public class MoveUp extends DBugCommand
 {
-
 	private double speed, initAngle;
 	private boolean onTarget;
 
