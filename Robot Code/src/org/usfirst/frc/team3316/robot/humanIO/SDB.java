@@ -41,8 +41,6 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			
-			put("Intake Current", Robot.intake.getCurrent());
 		}
 		
 		private void put (String name, double d)
@@ -142,19 +140,6 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
-		
-		/*
-		 * For testing
-		 */
-		// Intake
-		SmartDashboard.putData("Intake RollIn", new RollIn());
-		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
-
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
 		
 		logger.info("Finished initSDB()");
 	}

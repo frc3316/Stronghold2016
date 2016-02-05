@@ -222,7 +222,7 @@ public class Config
 																		// value
 																		// should
 																		// be.
-				addToConstants("FLYWHEEL_MOTOR_2", 11);
+				addToConstants("FLYWHEEL_MOTOR_2", 9);
 				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
 				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
 				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 1000.0);// TODO:

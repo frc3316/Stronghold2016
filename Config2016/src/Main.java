@@ -179,7 +179,7 @@ public class Main
 		JSch jsch = new JSch();
 		Session session = null;
 		
-		String host = "roborio-3316.local";
+		String host = "roborio-3316-frc.local";
 		String user = "admin";
 		String pass = "";
 		int port = 22;
