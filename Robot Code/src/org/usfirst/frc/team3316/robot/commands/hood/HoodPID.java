@@ -49,11 +49,11 @@ public class HoodPID extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("hood_Pid_Kp"),
-					(double) config.get("hood_Pid_Ki"),
-					(double) config.get("hood_Pid_Kd"));
+		pid.setPID((double) config.get("hood_PID_KP"),
+					(double) config.get("hood_PID_KI"),
+					(double) config.get("hood_PID_KD"));
 		
-		pid.setSetpoint((double) config.get("hood_Pid_Angle"));
+		pid.setSetpoint((double) config.get("hood_PID_Angle"));
 		
 		isFin = !Robot.hood.setMotors(pidOutput);
 	}

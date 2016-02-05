@@ -44,7 +44,8 @@ public class SDB
 			 * Insert put methods here
 			 */
 			
-			put("Intake Current", Robot.intake.getCurrent());
+			put("Hood Angle", Robot.hood.getAngle());
+			put("Turret Angle", Robot.turret.getAngle());
 		}
 		
 		private void put (String name, double d)
@@ -144,54 +145,12 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
-		
-		/*
-		 * Hood
-		 */
-		
-		// PID Control
-		putConfigVariableInSDB("hood_PID_KP");
-		putConfigVariableInSDB("hood_PID_KI");
-		putConfigVariableInSDB("hood_PID_KD");
-		
-		// Bangbang Control
-		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
-		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
-		putConfigVariableInSDB("hood_Bangbang_SetPoint");
 		
 		putConfigVariableInSDB("hood_Pot_LowThresh");
 		putConfigVariableInSDB("hood_Pot_HighThresh");	
 		
-		/*
-		 * Turret
-		 */
-		
-		// PID Control
-		putConfigVariableInSDB("turret_PID_KP");
-		putConfigVariableInSDB("turret_PID_KI");
-		putConfigVariableInSDB("turret_PID_KD");
-		
-		// Bangbang Control
-		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
-		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
-		putConfigVariableInSDB("turret_Bangbang_SetPoint");
-		
 		putConfigVariableInSDB("turret_Pot_LowThresh");
 		putConfigVariableInSDB("turret_Pot_HighThresh");	
-		
-		
-		/*
-		 * For testing
-		 */
-		// Intake
-		SmartDashboard.putData("Intake RollIn", new RollIn());
-		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake StopRoll", new StopRoll());
-
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
 		
 		// Hood
 		SmartDashboard.putData(new HoodBangbang());
