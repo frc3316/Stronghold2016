@@ -179,7 +179,7 @@ public class Main
 		JSch jsch = new JSch();
 		Session session = null;
 		
-		String host = "roborio-3316.local";
+		String host = "roborio-3316-frc.local";
 		String user = "admin";
 		String pass = "";
 		int port = 22;
@@ -208,11 +208,9 @@ public class Main
 			for (int i = 0; i < logs.size(); i++)
 			{
 				String fullString = logs.get(i).toString();
-				
+				String fileString = fullString.substring(fullString.lastIndexOf(" ")+1);
 				if (fullString.contains("logFile") && !fullString.contains("lck"))
 				{
-					int filePosition = fullString.indexOf("logFile");
-					String fileString = fullString.substring(filePosition);
 					
 					/*
 					File existingLog = new File(destPath + fileString);
@@ -233,6 +231,8 @@ public class Main
 					System.out.println("Transferred " + fileString);
 					bis.close();
 					bos.close();
+				} else if (fullString.contains("lck")) {
+					sftpChannel.rm(fileString);
 				}
 			}
 		}
