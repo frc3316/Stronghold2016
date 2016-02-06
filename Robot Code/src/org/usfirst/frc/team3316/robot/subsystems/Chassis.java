@@ -17,8 +17,7 @@ public class Chassis extends DBugSubsystemCC
 {
 
 	// Actuators
-	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
-			rightMotor1;
+	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
 
 	private DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
 
@@ -60,18 +59,17 @@ public class Chassis extends DBugSubsystemCC
 
 		// Sensors
 		navx = Robot.sensors.navx;
-		
+
 		heLeftFront = Robot.sensors.chassisHELeftFront;
 		heLeftBack = Robot.sensors.chassisHELeftBack;
 		heRightFront = Robot.sensors.chassisHERightFront;
 		heRightBack = Robot.sensors.chassisHERightBack;
 
 		// Create moving average
-		movingAvg = new MovingAverage(
-				(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
-				{
-					return getPitch();
-				});
+		movingAvg = new MovingAverage((int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
+		{
+			return getPitch();
+		});
 
 		// Timer init
 		navXTasker = new navX();
@@ -97,8 +95,7 @@ public class Chassis extends DBugSubsystemCC
 
 	public boolean openLongPistons()
 	{
-		if (shortPistonsRight.get().equals(Value.kForward)
-				|| shortPistonsLeft.get().equals(Value.kForward))
+		if (shortPistonsRight.get().equals(Value.kForward) || shortPistonsLeft.get().equals(Value.kForward))
 		{
 			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
 			return false;
@@ -109,14 +106,14 @@ public class Chassis extends DBugSubsystemCC
 			return true;
 		}
 	}
-	
+
 	public boolean closeLongPistons()
 	{
 		longPistons.set(Value.kReverse);
 		return true;
 	}
-	
-	public boolean openShortPistonsLeft ()
+
+	public boolean openShortPistonsLeft()
 	{
 		if (longPistons.get().equals(Value.kReverse))
 		{
@@ -129,8 +126,8 @@ public class Chassis extends DBugSubsystemCC
 			return true;
 		}
 	}
-	
-	public boolean openShortPistonsRight ()
+
+	public boolean openShortPistonsRight()
 	{
 		if (longPistons.get().equals(Value.kReverse))
 		{
@@ -143,35 +140,61 @@ public class Chassis extends DBugSubsystemCC
 			return true;
 		}
 	}
-	
-	public boolean closeShortPistonsLeft ()
+
+	public boolean closeShortPistonsLeft()
 	{
 		shortPistonsLeft.set(Value.kReverse);
 		return true;
 	}
-	
-	public boolean closeShortPistonsRight ()
+
+	public boolean closeShortPistonsRight()
 	{
 		shortPistonsRight.set(Value.kReverse);
 		return true;
 	}
 	
-	public boolean getHELeftFront ()
+	/**
+	 * Closes all of the chassis pistons.
+	 * @return Whether all of the closing methods have succeeded.
+	 */
+	public boolean closeAllPistons ()
+	{
+		return closeLongPistons() && closeShortPistonsLeft() && closeShortPistonsRight();
+	}
+
+	/**
+	 * Returns whether the long pistons are extended.
+	 */
+	public boolean areLongPistonsExtended()
+	{
+		return longPistons.get().equals(Value.kForward);
+	}
+
+	/**
+	 * Returns whether all of the short pistons are extended.
+	 */
+	public boolean areShortPistonsExtended()
+	{
+		return shortPistonsLeft.get().equals(Value.kForward)
+				&& shortPistonsRight.get().equals(Value.kForward);
+	}
+
+	public boolean getHELeftFront()
 	{
 		return heLeftFront.get();
 	}
-	
-	public boolean getHELeftBack ()
+
+	public boolean getHELeftBack()
 	{
 		return heLeftBack.get();
 	}
-	
-	public boolean getHERightFront ()
+
+	public boolean getHERightFront()
 	{
 		return heRightFront.get();
 	}
-	
-	public boolean getHERightBack ()
+
+	public boolean getHERightBack()
 	{
 		return heRightBack.get();
 	}
@@ -191,8 +214,7 @@ public class Chassis extends DBugSubsystemCC
 
 		public void run()
 		{
-			if (Math.abs(movingAvg.get()) <= (double) Robot.config
-					.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
+			if (Math.abs(movingAvg.get()) <= (double) Robot.config.get("CHASSIS_DEFENSE_ANGLE_RANGE"))
 			{
 				counter++;
 			}
@@ -201,8 +223,8 @@ public class Chassis extends DBugSubsystemCC
 				counter = 0;
 			}
 
-			if (counter >= (int) Math.round((double) ((double) config
-					.get("CHASSIS_DEFENSE_ANGLE_TIMEOUT") / 20.0)))
+			if (counter >= (int) Math
+					.round((double) ((double) config.get("CHASSIS_DEFENSE_ANGLE_TIMEOUT") / 20.0)))
 			{ // isTimedOut
 				counter = 0;
 				isOnDefense = false;

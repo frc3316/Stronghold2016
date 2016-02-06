@@ -15,9 +15,7 @@ public class RetractOmni extends DBugCommand
 	protected void init()
 	{
 		// Closing requires no coordination, so yolo
-		Robot.chassis.closeLongPistons();
-		Robot.chassis.closeShortPistonsLeft();
-		Robot.chassis.closeShortPistonsRight();
+		Robot.chassis.closeAllPistons();
 
 		timeout = (double) config.get("chassis_RetractOmni_Timeout");
 		setTimeout(timeout); // We want a timeout so we're sure that only the

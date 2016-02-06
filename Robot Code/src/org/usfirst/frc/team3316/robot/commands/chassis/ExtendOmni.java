@@ -11,6 +11,7 @@ public class ExtendOmni extends DBugCommand
 	private double cancelTimeout;
 
 	private double timeoutStartTime;
+	private boolean isTimeoutStarted;
 
 	private boolean leftSet, rightSet; // booleans for whether we've set already
 										// the pistons to open
@@ -22,6 +23,13 @@ public class ExtendOmni extends DBugCommand
 
 	protected void init()
 	{
+		//If we've already extended the module, the hall effects will not be active and this command will run forever.
+		if (Robot.chassis.areLongPistonsExtended() && Robot.chassis.areShortPistonsExtended())
+		{
+			this.cancel();
+			return;
+		}
+		
 		Robot.chassis.openLongPistons();
 
 		leftSet = false;
@@ -30,7 +38,8 @@ public class ExtendOmni extends DBugCommand
 		timeout = (double) config.get("chassis_ExtendOmni_Timeout");
 		cancelTimeout = (double) config.get("chassis_ExtendOmni_CancelTimeout");
 
-		timeoutStartTime = Double.MAX_VALUE;
+		timeoutStartTime = 0;
+		isTimeoutStarted = false;
 	}
 
 	protected void execute()
@@ -49,7 +58,7 @@ public class ExtendOmni extends DBugCommand
 			rightSet = true;
 		}
 
-		if (leftSet && rightSet && timeoutStartTime == Double.MAX_VALUE)
+		if (leftSet && rightSet && !isTimeoutStarted)
 		{
 			/*
 			 * We can't use here the isTimedOut method because it measures the
@@ -57,7 +66,7 @@ public class ExtendOmni extends DBugCommand
 			 * timeout was started
 			 */
 			timeoutStartTime = Timer.getFPGATimestamp();
-
+			isTimeoutStarted = true;
 		}
 	}
 
@@ -67,16 +76,12 @@ public class ExtendOmni extends DBugCommand
 		{
 			// Too much time has passed and the short pistons didn't open.
 			// Something is wrong and we're aborting.
-
-			Robot.chassis.closeLongPistons();
-			Robot.chassis.closeShortPistonsLeft();
-			Robot.chassis.closeShortPistonsRight();
-
+			Robot.chassis.closeAllPistons();
 			return true;
 		}
 
 		// This is a timer
-		return Timer.getFPGATimestamp() >= timeoutStartTime + timeout;
+		return (Timer.getFPGATimestamp() >= timeoutStartTime + timeout) && isTimeoutStarted;
 	}
 
 	protected void fin()
@@ -85,5 +90,7 @@ public class ExtendOmni extends DBugCommand
 
 	protected void interr()
 	{
+		// If the command didn't finish for some reason we're aborting as well
+		Robot.chassis.closeAllPistons();
 	}
 }
