@@ -144,7 +144,8 @@ public class SDB {
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-		putConfigVariableInSDB("climbing_Speed");
+		putConfigVariableInSDB("climbing_UpSpeed");
+		putConfigVariableInSDB("climbing_DownSpeed");
 
 		// Climbing
 		SmartDashboard.putData(new ClimbingSequence());

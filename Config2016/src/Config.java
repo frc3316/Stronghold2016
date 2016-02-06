@@ -196,8 +196,8 @@ public class Config
 				addToConstants("CLIMBING_MOTOR_4_PDP_CHANNEL", 14);
 				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 10.0);
 
-				addToConstants("CLIMBING_SOLENOID_FORWARD_CHANNEL", 0);
-				addToConstants("CLIMBING_SOLENOID_REVERSE_CHANNEL", 1);
+				addToConstants("CLIMBING_SOLENOID_FORWARD", 0);
+				addToConstants("CLIMBING_SOLENOID_REVERSE", 1);
 
 				addToConstants("CLIMBING_POT", 2);
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
@@ -350,7 +350,8 @@ public class Config
 				addToVariables("climbing_Pot_LowThresh", 100.0); // Check this value
 				addToVariables("climbing_Pot_HighThresh", 3400.0); // Check this value
 
-				addToVariables("climbing_Speed", 0.0);
+				addToVariables("climbing_UpSpeed", 0.0); // Check this value
+				addToVariables("climbing_DownSpeed", -0.0); // Check this value
 				addToVariables("climbing_Setpoint", 900.0);
 			}
 		}

@@ -2,6 +2,8 @@ package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 public class DBugToggleCommand extends DBugCommand
 {
 	/**
@@ -9,13 +11,13 @@ public class DBugToggleCommand extends DBugCommand
 	 * Note: This does not work on whileHeld
 	 */
 	
-	private static DBugCommand cmd1, cmd2;
+	private Command cmd1, cmd2;
 	private static int toggle = 1; // What command will run next
 
-	public DBugToggleCommand(DBugCommand cmd1, DBugCommand cmd2)
+	public DBugToggleCommand(Command cmd1, Command cmd2)
 	{
-		DBugToggleCommand.cmd1 = cmd1;
-		DBugToggleCommand.cmd2 = cmd2;
+		this.cmd1 = cmd1;
+		this.cmd2 = cmd2;
 	}
 
 	protected void init()

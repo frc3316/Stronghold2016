@@ -61,10 +61,8 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		JoystickButton EmergencyClimbButton = new JoystickButton(joystickRight, 5);
 		JoystickButton climbButton = new JoystickButton(joystickRight, 6);
-
-		EmergencyClimbButton.whenPressed(new DBugToggleCommand(new ReleaseArmPiston(), new PullUp()));
-		climbButton.whenPressed(new ClimbingSequence());
+		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
+		
 	}
 }
