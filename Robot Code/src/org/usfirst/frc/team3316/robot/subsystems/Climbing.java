@@ -20,7 +20,8 @@ public class Climbing extends DBugSubsystemCC {
 
 	private DoubleSolenoid climbingSolenoid;
 
-	public Climbing() {
+	public Climbing()
+	{
 		// Sensors
 		climbingPot = Robot.sensors.climbingPot;
 
@@ -40,15 +41,19 @@ public class Climbing extends DBugSubsystemCC {
 		addSpeedController(climbingMotor4);
 	}
 
-	public void initDefaultCommand() {
+	public void initDefaultCommand()
+	{
 		setDefaultCommand(new Stop());
 	}
 
-	public boolean setMotors(double v) {
-		if (getAngle() < (double) config.get("climbing_Pot_LowThresh")) {
+	public boolean setMotors(double v)
+	{
+		if (getAngle() < (double) config.get("climbing_Pot_LowThresh"))
+		{
 			logger.severe("Someone is trying to break climbing pot. Aborting");
 			v = Math.max(v, 0);
-		} else if (getAngle() > (double) config.get("climbing_Pot_HighThresh")) {
+		} else if (getAngle() > (double) config.get("climbing_Pot_HighThresh"))
+		{
 			logger.severe("Someone is trying to break climbing pot. Aborting");
 			v = Math.min(v, 0);
 		}
@@ -56,23 +61,28 @@ public class Climbing extends DBugSubsystemCC {
 		return super.setMotors(v);
 	}
 
-	public double getAngle() {
+	public double getAngle()
+	{
 		return climbingPot.get();
 	}
 
-	public void lockArmPiston() {
+	public void lockArmPiston()
+	{
 		climbingSolenoid.set(Value.kForward);
 	}
 
-	public void releaseArmPiston() {
+	public void releaseArmPiston()
+	{
 		climbingSolenoid.set(Value.kReverse);
 	}
 
-	public boolean isOnRung() {
+	public boolean isOnRung()
+	{
 		return climbingSwitch.get();
 	}
 
-	public boolean isNotOnRung() {
+	public boolean isNotOnRung()
+	{
 		return !isOnRung();
 	}
 }

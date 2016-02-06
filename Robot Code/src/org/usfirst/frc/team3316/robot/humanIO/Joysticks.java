@@ -4,20 +4,23 @@
 package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class Joysticks
-{
+public class Joysticks {
 	/*
 	 * Defines a button in a gamepad POV for an array of angles
 	 */
-	private class POVButton extends Button
-	{
+	private class POVButton extends Button {
 		Joystick m_joystick;
 		int m_deg;
 
@@ -37,6 +40,25 @@ public class Joysticks
 		}
 	}
 
+	private class ToggleButton extends Button {
+		Command m_command1, m_command2;
+		Joystick m_joystick;
+		int m_port;
+
+		public ToggleButton(Command command1, Command command2, Joystick joystick, int port)
+		{
+			m_command1 = command1;
+			m_command2 = command2;
+			m_joystick = joystick;
+			m_port = port;
+		}
+
+		public boolean get()
+		{
+			return m_joystick.getRawButton(m_port);
+		}
+	}
+
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
@@ -49,8 +71,7 @@ public class Joysticks
 	{
 		joystickLeft = new Joystick((int) Robot.config.get("JOYSTICK_LEFT"));
 		joystickRight = new Joystick((int) Robot.config.get("JOYSTICK_RIGHT"));
-		joystickOperator = new Joystick(
-				(int) Robot.config.get("JOYSTICK_OPERATOR"));
+		joystickOperator = new Joystick((int) Robot.config.get("JOYSTICK_OPERATOR"));
 	}
 
 	/**
@@ -59,7 +80,12 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		// TODO: We can start configuring buttons for driver commands (will be
-		// useful for testing code when we will need it)
+		//JoystickButton emergencyClimbButton = new JoystickButton(joystickOperator, 4);
+		JoystickButton climbButton = new JoystickButton(joystickRight, 1);
+		
+		climbButton.whileHeld(new ToggleCommand(new RollIn(), new RollOut()));
+
+		//climbButton.whenPressed(new ClimbingSequence());
+		// emergencyClimbButton.whenPressed();
 	}
 }
