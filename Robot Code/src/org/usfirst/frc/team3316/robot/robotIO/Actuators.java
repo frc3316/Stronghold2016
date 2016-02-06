@@ -20,6 +20,8 @@ public class Actuators
 	private SpeedController leftChassis1SC, leftChassis2SC, rightChassis1SC,
 			rightChassis2SC;
 
+	public DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
+
 	// Intake
 	public DoubleSolenoid intakeSolenoid;
 	public DBugSpeedController intakeMotor;
@@ -65,7 +67,7 @@ public class Actuators
 			rightChassis2SC = new Talon(
 					(int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 		}
-		
+
 		leftChassis1 = new DBugSpeedController(leftChassis1SC,
 				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"),
 				(int) config.get("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL"));
@@ -80,12 +82,28 @@ public class Actuators
 				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"),
 				(int) config.get("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL"));
 
+		longPistons = new DoubleSolenoid(
+				(int) Robot.config.get("CHASSIS_LONG_PISTONS_MODULE"),
+				(int) Robot.config.get("CHASSIS_LONG_PISTONS_FORWARD"),
+				(int) Robot.config.get("CHASSIS_LONG_PISTONS_REVERSE"));
+		
+		shortPistonsLeft = new DoubleSolenoid(
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_MODULE"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_FORWARD"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_REVERSE"));
+		
+		shortPistonsRight = new DoubleSolenoid(
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_MODULE"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE"));
+
 		/*
 		 * Intake
 		 */
 		intakeSolenoid = new DoubleSolenoid(
-				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD_CHANNEL"),
-				(int) Robot.config.get("INTAKE_SOLENOID_REVERSE_CHANNEL"));
+				(int) Robot.config.get("INTAKE_SOLENOID_MODULE"),
+				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD"),
+				(int) Robot.config.get("INTAKE_SOLENOID_REVERSE"));
 
 		intakeMotor = new DBugSpeedController(
 				new VictorSP((int) Robot.config.get("INTAKE_MOTOR")),
