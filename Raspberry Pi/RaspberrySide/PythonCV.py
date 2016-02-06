@@ -1,6 +1,7 @@
 '''
 This is the main module that handles and uses all other modules for the Python CV
 '''
+
 import sys
 from VisionManager import *
 from NetworkManager import *
@@ -10,11 +11,7 @@ import cv2
 import numpy as np
 from Utils import logger
 from Utils import LockFile
-
-#############
-# constants #
-#############
-
+from Constants import *
 # Lock File:
 lockFile = LockFile("LockFile.loc")
 
@@ -29,34 +26,6 @@ if len(sys.argv) > 2:
     isShowingImage = int(sys.argv[2])
 else:
     isShowingImage = 1
-# Colors:
-LB = np.array([37,0,231]) # Lower bond
-UB = np.array([108,40,255]) # Upper bond
-
-# Bounding rectangle
-MBR = 500 # Minimum bounding rectangle
-KH = 36 # Known height (of U).
-KW = 50.8 # Known width  (of U).
-FL = 1295 # Focal length.
-
-# Robot:
-RW = 100 # Robot width.
-RH = 81 # Robot height.
-RL = 100 # Robot length.
-
-# Field:
-TH = 255 # The height of the tower
-CUW = 260 # (Center U Width) The U width as it looks in the camera when it is in the center (in pixels).
-CUWD = 220 # The distance which the CUW was calculated from.
-
-# Camera:
-HAX = 53 # The head angle of the camera (x)
-HAY = 40 # The head angle of the camera (y)
-
-# Camera Settings:
-brightness = -0.1
-saturation = 15
-exposure = -1
 
 ##################################
 # Camera and FPS counter setting #
@@ -111,7 +80,7 @@ if __name__ == "__main__":
                 logger.debug("Current U X In Pixels: "+str(x))
                 logger.debug("Current U Y In Pixels: "+str(y))
                 # (x, y) = top left corner, h+ is down, w+ is right
-                cv2.rectangle(visionManager.maskedImage, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.rectangle(visionManager.maskedImage, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
             #############################
             # Send data to java process #
@@ -121,7 +90,7 @@ if __name__ == "__main__":
                values = [visionManager.currentImageObject.distanceFromCamera,
                          visionManager.currentImageObject.azimuthalAngle,
                          visionManager.currentImageObject.polarAngle]
-               names = ["DistanceFromCamera", "AzimuthalAngle", "PolarAngle"]
+               names = ["DFC", "AA", "PA"]
                networkManager.sendData(values, names)
 
             ###################
