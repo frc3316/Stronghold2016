@@ -4,8 +4,13 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class DBugToggleCommand extends DBugCommand
 {
+	/**
+	 * First pressing activates cmd 1 and the second activates cmd 2
+	 * Note: This does not work on whileHeld
+	 */
+	
 	private static DBugCommand cmd1, cmd2;
-	private static int toggle;
+	private static int toggle = 1; // What command will run next
 
 	public DBugToggleCommand(DBugCommand cmd1, DBugCommand cmd2)
 	{
