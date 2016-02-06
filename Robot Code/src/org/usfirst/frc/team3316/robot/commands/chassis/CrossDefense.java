@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CrossDefense extends DBugCommand
 {
@@ -61,7 +62,7 @@ public class CrossDefense extends DBugCommand
 
 	protected void init()
 	{
-		
+		SmartDashboard.putBoolean("finished", false);
 	}
 
 	protected void execute()
@@ -85,6 +86,7 @@ public class CrossDefense extends DBugCommand
 
 	protected void fin()
 	{
+		SmartDashboard.putBoolean("finished", true);
 		Robot.chassis.setMotors(0, 0);
 	}
 

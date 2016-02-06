@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public abstract class DBugCommandGroup extends CommandGroup 
 {
-	DBugLogger logger = Robot.logger;
-	Config config = Robot.config;
+	protected DBugLogger logger = Robot.logger;
+	protected Config config = Robot.config;
 	
 	//TODO: Think if we want to add isFin here too.
 	

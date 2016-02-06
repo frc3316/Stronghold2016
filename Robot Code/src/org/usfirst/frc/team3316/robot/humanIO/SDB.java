@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.ResetSensors;
 import org.usfirst.frc.team3316.robot.commands.chassis.CrossBangbang;
 import org.usfirst.frc.team3316.robot.commands.chassis.CrossDefense;
 import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
@@ -51,6 +52,7 @@ public class SDB
 			put("Chassis Yaw", Robot.chassis.getYaw());
 			put("Chassis Pitch", Robot.chassis.getPitch());
 			put("isOnDefense", Robot.chassis.isOnDefense());
+			put("Chassis_Motor1_Voltage", Robot.actuators.leftChassis1.getVoltage());
 		}
 		
 		private void put (String name, double d)
@@ -159,9 +161,9 @@ public class SDB
 		putConfigVariableInSDB("chassis_Crossing_Defense_Right_Speed");
 		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
 		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
-		putConfigVariableInSDB("chassis_Cross_Bangbang_offVoltage");
-		putConfigVariableInSDB("chassis_Cross_Bangbang_onVoltage");
 		putConfigVariableInSDB("chassis_CrossDefense_Back_Voltage");
+		putConfigVariableInSDB("chassis_CrossBack_Timeout");
+		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
 		
 		/*
 		 * For testing
@@ -170,6 +172,8 @@ public class SDB
 		SmartDashboard.putData(new CrossBangbang());
 		
 		SmartDashboard.putData(new CrossingSequence());
+		
+		SmartDashboard.putData(new ResetSensors());
 		
 		logger.info("Finished initSDB()");
 	}

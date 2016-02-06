@@ -1,25 +1,39 @@
 package org.usfirst.frc.team3316.robot.commands.chassis;
 
+import java.util.Timer;
+
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.utils.Point;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 public class CrossBack extends DBugCommand
 {
-	private double speed;
+	private double speed, currentSpeed;
+	private double timeout;
+	private int counter = 0;
 
+	public CrossBack() {
+		requires(Robot.chassis);
+	}
+	
 	protected void init()
 	{
 		speed = (double) config.get("chassis_CrossDefense_Back_Voltage");
+		timeout = (double) config.get("chassis_CrossBack_Timeout");
+		counter = 0;
 	}
 
 	protected void execute()
 	{
-		Robot.chassis.setMotors(speed, speed);
+		currentSpeed = Utils.scale(counter, new Point(0, 0), new Point(timeout / 20.0, speed));
+		Robot.chassis.setMotors(currentSpeed, currentSpeed);
+		counter++;
 	}
 
 	protected boolean isFinished()
 	{
-		return Robot.chassis.isOnDefense();
+		return counter >= timeout / 20.0;
 	}
 
 	protected void fin()

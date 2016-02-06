@@ -221,7 +221,6 @@ public class Config
 			 * Constants
 			 */
 			{
-				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
 				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
 			}
 
@@ -235,6 +234,8 @@ public class Config
 				addToVariables("chassis_TankDrive_InvertY", true);
 				
 				// Cross Defense
+				addToConstants("chassis_Defense_Angle_Timeout", 300.0);
+				
 				addToVariables("chassis_Crossing_Defense_Left_Speed", 0.5);
 				addToVariables("chassis_Crossing_Defense_Right_Speed", 0.5);
 				
@@ -248,6 +249,9 @@ public class Config
 				
 				addToVariables("chassis_Cross_Bangbang_offVoltage", -0.3);
 				addToVariables("chassis_Cross_Bangbang_onVoltage", 0.3);
+				
+				addToVariables("chassis_CrossBack_Timeout", 300.0);
+				addToVariables("chassis_CrossDefense_Back_Voltage", -0.3);
 			}
 
 		}
@@ -354,7 +358,6 @@ public class Config
 				addToVariables("transport_Bangbang_Setpoint", 0.0);
 				addToVariables("transport_Bangbang_OnVoltage", 1.0);
 				addToVariables("transport_Bangbang_OffVoltage", 0.0);
-				addToVariables("chassis_CrossDefense_Back_Voltage", 0.0);
 			}
 		}
 	}

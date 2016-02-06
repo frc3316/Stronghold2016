@@ -113,7 +113,7 @@ public class Chassis extends DBugSubsystem
 			}
 
 			if (counter >= (int) Math.round((double) ((double) config
-					.get("CHASSIS_DEFENSE_ANGLE_TIMEOUT") / 20.0)))
+					.get("chassis_Defense_Angle_Timeout") / 20.0)))
 			{ // isTimedOut
 				counter = 0;
 				isOnDefense = false;
@@ -122,8 +122,9 @@ public class Chassis extends DBugSubsystem
 			{
 				isOnDefense = true;
 			}
-			
-			SmartDashboard.putNumber("Robot Pitch Angle", Math.abs(movingAvgPitch.get()));
+
+			SmartDashboard.putNumber("Robot Pitch Angle",
+					Math.abs(movingAvgPitch.get()));
 			SmartDashboard.putNumber("isOnDefense_Counter", counter);
 		}
 	}
@@ -138,26 +139,26 @@ public class Chassis extends DBugSubsystem
 		return navx.getPitch();
 	}
 
-    public double getYaw ()
-    {
-    	return fixYaw(navx.getYaw());
-    }
-    
-    // Returns the same heading in the range (-180) to (180)
-    private static double fixYaw (double heading)
-    {
-    	double toReturn = heading % 360;
-    	
-    	if (toReturn < -180)
-    	{
-    		toReturn += 360;
-    	}
-    	else if (toReturn > 180)
-    	{
-    		toReturn -= 360;
-    	}
-    	return toReturn;
-    }
+	public double getYaw()
+	{
+		return fixYaw(navx.getYaw());
+	}
+
+	// Returns the same heading in the range (-180) to (180)
+	private static double fixYaw(double heading)
+	{
+		double toReturn = heading % 360;
+
+		if (toReturn < -180)
+		{
+			toReturn += 360;
+		}
+		else if (toReturn > 180)
+		{
+			toReturn -= 360;
+		}
+		return toReturn;
+	}
 
 	public double getLeftSpeed()
 	{
@@ -180,5 +181,11 @@ public class Chassis extends DBugSubsystem
 	{
 		rightEncoder.reset();
 		leftEncoder.reset();
+	}
+
+	public void resetNavX()
+	{
+		navx.reset();
+		navx.resetDisplacement();
 	}
 }
