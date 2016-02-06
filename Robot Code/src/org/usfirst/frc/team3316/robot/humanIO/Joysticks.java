@@ -4,12 +4,15 @@
 package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
 import org.usfirst.frc.team3316.robot.config.Config;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class Joysticks
 {
@@ -49,8 +52,7 @@ public class Joysticks
 	{
 		joystickLeft = new Joystick((int) Robot.config.get("JOYSTICK_LEFT"));
 		joystickRight = new Joystick((int) Robot.config.get("JOYSTICK_RIGHT"));
-		joystickOperator = new Joystick(
-				(int) Robot.config.get("JOYSTICK_OPERATOR"));
+		joystickOperator = new Joystick((int) Robot.config.get("JOYSTICK_OPERATOR"));
 	}
 
 	/**
@@ -59,7 +61,8 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		// TODO: We can start configuring buttons for driver commands (will be
-		// useful for testing code when we will need it)
+		JoystickButton climbButton = new JoystickButton(joystickRight, (int) Robot.config.get("CLIMB_BUTTON"));
+		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
+
 	}
 }

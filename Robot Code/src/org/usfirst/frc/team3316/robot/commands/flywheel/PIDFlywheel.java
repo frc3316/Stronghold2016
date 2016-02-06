@@ -20,6 +20,7 @@ public class PIDFlywheel extends DBugCommand
 		requires(Robot.flywheel);
 
 		// TODO: Add F term to PID
+
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
@@ -54,9 +55,10 @@ public class PIDFlywheel extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("flywheel_PID_KP"),
-				(double) config.get("flywheel_PID_KI"),
-				(double) config.get("flywheel_PID_KD"));
+		pid.setPID((double) config.get("flywheel_PID_KP") / 1000,
+				(double) config.get("flywheel_PID_KI") / 1000,
+				(double) config.get("flywheel_PID_KD") / 1000,
+				(double) config.get("flywheel_PID_KF") / 1000);
 
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 

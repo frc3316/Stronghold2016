@@ -15,10 +15,24 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
+import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
+import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
+import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
+import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
+import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SDB
@@ -42,10 +56,12 @@ public class SDB
 			 */
 			put("Hood Angle", Robot.hood.getAngle());
 			put("Turret Angle", Robot.turret.getAngle());
-			try {
-				put("DistanceFromCamera",
-					VisionServer.Data.get("DistanceFromCamera"));
-			} catch(Exception e) {
+			try
+			{
+				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
+			}
+			catch (Exception e)
+			{
 				e.printStackTrace();
 				put("DistanceFromCamera", "null");
 			}
@@ -124,13 +140,11 @@ public class SDB
 			if (!constant)
 			{
 				variablesInSDB.put(key, type);
-				logger.info("Added to SDB " + key + " of type " + type
-						+ "and allows for its modification");
+				logger.info("Added to SDB " + key + " of type " + type + "and allows for its modification");
 			}
 			else
 			{
-				logger.info("Added to SDB " + key + " of type " + type
-						+ "BUT DOES NOT ALLOW for its modification");
+				logger.info("Added to SDB " + key + " of type " + type + "BUT DOES NOT ALLOW for its modification");
 			}
 
 			return true;
@@ -152,13 +166,13 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-		
+
 		putConfigVariableInSDB("hood_Pot_LowThresh");
-		putConfigVariableInSDB("hood_Pot_HighThresh");	
-		
+		putConfigVariableInSDB("hood_Pot_HighThresh");
+
 		putConfigVariableInSDB("turret_Pot_LowThresh");
-		putConfigVariableInSDB("turret_Pot_HighThresh");	
-		
+		putConfigVariableInSDB("turret_Pot_HighThresh");
+
 		// Hood
 		SmartDashboard.putData(new HoodBangbang());
 		SmartDashboard.putData(new HoodJoysticks());
@@ -168,7 +182,18 @@ public class SDB
 		SmartDashboard.putData(new TurretBangbang());
 		SmartDashboard.putData(new TurretJoysticks());
 		SmartDashboard.putData(new TurretPID());
-		
+
+		putConfigVariableInSDB("climbing_UpSpeed");
+		putConfigVariableInSDB("climbing_DownSpeed");
+
+		// Climbing
+		SmartDashboard.putData(new ClimbingSequence());
+		SmartDashboard.putData(new lockArmPiston());
+		SmartDashboard.putData(new ReleaseArmPiston());
+		SmartDashboard.putData(new PullUp());
+		SmartDashboard.putData(new ReleaseDown());
+		SmartDashboard.putData(new JoystickWinchControl());
+
 		logger.info("Finished initSDB()");
 	}
 }

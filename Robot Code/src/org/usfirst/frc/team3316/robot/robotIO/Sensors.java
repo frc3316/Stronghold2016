@@ -45,6 +45,10 @@ public class Sensors {
 	// Hood
 	public AnalogPotentiometer hoodPot;
 
+	// Climbing
+	public AnalogPotentiometer climbingPot;
+	public DigitalInput climbingSwitch;
+	
 	public Sensors()
 	{
 		//pdp = new PowerDistributionPanel();
@@ -89,9 +93,9 @@ public class Sensors {
 				(int) config.get("TRANSPORT_ENCODER_B"),
 				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"),
 				CounterBase.EncodingType.k4X);
-		
+
 		// transportEncoder.setDistancePerPulse(???);
-		//TODO: check the distance per pulse of the transport encoder
+		// TODO: check the distance per pulse of the transport encoder
 
 		/*
 		 * Flywheel
@@ -109,5 +113,10 @@ public class Sensors {
 		// Hood
 		hoodPot = new AnalogPotentiometer((int) Robot.config.get("HOOD_POT"),
 				(double) Robot.config.get("HOOD_POT_FULL_RANGE"), (double) Robot.config.get("HOOD_POT_OFFSET"));
+		/*
+		 * Climbing
+		 */
+		climbingPot = new AnalogPotentiometer((int) config.get("CLIMBING_POT"), (double) config.get("CLIMBING_POT_FULL_RANGE"), (double) config.get("CLIMBING_POT_OFFSET"));
+		climbingSwitch = new DigitalInput((int) config.get("CLIMBING_SWITCH"));
 	}
 }

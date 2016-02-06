@@ -80,11 +80,11 @@ public class Config
 	}
 
 	/*
-	 * NOTE: constants and variables that are common to both robot A and robot B
-	 * should be added with addToConstants() or addToVariables()
+	 * NOTE: constants and variables that are common to both robot A and robot B should be added with
+	 * addToConstants() or addToVariables()
 	 * 
-	 * Specify the which table to add the constant or variable to only if there
-	 * is a difference between the two robots
+	 * Specify the which table to add the constant or variable to only if there is a difference between the
+	 * two robots
 	 */
 	private void initConfig()
 	{
@@ -96,9 +96,13 @@ public class Config
 			 * Constants
 			 */
 			{
+				// Joysticks
 				addToConstants("JOYSTICK_LEFT", 0);
 				addToConstants("JOYSTICK_RIGHT", 1);
 				addToConstants("JOYSTICK_OPERATOR", 2);
+				
+				// Buttons
+				addToConstants("CLIMB_BUTTON", 6);
 			}
 		}
 
@@ -120,23 +124,11 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
 				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
 
-				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
+				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 1); // Change this after prototype
+				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1); // Change this after prototype
 
-				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
-				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); // Change
-																		// this
-																		// after
-																		// prototype
+				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 1); // Change this after prototype
+				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1); // Change this after prototype
 
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
@@ -144,24 +136,25 @@ public class Config
 				/*
 				 * Intake
 				 */
-				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); // changed
-																		// for
-																		// prototype
-				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); // changed
-																		// for
-																		// prototype
+				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); // changed for prototype
+				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); // changed for prototype
 				addToConstants("INTAKE_MOTOR", 3); // changed for prototype
 
 				addToConstants("INTAKE_LEFT_SWITCH", 7);
 				addToConstants("INTAKE_RIGHT_SWITCH", 1);
 
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
+<<<<<<< HEAD
 				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 3); // changed for
 																// prototype
 				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0); // TODO:
 																	// Check the
 																	// stall
 																	// current
+=======
+				addToConstants("INTAKE_MOTOR_PDP_CHANNEL", 3); // changed for prototype
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
+>>>>>>> climbing
 
 				addToConstants("INTAKE_POT", 6);
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
@@ -174,6 +167,7 @@ public class Config
 
 				addToConstants("TRANSPORT_MOTOR_REVERSE", false);
 				addToConstants("TRANSPORT_MOTOR_PDP_CHANNEL", 5);
+<<<<<<< HEAD
 				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0); // TODO:
 																		// Check
 																		// what
@@ -181,6 +175,9 @@ public class Config
 																		// value
 																		// should
 																		// be.
+=======
+				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0);
+>>>>>>> climbing
 
 				addToConstants("TRANSPORT_ENCODER_A", 2);
 				addToConstants("TRANSPORT_ENCODER_B", 3);
@@ -192,6 +189,7 @@ public class Config
 				addToConstants("FLYWHEEL_MOTOR_1", 4);
 				addToConstants("FLYWHEEL_MOTOR_1_REVERSE", false);
 				addToConstants("FLYWHEEL_MOTOR_1_PDP_CHANNEL", 3);
+<<<<<<< HEAD
 				addToConstants("FLYWHEEL_MOTOR_1_MAX_CURRENT", 10.0); // TODO:
 																		// Check
 																		// what
@@ -233,6 +231,47 @@ public class Config
 				addToConstants("HOOD_POT", 5);
 				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
 				addToConstants("HOOD_POT_OFFSET", 30.0);
+=======
+				addToConstants("FLYWHEEL_MOTOR_1_MAX_CURRENT", 10.0);
+
+				addToConstants("FLYWHEEL_MOTOR_2", 11);
+				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
+				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
+				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 10.0);
+
+				/*
+				 * Climbing
+				 */
+				addToConstants("CLIMBING_MOTOR_1", 12);
+				addToConstants("CLIMBING_MOTOR_1_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_1_PDP_CHANNEL", 10);
+				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 10.0);
+
+				addToConstants("CLIMBING_MOTOR_2", 13);
+				addToConstants("CLIMBING_MOTOR_2_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_2_PDP_CHANNEL", 11);
+				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 10.0);
+
+				addToConstants("CLIMBING_MOTOR_3", 14);
+				addToConstants("CLIMBING_MOTOR_3_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_3_PDP_CHANNEL", 12);
+				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 10.0);
+
+				addToConstants("CLIMBING_MOTOR_4", 15);
+				addToConstants("CLIMBING_MOTOR_4_REVERSE", false);
+				addToConstants("CLIMBING_MOTOR_4_PDP_CHANNEL", 14);
+				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 10.0);
+
+				addToConstants("CLIMBING_SOLENOID_FORWARD", 0);
+				addToConstants("CLIMBING_SOLENOID_REVERSE", 1);
+
+				addToConstants("CLIMBING_POT", 2);
+				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
+				addToConstants("CLIMBING_POT_OFFSET", 0.0);
+
+				addToConstants("CLIMBING_SWITCH", 8);
+
+>>>>>>> climbing
 			}
 		}
 
@@ -269,13 +308,7 @@ public class Config
 			 * Constants
 			 */
 			{
-				addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 1000.0); // TOOD:
-																		// Measure
-																		// this
-																		// and
-																		// make
-																		// it
-																		// useful.
+				addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 10.0); // TOOD: Measure this and make it useful.
 				addToConstants("FLYWHEEL_COUNTER", 0);
 			}
 
@@ -294,6 +327,7 @@ public class Config
 				addToVariables("flywheel_PID_KP", 0.0);
 				addToVariables("flywheel_PID_KI", 0.0);
 				addToVariables("flywheel_PID_KD", 0.0);
+				addToVariables("flywheel_PID_KF", 0.0);
 			}
 		}
 
@@ -399,14 +433,14 @@ public class Config
 			{
 
 			}
-			
+
 			/*
 			 * Variables
 			 */
 			{
 
 			}
-			
+
 			/*
 			 * Roll In
 			 */
@@ -422,6 +456,29 @@ public class Config
 				addToVariables("transport_Bangbang_Setpoint", 0.0);
 				addToVariables("transport_Bangbang_OnVoltage", 1.0);
 				addToVariables("transport_Bangbang_OffVoltage", 0.0);
+			}
+		}
+
+		/*
+		 * Climbing
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+			}
+
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("climbing_Pot_LowThresh", 100.0); // Check this value
+				addToVariables("climbing_Pot_HighThresh", 3400.0); // Check this value
+
+				addToVariables("climbing_UpSpeed", 0.0); // Check this value
+				addToVariables("climbing_DownSpeed", -0.0); // Check this value
+				addToVariables("climbing_Setpoint", 900.0);
 			}
 		}
 	}
