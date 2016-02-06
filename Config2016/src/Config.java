@@ -2,13 +2,13 @@ import java.util.Hashtable;
 
 public class Config
 {
-	public Hashtable<String, Object> variablesB;
-	public Hashtable<String, Object> constantsB;
+	public static Hashtable<String, Object> variablesB;
+	public static Hashtable<String, Object> constantsB;
 
-	public Hashtable<String, Object> variablesA;
-	public Hashtable<String, Object> constantsA;
+	public static Hashtable<String, Object> variablesA;
+	public static Hashtable<String, Object> constantsA;
 
-	public Config()
+	static
 	{
 		variablesB = new Hashtable<String, Object>();
 		constantsB = new Hashtable<String, Object>();
@@ -19,7 +19,7 @@ public class Config
 		initConfig();
 	}
 
-	private void addToConstantsA(String key, Object value)
+	public static void addToConstantsA(String key, Object value)
 	{
 		if (constantsA.containsKey(key))
 		{
@@ -31,7 +31,7 @@ public class Config
 		}
 	}
 
-	private void addToVariablesA(String key, Object value)
+	public static void addToVariablesA(String key, Object value)
 	{
 		if (variablesA.containsKey(key))
 		{
@@ -43,7 +43,7 @@ public class Config
 		}
 	}
 
-	private void addToConstantsB(String key, Object value)
+	public static void addToConstantsB(String key, Object value)
 	{
 		if (constantsB.containsKey(key))
 		{
@@ -55,7 +55,7 @@ public class Config
 		}
 	}
 
-	private void addToVariablesB(String key, Object value)
+	public static void addToVariablesB(String key, Object value)
 	{
 		if (variablesB.containsKey(key))
 		{
@@ -67,13 +67,13 @@ public class Config
 		}
 	}
 
-	private void addToConstants(String key, Object value)
+	public static void addToConstants(String key, Object value)
 	{
 		addToConstantsA(key, value);
 		addToConstantsB(key, value);
 	}
 
-	private void addToVariables(String key, Object value)
+	private static void addToVariables(String key, Object value)
 	{
 		addToVariablesA(key, value);
 		addToVariablesB(key, value);
@@ -86,7 +86,7 @@ public class Config
 	 * Specify the which table to add the constant or variable to only if there
 	 * is a difference between the two robots
 	 */
-	private void initConfig()
+	private static void initConfig()
 	{
 		/*
 		 * Human IO
