@@ -40,7 +40,7 @@ public class Joysticks {
 		}
 	}
 
-	private class ToggleButton extends Button {
+	/* private class ToggleButton extends Button {
 		Command m_command1, m_command2;
 		Joystick m_joystick;
 		int m_port;
@@ -51,13 +51,13 @@ public class Joysticks {
 			m_command2 = command2;
 			m_joystick = joystick;
 			m_port = port;
-		}
+		} 
 
 		public boolean get()
 		{
 			return m_joystick.getRawButton(m_port);
 		}
-	}
+	} */
 
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
@@ -83,7 +83,7 @@ public class Joysticks {
 		//JoystickButton emergencyClimbButton = new JoystickButton(joystickOperator, 4);
 		JoystickButton climbButton = new JoystickButton(joystickRight, 1);
 		
-		climbButton.whileHeld(new ToggleCommand(new RollIn(), new RollOut()));
+		climbButton.whileHeld(new DBugToggleCommand(new RollIn(), new RollOut()));
 
 		//climbButton.whenPressed(new ClimbingSequence());
 		// emergencyClimbButton.whenPressed();
