@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.commands.chassis;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -11,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CrossDefense extends DBugCommand
 {
-	private double rightSpeed, leftSpeed;
+	private double currentSpeed;
 	private PIDController pid;
 	private boolean lastIsOnDefense, isFinished, reverse;
 
@@ -20,60 +21,20 @@ public class CrossDefense extends DBugCommand
 		requires(Robot.chassis);
 
 		this.reverse = reverse;
-
-		pid = new PIDController(0, 0, 0, new PIDSource()
-		{
-
-			public void setPIDSourceType(PIDSourceType pidSource)
-			{
-			}
-
-			public double pidGet()
-			{
-				return Robot.chassis.getYaw();
-			}
-
-			public PIDSourceType getPIDSourceType()
-			{
-				return PIDSourceType.kDisplacement;
-			}
-		}, new PIDOutput()
-		{
-
-			public void pidWrite(double output)
-			{
-				if (reverse)
-				{
-					leftSpeed += output;
-					rightSpeed -= output;
-				}
-				else
-				{
-					leftSpeed -= output;
-					rightSpeed += output;
-				}
-			}
-		});
-
-		pid.setOutputRange(-1, 1);
-
-
 	}
 
 	protected void init()
 	{
-		SmartDashboard.putBoolean("finished", false);
+		currentSpeed = (double) config.get("chassis_CrossDefense_Voltage");
 	}
 
 	protected void execute()
 	{
-		
-		leftSpeed = (reverse ? -1 : 1)
-				* (double) config.get("chassis_Crossing_Defense_Left_Speed");
-		rightSpeed = (reverse ? -1 : 1)
-				* (double) config.get("chassis_Crossing_Defense_Right_Speed");
+		Robot.chassis.setMotors(currentSpeed, currentSpeed);
 
-		Robot.chassis.setMotors(leftSpeed, rightSpeed);
+		currentSpeed -= currentSpeed > (double) config
+				.get("chassis_CrossDefense_MinSpeed")
+						? (double) config.get("chassis_CrossDefense_DownV") : 0.0;
 	}
 
 	protected boolean isFinished()

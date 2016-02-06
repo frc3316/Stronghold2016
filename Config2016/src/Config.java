@@ -252,6 +252,9 @@ public class Config
 				
 				addToVariables("chassis_CrossBack_Timeout", 300.0);
 				addToVariables("chassis_CrossDefense_Back_Voltage", -0.3);
+				
+				addToVariables("chassis_CrossDefense_MinSpeed", 0.0);
+				addToVariables("chassis_CrossDefense_DownV", 0.0);
 			}
 
 		}

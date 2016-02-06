@@ -157,13 +157,14 @@ public class SDB
 		putConfigVariableInSDB("chassis_CrossDefense_Pid_Ki");
 		putConfigVariableInSDB("chassis_CrossDefense_Pid_Kd");
 		putConfigVariableInSDB("chassis_CrossDefense_Pid_Setpoint");
-		putConfigVariableInSDB("chassis_Crossing_Defense_Left_Speed");
-		putConfigVariableInSDB("chassis_Crossing_Defense_Right_Speed");
+		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
 		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
 		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
 		putConfigVariableInSDB("chassis_CrossDefense_Back_Voltage");
 		putConfigVariableInSDB("chassis_CrossBack_Timeout");
 		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
+		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
+		putConfigVariableInSDB("chassis_CrossDefense_MaxSpeed");
 		
 		/*
 		 * For testing
