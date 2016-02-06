@@ -18,21 +18,19 @@ public class ReleaseDown extends DBugCommand
 	public ReleaseDown()
 	{
 		requires(Robot.climbing);
-	}
-
-	protected void init()
-	{
 		initAngle = Robot.climbing.getAngle();
 	}
 
+	protected void init() {}
+
 	protected void execute()
 	{
-		speed = -(double) config.get("climbing_Speed");
+		speed = (double) config.get("climbing_DownSpeed");
 
 		isFin = !Robot.climbing.setMotors(speed);
 
 		// The setpoint in the config is the difference in pot angle that we want
-		onTarget = Robot.climbing.getAngle() <= initAngle - ((double) config.get("climbing_Setpoint"));
+		onTarget = Robot.climbing.getAngle() <= initAngle;
 	}
 
 	protected boolean isFinished()

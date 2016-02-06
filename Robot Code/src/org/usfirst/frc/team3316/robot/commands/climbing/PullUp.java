@@ -17,16 +17,14 @@ public class PullUp extends DBugCommand {
 	public PullUp()
 	{
 		requires(Robot.climbing);
-	}
-
-	protected void init()
-	{
 		initAngle = Robot.climbing.getAngle();
 	}
 
+	protected void init() {}
+
 	protected void execute()
 	{
-		speed = (double) config.get("climbing_Speed");
+		speed = (double) config.get("climbing_UpSpeed");
 
 		isFin = !Robot.climbing.setMotors(speed);
 
