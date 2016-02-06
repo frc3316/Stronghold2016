@@ -4,8 +4,8 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 /**
- * Command for releasing the climbing off the rung. Sets the climbing motors until we reach the target angle
- * of the pot.
+ * Command for releasing the climbing off the rung. Sets the climbing motors
+ * until we reach the target angle of the pot.
  * 
  * @author D-Bug
  *
@@ -17,11 +17,16 @@ public class ReleaseDown extends DBugCommand
 
 	public ReleaseDown()
 	{
+		requires(Robot.chassis);
 		requires(Robot.climbing);
+		requires(Robot.flywheel);
+		requires(Robot.intake);
+		requires(Robot.transport);
 		initAngle = Robot.climbing.getAngle();
 	}
 
-	protected void init() {}
+	protected void init()
+	{}
 
 	protected void execute()
 	{
@@ -29,7 +34,8 @@ public class ReleaseDown extends DBugCommand
 
 		isFin = !Robot.climbing.setMotors(speed);
 
-		// The setpoint in the config is the difference in pot angle that we want
+		// The setpoint in the config is the difference in pot angle that we
+		// want
 		onTarget = Robot.climbing.getAngle() <= initAngle;
 	}
 

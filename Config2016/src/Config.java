@@ -96,9 +96,13 @@ public class Config
 			 * Constants
 			 */
 			{
+				// Joysticks
 				addToConstants("JOYSTICK_LEFT", 0);
 				addToConstants("JOYSTICK_RIGHT", 1);
 				addToConstants("JOYSTICK_OPERATOR", 2);
+				
+				// Buttons
+				addToConstants("CLIMB_BUTTON", 6);
 			}
 		}
 

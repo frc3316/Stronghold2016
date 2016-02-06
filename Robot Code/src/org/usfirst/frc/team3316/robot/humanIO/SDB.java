@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
 import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
+import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
@@ -153,6 +154,7 @@ public class SDB {
 		SmartDashboard.putData(new ReleaseArmPiston());
 		SmartDashboard.putData(new PullUp());
 		SmartDashboard.putData(new ReleaseDown());
+		SmartDashboard.putData(new JoystickWinchControl());
 
 		logger.info("Finished initSDB()");
 	}

@@ -61,8 +61,8 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		JoystickButton climbButton = new JoystickButton(joystickRight, 6);
+		JoystickButton climbButton = new JoystickButton(joystickRight, (int) Robot.config.get("CLIMB_BUTTON"));
 		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
-		
+
 	}
 }
