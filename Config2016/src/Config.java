@@ -212,26 +212,10 @@ public class Config
 				/*
 				 * Flywheel
 				 */
-				addToConstants("FLYWHEEL_MOTOR_1", 4);
-				addToConstants("FLYWHEEL_MOTOR_1_REVERSE", false);
-				addToConstants("FLYWHEEL_MOTOR_1_PDP_CHANNEL", 3);
-				addToConstants("FLYWHEEL_MOTOR_1_MAX_CURRENT", 10.0); // TODO:
-																		// Check
-																		// what
-																		// this
-																		// value
-																		// should
-																		// be.
-				addToConstants("FLYWHEEL_MOTOR_2", 9);
-				addToConstants("FLYWHEEL_MOTOR_2_REVERSE", true);
-				addToConstants("FLYWHEEL_MOTOR_2_PDP_CHANNEL", 5);
-				addToConstants("FLYWHEEL_MOTOR_2_MAX_CURRENT", 10.0); // TODO:
-																		// Check
-																		// what
-																		// this
-																		// value
-																		// should
-																		// be.
+				addToConstants("FLYWHEEL_MOTOR", 4);
+				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
+				addToConstants("FLYWHEEL_MOTOR_PDP_CHANNEL", 3);
+				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 10.0);
 				
 				/*
 				 * Turret
