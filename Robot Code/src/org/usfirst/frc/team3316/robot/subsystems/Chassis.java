@@ -13,7 +13,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Chassis extends DBugSubsystemCC
+public class Chassis extends DBugSubsystem
 {
 
 	// Actuators
@@ -47,11 +47,6 @@ public class Chassis extends DBugSubsystemCC
 		rightMotor2 = Robot.actuators.rightChassis2;
 		leftMotor2 = Robot.actuators.leftChassis2;
 		rightMotor1 = Robot.actuators.rightChassis1;
-
-		addSpeedController(leftMotor1);
-		addSpeedController(leftMotor2);
-		addSpeedController(rightMotor1);
-		addSpeedController(rightMotor2);
 
 		// Sensors
 		navx = Robot.sensors.navx;

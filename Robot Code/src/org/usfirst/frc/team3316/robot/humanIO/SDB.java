@@ -161,6 +161,7 @@ public class SDB
 		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
 		putConfigVariableInSDB("chassis_Cross_Bangbang_offVoltage");
 		putConfigVariableInSDB("chassis_Cross_Bangbang_onVoltage");
+		putConfigVariableInSDB("chassis_CrossDefense_Back_Voltage");
 		
 		/*
 		 * For testing

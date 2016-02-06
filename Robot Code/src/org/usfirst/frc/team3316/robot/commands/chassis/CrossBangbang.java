@@ -32,13 +32,11 @@ public class CrossBangbang extends DBugCommand
 		return false;
 	}
 
-	@Override
 	protected void fin()
 	{
 		Robot.chassis.setMotors(0, 0);
 	}
 
-	@Override
 	protected void interr()
 	{
 		fin();

@@ -354,6 +354,7 @@ public class Config
 				addToVariables("transport_Bangbang_Setpoint", 0.0);
 				addToVariables("transport_Bangbang_OnVoltage", 1.0);
 				addToVariables("transport_Bangbang_OffVoltage", 0.0);
+				addToVariables("chassis_CrossDefense_Back_Voltage", 0.0);
 			}
 		}
 	}
