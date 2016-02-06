@@ -234,27 +234,26 @@ public class Config
 				addToVariables("chassis_TankDrive_InvertY", true);
 				
 				// Cross Defense
-				addToConstants("chassis_Defense_Angle_Timeout", 300.0);
+				addToConstants("chassis_Defense_Angle_Timeout", 400.0);
 				
-				addToVariables("chassis_Crossing_Defense_Left_Speed", 0.5);
-				addToVariables("chassis_Crossing_Defense_Right_Speed", 0.5);
+				addToVariables("chassis_CrossDefense_Voltage", 0.5);
 				
 				addToVariables("chassis_CrossDefense_Pid_Kp", 0.0);
 				addToVariables("chassis_CrossDefense_Pid_Ki", 0.0);
 				addToVariables("chassis_CrossDefense_Pid_Kd", 0.0);
 				addToVariables("chassis_CrossDefense_Pid_Setpoint", 0.0);
 				
-				addToVariables("chassis_Defense_Pitch_Thresh", 4.0);
+				addToVariables("chassis_Defense_Pitch_Thresh", 2.5);
 				addToVariables("chassis_Defense_Roll_Thresh", 4.0);
 				
 				addToVariables("chassis_Cross_Bangbang_offVoltage", -0.3);
 				addToVariables("chassis_Cross_Bangbang_onVoltage", 0.3);
 				
-				addToVariables("chassis_CrossBack_Timeout", 300.0);
-				addToVariables("chassis_CrossDefense_Back_Voltage", -0.3);
+				addToVariables("chassis_CrossBack_Timeout", 400.0);
+				addToVariables("chassis_CrossDefense_Back_Voltage", -0.32);
 				
-				addToVariables("chassis_CrossDefense_MinSpeed", 0.0);
-				addToVariables("chassis_CrossDefense_DownV", 0.0);
+				addToVariables("chassis_CrossDefense_MinSpeed", 0.35);
+				addToVariables("chassis_CrossDefense_DownV", 0.001);
 			}
 
 		}

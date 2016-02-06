@@ -24,7 +24,8 @@ import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
-import org.usfirst.frc.team3316.robot.sequences.CrossingSequence;
+import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
+import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -164,7 +165,7 @@ public class SDB
 		putConfigVariableInSDB("chassis_CrossBack_Timeout");
 		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
 		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
-		putConfigVariableInSDB("chassis_CrossDefense_MaxSpeed");
+		putConfigVariableInSDB("chassis_CrossDefense_DownV");
 		
 		/*
 		 * For testing
@@ -172,7 +173,8 @@ public class SDB
 		SmartDashboard.putData(new CrossDefense(false));
 		SmartDashboard.putData(new CrossBangbang());
 		
-		SmartDashboard.putData(new CrossingSequence());
+		SmartDashboard.putData(new CrossingForwardSequence());
+		SmartDashboard.putData(new CrossingBackSequence());
 		
 		SmartDashboard.putData(new ResetSensors());
 		

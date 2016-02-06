@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CrossDefense extends DBugCommand
 {
-	private double currentSpeed;
+	private double speed;
 	private PIDController pid;
 	private boolean lastIsOnDefense, isFinished, reverse;
 
@@ -25,16 +25,28 @@ public class CrossDefense extends DBugCommand
 
 	protected void init()
 	{
-		currentSpeed = (double) config.get("chassis_CrossDefense_Voltage");
+		speed = (reverse ? -1 : 1) * (double) config.get("chassis_CrossDefense_Voltage");
 	}
 
 	protected void execute()
 	{
-		Robot.chassis.setMotors(currentSpeed, currentSpeed);
+		Robot.chassis.setMotors(speed, speed);
 
-		currentSpeed -= currentSpeed > (double) config
-				.get("chassis_CrossDefense_MinSpeed")
-						? (double) config.get("chassis_CrossDefense_DownV") : 0.0;
+		if (Robot.chassis.isOnDefense())
+		{
+			if (!reverse)
+			{
+				speed -= speed > (double) config
+						.get("chassis_CrossDefense_MinSpeed") ? (double) config
+								.get("chassis_CrossDefense_DownV") : 0.0;
+			}
+			else
+			{
+				speed += speed < -(double) config
+						.get("chassis_CrossDefense_MinSpeed") ? (double) config
+								.get("chassis_CrossDefense_DownV") : 0.0;
+			}
+		}
 	}
 
 	protected boolean isFinished()
