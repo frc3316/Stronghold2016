@@ -30,7 +30,7 @@ public class Actuators
 	public DBugSpeedController transportMotor;
 
 	// Flywheel
-	public DBugSpeedController flywheelMotor1, flywheelMotor2;
+	public DBugSpeedController flywheelMotor;
 	
 	// Turret
 	public DBugSpeedController turretMotor;
@@ -123,16 +123,11 @@ public class Actuators
 		/*
 		 * Flywheel
 		 */
-		flywheelMotor1 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("FLYWHEEL_MOTOR_1")),
-				(boolean) Robot.config.get("FLYWHEEL_MOTOR_1_REVERSE"),
-				(int) Robot.config.get("FLYWHEEL_MOTOR_1_PDP_CHANNEL"),
-				(double) Robot.config.get("FLYWHEEL_MOTOR_1_MAX_CURRENT"));
-		flywheelMotor2 = new DBugSpeedController(
-				new Talon((int) Robot.config.get("FLYWHEEL_MOTOR_2")),
-				(boolean) Robot.config.get("FLYWHEEL_MOTOR_2_REVERSE"),
-				(int) Robot.config.get("FLYWHEEL_MOTOR_2_PDP_CHANNEL"),
-				(double) Robot.config.get("FLYWHEEL_MOTOR_2_MAX_CURRENT"));
+		flywheelMotor = new DBugSpeedController(
+				new Talon((int) Robot.config.get("FLYWHEEL_MOTOR")),
+				(boolean) Robot.config.get("FLYWHEEL_MOTOR_REVERSE"),
+				(int) Robot.config.get("FLYWHEEL_MOTOR_PDP_CHANNEL"),
+				(double) Robot.config.get("FLYWHEEL_MOTOR_MAX_CURRENT"));
 		
 		// Turret
 		turretMotor = new DBugSpeedController(

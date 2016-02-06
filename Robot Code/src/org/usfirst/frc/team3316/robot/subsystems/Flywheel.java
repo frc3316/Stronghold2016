@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Counter;
 
 public class Flywheel extends DBugSubsystemCC
 {
-	private DBugSpeedController flywheelMotor1, flywheelMotor2;
+	private DBugSpeedController flywheelMotor;
 	private Counter counter;
 
 	double rate = 0;
@@ -46,11 +46,9 @@ public class Flywheel extends DBugSubsystemCC
 	public Flywheel()
 	{
 		// Actuators
-		flywheelMotor1 = Robot.actuators.flywheelMotor1;
-		flywheelMotor2 = Robot.actuators.flywheelMotor2;
+		flywheelMotor = Robot.actuators.flywheelMotor;
 
-		addSpeedController(flywheelMotor1);
-		addSpeedController(flywheelMotor2);
+		addSpeedController(flywheelMotor);
 
 		// Sensors
 		counter = Robot.sensors.flywheelCounter;
