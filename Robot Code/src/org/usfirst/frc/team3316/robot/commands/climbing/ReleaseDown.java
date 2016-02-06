@@ -26,7 +26,9 @@ public class ReleaseDown extends DBugCommand
 	}
 
 	protected void init()
-	{}
+	{
+		Robot.actuators.compressor.stop();
+	}
 
 	protected void execute()
 	{

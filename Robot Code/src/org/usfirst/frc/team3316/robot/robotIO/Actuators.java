@@ -13,7 +13,10 @@ public class Actuators
 {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
-
+	
+	// General
+	public Compressor compressor;
+	
 	// Chassis
 	public DBugSpeedController leftChassis1, leftChassis2, rightChassis1,
 			rightChassis2;
@@ -36,6 +39,11 @@ public class Actuators
 
 	public Actuators()
 	{
+		/*
+		 * General
+		 */
+		compressor = new Compressor();
+		
 		/*
 		 * Chassis
 		 */
