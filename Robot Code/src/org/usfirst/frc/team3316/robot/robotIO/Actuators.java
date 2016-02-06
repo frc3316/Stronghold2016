@@ -21,6 +21,8 @@ public class Actuators
 	public DBugSpeedController leftChassis1, leftChassis2, rightChassis1, rightChassis2;
 	private SpeedController leftChassis1SC, leftChassis2SC, rightChassis1SC, rightChassis2SC;
 
+	public DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
+
 	// Intake
 	public DoubleSolenoid intakeSolenoid;
 	public DBugSpeedController intakeMotor;
@@ -29,7 +31,7 @@ public class Actuators
 	public DBugSpeedController transportMotor;
 
 	// Flywheel
-	public DBugSpeedController flywheelMotor1, flywheelMotor2;
+	public DBugSpeedController flywheelMotor;
 
 	// Turret
 	public DBugSpeedController turretMotor;
@@ -80,11 +82,23 @@ public class Actuators
 				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"),
 				(int) config.get("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL"));
 
+		longPistons = new DoubleSolenoid((int) Robot.config.get("CHASSIS_LONG_PISTONS_MODULE"),
+				(int) Robot.config.get("CHASSIS_LONG_PISTONS_FORWARD"),
+				(int) Robot.config.get("CHASSIS_LONG_PISTONS_REVERSE"));
+
+		shortPistonsLeft = new DoubleSolenoid((int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_MODULE"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_FORWARD"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_REVERSE"));
+
+		shortPistonsRight = new DoubleSolenoid((int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_MODULE"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD"),
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE"));
+
 		/*
 		 * Intake
 		 */
-		intakeSolenoid = new DoubleSolenoid((int) Robot.config.get("INTAKE_SOLENOID_FORWARD_CHANNEL"),
-				(int) Robot.config.get("INTAKE_SOLENOID_REVERSE_CHANNEL"));
+		intakeSolenoid = new DoubleSolenoid((int) Robot.config.get("INTAKE_SOLENOID_MODULE"),
+				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD"), (int) Robot.config.get("INTAKE_SOLENOID_REVERSE"));
 
 		intakeMotor = new DBugSpeedController(new VictorSP((int) Robot.config.get("INTAKE_MOTOR")),
 				(boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"), (int) Robot.config.get("INTAKE_MOTOR_PDP_CHANNEL"),
@@ -101,14 +115,10 @@ public class Actuators
 		/*
 		 * Flywheel
 		 */
-		flywheelMotor1 = new DBugSpeedController(new Talon((int) Robot.config.get("FLYWHEEL_MOTOR_1")),
-				(boolean) Robot.config.get("FLYWHEEL_MOTOR_1_REVERSE"),
-				(int) Robot.config.get("FLYWHEEL_MOTOR_1_PDP_CHANNEL"),
-				(double) Robot.config.get("FLYWHEEL_MOTOR_1_MAX_CURRENT"));
-		flywheelMotor2 = new DBugSpeedController(new Talon((int) Robot.config.get("FLYWHEEL_MOTOR_2")),
-				(boolean) Robot.config.get("FLYWHEEL_MOTOR_2_REVERSE"),
-				(int) Robot.config.get("FLYWHEEL_MOTOR_2_PDP_CHANNEL"),
-				(double) Robot.config.get("FLYWHEEL_MOTOR_2_MAX_CURRENT"));
+		flywheelMotor = new DBugSpeedController(new Talon((int) Robot.config.get("FLYWHEEL_MOTOR")),
+				(boolean) Robot.config.get("FLYWHEEL_MOTOR_REVERSE"),
+				(int) Robot.config.get("FLYWHEEL_MOTOR_PDP_CHANNEL"),
+				(double) Robot.config.get("FLYWHEEL_MOTOR_MAX_CURRENT"));
 
 		/*
 		 * Turret
@@ -149,6 +159,5 @@ public class Actuators
 
 		climbingSolenoid = new DoubleSolenoid((int) Robot.config.get("CLIMBING_SOLENOID_FORWARD_CHANNEL"),
 				(int) Robot.config.get("CLIMBING_SOLENOID_REVERSE_CHANNEL"));
-
 	}
 }

@@ -28,6 +28,9 @@ public class Sensors {
 	// Chassis
 	public AHRS navx;
 
+	public DigitalInput chassisHELeftFront, chassisHELeftBack,
+			chassisHERightFront, chassisHERightBack;
+
 	// Intake
 	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
 	public AnalogPotentiometer intakePot;
@@ -72,19 +75,24 @@ public class Sensors {
 			DriverStation.reportError(
 					"Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+		
+		chassisHELeftFront = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_FRONT"));
+		chassisHELeftBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_BACK"));
+		chassisHERightFront = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_FRONT"));
+		chassisHERightBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_BACK"));
 
 		/*
 		 * Intake
 		 */
 		intakeLeftSwitch = new DigitalInput(
-				(int) Robot.config.get("INTAKE_LEFT_SWITCH"));
+				(int) config.get("INTAKE_LEFT_SWITCH"));
 		intakeRightSwitch = new DigitalInput(
-				(int) Robot.config.get("INTAKE_RIGHT_SWITCH"));
+				(int) config.get("INTAKE_RIGHT_SWITCH"));
 
 		intakePot = new AnalogPotentiometer(
-				(int) Robot.config.get("INTAKE_POT"),
-				(double) Robot.config.get("INTAKE_POT_FULL_RANGE"),
-				(double) Robot.config.get("INTAKE_POT_OFFSET"));
+				(int) config.get("INTAKE_POT"),
+				(double) config.get("INTAKE_POT_FULL_RANGE"),
+				(double) config.get("INTAKE_POT_OFFSET"));
 
 		/*
 		 * Transport
@@ -101,7 +109,7 @@ public class Sensors {
 		 * Flywheel
 		 */
 		hallEffect = new DigitalInput(
-				(int) Robot.config.get("FLYWHEEL_COUNTER"));
+				(int) config.get("FLYWHEEL_COUNTER"));
 
 		flywheelCounter = new Counter(hallEffect);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round

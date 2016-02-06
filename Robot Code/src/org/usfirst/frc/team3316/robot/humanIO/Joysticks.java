@@ -5,7 +5,7 @@ package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
-import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
+import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
@@ -64,5 +64,8 @@ public class Joysticks
 		JoystickButton climbButton = new JoystickButton(joystickRight, (int) Robot.config.get("CLIMB_BUTTON"));
 		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
 
+		JoystickButton toggleOmni = new JoystickButton(joystickRight,
+				(int) config.get("BUTTON_TOGGLE_OMNI"));
+		toggleOmni.whenPressed(new ToggleOmni());
 	}
 }
