@@ -43,19 +43,19 @@ public class Chassis extends DBugSubsystemCC
 	public Chassis()
 	{
 		// Actuators
-		leftMotor1 = Robot.actuators.leftChassis1;
-		rightMotor2 = Robot.actuators.rightChassis2;
-		leftMotor2 = Robot.actuators.leftChassis2;
-		rightMotor1 = Robot.actuators.rightChassis1;
+		leftMotor1 = Robot.actuators.chassisLeft1;
+		rightMotor2 = Robot.actuators.chassisRight2;
+		leftMotor2 = Robot.actuators.chassisLeft2;
+		rightMotor1 = Robot.actuators.chassisRight1;
 
 		addSpeedController(leftMotor1);
 		addSpeedController(leftMotor2);
 		addSpeedController(rightMotor1);
 		addSpeedController(rightMotor2);
 
-		longPistons = Robot.actuators.longPistons;
-		shortPistonsLeft = Robot.actuators.shortPistonsLeft;
-		shortPistonsRight = Robot.actuators.shortPistonsRight;
+		longPistons = Robot.actuators.chassisLongPistons;
+		shortPistonsLeft = Robot.actuators.chassisShortPistonsLeft;
+		shortPistonsRight = Robot.actuators.chassisShortPistonsRight;
 
 		// Sensors
 		navx = Robot.sensors.navx;
