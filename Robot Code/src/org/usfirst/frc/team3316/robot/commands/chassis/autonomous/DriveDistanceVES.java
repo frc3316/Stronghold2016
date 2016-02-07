@@ -16,7 +16,7 @@ public class DriveDistanceVES extends DriveDistance
     private double [][] values = new double [][] // TODO: Calibrate these values.
     {
         {0, 0.5, 1},
-        {1, 0.63, 0.1}
+        {0, 0.63, 0.1}
     };
     
 	public DriveDistanceVES(double dist)
@@ -32,7 +32,7 @@ public class DriveDistanceVES extends DriveDistance
 		pidLeft.setSetpoint(profileVelocity);
 		pidRight.setSetpoint(profileVelocity);
 
-		double feedForward = Math.max(0, Utils.valueInterpolation(profilePosition / dist, values));
+		double feedForward = Utils.valueInterpolation(profileVelocity, values);
 
 		Robot.chassis.set(feedForward + pidLeftOutput,
 				feedForward + pidRightOutput);
