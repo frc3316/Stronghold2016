@@ -20,7 +20,8 @@ public class Chassis extends DBugSubsystem
 {
 
 	// Actuators
-	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
+	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
+			rightMotor1;
 
 	private DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
 
@@ -86,9 +87,6 @@ public class Chassis extends DBugSubsystem
 		setDefaultCommand(new TankDrive());
 	}
 
-	/*
-	 * Set Method
-	 */
 	public void setMotors(double left, double right)
 	{
 		leftMotor1.setMotor(left);
@@ -100,9 +98,11 @@ public class Chassis extends DBugSubsystem
 
 	public boolean openLongPistons()
 	{
-		if (shortPistonsRight.get().equals(Value.kForward) || shortPistonsLeft.get().equals(Value.kForward))
+		if (shortPistonsRight.get().equals(Value.kForward)
+				|| shortPistonsLeft.get().equals(Value.kForward))
 		{
-			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
+			logger.severe(
+					"Tried to open long pistons when short pistons are open. Aborting.");
 			return false;
 		}
 		else
@@ -122,7 +122,8 @@ public class Chassis extends DBugSubsystem
 	{
 		if (longPistons.get().equals(Value.kReverse))
 		{
-			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			logger.severe(
+					"Tried to open short pistons when long pistons are closed. Aborting.");
 			return false;
 		}
 		else
@@ -136,7 +137,8 @@ public class Chassis extends DBugSubsystem
 	{
 		if (longPistons.get().equals(Value.kReverse))
 		{
-			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			logger.severe(
+					"Tried to open short pistons when long pistons are closed. Aborting.");
 			return false;
 		}
 		else
@@ -157,14 +159,16 @@ public class Chassis extends DBugSubsystem
 		shortPistonsRight.set(Value.kReverse);
 		return true;
 	}
-	
+
 	/**
 	 * Closes all of the chassis pistons.
+	 * 
 	 * @return Whether all of the closing methods have succeeded.
 	 */
-	public boolean closeAllPistons ()
+	public boolean closeAllPistons()
 	{
-		return closeLongPistons() && closeShortPistonsLeft() && closeShortPistonsRight();
+		return closeLongPistons() && closeShortPistonsLeft()
+				&& closeShortPistonsRight();
 	}
 
 	/**
@@ -204,9 +208,6 @@ public class Chassis extends DBugSubsystem
 		return heRightBack.get();
 	}
 
-	/*
-	 * GET Methods
-	 */
 	public boolean isOnDefense()
 	{
 		return isOnDefense;
@@ -215,34 +216,55 @@ public class Chassis extends DBugSubsystem
 	// navX Class
 	private class navX extends TimerTask
 	{
-		private int counter = 0; // For the navX
+		private int counterPitch = 0; // For the navX
+		private int counterRoll = 0;
 
 		public void run()
 		{
 			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config
 					.get("chassis_Defense_Pitch_Thresh"))
 			{
-				counter++;
+				counterPitch++;
 			}
 			else
 			{
-				counter = 0;
+				counterPitch = 0;
 			}
 
-			if (counter >= (int) Math.round((double) ((double) config
+			if (counterPitch >= (int) Math.round((double) ((double) config
 					.get("chassis_Defense_Angle_Timeout") / 20.0)))
 			{ // isTimedOut
-				counter = 0;
+				counterPitch = 0;
 				isOnDefense = false;
 			}
-			else if (counter == 0)
+			else if (counterPitch == 0)
+			{
+				isOnDefense = true;
+			}
+
+			if (Math.abs(movingAvgRoll.get()) <= (double) Robot.config
+					.get("chassis_Defense_Roll_Thresh"))
+			{
+				counterRoll++;
+			}
+			else
+			{
+				counterRoll = 0;
+			}
+
+			if (counterRoll >= (int) Math.round((double) ((double) config
+					.get("chassis_Defense_Angle_Timeout") / 20.0)))
+			{ // isTimedOut
+				counterRoll = 0;
+				isOnDefense = false;
+			}
+			else if (counterRoll == 0)
 			{
 				isOnDefense = true;
 			}
 
 			SmartDashboard.putNumber("Robot Pitch Angle",
 					Math.abs(movingAvgPitch.get()));
-			SmartDashboard.putNumber("isOnDefense_Counter", counter);
 		}
 	}
 

@@ -1,26 +1,26 @@
-package org.usfirst.frc.team3316.robot.commands.chassis;
-
-import java.util.Timer;
+package org.usfirst.frc.team3316.robot.commands.chassis.auton;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 import org.usfirst.frc.team3316.robot.utils.Point;
 import org.usfirst.frc.team3316.robot.utils.Utils;
 
-public class CrossBack extends DBugCommand
+public class CrossBrake extends DBugCommand
 {
-	private double speed, currentSpeed;
-	private double timeout;
+	private double speed, currentSpeed, timeout;
+	private boolean reverse;
 	private int counter = 0;
 
-	public CrossBack() {
+	public CrossBrake(boolean reverse) {
 		requires(Robot.chassis);
+		
+		this.reverse = reverse;
 	}
 	
 	protected void init()
 	{
-		speed = (double) config.get("chassis_CrossDefense_Back_Voltage");
-		timeout = (double) config.get("chassis_CrossBack_Timeout");
+		speed = (reverse ? -1 : 1) * (double) config.get("chassis_CrossDefense_BrakeV");
+		timeout = (double) config.get("chassis_CrossBrake_Timeout");
 		counter = 0;
 	}
 

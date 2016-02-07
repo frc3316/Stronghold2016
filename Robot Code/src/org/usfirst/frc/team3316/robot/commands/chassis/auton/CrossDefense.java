@@ -1,19 +1,12 @@
-package org.usfirst.frc.team3316.robot.commands.chassis;
+package org.usfirst.frc.team3316.robot.commands.chassis.auton;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.utils.Utils;
-
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CrossDefense extends DBugCommand
 {
 	private double speed;
-	private PIDController pid;
 	private boolean lastIsOnDefense, isFinished, reverse;
 
 	public CrossDefense(boolean reverse)
@@ -25,7 +18,8 @@ public class CrossDefense extends DBugCommand
 
 	protected void init()
 	{
-		speed = (reverse ? -1 : 1) * (double) config.get("chassis_CrossDefense_Voltage");
+		speed = (reverse ? -1 : 1)
+				* (double) config.get("chassis_CrossDefense_Voltage");
 	}
 
 	protected void execute()
@@ -34,6 +28,8 @@ public class CrossDefense extends DBugCommand
 
 		if (Robot.chassis.isOnDefense())
 		{
+			// We want the speed to decrease/increase every iteration until it
+			// equals to the MinSpeed.
 			if (!reverse)
 			{
 				speed -= speed > (double) config

@@ -10,9 +10,8 @@ import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.ResetSensors;
-import org.usfirst.frc.team3316.robot.commands.chassis.CrossBangbang;
-import org.usfirst.frc.team3316.robot.commands.chassis.CrossDefense;
 import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.CrossDefense;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -143,11 +142,11 @@ public class SDB
 			if (!constant)
 			{
 				variablesInSDB.put(key, type);
-				logger.info("Added to SDB " + key + " of type " + type + "and allows for its modification");
+				logger.info("Added to SDB " + key + " of type " + type + " and allows for its modification");
 			}
 			else
 			{
-				logger.info("Added to SDB " + key + " of type " + type + "BUT DOES NOT ALLOW for its modification");
+				logger.info("Added to SDB " + key + " of type " + type + " BUT DOES NOT ALLOW for its modification");
 			}
 
 			return true;
@@ -169,15 +168,11 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */		
-		putConfigVariableInSDB("chassis_CrossDefense_Pid_Kp");
-		putConfigVariableInSDB("chassis_CrossDefense_Pid_Ki");
-		putConfigVariableInSDB("chassis_CrossDefense_Pid_Kd");
-		putConfigVariableInSDB("chassis_CrossDefense_Pid_Setpoint");
 		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
 		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
 		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
-		putConfigVariableInSDB("chassis_CrossDefense_Back_Voltage");
-		putConfigVariableInSDB("chassis_CrossBack_Timeout");
+		putConfigVariableInSDB("chassis_CrossDefense_BrakeV");
+		putConfigVariableInSDB("chassis_CrossBrake_Timeout");
 		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
 		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
 		putConfigVariableInSDB("chassis_CrossDefense_DownV");
@@ -186,7 +181,6 @@ public class SDB
 		 * For testing
 		 */
 		SmartDashboard.putData(new CrossDefense(false));
-		SmartDashboard.putData(new CrossBangbang());
 		
 		SmartDashboard.putData(new CrossingForwardSequence());
 		SmartDashboard.putData(new CrossingBackSequence());
