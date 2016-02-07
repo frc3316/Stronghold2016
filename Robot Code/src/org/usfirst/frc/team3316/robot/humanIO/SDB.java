@@ -147,13 +147,18 @@ public class SDB
 		
 		putConfigVariableInSDB("chassis_TankDrive_InvertY");
 		
+		// Buttons
+		putConfigVariableInSDB("joysticks_RollIn");
+		putConfigVariableInSDB("joysticks_RollOut");
+		putConfigVariableInSDB("joysticks_IntakeToggle");
+		
 		/*
 		 * For testing
 		 */
 		// Intake
 		SmartDashboard.putData("Intake RollIn", new RollIn());
 		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake 	StopRoll", new StopRoll());
+		SmartDashboard.putData("Intake StopRoll", new StopRoll());
 
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());

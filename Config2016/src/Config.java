@@ -100,6 +100,15 @@ public class Config
 				addToConstants("JOYSTICK_RIGHT", 1);
 				addToConstants("JOYSTICK_OPERATOR", 2);
 			}
+			
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("joysticks_RollIn", 2);
+				addToVariables("joysticks_RollOut", 3);
+				addToVariables("joysticks_IntakeToggle", 1);
+			}
 		}
 
 		/*

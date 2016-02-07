@@ -15,26 +15,21 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class Joysticks
-{
+public class Joysticks {
 	/*
 	 * Defines a button in a gamepad POV for an array of angles
 	 */
-	private class POVButton extends Button
-	{
+	private class POVButton extends Button {
 		Joystick m_joystick;
 		int m_deg;
 
-		public POVButton(Joystick joystick, int deg)
-		{
+		public POVButton(Joystick joystick, int deg) {
 			m_joystick = joystick;
 			m_deg = deg;
 		}
 
-		public boolean get()
-		{
-			if (m_joystick.getPOV() == m_deg)
-			{
+		public boolean get() {
+			if (m_joystick.getPOV() == m_deg) {
 				return true;
 			}
 			return false;
@@ -49,27 +44,27 @@ public class Joysticks
 	/**
 	 * Initializes the joysticks.
 	 */
-	public Joysticks()
-	{
+	public Joysticks() {
 		joystickLeft = new Joystick((int) Robot.config.get("JOYSTICK_LEFT"));
 		joystickRight = new Joystick((int) Robot.config.get("JOYSTICK_RIGHT"));
-		joystickOperator = new Joystick(
-				(int) Robot.config.get("JOYSTICK_OPERATOR"));
+		joystickOperator = new Joystick((int) Robot.config.get("JOYSTICK_OPERATOR"));
 	}
 
 	/**
 	 * Initializes the joystick buttons. This is done separately because they
 	 * usually require the subsystems to be already instantiated.
 	 */
-	public void initButtons()
-	{
-		JoystickButton btn2 = new JoystickButton(joystickOperator, 2);
-		JoystickButton btn3 = new JoystickButton(joystickOperator, 3);
+	public void initButtons() {
+		// TODO: Remember! Add all the variables to config and SDB.
+		// For setting new buttons use DBugJoystickButton, for setting their
+		// config variables use the format: joysticks_CommandName.
 		
-		btn2.whileHeld(new RollIn());
-		btn3.whileHeld(new RollOut());
-		
-		JoystickButton intakeButton = new JoystickButton(joystickOperator, 1);
-		intakeButton.whenPressed(new ToggleIntake());
+		DBugJoystickButton rollInBtn = new DBugJoystickButton(joystickOperator, "joysticks_RollIn");
+		DBugJoystickButton rollOutBtn = new DBugJoystickButton(joystickOperator, "joysticks_RollOut");
+		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "joysticks_IntakeToggle");
+
+		rollInBtn.whileHeld(new RollIn());
+		rollOutBtn.whileHeld(new RollOut());
+		toggleIntakeBtn.whenPressed(new ToggleIntake());
 	}
 }
