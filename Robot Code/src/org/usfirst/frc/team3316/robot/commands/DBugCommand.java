@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public abstract class DBugCommand extends Command 
 {
-	protected DBugLogger logger = Robot.logger;
-	protected Config config = Robot.config;
+	protected static DBugLogger logger = Robot.logger;
+	protected static Config config = Robot.config;
 	
 	protected boolean isFin = false; 
 	//TODO: Eliminate the isFinished method by changing it here: return isFin. 

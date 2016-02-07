@@ -311,20 +311,11 @@ public class Chassis extends DBugSubsystem
 										// second units.
 	}
 
-	public double getDistance()
-	{
-		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
+	public double getLeftDistance() {
+		return leftEncoder.getDistance();
 	}
-
-	public void resetEncoders()
-	{
-		rightEncoder.reset();
-		leftEncoder.reset();
-	}
-
-	public void resetNavX()
-	{
-		navx.reset();
-		navx.resetDisplacement();
+	
+	public double getRightDistance() {
+		return rightEncoder.getDistance();
 	}
 }
