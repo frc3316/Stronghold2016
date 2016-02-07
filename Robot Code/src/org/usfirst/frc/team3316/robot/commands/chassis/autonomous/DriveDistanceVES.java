@@ -15,8 +15,8 @@ public class DriveDistanceVES extends DriveDistance
 {
     private double [][] values = new double [][] // TODO: Calibrate these values.
     {
-        {0, 0.5, 1},
-        {0, 0.63, 0.1}
+        {0, 0.1, 0.2, 0.5, 1},
+        {0, 0.0, 0.52, 0.63, 0.1}
     };
     
 	public DriveDistanceVES(double dist)

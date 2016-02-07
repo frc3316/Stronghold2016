@@ -265,6 +265,13 @@ public class Config
 				addToVariables("chassis_PIDLeft_KD", 75.0);
 				addToVariables("chassis_PIDLeft_KF", 450.0);
 			}
+			
+			/*
+			 * Set Constant Voltage
+			 */
+			{
+				addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
+			}
 		}
 
 		/*

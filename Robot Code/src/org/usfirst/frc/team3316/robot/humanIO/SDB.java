@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.chassis.motion.MeasureKinematics;
+import org.usfirst.frc.team3316.robot.chassis.motion.SetConstantVoltage;
 import org.usfirst.frc.team3316.robot.commands.chassis.autonomous.DriveDistanceVES;
 import org.usfirst.frc.team3316.robot.commands.chassis.autonomous.DriveDistanceVS;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
@@ -160,9 +161,6 @@ public class SDB
 		putConfigVariableInSDB("chassis_PIDLeft_KD");
 		putConfigVariableInSDB("chassis_PIDLeft_KF");
 		
-		putConfigVariableInSDB("chassis_DriveDistance_KV");
-		putConfigVariableInSDB("chassis_DriveDistance_KA");
-		
 		//Motion Planner stuff
 		putConfigVariableInSDB("motionPlanner_MaxAccel");
 		putConfigVariableInSDB("motionPlanner_MaxDecel");
@@ -176,6 +174,10 @@ public class SDB
 		SmartDashboard.putData("Measure 1 sec", new MeasureKinematics(1));
 		SmartDashboard.putData("Measure 1.5 sec", new MeasureKinematics(1.5));
 		SmartDashboard.putData("Measure 2 sec", new MeasureKinematics(2));
+		
+		putConfigVariableInSDB("chassis_SetConstantVoltage_Voltage");
+		
+		SmartDashboard.putData(new SetConstantVoltage());
 		
 		logger.info("Finished initSDB()");
 	}
