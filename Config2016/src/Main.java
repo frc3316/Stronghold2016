@@ -67,8 +67,6 @@ public class Main
 	
 	private static void writeConfig ()
 	{
-		config = new Config();
-		
 		FileOutputStream out;
 		ObjectOutputStream output;
 		

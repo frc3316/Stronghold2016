@@ -109,7 +109,7 @@ public class Sensors {
 		 * Flywheel
 		 */
 		hallEffect = new DigitalInput(
-				(int) config.get("FLYWHEEL_COUNTER"));
+				(int) config.get("FLYWHEEL_HALL_EFFECT_COUNTER"));
 
 		flywheelCounter = new Counter(hallEffect);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round
