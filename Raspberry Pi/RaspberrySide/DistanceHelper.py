@@ -26,8 +26,10 @@ class DistanceHelper(object):
         '''
 
         remainder = float(self.knownHeight * self.focalLength) / float(objectHeight)
-        return sqrt(remainder**2 - (towerHeight-(self.knownHeight/2)-robotObject.height)**2)
-
+        try:
+            return sqrt(remainder**2 - (towerHeight-(self.knownHeight/2)-robotObject.height)**2)
+        except:
+            return 3316.00
     def getXRobotPosition(self,robotObject):
         '''
         Ths method calculates the X position of the robotObject, ((0,0) is the center of the far edge of the field).

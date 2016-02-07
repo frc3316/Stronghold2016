@@ -25,6 +25,10 @@ if len(sys.argv) > 1:
 else:
     JAVA_IP = "127.0.0.1"
 
+if len(sys.argv) > 2:
+    isShowingImage = int(sys.argv[2])
+else:
+    isShowingImage = 1
 # Colors:
 LB = np.array([37,0,231]) # Lower bond
 UB = np.array([108,40,255]) # Upper bond
@@ -69,10 +73,11 @@ if __name__ == "__main__":
         FPSCounter.start()
 
         cam = cv2.VideoCapture(0)
-
-        cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
-        cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
-        cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
+        cam.set(3,640)
+        cam.set(4,480)
+        #cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
+        #cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
+        #cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
         networkManager = NetworkManager(JAVA_IP,8080)
@@ -81,14 +86,14 @@ if __name__ == "__main__":
         # The code itself #
         ###################
 
-        # CR: Add IPC lock
         while True:
+
             visionManager.updateImage()
             visionManager.updateTowerScales()
             visionManager.updateRobotScales()
             FPSCounter.update()
 
-            if visionManager.currentImageObject is not None: # if an object was detected
+            if visionManager.isObjectDetected: # if an object was detected
 
                 ######################
                 # Rectangle creation #
@@ -112,7 +117,7 @@ if __name__ == "__main__":
             # Send data to java process #
             #############################
 
-            if visionManager.currentImageObject is not None and visionManager.robotObject is not None:
+            if visionManager.isObjectDetected and visionManager.robotObject is not None:
                values = [visionManager.currentImageObject.distanceFromCamera,
                          visionManager.currentImageObject.azimuthalAngle,
                          visionManager.currentImageObject.polarAngle]
@@ -120,10 +125,10 @@ if __name__ == "__main__":
                networkManager.sendData(values, names)
 
             ###################
-            # Results printer #
+            # Results logger  #
             ###################
 
-            if visionManager.currentImageObject is not None:
+            if visionManager.isObjectDetected:
                 logger.debug("------------------")
                 logger.debug("Robot Information:")
                 logger.debug("------------------")
@@ -144,9 +149,10 @@ if __name__ == "__main__":
             logger.debug("------------------")
 
             # display:
-            # cv2.imshow("Current Image", visionManager.currentImage)
-            # cv2.imshow("Thresh Image", visionManager.threshImage)
-            cv2.imshow("Masked Image", visionManager.maskedImage)
+            if isShowingImage:
+                # cv2.imshow("Current Image", visionManager.currentImage)
+                # cv2.imshow("Thresh Image", visionManager.threshImage)
+                cv2.imshow("Masked Image", visionManager.maskedImage)
 
             #########################
             # Wait for key pressing #
@@ -157,7 +163,7 @@ if __name__ == "__main__":
             # save image:
             # k = cv2.waitKey(5) & 0xFF
             # if k == 115: # pressed s
-            #     if visionManager.currentImageObject is not None:
+            #     if visionManager.isObjectDetected:
             #         cv2.imwrite("Current Image.png",visionManager.currentImage)
 
             #  stop
@@ -165,7 +171,7 @@ if __name__ == "__main__":
             if k == 27:
                 break
 
-            # sleep(0.01) # so the pi won't crush and cut the connection
+            # sleep(0.01) # so the pi won't crush
     finally:
         logger.debug("----------------")
         logger.debug("Finished Running")

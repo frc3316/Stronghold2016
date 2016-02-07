@@ -18,7 +18,7 @@ public class NetworkingTest
 			{
 				//System.out.println("Is Null :O");
 			}
-			Thread.sleep(1);
+			Thread.sleep(100);
 		}
 	}
 }

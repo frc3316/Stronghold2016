@@ -11,10 +11,14 @@ import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
+import org.usfirst.frc.team3316.robot.subsystems.Climbing;
 import org.usfirst.frc.team3316.robot.subsystems.Flywheel;
+import org.usfirst.frc.team3316.robot.subsystems.Hood;
 import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
+import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -51,6 +55,9 @@ public class Robot extends IterativeRobot
 	public static Intake intake;
 	public static Transport transport;
 	public static Flywheel flywheel;
+	public static Turret turret;
+	public static Hood hood;
+	public static Climbing climbing;
 
 	Command autonomousCommand;
 
@@ -85,6 +92,9 @@ public class Robot extends IterativeRobot
 		intake = new Intake();
 		transport = new Transport();
 		flywheel = new Flywheel();
+		turret = new Turret();
+		hood = new Hood();
+		climbing = new Climbing();
 
 		/*
 		 * Human IO (that requires subsystems)
@@ -103,7 +113,7 @@ public class Robot extends IterativeRobot
 
 	public void disabledInit()
 	{
-
+		
 	}
 
 	public void disabledPeriodic()

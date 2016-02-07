@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3316.robot.commands.flywheel;
+package org.usfirst.frc.team3316.robot.commands.turret;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
@@ -8,61 +8,54 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class PIDFlywheel extends DBugCommand
+public class TurretPID extends DBugCommand
 {
-	// TODO: Add commenting
-
 	private PIDController pid;
-	private double v = 0;
+	private double pidOutput;
 
-	public PIDFlywheel()
-	{
-		requires(Robot.flywheel);
-
-		// TODO: Add F term to PID
-
+	public TurretPID() {
+		
+		requires(Robot.turret);
+		
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
-				return;
 			}
-
 			public double pidGet()
 			{
-				return Robot.flywheel.getRate();
+				return Robot.turret.getAngle();
 			}
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kRate;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
 			public void pidWrite(double output)
 			{
-				v = output;
+				pidOutput = output;
 			}
 		});
+		
+		pid.setOutputRange(-1, 1);
 	}
 
 	protected void init()
 	{
-		v = 0;
-
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("flywheel_PID_KP") / 1000,
-				(double) config.get("flywheel_PID_KI") / 1000,
-				(double) config.get("flywheel_PID_KD") / 1000,
-				(double) config.get("flywheel_PID_KF") / 1000);
-
-		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
-
-		isFin = !Robot.flywheel.setMotors(v);
+		pid.setPID((double) config.get("turret_PID_KP"),
+					(double) config.get("turret_PID_KI"),
+					(double) config.get("turret_PID_KD"));
+		
+		pid.setSetpoint((double) config.get("turret_Angle_SetPoint"));
+		
+		isFin = !Robot.turret.setMotors(pidOutput);
 	}
 
 	protected boolean isFinished()
@@ -72,13 +65,12 @@ public class PIDFlywheel extends DBugCommand
 
 	protected void fin()
 	{
-		pid.disable();
-
-		Robot.flywheel.setMotors(0);
+		Robot.turret.setMotors(0);
 	}
 
 	protected void interr()
 	{
 		fin();
 	}
+
 }

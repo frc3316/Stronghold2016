@@ -10,20 +10,26 @@ import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class Chassis extends DBugSubsystem
 {
 
 	// Actuators
-	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
-			rightMotor1;
+	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
+
+	private DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
 
 	// Sensors
 	private AHRS navx; // For the navX
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
+
+	private DigitalInput heLeftFront, heLeftBack, heRightFront, heRightBack;
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
@@ -52,6 +58,11 @@ public class Chassis extends DBugSubsystem
 		navx = Robot.sensors.navx;
 		leftEncoder = Robot.sensors.chassisLeftEncoder;
 		rightEncoder = Robot.sensors.chassisRightEncoder;
+
+		heLeftFront = Robot.sensors.chassisHELeftFront;
+		heLeftBack = Robot.sensors.chassisHELeftBack;
+		heRightFront = Robot.sensors.chassisHERightFront;
+		heRightBack = Robot.sensors.chassisHERightBack;
 
 		// Create moving average
 		movingAvgPitch = new MovingAverage(
@@ -85,6 +96,112 @@ public class Chassis extends DBugSubsystem
 
 		rightMotor1.setMotor(right);
 		rightMotor2.setMotor(right);
+	}
+
+	public boolean openLongPistons()
+	{
+		if (shortPistonsRight.get().equals(Value.kForward) || shortPistonsLeft.get().equals(Value.kForward))
+		{
+			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
+			return false;
+		}
+		else
+		{
+			longPistons.set(Value.kForward);
+			return true;
+		}
+	}
+
+	public boolean closeLongPistons()
+	{
+		longPistons.set(Value.kReverse);
+		return true;
+	}
+
+	public boolean openShortPistonsLeft()
+	{
+		if (longPistons.get().equals(Value.kReverse))
+		{
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			return false;
+		}
+		else
+		{
+			shortPistonsLeft.set(Value.kForward);
+			return true;
+		}
+	}
+
+	public boolean openShortPistonsRight()
+	{
+		if (longPistons.get().equals(Value.kReverse))
+		{
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			return false;
+		}
+		else
+		{
+			shortPistonsRight.set(Value.kForward);
+			return true;
+		}
+	}
+
+	public boolean closeShortPistonsLeft()
+	{
+		shortPistonsLeft.set(Value.kReverse);
+		return true;
+	}
+
+	public boolean closeShortPistonsRight()
+	{
+		shortPistonsRight.set(Value.kReverse);
+		return true;
+	}
+	
+	/**
+	 * Closes all of the chassis pistons.
+	 * @return Whether all of the closing methods have succeeded.
+	 */
+	public boolean closeAllPistons ()
+	{
+		return closeLongPistons() && closeShortPistonsLeft() && closeShortPistonsRight();
+	}
+
+	/**
+	 * Returns whether the long pistons are extended.
+	 */
+	public boolean areLongPistonsExtended()
+	{
+		return longPistons.get().equals(Value.kForward);
+	}
+
+	/**
+	 * Returns whether all of the short pistons are extended.
+	 */
+	public boolean areShortPistonsExtended()
+	{
+		return shortPistonsLeft.get().equals(Value.kForward)
+				&& shortPistonsRight.get().equals(Value.kForward);
+	}
+
+	public boolean getHELeftFront()
+	{
+		return heLeftFront.get();
+	}
+
+	public boolean getHELeftBack()
+	{
+		return heLeftBack.get();
+	}
+
+	public boolean getHERightFront()
+	{
+		return heRightFront.get();
+	}
+
+	public boolean getHERightBack()
+	{
+		return heRightBack.get();
 	}
 
 	/*
