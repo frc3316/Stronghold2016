@@ -6,20 +6,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CrossDefense extends DBugCommand
 {
-	private double speed;
+	private double speed, minSpeed, DownV;
 	private boolean lastIsOnDefense, isFinished, reverse;
 
-	public CrossDefense(boolean reverse)
+	public CrossDefense(Direction dir)
 	{
 		requires(Robot.chassis);
 
-		this.reverse = reverse;
+		this.reverse = dir == Direction.FORWARDS ? false : true;
 	}
 
 	protected void init()
 	{
 		speed = (reverse ? -1 : 1)
 				* (double) config.get("chassis_CrossDefense_Voltage");
+		minSpeed = (double) config.get("chassis_CrossDefense_MinSpeed");
+		DownV = (double) config.get("chassis_CrossDefense_DownV");
 	}
 
 	protected void execute()
@@ -32,15 +34,11 @@ public class CrossDefense extends DBugCommand
 			// equals to the MinSpeed.
 			if (!reverse)
 			{
-				speed -= speed > (double) config
-						.get("chassis_CrossDefense_MinSpeed") ? (double) config
-								.get("chassis_CrossDefense_DownV") : 0.0;
+				speed -= speed > minSpeed ? DownV : 0.0;
 			}
 			else
 			{
-				speed += speed < -(double) config
-						.get("chassis_CrossDefense_MinSpeed") ? (double) config
-								.get("chassis_CrossDefense_DownV") : 0.0;
+				speed += speed < -minSpeed ? DownV : 0.0;
 			}
 		}
 	}
@@ -55,7 +53,6 @@ public class CrossDefense extends DBugCommand
 
 	protected void fin()
 	{
-		SmartDashboard.putBoolean("finished", true);
 		Robot.chassis.setMotors(0, 0);
 	}
 

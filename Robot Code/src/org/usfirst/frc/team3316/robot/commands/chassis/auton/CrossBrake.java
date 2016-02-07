@@ -11,10 +11,10 @@ public class CrossBrake extends DBugCommand
 	private boolean reverse;
 	private int counter = 0;
 
-	public CrossBrake(boolean reverse) {
+	public CrossBrake(Direction dir) {
 		requires(Robot.chassis);
 		
-		this.reverse = reverse;
+		this.reverse = dir == Direction.FORWARDS ? false : true;
 	}
 	
 	protected void init()

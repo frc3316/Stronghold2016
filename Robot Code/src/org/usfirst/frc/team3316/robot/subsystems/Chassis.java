@@ -18,7 +18,61 @@ import edu.wpi.first.wpilibj.Encoder;
 
 public class Chassis extends DBugSubsystem
 {
+	// navX Class
+	private class navX extends TimerTask
+	{
+		private int counterPitch = 0;
+		private int counterRoll = 0;
 
+		public void run()
+		{
+			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config
+					.get("chassis_Defense_Pitch_Thresh"))
+			{
+				counterPitch++;
+			}
+			else
+			{
+				counterPitch = 0;
+			}
+
+			if (counterPitch >= (int) Math.round((double) ((double) config
+					.get("chassis_Defense_Angle_Timeout") / 20.0)))
+			{ // isTimedOut
+				counterPitch = 0;
+				isOnDefense = false;
+			}
+			else if (counterPitch == 0)
+			{
+				isOnDefense = true;
+			}
+
+			if (Math.abs(movingAvgRoll.get()) <= (double) Robot.config
+					.get("chassis_Defense_Roll_Thresh"))
+			{
+				counterRoll++;
+			}
+			else
+			{
+				counterRoll = 0;
+			}
+
+			if (counterRoll >= (int) Math.round((double) ((double) config
+					.get("chassis_Defense_Angle_Timeout") / 20.0)))
+			{ // isTimedOut
+				counterRoll = 0;
+				isOnDefense = false;
+			}
+			else if (counterRoll == 0)
+			{
+				isOnDefense = true;
+			}
+
+			SmartDashboard.putNumber("Robot Pitch Angle",
+					Math.abs(movingAvgPitch.get()));
+		}
+	}
+	
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
@@ -77,7 +131,6 @@ public class Chassis extends DBugSubsystem
 					return getRoll();
 				});
 
-		// Timer init
 		navXTasker = new navX();
 		timer.schedule(navXTasker, 0, 20);
 	}
@@ -213,60 +266,7 @@ public class Chassis extends DBugSubsystem
 		return isOnDefense;
 	}
 
-	// navX Class
-	private class navX extends TimerTask
-	{
-		private int counterPitch = 0; // For the navX
-		private int counterRoll = 0;
 
-		public void run()
-		{
-			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config
-					.get("chassis_Defense_Pitch_Thresh"))
-			{
-				counterPitch++;
-			}
-			else
-			{
-				counterPitch = 0;
-			}
-
-			if (counterPitch >= (int) Math.round((double) ((double) config
-					.get("chassis_Defense_Angle_Timeout") / 20.0)))
-			{ // isTimedOut
-				counterPitch = 0;
-				isOnDefense = false;
-			}
-			else if (counterPitch == 0)
-			{
-				isOnDefense = true;
-			}
-
-			if (Math.abs(movingAvgRoll.get()) <= (double) Robot.config
-					.get("chassis_Defense_Roll_Thresh"))
-			{
-				counterRoll++;
-			}
-			else
-			{
-				counterRoll = 0;
-			}
-
-			if (counterRoll >= (int) Math.round((double) ((double) config
-					.get("chassis_Defense_Angle_Timeout") / 20.0)))
-			{ // isTimedOut
-				counterRoll = 0;
-				isOnDefense = false;
-			}
-			else if (counterRoll == 0)
-			{
-				isOnDefense = true;
-			}
-
-			SmartDashboard.putNumber("Robot Pitch Angle",
-					Math.abs(movingAvgPitch.get()));
-		}
-	}
 
 	public double getPitch()
 	{
