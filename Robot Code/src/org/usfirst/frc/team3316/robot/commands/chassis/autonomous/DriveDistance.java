@@ -137,7 +137,7 @@ public abstract class DriveDistance extends DBugCommand
 		pidLeft.disable();
 		pidRight.disable();
 
-		Robot.chassis.set(0, 0);
+		Robot.chassis.setMotors(0, 0);
 	}
 
 	protected void interr()

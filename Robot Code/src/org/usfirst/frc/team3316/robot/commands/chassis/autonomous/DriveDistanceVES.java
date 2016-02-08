@@ -34,7 +34,7 @@ public class DriveDistanceVES extends DriveDistance
 
 		double feedForward = Utils.valueInterpolation(profileVelocity, values);
 
-		Robot.chassis.set(feedForward + pidLeftOutput,
+		Robot.chassis.setMotors(feedForward + pidLeftOutput,
 				feedForward + pidRightOutput);
 	}
 

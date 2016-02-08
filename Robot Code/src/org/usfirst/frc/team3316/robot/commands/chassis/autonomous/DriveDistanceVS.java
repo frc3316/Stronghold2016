@@ -34,7 +34,7 @@ public class DriveDistanceVS extends DriveDistance
 		SmartDashboard.putNumber("PID Left Output", pidLeftOutput);
 		SmartDashboard.putNumber("PID Right Output", pidRightOutput);
 		
-		Robot.chassis.set(pidLeftOutput, pidRightOutput);
+		Robot.chassis.setMotors(pidLeftOutput, pidRightOutput);
 	}
 
 	protected boolean isFinished()

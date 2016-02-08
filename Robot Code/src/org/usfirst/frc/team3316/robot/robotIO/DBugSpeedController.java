@@ -18,19 +18,13 @@ public class DBugSpeedController
 {
 	DBugLogger logger = Robot.logger;
 	Config config = Robot.config;
-	//PowerDistributionPanel pdp = Robot.sensors.pdp;
+	PowerDistributionPanel pdp = Robot.sensors.pdp;
 
 	private SpeedController sc;
 	private boolean reverse; // Negative factor of velocity
 	private boolean isSetLimit;
-<<<<<<< HEAD
 	private int pdpChannel; // The channel in the PDP of the speed controller
 	private double maxCurrent; // The high threshold for current control
-=======
-	public int pdpChannel = 0; // The channel in the PDP of the speed controller
-	public double maxCurrent = Double.MAX_VALUE; // The high threshold for
-													// current control
->>>>>>> auton_motion_profile
 
 	/**
 	 * This method is using for adding a new speed controller to this subsystem.
@@ -92,11 +86,7 @@ public class DBugSpeedController
 	 */
 	public boolean setMotor(double v)
 	{
-<<<<<<< HEAD
 		if (!isSetLimit || getCurrent() < maxCurrent)
-=======
-		if (Robot.sensors.pdp.getCurrent(pdpChannel) < maxCurrent || !isSetLimit)
->>>>>>> auton_motion_profile
 		{
 			sc.set(v);
 			return true;
@@ -104,22 +94,16 @@ public class DBugSpeedController
 		else
 		{
 			sc.set(0);
-<<<<<<< HEAD
 			logger.severe(
 					"Current overflow at D-Bug Speed Controller on PDP channel "
 							+ pdpChannel + ".");
-=======
-
-			logger.severe("Current overflow on PDP channel: " + pdpChannel);
->>>>>>> auton_motion_profile
 			return false;
 		}
 	}
 
 	public double getCurrent()
 	{
-		//return pdp.getCurrent(pdpChannel);
-		return 0;
+		return pdp.getCurrent(pdpChannel);
 	}
 
 }

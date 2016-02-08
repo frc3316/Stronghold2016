@@ -18,7 +18,7 @@ public class SetConstantVoltage extends DBugCommand
 	{
 		double voltage = (double) config.get("chassis_SetConstantVoltage_Voltage");
 		
-		Robot.chassis.set(voltage, voltage);
+		Robot.chassis.setMotors(voltage, voltage);
 	}
 
 	protected boolean isFinished()
@@ -28,7 +28,7 @@ public class SetConstantVoltage extends DBugCommand
 
 	protected void fin()
 	{
-		Robot.chassis.set(0, 0);
+		Robot.chassis.setMotors(0, 0);
 	}
 
 	protected void interr()

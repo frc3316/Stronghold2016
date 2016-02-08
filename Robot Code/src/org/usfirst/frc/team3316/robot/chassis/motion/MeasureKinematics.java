@@ -40,12 +40,12 @@ public class MeasureKinematics extends DBugCommand
 		{
 			isAccelerating = true;
 
-			Robot.chassis.set(1, 1);
+			Robot.chassis.setMotors(1, 1);
 		}
 		else
 		{
 			isAccelerating = false;
-			Robot.chassis.set(-0.08, -0.08);
+			Robot.chassis.setMotors(-0.08, -0.08);
 
 			if (initialDecelTime == -1)
 			{
