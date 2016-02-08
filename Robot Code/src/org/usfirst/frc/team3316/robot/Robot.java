@@ -119,13 +119,32 @@ public class Robot extends IterativeRobot
 		/*
 		 * Test Mode
 		 */
-		//Chassis
-		LiveWindow.addActuator("General", "compressor", actuators.compressor);
+		// General
+		LiveWindow.addActuator("General", "compressor", (LiveWindowSendable) actuators.compressor);
+		// Chassis
 		LiveWindow.addActuator("Chassis", "chassisLeft1SC", (LiveWindowSendable) actuators.chassisLeft1SC);
 		LiveWindow.addActuator("Chassis", "chassisLeft2SC", (LiveWindowSendable) actuators.chassisLeft2SC);
 		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) actuators.chassisRight1SC);
 		LiveWindow.addActuator("Chassis", "chassisRight2SC", (LiveWindowSendable) actuators.chassisRight2SC);
-		// LiveWindow.addActuator("General", "Compressor", (LiveWindowSendable) actuators.intakeSC);	
+		// Intake
+		LiveWindow.addActuator("Intake", "intakeSolenoid", (LiveWindowSendable) actuators.intakeSolenoid);
+		LiveWindow.addActuator("Intake", "intakeSC", (LiveWindowSendable) actuators.intakeSC);
+		// Transport
+		LiveWindow.addActuator("Transport", "transportSC", (LiveWindowSendable) actuators.transportSC);
+		// Flywheel
+		LiveWindow.addActuator("Flywheel", "flywheelSC", (LiveWindowSendable) actuators.flywheelSC);
+		// Turret
+		LiveWindow.addActuator("Turret", "turretSC", (LiveWindowSendable) actuators.turretSC);
+		// Hood
+		LiveWindow.addActuator("Hood", "hoodSC", (LiveWindowSendable) actuators.hoodSC);
+		// Climbing
+		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingSolenoid);
+		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC1);
+		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC2);
+		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC3);
+		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC4);
+
+		
 	}
 
 	public void disabledInit()
