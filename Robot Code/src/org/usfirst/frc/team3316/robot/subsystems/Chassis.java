@@ -21,58 +21,36 @@ public class Chassis extends DBugSubsystem
 	// navX Class
 	private class navX extends TimerTask
 	{
-		private int counterPitch = 0;
+		private int counter = 0;
 		private int counterRoll = 0;
 
 		public void run()
 		{
 			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config
-					.get("chassis_Defense_Pitch_Thresh"))
+					.get("chassis_Defense_Pitch_Thresh")
+					&& Math.abs(movingAvgRoll.get()) <= (double) Robot.config
+							.get("chassis_Defense_Roll_Thresh"))
 			{
-				counterPitch++;
+				counter++;
 			}
 			else
 			{
-				counterPitch = 0;
+				counter = 0;
 			}
 
-			if (counterPitch >= (int) Math.round((double) ((double) config
+			if (counter >= (int) Math.round((double) ((double) config
 					.get("chassis_Defense_Angle_Timeout") / 20.0)))
 			{ // isTimedOut
-				counterPitch = 0;
+				counter = 0;
 				isOnDefense = false;
 			}
-			else if (counterPitch == 0)
+			else if (counter == 0)
 			{
 				isOnDefense = true;
 			}
-
-			if (Math.abs(movingAvgRoll.get()) <= (double) Robot.config
-					.get("chassis_Defense_Roll_Thresh"))
-			{
-				counterRoll++;
-			}
-			else
-			{
-				counterRoll = 0;
-			}
-
-			if (counterRoll >= (int) Math.round((double) ((double) config
-					.get("chassis_Defense_Angle_Timeout") / 20.0)))
-			{ // isTimedOut
-				counterRoll = 0;
-				isOnDefense = false;
-			}
-			else if (counterRoll == 0)
-			{
-				isOnDefense = true;
-			}
-
-			SmartDashboard.putNumber("Robot Pitch Angle",
-					Math.abs(movingAvgPitch.get()));
 		}
 	}
-	
+
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
 			rightMotor1;
@@ -266,8 +244,6 @@ public class Chassis extends DBugSubsystem
 		return isOnDefense;
 	}
 
-
-
 	public double getPitch()
 	{
 		return navx.getRoll();
@@ -311,11 +287,13 @@ public class Chassis extends DBugSubsystem
 										// second units.
 	}
 
-	public double getLeftDistance() {
+	public double getLeftDistance()
+	{
 		return leftEncoder.getDistance();
 	}
-	
-	public double getRightDistance() {
+
+	public double getRightDistance()
+	{
 		return rightEncoder.getDistance();
 	}
 }

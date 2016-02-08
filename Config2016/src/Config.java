@@ -167,10 +167,10 @@ public class Config
 				/*
 				 * Intake
 				 */
-				addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); // changed
+				addToConstants("INTAKE_SOLENOID_FORWARD", 6); // changed
 																		// for
 																		// prototype
-				addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); // changed
+				addToConstants("INTAKE_SOLENOID_REVERSE", 7); // changed
 																		// for
 																		// prototype
 				addToConstants("INTAKE_SOLENOID_MODULE", 0);
@@ -199,8 +199,8 @@ public class Config
 
 				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0);
 
-				addToConstants("TRANSPORT_ENCODER_A", 6);
-				addToConstants("TRANSPORT_ENCODER_B", 10);
+				addToConstants("TRANSPORT_ENCODER_A", 8);
+				addToConstants("TRANSPORT_ENCODER_B", 6);
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
 
 				/*
@@ -228,7 +228,7 @@ public class Config
 				/*
 				 * Hood
 				 */
-				addToConstants("HOOD_MOTOR", 12);
+				addToConstants("HOOD_MOTOR", 16);
 				addToConstants("HOOD_MOTOR_REVERSE", false);
 				addToConstants("HOOD_MOTOR_PDP_CHANNEL", 10);
 				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
@@ -242,12 +242,12 @@ public class Config
 				/*
 				 * Climbing
 				 */
-				addToConstants("CLIMBING_MOTOR_1", 12);
+				addToConstants("CLIMBING_MOTOR_1", 17);
 				addToConstants("CLIMBING_MOTOR_1_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_1_PDP_CHANNEL", 10);
 				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 10.0);
 
-				addToConstants("CLIMBING_MOTOR_2", 13);
+				addToConstants("CLIMBING_MOTOR_2", 18);
 				addToConstants("CLIMBING_MOTOR_2_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_2_PDP_CHANNEL", 11);
 				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 10.0);
@@ -269,7 +269,7 @@ public class Config
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
 
-				addToConstants("CLIMBING_SWITCH", 8);
+				addToConstants("CLIMBING_SWITCH", 9);
 
 			}
 		}

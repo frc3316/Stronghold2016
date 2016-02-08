@@ -9,9 +9,9 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.ResetSensors;
 import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.CrossDefense;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -180,12 +180,10 @@ public class SDB
 		/*
 		 * For testing
 		 */
-		SmartDashboard.putData(new CrossDefense(false));
+		SmartDashboard.putData(new CrossDefense(Direction.FORWARDS));
 		
 		SmartDashboard.putData(new CrossingForwardSequence());
 		SmartDashboard.putData(new CrossingBackSequence());
-		
-		SmartDashboard.putData(new ResetSensors());
 		
 		/*
 		 * Remove these after finishing testing on prototype
