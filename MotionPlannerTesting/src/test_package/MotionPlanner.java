@@ -1,8 +1,11 @@
-package org.usfirst.frc.team3316.robot.chassis.motion;
+package test_package;
+//package org.usfirst.frc.team3316.robot.chassis.motion;
 
+/*
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+*/
 
 /**
  * Class that has useful methods for motion planning, assuming the robot has a
@@ -14,20 +17,21 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
  */
 public class MotionPlanner
 {
-
-	static Config config = Robot.config;
-	static DBugLogger logger = Robot.logger;
+	/*
+	 * static Config config = Robot.config; static DBugLogger logger =
+	 * Robot.logger;
+	 */
 
 	static double maxAccel, maxDecel, maxVelocity;
 
 	static
 	{
-		updateParameters();
+		// updateParameters();
 	}
 
-	public static PlannedMotion planMotion ( double distance )
+	public static PlannedMotion planMotion(double distance)
 	{
-		updateParameters();
+		// updateParameters();
 
 		double maxAccel, maxDecel, maxVelocity;
 
@@ -98,17 +102,26 @@ public class MotionPlanner
 	public static double distanceToBrake(double currentVelocity)
 	{
 		// By the equation: v^2 = (v0)^2 + 2a*x
-		return Math.signum(currentVelocity) * Math.pow(currentVelocity, 2)
-				/ (-2 * maxDecel);
+		return Math.signum(currentVelocity) * Math.pow(currentVelocity, 2) / (-2 * maxDecel);
+	}
+
+	public static void setStuff(double maxAccel, double maxDecel,
+			double maxVelocity)
+	{
+		MotionPlanner.maxAccel = maxAccel;
+		MotionPlanner.maxDecel = maxDecel;
+		MotionPlanner.maxVelocity = maxVelocity;
 	}
 
 	/**
 	 * Updates variables from the config
 	 */
-	private static void updateParameters()
-	{
-		maxAccel = (double) config.get("motionPlanner_MaxAccel");
-		maxDecel = (double) config.get("motionPlanner_MaxDecel");
-		maxVelocity = (double) config.get("motionPlanner_MaxVelocity");
-	}
+	/*
+	 * private static void updateParameters() { maxAccel = (double)
+	 * config.get("motionPlanner_MaxAccel"); maxDecel = (double)
+	 * config.get("motionPlanner_Maxdecel"); maxVelocity = (double)
+	 * config.get("motionPlanner_MaxVelocity"); timeStep = (double)
+	 * config.get("motionPlanner_TimeStep"); }
+	 */
+
 }

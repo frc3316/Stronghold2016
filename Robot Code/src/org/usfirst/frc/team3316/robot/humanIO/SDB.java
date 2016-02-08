@@ -20,20 +20,11 @@ import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
 import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
-import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
-import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
-import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
-import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
-import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
-import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SDB
 {
@@ -74,7 +65,7 @@ public class SDB
 
 		private void put(String name, int i)
 		{
-			SmartDashboard.putInt(name, i);
+			SmartDashboard.putNumber(name, i);
 		}
 
 		private void put(String name, boolean b)
@@ -105,7 +96,7 @@ public class SDB
 	public void timerInit()
 	{
 		updateSDBTask = new UpdateSDBTask();
-		Robot.timer.schedule(updateSDBTask, 0, 100);
+		Robot.timer.schedule(updateSDBTask, 0, 10);
 	}
 
 	/**
@@ -122,7 +113,8 @@ public class SDB
 		{
 			Class<?> type = value.getClass();
 
-			boolean constant = Character.isUpperCase(key.codePointAt(0));
+			boolean constant = Character.isUpperCase(key.codePointAt(0))
+					&& Character.isUpperCase(key.codePointAt(key.length() - 1));
 
 			if (type == Double.class)
 			{
@@ -161,7 +153,6 @@ public class SDB
 	private void initSDB()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
-																// THIS COMMAND
 
 		/*
 		 * Remove these after finishing testing on prototype

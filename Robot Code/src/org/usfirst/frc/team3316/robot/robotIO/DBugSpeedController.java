@@ -18,7 +18,7 @@ public class DBugSpeedController
 {
 	DBugLogger logger = Robot.logger;
 	Config config = Robot.config;
-	//PowerDistributionPanel pdp = Robot.sensors.pdp;
+	PowerDistributionPanel pdp = Robot.sensors.pdp;
 
 	private SpeedController sc;
 	private boolean reverse; // Negative factor of velocity
@@ -103,8 +103,7 @@ public class DBugSpeedController
 
 	public double getCurrent()
 	{
-		//return pdp.getCurrent(pdpChannel);
-		return 0;
+		return pdp.getCurrent(pdpChannel);
 	}
 
 }

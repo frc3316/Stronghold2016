@@ -23,6 +23,8 @@ public class Chassis extends DBugSubsystemCC
 
 	// Sensors
 	private AHRS navx; // For the navX
+	private Encoder leftEncoder;
+	private Encoder rightEncoder;
 
 	private DigitalInput heLeftFront, heLeftBack, heRightFront, heRightBack;
 
@@ -59,6 +61,8 @@ public class Chassis extends DBugSubsystemCC
 
 		// Sensors
 		navx = Robot.sensors.navx;
+		leftEncoder = Robot.sensors.chassisLeftEncoder;
+		rightEncoder = Robot.sensors.chassisRightEncoder;
 
 		heLeftFront = Robot.sensors.chassisHELeftFront;
 		heLeftBack = Robot.sensors.chassisHELeftBack;
@@ -239,5 +243,26 @@ public class Chassis extends DBugSubsystemCC
 	public double getPitch()
 	{
 		return navx.getRoll();
+	}
+
+	public double getLeftSpeed()
+	{
+		return leftEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+
+	public double getRightSpeed()
+	{
+		return rightEncoder.getRate(); // Returns the speed in meter per
+										// second units.
+	}
+	
+	public double getDistance() {
+		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
+	}
+	
+	public void resetEncoders() {
+		rightEncoder.reset();
+		leftEncoder.reset();
 	}
 }
