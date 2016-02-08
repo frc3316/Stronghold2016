@@ -50,6 +50,10 @@ public class Actuators
 	public DBugSpeedController climbingMotor1, climbingMotor2, climbingMotor3, climbingMotor4;
 	public SpeedController climbingMotorSC1, climbingMotorSC2, climbingMotorSC3, climbingMotorSC4;
 
+	// Spare
+	public DBugSpeedController spareMotor;
+	public SpeedController spareMotorSC;
+
 	public Actuators()
 	{
 		/*
@@ -83,6 +87,8 @@ public class Actuators
 			climbingMotorSC2 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_2"));
 			climbingMotorSC3 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_3"));
 			climbingMotorSC4 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_4"));
+
+			spareMotorSC = new VictorSP((int) Robot.config.get("SPARE_MOTOR"));
 		}
 		else
 		{
@@ -95,23 +101,27 @@ public class Actuators
 
 			intakeSC = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
 
-			transportSC = new Talon((int) Robot.config.get("TRANSPORT_MOTOR"));
+			transportSC = new CANTalon((int) Robot.config.get("TRANSPORT_MOTOR"));
 
-			flywheelSC = new Talon((int) Robot.config.get("FLYWHEEL_MOTOR"));
+			flywheelSC = new CANTalon((int) Robot.config.get("FLYWHEEL_MOTOR"));
 
-			turretSC = new Talon((int) Robot.config.get("TURRET_MOTOR"));
+			turretSC = new CANTalon((int) Robot.config.get("TURRET_MOTOR"));
 
-			hoodSC = new Talon((int) Robot.config.get("HOOD_MOTOR"));
+			hoodSC = new CANTalon((int) Robot.config.get("HOOD_MOTOR"));
 
-			climbingMotorSC1 = new Talon((int) Robot.config.get("CLIMBING_MOTOR_1"));
-			climbingMotorSC2 = new Talon((int) Robot.config.get("CLIMBING_MOTOR_2"));
-			climbingMotorSC3 = new Talon((int) Robot.config.get("CLIMBING_MOTOR_3"));
-			climbingMotorSC4 = new Talon((int) Robot.config.get("CLIMBING_MOTOR_4"));
+			climbingMotorSC1 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_1"));
+			climbingMotorSC2 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_2"));
+			climbingMotorSC3 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_3"));
+			climbingMotorSC4 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_4"));
+
+			spareMotorSC = new CANTalon((int) Robot.config.get("SPARE_MOTOR"));
 		}
 
-		chassisLeft1 = new DBugSpeedController(chassisLeft1SC, (boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"),
+		chassisLeft1 = new DBugSpeedController(chassisLeft1SC,
+				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"),
 				(int) config.get("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL"));
-		chassisLeft2 = new DBugSpeedController(chassisLeft2SC, (boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"),
+		chassisLeft2 = new DBugSpeedController(chassisLeft2SC,
+				(boolean) Robot.config.get("CHASSIS_MOTOR_LEFT_REVERSE"),
 				(int) config.get("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL"));
 
 		chassisRight1 = new DBugSpeedController(chassisRight1SC,
@@ -125,11 +135,13 @@ public class Actuators
 				(int) Robot.config.get("CHASSIS_LONG_PISTONS_FORWARD"),
 				(int) Robot.config.get("CHASSIS_LONG_PISTONS_REVERSE"));
 
-		chassisShortPistonsLeft = new DoubleSolenoid((int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_MODULE"),
+		chassisShortPistonsLeft = new DoubleSolenoid(
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_MODULE"),
 				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_FORWARD"),
 				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_LEFT_REVERSE"));
 
-		chassisShortPistonsRight = new DoubleSolenoid((int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_MODULE"),
+		chassisShortPistonsRight = new DoubleSolenoid(
+				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_MODULE"),
 				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD"),
 				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE"));
 
@@ -137,7 +149,8 @@ public class Actuators
 		 * Intake
 		 */
 		intakeSolenoid = new DoubleSolenoid((int) Robot.config.get("INTAKE_SOLENOID_MODULE"),
-				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD"), (int) Robot.config.get("INTAKE_SOLENOID_REVERSE"));
+				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD"),
+				(int) Robot.config.get("INTAKE_SOLENOID_REVERSE"));
 
 		intakeMotor = new DBugSpeedController(intakeSC, (boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
 				(int) Robot.config.get("INTAKE_MOTOR_PDP_CHANNEL"),
@@ -146,14 +159,16 @@ public class Actuators
 		/*
 		 * Transport
 		 */
-		transportMotor = new DBugSpeedController(transportSC, (boolean) Robot.config.get("TRANSPORT_MOTOR_REVERSE"),
+		transportMotor = new DBugSpeedController(transportSC,
+				(boolean) Robot.config.get("TRANSPORT_MOTOR_REVERSE"),
 				(int) Robot.config.get("TRANSPORT_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("TRANSPORT_MOTOR_MAX_CURRENT"));
 
 		/*
 		 * Flywheel
 		 */
-		flywheelMotor = new DBugSpeedController(flywheelSC, (boolean) Robot.config.get("FLYWHEEL_MOTOR_REVERSE"),
+		flywheelMotor = new DBugSpeedController(flywheelSC,
+				(boolean) Robot.config.get("FLYWHEEL_MOTOR_REVERSE"),
 				(int) Robot.config.get("FLYWHEEL_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("FLYWHEEL_MOTOR_MAX_CURRENT"));
 
@@ -168,7 +183,8 @@ public class Actuators
 		 * Hood
 		 */
 		hoodMotor = new DBugSpeedController(hoodSC, (boolean) Robot.config.get("HOOD_MOTOR_REVERSE"),
-				(int) Robot.config.get("HOOD_MOTOR_PDP_CHANNEL"), (double) Robot.config.get("HOOD_MOTOR_MAX_CURRENT"));
+				(int) Robot.config.get("HOOD_MOTOR_PDP_CHANNEL"),
+				(double) Robot.config.get("HOOD_MOTOR_MAX_CURRENT"));
 
 		/*
 		 * Climbing
@@ -195,5 +211,14 @@ public class Actuators
 
 		climbingSolenoid = new DoubleSolenoid((int) Robot.config.get("CLIMBING_SOLENOID_FORWARD"),
 				(int) Robot.config.get("CLIMBING_SOLENOID_REVERSE"));
+
+		/*
+		 * Spare
+		 */
+
+		spareMotor = new DBugSpeedController(spareMotorSC,
+				(boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
+				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
+				(double) Robot.config.get("SPARE_MOTOR_PDP_MAX_CURRENT"));
 	}
 }

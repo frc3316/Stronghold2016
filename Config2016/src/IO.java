@@ -3,7 +3,12 @@ import java.util.Map;
 
 public class IO
 {
-	public static Map<String, Integer> pwm = new HashMap<>();
+	public static Map<String, Integer> pwmA = new HashMap<>();
+	public static Map<String, Integer> canA = new HashMap<>();
+
+	public static Map<String, Integer> pwmB = new HashMap<>();
+	public static Map<String, Integer> canB = new HashMap<>();
+
 	public static Map<String, Integer> dio = new HashMap<>();
 	public static Map<String, Integer> aio = new HashMap<>();
 	public static Map<String, Integer> pdp = new HashMap<>();
@@ -45,8 +50,8 @@ public class IO
 	{
 		if (in.containsValue(channel))
 		{
-			throw new Exception(
-					"Channel " + channel + " for key " + name + " already exists and is: " + findKey(in, channel));
+			throw new Exception("Channel " + channel + " for key " + name + " already exists and is: "
+					+ findKey(in, channel));
 		}
 
 		in.put(name, channel);
@@ -54,15 +59,87 @@ public class IO
 	}
 
 	/**
-	 * Put method for pwm channels. Read the documentation of the put method.
+	 * Puts a mapping of a key to a channel in the requested map of ROBOT A.
+	 * 
+	 * @param in
+	 *            The map to add the key.
+	 * @param name
+	 *            The key.
+	 * @param channel
+	 *            The channel to map the key to.
+	 * @throws Exception
+	 *             If the channel already has a mapping, throws an exception.
 	 */
-	private static void putPWM(String name, int channel) throws Exception
+	private static void putA(Map<String, Integer> in, String name, int channel) throws Exception
 	{
-		put(pwm, name, channel);
+		if (in.containsValue(channel))
+		{
+			throw new Exception("Channel " + channel + " for key " + name + " already exists and is: "
+					+ findKey(in, channel));
+		}
+
+		in.put(name, channel);
+		Config.addToConstantsA(name, channel);
 	}
 
 	/**
-	 * Put method for pwm channels. Read the documentation of the put method.
+	 * Puts a mapping of a key to a channel in the requested map of ROBOT B.
+	 * 
+	 * @param in
+	 *            The map to add the key.
+	 * @param name
+	 *            The key.
+	 * @param channel
+	 *            The channel to map the key to.
+	 * @throws Exception
+	 *             If the channel already has a mapping, throws an exception.
+	 */
+	private static void putB(Map<String, Integer> in, String name, int channel) throws Exception
+	{
+		if (in.containsValue(channel))
+		{
+			throw new Exception("Channel " + channel + " for key " + name + " already exists and is: "
+					+ findKey(in, channel));
+		}
+
+		in.put(name, channel);
+		Config.addToConstantsB(name, channel);
+	}
+
+	/**
+	 * Put method for pwm channels on robot A. Read the documentation of the put method.
+	 */
+	private static void putPWMA(String name, int channel) throws Exception
+	{
+		putA(pwmA, name, channel);
+	}
+
+	/**
+	 * Put method for can channels on robot A. Read the documentation of the put method.
+	 */
+	private static void putCANA(String name, int channel) throws Exception
+	{
+		putA(canA, name, channel);
+	}
+
+	/**
+	 * Put method for pwm channels on robot B. Read the documentation of the put method.
+	 */
+	private static void putPWMB(String name, int channel) throws Exception
+	{
+		putA(pwmA, name, channel);
+	}
+
+	/**
+	 * Put method for can channels on robot B. Read the documentation of the put method.
+	 */
+	private static void putCANB(String name, int channel) throws Exception
+	{
+		putA(canA, name, channel);
+	}
+
+	/**
+	 * Put method for dio channels. Read the documentation of the put method.
 	 */
 	private static void putDIO(String name, int channel) throws Exception
 	{
@@ -70,7 +147,7 @@ public class IO
 	}
 
 	/**
-	 * Put method for pwm channels. Read the documentation of the put method.
+	 * Put method for aio channels. Read the documentation of the put method.
 	 */
 	private static void putAIO(String name, int channel) throws Exception
 	{
@@ -78,7 +155,7 @@ public class IO
 	}
 
 	/**
-	 * Put method for pwm channels. Read the documentation of the put method.
+	 * Put method for pdp channels. Read the documentation of the put method.
 	 */
 	private static void putPDP(String name, int channel) throws Exception
 	{
@@ -90,28 +167,62 @@ public class IO
 		try
 		{
 			/*
-			 * PWM initialization
+			 * PWM and CAN initialization
 			 */
 			{
-				putPWM("CHASSIS_MOTOR_LEFT_1", 5);
-				putPWM("CHASSIS_MOTOR_LEFT_2", 6);
-				putPWM("CHASSIS_MOTOR_RIGHT_1", 1);
-				putPWM("CHASSIS_MOTOR_RIGHT_2", 2);
+				/*
+				 * Robot A
+				 */
+				{
+					putPWMA("CHASSIS_MOTOR_LEFT_1", 4);
+					putPWMA("CHASSIS_MOTOR_LEFT_2", 5);
+					putPWMA("CHASSIS_MOTOR_RIGHT_1", 8);
+					putPWMA("CHASSIS_MOTOR_RIGHT_2", 9);
+
+					putPWMA("INTAKE_MOTOR", 0);
+
+					putCANA("TRANSPORT_MOTOR", 0);
+
+					putCANA("FLYWHEEL_MOTOR", 1);
+
+					putCANA("TURRET_MOTOR", 2);
+
+					putCANA("HOOD_MOTOR", 3);
+
+					putCANA("CLIMBING_MOTOR_1", 11);
+					putCANA("CLIMBING_MOTOR_2", 12);
+					putCANA("CLIMBING_MOTOR_3", 13);
+					putCANA("CLIMBING_MOTOR_4", 14);
+					
+					putCANA("SPARE_MOTOR", 15);
+				}
 				
-				putPWM("INTAKE_MOTOR", 3);
-				
-				putPWM("TRANSPORT_MOTOR", 8);
-				
-				putPWM("FLYWHEEL_MOTOR", 4);
-				
-				putPWM("TURRET_MOTOR", 0);
-				
-				putPWM("HOOD_MOTOR", 16);
-				
-				putPWM("CLIMBING_MOTOR_1", 17);
-				putPWM("CLIMBING_MOTOR_2", 18);
-				putPWM("CLIMBING_MOTOR_3", 19);
-				putPWM("CLIMBING_MOTOR_4", 15);
+				/*
+				 * Robot B
+				 */
+				{
+					putPWMB("CHASSIS_MOTOR_LEFT_1", 4);
+					putPWMB("CHASSIS_MOTOR_LEFT_2", 5);
+					putPWMB("CHASSIS_MOTOR_RIGHT_1", 8);
+					putPWMB("CHASSIS_MOTOR_RIGHT_2", 9);
+
+					putPWMB("INTAKE_MOTOR", 0);
+
+					putCANB("TRANSPORT_MOTOR", 0);
+
+					putCANB("FLYWHEEL_MOTOR", 1);
+
+					putCANB("TURRET_MOTOR", 2);
+
+					putCANB("HOOD_MOTOR", 3);
+
+					putCANB("CLIMBING_MOTOR_1", 11);
+					putCANB("CLIMBING_MOTOR_2", 12);
+					putCANB("CLIMBING_MOTOR_3", 13);
+					putCANB("CLIMBING_MOTOR_4", 14);
+					
+					putCANB("SPARE_MOTOR", 15);
+				}
 			}
 
 			/*
@@ -120,23 +231,23 @@ public class IO
 			{
 				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
 				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
-				
+
 				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
 				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
-				
+
 				putDIO("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
 				putDIO("CHASSIS_HALL_EFFECT_LEFT_BACK", 13);
 				putDIO("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 11);
 				putDIO("CHASSIS_HALL_EFFECT_RIGHT_BACK", 10);
-				
+
 				putDIO("INTAKE_LEFT_SWITCH", 8);
 				putDIO("INTAKE_RIGHT_SWITCH", 9);
-				
+
 				putDIO("TRANSPORT_ENCODER_A", 6);
 				putDIO("TRANSPORT_ENCODER_B", 7);
-				
+
 				putDIO("CLIMBING_SWITCH", 1);
-				
+
 				putDIO("FLYWHEEL_HALL_EFFECT_COUNTER", 0);
 			}
 
@@ -145,11 +256,11 @@ public class IO
 			 */
 			{
 				putAIO("INTAKE_POT", 0);
-				
+
 				putAIO("TURRET_POT", 1);
-				
+
 				putAIO("HOOD_POT", 2);
-				
+
 				putAIO("CLIMBING_POT", 3);
 			}
 
@@ -157,26 +268,28 @@ public class IO
 			 * PDP initialization
 			 */
 			{
-				putPDP("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 0);
-				putPDP("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1);
+				putPDP("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 4);
+				putPDP("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 5);
 
-				putPDP("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 2);
-				putPDP("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 3);
+				putPDP("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 8);
+				putPDP("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 9);
+
+				putPDP("INTAKE_MOTOR_PDP_CHANNEL", 10);
+
+				putPDP("TRANSPORT_MOTOR_PDP_CHANNEL", 0);
+
+				putPDP("FLYWHEEL_MOTOR_PDP_CHANNEL", 1);
+
+				putPDP("TURRET_MOTOR_PDP_CHANNEL", 2);
+
+				putPDP("HOOD_MOTOR_PDP_CHANNEL", 3);
+
+				putPDP("CLIMBING_MOTOR_1_PDP_CHANNEL", 11);
+				putPDP("CLIMBING_MOTOR_2_PDP_CHANNEL", 12);
+				putPDP("CLIMBING_MOTOR_3_PDP_CHANNEL", 13);
+				putPDP("CLIMBING_MOTOR_4_PDP_CHANNEL", 14);
 				
-				putPDP("INTAKE_MOTOR_PDP_CHANNEL", 4);
-				
-				putPDP("TRANSPORT_MOTOR_PDP_CHANNEL", 5);
-				
-				putPDP("FLYWHEEL_MOTOR_PDP_CHANNEL", 6);
-				
-				putPDP("TURRET_MOTOR_PDP_CHANNEL", 7);
-				
-				putPDP("HOOD_MOTOR_PDP_CHANNEL", 8);
-				
-				putPDP("CLIMBING_MOTOR_1_PDP_CHANNEL", 10);
-				putPDP("CLIMBING_MOTOR_2_PDP_CHANNEL", 11);
-				putPDP("CLIMBING_MOTOR_3_PDP_CHANNEL", 12);
-				putPDP("CLIMBING_MOTOR_4_PDP_CHANNEL", 13);
+				putPDP("SPARE_MOTOR_PDP_CHANNEL", 15);
 			}
 
 			/*
@@ -197,16 +310,15 @@ public class IO
 
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 4);
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 5);
-				
+
 				Config.addToConstants("CLIMBING_SOLENOID_FORWARD", 6);
 				Config.addToConstants("CLIMBING_SOLENOID_REVERSE", 7);
-				
-				
+
 				// Module 0
 				Config.addToConstants("INTAKE_SOLENOID_MODULE", 0);
-				
-				Config.addToConstants("INTAKE_SOLENOID_FORWARD", 6); 
-				Config.addToConstants("INTAKE_SOLENOID_REVERSE", 7); 
+
+				Config.addToConstants("INTAKE_SOLENOID_FORWARD", 6);
+				Config.addToConstants("INTAKE_SOLENOID_REVERSE", 7);
 			}
 		}
 		catch (Exception e)

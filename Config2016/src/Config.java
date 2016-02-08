@@ -137,7 +137,6 @@ public class Config
 				 * Intake
 				 */
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
-				
 				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
@@ -155,14 +154,12 @@ public class Config
 				 * Flywheel
 				 */
 				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
-			
 				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 10.0);
 
 				/*
 				 * Turret
 				 */
 				addToConstants("TURRET_MOTOR_REVERSE", false);
-		
 				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check the stall current
 				
 				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
@@ -172,7 +169,6 @@ public class Config
 				 * Hood
 				 */
 				addToConstants("HOOD_MOTOR_REVERSE", false);
-				
 				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check the stall current
 
 				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
@@ -196,6 +192,13 @@ public class Config
 				
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
+				
+				/*
+				 * Spare
+				 */
+				addToConstants("SPARE_MOTOR_PDP_REVERSE", false);
+				
+				addToConstants("SPARE_MOTOR_PDP_MAX_CURRENT", 10.0);
 			}
 		}
 		
