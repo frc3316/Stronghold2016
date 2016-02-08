@@ -125,6 +125,21 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
+				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
+				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
+				
+				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
+				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
+				
+				
+				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
+				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+				
+				//For some reason the encoders give 4 times less the correct speed
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
+				
+				
 				/*
 				 * Intake
 				 */
@@ -132,7 +147,6 @@ public class Config
 				
 				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
 
-			
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
 
@@ -191,6 +205,8 @@ public class Config
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
 			}
 		}
+		
+		
 
 		/*
 		 * Chassis
@@ -213,7 +229,6 @@ public class Config
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
-			}
 
 			/*
 			 * Retract Omni
@@ -230,6 +245,36 @@ public class Config
 				addToVariables("chassis_ExtendOmni_CancelTimeout", 1.5);
 			}
 
+				// TODO: Check what the following variables should be, and
+				// change them.
+				addToVariables("motionPlanner_MaxAccel", 2.5);
+				addToVariables("motionPlanner_MaxDecel", -1.5);
+				addToVariables("motionPlanner_MaxVelocity", 1.0);
+				addToVariables("motionPlanner_TimeStep", 0.02);
+			}
+			
+			/*
+			 * Drive Distance
+			 */
+			{
+				// PID
+				addToVariables("chassis_PIDRight_KP", 100.0);
+				addToVariables("chassis_PIDRight_KI", 0.00);
+				addToVariables("chassis_PIDRight_KD", 75.0);
+				addToVariables("chassis_PIDRight_KF", 450.0);
+				
+				addToVariables("chassis_PIDLeft_KP", 100.0);
+				addToVariables("chassis_PIDLeft_KI", 0.0);
+				addToVariables("chassis_PIDLeft_KD", 75.0);
+				addToVariables("chassis_PIDLeft_KF", 450.0);
+			}
+			
+			/*
+			 * Set Constant Voltage
+			 */
+			{
+				addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
+			}
 		}
 
 		/*

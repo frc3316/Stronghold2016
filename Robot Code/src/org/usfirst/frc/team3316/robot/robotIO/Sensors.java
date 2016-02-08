@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
@@ -23,10 +24,12 @@ public class Sensors {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
-	//public PowerDistributionPanel pdp;
+	public PowerDistributionPanel pdp;
 	
 	// Chassis
 	public AHRS navx;
+	public Encoder chassisLeftEncoder;
+	public Encoder chassisRightEncoder;
 
 	public DigitalInput chassisHELeftFront, chassisHELeftBack,
 			chassisHERightFront, chassisHERightBack;
@@ -54,7 +57,7 @@ public class Sensors {
 	
 	public Sensors()
 	{
-		//pdp = new PowerDistributionPanel();
+		pdp = new PowerDistributionPanel();
 		
 		/*
 		 * Vision
@@ -80,6 +83,21 @@ public class Sensors {
 		chassisHELeftBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_BACK"));
 		chassisHERightFront = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_FRONT"));
 		chassisHERightBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_BACK"));
+		
+		chassisLeftEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),
+				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),
+				(boolean) Robot.config.get("CHASSIS_LEFT_ENCODER_REVERSE"),
+				EncodingType.k4X);
+		
+		chassisLeftEncoder.setDistancePerPulse((double) config.get("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE"));
+
+		chassisRightEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
+				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),
+				(boolean) Robot.config.get("CHASSIS_RIGHT_ENCODER_REVERSE"),
+				EncodingType.k4X);
+		chassisRightEncoder.setDistancePerPulse((double) config.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
 
 		/*
 		 * Intake
