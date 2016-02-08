@@ -19,7 +19,7 @@ public class Actuators
 
 	// Chassis
 	public DBugSpeedController chassisLeft1, chassisLeft2, chassisRight1, chassisRight2;
-	private SpeedController chassisLeft1SC, chassisLeft2SC, chassisRight1SC, chassisRight2SC;
+	public SpeedController chassisLeft1SC, chassisLeft2SC, chassisRight1SC, chassisRight2SC;
 
 	public DoubleSolenoid chassisLongPistons, chassisShortPistonsLeft, chassisShortPistonsRight;
 
@@ -27,28 +27,28 @@ public class Actuators
 	public DoubleSolenoid intakeSolenoid;
 
 	public DBugSpeedController intakeMotor;
-	private SpeedController intakeSC;
+	public SpeedController intakeSC;
 
 	// Transport
 	public DBugSpeedController transportMotor;
-	private SpeedController transportSC;
+	public SpeedController transportSC;
 
 	// Flywheel
 	public DBugSpeedController flywheelMotor;
-	private SpeedController flywheelSC;
+	public SpeedController flywheelSC;
 
 	// Turret
 	public DBugSpeedController turretMotor;
-	private SpeedController turretSC;
+	public SpeedController turretSC;
 
 	// Hood
 	public DBugSpeedController hoodMotor;
-	private SpeedController hoodSC;
+	public SpeedController hoodSC;
 
 	// Climbing
 	public DoubleSolenoid climbingSolenoid;
 	public DBugSpeedController climbingMotor1, climbingMotor2, climbingMotor3, climbingMotor4;
-	private SpeedController climbingMotorSC1, climbingMotorSC2, climbingMotorSC3, climbingMotorSC4;
+	public SpeedController climbingMotorSC1, climbingMotorSC2, climbingMotorSC3, climbingMotorSC4;
 
 	public Actuators()
 	{

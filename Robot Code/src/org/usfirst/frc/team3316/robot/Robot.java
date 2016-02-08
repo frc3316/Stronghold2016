@@ -18,11 +18,14 @@ import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
 import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -108,7 +111,21 @@ public class Robot extends IterativeRobot
 		 */
 		sdb.timerInit();
 
+		/*
+		 * La verite (turns out that apostrophes makes errors) 
+		 */
 		logger.info(returnTheTruth());
+		
+		/*
+		 * Test Mode
+		 */
+		//Chassis
+		LiveWindow.addActuator("General", "compressor", actuators.compressor);
+		LiveWindow.addActuator("Chassis", "chassisLeft1SC", (LiveWindowSendable) actuators.chassisLeft1SC);
+		LiveWindow.addActuator("Chassis", "chassisLeft2SC", (LiveWindowSendable) actuators.chassisLeft2SC);
+		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) actuators.chassisRight1SC);
+		LiveWindow.addActuator("Chassis", "chassisRight2SC", (LiveWindowSendable) actuators.chassisRight2SC);
+		// LiveWindow.addActuator("General", "Compressor", (LiveWindowSendable) actuators.intakeSC);	
 	}
 
 	public void disabledInit()
