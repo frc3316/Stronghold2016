@@ -118,18 +118,24 @@ public class IO
 			 * DIO initialization
 			 */
 			{
+				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
+				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
+				
+				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
+				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
+				
 				putDIO("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
 				putDIO("CHASSIS_HALL_EFFECT_LEFT_BACK", 13);
 				putDIO("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 11);
 				putDIO("CHASSIS_HALL_EFFECT_RIGHT_BACK", 10);
 				
-				putDIO("INTAKE_LEFT_SWITCH", 7);
-				putDIO("INTAKE_RIGHT_SWITCH", 1);
+				putDIO("INTAKE_LEFT_SWITCH", 8);
+				putDIO("INTAKE_RIGHT_SWITCH", 9);
 				
-				putDIO("TRANSPORT_ENCODER_A", 2);
-				putDIO("TRANSPORT_ENCODER_B", 3);
+				putDIO("TRANSPORT_ENCODER_A", 6);
+				putDIO("TRANSPORT_ENCODER_B", 7);
 				
-				putDIO("CLIMBING_SWITCH", 8);
+				putDIO("CLIMBING_SWITCH", 1);
 				
 				putDIO("FLYWHEEL_HALL_EFFECT_COUNTER", 0);
 			}
@@ -192,15 +198,15 @@ public class IO
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 4);
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 5);
 				
-				Config.addToConstants("CLIMBING_SOLENOID_FORWARD_CHANNEL", 6);
-				Config.addToConstants("CLIMBING_SOLENOID_REVERSE_CHANNEL", 7);
+				Config.addToConstants("CLIMBING_SOLENOID_FORWARD", 6);
+				Config.addToConstants("CLIMBING_SOLENOID_REVERSE", 7);
 				
 				
 				// Module 0
 				Config.addToConstants("INTAKE_SOLENOID_MODULE", 0);
 				
-				Config.addToConstants("INTAKE_SOLENOID_FORWARD_CHANNEL", 6); 
-				Config.addToConstants("INTAKE_SOLENOID_REVERSE_CHANNEL", 7); 
+				Config.addToConstants("INTAKE_SOLENOID_FORWARD", 6); 
+				Config.addToConstants("INTAKE_SOLENOID_REVERSE", 7); 
 			}
 		}
 		catch (Exception e)

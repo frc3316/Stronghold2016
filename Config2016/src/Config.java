@@ -125,13 +125,6 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
-				
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
-				
-				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
 				
@@ -203,9 +196,6 @@ public class Config
 				
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
-				
-				addToConstants("CLIMBING_SOLENOID_FORWARD", 1);
-				addToConstants("CLIMBING_SOLENOID_REVERSE", 2);
 			}
 		}
 		
