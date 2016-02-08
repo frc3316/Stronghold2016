@@ -75,9 +75,9 @@ if __name__ == "__main__":
         cam = cv2.VideoCapture(0)
         cam.set(3,640)
         cam.set(4,480)
-        #cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
-        #cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
-        #cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
+        cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
+        cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
+        cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
         networkManager = NetworkManager(JAVA_IP,8080)
@@ -150,9 +150,9 @@ if __name__ == "__main__":
 
             # display:
             if isShowingImage:
-                # cv2.imshow("Current Image", visionManager.currentImage)
+                cv2.imshow("Current Image", visionManager.currentImage)
                 # cv2.imshow("Thresh Image", visionManager.threshImage)
-                cv2.imshow("Masked Image", visionManager.maskedImage)
+                # cv2.imshow("Masked Image", visionManager.maskedImage)
 
             #########################
             # Wait for key pressing #
