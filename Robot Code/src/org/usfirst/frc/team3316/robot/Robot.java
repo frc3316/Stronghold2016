@@ -120,12 +120,14 @@ public class Robot extends IterativeRobot
 		 * Test Mode
 		 */
 		//Chassis
-		LiveWindow.addActuator("General", "compressor", actuators.compressor);
+		/*LiveWindow.addActuator("General", "compressor", actuators.compressor);
 		LiveWindow.addActuator("Chassis", "chassisLeft1SC", (LiveWindowSendable) actuators.chassisLeft1SC);
 		LiveWindow.addActuator("Chassis", "chassisLeft2SC", (LiveWindowSendable) actuators.chassisLeft2SC);
 		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) actuators.chassisRight1SC);
 		LiveWindow.addActuator("Chassis", "chassisRight2SC", (LiveWindowSendable) actuators.chassisRight2SC);
-		// LiveWindow.addActuator("General", "Compressor", (LiveWindowSendable) actuators.intakeSC);	
+		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) actuators.chassisLongPistons);
+		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) actuators.chassisShortPistonsLeft);
+		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) actuators.chassisShortPistonsRight); */
 	}
 
 	public void disabledInit()
