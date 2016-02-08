@@ -18,10 +18,7 @@ import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
 import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -115,36 +112,6 @@ public class Robot extends IterativeRobot
 		 * La verite (turns out that apostrophes makes errors) 
 		 */
 		logger.info(returnTheTruth());
-		
-		/*
-		 * Test Mode
-		 */
-		// General
-		LiveWindow.addActuator("General", "compressor", (LiveWindowSendable) actuators.compressor);
-		// Chassis
-		LiveWindow.addActuator("Chassis", "chassisLeft1SC", (LiveWindowSendable) actuators.chassisLeft1SC);
-		LiveWindow.addActuator("Chassis", "chassisLeft2SC", (LiveWindowSendable) actuators.chassisLeft2SC);
-		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) actuators.chassisRight1SC);
-		LiveWindow.addActuator("Chassis", "chassisRight2SC", (LiveWindowSendable) actuators.chassisRight2SC);
-		// Intake
-		LiveWindow.addActuator("Intake", "intakeSolenoid", (LiveWindowSendable) actuators.intakeSolenoid);
-		LiveWindow.addActuator("Intake", "intakeSC", (LiveWindowSendable) actuators.intakeSC);
-		// Transport
-		LiveWindow.addActuator("Transport", "transportSC", (LiveWindowSendable) actuators.transportSC);
-		// Flywheel
-		LiveWindow.addActuator("Flywheel", "flywheelSC", (LiveWindowSendable) actuators.flywheelSC);
-		// Turret
-		LiveWindow.addActuator("Turret", "turretSC", (LiveWindowSendable) actuators.turretSC);
-		// Hood
-		LiveWindow.addActuator("Hood", "hoodSC", (LiveWindowSendable) actuators.hoodSC);
-		// Climbing
-		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingSolenoid);
-		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC1);
-		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC2);
-		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC3);
-		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) actuators.climbingMotorSC4);
-
-		
 	}
 
 	public void disabledInit()
