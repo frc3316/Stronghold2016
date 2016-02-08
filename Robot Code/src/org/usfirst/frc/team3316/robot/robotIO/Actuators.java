@@ -137,7 +137,7 @@ public class Actuators
 		 * Intake
 		 */
 		intakeSolenoid = new DoubleSolenoid((int) Robot.config.get("INTAKE_SOLENOID_MODULE"),
-				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD"), (int) Robot.config.get("INTAKE_SOLENOID_REVERSE"));
+				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD_CHANNEL"), (int) Robot.config.get("INTAKE_SOLENOID_REVERSE_CHANNEL"));
 
 		intakeMotor = new DBugSpeedController(intakeSC, (boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
 				(int) Robot.config.get("INTAKE_MOTOR_PDP_CHANNEL"),
@@ -193,7 +193,7 @@ public class Actuators
 				(int) Robot.config.get("CLIMBING_MOTOR_4_PDP_CHANNEL"),
 				(double) Robot.config.get("CLIMBING_MOTOR_4_MAX_CURRENT"));
 
-		climbingSolenoid = new DoubleSolenoid((int) Robot.config.get("CLIMBING_SOLENOID_FORWARD_CHANNEL"),
-				(int) Robot.config.get("CLIMBING_SOLENOID_REVERSE_CHANNEL"));
+		climbingSolenoid = new DoubleSolenoid((int) Robot.config.get("CLIMBING_SOLENOID_FORWARD"),
+				(int) Robot.config.get("CLIMBING_SOLENOID_REVERSE"));
 	}
 }

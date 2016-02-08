@@ -203,6 +203,9 @@ public class Config
 				
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
+				
+				addToConstants("CLIMBING_SOLENOID_FORWARD", 1);
+				addToConstants("CLIMBING_SOLENOID_REVERSE", 2);
 			}
 		}
 		

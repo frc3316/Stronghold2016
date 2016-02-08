@@ -106,11 +106,11 @@ public class IO
 				
 				putPWM("TURRET_MOTOR", 0);
 				
-				putPWM("HOOD_MOTOR", 11);
+				putPWM("HOOD_MOTOR", 16);
 				
-				putPWM("CLIMBING_MOTOR_1", 12);
-				putPWM("CLIMBING_MOTOR_2", 13);
-				putPWM("CLIMBING_MOTOR_3", 14);
+				putPWM("CLIMBING_MOTOR_1", 17);
+				putPWM("CLIMBING_MOTOR_2", 18);
+				putPWM("CLIMBING_MOTOR_3", 19);
 				putPWM("CLIMBING_MOTOR_4", 15);
 			}
 
@@ -192,8 +192,8 @@ public class IO
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 4);
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 5);
 				
-				Config.addToConstants("CLIMBING_SOLENOID_FORWARD", 6);
-				Config.addToConstants("CLIMBING_SOLENOID_REVERSE", 7);
+				Config.addToConstants("CLIMBING_SOLENOID_FORWARD_CHANNEL", 6);
+				Config.addToConstants("CLIMBING_SOLENOID_REVERSE_CHANNEL", 7);
 				
 				
 				// Module 0
