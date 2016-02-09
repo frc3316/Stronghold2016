@@ -3,21 +3,23 @@ import time
 import thread
 from Tkinter import *
 
+# TODO: add exposure and saturation default values.
 def saveImage():
+    timeStamp = time.time()
     frame = cam.read()[1]
-    cv2.imshow("Saved Image", frame)
-    cv2.imwrite(str(time.time()) + ".png", frame)
-    with open(str(time.time()) + ".txt",  "w") as f:
+    cv2.imshow("Saved Image", cv2.resize(cam.read()[1],(480, 320), interpolation = cv2.INTER_CUBIC))
+    cv2.imwrite(str(timeStamp) + ".png", frame)
+    with open(str(timeStamp) + ".txt",  "w") as f:
         f.write(str(DFC.get()))
         f.close()
 
 def showImage():
     while True:
-        cv2.imshow("Current Image", cam.read()[1])
+        cv2.imshow("Current Image", cv2.resize(cam.read()[1],(480, 320), interpolation = cv2.INTER_CUBIC))
 
 cam = cv2.VideoCapture(0)
-cam.set(3,620) # Width of frame.
-cam.set(4,480) # Height of frame.
+# cam.set(3,620) # Width of frame.
+# cam.set(4,480) # Height of frame.
 
 master = Tk()
 saveImage = Button(master,text = "Save Image", command = saveImage)
