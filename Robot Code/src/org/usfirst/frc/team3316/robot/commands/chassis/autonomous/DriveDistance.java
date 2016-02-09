@@ -26,7 +26,7 @@ public abstract class DriveDistance extends DBugCommand
 
 	protected double dist;
 	
-	protected PlannedMotion motion;
+	protected PlannedMotion distToBrake;
 
 	protected double initTime = 0;
 	protected double initDist = 0;
@@ -91,7 +91,7 @@ public abstract class DriveDistance extends DBugCommand
 
 	protected void init()
 	{
-		motion = MotionPlanner.planMotion(dist);
+
 		
 		pidRight.setOutputRange(-1, 1);
 		pidLeft.setOutputRange(-1, 1);
@@ -120,7 +120,7 @@ public abstract class DriveDistance extends DBugCommand
 		currentTime = Timer.getFPGATimestamp() - initTime;
 		
 		SmartDashboard.putNumber("Motion profile velocity",
-				motion.getVelocity(currentTime));
+				distToBrake.getVelocity(currentTime));
 
 		set();
 	}
