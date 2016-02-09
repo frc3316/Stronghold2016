@@ -109,14 +109,14 @@ public class Robot extends IterativeRobot
 		sdb.timerInit();
 
 		/*
-		 * La verite (turns out that apostrophes makes errors) 
+		 * La verite (turns out that apostrophes makes errors)
 		 */
 		logger.info(returnTheTruth());
 	}
 
 	public void disabledInit()
 	{
-		
+
 	}
 
 	public void disabledPeriodic()
