@@ -154,7 +154,7 @@ class VisionManager(object):
 
                 azimuthalAngle = self.distanceHelper.getAzimuthalAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAX)
                 polarAngle = self.distanceHelper.getPolarAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAY)
-                self.currentImageObject.azimathalAngle = azimuthalAngle
+                self.currentImageObject.azimuthalAngle = azimuthalAngle
                 self.currentImageObject.polarAngle = polarAngle
 
             self.currentImageObject.didUpdateVar = True

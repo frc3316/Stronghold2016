@@ -87,11 +87,11 @@ if __name__ == "__main__":
             #############################
 
             if visionManager.isObjectDetected and visionManager.robotObject is not None:
-               values = [visionManager.currentImageObject.distanceFromCamera,
-                         visionManager.currentImageObject.azimuthalAngle,
-                         visionManager.currentImageObject.polarAngle]
-               names = ["DFC", "AA", "PA"]
-               networkManager.sendData(values, names)
+                values = [visionManager.currentImageObject.distanceFromCamera,
+                          visionManager.currentImageObject.azimuthalAngle,
+                          visionManager.currentImageObject.polarAngle]
+                names = ["DFC", "AA", "PA"]
+                networkManager.sendData(values, names)
 
             ###################
             # Results logger  #
