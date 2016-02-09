@@ -1,10 +1,7 @@
 import numpy as np
 
 # Colors:
-# LB = np.array([50,250,160]) # Lower bond
-# UB = np.array([70,255,255]) # Upper bond
-
-LB = np.array([0,0,0]) # Lower bond
+LB = np.array([50,250,160]) # Lower bond
 UB = np.array([70,255,255]) # Upper bond
 
 # Bounding rectangle
