@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.CrossDefense;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -22,6 +25,9 @@ import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
+import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
+
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
@@ -45,6 +51,11 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
+			put("Intake Current", Robot.intake.getCurrent());
+			
+			put("Chassis Yaw", Robot.chassis.getYaw());
+			put("Chassis Pitch", Robot.chassis.getPitch());
+			put("isOnDefense", Robot.chassis.isOnDefense());
 			put("Hood Angle", Robot.hood.getAngle());
 			put("Turret Angle", Robot.turret.getAngle());
 			try
@@ -132,11 +143,11 @@ public class SDB
 			if (!constant)
 			{
 				variablesInSDB.put(key, type);
-				logger.info("Added to SDB " + key + " of type " + type + "and allows for its modification");
+				logger.info("Added to SDB " + key + " of type " + type + " and allows for its modification");
 			}
 			else
 			{
-				logger.info("Added to SDB " + key + " of type " + type + "BUT DOES NOT ALLOW for its modification");
+				logger.info("Added to SDB " + key + " of type " + type + " BUT DOES NOT ALLOW for its modification");
 			}
 
 			return true;
@@ -152,8 +163,29 @@ public class SDB
 
 	private void initSDB()
 	{
-		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
+		SmartDashboard.putData(new UpdateVariablesInConfig()); //NEVER REMOVE THIS COMMAND
 
+
+		/*
+		 * Remove these after finishing testing on prototype
+		 */		
+		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
+		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
+		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
+		putConfigVariableInSDB("chassis_CrossDefense_BrakeV");
+		putConfigVariableInSDB("chassis_CrossBrake_Timeout");
+		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
+		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
+		putConfigVariableInSDB("chassis_CrossDefense_DownV");
+		
+		/*
+		 * For testing
+		 */
+		SmartDashboard.putData(new CrossDefense(Direction.FORWARDS));
+		
+		SmartDashboard.putData(new CrossingForwardSequence());
+		SmartDashboard.putData(new CrossingBackSequence());
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */

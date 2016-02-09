@@ -122,8 +122,35 @@ public class Config
 				/*
 				 * Chassis
 				 */
+<<<<<<< HEAD
+=======
+				addToConstants("CHASSIS_MOTOR_LEFT_1", 5);
+				addToConstants("CHASSIS_MOTOR_LEFT_2", 6);
+				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
+				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
+
+>>>>>>> auton_cross_defense
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				
+				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 13);
+				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 14);
+				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 2);
+				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1);
+
+				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
+				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
+
+				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
+				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
+
+				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
+				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE",
+						4 * ((6 * Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE",
+						4 * ((6 * Math.PI) / 32) * 0.0254);
 
 				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
 				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
@@ -143,6 +170,22 @@ public class Config
 				/*
 				 * Intake
 				 */
+<<<<<<< HEAD
+=======
+				addToConstants("INTAKE_SOLENOID_FORWARD", 6); // changed
+																		// for
+																		// prototype
+				addToConstants("INTAKE_SOLENOID_REVERSE", 7); // changed
+																		// for
+																		// prototype
+				addToConstants("INTAKE_SOLENOID_MODULE", 0);
+
+				addToConstants("INTAKE_MOTOR", 3); // changed for prototype
+
+				addToConstants("INTAKE_LEFT_SWITCH", 7);
+				addToConstants("INTAKE_RIGHT_SWITCH", 1);
+
+>>>>>>> auton_cross_defense
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
 				
 				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
@@ -155,7 +198,13 @@ public class Config
 				 */
 				addToConstants("TRANSPORT_MOTOR_REVERSE", false);
 				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0);
+<<<<<<< HEAD
 				
+=======
+
+				addToConstants("TRANSPORT_ENCODER_A", 8);
+				addToConstants("TRANSPORT_ENCODER_B", 6);
+>>>>>>> auton_cross_defense
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
 
 				/*
@@ -178,6 +227,10 @@ public class Config
 				/*
 				 * Hood
 				 */
+<<<<<<< HEAD
+=======
+				addToConstants("HOOD_MOTOR", 16);
+>>>>>>> auton_cross_defense
 				addToConstants("HOOD_MOTOR_REVERSE", false);
 				
 				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check the stall current
@@ -188,10 +241,18 @@ public class Config
 				/*
 				 * Climbing
 				 */
+<<<<<<< HEAD
 				
+=======
+				addToConstants("CLIMBING_MOTOR_1", 17);
+>>>>>>> auton_cross_defense
 				addToConstants("CLIMBING_MOTOR_1_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 10.0);
 
+<<<<<<< HEAD
+=======
+				addToConstants("CLIMBING_MOTOR_2", 18);
+>>>>>>> auton_cross_defense
 				addToConstants("CLIMBING_MOTOR_2_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 10.0);
 
@@ -203,6 +264,12 @@ public class Config
 				
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
+<<<<<<< HEAD
+=======
+
+				addToConstants("CLIMBING_SWITCH", 9);
+
+>>>>>>> auton_cross_defense
 			}
 		}
 		
@@ -216,8 +283,6 @@ public class Config
 			 * Constants
 			 */
 			{
-				addToConstants("CHASSIS_DEFENSE_ANGLE_TIMEOUT", 500.0);
-				addToConstants("CHASSIS_DEFENSE_ANGLE_RANGE", 4.0);
 				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
 			}
 
@@ -229,6 +294,24 @@ public class Config
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
+<<<<<<< HEAD
+=======
+				
+				// Cross Defense
+				addToConstants("chassis_Defense_Angle_Timeout", 400.0);
+				
+				addToVariables("chassis_CrossDefense_Voltage", 0.5);
+				
+				addToVariables("chassis_Defense_Pitch_Thresh", 2.5);
+				addToVariables("chassis_Defense_Roll_Thresh", 4.0);
+				
+				addToVariables("chassis_CrossBrake_Timeout", 400.0);
+				addToVariables("chassis_CrossDefense_BrakeV", -0.32);
+				
+				addToVariables("chassis_CrossDefense_MinSpeed", 0.35);
+				addToVariables("chassis_CrossDefense_DownV", 0.001);
+			}
+>>>>>>> auton_cross_defense
 
 			/*
 			 * Retract Omni

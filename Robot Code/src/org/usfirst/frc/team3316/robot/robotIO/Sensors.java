@@ -28,8 +28,8 @@ public class Sensors {
 	
 	// Chassis
 	public AHRS navx;
-	public Encoder chassisLeftEncoder;
-	public Encoder chassisRightEncoder;
+
+	public Encoder chassisLeftEncoder, chassisRightEncoder;
 
 	public DigitalInput chassisHELeftFront, chassisHELeftBack,
 			chassisHERightFront, chassisHERightBack;
@@ -78,6 +78,20 @@ public class Sensors {
 			DriverStation.reportError(
 					"Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+		chassisLeftEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),
+				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),
+				(boolean) Robot.config.get("CHASSIS_LEFT_ENCODER_REVERSE"),
+				EncodingType.k4X);
+		
+		chassisLeftEncoder.setDistancePerPulse((double) config.get("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE"));
+
+		chassisRightEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
+				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),
+				(boolean) Robot.config.get("CHASSIS_RIGHT_ENCODER_REVERSE"),
+				EncodingType.k4X);
+		chassisRightEncoder.setDistancePerPulse((double) config.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
 		
 		chassisHELeftFront = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_FRONT"));
 		chassisHELeftBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_BACK"));

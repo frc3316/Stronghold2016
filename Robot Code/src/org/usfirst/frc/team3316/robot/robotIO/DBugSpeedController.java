@@ -106,4 +106,12 @@ public class DBugSpeedController
 		return pdp.getCurrent(pdpChannel);
 	}
 
+	/**
+	 * Returns the set speed of the DBugSpeedController between -1 to 1.
+	 */
+	public double getVoltage()
+	{
+		return sc.get();
+	}
+
 }
