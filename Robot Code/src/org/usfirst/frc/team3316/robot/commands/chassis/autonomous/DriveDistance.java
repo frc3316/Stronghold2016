@@ -19,11 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author D-Bug
  *
  */
-public abstract class DriveDistance extends DBugCommand
+public class DriveDistance extends DBugCommand
 {
 	private PIDController pid;
-	private double pidOutput;
-	private double pidGet;
 
 	private double dist, initDist = 0, currentDist, initTime = 0, currentTime;
 	
@@ -38,7 +36,6 @@ public abstract class DriveDistance extends DBugCommand
 		
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
-
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
 				return;
@@ -46,7 +43,9 @@ public abstract class DriveDistance extends DBugCommand
 
 			public double pidGet()
 			{
-				return pidGet;
+				currentDist = Robot.chassis.getDistance() - initDist;
+				
+				return currentDist;
 			}
 
 			public PIDSourceType getPIDSourceType()
@@ -58,7 +57,10 @@ public abstract class DriveDistance extends DBugCommand
 
 			public void pidWrite(double output)
 			{
-				pidOutput = output;
+				currentTime = Timer.getFPGATimestamp() - initTime;
+				profileVelocity = motion.getVelocity(currentTime);		
+				
+				Robot.chassis.setMotors(output + profileVelocity, output + profileVelocity);
 			}
 		});
 	}
@@ -71,8 +73,9 @@ public abstract class DriveDistance extends DBugCommand
 
 		pid.setPID((double) config.get("chassis_DriveDistance_PID_KP") / 1000,
 				(double) config.get("chassis_DriveDistance_PID_KI") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KD") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KF") / 1000);
+				(double) config.get("chassis_DriveDistance_PID_KD") / 1000);
+		
+		pid.setSetpoint(dist);
 
 		pid.enable();
 
@@ -83,17 +86,7 @@ public abstract class DriveDistance extends DBugCommand
 	}
 
 	protected void execute()
-	{
-		currentDist = Robot.chassis.getDistance() - initDist;
-		currentTime = Timer.getFPGATimestamp() - initTime;
-		
-		pidGet = dist - currentDist;
-		pid.setSetpoint((double) config.get("chassis_DriveDistance_PID_Setpoint"));
-		
-		profileVelocity = motion.getVelocity(currentTime);		
-		
-		Robot.chassis.setMotors(pidOutput + profileVelocity, pidOutput + profileVelocity);
-	}
+	{}
 
 	protected boolean isFinished() {
 		return pid.onTarget();

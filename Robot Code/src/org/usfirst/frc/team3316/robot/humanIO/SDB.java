@@ -17,6 +17,7 @@ import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
 import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
 import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
+import org.usfirst.frc.team3316.robot.commands.chassis.autonomous.DriveDistance;
 import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
@@ -173,6 +174,9 @@ public class SDB
 			putConfigVariableInSDB("motionPlanner_MaxDecel");
 			putConfigVariableInSDB("motionPlanner_MaxVelocity");
 			putConfigVariableInSDB("motionPlanner_TimeStep");
+			
+			SmartDashboard.putData(new DriveDistance(0.5));
+			SmartDashboard.putData(new DriveDistance(1.0));
 		}
 		
 		putConfigVariableInSDB("hood_Pot_LowThresh");
