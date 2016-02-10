@@ -13,13 +13,7 @@ public class Flywheel extends DBugSubsystemCC
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
 
-	double rate = 0;
-	private static Timer timer;
-
-	static
-	{
-		timer = new Timer();
-	}
+	private double rate = 0;
 
 	/**
 	 * Class for filtering out noise from the FPGA rate calculation. Essentially,
@@ -54,7 +48,7 @@ public class Flywheel extends DBugSubsystemCC
 		counter = Robot.sensors.flywheelCounter;
 
 		// Other stuff
-		timer.schedule(new RateTask(), 0, 10);
+		Robot.timer.schedule(new RateTask(), 0, 10);
 	}
 	
 	public void initDefaultCommand()
