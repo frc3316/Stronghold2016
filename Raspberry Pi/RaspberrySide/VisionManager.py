@@ -108,7 +108,7 @@ class VisionManager(object):
 
         thresh = cv2.threshold(mask, 25, 255, cv2.THRESH_BINARY)[1]
         # dilate the threshed image to fill in holes, then find contours on thresholded image.
-        thresh = cv2.dilate(thresh, None, iterations=2)
+        thresh = cv2.dilate(thresh, None, iterations=1)
         self.threshImage = thresh
 
     def calculateBoundingRect(self):
@@ -154,7 +154,7 @@ class VisionManager(object):
 
                 azimuthalAngle = self.distanceHelper.getAzimuthalAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAX)
                 polarAngle = self.distanceHelper.getPolarAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAY)
-                self.currentImageObject.azimathalAngle = azimuthalAngle
+                self.currentImageObject.azimuthalAngle = azimuthalAngle
                 self.currentImageObject.polarAngle = polarAngle
 
             self.currentImageObject.didUpdateVar = True
