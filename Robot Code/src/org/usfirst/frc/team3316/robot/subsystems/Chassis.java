@@ -87,11 +87,6 @@ public class Chassis extends DBugSubsystem
 		leftMotor2 = Robot.actuators.chassisLeft2;
 		rightMotor1 = Robot.actuators.chassisRight1;
 
-		addSpeedController(leftMotor1);
-		addSpeedController(leftMotor2);
-		addSpeedController(rightMotor1);
-		addSpeedController(rightMotor2);
-
 		longPistons = Robot.actuators.chassisLongPistons;
 		shortPistonsLeft = Robot.actuators.chassisShortPistonsLeft;
 		shortPistonsRight = Robot.actuators.chassisShortPistonsRight;
