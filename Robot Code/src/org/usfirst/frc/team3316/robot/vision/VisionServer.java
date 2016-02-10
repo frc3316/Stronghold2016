@@ -53,6 +53,7 @@ public class VisionServer implements Runnable {
 			
 			String sentence = new String( receivePacket.getData() );
 			VisionServer.Data = parseLine(sentence);
+			AlignShooter.align();
 		}
 		
 	}
