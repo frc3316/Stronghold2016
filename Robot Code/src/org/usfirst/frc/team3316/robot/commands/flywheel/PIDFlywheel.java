@@ -48,6 +48,11 @@ public class PIDFlywheel extends DBugCommand
 
 	protected void init()
 	{
+		pid.setPID((double) config.get("flywheel_PID_KP") / 1000,
+				(double) config.get("flywheel_PID_KI") / 1000,
+				(double) config.get("flywheel_PID_KD") / 1000,
+				(double) config.get("flywheel_PID_KF") / 1000);
+		
 		v = 0;
 
 		pid.enable();
@@ -55,11 +60,6 @@ public class PIDFlywheel extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("flywheel_PID_KP") / 1000,
-				(double) config.get("flywheel_PID_KI") / 1000,
-				(double) config.get("flywheel_PID_KD") / 1000,
-				(double) config.get("flywheel_PID_KF") / 1000);
-
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 
 		isFin = !Robot.flywheel.setMotors(v);

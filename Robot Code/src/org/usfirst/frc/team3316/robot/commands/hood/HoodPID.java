@@ -13,15 +13,17 @@ public class HoodPID extends DBugCommand
 	private PIDController pid;
 	private double pidOutput;
 
-	public HoodPID() {
-		
+	public HoodPID()
+	{
+
 		requires(Robot.hood);
-		
+
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
 			}
+
 			public double pidGet()
 			{
 				return Robot.hood.getAngle();
@@ -38,23 +40,22 @@ public class HoodPID extends DBugCommand
 				pidOutput = output;
 			}
 		});
-		
+
 		pid.setOutputRange(-1, 1);
 	}
 
 	protected void init()
 	{
+		pid.setPID((double) config.get("hood_PID_KP"), (double) config.get("hood_PID_KI"),
+				(double) config.get("hood_PID_KD"));
+
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("hood_PID_KP"),
-					(double) config.get("hood_PID_KI"),
-					(double) config.get("hood_PID_KD"));
-		
 		pid.setSetpoint((double) config.get("hood_Angle_SetPoint"));
-		
+
 		isFin = !Robot.hood.setMotors(pidOutput);
 	}
 
