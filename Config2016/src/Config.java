@@ -352,7 +352,7 @@ public class Config
 		 */
 		{
 			addToVariables("intake_Pot_LowThresh", 1.0);
-			addToVariables("intake_Pot_HightThresh", 130.5);
+			addToVariables("intake_Pot_HighThresh", 130.5);
 		}
 
 		/*
