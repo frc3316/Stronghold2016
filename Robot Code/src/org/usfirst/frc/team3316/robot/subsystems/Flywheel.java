@@ -56,21 +56,9 @@ public class Flywheel extends DBugSubsystemCC
 		// Other stuff
 		timer.schedule(new RateTask(), 0, 10);
 	}
-
-	/**
-	 * Sets the flywheel a certain % voltage.
-	 * 
-	 * @param v
-	 *            The % voltage to set. Positive is for shooting.
-	 * @return Whether setting was successful. Will return false if motor
-	 *         reaches stall current as measured by the PDP.
-	 */
-	/**
-	 * Delete this method (already defined in super)
-	 */
-	public boolean setMotors(double v)
+	
+	public void initDefaultCommand()
 	{
-		return super.setMotors(v);
 	}
 
 	/**
@@ -81,9 +69,5 @@ public class Flywheel extends DBugSubsystemCC
 	public double getRate()
 	{
 		return rate;
-	}
-
-	public void initDefaultCommand()
-	{
 	}
 }
