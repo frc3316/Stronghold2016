@@ -125,15 +125,11 @@ public class Config
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
-				
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
 				
 				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+				
 				
 				//For some reason the encoders give 4 times less the correct speed
 				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
@@ -149,6 +145,15 @@ public class Config
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
+				
+				addToConstants("INTAKE_POT", 5);
+				
+				addToConstants("INTAKE_LEFT_SWITCH", 10);
+				addToConstants("INTAKE_RIGHT_SWITCH", 11);
+				
+				addToConstants("INTAKE_SOLENOID_MODULE", 0);
+				addToConstants("INTAKE_SOLENOID_FORWARD", 0);
+				addToConstants("INTAKE_SOLENOID_REVERSE", 1);
 
 				/*
 				 * Transport
@@ -258,13 +263,15 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_DriveDistance_PID_KP", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KP", 80.0);
 				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KD", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KF", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KD", 12300.0);
+				
+				addToVariables("chassis_DriveDistance_KV", 0.5);
 				
 				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
+				
 			}
 			
 			/*

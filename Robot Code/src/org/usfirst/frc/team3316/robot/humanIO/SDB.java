@@ -57,6 +57,9 @@ public class SDB
 				e.printStackTrace();
 				put("DistanceFromCamera", "null");
 			}
+			
+			// Drive Distance
+			SmartDashboard.putNumber("Chassis voltage", Robot.actuators.chassisLeft1.getVoltage());
 		}
 
 		private void put(String name, double d)
@@ -158,6 +161,7 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
+		
 		/*
 		 * Drive Distance - TO REMOVE AFTER TESTINGS
 		 */
@@ -165,7 +169,7 @@ public class SDB
 			putConfigVariableInSDB("chassis_DriveDistance_PID_KP");
 			putConfigVariableInSDB("chassis_DriveDistance_PID_KI");
 			putConfigVariableInSDB("chassis_DriveDistance_PID_KD");
-			putConfigVariableInSDB("chassis_DriveDistance_PID_KF");
+			putConfigVariableInSDB("chassis_DriveDistance_KV");
 			
 			putConfigVariableInSDB("chassis_DriveDistance_PID_Tolerance");
 			putConfigVariableInSDB("chassis_DriveDistance_PID_Setpoint");
@@ -175,8 +179,11 @@ public class SDB
 			putConfigVariableInSDB("motionPlanner_MaxVelocity");
 			putConfigVariableInSDB("motionPlanner_TimeStep");
 			
-			SmartDashboard.putData(new DriveDistance(0.5));
-			SmartDashboard.putData(new DriveDistance(1.0));
+			SmartDashboard.putData("Drive 0.5 meter", new DriveDistance(0.5));
+			SmartDashboard.putData("Drive 1.0 meter", new DriveDistance(1.0));
+			SmartDashboard.putData("Drive 1.2 meter", new DriveDistance(1.2));
+			SmartDashboard.putData("Drive 3.0 meter", new DriveDistance(3.0));
+			SmartDashboard.putData("Drive 4.0 meter", new DriveDistance(4.0));
 		}
 		
 		putConfigVariableInSDB("hood_Pot_LowThresh");

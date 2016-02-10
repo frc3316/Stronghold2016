@@ -100,24 +100,31 @@ public class IO
 				
 				putPWM("INTAKE_MOTOR", 3);
 				
-				putPWM("TRANSPORT_MOTOR", 8);
+				putPWM("TRANSPORT_MOTOR", 7);
 				
-				putPWM("FLYWHEEL_MOTOR", 4);
+				putPWM("FLYWHEEL_MOTOR", 8);
 				
-				putPWM("TURRET_MOTOR", 0);
+				putPWM("TURRET_MOTOR", 9);
 				
-				putPWM("HOOD_MOTOR", 11);
+				putPWM("HOOD_MOTOR", 15);
 				
-				putPWM("CLIMBING_MOTOR_1", 12);
-				putPWM("CLIMBING_MOTOR_2", 13);
-				putPWM("CLIMBING_MOTOR_3", 14);
-				putPWM("CLIMBING_MOTOR_4", 15);
+				putPWM("CLIMBING_MOTOR_1", 16);
+				putPWM("CLIMBING_MOTOR_2", 17);
+				putPWM("CLIMBING_MOTOR_3", 18);
+				putPWM("CLIMBING_MOTOR_4", 14);
 			}
 
 			/*
 			 * DIO initialization
 			 */
 			{
+
+				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
+				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
+				
+				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
+				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
+				
 				putDIO("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
 				putDIO("CHASSIS_HALL_EFFECT_LEFT_BACK", 13);
 				putDIO("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 11);
@@ -126,8 +133,8 @@ public class IO
 				putDIO("INTAKE_LEFT_SWITCH", 7);
 				putDIO("INTAKE_RIGHT_SWITCH", 1);
 				
-				putDIO("TRANSPORT_ENCODER_A", 2);
-				putDIO("TRANSPORT_ENCODER_B", 3);
+				putDIO("TRANSPORT_ENCODER_A", 6);
+				putDIO("TRANSPORT_ENCODER_B", 9);
 				
 				putDIO("CLIMBING_SWITCH", 8);
 				
