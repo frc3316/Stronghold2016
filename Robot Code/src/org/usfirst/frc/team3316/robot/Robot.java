@@ -146,10 +146,7 @@ public class Robot extends IterativeRobot
 		Scheduler.getInstance().run();
 	}
 
-	public void testInit()
-	{
-
-	}
+	public void testInit() {}
 
 	public void testPeriodic()
 	{
