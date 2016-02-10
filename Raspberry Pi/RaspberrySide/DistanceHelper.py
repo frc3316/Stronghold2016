@@ -48,7 +48,7 @@ class DistanceHelper(object):
         '''
 
         return sin(radians(robotObject.angle))*robotObject.distanceFromTower
-
+    # TODO: move those to angle helper:
     def getAzimuthalAngle(self,cameraSize,imageObject,HAX):
         '''
         This method calculates the azimuthal angle of the imageObject from the center of the frame.
