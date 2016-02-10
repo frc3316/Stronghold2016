@@ -284,18 +284,6 @@ public class Chassis extends DBugSubsystem
 		return toReturn;
 	}
 
-	public double getLeftSpeed()
-	{
-		return leftEncoder.getRate(); // Returns the speed in meter per
-										// second units.
-	}
-
-	public double getRightSpeed()
-	{
-		return rightEncoder.getRate(); // Returns the speed in meter per
-										// second units.
-	}
-
 	public double getLeftDistance()
 	{
 		return leftEncoder.getDistance();
