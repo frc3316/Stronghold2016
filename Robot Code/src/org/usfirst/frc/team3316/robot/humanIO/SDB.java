@@ -157,7 +157,24 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-
+		/*
+		 * Drive Distance - TO REMOVE AFTER TESTINGS
+		 */
+		{
+			putConfigVariableInSDB("chassis_DriveDistance_PID_KP");
+			putConfigVariableInSDB("chassis_DriveDistance_PID_KI");
+			putConfigVariableInSDB("chassis_DriveDistance_PID_KD");
+			putConfigVariableInSDB("chassis_DriveDistance_PID_KF");
+			
+			putConfigVariableInSDB("chassis_DriveDistance_PID_Tolerance");
+			putConfigVariableInSDB("chassis_DriveDistance_PID_Setpoint");
+			
+			putConfigVariableInSDB("motionPlanner_MaxAccel");
+			putConfigVariableInSDB("motionPlanner_MaxDecel");
+			putConfigVariableInSDB("motionPlanner_MaxVelocity");
+			putConfigVariableInSDB("motionPlanner_TimeStep");
+		}
+		
 		putConfigVariableInSDB("hood_Pot_LowThresh");
 		putConfigVariableInSDB("hood_Pot_HighThresh");
 

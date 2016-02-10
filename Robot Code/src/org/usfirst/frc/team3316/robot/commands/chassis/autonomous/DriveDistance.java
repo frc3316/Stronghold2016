@@ -27,11 +27,15 @@ public abstract class DriveDistance extends DBugCommand
 
 	private double dist, initDist = 0, currentDist, initTime = 0, currentTime;
 	
+	private PlannedMotion motion;
+	private double profileVelocity;
 
 	public DriveDistance(double dist)
 	{
 		this.dist = dist;
 
+		motion = MotionPlanner.planMotion(dist);
+		
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 
@@ -62,7 +66,8 @@ public abstract class DriveDistance extends DBugCommand
 	protected void init()
 	{
 		pid.setOutputRange(-1, 1);
-		pid.setOutputRange(-1, 1);
+		
+		pid.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
 
 		pid.setPID((double) config.get("chassis_DriveDistance_PID_KP") / 1000,
 				(double) config.get("chassis_DriveDistance_PID_KI") / 1000,
@@ -74,30 +79,29 @@ public abstract class DriveDistance extends DBugCommand
 		initTime = Timer.getFPGATimestamp();
 		initDist = Robot.chassis.getDistance();
 		
-		currentTime = 0;
+		currentTime = Timer.getFPGATimestamp() - initTime;
 	}
 
 	protected void execute()
 	{
 		currentDist = Robot.chassis.getDistance() - initDist;
-		
 		currentTime = Timer.getFPGATimestamp() - initTime;
 		
 		pidGet = dist - currentDist;
-
 		pid.setSetpoint((double) config.get("chassis_DriveDistance_PID_Setpoint"));
 		
-		Robot.chassis.setMotors(pidOutput, pidOutput);
+		profileVelocity = motion.getVelocity(currentTime);		
+		
+		Robot.chassis.setMotors(pidOutput + profileVelocity, pidOutput + profileVelocity);
 	}
 
 	protected boolean isFinished() {
-		return false;
+		return pid.onTarget();
 	}
 
 	protected void fin()
 	{
 		pid.reset();
-		
 		pid.disable();
 
 		Robot.chassis.setMotors(0, 0);

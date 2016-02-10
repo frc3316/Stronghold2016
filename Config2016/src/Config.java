@@ -258,15 +258,13 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_PIDRight_KP", 100.0);
-				addToVariables("chassis_PIDRight_KI", 0.00);
-				addToVariables("chassis_PIDRight_KD", 75.0);
-				addToVariables("chassis_PIDRight_KF", 450.0);
+				addToVariables("chassis_DriveDistance_PID_KP", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KD", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KF", 0.0);
 				
-				addToVariables("chassis_PIDLeft_KP", 100.0);
-				addToVariables("chassis_PIDLeft_KI", 0.0);
-				addToVariables("chassis_PIDLeft_KD", 75.0);
-				addToVariables("chassis_PIDLeft_KF", 450.0);
+				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
+				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
 			}
 			
 			/*
