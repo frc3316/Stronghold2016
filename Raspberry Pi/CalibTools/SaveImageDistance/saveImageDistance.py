@@ -3,7 +3,11 @@ import time
 import thread
 from Tkinter import *
 
-# TODO: add exposure and saturation default values.
+# TODO: those vars need to be set so we could detect the wanted contour, meaning need to be set as the constants on the robot camera code.
+
+brightness = -0.1
+saturation = 15
+
 def saveImage():
     timeStamp = time.time()
     frame = cam.read()[1]
@@ -18,6 +22,8 @@ def showImage():
         cv2.imshow("Current Image", cv2.resize(cam.read()[1],(480, 320), interpolation = cv2.INTER_CUBIC))
 
 cam = cv2.VideoCapture(0)
+cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
+cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
 # cam.set(3,620) # Width of frame.
 # cam.set(4,480) # Height of frame.
 

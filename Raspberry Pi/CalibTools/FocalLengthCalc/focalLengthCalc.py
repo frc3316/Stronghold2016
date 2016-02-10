@@ -43,8 +43,10 @@ thresh = cv2.dilate(thresh, None, iterations=1)
 (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 if cnts:
     c = max(cnts, key = cv2.contourArea)
-(x, y, w, h) = cv2.boundingRect(c)
-focalLength = (h * distance) / KNOWN_HEIGHT
-print("Focal Length     ", focalLength)
-print("MARK: This is a physical solution, need to verify by running the vision code and checking distance")
+    (x, y, w, h) = cv2.boundingRect(c)
+    focalLength = (h * distance) / KNOWN_HEIGHT
+    print "Focal Length " + str(focalLength)
+    print("MARK: This is a physical solution, need to verify by running the vision code and checking distance")
+else:
+    print "No contour found"
 mainloop()
