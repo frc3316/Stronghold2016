@@ -13,13 +13,7 @@ public class Flywheel extends DBugSubsystemCC
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
 
-	double rate = 0;
-	private static Timer timer;
-
-	static
-	{
-		timer = new Timer();
-	}
+	private double rate = 0;
 
 	/**
 	 * Class for filtering out noise from the FPGA rate calculation. Essentially,
@@ -54,23 +48,11 @@ public class Flywheel extends DBugSubsystemCC
 		counter = Robot.sensors.flywheelCounter;
 
 		// Other stuff
-		timer.schedule(new RateTask(), 0, 10);
+		Robot.timer.schedule(new RateTask(), 0, 10);
 	}
-
-	/**
-	 * Sets the flywheel a certain % voltage.
-	 * 
-	 * @param v
-	 *            The % voltage to set. Positive is for shooting.
-	 * @return Whether setting was successful. Will return false if motor
-	 *         reaches stall current as measured by the PDP.
-	 */
-	/**
-	 * Delete this method (already defined in super)
-	 */
-	public boolean setMotors(double v)
+	
+	public void initDefaultCommand()
 	{
-		return super.setMotors(v);
 	}
 
 	/**
@@ -81,9 +63,5 @@ public class Flywheel extends DBugSubsystemCC
 	public double getRate()
 	{
 		return rate;
-	}
-
-	public void initDefaultCommand()
-	{
 	}
 }

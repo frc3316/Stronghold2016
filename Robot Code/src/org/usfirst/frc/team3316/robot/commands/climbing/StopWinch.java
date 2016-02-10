@@ -3,20 +3,20 @@ package org.usfirst.frc.team3316.robot.commands.climbing;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class Stop extends DBugCommand
+public class StopWinch extends DBugCommand
 {
-	public Stop ()
+	public StopWinch ()
 	{
 		requires(Robot.climbing);
 	}
 	
 	protected void init()
 	{
-		Robot.climbing.setMotors(0);
 	}
 
 	protected void execute()
 	{
+		Robot.climbing.setMotors(0);
 	}
 
 	protected boolean isFinished()

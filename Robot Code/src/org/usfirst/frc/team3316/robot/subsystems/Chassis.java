@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
@@ -10,7 +9,6 @@ import org.usfirst.frc.team3316.robot.utils.MovingAverage;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -22,14 +20,12 @@ public class Chassis extends DBugSubsystem
 	private class navX extends TimerTask
 	{
 		private int counter = 0;
-		private int counterRoll = 0;
 
 		public void run()
 		{
-			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config
-					.get("chassis_Defense_Pitch_Thresh")
-					&& Math.abs(movingAvgRoll.get()) <= (double) Robot.config
-							.get("chassis_Defense_Roll_Thresh"))
+			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config.get("chassis_Defense_Pitch_Thresh")
+					&& Math.abs(
+							movingAvgRoll.get()) <= (double) Robot.config.get("chassis_Defense_Roll_Thresh"))
 			{
 				counter++;
 			}
@@ -38,8 +34,8 @@ public class Chassis extends DBugSubsystem
 				counter = 0;
 			}
 
-			if (counter >= (int) Math.round((double) ((double) config
-					.get("chassis_Defense_Angle_Timeout") / 20.0)))
+			if (counter >= (int) Math
+					.round((double) ((double) config.get("chassis_Defense_Angle_Timeout") / 20.0)))
 			{ // isTimedOut
 				counter = 0;
 				isOnDefense = false;
@@ -52,8 +48,7 @@ public class Chassis extends DBugSubsystem
 	}
 
 	// Actuators
-	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2,
-			rightMotor1;
+	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
 
 	private DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
 
@@ -67,13 +62,6 @@ public class Chassis extends DBugSubsystem
 	// Variables
 	private boolean isOnDefense = false; // For the navX
 
-	private static Timer timer;
-
-	static
-	{
-		timer = new Timer();
-	}
-
 	// Other
 	private MovingAverage movingAvgPitch; // For the navX
 	private MovingAverage movingAvgRoll; // For the navX
@@ -86,11 +74,6 @@ public class Chassis extends DBugSubsystem
 		rightMotor2 = Robot.actuators.chassisRight2;
 		leftMotor2 = Robot.actuators.chassisLeft2;
 		rightMotor1 = Robot.actuators.chassisRight1;
-
-		addSpeedController(leftMotor1);
-		addSpeedController(leftMotor2);
-		addSpeedController(rightMotor1);
-		addSpeedController(rightMotor2);
 
 		longPistons = Robot.actuators.chassisLongPistons;
 		shortPistonsLeft = Robot.actuators.chassisShortPistonsLeft;
@@ -107,19 +90,17 @@ public class Chassis extends DBugSubsystem
 		heRightBack = Robot.sensors.chassisHERightBack;
 
 		// Create moving average
-		movingAvgPitch = new MovingAverage(
-				(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
-				{
-					return getPitch();
-				});
-		movingAvgRoll = new MovingAverage(
-				(int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
-				{
-					return getRoll();
-				});
+		movingAvgPitch = new MovingAverage((int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
+		{
+			return getPitch();
+		});
+		movingAvgRoll = new MovingAverage((int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
+		{
+			return getRoll();
+		});
 
 		navXTasker = new navX();
-		timer.schedule(navXTasker, 0, 20);
+		Robot.timer.schedule(navXTasker, 0, 20);
 	}
 
 	public void initDefaultCommand()
@@ -127,6 +108,9 @@ public class Chassis extends DBugSubsystem
 		setDefaultCommand(new TankDrive());
 	}
 
+	/*
+	 * Motor methods
+	 */
 	public void setMotors(double left, double right)
 	{
 		leftMotor1.setMotor(left);
@@ -136,13 +120,14 @@ public class Chassis extends DBugSubsystem
 		rightMotor2.setMotor(right);
 	}
 
+	/*
+	 * Piston methods
+	 */
 	public boolean openLongPistons()
 	{
-		if (shortPistonsRight.get().equals(Value.kForward)
-				|| shortPistonsLeft.get().equals(Value.kForward))
+		if (areShortPistonsLeftExtended() || areShortPistonsRightExtended())
 		{
-			logger.severe(
-					"Tried to open long pistons when short pistons are open. Aborting.");
+			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
 			return false;
 		}
 		else
@@ -160,10 +145,9 @@ public class Chassis extends DBugSubsystem
 
 	public boolean openShortPistonsLeft()
 	{
-		if (longPistons.get().equals(Value.kReverse))
+		if (!areLongPistonsExtended())
 		{
-			logger.severe(
-					"Tried to open short pistons when long pistons are closed. Aborting.");
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
 			return false;
 		}
 		else
@@ -175,10 +159,9 @@ public class Chassis extends DBugSubsystem
 
 	public boolean openShortPistonsRight()
 	{
-		if (longPistons.get().equals(Value.kReverse))
+		if (!areLongPistonsExtended())
 		{
-			logger.severe(
-					"Tried to open short pistons when long pistons are closed. Aborting.");
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
 			return false;
 		}
 		else
@@ -207,8 +190,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean closeAllPistons()
 	{
-		return closeLongPistons() && closeShortPistonsLeft()
-				&& closeShortPistonsRight();
+		return closeLongPistons() && closeShortPistonsLeft() && closeShortPistonsRight();
 	}
 
 	/**
@@ -228,26 +210,61 @@ public class Chassis extends DBugSubsystem
 				&& shortPistonsRight.get().equals(Value.kForward);
 	}
 
+	/**
+	 * Returns whether the left short pistons are extended
+	 */
+	public boolean areShortPistonsLeftExtended()
+	{
+		return shortPistonsLeft.get().equals(Value.kForward);
+	}
+
+	/**
+	 * Returns whether the right short pistons are extended
+	 */
+	public boolean areShortPistonsRightExtended()
+	{
+		return shortPistonsRight.get().equals(Value.kForward);
+	}
+
+	/*
+	 * Hall effect get methods
+	 */
+
+	/**
+	 * Returns whether the left front hall effect is on (on is when magnet is in front of it)
+	 */
 	public boolean getHELeftFront()
 	{
 		return heLeftFront.get();
 	}
 
+	/**
+	 * Returns whether the left back hall effect is on (on is when magnet is in front of it)
+	 */
 	public boolean getHELeftBack()
 	{
 		return heLeftBack.get();
 	}
 
+	/**
+	 * Returns whether the right front hall effect is on (on is when magnet is in front of it)
+	 */
 	public boolean getHERightFront()
 	{
 		return heRightFront.get();
 	}
 
+	/**
+	 * Returns whether the right back hall effect is on (on is when magnet is in front of it)
+	 */
 	public boolean getHERightBack()
 	{
 		return heRightBack.get();
 	}
 
+	/*
+	 * Methods related to NavX angle
+	 */
 	public boolean isOnDefense()
 	{
 		return isOnDefense;
@@ -284,18 +301,9 @@ public class Chassis extends DBugSubsystem
 		return toReturn;
 	}
 
-	public double getLeftSpeed()
-	{
-		return leftEncoder.getRate(); // Returns the speed in meter per
-										// second units.
-	}
-
-	public double getRightSpeed()
-	{
-		return rightEncoder.getRate(); // Returns the speed in meter per
-										// second units.
-	}
-
+	/*
+	 * Encoder Methods
+	 */
 	public double getLeftDistance()
 	{
 		return leftEncoder.getDistance();
@@ -317,12 +325,14 @@ public class Chassis extends DBugSubsystem
 		return rightEncoder.getRate(); // Returns the speed in meter per
 										// second units.
 	}
-	
-	public double getDistance() {
+
+	public double getDistance()
+	{
 		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
 	}
-	
-	public void resetEncoders() {
+
+	public void resetEncoders()
+	{
 		rightEncoder.reset();
 		leftEncoder.reset();
 	}
