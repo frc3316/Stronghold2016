@@ -26,6 +26,8 @@ public class Config
 
 	public static void addToConstantsA(String key, Object value)
 	{
+		System.out.println("Trying to add to constants A: key " + key + " value " + value);
+		
 		if (constantsA.containsKey(key))
 		{
 			constantsA.replace(key, value);
@@ -38,6 +40,8 @@ public class Config
 
 	public static void addToVariablesA(String key, Object value)
 	{
+		System.out.println("Trying to add to variables A: key " + key + " value " + value);
+		
 		if (variablesA.containsKey(key))
 		{
 			variablesA.replace(key, value);
@@ -50,6 +54,8 @@ public class Config
 
 	public static void addToConstantsB(String key, Object value)
 	{
+		System.out.println("Trying to add to constants B: key " + key + " value " + value);
+		
 		if (constantsB.containsKey(key))
 		{
 			constantsB.replace(key, value);
@@ -62,6 +68,8 @@ public class Config
 
 	public static void addToVariablesB(String key, Object value)
 	{
+		System.out.println("Trying to add to variables B: key " + key + " value " + value);
+		
 		if (variablesB.containsKey(key))
 		{
 			variablesB.replace(key, value);
@@ -78,7 +86,7 @@ public class Config
 		addToConstantsB(key, value);
 	}
 
-	private static void addToVariables(String key, Object value)
+	public static void addToVariables(String key, Object value)
 	{
 		addToVariablesA(key, value);
 		addToVariablesB(key, value);

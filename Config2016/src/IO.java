@@ -127,7 +127,7 @@ public class IO
 	 */
 	private static void putPWMB(String name, int channel) throws Exception
 	{
-		putA(pwmA, name, channel);
+		putB(pwmB, name, channel);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class IO
 	 */
 	private static void putCANB(String name, int channel) throws Exception
 	{
-		putA(canA, name, channel);
+		putB(canB, name, channel);
 	}
 
 	/**
