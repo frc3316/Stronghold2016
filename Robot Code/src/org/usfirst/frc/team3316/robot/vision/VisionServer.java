@@ -42,7 +42,7 @@ public class VisionServer implements Runnable {
 
 		byte[] receiveData = new byte[1024];
 
-		while (true) {
+		while (!Thread.interrupted()) {
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 			
 			try {
