@@ -23,10 +23,9 @@ public class DriveDistance extends DBugCommand
 {
 	private PIDController pid;
 
-	private double dist, initDist = 0, currentDist, initTime = 0, currentTime;
+	private double dist, initDist = 0, initTime = 0;
 
 	private PlannedMotion motion;
-	private double profileVelocity;
 
 	public DriveDistance(double dist)
 	{
@@ -45,18 +44,10 @@ public class DriveDistance extends DBugCommand
 
 			public double pidGet()
 			{
-				currentDist = Robot.chassis.getDistance() - initDist;
+				double currentDist = Robot.chassis.getDistance() - initDist;
 
+				// REMOVE AFTER TESTINGS
 				SmartDashboard.putNumber("Current Distance", currentDist);
-
-				if (currentDist > dist + (double) config
-						.get("chassis_DriveDistance_PID_Tolerance")
-						&& currentDist < dist - (double) config
-								.get("chassis_DriveDistance_PID_Tolerance"))
-				{
-					pid.reset();
-					pid.enable();
-				}
 
 				return currentDist;
 			}
@@ -70,11 +61,8 @@ public class DriveDistance extends DBugCommand
 
 			public void pidWrite(double output)
 			{
-				currentTime = Timer.getFPGATimestamp() - initTime;
-				profileVelocity = motion.getVelocity(currentTime);
-
-				SmartDashboard.putNumber("Motion Planner Velocity",
-						profileVelocity);
+				double currentTime = Timer.getFPGATimestamp() - initTime;
+				double profileVelocity = motion.getVelocity(currentTime);
 
 				double velocity = output + profileVelocity * (double) config.get("chassis_DriveDistance_KV");
 				Robot.chassis.setMotors(velocity, velocity);
@@ -85,7 +73,8 @@ public class DriveDistance extends DBugCommand
 	protected void init()
 	{
 		pid.setOutputRange(-1, 1);
-
+		
+		// TODO: Check if onTarget() works.
 		pid.setAbsoluteTolerance(
 				(double) config.get("chassis_DriveDistance_PID_Tolerance"));
 
@@ -98,20 +87,16 @@ public class DriveDistance extends DBugCommand
 		initTime = Timer.getFPGATimestamp();
 		initDist = Robot.chassis.getDistance();
 
-		currentTime = Timer.getFPGATimestamp() - initTime;
-		currentDist = 0;
-
 		pid.enable();
 	}
 
 	protected void execute()
-	{
-	}
+	{}
 
 	protected boolean isFinished()
 	{
 		double measuredSpeed = (Robot.chassis.getLeftSpeed() + Robot.chassis.getRightSpeed()) / 2;
-		return measuredSpeed == 0 && currentDist > dist/2;
+		return measuredSpeed == 0 && pid.onTarget();
 	}
 
 	protected void fin()
