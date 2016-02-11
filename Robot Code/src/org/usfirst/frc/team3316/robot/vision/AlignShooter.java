@@ -1,7 +1,9 @@
 package org.usfirst.frc.team3316.robot.vision;
 
+import org.omg.CORBA.portable.ValueInputStream;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 public class AlignShooter
 {
@@ -20,8 +22,9 @@ public class AlignShooter
 	
 	private static void alignHood()
 	{
-		double towerAngle = VisionServer.Data.get("PA"); // PA = Polar Angle
-		double hoodAngle = Robot.turret.getAngle();
-		Robot.config.add("turret_Angle_SetPoint", hoodAngle - towerAngle);
+		double distance = VisionServer.Data.get("DFC"); // DFC = Distance From Camera
+		// double hoodAngle = Robot.turret.getAngle();
+		double table [][] = null;
+		Robot.config.add("turret_Angle_SetPoint", Utils.valueInterpolation(distance, table));
 	}
 }
