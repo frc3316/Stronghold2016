@@ -49,6 +49,8 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
+			put("Navx Pitch", Robot.chassis.getPitch());
+			
 			put("Hood Angle", Robot.hood.getAngle());
 			put("Turret Angle", Robot.turret.getAngle());
 			try
