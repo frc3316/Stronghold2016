@@ -26,8 +26,9 @@ public class Config
 
 	public static void addToConstantsA(String key, Object value)
 	{
-		System.out.println("Trying to add to constants A: key " + key + " value " + value);
-		
+		System.out.println(
+				"Trying to add to constants A: key " + key + " value " + value);
+
 		if (constantsA.containsKey(key))
 		{
 			constantsA.replace(key, value);
@@ -40,8 +41,9 @@ public class Config
 
 	public static void addToVariablesA(String key, Object value)
 	{
-		System.out.println("Trying to add to variables A: key " + key + " value " + value);
-		
+		System.out.println(
+				"Trying to add to variables A: key " + key + " value " + value);
+
 		if (variablesA.containsKey(key))
 		{
 			variablesA.replace(key, value);
@@ -54,8 +56,9 @@ public class Config
 
 	public static void addToConstantsB(String key, Object value)
 	{
-		System.out.println("Trying to add to constants B: key " + key + " value " + value);
-		
+		System.out.println(
+				"Trying to add to constants B: key " + key + " value " + value);
+
 		if (constantsB.containsKey(key))
 		{
 			constantsB.replace(key, value);
@@ -68,8 +71,9 @@ public class Config
 
 	public static void addToVariablesB(String key, Object value)
 	{
-		System.out.println("Trying to add to variables B: key " + key + " value " + value);
-		
+		System.out.println(
+				"Trying to add to variables B: key " + key + " value " + value);
+
 		if (variablesB.containsKey(key))
 		{
 			variablesB.replace(key, value);
@@ -138,16 +142,16 @@ public class Config
 
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
-				
+
 				addToConstants("CHASSIS_HALL_EFFECT_LEFT_FRONT", 1);
 				addToConstants("CHASSIS_HALL_EFFECT_LEFT_BACK", 2);
 				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 3);
 				addToConstants("CHASSIS_HALL_EFFECT_RIGHT_BACK", 4);
-				
+
 				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 5);
 				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 6);
 				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", 8);
-				
+
 				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 9);
 				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 10);
 				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", 12);
@@ -300,188 +304,188 @@ public class Config
 		{
 			addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
 		}
-	}
 
-	/*
-	 * Flywheel
-	 */
-	{
 		/*
-		 * Constants
+		 * Flywheel
 		 */
 		{
-			addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 10.0);
+			/*
+			 * Constants
+			 */
+			{
+				addToConstants("FLYWHEEL_MOTOR_HIGH_THRESH", 10.0);
+			}
+
+			/*
+			 * Variables
+			 */
+			{
+
+				// Bangbang - TO REMOVE AFTER TESTINGS
+				addToVariables("flywheel_Bangbang_Setpoint", 40.0);
+				addToVariables("flywheel_Bangbang_OnVoltage", 1.0);
+				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
+
+				// PID - TO REMOVE AFTER TESTINGS
+				addToVariables("flywheel_PID_Setpoint", 0.0);
+				addToVariables("flywheel_PID_KP", 0.0);
+				addToVariables("flywheel_PID_KI", 0.0);
+				addToVariables("flywheel_PID_KD", 0.0);
+				addToVariables("flywheel_PID_KF", 0.0);
+			}
 		}
 
 		/*
-		 * Variables
+		 * Intake
 		 */
 		{
+			/*
+			 * Constants
+			 */
+			{
+			}
 
-			// Bangbang - TO REMOVE AFTER TESTINGS
-			addToVariables("flywheel_Bangbang_Setpoint", 40.0);
-			addToVariables("flywheel_Bangbang_OnVoltage", 1.0);
-			addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("intake_Pot_LowThresh", 1.0);
+				addToVariables("intake_Pot_HightThresh", 130.5);
+			}
 
-			// PID - TO REMOVE AFTER TESTINGS
-			addToVariables("flywheel_PID_Setpoint", 0.0);
-			addToVariables("flywheel_PID_KP", 0.0);
-			addToVariables("flywheel_PID_KI", 0.0);
-			addToVariables("flywheel_PID_KD", 0.0);
-			addToVariables("flywheel_PID_KF", 0.0);
-		}
-	}
+			/*
+			 * Roll In
+			 */
+			{
+				addToVariables("intake_RollIn_Speed", 0.5);
+			}
 
-	/*
-	 * Intake
-	 */
-	{
-		/*
-		 * Constants
-		 */
-		{
-		}
-
-		/*
-		 * Variables
-		 */
-		{
-			addToVariables("intake_Pot_LowThresh", 1.0);
-			addToVariables("intake_Pot_HightThresh", 130.5);
+			/*
+			 * Roll Out
+			 */
+			{
+				addToVariables("intake_RollOut_Speed", -0.5);
+			}
 		}
 
 		/*
-		 * Roll In
+		 * Turret
 		 */
 		{
-			addToVariables("intake_RollIn_Speed", 0.5);
+			/*
+			 * Constants
+			 */
+			{
+			}
+
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("turret_Angle_SetPoint", 0.0);
+
+				// PID Control
+				addToVariables("turret_PID_KP", 0.0);
+				addToVariables("turret_PID_KI", 0.0);
+				addToVariables("turret_PID_KD", 0.0);
+
+				// Bangbang Control
+				addToVariables("turret_Bangbang_OnVoltage", 0.0);
+				addToVariables("turret_Bangbang_OffVoltage", 0.0);
+
+				addToVariables("turret_Pot_LeftThresh", 0.0);
+				addToVariables("turret_Pot_RightThresh", 400.0);
+			}
 		}
 
 		/*
-		 * Roll Out
+		 * Hood
 		 */
 		{
-			addToVariables("intake_RollOut_Speed", -0.5);
-		}
-	}
+			/*
+			 * Constants
+			 */
+			{
+			}
 
-	/*
-	 * Turret
-	 */
-	{
-		/*
-		 * Constants
-		 */
-		{
-		}
+			/*
+			 * Variables
+			 */
+			{
+				// PID Control
+				addToVariables("hood_PID_KP", 0.0);
+				addToVariables("hood_PID_KI", 0.0);
+				addToVariables("hood_PID_KD", 0.0);
 
-		/*
-		 * Variables
-		 */
-		{
-			addToVariables("turret_Angle_SetPoint", 0.0);
+				// Bangbang Control
+				addToVariables("hood_Bangbang_OnVoltage", 0.0);
+				addToVariables("hood_Bangbang_OffVoltage", 0.0);
+				addToVariables("hood_Angle_SetPoint", 0.0);
 
-			// PID Control
-			addToVariables("turret_PID_KP", 0.0);
-			addToVariables("turret_PID_KI", 0.0);
-			addToVariables("turret_PID_KD", 0.0);
-
-			// Bangbang Control
-			addToVariables("turret_Bangbang_OnVoltage", 0.0);
-			addToVariables("turret_Bangbang_OffVoltage", 0.0);
-
-			addToVariables("turret_Pot_LeftThresh", 0.0);
-			addToVariables("turret_Pot_RightThresh", 400.0);
-		}
-	}
-
-	/*
-	 * Hood
-	 */
-	{
-		/*
-		 * Constants
-		 */
-		{
+				addToVariables("hood_Pot_BottomThresh", 0.0);
+				addToVariables("hood_Pot_TopThresh", 400.0);
+			}
 		}
 
 		/*
-		 * Variables
+		 * Transport
 		 */
 		{
-			// PID Control
-			addToVariables("hood_PID_KP", 0.0);
-			addToVariables("hood_PID_KI", 0.0);
-			addToVariables("hood_PID_KD", 0.0);
+			/*
+			 * Constants
+			 */
+			{
 
-			// Bangbang Control
-			addToVariables("hood_Bangbang_OnVoltage", 0.0);
-			addToVariables("hood_Bangbang_OffVoltage", 0.0);
-			addToVariables("hood_Angle_SetPoint", 0.0);
+			}
 
-			addToVariables("hood_Pot_BottomThresh", 0.0);
-			addToVariables("hood_Pot_TopThresh", 400.0);
-		}
-	}
+			/*
+			 * Variables
+			 */
+			{
 
-	/*
-	 * Transport
-	 */
-	{
-		/*
-		 * Constants
-		 */
-		{
+			}
 
-		}
+			/*
+			 * Roll In
+			 */
 
-		/*
-		 * Variables
-		 */
-		{
+			{
+				addToVariables("transport_RollIn_Speed", 0.5);
+			}
 
-		}
-
-		/*
-		 * Roll In
-		 */
-
-		{
-			addToVariables("transport_RollIn_Speed", 0.5);
+			/*
+			 * Bangbang
+			 */
+			{
+				addToVariables("transport_Bangbang_Setpoint", 0.0);
+				addToVariables("transport_Bangbang_OnVoltage", 1.0);
+				addToVariables("transport_Bangbang_OffVoltage", 0.0);
+			}
 		}
 
 		/*
-		 * Bangbang
+		 * Climbing
 		 */
 		{
-			addToVariables("transport_Bangbang_Setpoint", 0.0);
-			addToVariables("transport_Bangbang_OnVoltage", 1.0);
-			addToVariables("transport_Bangbang_OffVoltage", 0.0);
-		}
-	}
+			/*
+			 * Constants
+			 */
+			{
+			}
 
-	/*
-	 * Climbing
-	 */
-	{
-		/*
-		 * Constants
-		 */
-		{
-		}
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("climbing_Pot_LowThresh", 100.0); // Check this
+																	// value
+				addToVariables("climbing_Pot_HighThresh", 3400.0); // Check this
+																	// value
 
-		/*
-		 * Variables
-		 */
-		{
-			addToVariables("climbing_Pot_LowThresh", 100.0); // Check this
-																// value
-			addToVariables("climbing_Pot_HighThresh", 3400.0); // Check this
-																// value
-
-			addToVariables("climbing_UpSpeed", 0.0); // Check this value
-			addToVariables("climbing_DownSpeed", -0.0); // Check this value
-			addToVariables("climbing_Setpoint", 900.0);
+				addToVariables("climbing_UpSpeed", 0.0); // Check this value
+				addToVariables("climbing_DownSpeed", -0.0); // Check this value
+				addToVariables("climbing_Setpoint", 900.0);
+			}
 		}
 	}
 }

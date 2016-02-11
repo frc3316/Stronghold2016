@@ -162,11 +162,11 @@ public class SDB
 		 * Remove these after finishing testing on prototype
 		 */
 
-		putConfigVariableInSDB("hood_Pot_LowThresh");
-		putConfigVariableInSDB("hood_Pot_HighThresh");
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
 
-		putConfigVariableInSDB("turret_Pot_LowThresh");
-		putConfigVariableInSDB("turret_Pot_HighThresh");
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
 
 		// Hood
 		SmartDashboard.putData(new HoodBangbang());
