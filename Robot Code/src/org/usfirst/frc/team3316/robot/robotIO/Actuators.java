@@ -97,7 +97,7 @@ public class Actuators
 			// We know that in reality some of them will be TalonSRX's, in the
 			// meantime but we're ignoring it.
 			chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-			chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+			chassisLeft2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
 			chassisRight1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
 			chassisRight2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 
