@@ -16,11 +16,11 @@ public class RollIn extends DBugCommand
 
 	protected void init()
 	{
+		speed = (double) config.get("intake_RollIn_Speed");
 	}
 
 	protected void execute()
 	{
-		speed = (double) config.get("intake_RollIn_Speed");
 		isFin = !Robot.intake.setMotors(speed);
 	}
 

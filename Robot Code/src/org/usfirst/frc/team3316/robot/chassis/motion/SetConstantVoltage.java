@@ -5,6 +5,8 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class SetConstantVoltage extends DBugCommand
 {
+	double voltage;
+	
 	public SetConstantVoltage ()
 	{
 		requires(Robot.chassis);
@@ -12,12 +14,11 @@ public class SetConstantVoltage extends DBugCommand
 	
 	protected void init()
 	{
+		voltage = (double) config.get("chassis_SetConstantVoltage_Voltage");
 	}
 
 	protected void execute()
 	{
-		double voltage = (double) config.get("chassis_SetConstantVoltage_Voltage");
-		
 		Robot.chassis.setMotors(voltage, voltage);
 	}
 

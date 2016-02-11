@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class TankDrive extends Drive
 {
-	//TODO: Add commenting
-	
+	// TODO: Add commenting
+
 	protected static Joystick joystickLeft, joystickRight;
 
 	static boolean invertY, invertX;
@@ -82,6 +82,10 @@ public class TankDrive extends Drive
 		return x;
 	}
 
+	/*
+	 * Here we call the get method of the config every execute because we want the variables to update without
+	 * needing to cancel the commands.
+	 */
 	private static void updateConfigVariables()
 	{
 		deadBand = (double) config.get("chassis_TankDrive_DeadBand");

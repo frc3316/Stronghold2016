@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class BangbangFlywheel extends DBugCommand
 {
+	private double setpoint, onVoltage, offVoltage;
+
 	private double v = 0;
 
 	public BangbangFlywheel()
@@ -27,19 +29,22 @@ public class BangbangFlywheel extends DBugCommand
 
 	protected void init()
 	{
+		setpoint = (double) config.get("flywheel_Bangbang_Setpoint");
+		onVoltage = (double) config.get("flywheel_Bangbang_OnVoltage");
+		offVoltage = (double) config.get("flywheel_Bangbang_OffVoltage");
+
 		v = 0;
 	}
 
 	protected void execute()
 	{
-		if (Robot.flywheel
-				.getRate() < (double) config.get("flywheel_Bangbang_Setpoint"))
+		if (Robot.flywheel.getRate() < setpoint)
 		{
-			v = (double) config.get("flywheel_Bangbang_OnVoltage");
+			v = onVoltage;
 		}
 		else
 		{
-			v = (double) config.get("flywheel_Bangbang_OffVoltage");
+			v = offVoltage;
 		}
 
 		isFin = !Robot.flywheel.setMotors(v);

@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RollOut extends DBugCommand
 {
-	//TODO: Add commenting
-
 	private double speed;
 
 	public RollOut()
@@ -18,13 +16,12 @@ public class RollOut extends DBugCommand
 
 	protected void init()
 	{
+		speed = (double) config.get("intake_RollOut_Speed");
 	}
 
 	protected void execute()
 	{
-		speed = (double) config.get("intake_RollOut_Speed");
 		isFin = !Robot.intake.setMotors(speed);
-		System.out.println(speed);
 	}
 
 	protected boolean isFinished()
