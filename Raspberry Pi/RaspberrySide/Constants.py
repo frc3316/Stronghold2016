@@ -28,3 +28,4 @@ HAY = 40 # The head angle of the camera (y)
 brightness = -0.1
 saturation = 15
 exposure = -1
+rotateClockwise = True # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
