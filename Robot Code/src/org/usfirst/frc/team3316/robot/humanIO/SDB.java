@@ -95,7 +95,7 @@ public class SDB
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
-
+		initLiveWindow();
 		initSDB();
 	}
 
@@ -204,7 +204,7 @@ public class SDB
 		 * Actuators
 		 */
 		// General
-		LiveWindow.addActuator("General", "compressor", (LiveWindowSendable) Robot.actuators.compressor);
+		LiveWindow.addActuator("General", "compressor", Robot.actuators.compressor);
 		// Chassis
 		LiveWindow.addActuator("Chassis", "chassisLeft1SC", (LiveWindowSendable) Robot.actuators.chassisLeft1SC);
 		LiveWindow.addActuator("Chassis", "chassisLeft2SC", (LiveWindowSendable) Robot.actuators.chassisLeft2SC);
@@ -236,7 +236,6 @@ public class SDB
 		/*
 		 * Sensors
 		 */
-		
 		// General
 		LiveWindow.addSensor("General", "pdp", (LiveWindowSendable) Robot.sensors.pdp);
 		// Chassis
