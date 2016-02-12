@@ -1,4 +1,6 @@
 import cv2
+import numpy as np
+from Constants import *
 from AngleHelper import *
 from DistanceHelper import *
 from ImageObject import *
@@ -81,7 +83,8 @@ class VisionManager(object):
             self.currentImageObject.didUpdateVar = False	
 
         didGetImage,frame = self.cam.read()
-        # frame = cv2.resize(frame, (320,240), interpolation = cv2.INTER_AREA)
+        frame = cv2.resize(frame, (resizedImageWidth,resizedImageWidth), interpolation = cv2.INTER_AREA)
+        frame = self.rotateImage(frame)
         if didGetImage:
             if self.currentImage == None and self.imageHeight == None and self.imageWidth == None:
                 self.currentImage = frame
@@ -91,6 +94,17 @@ class VisionManager(object):
         else:
             logger.error("Couldn't Read Image from self.cam!")
 
+    def rotateImage(self,img):
+        '''
+        This method rotates the image img by 90 degrees, if Constants.rotateClockwise is True, we will rotate
+        clockwise, else anticlockwise.
+        :param img: the image to be rotated.
+        :return: A new image, the rotated image of img.
+        '''
+        if rotateClockwise:
+            return np.rot90(img,1)
+        else:
+            return np.rot90(img,3)
     def updateMaskThresh(self):
         '''
         This method updates self.maskedImage, self.threshImage, using self.currentImage.

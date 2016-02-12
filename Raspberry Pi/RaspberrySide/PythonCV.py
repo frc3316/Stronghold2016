@@ -18,9 +18,9 @@ lockFile = LockFile("LockFile.loc")
 # Networking:
 
 if len(sys.argv) > 1:
-    JAVA_IP = sys.argv[1]
+    JAVA_HOST = sys.argv[1]
 else:
-    JAVA_IP = "127.0.0.1"
+    JAVA_HOST = "roborio-3316-frc.local"
 
 if len(sys.argv) > 2:
     isShowingImage = int(sys.argv[2])
@@ -42,14 +42,14 @@ if __name__ == "__main__":
         FPSCounter.start()
 
         cam = cv2.VideoCapture(0)
-        cam.set(3,640)
-        cam.set(4,480)
+        cam.set(3,1280)
+        cam.set(4,960)
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
-        networkManager = NetworkManager(JAVA_IP,8080)
+        networkManager = NetworkManager(JAVA_HOST,8080)
 
         ###################
         # The code itself #
@@ -107,7 +107,6 @@ if __name__ == "__main__":
                 logger.debug("Y Robot Position: " + str(visionManager.robotObject.Yposition))
                 logger.debug("AzimuthalAngle: " + str(visionManager.currentImageObject.azimuthalAngle))
                 logger.debug("PolarAngle: " + str(visionManager.currentImageObject.polarAngle))
-
                 # put the FPS on the picture
                 # cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
                 #       (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
