@@ -101,8 +101,10 @@ class VisionManager(object):
         :param img: the image to be rotated.
         :return: A new image, the rotated image of img.
         '''
-        return np.rot90(img,1)
-
+        if rotateClockwise:
+            return np.rot90(img,1)
+        else:
+            return np.rot90(img,3)
     def updateMaskThresh(self):
         '''
         This method updates self.maskedImage, self.threshImage, using self.currentImage.

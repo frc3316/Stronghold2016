@@ -107,8 +107,6 @@ if __name__ == "__main__":
                 logger.debug("Y Robot Position: " + str(visionManager.robotObject.Yposition))
                 logger.debug("AzimuthalAngle: " + str(visionManager.currentImageObject.azimuthalAngle))
                 logger.debug("PolarAngle: " + str(visionManager.currentImageObject.polarAngle))
-                print("AzimuthalAngle: " + str(visionManager.currentImageObject.azimuthalAngle))
-                print("PolarAngle: " + str(visionManager.currentImageObject.polarAngle))
                 # put the FPS on the picture
                 # cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
                 #       (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
