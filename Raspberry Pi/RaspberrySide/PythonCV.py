@@ -136,9 +136,9 @@ if __name__ == "__main__":
             #         cv2.imwrite("Current Image.png",visionManager.currentImage)
 
             #  stop
-            k = cv2.waitKey(5) & 0xFF
-            if k == 27:
-                break
+            # k = cv2.waitKey(5) & 0xFF
+            # if k == 27:
+            #    break
 
             # sleep(0.01) # so the pi won't crush
     finally:
