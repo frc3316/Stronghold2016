@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.commands.turret;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -13,15 +14,17 @@ public class TurretPID extends DBugCommand
 	private PIDController pid;
 	private double pidOutput;
 
-	public TurretPID() {
-		
+	public TurretPID()
+	{
+
 		requires(Robot.turret);
-		
+
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
 			}
+
 			public double pidGet()
 			{
 				return Robot.turret.getAngle();
@@ -38,7 +41,7 @@ public class TurretPID extends DBugCommand
 				pidOutput = output;
 			}
 		});
-		
+
 		pid.setOutputRange(-1, 1);
 	}
 
@@ -50,11 +53,11 @@ public class TurretPID extends DBugCommand
 	protected void execute()
 	{
 		pid.setPID((double) config.get("turret_PID_KP"),
-					(double) config.get("turret_PID_KI"),
-					(double) config.get("turret_PID_KD"));
-		
-		pid.setSetpoint((double) config.get("turret_Angle_SetPoint"));
-		
+				(double) config.get("turret_PID_KI"),
+				(double) config.get("turret_PID_KD"));
+
+		pid.setSetpoint((double) AlignShooter.alignTurret());
+
 		isFin = !Robot.turret.setMotors(pidOutput);
 	}
 

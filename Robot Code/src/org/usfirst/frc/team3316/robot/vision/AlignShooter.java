@@ -5,27 +5,20 @@ import org.usfirst.frc.team3316.robot.utils.Utils;
 
 public class AlignShooter
 {
-	public static void align()
-	{
-		alignTurret();
-		alignHood();
-	}
-
 	// hood_Angle_SetPoint, turret_Angle_SetPoint
-	private static void alignTurret()
+	public static double alignTurret()
 	{
 		double towerAngle = VisionServer.Data.get("AA"); // AA = Azimuthal Angle
 		double turretAngle = Robot.turret.getAngle();
-		Robot.config.add("turret_Angle_SetPoint", turretAngle - towerAngle);
+		return (turretAngle - towerAngle);
 	}
 
-	private static void alignHood()
+	public static double alignHood()
 	{
 		double distance = VisionServer.Data.get("DFC"); // DFC = Distance From
 														// Camera
-		double table[][] = new double[][] { { 0 }, 
-											{ 0 } };
-		Robot.config.add("turret_Angle_SetPoint",
-				Utils.valueInterpolation(distance, table));
+		double table[][] = new double[][] { { 0 }, { 0 } };
+		return (Utils.valueInterpolation(distance, table));
+
 	}
 }

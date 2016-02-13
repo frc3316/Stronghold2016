@@ -1,40 +1,51 @@
 package org.usfirst.frc.team3316.robot.commands.turret;
 
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.Robot;
 
-public class TurretBangbang extends DBugCommand {
-	
+public class TurretBangbang extends DBugCommand
+{
+
 	private double setPoint, onVoltage, offVoltage;
-	
-	public TurretBangbang() {
+
+	public TurretBangbang()
+	{
 		requires(Robot.turret);
 	}
 
-	protected void init() {}
+	protected void init()
+	{
+	}
 
-	protected void execute() {
+	protected void execute()
+	{
 		onVoltage = (double) config.get("turret_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("turret_Bangbang_OffVoltage");
-		setPoint = (double) config.get("turret_Angle_SetPoint");
-		
-		if (Robot.turret.getAngle() <= setPoint) {
+		setPoint = (double) AlignShooter.alignTurret();
+
+		if (Robot.turret.getAngle() <= setPoint)
+		{
 			isFin = !Robot.turret.setMotors(onVoltage);
 		}
-		else {
+		else
+		{
 			isFin = !Robot.turret.setMotors(offVoltage);
 		}
 	}
 
-	protected boolean isFinished() {
+	protected boolean isFinished()
+	{
 		return isFin;
 	}
 
-	protected void fin() {
+	protected void fin()
+	{
 		Robot.turret.setMotors(0);
 	}
 
-	protected void interr() {
+	protected void interr()
+	{
 		fin();
 	}
 
