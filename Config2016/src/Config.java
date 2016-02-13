@@ -167,7 +167,7 @@ public class Config
 				/*
 				 * Flywheel
 				 */
-				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
+				addToConstants("FLYWHEEL_MOTOR_REVERSE", true);
 
 				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 10.0);
 

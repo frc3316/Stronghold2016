@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3316.robot.subsystems;
-
-import java.util.Timer;
+	
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
