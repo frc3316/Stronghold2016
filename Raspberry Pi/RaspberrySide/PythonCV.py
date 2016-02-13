@@ -89,8 +89,9 @@ if __name__ == "__main__":
             if visionManager.isObjectDetected and visionManager.robotObject is not None:
                 values = [visionManager.currentImageObject.distanceFromCamera,
                           visionManager.currentImageObject.azimuthalAngle,
-                          visionManager.currentImageObject.polarAngle]
-                names = ["DFC", "AA", "PA"]
+                          visionManager.currentImageObject.polarAngle,
+                          visionManager.isObjectDetected]
+                names = ["DFC", "AA", "PA", "IOD"]
                 networkManager.sendData(values, names)
 
             ###################
@@ -118,9 +119,9 @@ if __name__ == "__main__":
 
             # display:
             if isShowingImage:
-                cv2.imshow("Current Image", visionManager.currentImage)
+                # cv2.imshow("Current Image", visionManager.currentImage)
                 # cv2.imshow("Thresh Image", visionManager.threshImage)
-                # cv2.imshow("Masked Image", visionManager.maskedImage)
+                cv2.imshow("Masked Image", visionManager.maskedImage)
 
             #########################
             # Wait for key pressing #
@@ -135,9 +136,9 @@ if __name__ == "__main__":
             #         cv2.imwrite("Current Image.png",visionManager.currentImage)
 
             #  stop
-            k = cv2.waitKey(5) & 0xFF
-            if k == 27:
-                break
+            # k = cv2.waitKey(5) & 0xFF
+            # if k == 27:
+            #    break
 
             # sleep(0.01) # so the pi won't crush
     finally:
