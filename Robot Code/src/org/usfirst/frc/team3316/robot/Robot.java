@@ -18,6 +18,7 @@ import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
 import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot
 	 */
 	public static Actuators actuators;
 	public static Sensors sensors;
+	public static Compressor compressor;
 
 	/*
 	 * Subsystems
@@ -84,6 +86,7 @@ public class Robot extends IterativeRobot
 		 */
 		sensors = new Sensors();
 		actuators = new Actuators();
+		compressor = new Compressor();
 
 		/*
 		 * Subsystems
