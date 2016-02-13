@@ -196,8 +196,11 @@ public class SDB
 		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
 		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
 		
-		SmartDashboard.putData(new BangbangFlywheel());
+		SmartDashboard.putNumber("Flywheel speed", Robot.flywheel.getRate());
+		SmartDashboard.putNumber("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
 		
+		SmartDashboard.putData(new BangbangFlywheel());
+		SmartDashboard.putData(new JoystickFlywheel());
 
 		logger.info("Finished initSDB()");
 	}
