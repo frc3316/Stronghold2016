@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.commands.turret;
 
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.Robot;
 
 public class TurretBangbang extends DBugCommand
@@ -17,11 +18,12 @@ public class TurretBangbang extends DBugCommand
 	{
 		onVoltage = (double) config.get("turret_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("turret_Bangbang_OffVoltage");
-		setPoint = (double) config.get("turret_Angle_SetPoint");
 	}
 
 	protected void execute()
 	{
+		setPoint = (double) AlignShooter.getTurretAngle();
+
 		if (Robot.turret.getAngle() <= setPoint)
 		{
 			isFin = !Robot.turret.setMotors(onVoltage);
