@@ -4,25 +4,19 @@ import org.usfirst.frc.team3316.robot.Robot;
 
 public class StopCompressor extends DBugCommand
 {
-
-	@Override
 	protected void init() {}
 
-	@Override
 	protected void execute()
 	{
 		Robot.actuators.compressor.stop();
 	}
 
-	@Override
 	protected boolean isFinished()
 	{
 		return true;
 	}
 
-	@Override
 	protected void fin() {}
 
-	@Override
 	protected void interr() {}
 }
