@@ -65,11 +65,6 @@ public class VisionServer implements Runnable
 
 			String sentence = new String(receivePacket.getData());
 			VisionServer.Data = parseLine(sentence);
-			if (VisionServer.Data.get("IDO") == 1.0)
-			{
-				AlignShooter.alignTurret();
-				AlignShooter.alignHood();
-			}
 		}
 
 	}

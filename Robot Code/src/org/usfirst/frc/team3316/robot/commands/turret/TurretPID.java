@@ -55,10 +55,18 @@ public class TurretPID extends DBugCommand
 		pid.setPID((double) config.get("turret_PID_KP"),
 				(double) config.get("turret_PID_KI"),
 				(double) config.get("turret_PID_KD"));
-
-		pid.setSetpoint((double) AlignShooter.alignTurret());
-
-		isFin = !Robot.turret.setMotors(pidOutput);
+		
+		if (AlignShooter.isObjectDetected())
+		{
+			double setPoint = (double) AlignShooter.getTurretAngle();
+			pid.setSetpoint(setPoint);
+			
+			isFin = !Robot.turret.setMotors(pidOutput);
+		}
+		else
+		{
+			isFin = !Robot.turret.setMotors(0);
+		}
 	}
 
 	protected boolean isFinished()

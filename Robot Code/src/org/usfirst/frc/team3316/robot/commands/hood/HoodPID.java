@@ -3,6 +3,7 @@ package org.usfirst.frc.team3316.robot.commands.hood;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
+import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -55,10 +56,17 @@ public class HoodPID extends DBugCommand
 		pid.setPID((double) config.get("hood_PID_KP"),
 				(double) config.get("hood_PID_KI"),
 				(double) config.get("hood_PID_KD"));
-
-		pid.setSetpoint((double) AlignShooter.alignHood());
-
-		isFin = !Robot.hood.setMotors(pidOutput);
+		if (AlignShooter.isObjectDetected())
+		{
+			double setPoint = (double) AlignShooter.getHoodAngle();
+			pid.setSetpoint(setPoint);
+			
+			isFin = !Robot.hood.setMotors(pidOutput);
+		}
+		else
+		{
+			isFin = !Robot.hood.setMotors(0);
+		}
 	}
 
 	protected boolean isFinished()

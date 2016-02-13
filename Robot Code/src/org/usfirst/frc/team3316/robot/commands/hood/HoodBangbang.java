@@ -7,7 +7,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 public class HoodBangbang extends DBugCommand
 {
 
-	private double setPoint, onVoltage, offVoltage;
+	private double onVoltage, offVoltage;
 
 	public HoodBangbang()
 	{
@@ -15,22 +15,27 @@ public class HoodBangbang extends DBugCommand
 	}
 
 	protected void init()
-	{
-	}
+	{}
 
 	protected void execute()
 	{
 		onVoltage = (double) config.get("hood_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("hood_Bangbang_OffVoltage");
-		setPoint = (double) AlignShooter.alignHood();
-
-		if (Robot.hood.getAngle() <= setPoint)
+		if (AlignShooter.isObjectDetected())
 		{
-			isFin = !Robot.hood.setMotors(onVoltage);
+			double setPoint = (double) AlignShooter.getHoodAngle();
+			if (Robot.hood.getAngle() <= setPoint)
+			{
+				isFin = !Robot.hood.setMotors(onVoltage);
+			}
+			else
+			{
+				isFin = !Robot.hood.setMotors(offVoltage);
+			}
 		}
 		else
 		{
-			isFin = !Robot.hood.setMotors(offVoltage);
+			isFin = !Robot.hood.setMotors(0);
 		}
 	}
 
