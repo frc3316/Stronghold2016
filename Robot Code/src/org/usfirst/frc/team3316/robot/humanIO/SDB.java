@@ -48,6 +48,10 @@ import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
 import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 
@@ -75,6 +79,7 @@ public class SDB
 			put("Chassis Yaw", Robot.chassis.getYaw());
 			put("Chassis Pitch", Robot.chassis.getPitch());
 			put("isOnDefense", Robot.chassis.isOnDefense());
+
 			put("Hood Angle", Robot.hood.getAngle());
 			put("Turret Angle", Robot.turret.getAngle());
 			try
@@ -119,7 +124,7 @@ public class SDB
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
-
+		initLiveWindow();
 		initSDB();
 	}
 
@@ -241,11 +246,11 @@ public class SDB
 		 * Remove these after finishing testing on prototype
 		 */
 
-		putConfigVariableInSDB("hood_Pot_LowThresh");
-		putConfigVariableInSDB("hood_Pot_HighThresh");
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
 
-		putConfigVariableInSDB("turret_Pot_LowThresh");
-		putConfigVariableInSDB("turret_Pot_HighThresh");
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
 
 		// Hood
 		SmartDashboard.putData(new HoodBangbang());
@@ -269,5 +274,16 @@ public class SDB
 		SmartDashboard.putData(new JoystickWinchControl());
 
 		logger.info("Finished initSDB()");
+	}
+
+	/**
+	 * This method puts in the live window of the test mode all of the robot's
+	 * actuators and sensors. It is disgusting.
+	 */
+	public void initLiveWindow()
+	{
+		/*
+		 * Actuators
+		 */
 	}
 }
