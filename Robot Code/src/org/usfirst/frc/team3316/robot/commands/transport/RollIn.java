@@ -40,6 +40,7 @@ public class RollIn extends DBugCommand
 
 	protected void interr()
 	{
+		fin();
 	}
 
 }
