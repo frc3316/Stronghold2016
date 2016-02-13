@@ -82,13 +82,18 @@ public class SDB
 
 			put("Hood Angle", Robot.hood.getAngle());
 			put("Turret Angle", Robot.turret.getAngle());
+			
+			put("Flywheel speed", Robot.flywheel.getRate());
+			put("Flywheel HE", Robot.sensors.flywheelHE.get());
+			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
+			
 			try
 			{
 				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
+				//e.printStackTrace();
 				put("DistanceFromCamera", "null");
 			}
 		}
@@ -197,9 +202,6 @@ public class SDB
 		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
 		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
 		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
-		
-		SmartDashboard.putNumber("Flywheel speed", Robot.flywheel.getRate());
-		SmartDashboard.putNumber("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
 		
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new JoystickFlywheel());

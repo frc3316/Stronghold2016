@@ -232,7 +232,7 @@ public class IO
 				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
 				putDIO("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
 
-				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
+				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 0);
 				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
 
 				putDIO("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
@@ -248,18 +248,18 @@ public class IO
 
 				putDIO("CLIMBING_SWITCH", 1);
 
-				putDIO("FLYWHEEL_HALL_EFFECT_COUNTER", 0);
+				putDIO("FLYWHEEL_HALL_EFFECT_COUNTER", 2);
 			}
 
 			/*
 			 * AIO initialization
 			 */
 			{
-				putAIO("INTAKE_POT", 0);
+				putAIO("INTAKE_POT", 2);
 
 				putAIO("TURRET_POT", 1);
 
-				putAIO("HOOD_POT", 2);
+				putAIO("HOOD_POT", 0);
 
 				putAIO("CLIMBING_POT", 3);
 			}
