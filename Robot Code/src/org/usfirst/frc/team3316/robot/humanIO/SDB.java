@@ -192,6 +192,8 @@ public class SDB
 		/*
 		 * For testing
 		 */
+		
+		// Flywheel
 		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
 		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
 		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
@@ -201,6 +203,23 @@ public class SDB
 		
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new JoystickFlywheel());
+		
+		// Hood
+		putConfigVariableInSDB("hood_PID_KP");
+		putConfigVariableInSDB("hood_PID_KI");
+		putConfigVariableInSDB("hood_PID_KD");
+
+		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
+		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
+		
+		putConfigVariableInSDB("hood_Angle_SetPoint");
+
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
+		
+		SmartDashboard.putData(new HoodBangbang());
+		SmartDashboard.putData(new HoodPID());
+		SmartDashboard.putData(new HoodJoysticks());
 
 		logger.info("Finished initSDB()");
 	}

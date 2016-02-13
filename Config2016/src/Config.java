@@ -188,12 +188,12 @@ public class Config
 				 */
 				addToConstants("HOOD_MOTOR_REVERSE", false);
 
-				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check
 																// the stall
 																// current
 
-				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
-				addToConstants("HOOD_POT_OFFSET", 30.0);
+				addToConstants("HOOD_POT_FULL_RANGE", 300.0);
+				addToConstants("HOOD_POT_OFFSET", 0.0);
 
 				/*
 				 * Climbing
