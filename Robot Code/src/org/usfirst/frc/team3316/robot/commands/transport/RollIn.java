@@ -35,6 +35,7 @@ public class RollIn extends DBugCommand
 
 	protected void fin()
 	{
+		Robot.transport.setMotors(0);
 	}
 
 	protected void interr()
