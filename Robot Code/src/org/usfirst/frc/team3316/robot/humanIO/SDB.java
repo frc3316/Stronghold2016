@@ -87,6 +87,8 @@ public class SDB
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
 			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
 			
+			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
+			
 			try
 			{
 				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));

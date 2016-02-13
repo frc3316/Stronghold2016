@@ -186,7 +186,7 @@ public class Config
 				/*
 				 * Hood
 				 */
-				addToConstants("HOOD_MOTOR_REVERSE", false);
+				addToConstants("HOOD_MOTOR_REVERSE", true);
 
 				addToConstants("HOOD_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check
 																// the stall
