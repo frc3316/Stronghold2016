@@ -55,7 +55,7 @@ public class SDB
 			put("Turret Angle", Robot.turret.getAngle());
 			try
 			{
-				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
+				//put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
 			}
 			catch (Exception e)
 			{
@@ -95,8 +95,8 @@ public class SDB
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
-		initLiveWindow();
 		initSDB();
+		initLiveWindow();
 	}
 
 	public void timerInit()
@@ -262,6 +262,7 @@ public class SDB
 		// Climbing
 		LiveWindow.addSensor("Climbing", "climbingPot", (LiveWindowSendable) Robot.sensors.climbingPot);
 		LiveWindow.addSensor("Climbing", "climbingSwitch", (LiveWindowSendable) Robot.sensors.climbingSwitch);
+		
 		logger.info("Finished initLiveWindow()");
 	}
 }
