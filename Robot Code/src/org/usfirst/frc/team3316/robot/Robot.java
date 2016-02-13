@@ -48,8 +48,6 @@ public class Robot extends IterativeRobot
 	 */
 	public static Actuators actuators;
 	public static Sensors sensors;
-	public static Compressor compressor;
-
 	/*
 	 * Subsystems
 	 */
@@ -86,7 +84,6 @@ public class Robot extends IterativeRobot
 		 */
 		sensors = new Sensors();
 		actuators = new Actuators();
-		compressor = new Compressor();
 
 		/*
 		 * Subsystems

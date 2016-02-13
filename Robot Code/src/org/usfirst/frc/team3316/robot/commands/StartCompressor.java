@@ -11,7 +11,7 @@ public class StartCompressor extends DBugCommand
 	@Override
 	protected void execute()
 	{
-		Robot.compressor.start();
+		Robot.actuators.compressor.start();
 	}
 
 	@Override

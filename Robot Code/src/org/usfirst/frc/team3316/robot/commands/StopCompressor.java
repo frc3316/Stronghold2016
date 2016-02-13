@@ -11,7 +11,7 @@ public class StopCompressor extends DBugCommand
 	@Override
 	protected void execute()
 	{
-		Robot.compressor.stop();
+		Robot.actuators.compressor.stop();
 	}
 
 	@Override
