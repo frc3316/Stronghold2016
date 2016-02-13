@@ -95,8 +95,8 @@ public class SDB
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
-		initSDB();
 		initLiveWindow();
+		initSDB();
 	}
 
 	public void timerInit()
