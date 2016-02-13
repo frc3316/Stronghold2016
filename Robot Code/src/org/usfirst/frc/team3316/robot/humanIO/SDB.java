@@ -262,5 +262,6 @@ public class SDB
 		// Climbing
 		LiveWindow.addSensor("Climbing", "climbingPot", (LiveWindowSendable) Robot.sensors.climbingPot);
 		LiveWindow.addSensor("Climbing", "climbingSwitch", (LiveWindowSendable) Robot.sensors.climbingSwitch);
+		logger.info("Finished initLiveWindow()");
 	}
 }
