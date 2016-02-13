@@ -65,31 +65,17 @@ public class Intake extends DBugSubsystemCC
 
 	public boolean isIntakeOpen()
 	{
-		/*
-		 * try { return intakePot .get() >= (double)
-		 * config.get("INTAKE_POT_HIGH_TRESH"); } catch (ConfigException e) {
-		 * logger.severe(e); } return false;
-		 */
-
-		// Changed for prototype reasons, need to switch it back to pot input
-		return intakeSolendoid.get() == Value.kForward;
+		return intakePot.get() >= (double) config.get("intake_Pot_HighThresh");
 	}
 
 	public boolean isIntakeClose()
 	{
-		/*
-		 * try { return intakePot .get() <= (double)
-		 * config.get("INTAKE_POT_LOW_TRESH"); } catch (ConfigException e) {
-		 * logger.severe(e); } return false;
-		 */
-
-		// Changed for prototype reasons, need to switch it back to pot input
-		return intakeSolendoid.get() == Value.kReverse;
+		return intakePot.get() <= (double) config.get("intake_Pot_LowThresh");
 	}
 
-	public double getCurrent ()
+	public double getCurrent()
 	{
 		return intakeMotor.getCurrent();
 	}
-	
+
 }

@@ -8,8 +8,10 @@ public class Config
 	public static Hashtable<String, Object> variablesA;
 	public static Hashtable<String, Object> constantsA;
 
-	private Config () {}
-	
+	private Config()
+	{
+	}
+
 	static
 	{
 		variablesB = new Hashtable<String, Object>();
@@ -24,6 +26,8 @@ public class Config
 
 	public static void addToConstantsA(String key, Object value)
 	{
+		System.out.println("Trying to add to constants A: key " + key + " value " + value);
+
 		if (constantsA.containsKey(key))
 		{
 			constantsA.replace(key, value);
@@ -36,6 +40,8 @@ public class Config
 
 	public static void addToVariablesA(String key, Object value)
 	{
+		System.out.println("Trying to add to variables A: key " + key + " value " + value);
+
 		if (variablesA.containsKey(key))
 		{
 			variablesA.replace(key, value);
@@ -48,6 +54,8 @@ public class Config
 
 	public static void addToConstantsB(String key, Object value)
 	{
+		System.out.println("Trying to add to constants B: key " + key + " value " + value);
+
 		if (constantsB.containsKey(key))
 		{
 			constantsB.replace(key, value);
@@ -60,6 +68,8 @@ public class Config
 
 	public static void addToVariablesB(String key, Object value)
 	{
+		System.out.println("Trying to add to variables B: key " + key + " value " + value);
+
 		if (variablesB.containsKey(key))
 		{
 			variablesB.replace(key, value);
@@ -76,7 +86,7 @@ public class Config
 		addToConstantsB(key, value);
 	}
 
-	private static void addToVariables(String key, Object value)
+	public static void addToVariables(String key, Object value)
 	{
 		addToVariablesA(key, value);
 		addToVariablesB(key, value);
@@ -86,7 +96,9 @@ public class Config
 	 * NOTE: constants and variables that are common to both robot A and robot B should be added with
 	 * addToConstants() or addToVariables()
 	 * 
-	 * Use different constants and variables for the two robots only if there is a difference. 
+	 * <<<<<<< HEAD Use different constants and variables for the two robots only if there is a difference.
+	 * ======= Use different constants and variables for the two robots only if there is a difference. >>>>>>>
+	 * TestModeStuff
 	 */
 	private static void initConfig()
 	{
@@ -122,72 +134,23 @@ public class Config
 				/*
 				 * Chassis
 				 */
-<<<<<<< HEAD
-=======
-				addToConstants("CHASSIS_MOTOR_LEFT_1", 5);
-				addToConstants("CHASSIS_MOTOR_LEFT_2", 6);
-				addToConstants("CHASSIS_MOTOR_RIGHT_1", 1);
-				addToConstants("CHASSIS_MOTOR_RIGHT_2", 2);
-
->>>>>>> auton_cross_defense
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
-				
-				addToConstants("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 13);
-				addToConstants("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 14);
-				addToConstants("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 2);
-				addToConstants("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 1);
-
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
-
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
 
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
 
-				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE",
-						4 * ((6 * Math.PI) / 32) * 0.0254);
-				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE",
-						4 * ((6 * Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", 4 * ((6 * Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", 4 * ((6 * Math.PI) / 32) * 0.0254);
 
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
-				addToConstants("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
-				
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
-				addToConstants("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
-				
-				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
-				
-				//For some reason the encoders give 4 times less the correct speed
-				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
-				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
-				
-				
+
 				/*
 				 * Intake
 				 */
-<<<<<<< HEAD
-=======
-				addToConstants("INTAKE_SOLENOID_FORWARD", 6); // changed
-																		// for
-																		// prototype
-				addToConstants("INTAKE_SOLENOID_REVERSE", 7); // changed
-																		// for
-																		// prototype
-				addToConstants("INTAKE_SOLENOID_MODULE", 0);
-
-				addToConstants("INTAKE_MOTOR", 3); // changed for prototype
-
-				addToConstants("INTAKE_LEFT_SWITCH", 7);
-				addToConstants("INTAKE_RIGHT_SWITCH", 1);
-
->>>>>>> auton_cross_defense
 				addToConstants("INTAKE_MOTOR_REVERSE", false);
-				
+
 				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
@@ -198,42 +161,36 @@ public class Config
 				 */
 				addToConstants("TRANSPORT_MOTOR_REVERSE", false);
 				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0);
-<<<<<<< HEAD
-				
-=======
 
-				addToConstants("TRANSPORT_ENCODER_A", 8);
-				addToConstants("TRANSPORT_ENCODER_B", 6);
->>>>>>> auton_cross_defense
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
 
 				/*
 				 * Flywheel
 				 */
 				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
-			
+
 				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 10.0);
 
 				/*
 				 * Turret
 				 */
 				addToConstants("TURRET_MOTOR_REVERSE", false);
-		
-				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check the stall current
-				
+
+				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
+																	// the stall
+																	// current
+
 				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
 				addToConstants("TURRET_POT_OFFSET", 0.0);
 
 				/*
 				 * Hood
 				 */
-<<<<<<< HEAD
-=======
-				addToConstants("HOOD_MOTOR", 16);
->>>>>>> auton_cross_defense
 				addToConstants("HOOD_MOTOR_REVERSE", false);
-				
-				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check the stall current
+
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
+																// the stall
+																// current
 
 				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
 				addToConstants("HOOD_POT_OFFSET", 30.0);
@@ -241,39 +198,29 @@ public class Config
 				/*
 				 * Climbing
 				 */
-<<<<<<< HEAD
-				
-=======
-				addToConstants("CLIMBING_MOTOR_1", 17);
->>>>>>> auton_cross_defense
 				addToConstants("CLIMBING_MOTOR_1_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 10.0);
 
-<<<<<<< HEAD
-=======
-				addToConstants("CLIMBING_MOTOR_2", 18);
->>>>>>> auton_cross_defense
 				addToConstants("CLIMBING_MOTOR_2_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 10.0);
 
 				addToConstants("CLIMBING_MOTOR_3_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 10.0);
-				
+
 				addToConstants("CLIMBING_MOTOR_4_REVERSE", false);
 				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 10.0);
-				
+
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
-<<<<<<< HEAD
-=======
 
-				addToConstants("CLIMBING_SWITCH", 9);
+				/*
+				 * Spare
+				 */
+				addToConstants("SPARE_MOTOR_PDP_REVERSE", false);
 
->>>>>>> auton_cross_defense
+				addToConstants("SPARE_MOTOR_PDP_MAX_CURRENT", 10.0);
 			}
 		}
-		
-		
 
 		/*
 		 * Chassis
@@ -294,24 +241,23 @@ public class Config
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
-<<<<<<< HEAD
-=======
-				
-				// Cross Defense
+			}
+
+			// Cross Defense
+			{
 				addToConstants("chassis_Defense_Angle_Timeout", 400.0);
-				
+
 				addToVariables("chassis_CrossDefense_Voltage", 0.5);
-				
+
 				addToVariables("chassis_Defense_Pitch_Thresh", 2.5);
 				addToVariables("chassis_Defense_Roll_Thresh", 4.0);
-				
+
 				addToVariables("chassis_CrossBrake_Timeout", 400.0);
 				addToVariables("chassis_CrossDefense_BrakeV", -0.32);
-				
+
 				addToVariables("chassis_CrossDefense_MinSpeed", 0.35);
 				addToVariables("chassis_CrossDefense_DownV", 0.001);
 			}
->>>>>>> auton_cross_defense
 
 			/*
 			 * Retract Omni
@@ -328,14 +274,13 @@ public class Config
 				addToVariables("chassis_ExtendOmni_CancelTimeout", 1.5);
 			}
 
-				// TODO: Check what the following variables should be, and
-				// change them.
-				addToVariables("motionPlanner_MaxAccel", 2.5);
-				addToVariables("motionPlanner_MaxDecel", -1.5);
-				addToVariables("motionPlanner_MaxVelocity", 1.0);
-				addToVariables("motionPlanner_TimeStep", 0.02);
-			}
-			
+			// TODO: Check what the following variables should be, and
+			// change them.
+			addToVariables("motionPlanner_MaxAccel", 2.5);
+			addToVariables("motionPlanner_MaxDecel", -1.5);
+			addToVariables("motionPlanner_MaxVelocity", 1.0);
+			addToVariables("motionPlanner_TimeStep", 0.02);
+
 			/*
 			 * Drive Distance
 			 */
@@ -345,19 +290,20 @@ public class Config
 				addToVariables("chassis_PIDRight_KI", 0.00);
 				addToVariables("chassis_PIDRight_KD", 75.0);
 				addToVariables("chassis_PIDRight_KF", 450.0);
-				
+
 				addToVariables("chassis_PIDLeft_KP", 100.0);
 				addToVariables("chassis_PIDLeft_KI", 0.0);
 				addToVariables("chassis_PIDLeft_KD", 75.0);
 				addToVariables("chassis_PIDLeft_KF", 450.0);
 			}
-			
+
 			/*
 			 * Set Constant Voltage
 			 */
 			{
 				addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
 			}
+
 		}
 
 		/*
@@ -405,7 +351,7 @@ public class Config
 			 */
 			{
 				addToVariables("intake_Pot_LowThresh", 1.0);
-				addToVariables("intake_Pot_HightThresh", 130.5);
+				addToVariables("intake_Pot_HighThresh", 130.5);
 			}
 
 			/*

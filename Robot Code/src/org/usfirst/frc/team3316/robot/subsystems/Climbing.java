@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.climbing.Stop;
+import org.usfirst.frc.team3316.robot.commands.climbing.StopWinch;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -43,7 +43,7 @@ public class Climbing extends DBugSubsystemCC {
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new Stop());
+		setDefaultCommand(new StopWinch());
 	}
 
 	public boolean setMotors(double v)

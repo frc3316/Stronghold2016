@@ -11,6 +11,8 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
  */
 public class BangbangTransport extends DBugCommand
 {
+	private double setpoint, onVoltage, offVoltage;
+
 	private double v = 0;
 
 	public BangbangTransport()
@@ -20,21 +22,22 @@ public class BangbangTransport extends DBugCommand
 
 	protected void init()
 	{
+		setpoint = (double) config.get("transport_Bangbang_Setpoint");
+		onVoltage = (double) config.get("transport_Bangbang_OnVoltage");
+		offVoltage = (double) config.get("transport_Bangbang_OffVoltage");
+		
 		v = 0;
 	}
 
 	protected void execute()
 	{
-		double speedSetpoint = (double) config
-				.get("transport_Bangbang_Setpoint");
-
-		if (Robot.transport.getRate() < speedSetpoint)
+		if (Robot.transport.getRate() < setpoint)
 		{
-			v = (double) config.get("transport_Bangbang_OnVoltage");
+			v = onVoltage;
 		}
 		else
 		{
-			v = (double) config.get("transport_Bangbang_OffVoltage");
+			v = offVoltage;
 		}
 
 		isFin = !Robot.transport.setMotors(v);

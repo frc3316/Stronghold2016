@@ -4,8 +4,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 /**
- * Command for climbing. Sets the climbing motors until we reach the target
- * angle of the pot.
+ * Command for climbing. Sets the climbing motors until we reach the target angle of the pot.
  * 
  * @author D-Bug
  *
@@ -26,17 +25,18 @@ public class PullUp extends DBugCommand
 	}
 
 	protected void init()
-	{}
+	{
+		speed = (double) config.get("climbing_UpSpeed");
+	}
 
 	protected void execute()
 	{
-		speed = (double) config.get("climbing_UpSpeed");
-
 		isFin = !Robot.climbing.setMotors(speed);
 
-		// The setpoint in the config is the difference in pot angle that we
-		// want
+		// The setpoint in the config is the difference in pot angle that we want
 		onTarget = Robot.climbing.getAngle() >= ((double) config.get("climbing_Setpoint") + initAngle);
+		// The variable climbing_Setpoint is called periodically because we want it to update while the
+		// command is running
 	}
 
 	protected boolean isFinished()

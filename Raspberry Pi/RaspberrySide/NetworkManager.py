@@ -43,6 +43,7 @@ class NetworkManager(object):
         :return: None.
         '''
         try:
+            self.HOST = socket.gethostbyname(self.HOST)
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(1)
             sock.connect((self.HOST, self.PORT))

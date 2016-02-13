@@ -19,11 +19,11 @@ public class StopHood extends DBugCommand
 
 	protected void init()
 	{
-		Robot.hood.setMotors(0);
 	}
 
 	protected void execute()
 	{
+		Robot.hood.setMotors(0);
 	}
 
 	protected boolean isFinished()

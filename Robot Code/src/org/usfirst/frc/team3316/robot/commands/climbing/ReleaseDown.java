@@ -28,12 +28,12 @@ public class ReleaseDown extends DBugCommand
 	protected void init()
 	{
 		Robot.actuators.compressor.stop();
+		
+		speed = (double) config.get("climbing_DownSpeed");
 	}
 
 	protected void execute()
 	{
-		speed = (double) config.get("climbing_DownSpeed");
-
 		isFin = !Robot.climbing.setMotors(speed);
 
 		// The setpoint in the config is the difference in pot angle that we

@@ -18,11 +18,11 @@ import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
 import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -108,12 +108,15 @@ public class Robot extends IterativeRobot
 		 */
 		sdb.timerInit();
 
+		/*
+		 * La verite (turns out that apostrophes makes errors)
+		 */
 		logger.info(returnTheTruth());
 	}
 
 	public void disabledInit()
 	{
-		
+
 	}
 
 	public void disabledPeriodic()
@@ -143,10 +146,7 @@ public class Robot extends IterativeRobot
 		Scheduler.getInstance().run();
 	}
 
-	public void testInit()
-	{
-
-	}
+	public void testInit() {}
 
 	public void testPeriodic()
 	{

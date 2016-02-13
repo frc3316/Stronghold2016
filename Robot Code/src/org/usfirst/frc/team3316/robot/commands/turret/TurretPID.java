@@ -13,15 +13,17 @@ public class TurretPID extends DBugCommand
 	private PIDController pid;
 	private double pidOutput;
 
-	public TurretPID() {
-		
+	public TurretPID()
+	{
+
 		requires(Robot.turret);
-		
+
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
 			}
+
 			public double pidGet()
 			{
 				return Robot.turret.getAngle();
@@ -38,23 +40,22 @@ public class TurretPID extends DBugCommand
 				pidOutput = output;
 			}
 		});
-		
+
 		pid.setOutputRange(-1, 1);
 	}
 
 	protected void init()
 	{
+		pid.setPID((double) config.get("turret_PID_KP"), (double) config.get("turret_PID_KI"),
+				(double) config.get("turret_PID_KD"));
+
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("turret_PID_KP"),
-					(double) config.get("turret_PID_KI"),
-					(double) config.get("turret_PID_KD"));
-		
 		pid.setSetpoint((double) config.get("turret_Angle_SetPoint"));
-		
+
 		isFin = !Robot.turret.setMotors(pidOutput);
 	}
 

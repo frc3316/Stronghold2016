@@ -19,11 +19,11 @@ public class StopTurret extends DBugCommand
 
 	protected void init()
 	{
-		Robot.turret.setMotors(0);
 	}
 
 	protected void execute()
 	{
+		Robot.turret.setMotors(0);
 	}
 
 	protected boolean isFinished()

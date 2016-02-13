@@ -97,21 +97,6 @@ public class Sensors {
 		chassisHELeftBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_BACK"));
 		chassisHERightFront = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_FRONT"));
 		chassisHERightBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_BACK"));
-		
-		chassisLeftEncoder = new Encoder(
-				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),
-				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),
-				(boolean) Robot.config.get("CHASSIS_LEFT_ENCODER_REVERSE"),
-				EncodingType.k4X);
-		
-		chassisLeftEncoder.setDistancePerPulse((double) config.get("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE"));
-
-		chassisRightEncoder = new Encoder(
-				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
-				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),
-				(boolean) Robot.config.get("CHASSIS_RIGHT_ENCODER_REVERSE"),
-				EncodingType.k4X);
-		chassisRightEncoder.setDistancePerPulse((double) config.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
 
 		/*
 		 * Intake
