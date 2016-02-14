@@ -5,6 +5,11 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class JoystickWinchControl extends DBugCommand
 {
+	public JoystickWinchControl ()
+	{
+		requires(Robot.climbing);
+	}
+	
 	protected void init()
 	{}
 
