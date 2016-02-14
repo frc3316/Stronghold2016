@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.turret.StopTurret;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -10,6 +10,7 @@ public class Turret extends DBugSubsystemCC
 {
 	private DBugSpeedController turretMotor;
 	private AnalogPotentiometer turretPot;
+	private double potOffset;
 
 	public Turret()
 	{
@@ -17,11 +18,12 @@ public class Turret extends DBugSubsystemCC
 		addSpeedController(turretMotor);
 
 		turretPot = Robot.sensors.turretPot;
+		potOffset = (double) config.get("turret_Pot_Offset");
 	}
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new StopTurret());
+		setDefaultCommand(new TurretJoysticks());
 	}
 
 	/**
@@ -55,7 +57,18 @@ public class Turret extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		return turretPot.get();
+		return turretPot.get() + potOffset;
+	}
+	
+	
+	/**
+	 * This method is for adjusting the offset of the turret potentiometer.
+	 * This method DOES NOT update the offset in the config.
+	 * @param offset - The offset to add to the reading from the potentiometer;
+	 */
+	public void setOffset(double offset) {
+		logger.fine("The offset of the ");
+		potOffset = offset;
 	}
 
 }

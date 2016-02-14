@@ -23,6 +23,7 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
+import org.usfirst.frc.team3316.robot.commands.hood.ZeroAngle;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
@@ -223,6 +224,10 @@ public class SDB
 		SmartDashboard.putData(new HoodBangbang());
 		SmartDashboard.putData(new HoodPID());
 		SmartDashboard.putData(new HoodJoysticks());
+		SmartDashboard.putData("Hood ZeroAngle", new org.usfirst.frc.team3316.robot.commands.hood.ZeroAngle());
+		
+		// Turret
+		SmartDashboard.putData("Turret ZeroAngle", new org.usfirst.frc.team3316.robot.commands.turret.ZeroAngle());
 
 		logger.info("Finished initSDB()");
 	}

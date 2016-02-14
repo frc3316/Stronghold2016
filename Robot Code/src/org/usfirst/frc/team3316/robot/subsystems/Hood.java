@@ -10,6 +10,7 @@ public class Hood extends DBugSubsystemCC
 {
 	private DBugSpeedController hoodMotor;
 	private AnalogPotentiometer hoodPot;
+	private double potOffset;
 
 	public Hood()
 	{
@@ -55,7 +56,16 @@ public class Hood extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		return hoodPot.get();
+		return hoodPot.get() + potOffset;
+	}
+	
+	/**
+	 * This method is for adjusting the offset of the hood potentiometer.
+	 * This method DOES NOT update the offset in the config.
+	 * @param offset - the offset to add to the reading from the potentiometer;
+	 */
+	public void setOffset(double offset) {
+		potOffset = offset;
 	}
 
 }
