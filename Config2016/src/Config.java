@@ -423,8 +423,8 @@ public class Config
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 				addToVariables("hood_Angle_SetPoint", 0.0);
 
-				addToVariables("hood_Pot_BottomThresh", 0.0);
-				addToVariables("hood_Pot_TopThresh", 400.0);
+				addToVariables("hood_Pot_BottomThresh", 39.0);
+				addToVariables("hood_Pot_TopThresh", 81.0);
 			}
 		}
 
