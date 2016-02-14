@@ -13,14 +13,11 @@ import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
 import org.usfirst.frc.team3316.robot.commands.chassis.ExtendOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
-import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
 import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
 import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallIn;
 import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallOut;
 import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
-import org.usfirst.frc.team3316.robot.commands.chassis.auton.CrossDefense;
-import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -51,7 +48,6 @@ import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -93,6 +89,9 @@ public class SDB
 				e.printStackTrace();
 				put("DistanceFromCamera", "null");
 			}
+			
+			// Drive Distance
+			SmartDashboard.putNumber("Chassis voltage", Robot.actuators.chassisLeft1.getVoltage());
 		}
 
 		private void put(String name, double d)

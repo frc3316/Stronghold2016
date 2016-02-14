@@ -19,26 +19,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author D-Bug
  *
  */
-public abstract class DriveDistance extends DBugCommand
+public class DriveDistance extends DBugCommand
 {
-	protected PIDController pidRight, pidLeft;
-	protected double pidRightOutput, pidLeftOutput;
+	private PIDController pid;
 
-	protected double dist;
-	
-	protected PlannedMotion motion;
+	private double dist, initDist = 0, initTime = 0;
 
-	protected double initTime = 0;
-	protected double initDist = 0;
-	protected double currentTime = 0;
+	private PlannedMotion motion;
 
 	public DriveDistance(double dist)
 	{
+		requires(Robot.chassis);
+		
 		this.dist = dist;
 
-		pidRight = new PIDController(0, 0, 0, new PIDSource()
-		{
+		motion = MotionPlanner.planMotion(dist);
 
+		pid = new PIDController(0, 0, 0, new PIDSource()
+		{
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
 				return;
@@ -46,96 +44,65 @@ public abstract class DriveDistance extends DBugCommand
 
 			public double pidGet()
 			{
-				return Robot.chassis.getRightSpeed();
+				double currentDist = Robot.chassis.getDistance() - initDist;
+
+				// REMOVE AFTER TESTINGS
+				SmartDashboard.putNumber("Current Distance", currentDist);
+
+				return currentDist;
 			}
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kRate;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
 
 			public void pidWrite(double output)
 			{
-				pidRightOutput = output;
-			}
-		});
+				double currentTime = Timer.getFPGATimestamp() - initTime;
+				double profileVelocity = motion.getVelocity(currentTime);
 
-		pidLeft = new PIDController(0, 0, 0, new PIDSource()
-		{
-
-			public void setPIDSourceType(PIDSourceType pidSource)
-			{
-				return;
+				double velocity = output + profileVelocity * (double) config.get("chassis_DriveDistance_KV");
+				Robot.chassis.setMotors(velocity, velocity);
 			}
-
-			public double pidGet()
-			{
-				return Robot.chassis.getLeftSpeed();
-			}
-
-			public PIDSourceType getPIDSourceType()
-			{
-				return PIDSourceType.kRate;
-			}
-		}, new PIDOutput()
-		{
-
-			public void pidWrite(double output)
-			{
-				pidLeftOutput = output;
-			}
-		});
+		}, 0.02);
 	}
 
 	protected void init()
 	{
-		motion = MotionPlanner.planMotion(dist);
+		pid.setOutputRange(-1, 1);
 		
-		pidRight.setOutputRange(-1, 1);
-		pidLeft.setOutputRange(-1, 1);
+		// TODO: Check if onTarget() works.
+		pid.setAbsoluteTolerance(
+				(double) config.get("chassis_DriveDistance_PID_Tolerance"));
 
-		// PID values are the same for all subclasses for until we finish
-		// testings
-		pidRight.setPID((double) config.get("chassis_PIDRight_KP") / 1000,
-				(double) config.get("chassis_PIDRight_KI") / 1000,
-				(double) config.get("chassis_PIDRight_KF") / 1000,
-				(double) config.get("chassis_PIDRight_KF") / 1000);
+		pid.setPID((double) config.get("chassis_DriveDistance_PID_KP") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_KI") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_KD") / 1000);
 
-		pidLeft.setPID((double) config.get("chassis_PIDLeft_KP") / 1000,
-				(double) config.get("chassis_PIDLeft_KI") / 1000,
-				(double) config.get("chassis_PIDLeft_KD") / 1000,
-				(double) config.get("chassis_PIDLeft_KF") / 1000);
-
-		pidRight.enable();
-		pidLeft.enable();
+		pid.setSetpoint(dist);
 
 		initTime = Timer.getFPGATimestamp();
 		initDist = Robot.chassis.getDistance();
+
+		pid.enable();
 	}
 
 	protected void execute()
+	{}
+
+	protected boolean isFinished()
 	{
-		currentTime = Timer.getFPGATimestamp() - initTime;
-		
-		SmartDashboard.putNumber("Motion profile velocity",
-				motion.getVelocity(currentTime));
-
-		set();
+		double measuredSpeed = (Robot.chassis.getLeftSpeed() + Robot.chassis.getRightSpeed()) / 2;
+		return measuredSpeed == 0 && pid.onTarget();
 	}
-
-	protected abstract void set();
-
-	protected abstract boolean isFinished();
 
 	protected void fin()
 	{
-		pidLeft.reset();
-		pidRight.reset();
-		
-		pidLeft.disable();
-		pidRight.disable();
+		pid.reset();
+		pid.disable();
 
 		Robot.chassis.setMotors(0, 0);
 	}
