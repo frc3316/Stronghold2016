@@ -88,8 +88,8 @@ public class SDB
 				put("DistanceFromCamera", "null");
 			}
 			
-			// Drive Distance
-			SmartDashboard.putNumber("Chassis voltage", Robot.actuators.chassisLeft1.getVoltage());
+			// Climbing
+			put("Winch angle", Robot.climbing.getWinchAngle());
 		}
 
 		private void put(String name, double d)
