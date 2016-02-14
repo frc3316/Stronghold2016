@@ -74,8 +74,6 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Intake Current", Robot.intake.getCurrent());
-			
 			put("Chassis Yaw", Robot.chassis.getYaw());
 			put("Chassis Pitch", Robot.chassis.getPitch());
 			put("isOnDefense", Robot.chassis.isOnDefense());
@@ -86,6 +84,7 @@ public class SDB
 			put("Flywheel speed", Robot.flywheel.getRate());
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
 			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
+			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
