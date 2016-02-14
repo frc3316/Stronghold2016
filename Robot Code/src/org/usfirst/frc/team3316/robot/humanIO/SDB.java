@@ -72,14 +72,12 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Intake Current", Robot.intake.getCurrent());
 			
-			put("Chassis Yaw", Robot.chassis.getYaw());
-			put("Chassis Pitch", Robot.chassis.getPitch());
-			put("isOnDefense", Robot.chassis.isOnDefense());
-
-			put("Hood Angle", Robot.hood.getAngle());
-			put("Turret Angle", Robot.turret.getAngle());
+			put("Motor 11 Current", Robot.actuators.climbingMotor1.getCurrent());
+			put("Motor 12 Current", Robot.actuators.climbingMotor2.getCurrent());
+			put("Motor 13 Current", Robot.actuators.climbingMotor3.getCurrent());
+			put("Motor 14 Current", Robot.actuators.climbingMotor4.getCurrent());
+			
 			try
 			{
 				//put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
@@ -189,82 +187,9 @@ public class SDB
 	private void initSDB()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE THIS COMMAND
-
-
-		/*
-		 * Remove these after finishing testing on prototype
-		 */		
-		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
-		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
-		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
-		putConfigVariableInSDB("chassis_CrossDefense_BrakeV");
-		putConfigVariableInSDB("chassis_CrossBrake_Timeout");
-		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
-		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
-		putConfigVariableInSDB("chassis_CrossDefense_DownV");
-		
-		/*
-		 * For testing
-		 */
-		SmartDashboard.putData(new CrossingForwardSequence());
-		SmartDashboard.putData(new CrossingBackSequence());
-		SmartDashboard.putData(new lockArmPiston());
-		SmartDashboard.putData(new ExtendOmni());
-		SmartDashboard.putData(new RetractOmni());
-		SmartDashboard.putData(new ToggleOmni());
-		SmartDashboard.putData(new WaitForDefense());
-		SmartDashboard.putData(new JoystickWinchControl());
-		SmartDashboard.putData(new lockArmPiston());
-		SmartDashboard.putData(new PullUp());
-		SmartDashboard.putData(new ReleaseArmPiston());
-		SmartDashboard.putData(new ReleaseDown());
-		SmartDashboard.putData(new StopWinch());
-		SmartDashboard.putData(new WaitForRung());
-		SmartDashboard.putData(new BangbangFlywheel());
-		SmartDashboard.putData(new JoystickFlywheel());
-		SmartDashboard.putData(new PIDFlywheel());
-		SmartDashboard.putData(new HoodBangbang());
-		SmartDashboard.putData(new HoodJoysticks());
-		SmartDashboard.putData(new HoodPID());
-		SmartDashboard.putData(new StopHood());
-		SmartDashboard.putData(new CloseIntake());
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData("Intake RollIn", new RollIn());
-		SmartDashboard.putData("Intake RollOut", new RollOut());
-		SmartDashboard.putData("Intake StopRoll", new StopRoll());
-		SmartDashboard.putData(new WaitForBallIn());
-		SmartDashboard.putData(new WaitForBallOut());
-		SmartDashboard.putData(new BangbangTransport());
-		SmartDashboard.putData("Transport RollIn", new org.usfirst.frc.team3316.robot.commands.transport.RollIn());
-		SmartDashboard.putData("Transport StopRoll", new org.usfirst.frc.team3316.robot.commands.transport.StopRoll());
-		SmartDashboard.putData(new StopTurret());
-		SmartDashboard.putData(new TurretBangbang());
-		SmartDashboard.putData(new TurretBangbang());
-		SmartDashboard.putData(new TurretJoysticks());
-		SmartDashboard.putData(new TurretPID());
-		SmartDashboard.putData(new StartCompressor());
-		SmartDashboard.putData(new StopCompressor());		
-		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-
-		putConfigVariableInSDB("hood_Pot_BottomThresh");
-		putConfigVariableInSDB("hood_Pot_TopThresh");
-
-		putConfigVariableInSDB("turret_Pot_LeftThresh");
-		putConfigVariableInSDB("turret_Pot_RightThresh");
-
-		// Hood
-		SmartDashboard.putData(new HoodBangbang());
-		SmartDashboard.putData(new HoodJoysticks());
-		SmartDashboard.putData(new HoodPID());
-
-		// Turret
-		SmartDashboard.putData(new TurretBangbang());
-		SmartDashboard.putData(new TurretJoysticks());
-		SmartDashboard.putData(new TurretPID());
-
 		putConfigVariableInSDB("climbing_UpSpeed");
 		putConfigVariableInSDB("climbing_DownSpeed");
 
