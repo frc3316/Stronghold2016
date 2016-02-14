@@ -205,16 +205,16 @@ public class Config
 				 * Climbing
 				 */
 				addToConstants("CLIMBING_MOTOR_1_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 100.0);
 
 				addToConstants("CLIMBING_MOTOR_2_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 100.0);
 
 				addToConstants("CLIMBING_MOTOR_3_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 100.0);
 
 				addToConstants("CLIMBING_MOTOR_4_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 100.0);
 
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);

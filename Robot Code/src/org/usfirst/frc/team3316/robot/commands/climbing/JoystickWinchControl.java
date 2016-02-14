@@ -15,7 +15,7 @@ public class JoystickWinchControl extends DBugCommand
 
 	protected void execute()
 	{
-		isFin = Robot.climbing.setMotors(-Robot.joysticks.joystickOperator.getRawAxis(5)); // Coz flight
+		isFin = !Robot.climbing.setMotors(-Robot.joysticks.joystickOperator.getRawAxis(5)); // Coz flight
 																							// simulators
 	}
 
