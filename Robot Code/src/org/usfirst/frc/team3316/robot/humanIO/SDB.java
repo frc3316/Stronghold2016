@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
+import org.usfirst.frc.team3316.robot.commands.chassis.AutoPistonsToggle;
 import org.usfirst.frc.team3316.robot.commands.chassis.ExtendOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
@@ -178,6 +179,9 @@ public class SDB
 	private void initSDB()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE THIS COMMAND
+		
+		SmartDashboard.putData(new StartCompressor());
+		SmartDashboard.putData(new StopCompressor());
 
 		/*
 		 * Remove these after finishing testing on prototype
@@ -200,8 +204,7 @@ public class SDB
 		SmartDashboard.putData(new RetractOmni());
 		SmartDashboard.putData(new ToggleOmni());
 		SmartDashboard.putData(new WaitForDefense());
-		SmartDashboard.putData(new StartCompressor());
-		SmartDashboard.putData(new StopCompressor());		
+		SmartDashboard.putData(new AutoPistonsToggle());
 		
 		/*
 		 * Remove these after finishing testing on prototype
