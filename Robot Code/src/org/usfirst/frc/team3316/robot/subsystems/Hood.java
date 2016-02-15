@@ -13,7 +13,7 @@ public class Hood extends DBugSubsystemCC
 
 	public Hood()
 	{
-		hoodMotor = Robot.actuators.hoodMotor;
+		//hoodMotor = Robot.actuators.hoodMotor;
 		addSpeedController(hoodMotor);
 
 		hoodPot = Robot.sensors.hoodPot;
@@ -21,7 +21,7 @@ public class Hood extends DBugSubsystemCC
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new StopHood());
+//		setDefaultCommand(new StopHood());
 	}
 
 	/**

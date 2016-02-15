@@ -70,10 +70,12 @@ public class Chassis extends DBugSubsystem
 	public Chassis()
 	{
 		// Actuators
+		/*
 		leftMotor1 = Robot.actuators.chassisLeft1;
 		rightMotor2 = Robot.actuators.chassisRight2;
 		leftMotor2 = Robot.actuators.chassisLeft2;
 		rightMotor1 = Robot.actuators.chassisRight1;
+		*/
 
 		longPistons = Robot.actuators.chassisLongPistons;
 		shortPistonsLeft = Robot.actuators.chassisShortPistonsLeft;
@@ -105,7 +107,7 @@ public class Chassis extends DBugSubsystem
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new TankDrive());
+//		setDefaultCommand(new TankDrive());
 	}
 
 	/*

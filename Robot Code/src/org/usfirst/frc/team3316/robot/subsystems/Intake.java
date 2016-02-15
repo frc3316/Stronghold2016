@@ -23,7 +23,7 @@ public class Intake extends DBugSubsystemCC
 	{
 		// Actuators
 		intakeSolendoid = Robot.actuators.intakeSolenoid;
-		intakeMotor = Robot.actuators.intakeMotor;
+		//intakeMotor = Robot.actuators.intakeMotor;
 
 		addSpeedController(intakeMotor);
 
