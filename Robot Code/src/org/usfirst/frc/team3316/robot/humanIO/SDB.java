@@ -76,14 +76,11 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Intake Current", Robot.intake.getCurrent());
-			
 			put("Chassis Yaw", Robot.chassis.getYaw());
 			put("Chassis Pitch", Robot.chassis.getPitch());
+			put("Chassis Roll", Robot.chassis.getRoll());
 			put("isOnDefense", Robot.chassis.isOnDefense());
-
-			put("Hood Angle", Robot.hood.getAngle());
-			put("Turret Angle", Robot.turret.getAngle());
+			
 		}
 
 		private void put(String name, double d)
