@@ -43,7 +43,7 @@ public class Sensors {
 
 	// Flywheel
 	public Counter flywheelCounter;
-	public DigitalInput hallEffect;
+	public DigitalInput flywheelHE;
 
 	// Turret
 	public AnalogPotentiometer turretPot;
@@ -125,10 +125,10 @@ public class Sensors {
 		/*
 		 * Flywheel
 		 */
-		hallEffect = new DigitalInput(
+		flywheelHE = new DigitalInput(
 				(int) config.get("FLYWHEEL_HALL_EFFECT_COUNTER"));
 
-		flywheelCounter = new Counter(hallEffect);
+		flywheelCounter = new Counter(flywheelHE);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round
 
 		// Turret
