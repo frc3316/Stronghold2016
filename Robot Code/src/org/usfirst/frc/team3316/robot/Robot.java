@@ -82,12 +82,14 @@ public class Robot extends IterativeRobot
 		/*
 		 * Robot IO
 		 */
-		sensors = new Sensors();
-		actuators = new Actuators();
+		// sensors = new Sensors();
+		// actuators = new Actuators();
 
 		/*
 		 * Subsystems
 		 */
+		Robot.actuators.GeneralActuators();
+		Robot.sensors.GeneralSensors();
 		chassis = new Chassis();
 		intake = new Intake();
 		transport = new Transport();
@@ -95,7 +97,8 @@ public class Robot extends IterativeRobot
 		turret = new Turret();
 		hood = new Hood();
 		climbing = new Climbing();
-
+		Robot.actuators.SpareActuators();
+		
 		/*
 		 * Human IO (that requires subsystems)
 		 */

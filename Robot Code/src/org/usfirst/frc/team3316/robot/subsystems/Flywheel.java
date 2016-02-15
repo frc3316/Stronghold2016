@@ -40,11 +40,15 @@ public class Flywheel extends DBugSubsystemCC
 	public Flywheel()
 	{
 		// Actuators
+		Robot.actuators.FlywheelActuators();
+		
 		flywheelMotor = Robot.actuators.flywheelMotor;
 
 		addSpeedController(flywheelMotor);
 
 		// Sensors
+		Robot.sensors.FlywheelSensors();
+		
 		counter = Robot.sensors.flywheelCounter;
 
 		// Other stuff
