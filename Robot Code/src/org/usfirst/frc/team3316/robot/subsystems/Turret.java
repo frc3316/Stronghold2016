@@ -11,6 +11,7 @@ public class Turret extends DBugSubsystemCC
 	private DBugSpeedController turretMotor;
 	private AnalogPotentiometer turretPot;
 	private double potOffset;
+	private boolean adjustTurret;
 
 	public Turret()
 	{
@@ -19,6 +20,8 @@ public class Turret extends DBugSubsystemCC
 
 		turretPot = Robot.sensors.turretPot;
 		potOffset = (double) config.get("turret_Pot_Offset");
+		
+		adjustTurret = false;
 	}
 
 	public void initDefaultCommand()
@@ -60,6 +63,19 @@ public class Turret extends DBugSubsystemCC
 		return turretPot.get() + potOffset;
 	}
 	
+	/**
+	 * @return - If the hood was set to be adjusted.
+	 */
+	public boolean toAdjustTurret() {
+		return adjustTurret;
+	}
+	
+	/**
+	 * @par value - Set the hood adjusting value (true or false).
+	 */
+	public void setTurretAdjusting(boolean value) {
+		adjustTurret = value;
+	}
 	
 	/**
 	 * This method is for adjusting the offset of the turret potentiometer.

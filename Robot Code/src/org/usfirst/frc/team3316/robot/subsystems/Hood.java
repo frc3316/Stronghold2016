@@ -11,6 +11,7 @@ public class Hood extends DBugSubsystemCC
 	private DBugSpeedController hoodMotor;
 	private AnalogPotentiometer hoodPot;
 	private double potOffset;
+	private boolean adjustHood;
 
 	public Hood()
 	{
@@ -19,6 +20,8 @@ public class Hood extends DBugSubsystemCC
 
 		hoodPot = Robot.sensors.hoodPot;
 		potOffset = (double) config.get("hood_Pot_Offset");
+		
+		adjustHood = false;
 	}
 
 	public void initDefaultCommand()
@@ -58,6 +61,20 @@ public class Hood extends DBugSubsystemCC
 	public double getAngle()
 	{
 		return hoodPot.get() + potOffset;
+	}
+	
+	/**
+	 * @return - If the hood was set to be adjusted.
+	 */
+	public boolean toAdjustHood() {
+		return adjustHood;
+	}
+	
+	/**
+	 * @par value - Set the hood adjusting value (true or false).
+	 */
+	public void setHoodAdjusting(boolean value) {
+		adjustHood = value;
 	}
 	
 	/**
