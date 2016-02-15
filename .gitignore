@@ -23,7 +23,8 @@ hs_err_pid*
 __pycache__/
 *.py[cod]
 *$py.class
-
+*.loc
+*.pyc
 # Unit test / coverage reports
 htmlcov/
 .tox/

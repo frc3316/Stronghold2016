@@ -96,8 +96,7 @@ public class Config
 	 * NOTE: constants and variables that are common to both robot A and robot B should be added with
 	 * addToConstants() or addToVariables()
 	 * 
-	 * <<<<<<< HEAD Use different constants and variables for the two robots only if there is a difference.
-	 * ======= Use different constants and variables for the two robots only if there is a difference. >>>>>>>
+	 * Use different constants and variables for the two robots only if there is a difference.
 	 * TestModeStuff
 	 */
 	private static void initConfig()
@@ -136,15 +135,13 @@ public class Config
 				 */
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
-
+				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
-
-				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", 4 * ((6 * Math.PI) / 32) * 0.0254);
-				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", 4 * ((6 * Math.PI) / 32) * 0.0254);
-
-				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
-				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+				
+				//For some reason the encoders give 4 times less the correct speed
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
 
 				/*
 				 * Intake
@@ -155,6 +152,15 @@ public class Config
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
+				
+				addToConstants("INTAKE_POT", 5);
+				
+				addToConstants("INTAKE_LEFT_SWITCH", 10);
+				addToConstants("INTAKE_RIGHT_SWITCH", 11);
+				
+				addToConstants("INTAKE_SOLENOID_MODULE", 0);
+				addToConstants("INTAKE_SOLENOID_FORWARD", 0);
+				addToConstants("INTAKE_SOLENOID_REVERSE", 1);
 
 				/*
 				 * Transport
@@ -286,15 +292,14 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_PIDRight_KP", 100.0);
-				addToVariables("chassis_PIDRight_KI", 0.00);
-				addToVariables("chassis_PIDRight_KD", 75.0);
-				addToVariables("chassis_PIDRight_KF", 450.0);
-
-				addToVariables("chassis_PIDLeft_KP", 100.0);
-				addToVariables("chassis_PIDLeft_KI", 0.0);
-				addToVariables("chassis_PIDLeft_KD", 75.0);
-				addToVariables("chassis_PIDLeft_KF", 450.0);
+				addToVariables("chassis_DriveDistance_PID_KP", 80.0);
+				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KD", 12300.0);
+				
+				addToVariables("chassis_DriveDistance_KV", 0.5);
+				
+				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
+				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
 			}
 
 			/*

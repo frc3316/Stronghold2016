@@ -1,11 +1,12 @@
 package org.usfirst.frc.team3316.robot.commands.hood;
 
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.Robot;
 
 public class HoodBangbang extends DBugCommand
 {
-	private double setPoint, onVoltage, offVoltage;
+	private double onVoltage, offVoltage;
 
 	public HoodBangbang()
 	{
@@ -20,14 +21,26 @@ public class HoodBangbang extends DBugCommand
 
 	protected void execute()
 	{
+<<<<<<< HEAD
 		setPoint = (double) config.get("hood_Angle_SetPoint");
 		if (Robot.hood.getAngle() <= setPoint)
+=======
+		if (AlignShooter.isObjectDetected())
+>>>>>>> master
 		{
-			isFin = !Robot.hood.setMotors(onVoltage);
+			double setPoint = (double) AlignShooter.getHoodAngle();
+			if (Robot.hood.getAngle() <= setPoint)
+			{
+				isFin = !Robot.hood.setMotors(onVoltage);
+			}
+			else
+			{
+				isFin = !Robot.hood.setMotors(offVoltage);
+			}
 		}
 		else
 		{
-			isFin = !Robot.hood.setMotors(offVoltage);
+			isFin = !Robot.hood.setMotors(0);
 		}
 	}
 
