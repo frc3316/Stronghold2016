@@ -91,7 +91,7 @@ public class Actuators
 			climbingMotorSC4 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_4"));
 
 			spareMotorSC = new VictorSP((int) Robot.config.get("SPARE_MOTOR"));
-			
+
 		}
 		else
 		{
@@ -219,33 +219,34 @@ public class Actuators
 				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("SPARE_MOTOR_PDP_MAX_CURRENT"));
 	}
-	
+
 	/*
 	 * General
 	 */
 	public void GeneralActuators()
 	{
-	compressor = new Compressor();
+		compressor = new Compressor();
 	}
-	
+
 	/*
 	 * Chassis
 	 */
 	private void ChassisActuatorsA()
 	{
-			chassisLeft1SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-			chassisLeft2SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
-			chassisRight1SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-			chassisRight2SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		chassisLeft1SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+		chassisLeft2SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+		chassisRight1SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+		chassisRight2SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 	}
+
 	private void ChassisActuatorsB()
 	{
-			chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-			chassisLeft2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
-			chassisRight1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-			chassisRight2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+		chassisLeft2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+		chassisRight1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+		chassisRight2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 	}
-	
+
 	public void ChassisActuators()
 	{
 		if (config.robotA)
@@ -280,7 +281,7 @@ public class Actuators
 				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD"),
 				(int) Robot.config.get("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE"));
 	}
-	
+
 	/*
 	 * Intake
 	 */
@@ -288,12 +289,12 @@ public class Actuators
 	{
 		intakeSC = new VictorSP((int) Robot.config.get("INTAKE_MOTOR"));
 	}
-	
+
 	private void IntakeActuatorsB()
 	{
 		intakeSC = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
 	}
-	
+
 	public void IntakeActuators()
 	{
 		if (config.robotA)
@@ -304,7 +305,7 @@ public class Actuators
 		{
 			IntakeActuatorsB();
 		}
-		
+
 		intakeSolenoid = new DoubleSolenoid((int) Robot.config.get("INTAKE_SOLENOID_MODULE"),
 				(int) Robot.config.get("INTAKE_SOLENOID_FORWARD"), (int) Robot.config.get("INTAKE_SOLENOID_REVERSE"));
 
@@ -312,7 +313,7 @@ public class Actuators
 				(int) Robot.config.get("INTAKE_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("INTAKE_MOTOR_MAX_CURRENT"));
 	}
-	
+
 	/*
 	 * Transport
 	 */
@@ -320,12 +321,12 @@ public class Actuators
 	{
 		transportSC = new VictorSP((int) Robot.config.get("TRANSPORT_MOTOR"));
 	}
-	
+
 	private void TransportActuatorsB()
 	{
 		transportSC = new CANTalon((int) Robot.config.get("TRANSPORT_MOTOR"));
 	}
-	
+
 	public void TransportActuators()
 	{
 		if (config.robotA)
@@ -340,7 +341,7 @@ public class Actuators
 				(int) Robot.config.get("TRANSPORT_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("TRANSPORT_MOTOR_MAX_CURRENT"));
 	}
-	
+
 	/*
 	 * Flywheel
 	 */
@@ -348,12 +349,12 @@ public class Actuators
 	{
 		flywheelSC = new VictorSP((int) Robot.config.get("FLYWHEEL_MOTOR"));
 	}
-	
+
 	private void FlywheelActuatorsB()
 	{
 		flywheelSC = new CANTalon((int) Robot.config.get("FLYWHEEL_MOTOR"));
 	}
-	
+
 	public void FlywheelActuators()
 	{
 		if (config.robotA)
@@ -368,7 +369,7 @@ public class Actuators
 				(int) Robot.config.get("FLYWHEEL_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("FLYWHEEL_MOTOR_MAX_CURRENT"));
 	}
-	
+
 	/*
 	 * Turret
 	 */
@@ -376,12 +377,12 @@ public class Actuators
 	{
 		turretSC = new VictorSP((int) Robot.config.get("TURRET_MOTOR"));
 	}
-	
+
 	private void TurretActuatorsB()
 	{
 		turretSC = new CANTalon((int) Robot.config.get("TURRET_MOTOR"));
 	}
-	
+
 	public void TurretActuators()
 	{
 		if (config.robotA)
@@ -396,7 +397,7 @@ public class Actuators
 				(int) Robot.config.get("TURRET_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("TURRET_MOTOR_MAX_CURRENT"));
 	}
-	
+
 	/*
 	 * Hood
 	 */
@@ -404,12 +405,12 @@ public class Actuators
 	{
 		hoodSC = new VictorSP((int) Robot.config.get("HOOD_MOTOR"));
 	}
-	
+
 	private void HoodActuatorsB()
 	{
 		hoodSC = new CANTalon((int) Robot.config.get("HOOD_MOTOR"));
 	}
-	
+
 	public void HoodActuators()
 	{
 		if (config.robotA)
@@ -423,7 +424,7 @@ public class Actuators
 		hoodMotor = new DBugSpeedController(hoodSC, (boolean) Robot.config.get("HOOD_MOTOR_REVERSE"),
 				(int) Robot.config.get("HOOD_MOTOR_PDP_CHANNEL"), (double) Robot.config.get("HOOD_MOTOR_MAX_CURRENT"));
 	}
-	
+
 	/*
 	 * Climbing
 	 */
@@ -434,7 +435,7 @@ public class Actuators
 		climbingMotorSC3 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_3"));
 		climbingMotorSC4 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_4"));
 	}
-	
+
 	private void ClimbingActuatorsB()
 	{
 		climbingMotorSC1 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_1"));
@@ -442,7 +443,7 @@ public class Actuators
 		climbingMotorSC3 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_3"));
 		climbingMotorSC4 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_4"));
 	}
-	
+
 	public void ClimbingActuators()
 	{
 		if (config.robotA)
@@ -457,27 +458,27 @@ public class Actuators
 				(boolean) Robot.config.get("CLIMBING_MOTOR_1_REVERSE"),
 				(int) Robot.config.get("CLIMBING_MOTOR_1_PDP_CHANNEL"),
 				(double) Robot.config.get("CLIMBING_MOTOR_1_MAX_CURRENT"));
-	
+
 		climbingMotor2 = new DBugSpeedController(climbingMotorSC2,
 				(boolean) Robot.config.get("CLIMBING_MOTOR_2_REVERSE"),
 				(int) Robot.config.get("CLIMBING_MOTOR_2_PDP_CHANNEL"),
 				(double) Robot.config.get("CLIMBING_MOTOR_2_MAX_CURRENT"));
-	
+
 		climbingMotor3 = new DBugSpeedController(climbingMotorSC3,
 				(boolean) Robot.config.get("CLIMBING_MOTOR_3_REVERSE"),
 				(int) Robot.config.get("CLIMBING_MOTOR_3_PDP_CHANNEL"),
 				(double) Robot.config.get("CLIMBING_MOTOR_3_MAX_CURRENT"));
-	
+
 		climbingMotor4 = new DBugSpeedController(climbingMotorSC4,
 				(boolean) Robot.config.get("CLIMBING_MOTOR_4_REVERSE"),
 				(int) Robot.config.get("CLIMBING_MOTOR_4_PDP_CHANNEL"),
 				(double) Robot.config.get("CLIMBING_MOTOR_4_MAX_CURRENT"));
-	
+
 		climbingSolenoid = new DoubleSolenoid((int) Robot.config.get("CLIMBING_SOLENOID_MODULE"),
 				(int) Robot.config.get("CLIMBING_SOLENOID_FORWARD"),
 				(int) Robot.config.get("CLIMBING_SOLENOID_REVERSE"));
 	}
-	
+
 	/*
 	 * Spare
 	 */
@@ -485,12 +486,12 @@ public class Actuators
 	{
 		spareMotorSC = new VictorSP((int) Robot.config.get("SPARE_MOTOR"));
 	}
-	
+
 	private void SpareActuatorsB()
 	{
 		spareMotorSC = new CANTalon((int) Robot.config.get("SPARE_MOTOR"));
 	}
-	
+
 	public void SpareActuators()
 	{
 		if (config.robotA)
