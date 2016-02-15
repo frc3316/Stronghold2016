@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class PIDFlywheel extends DBugCommand
+public class FlywheelPID extends DBugCommand
 {
 	// TODO: Add commenting
 
-	private PIDController pid;
+	private static PIDController pid;
 	private double v = 0;
 
-	public PIDFlywheel()
+	public FlywheelPID()
 	{
 		requires(Robot.flywheel);
 
@@ -63,6 +63,10 @@ public class PIDFlywheel extends DBugCommand
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 
 		isFin = !Robot.flywheel.setMotors(v);
+	}
+	
+	public static boolean onTarget() {
+		return pid.onTarget();
 	}
 
 	protected boolean isFinished()

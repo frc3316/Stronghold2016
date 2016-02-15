@@ -1,5 +1,5 @@
 package org.usfirst.frc.team3316.robot.subsystems;
-	
+
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
@@ -11,12 +11,10 @@ public class Flywheel extends DBugSubsystemCC
 {
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
-
 	private double rate = 0;
 
 	/**
-	 * Class for filtering out noise from the FPGA rate calculation. Essentially,
-	 * this is a low pass filter.
+	 * Class for filtering out noise from the FPGA rate calculation. Essentially, this is a low pass filter.
 	 * 
 	 * @author D-Bug
 	 *
@@ -49,7 +47,7 @@ public class Flywheel extends DBugSubsystemCC
 		// Other stuff
 		Robot.timer.schedule(new RateTask(), 0, 10);
 	}
-	
+
 	public void initDefaultCommand()
 	{
 	}

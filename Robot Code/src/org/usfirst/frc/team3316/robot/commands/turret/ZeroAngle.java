@@ -11,7 +11,7 @@ public class ZeroAngle extends DBugCommand
 
 	protected void execute()
 	{
-		Robot.turret.setOffset(-Robot.turret.getAngle());
+		Robot.turret.setAngle(-Robot.turret.getAngle());
 	}
 
 	protected boolean isFinished()

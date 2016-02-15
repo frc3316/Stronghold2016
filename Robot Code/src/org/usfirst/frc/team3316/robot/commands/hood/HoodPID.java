@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class HoodPID extends DBugCommand
 {
-	private PIDController pid;
+	private static PIDController pid;
 	private double pidOutput;
 
 	public HoodPID()
@@ -59,6 +59,7 @@ public class HoodPID extends DBugCommand
 		pid.setPID((double) config.get("hood_PID_KP"),
 				(double) config.get("hood_PID_KI"),
 				(double) config.get("hood_PID_KD"));
+		
 		if (AlignShooter.isObjectDetected())
 		{
 			double setPoint = (double) AlignShooter.getHoodAngle();
@@ -75,6 +76,10 @@ public class HoodPID extends DBugCommand
 	protected boolean isFinished()
 	{
 		return isFin;
+	}
+	
+	public static boolean onTarget() {
+		return pid.onTarget();
 	}
 
 	protected void fin()

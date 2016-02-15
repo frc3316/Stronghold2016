@@ -327,13 +327,14 @@ public class Config
 			 */
 			{
 
-				// Bangbang - TO REMOVE AFTER TESTINGS
+				// Bangbang
 				addToVariables("flywheel_Bangbang_Setpoint", 40.0);
 				addToVariables("flywheel_Bangbang_OnVoltage", 1.0);
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
-				// PID - TO REMOVE AFTER TESTINGS
+				// PID
 				addToVariables("flywheel_PID_Setpoint", 0.0);
+				addToVariables("flywheel_PID_Tolerance", 1.0);
 				addToVariables("flywheel_PID_KP", 0.0);
 				addToVariables("flywheel_PID_KI", 0.0);
 				addToVariables("flywheel_PID_KD", 0.0);
@@ -388,9 +389,9 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("turret_Angle_SetPoint", 0.0);
-
 				// PID Control
+				addToVariables("turret_Angle_SetPoint", 0.0);
+				addToVariables("turret_PID_Tolerance", 1.0);
 				addToVariables("turret_PID_KP", 0.0);
 				addToVariables("turret_PID_KI", 0.0);
 				addToVariables("turret_PID_KD", 0.0);
@@ -419,6 +420,8 @@ public class Config
 			 */
 			{
 				// PID Control
+				addToVariables("hood_Angle_SetPoint", 0.0);
+				addToVariables("hood_PID_Tolerance", 1.0);
 				addToVariables("hood_PID_KP", 0.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.0);
@@ -426,7 +429,6 @@ public class Config
 				// Bangbang Control
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
-				addToVariables("hood_Angle_SetPoint", 0.0);
 
 				addToVariables("hood_Pot_BottomThresh", 39.0);
 				addToVariables("hood_Pot_TopThresh", 81.0);
