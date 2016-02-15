@@ -179,7 +179,7 @@ public class IO
 					putPWMA("CHASSIS_MOTOR_RIGHT_1", 8);
 					putPWMA("CHASSIS_MOTOR_RIGHT_2", 9);
 
-					putPWMA("INTAKE_MOTOR", 0);
+					putPWMA("INTAKE_MOTOR", 6);
 
 					putCANA("TRANSPORT_MOTOR", 0);
 
@@ -189,10 +189,10 @@ public class IO
 
 					putCANA("HOOD_MOTOR", 3);
 
-					putCANA("CLIMBING_MOTOR_1", 11);
-					putCANA("CLIMBING_MOTOR_2", 12);
-					putCANA("CLIMBING_MOTOR_3", 13);
-					putCANA("CLIMBING_MOTOR_4", 14);
+					putPWMA("CLIMBING_MOTOR_1", 0);
+					putPWMA("CLIMBING_MOTOR_2", 1);
+					putPWMA("CLIMBING_MOTOR_3", 2);
+					putPWMA("CLIMBING_MOTOR_4", 3);
 					
 					putCANA("SPARE_MOTOR", 15);
 				}
