@@ -84,15 +84,6 @@ public class SDB
 
 			put("Hood Angle", Robot.hood.getAngle());
 			put("Turret Angle", Robot.turret.getAngle());
-			try
-			{
-				//put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-				put("DistanceFromCamera", "null");
-			}
 		}
 
 		private void put(String name, double d)
