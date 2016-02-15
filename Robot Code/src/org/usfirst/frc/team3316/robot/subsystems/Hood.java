@@ -18,6 +18,7 @@ public class Hood extends DBugSubsystemCC
 		addSpeedController(hoodMotor);
 
 		hoodPot = Robot.sensors.hoodPot;
+		potOffset = (double) config.get("hood_Pot_Offset");
 	}
 
 	public void initDefaultCommand()
@@ -65,6 +66,7 @@ public class Hood extends DBugSubsystemCC
 	 * @param offset - the offset to add to the reading from the potentiometer;
 	 */
 	public void setOffset(double offset) {
+		logger.fine("The offset of the hood is set to be " + offset + ". UPDATE THIS VALUE IN THE CONFIG.");
 		potOffset = offset;
 	}
 

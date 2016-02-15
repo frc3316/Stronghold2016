@@ -67,7 +67,7 @@ public class Turret extends DBugSubsystemCC
 	 * @param offset - The offset to add to the reading from the potentiometer;
 	 */
 	public void setOffset(double offset) {
-		logger.fine("The offset of the ");
+		logger.fine("The offset of the turret is set to be " + offset + ".  UPDATE THIS VALUE IN THE CONFIG.");
 		potOffset = offset;
 	}
 
