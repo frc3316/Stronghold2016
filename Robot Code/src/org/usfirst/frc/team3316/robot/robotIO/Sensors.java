@@ -55,7 +55,9 @@ public class Sensors
 	public AnalogPotentiometer climbingPot;
 	public DigitalInput climbingSwitch;
 
-	public Sensors()
+	public Sensors() {}
+	
+	public void AllSensors()
 	{
 		/*
 		 * General

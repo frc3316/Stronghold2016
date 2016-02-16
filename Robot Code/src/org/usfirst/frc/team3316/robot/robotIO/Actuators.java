@@ -53,9 +53,12 @@ public class Actuators
 	// Spare
 	public DBugSpeedController spareMotor;
 	public SpeedController spareMotorSC;
-
-	public Actuators()
+	
+	public Actuators() {}
+	
+	public void AllActuators()
 	{
+		
 		/*
 		 * General
 		 */
@@ -214,7 +217,6 @@ public class Actuators
 		/*
 		 * Spare
 		 */
-
 		spareMotor = new DBugSpeedController(spareMotorSC, (boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
 				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
 				(double) Robot.config.get("SPARE_MOTOR_PDP_MAX_CURRENT"));
