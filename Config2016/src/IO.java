@@ -296,10 +296,10 @@ public class IO
 			 * PCM initialization
 			 */
 			{
-				// Module 1
-				Config.addToConstants("CHASSIS_LONG_PISTONS_MODULE", 1);
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 1);
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 1);
+				// Module 0
+				Config.addToConstants("CHASSIS_LONG_PISTONS_MODULE", 0);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 0);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 0);
 
 				Config.addToConstants("CHASSIS_LONG_PISTONS_FORWARD", 0);
 				Config.addToConstants("CHASSIS_LONG_PISTONS_REVERSE", 1);
@@ -310,13 +310,13 @@ public class IO
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 6);
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 7);
 
-				// Module 0
-				Config.addToConstants("INTAKE_SOLENOID_MODULE", 0);
+				// Module 1
+				Config.addToConstants("INTAKE_SOLENOID_MODULE", 1);
 
 				Config.addToConstants("INTAKE_SOLENOID_FORWARD", 6);
 				Config.addToConstants("INTAKE_SOLENOID_REVERSE", 7);
 				
-				Config.addToConstants("CLIMBING_SOLENOID_MODULE", 0);
+				Config.addToConstants("CLIMBING_SOLENOID_MODULE", 1);
 
 				Config.addToConstants("CLIMBING_SOLENOID_FORWARD", 0);
 				Config.addToConstants("CLIMBING_SOLENOID_REVERSE", 1);

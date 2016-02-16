@@ -12,7 +12,11 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
 import org.usfirst.frc.team3316.robot.commands.chassis.AutoPistonsToggle;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.ExtendOmni;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
 import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
@@ -212,6 +216,11 @@ public class SDB
 		SmartDashboard.putData(new ToggleOmni());
 		SmartDashboard.putData(new WaitForDefense());
 		SmartDashboard.putData(new AutoPistonsToggle());
+		
+		SmartDashboard.putData(new OpenLongPistons());
+		SmartDashboard.putData(new CloseLongPistons());
+		SmartDashboard.putData(new OpenShortPistons());
+		SmartDashboard.putData(new CloseShortPistons());
 		
 		/*
 		 * Remove these after finishing testing on prototype
