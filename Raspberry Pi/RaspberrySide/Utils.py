@@ -2,6 +2,7 @@ import logging
 import time
 import os.path
 from os import getpid
+from glob import glob
 ##################
 #     Logger     #
 ##################
@@ -76,3 +77,15 @@ def check_pid(pid):
         return False
     else:
         return True
+def getCameraNumber():
+    '''
+    finds the camera number from /dev
+    return: Int, the camera number
+    '''
+    allCamerasNames = glob("/dev/video*")
+    if allCamerasNames:
+        fullName = allCamerasNames[0]
+        startIndex = fullName.find("video")
+        return int(fullName[startIndex + len("video"):])
+    else:
+        return 0 # Defult camera value

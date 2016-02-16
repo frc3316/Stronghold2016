@@ -9,8 +9,7 @@ from FPSCounter import *
 from time import sleep
 import cv2
 import numpy as np
-from Utils import logger
-from Utils import LockFile
+from Utils import *
 from Constants import *
 # Lock File:
 lockFile = LockFile("LockFile.loc")
@@ -41,7 +40,9 @@ if __name__ == "__main__":
         FPSCounter = FPS()
         FPSCounter.start()
 
-        cam = cv2.VideoCapture(0)
+        cam = cv2.VideoCapture(getCameraNumber())
+        if not cam.isOpened():
+            logger.error("No Camera Found!!!")
         cam.set(3,1280)
         cam.set(4,960)
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
@@ -56,12 +57,10 @@ if __name__ == "__main__":
         ###################
 
         while True:
-
             visionManager.updateImage()
             visionManager.updateTowerScales()
             visionManager.updateRobotScales()
             FPSCounter.update()
-
             if visionManager.isObjectDetected: # if an object was detected
 
                 ######################
