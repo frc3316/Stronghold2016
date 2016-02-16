@@ -82,6 +82,13 @@ public class SDB
 			put("Chassis Roll", Robot.chassis.getRoll());
 			put("isOnDefense", Robot.chassis.isOnDefense());
 			
+			put("Left encoder displacement", Robot.chassis.getLeftDistance());
+			put("Right encoder displacement", Robot.chassis.getRightDistance());
+			
+			put("HE Left Front", Robot.chassis.getHELeftFront());
+			put("HE Left Back", Robot.chassis.getHELeftBack());
+			put("HE Right Front", Robot.chassis.getHERightFront());
+			put("HE Right Back", Robot.chassis.getHERightBack());
 		}
 
 		private void put(String name, double d)
