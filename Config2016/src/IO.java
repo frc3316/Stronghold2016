@@ -305,10 +305,10 @@ public class IO
 				Config.addToConstants("CHASSIS_LONG_PISTONS_REVERSE", 1);
 
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 2);
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 3);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 5);
 
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 4);
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 5);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 6);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 7);
 
 				// Module 0
 				Config.addToConstants("INTAKE_SOLENOID_MODULE", 0);
