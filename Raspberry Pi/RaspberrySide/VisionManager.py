@@ -83,7 +83,7 @@ class VisionManager(object):
             self.currentImageObject.didUpdateVar = False	
 
         didGetImage,frame = self.cam.read()
-        frame = cv2.resize(frame, (resizedImageWidth,resizedImageWidth), interpolation = cv2.INTER_AREA)
+        frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight), interpolation = cv2.INTER_AREA)
         frame = self.rotateImage(frame)
         if didGetImage:
             if self.currentImage == None and self.imageHeight == None and self.imageWidth == None:

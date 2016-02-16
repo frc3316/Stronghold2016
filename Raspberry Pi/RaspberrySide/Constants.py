@@ -30,4 +30,4 @@ saturation = 15
 exposure = -1
 rotateClockwise = True # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
 resizedImageWidth = 320
-resizedImageHeight = 240
+resizedImageHeight = 180

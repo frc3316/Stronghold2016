@@ -88,4 +88,4 @@ def getCameraNumber():
         startIndex = fullName.find("video")
         return int(fullName[startIndex + len("video"):])
     else:
-        return 0 # Defult camera value
+        return 0 # Default camera value

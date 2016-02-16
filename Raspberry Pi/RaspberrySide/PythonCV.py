@@ -43,8 +43,8 @@ if __name__ == "__main__":
         cam = cv2.VideoCapture(getCameraNumber())
         if not cam.isOpened():
             logger.error("No Camera Found!!!")
-        cam.set(3,1280)
-        cam.set(4,960)
+        #cam.set(3,1280)
+        #cam.set(4,960)
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
@@ -55,7 +55,6 @@ if __name__ == "__main__":
         ###################
         # The code itself #
         ###################
-
         while True:
             visionManager.updateImage()
             visionManager.updateTowerScales()
