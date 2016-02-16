@@ -37,6 +37,7 @@ import org.usfirst.frc.team3316.robot.commands.climbing.StopWinch;
 import org.usfirst.frc.team3316.robot.commands.climbing.WaitForRung;
 import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.PullUpTimeout;
 import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
@@ -192,6 +193,7 @@ public class SDB
 		 */
 		putConfigVariableInSDB("climbing_UpSpeed");
 		putConfigVariableInSDB("climbing_DownSpeed");
+		putConfigVariableInSDB("climbing_Timeout");
 
 		// Climbing
 		SmartDashboard.putData(new ClimbingSequence());
@@ -200,6 +202,7 @@ public class SDB
 		SmartDashboard.putData(new PullUp());
 		SmartDashboard.putData(new ReleaseDown());
 		SmartDashboard.putData(new JoystickWinchControl());
+		SmartDashboard.putData(new PullUpTimeout());
 
 		logger.info("Finished initSDB()");
 	}
