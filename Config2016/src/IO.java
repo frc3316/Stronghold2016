@@ -50,8 +50,8 @@ public class IO
 	{
 		if (in.containsValue(channel))
 		{
-			throw new Exception("Channel " + channel + " for key " + name + " already exists and is: "
-					+ findKey(in, channel));
+			throw new Exception(
+					"Channel " + channel + " for key " + name + " already exists and is: " + findKey(in, channel));
 		}
 
 		in.put(name, channel);
@@ -74,8 +74,8 @@ public class IO
 	{
 		if (in.containsValue(channel))
 		{
-			throw new Exception("Channel " + channel + " for key " + name + " already exists and is: "
-					+ findKey(in, channel));
+			throw new Exception(
+					"Channel " + channel + " for key " + name + " already exists and is: " + findKey(in, channel));
 		}
 
 		in.put(name, channel);
@@ -98,8 +98,8 @@ public class IO
 	{
 		if (in.containsValue(channel))
 		{
-			throw new Exception("Channel " + channel + " for key " + name + " already exists and is: "
-					+ findKey(in, channel));
+			throw new Exception(
+					"Channel " + channel + " for key " + name + " already exists and is: " + findKey(in, channel));
 		}
 
 		in.put(name, channel);
@@ -196,7 +196,7 @@ public class IO
 					
 					putPWMA("SPARE_MOTOR", 15);
 				}
-				
+
 				/*
 				 * Robot B
 				 */
@@ -220,7 +220,7 @@ public class IO
 					putCANB("CLIMBING_MOTOR_2", 12);
 					putCANB("CLIMBING_MOTOR_3", 13);
 					putCANB("CLIMBING_MOTOR_4", 14);
-					
+
 					putCANB("SPARE_MOTOR", 15);
 				}
 			}
@@ -288,7 +288,7 @@ public class IO
 				putPDP("CLIMBING_MOTOR_2_PDP_CHANNEL", 12);
 				putPDP("CLIMBING_MOTOR_3_PDP_CHANNEL", 13);
 				putPDP("CLIMBING_MOTOR_4_PDP_CHANNEL", 14);
-				
+
 				putPDP("SPARE_MOTOR_PDP_CHANNEL", 15);
 			}
 

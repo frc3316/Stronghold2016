@@ -491,6 +491,7 @@ public class Config
 				addToVariables("climbing_UpSpeed", 0.0); // Check this value
 				addToVariables("climbing_DownSpeed", -0.0); // Check this value
 				addToVariables("climbing_Setpoint", 900.0);
+				addToVariables("climbing_Timeout", 3.00);
 			}
 		}
 	}

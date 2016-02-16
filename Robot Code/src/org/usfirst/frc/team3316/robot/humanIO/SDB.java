@@ -37,6 +37,7 @@ import org.usfirst.frc.team3316.robot.commands.climbing.StopWinch;
 import org.usfirst.frc.team3316.robot.commands.climbing.WaitForRung;
 import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.PullUpTimeout;
 import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
@@ -73,10 +74,12 @@ public class SDB
 			 * Insert put methods here
 			 */
 			
-			put("Motor 11 Current", Robot.actuators.climbingMotor1.getCurrent());
-			put("Motor 12 Current", Robot.actuators.climbingMotor2.getCurrent());
-			put("Motor 13 Current", Robot.actuators.climbingMotor3.getCurrent());
-			put("Motor 14 Current", Robot.actuators.climbingMotor4.getCurrent());
+			put("Motor 0 Current", Robot.actuators.climbingMotor1.getCurrent());
+			put("Motor 1 Current", Robot.actuators.climbingMotor2.getCurrent());
+			put("Motor 2 Current", Robot.actuators.climbingMotor3.getCurrent());
+			put("Motor 3 Current", Robot.actuators.climbingMotor4.getCurrent());
+			
+			put("Motor 0 Voltage", Robot.actuators.climbingMotor1.getVoltage());
 			
 			try
 			{
@@ -87,9 +90,8 @@ public class SDB
 				e.printStackTrace();
 				put("DistanceFromCamera", "null");
 			}
-			
-			// Drive Distance
-//			SmartDashboard.putNumber("Chassis voltage", Robot.actuators.chassisLeft1.getVoltage());
+			// Climbing
+			put("Winch angle", Robot.climbing.getWinchAngle());
 		}
 
 		private void put(String name, double d)
@@ -192,6 +194,7 @@ public class SDB
 		 */
 		putConfigVariableInSDB("climbing_UpSpeed");
 		putConfigVariableInSDB("climbing_DownSpeed");
+		putConfigVariableInSDB("climbing_Timeout");
 
 		// Climbing
 		SmartDashboard.putData(new ClimbingSequence());
@@ -200,6 +203,7 @@ public class SDB
 		SmartDashboard.putData(new PullUp());
 		SmartDashboard.putData(new ReleaseDown());
 		SmartDashboard.putData(new JoystickWinchControl());
+		SmartDashboard.putData(new PullUpTimeout());
 
 		logger.info("Finished initSDB()");
 	}

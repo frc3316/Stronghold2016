@@ -21,7 +21,7 @@ public class PullUp extends DBugCommand
 		requires(Robot.flywheel);
 		requires(Robot.intake);
 		requires(Robot.transport);
-		initAngle = Robot.climbing.getAngle();
+		initAngle = Robot.climbing.getWinchAngle();
 	}
 
 	protected void init()
@@ -34,7 +34,7 @@ public class PullUp extends DBugCommand
 		isFin = !Robot.climbing.setMotors(speed);
 
 		// The setpoint in the config is the difference in pot angle that we want
-		onTarget = Robot.climbing.getAngle() >= ((double) config.get("climbing_Setpoint") + initAngle);
+		onTarget = Robot.climbing.getWinchAngle() >= ((double) config.get("climbing_Setpoint") + initAngle);
 		// The variable climbing_Setpoint is called periodically because we want it to update while the
 		// command is running
 	}
