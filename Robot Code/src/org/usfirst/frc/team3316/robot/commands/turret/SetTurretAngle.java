@@ -5,9 +5,14 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class SetTurretAngle extends DBugCommand
 {
+	public SetTurretAngle ()
+	{
+		setRunWhenDisabled(true);
+	}
+	
 	protected void init()
 	{
-		Robot.hood.setAngle((double) config.get("turret_Pot_Offset"));
+		Robot.turret.setAngle((double) config.get("turret_SetTurretAngle_Angle"));
 	}
 
 	protected void execute()

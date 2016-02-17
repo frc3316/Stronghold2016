@@ -185,9 +185,8 @@ public class Config
 				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
 																	// the stall
 																	// current
-
 				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
-				addToConstants("turret_Pot_Offset", 0.0);
+				
 
 				/*
 				 * Hood
@@ -199,7 +198,6 @@ public class Config
 																// current
 
 				addToConstants("HOOD_POT_FULL_RANGE", 300.0);
-				addToConstants("hood_Pot_Offset", 0.0);
 
 				/*
 				 * Climbing
@@ -389,6 +387,8 @@ public class Config
 			 * Variables
 			 */
 			{
+				addToVariables("turret_Pot_Offset", 0.0);
+				
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
 				addToVariables("turret_PID_Tolerance", 1.0);
@@ -402,6 +402,13 @@ public class Config
 
 				addToVariables("turret_Pot_LeftThresh", 0.0);
 				addToVariables("turret_Pot_RightThresh", 400.0);
+			}
+			
+			/*
+			 * Set Hood Angle
+			 */
+			{
+				addToVariables("turret_SetTurretAngle_Angle", 0.0);
 			}
 		}
 
@@ -419,6 +426,8 @@ public class Config
 			 * Variables
 			 */
 			{
+				addToVariables("hood_Pot_Offset", 0.0);
+				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
 				addToVariables("hood_PID_Tolerance", 1.0);
@@ -432,6 +441,13 @@ public class Config
 
 				addToVariables("hood_Pot_BottomThresh", 39.0);
 				addToVariables("hood_Pot_TopThresh", 81.0);
+			}
+			
+			/*
+			 * Set Hood Angle
+			 */
+			{
+				addToVariables("hood_SetHoodAngle_Angle", 0.0);
 			}
 		}
 

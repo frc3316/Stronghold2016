@@ -170,8 +170,8 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 		
-		putConfigVariableInSDB("hood_Pot_Offset");
-		putConfigVariableInSDB("turret_Pot_Offset");
+		putConfigVariableInSDB("hood_SetHoodAngle_Angle");
+		putConfigVariableInSDB("turret_SetTurretAngle_Angle");
 		
 		SmartDashboard.putData(new SetHoodAngle());
 		SmartDashboard.putData(new SetTurretAngle());
