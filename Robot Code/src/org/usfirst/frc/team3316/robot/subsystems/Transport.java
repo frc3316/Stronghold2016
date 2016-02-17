@@ -13,9 +13,15 @@ public class Transport extends DBugSubsystemCC
 	
 	public Transport()
 	{
+		// Actuators
+		Robot.actuators.TransportActuators();
+		
 		motor = Robot.actuators.transportMotor;
 		addSpeedController(motor);
 		
+		// Sensors
+		Robot.sensors.TransportSensors();
+
 		encoder = Robot.sensors.transportEncoder;
 	}
 

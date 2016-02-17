@@ -13,9 +13,15 @@ public class Turret extends DBugSubsystemCC
 
 	public Turret()
 	{
+		// Actuators
+		Robot.actuators.TurretActuators();
+		
 		turretMotor = Robot.actuators.turretMotor;
 		addSpeedController(turretMotor);
 
+		// Sensors
+		Robot.sensors.TurretSensors();
+		
 		turretPot = Robot.sensors.turretPot;
 	}
 

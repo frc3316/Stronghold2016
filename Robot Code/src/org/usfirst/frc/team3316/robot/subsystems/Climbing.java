@@ -22,12 +22,9 @@ public class Climbing extends DBugSubsystemCC {
 
 	public Climbing()
 	{
-		// Sensors
-		climbingPot = Robot.sensors.climbingPot;
-
-		climbingSwitch = Robot.sensors.climbingSwitch;
-
 		// Actuators
+		Robot.actuators.ClimbingActuators();
+		
 		climbingSolenoid = Robot.actuators.climbingSolenoid;
 
 		climbingMotor1 = Robot.actuators.climbingMotor1;
@@ -39,6 +36,13 @@ public class Climbing extends DBugSubsystemCC {
 		addSpeedController(climbingMotor2);
 		addSpeedController(climbingMotor3);
 		addSpeedController(climbingMotor4);
+		
+		// Sensors
+		Robot.sensors.ClimbingSensors();
+		
+		climbingPot = Robot.sensors.climbingPot;
+
+		climbingSwitch = Robot.sensors.climbingSwitch;
 	}
 
 	public void initDefaultCommand()
