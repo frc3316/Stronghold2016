@@ -84,13 +84,14 @@ public class Robot extends IterativeRobot
 		 */
 		actuators = new Actuators();
 		sensors = new Sensors();
+		
+		Robot.actuators.GeneralActuators();
+		Robot.sensors.GeneralSensors();
+		Robot.sensors.VisionSensors();
 
 		/*
 		 * Subsystems
 		 */
-		Robot.actuators.GeneralActuators();
-		Robot.sensors.GeneralSensors();
-		Robot.sensors.VisionSensors();
 		chassis = new Chassis();
 		intake = new Intake();
 		transport = new Transport();
