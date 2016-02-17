@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot
 	public static Joysticks joysticks;
 	public static SDB sdb;
 	/*
-	 * Robot IO
+	 * Robot IO 
 	 */
 	public static Actuators actuators;
 	public static Sensors sensors;
