@@ -14,6 +14,8 @@ import org.usfirst.frc.team3316.robot.commands.StopCompressor;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
+import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
+import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.config.Config;
@@ -166,7 +168,13 @@ public class SDB
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE THIS COMMAND
 		
 		SmartDashboard.putData(new StartCompressor());
-		SmartDashboard.putData(new StopCompressor());	
+		SmartDashboard.putData(new StopCompressor());
+		
+		putConfigVariableInSDB("hood_Pot_Offset");
+		putConfigVariableInSDB("turret_Pot_Offset");
+		
+		SmartDashboard.putData(new SetHoodAngle());
+		SmartDashboard.putData(new SetTurretAngle());
 		
 		/*
 		 * For testing
@@ -189,9 +197,6 @@ public class SDB
 		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
 		
 		putConfigVariableInSDB("hood_Angle_SetPoint");
-
-		putConfigVariableInSDB("hood_Pot_BottomThresh");
-		putConfigVariableInSDB("hood_Pot_TopThresh");
 		
 		SmartDashboard.putData(new HoodBangbang());
 		SmartDashboard.putData(new HoodPID());
