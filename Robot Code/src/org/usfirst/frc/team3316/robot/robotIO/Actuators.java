@@ -59,11 +59,33 @@ public class Actuators
 	/*
 	 * General
 	 */
+
+	private void GeneralActuatorsA()
+	{
+		spareMotorSC = new VictorSP((int) Robot.config.get("SPARE_MOTOR"));
+	}
+
+	private void GeneralActuatorsB()
+	{
+		spareMotorSC = new CANTalon((int) Robot.config.get("SPARE_MOTOR"));
+	}
+
 	public void GeneralActuators()
 	{
 		compressor = new Compressor();
+		if (config.robotA)
+		{
+			GeneralActuatorsA();
+		}
+		else
+		{
+			GeneralActuatorsB();
+		}
+		spareMotor = new DBugSpeedController(spareMotorSC, (boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
+				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
+				(double) Robot.config.get("SPARE_MOTOR_PDP_MAX_CURRENT"));
 	}
-
+	
 	/*
 	 * Chassis
 	 */
@@ -313,33 +335,5 @@ public class Actuators
 		climbingSolenoid = new DoubleSolenoid((int) Robot.config.get("CLIMBING_SOLENOID_MODULE"),
 				(int) Robot.config.get("CLIMBING_SOLENOID_FORWARD"),
 				(int) Robot.config.get("CLIMBING_SOLENOID_REVERSE"));
-	}
-
-	/*
-	 * Spare
-	 */
-	private void SpareActuatorsA()
-	{
-		spareMotorSC = new VictorSP((int) Robot.config.get("SPARE_MOTOR"));
-	}
-
-	private void SpareActuatorsB()
-	{
-		spareMotorSC = new CANTalon((int) Robot.config.get("SPARE_MOTOR"));
-	}
-
-	public void SpareActuators()
-	{
-		if (config.robotA)
-		{
-			SpareActuatorsA();
-		}
-		else
-		{
-			SpareActuatorsB();
-		}
-		spareMotor = new DBugSpeedController(spareMotorSC, (boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
-				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
-				(double) Robot.config.get("SPARE_MOTOR_PDP_MAX_CURRENT"));
 	}
 }

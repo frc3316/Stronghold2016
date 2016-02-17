@@ -90,6 +90,7 @@ public class Robot extends IterativeRobot
 		 */
 		Robot.actuators.GeneralActuators();
 		Robot.sensors.GeneralSensors();
+		Robot.sensors.VisionSensors();
 		chassis = new Chassis();
 		intake = new Intake();
 		transport = new Transport();
@@ -97,7 +98,6 @@ public class Robot extends IterativeRobot
 		turret = new Turret();
 		hood = new Hood();
 		climbing = new Climbing();
-		Robot.actuators.SpareActuators();
 		
 		/*
 		 * Human IO (that requires subsystems)
