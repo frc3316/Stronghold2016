@@ -22,7 +22,7 @@ public class ReleaseDown extends DBugCommand
 		requires(Robot.flywheel);
 		requires(Robot.intake);
 		requires(Robot.transport);
-		initAngle = Robot.climbing.getAngle();
+		initAngle = Robot.climbing.getWinchAngle();
 	}
 
 	protected void init()
@@ -38,7 +38,7 @@ public class ReleaseDown extends DBugCommand
 
 		// The setpoint in the config is the difference in pot angle that we
 		// want
-		onTarget = Robot.climbing.getAngle() <= initAngle;
+		onTarget = Robot.climbing.getWinchAngle() <= initAngle;
 	}
 
 	protected boolean isFinished()

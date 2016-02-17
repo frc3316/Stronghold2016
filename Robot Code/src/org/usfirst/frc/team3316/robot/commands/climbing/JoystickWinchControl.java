@@ -5,12 +5,17 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class JoystickWinchControl extends DBugCommand
 {
+	public JoystickWinchControl ()
+	{
+		requires(Robot.climbing);
+	}
+	
 	protected void init()
 	{}
 
 	protected void execute()
 	{
-		isFin = Robot.climbing.setMotors(-Robot.joysticks.joystickOperator.getRawAxis(5)); // Coz flight
+		isFin = !Robot.climbing.setMotors(-Robot.joysticks.joystickOperator.getRawAxis(5)); // Coz flight
 																							// simulators
 	}
 
