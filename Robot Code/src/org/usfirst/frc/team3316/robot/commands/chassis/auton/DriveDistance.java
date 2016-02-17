@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3316.robot.commands.chassis.autonomous;
+package org.usfirst.frc.team3316.robot.commands.chassis.auton;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner;

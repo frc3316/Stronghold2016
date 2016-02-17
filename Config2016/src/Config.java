@@ -175,7 +175,7 @@ public class Config
 				 */
 				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
 
-				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 10.0);
+				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 1000.0);
 
 				/*
 				 * Turret
@@ -185,21 +185,19 @@ public class Config
 				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
 																	// the stall
 																	// current
-
 				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
-				addToConstants("TURRET_POT_OFFSET", 0.0);
+				
 
 				/*
 				 * Hood
 				 */
-				addToConstants("HOOD_MOTOR_REVERSE", false);
+				addToConstants("HOOD_MOTOR_REVERSE", true);
 
-				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check
 																// the stall
 																// current
 
-				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
-				addToConstants("HOOD_POT_OFFSET", 30.0);
+				addToConstants("HOOD_POT_FULL_RANGE", 300.0);
 
 				/*
 				 * Climbing
@@ -327,13 +325,14 @@ public class Config
 			 */
 			{
 
-				// Bangbang - TO REMOVE AFTER TESTINGS
+				// Bangbang
 				addToVariables("flywheel_Bangbang_Setpoint", 40.0);
 				addToVariables("flywheel_Bangbang_OnVoltage", 1.0);
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
-				// PID - TO REMOVE AFTER TESTINGS
+				// PID
 				addToVariables("flywheel_PID_Setpoint", 0.0);
+				addToVariables("flywheel_PID_Tolerance", 1.0);
 				addToVariables("flywheel_PID_KP", 0.0);
 				addToVariables("flywheel_PID_KI", 0.0);
 				addToVariables("flywheel_PID_KD", 0.0);
@@ -388,9 +387,11 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("turret_Angle_SetPoint", 0.0);
-
+				addToVariables("turret_Pot_Offset", 0.0);
+				
 				// PID Control
+				addToVariables("turret_Angle_SetPoint", 0.0);
+				addToVariables("turret_PID_Tolerance", 1.0);
 				addToVariables("turret_PID_KP", 0.0);
 				addToVariables("turret_PID_KI", 0.0);
 				addToVariables("turret_PID_KD", 0.0);
@@ -401,6 +402,13 @@ public class Config
 
 				addToVariables("turret_Pot_LeftThresh", 0.0);
 				addToVariables("turret_Pot_RightThresh", 400.0);
+			}
+			
+			/*
+			 * Set Hood Angle
+			 */
+			{
+				addToVariables("turret_SetTurretAngle_Angle", 0.0);
 			}
 		}
 
@@ -418,7 +426,11 @@ public class Config
 			 * Variables
 			 */
 			{
+				addToVariables("hood_Pot_Offset", 0.0);
+				
 				// PID Control
+				addToVariables("hood_Angle_SetPoint", 0.0);
+				addToVariables("hood_PID_Tolerance", 1.0);
 				addToVariables("hood_PID_KP", 0.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.0);
@@ -426,10 +438,16 @@ public class Config
 				// Bangbang Control
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
-				addToVariables("hood_Angle_SetPoint", 0.0);
 
-				addToVariables("hood_Pot_BottomThresh", 0.0);
-				addToVariables("hood_Pot_TopThresh", 400.0);
+				addToVariables("hood_Pot_BottomThresh", 39.0);
+				addToVariables("hood_Pot_TopThresh", 81.0);
+			}
+			
+			/*
+			 * Set Hood Angle
+			 */
+			{
+				addToVariables("hood_SetHoodAngle_Angle", 0.0);
 			}
 		}
 
