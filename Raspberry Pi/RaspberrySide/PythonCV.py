@@ -90,11 +90,15 @@ if __name__ == "__main__":
             # Send data to java process #
             #############################
 
-            if visionManager.isObjectDetected and visionManager.robotObject is not None:
+            if visionManager.isObjectDetected:
                 values = [visionManager.currentImageObject.distanceFromCamera,
                           visionManager.currentImageObject.azimuthalAngle,
                           visionManager.currentImageObject.polarAngle,
                           visionManager.isObjectDetected]
+                names = ["DFC", "AA", "PA", "IOD"]
+                networkManager.sendData(values, names)
+            else:
+                values = ['3316.00','3316.00','3316.00',"0.00"]
                 names = ["DFC", "AA", "PA", "IOD"]
                 networkManager.sendData(values, names)
 
@@ -152,3 +156,4 @@ if __name__ == "__main__":
         logger.debug("----------------")
         cv2.destroyAllWindows()
         visionManager.cam.release()
+	networkManager.sock.close()

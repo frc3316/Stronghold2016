@@ -38,7 +38,7 @@ class NetworkManager(object):
                     resultDic[names[i]] = strValue
                 stringToSend = str(resultDic).replace(" ","")
                 self.sock.sendto(stringToSend + "\n", (self.HOST, self.PORT))
-            except ValueError:
+            except:
                 logger.warning('Input for sendData invalid, or error in sending data')
 			
     def connect(self):
@@ -48,9 +48,12 @@ class NetworkManager(object):
         '''
         try:
             self.HOST = socket.gethostbyname(self.HOST)
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(1)
-            sock.connect((self.HOST, self.PORT))
+            logger.info("found roborio ip? "+ str(self.HOST))
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	    sock.settimeout(3)
+	    logger.info(str(self.HOST) + " " + str(self.PORT))
+	    sock.connect((self.HOST, self.PORT))
+            logger.info("reached after connect statement")
             sock.settimeout(None)
             self.sock = sock
             self.isConnected = True
@@ -60,3 +63,7 @@ class NetworkManager(object):
             logger.warning("---------------------------")
             logger.warning("Connection To Jave Timeout!")
             logger.warning("---------------------------")
+        else:
+            logger.info("------------------")
+            logger.info("Connected To Java!")
+            logger.info("------------------")
