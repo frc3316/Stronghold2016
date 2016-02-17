@@ -84,8 +84,6 @@ public class Robot extends IterativeRobot
 		 */
 		actuators = new Actuators();
 		sensors = new Sensors();
-		actuators.AllActuators();
-		sensors.AllSensors();
 
 		/*
 		 * Subsystems

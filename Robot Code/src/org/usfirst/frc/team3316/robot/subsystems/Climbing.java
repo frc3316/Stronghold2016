@@ -23,7 +23,7 @@ public class Climbing extends DBugSubsystemCC {
 	public Climbing()
 	{
 		// Actuators
-		Robot.actuators.ChassisActuators();
+		Robot.actuators.ClimbingActuators();
 		
 		climbingSolenoid = Robot.actuators.climbingSolenoid;
 
@@ -38,7 +38,7 @@ public class Climbing extends DBugSubsystemCC {
 		addSpeedController(climbingMotor4);
 		
 		// Sensors
-		Robot.sensors.ChassisSensors();
+		Robot.sensors.ClimbingSensors();
 		
 		climbingPot = Robot.sensors.climbingPot;
 
