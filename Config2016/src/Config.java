@@ -187,7 +187,7 @@ public class Config
 																	// current
 
 				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
-				addToConstants("TURRET_POT_OFFSET", 0.0);
+				addToConstants("turret_Pot_Offset", 0.0);
 
 				/*
 				 * Hood
@@ -199,7 +199,7 @@ public class Config
 																// current
 
 				addToConstants("HOOD_POT_FULL_RANGE", 300.0);
-				addToConstants("HOOD_POT_OFFSET", 0.0);
+				addToConstants("hood_Pot_Offset", 0.0);
 
 				/*
 				 * Climbing
