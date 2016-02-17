@@ -10,6 +10,7 @@ import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -46,7 +47,7 @@ public class Sensors
 	public DigitalInput flywheelHE;
 
 	// Turret
-	public AnalogPotentiometer turretPot;
+	public AnalogInput turretPot;
 
 	// Hood
 	public AnalogPotentiometer hoodPot;
@@ -145,8 +146,7 @@ public class Sensors
 	 */
 	public void TurretSensors()
 	{
-		turretPot = new AnalogPotentiometer((int) Robot.config.get("TURRET_POT"),
-				(double) Robot.config.get("TURRET_POT_FULL_RANGE"), (double) Robot.config.get("turret_Pot_Offset"));
+		turretPot = new AnalogInput((int) Robot.config.get("TURRET_POT"));
 	}
 
 	/*

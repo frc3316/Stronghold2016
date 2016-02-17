@@ -32,6 +32,7 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -66,6 +67,9 @@ public class SDB
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
+			
+			put("Hood Voltage", Robot.sensors.hoodPot.get() / (double) Robot.config.get("HOOD_POT_FULL_RANGE"));
+			put("Turret Voltage", Robot.sensors.turretPot.getVoltage());
 			
 			try
 			{

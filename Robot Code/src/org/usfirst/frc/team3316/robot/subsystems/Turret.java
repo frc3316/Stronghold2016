@@ -4,12 +4,13 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
 public class Turret extends DBugSubsystemCC
 {
 	private DBugSpeedController turretMotor;
-	private AnalogPotentiometer turretPot;
+	private AnalogInput turretPot;
 	private double potOffset;
 
 	public Turret()
@@ -63,11 +64,11 @@ public class Turret extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		return turretPot.get() + potOffset;
+		return turretPot.getValue() + potOffset;
 	}
 	
 	public void setAngle(double angle) {
-		potOffset = (angle - turretPot.get());
+		potOffset = (angle - turretPot.getValue());
 		logger.fine("The offset of the turret is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
 	}
 
