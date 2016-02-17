@@ -239,7 +239,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHELeftFront()
 	{
-		return heLeftFront.get();
+		return !heLeftFront.get();
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHELeftBack()
 	{
-		return heLeftBack.get();
+		return !heLeftBack.get();
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHERightFront()
 	{
-		return heRightFront.get();
+		return !heRightFront.get();
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHERightBack()
 	{
-		return heRightBack.get();
+		return !heRightBack.get();
 	}
 
 	/*

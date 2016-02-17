@@ -11,17 +11,28 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.ExtendOmni;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
+import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
+
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SDB
@@ -45,6 +56,7 @@ public class SDB
 			 */
 			put("Chassis Yaw", Robot.chassis.getYaw());
 			put("Chassis Pitch", Robot.chassis.getPitch());
+			put("Chassis Roll", Robot.chassis.getRoll());
 			put("isOnDefense", Robot.chassis.isOnDefense());
 
 			put("Hood Angle", Robot.hood.getAngle());
@@ -54,6 +66,14 @@ public class SDB
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
 			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
+			
+			put("Left encoder displacement", Robot.chassis.getLeftDistance());
+			put("Right encoder displacement", Robot.chassis.getRightDistance());
+			
+			put("HE Left Front", Robot.chassis.getHELeftFront());
+			put("HE Left Back", Robot.chassis.getHELeftBack());
+			put("HE Right Front", Robot.chassis.getHERightFront());
+			put("HE Right Back", Robot.chassis.getHERightBack());
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
@@ -66,9 +86,6 @@ public class SDB
 				//e.printStackTrace();
 				put("DistanceFromCamera", "null");
 			}
-			
-			// Drive Distance
-			SmartDashboard.putNumber("Chassis voltage", Robot.actuators.chassisLeft1.getVoltage());
 		}
 
 		private void put(String name, double d)
@@ -187,6 +204,13 @@ public class SDB
 		
 		SmartDashboard.putData(new BangbangFlywheel());
 		SmartDashboard.putData(new JoystickFlywheel());
+
+		putConfigVariableInSDB("flywheel_PID_KP");
+		putConfigVariableInSDB("flywheel_PID_KI");
+		putConfigVariableInSDB("flywheel_PID_KD");
+		putConfigVariableInSDB("flywheel_PID_KF");
+		
+		SmartDashboard.putData(new FlywheelPID());
 		
 		// Hood
 		putConfigVariableInSDB("hood_PID_KP");
@@ -202,6 +226,18 @@ public class SDB
 		SmartDashboard.putData(new HoodPID());
 		SmartDashboard.putData(new HoodJoysticks());
 
+		SmartDashboard.putData(new ExtendOmni());
+		SmartDashboard.putData(new RetractOmni());
+		SmartDashboard.putData(new WaitForDefense());
+		
+		SmartDashboard.putData(new OpenLongPistons());
+		SmartDashboard.putData(new CloseLongPistons());
+		SmartDashboard.putData(new OpenShortPistons());
+		SmartDashboard.putData(new CloseShortPistons());
+		
+		/*
+		 * Remove these after finishing testing on prototype
+		 */
 		logger.info("Finished initSDB()");
 	}
 
@@ -210,5 +246,36 @@ public class SDB
 	 * actuators and sensors. It is disgusting.
 	 */
 	public void initLiveWindow()
-	{}
+	{
+		/*
+		 * Actuators
+		 */
+		// General
+		LiveWindow.addActuator("General", "compressor", Robot.actuators.compressor);
+		// Chassis
+		LiveWindow.addActuator("Chassis", "chassisLeft1SC", (LiveWindowSendable) Robot.actuators.chassisLeft1SC);
+		LiveWindow.addActuator("Chassis", "chassisLeft2SC", (LiveWindowSendable) Robot.actuators.chassisLeft2SC);
+		LiveWindow.addActuator("Chassis", "chassisRight1SC", (LiveWindowSendable) Robot.actuators.chassisRight1SC);
+		LiveWindow.addActuator("Chassis", "chassisRight2SC", (LiveWindowSendable) Robot.actuators.chassisRight2SC);
+		LiveWindow.addActuator("Chassis", "chassisLongPistons", (LiveWindowSendable) Robot.actuators.chassisLongPistons);
+		LiveWindow.addActuator("Chassis", "chassisShortPistonsLeft", (LiveWindowSendable) Robot.actuators.chassisShortPistonsLeft);
+		LiveWindow.addActuator("Chassis", "chassisShortPistonsRight", (LiveWindowSendable) Robot.actuators.chassisShortPistonsRight);
+		LiveWindow.addActuator("Spare", "spareMotorSC", (LiveWindowSendable) Robot.actuators.spareMotorSC);
+
+		/*
+		 * Sensors
+		 */
+		// General
+		LiveWindow.addSensor("General", "pdp", (LiveWindowSendable) Robot.sensors.pdp);
+		// Chassis
+		LiveWindow.addSensor("Chassis", "navx", (LiveWindowSendable) Robot.sensors.navx);
+		LiveWindow.addSensor("Chassis", "chassisLeftEncoder", (LiveWindowSendable) Robot.sensors.chassisLeftEncoder);
+		LiveWindow.addSensor("Chassis", "chassisRighttEncoder", (LiveWindowSendable) Robot.sensors.chassisRightEncoder);
+		LiveWindow.addSensor("Chassis", "chassisHELeftFront", (LiveWindowSendable) Robot.sensors.chassisHELeftFront);
+		LiveWindow.addSensor("Chassis", "chassisHELeftBack", (LiveWindowSendable) Robot.sensors.chassisHELeftBack);
+		LiveWindow.addSensor("Chassis", "chassisHERightFront", (LiveWindowSendable) Robot.sensors.chassisHERightFront);
+		LiveWindow.addSensor("Chassis", "chassisHERightBack", (LiveWindowSendable) Robot.sensors.chassisHERightBack);
+		
+		logger.info("Finished initLiveWindow()");
+	}
 }

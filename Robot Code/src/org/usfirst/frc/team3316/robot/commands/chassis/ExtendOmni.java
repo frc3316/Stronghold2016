@@ -54,6 +54,7 @@ public class ExtendOmni extends DBugCommand
 		if (Robot.chassis.getHERightBack() && Robot.chassis.getHERightFront()
 				&& !rightSet)
 		{
+			
 			Robot.chassis.openShortPistonsRight();
 			rightSet = true;
 		}
