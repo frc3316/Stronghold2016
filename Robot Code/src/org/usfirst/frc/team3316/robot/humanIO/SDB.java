@@ -89,10 +89,15 @@ public class SDB
 			put("Left encoder displacement", Robot.chassis.getLeftDistance());
 			put("Right encoder displacement", Robot.chassis.getRightDistance());
 			
-			put("HE Left Front", Robot.chassis.getHELeftFront());
-			put("HE Left Back", Robot.chassis.getHELeftBack());
-			put("HE Right Front", Robot.chassis.getHERightFront());
-			put("HE Right Back", Robot.chassis.getHERightBack());
+			// put("HE Left Front", Robot.chassis.getHELeftFront());
+			// put("HE Left Back", Robot.chassis.getHELeftBack());
+			// put("HE Right Front", Robot.chassis.getHERightFront());
+			// put("HE Right Back", Robot.chassis.getHERightBack());
+			
+			put("isHELeftFrontOn", Robot.chassis.isHELeftFrontOn);
+			put("isHERightFrontOn", Robot.chassis.isHERightFrontOn);
+			put("isHELeftBackOn", Robot.chassis.isHELeftBackOn);
+			put("isHERightBackOn", Robot.chassis.isHERightBackOn);
 		}
 
 		private void put(String name, double d)
