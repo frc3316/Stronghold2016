@@ -179,15 +179,15 @@ public class IO
 					putPWMA("CHASSIS_MOTOR_RIGHT_1", 8);
 					putPWMA("CHASSIS_MOTOR_RIGHT_2", 9);
 
-					putPWMA("INTAKE_MOTOR", 0);
+					putPWMA("INTAKE_MOTOR", 6);
 
-					putCANA("TRANSPORT_MOTOR", 0);
+					putPWMA("TRANSPORT_MOTOR", 0);
 
-					putCANA("FLYWHEEL_MOTOR", 1);
+					putPWMA("FLYWHEEL_MOTOR", 1);
 
-					putCANA("TURRET_MOTOR", 2);
+					putPWMA("TURRET_MOTOR", 3);
 
-					putCANA("HOOD_MOTOR", 3);
+					putCANA("HOOD_MOTOR", 2);
 
 					putCANA("CLIMBING_MOTOR_1", 11);
 					putCANA("CLIMBING_MOTOR_2", 12);
