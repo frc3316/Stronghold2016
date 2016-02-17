@@ -21,12 +21,7 @@ public class HoodBangbang extends DBugCommand
 
 	protected void execute()
 	{
-<<<<<<< HEAD
-		setPoint = (double) config.get("hood_Angle_SetPoint");
-		if (Robot.hood.getAngle() <= setPoint)
-=======
 		if (AlignShooter.isObjectDetected())
->>>>>>> master
 		{
 			double setPoint = (double) AlignShooter.getHoodAngle();
 			if (Robot.hood.getAngle() <= setPoint)
