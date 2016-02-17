@@ -23,6 +23,7 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
@@ -54,26 +55,15 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Chassis Yaw", Robot.chassis.getYaw());
-			put("Chassis Pitch", Robot.chassis.getPitch());
-			put("Chassis Roll", Robot.chassis.getRoll());
-			put("isOnDefense", Robot.chassis.isOnDefense());
-
 			put("Hood Angle", Robot.hood.getAngle());
+			put("Hood current", Robot.actuators.hoodMotor.getCurrent());
+			
 			put("Turret Angle", Robot.turret.getAngle());
+			put("Turret current", Robot.actuators.turretMotor.getCurrent());
 			
 			put("Flywheel speed", Robot.flywheel.getRate());
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
-			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
-			
-			put("Left encoder displacement", Robot.chassis.getLeftDistance());
-			put("Right encoder displacement", Robot.chassis.getRightDistance());
-			
-			put("HE Left Front", Robot.chassis.getHELeftFront());
-			put("HE Left Back", Robot.chassis.getHELeftBack());
-			put("HE Right Front", Robot.chassis.getHERightFront());
-			put("HE Right Back", Robot.chassis.getHERightBack());
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
@@ -225,16 +215,10 @@ public class SDB
 		SmartDashboard.putData(new HoodBangbang());
 		SmartDashboard.putData(new HoodPID());
 		SmartDashboard.putData(new HoodJoysticks());
+		
+		// Turret
+		SmartDashboard.putData(new TurretJoysticks());
 
-		SmartDashboard.putData(new ExtendOmni());
-		SmartDashboard.putData(new RetractOmni());
-		SmartDashboard.putData(new WaitForDefense());
-		
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseShortPistons());
-		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */

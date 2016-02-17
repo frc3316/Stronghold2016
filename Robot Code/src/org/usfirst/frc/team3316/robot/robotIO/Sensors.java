@@ -146,7 +146,7 @@ public class Sensors
 	public void TurretSensors()
 	{
 		turretPot = new AnalogPotentiometer((int) Robot.config.get("TURRET_POT"),
-				(double) Robot.config.get("TURRET_POT_FULL_RANGE"), (double) Robot.config.get("TURRET_POT_OFFSET"));
+				(double) Robot.config.get("TURRET_POT_FULL_RANGE"), (double) Robot.config.get("turret_Pot_Offset"));
 	}
 
 	/*
@@ -155,7 +155,7 @@ public class Sensors
 	public void HoodSensors()
 	{
 		hoodPot = new AnalogPotentiometer((int) Robot.config.get("HOOD_POT"),
-				(double) Robot.config.get("HOOD_POT_FULL_RANGE"), (double) Robot.config.get("HOOD_POT_OFFSET"));
+				(double) Robot.config.get("HOOD_POT_FULL_RANGE"), (double) Robot.config.get("hood_Pot_Offset"));
 	}
 
 	/*
