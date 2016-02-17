@@ -44,19 +44,23 @@ public class ExtendOmni extends DBugCommand
 
 	protected void execute()
 	{
-		if (Robot.chassis.getHELeftBack() && Robot.chassis.getHELeftFront()
+		if (Robot.chassis.isHELeftBackOn && Robot.chassis.isHELeftFrontOn
 				&& !leftSet)
 		{
 			Robot.chassis.openShortPistonsLeft();
 			leftSet = true;
+			Robot.chassis.isHELeftFrontOn = false;
+			Robot.chassis.isHELeftBackOn = false;
 		}
 
-		if (Robot.chassis.getHERightBack() && Robot.chassis.getHERightFront()
+		if (Robot.chassis.isHERightBackOn && Robot.chassis.isHERightFrontOn
 				&& !rightSet)
 		{
 			
 			Robot.chassis.openShortPistonsRight();
 			rightSet = true;
+			Robot.chassis.isHERightFrontOn = false;
+			Robot.chassis.isHERightBackOn = false;
 		}
 
 		if (leftSet && rightSet && !isTimeoutStarted)
