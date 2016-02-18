@@ -84,6 +84,8 @@ public class HoodPID extends DBugCommand
 
 	protected void fin()
 	{
+		pid.reset();
+		
 		Robot.hood.setMotors(0);
 	}
 

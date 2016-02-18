@@ -53,6 +53,8 @@ public class FlywheelPID extends DBugCommand
 				(double) config.get("flywheel_PID_KD") / 1000,
 				(double) config.get("flywheel_PID_KF") / 1000);
 		
+		pid.setAbsoluteTolerance((double) config.get("flywheel_PID_Tolerance")); 
+		
 		v = 0;
 
 		reachedTarget = false;
@@ -86,7 +88,7 @@ public class FlywheelPID extends DBugCommand
 
 	protected void fin()
 	{
-		pid.disable();
+		pid.reset();
 
 		Robot.flywheel.setMotors(0);
 	}

@@ -23,7 +23,7 @@ public class AccelerateFlywheel extends DBugCommand
 		timeToAccel = (double) config
 				.get("flywheel_AccelerateFlywheel_Timeout");
 
-		accelTable = new double[][] { { 0, timeToAccel }, { 0, 0.5 } };
+		accelTable = new double[][] { { 0, timeToAccel }, { 0, 0.9 } };
 
 		setTimeout(timeToAccel);
 	}
