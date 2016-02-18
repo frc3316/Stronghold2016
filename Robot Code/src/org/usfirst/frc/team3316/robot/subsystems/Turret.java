@@ -30,7 +30,7 @@ public class Turret extends DBugSubsystemCC
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new TurretJoysticks());
+//		setDefaultCommand(new TurretJoysticks());
 	}
 
 	/**

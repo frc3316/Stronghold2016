@@ -334,7 +334,7 @@ public class Config
 				addToVariables("flywheel_PID_Setpoint", 45.0);
 				addToVariables("flywheel_PID_Tolerance", 1.0);
 				addToVariables("flywheel_PID_KP", 3.5);
-				addToVariables("flywheel_PID_KI", 0.85);
+				addToVariables("flywheel_PID_KI", 0.81);
 				addToVariables("flywheel_PID_KD", 0.015);
 				addToVariables("flywheel_PID_KF", 7.5);
 			}

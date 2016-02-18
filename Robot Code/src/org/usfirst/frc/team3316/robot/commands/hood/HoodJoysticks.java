@@ -17,7 +17,7 @@ public class HoodJoysticks extends DBugCommand {
 
 	protected void execute() {
 		// When push joystick forward, the speed needs to be positive.
-		speed = -Robot.joysticks.joystickOperator.getY();
+		speed = 0.5 * -Robot.joysticks.joystickOperator.getY(); //We want less power
 		isFin = !Robot.hood.setMotors(speed);
 	}
 

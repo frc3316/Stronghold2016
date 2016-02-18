@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FlywheelPID extends DBugCommand
 {
@@ -67,6 +68,7 @@ public class FlywheelPID extends DBugCommand
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 
 		logger.finest("This is flywheel's v: " + v);
+		SmartDashboard.putBoolean("PID on target", onTarget());
 		
 		isFin = !Robot.flywheel.setMotors(v);
 		
@@ -77,7 +79,9 @@ public class FlywheelPID extends DBugCommand
 		}
 	}
 	
-	public static boolean onTarget() {
+	public static boolean onTarget() 
+	{
+		logger.fine("Someone asked if I'm on target. Answer: " + pid.onTarget());
 		return pid.onTarget();
 	}
 
