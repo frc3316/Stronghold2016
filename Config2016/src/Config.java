@@ -326,17 +326,17 @@ public class Config
 			{
 
 				// Bangbang
-				addToVariables("flywheel_Bangbang_Setpoint", 40.0);
+				addToVariables("flywheel_Bangbang_Setpoint", 45.0);
 				addToVariables("flywheel_Bangbang_OnVoltage", 1.0);
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
 				// PID
 				addToVariables("flywheel_PID_Setpoint", 45.0);
-				addToVariables("flywheel_PID_Tolerance", 1.0);
-				addToVariables("flywheel_PID_KP", 3.5);
-				addToVariables("flywheel_PID_KI", 0.81);
-				addToVariables("flywheel_PID_KD", 0.015);
-				addToVariables("flywheel_PID_KF", 7.5);
+				addToVariables("flywheel_PID_Tolerance", 2.0);
+				addToVariables("flywheel_PID_KP", 10.0);
+				addToVariables("flywheel_PID_KI", 0.54);
+				addToVariables("flywheel_PID_KD", 0.010);
+				addToVariables("flywheel_PID_KF", 10.0);
 			}
 			
 			/*
