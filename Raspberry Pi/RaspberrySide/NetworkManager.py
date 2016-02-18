@@ -36,9 +36,10 @@ class NetworkManager(object):
                     else:
                         strValue = '{0:.2f}'.format(float(values[i]))
                     resultDic[names[i]] = strValue
-                stringToSend = str(resultDic).replace(" ","")
-                self.sock.sendto(stringToSend + "\n", (self.HOST, self.PORT))
-            except:
+                stringToSend = str(resultDic).replace(' ', '')
+                logger.info(stringToSend)
+		self.sock.sendto(stringToSend + '\n', (self.HOST, self.PORT))    
+       	    except:
                 logger.warning('Input for sendData invalid, or error in sending data')
 			
     def connect(self):
@@ -50,9 +51,9 @@ class NetworkManager(object):
             self.HOST = socket.gethostbyname(self.HOST)
             logger.info("found roborio ip? "+ str(self.HOST))
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	    sock.settimeout(3)
-	    logger.info(str(self.HOST) + " " + str(self.PORT))
-	    sock.connect((self.HOST, self.PORT))
+            sock.settimeout(1)
+            logger.info(str(self.HOST) + " " + str(self.PORT))
+            sock.connect((self.HOST, self.PORT))
             logger.info("reached after connect statement")
             sock.settimeout(None)
             self.sock = sock
