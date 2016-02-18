@@ -331,12 +331,12 @@ public class Config
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
 				// PID
-				addToVariables("flywheel_PID_Setpoint", 0.0);
+				addToVariables("flywheel_PID_Setpoint", 47.5);
 				addToVariables("flywheel_PID_Tolerance", 1.0);
-				addToVariables("flywheel_PID_KP", 0.0);
-				addToVariables("flywheel_PID_KI", 0.0);
-				addToVariables("flywheel_PID_KD", 0.0);
-				addToVariables("flywheel_PID_KF", 0.0);
+				addToVariables("flywheel_PID_KP", 0.5);
+				addToVariables("flywheel_PID_KI", 0.014);
+				addToVariables("flywheel_PID_KD", 0.001);
+				addToVariables("flywheel_PID_KF", 11.0);
 			}
 		}
 

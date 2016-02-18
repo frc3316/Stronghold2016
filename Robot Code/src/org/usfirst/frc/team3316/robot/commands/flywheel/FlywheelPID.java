@@ -33,7 +33,7 @@ public class FlywheelPID extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kRate;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
@@ -60,6 +60,8 @@ public class FlywheelPID extends DBugCommand
 	{
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 
+		logger.finest("This is flywheel's v: " + v);
+		
 		isFin = !Robot.flywheel.setMotors(v);
 	}
 	
