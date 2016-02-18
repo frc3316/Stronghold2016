@@ -175,7 +175,7 @@ public class Config
 				 */
 				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
 
-				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 1000.0);
+				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 70.0);
 
 				/*
 				 * Turret
@@ -331,19 +331,19 @@ public class Config
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
 				// PID
-				addToVariables("flywheel_PID_Setpoint", 47.5);
+				addToVariables("flywheel_PID_Setpoint", 45.0);
 				addToVariables("flywheel_PID_Tolerance", 1.0);
-				addToVariables("flywheel_PID_KP", 0.5);
-				addToVariables("flywheel_PID_KI", 0.013);
-				addToVariables("flywheel_PID_KD", 0.011);
-				addToVariables("flywheel_PID_KF", 5.0);
+				addToVariables("flywheel_PID_KP", 3.0);
+				addToVariables("flywheel_PID_KI", 0.85);
+				addToVariables("flywheel_PID_KD", 0.015);
+				addToVariables("flywheel_PID_KF", 7.5);
 			}
 			
 			/*
 			 * Accelerate Flywheel
 			 */
 			{
-				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.3);
+				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.15);
 			}
 		}
 
