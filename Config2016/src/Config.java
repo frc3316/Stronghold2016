@@ -426,7 +426,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("hood_Pot_Offset", 0.0);
+				addToVariables("hood_Pot_Offset", 225.69833969788263);
 				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
@@ -439,8 +439,8 @@ public class Config
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 
-				addToVariables("hood_Pot_BottomThresh", 39.0);
-				addToVariables("hood_Pot_TopThresh", 81.0);
+				addToVariables("hood_Pot_BottomThresh", -1.0);
+				addToVariables("hood_Pot_TopThresh", 40.0);
 			}
 			
 			/*

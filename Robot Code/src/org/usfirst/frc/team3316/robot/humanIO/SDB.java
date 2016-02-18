@@ -201,6 +201,8 @@ public class SDB
 		putConfigVariableInSDB("flywheel_PID_KD");
 		putConfigVariableInSDB("flywheel_PID_KF");
 		
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
+		
 		SmartDashboard.putData(new FlywheelPID());
 		
 		// Hood
