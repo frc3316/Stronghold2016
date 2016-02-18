@@ -338,6 +338,13 @@ public class Config
 				addToVariables("flywheel_PID_KD", 0.011);
 				addToVariables("flywheel_PID_KF", 5.0);
 			}
+			
+			/*
+			 * Accelerate Flywheel
+			 */
+			{
+				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.3);
+			}
 		}
 
 		/*

@@ -14,6 +14,8 @@ public class FlywheelPID extends DBugCommand
 
 	private static PIDController pid;
 	private double v = 0;
+	
+	private boolean reachedTarget;
 
 	public FlywheelPID()
 	{
@@ -53,6 +55,8 @@ public class FlywheelPID extends DBugCommand
 		
 		v = 0;
 
+		reachedTarget = false;
+		
 		pid.enable();
 	}
 
@@ -63,6 +67,12 @@ public class FlywheelPID extends DBugCommand
 		logger.finest("This is flywheel's v: " + v);
 		
 		isFin = !Robot.flywheel.setMotors(v);
+		
+		if (onTarget() && !reachedTarget)
+		{
+			logger.info("Flywheel PID has reached target after " + timeSinceInitialized() + " seconds.");
+			reachedTarget = true;
+		}
 	}
 	
 	public static boolean onTarget() {

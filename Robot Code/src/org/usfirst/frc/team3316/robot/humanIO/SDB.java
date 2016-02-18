@@ -27,6 +27,7 @@ import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
@@ -204,6 +205,9 @@ public class SDB
 		putConfigVariableInSDB("flywheel_PID_Setpoint");
 		
 		SmartDashboard.putData(new FlywheelPID());
+		
+		putConfigVariableInSDB("flywheel_AccelerateFlywheel_Timeout");
+		SmartDashboard.putData(new WarmShooter());
 		
 		// Hood
 		putConfigVariableInSDB("hood_PID_KP");
