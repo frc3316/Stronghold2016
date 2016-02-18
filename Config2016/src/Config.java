@@ -197,7 +197,7 @@ public class Config
 																// the stall
 																// current
 
-				addToConstants("HOOD_POT_FULL_RANGE", 300.0);
+				addToConstants("HOOD_POT_FULL_RANGE", -300.0); // negative to flip incrementing direction
 
 				/*
 				 * Climbing

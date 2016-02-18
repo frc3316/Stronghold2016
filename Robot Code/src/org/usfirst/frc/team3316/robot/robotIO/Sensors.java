@@ -33,7 +33,8 @@ public class Sensors
 
 	public Encoder chassisLeftEncoder, chassisRightEncoder;
 
-	public DigitalInput chassisHELeftFront, chassisHELeftBack, chassisHERightFront, chassisHERightBack;
+	public DigitalInput chassisHELeftFront, chassisHELeftBack,
+			chassisHERightFront, chassisHERightBack;
 
 	// Intake
 	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
@@ -47,7 +48,7 @@ public class Sensors
 	public DigitalInput flywheelHE;
 
 	// Turret
-	public AnalogInput turretPot;
+	public AnalogPotentiometer turretPot;
 
 	// Hood
 	public AnalogPotentiometer hoodPot;
@@ -56,8 +57,10 @@ public class Sensors
 	public AnalogPotentiometer climbingPot;
 	public DigitalInput climbingSwitch;
 
-	public Sensors() {}
-	
+	public Sensors()
+	{
+	}
+
 	/*
 	 * General
 	 */
@@ -87,23 +90,34 @@ public class Sensors
 		}
 		catch (RuntimeException ex)
 		{
-			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+			DriverStation.reportError(
+					"Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
-		chassisLeftEncoder = new Encoder((int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),
+		chassisLeftEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),
 				(int) Robot.config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),
-				(boolean) Robot.config.get("CHASSIS_LEFT_ENCODER_REVERSE"), EncodingType.k4X);
+				(boolean) Robot.config.get("CHASSIS_LEFT_ENCODER_REVERSE"),
+				EncodingType.k4X);
 
-		chassisLeftEncoder.setDistancePerPulse((double) config.get("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE"));
+		chassisLeftEncoder.setDistancePerPulse(
+				(double) config.get("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE"));
 
-		chassisRightEncoder = new Encoder((int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
+		chassisRightEncoder = new Encoder(
+				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
 				(int) Robot.config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),
-				(boolean) Robot.config.get("CHASSIS_RIGHT_ENCODER_REVERSE"), EncodingType.k4X);
-		chassisRightEncoder.setDistancePerPulse((double) config.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
+				(boolean) Robot.config.get("CHASSIS_RIGHT_ENCODER_REVERSE"),
+				EncodingType.k4X);
+		chassisRightEncoder.setDistancePerPulse((double) config
+				.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
 
-		chassisHELeftFront = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_FRONT"));
-		chassisHELeftBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_LEFT_BACK"));
-		chassisHERightFront = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_FRONT"));
-		chassisHERightBack = new DigitalInput((int) config.get("CHASSIS_HALL_EFFECT_RIGHT_BACK"));
+		chassisHELeftFront = new DigitalInput(
+				(int) config.get("CHASSIS_HALL_EFFECT_LEFT_FRONT"));
+		chassisHELeftBack = new DigitalInput(
+				(int) config.get("CHASSIS_HALL_EFFECT_LEFT_BACK"));
+		chassisHERightFront = new DigitalInput(
+				(int) config.get("CHASSIS_HALL_EFFECT_RIGHT_FRONT"));
+		chassisHERightBack = new DigitalInput(
+				(int) config.get("CHASSIS_HALL_EFFECT_RIGHT_BACK"));
 	}
 
 	/*
@@ -111,11 +125,14 @@ public class Sensors
 	 */
 	public void IntakeSensors()
 	{
-		intakeLeftSwitch = new DigitalInput((int) config.get("INTAKE_LEFT_SWITCH"));
-		intakeRightSwitch = new DigitalInput((int) config.get("INTAKE_RIGHT_SWITCH"));
+		intakeLeftSwitch = new DigitalInput(
+				(int) config.get("INTAKE_LEFT_SWITCH"));
+		intakeRightSwitch = new DigitalInput(
+				(int) config.get("INTAKE_RIGHT_SWITCH"));
 
 		intakePot = new AnalogPotentiometer((int) config.get("INTAKE_POT"),
-				(double) config.get("INTAKE_POT_FULL_RANGE"), (double) config.get("INTAKE_POT_OFFSET"));
+				(double) config.get("INTAKE_POT_FULL_RANGE"),
+				(double) config.get("INTAKE_POT_OFFSET"));
 	}
 
 	/*
@@ -123,8 +140,10 @@ public class Sensors
 	 */
 	public void TransportSensors()
 	{
-		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"), (int) config.get("TRANSPORT_ENCODER_B"),
-				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"), CounterBase.EncodingType.k4X);
+		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"),
+				(int) config.get("TRANSPORT_ENCODER_B"),
+				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"),
+				CounterBase.EncodingType.k4X);
 
 		// transportEncoder.setDistancePerPulse(???);
 		// TODO: check the distance per pulse of the transport encoder
@@ -135,7 +154,8 @@ public class Sensors
 	 */
 	public void FlywheelSensors()
 	{
-		flywheelHE = new DigitalInput((int) config.get("FLYWHEEL_HALL_EFFECT_COUNTER"));
+		flywheelHE = new DigitalInput(
+				(int) config.get("FLYWHEEL_HALL_EFFECT_COUNTER"));
 
 		flywheelCounter = new Counter(flywheelHE);
 		flywheelCounter.setDistancePerPulse(1.0 / 6.0); // 6 bolts per round
@@ -146,7 +166,9 @@ public class Sensors
 	 */
 	public void TurretSensors()
 	{
-		turretPot = new AnalogInput((int) Robot.config.get("TURRET_POT"));
+		turretPot = new AnalogPotentiometer(
+				(int) Robot.config.get("TURRET_POT"),
+				(double) Robot.config.get("TURRET_POT_FULL_RANGE"), 0);
 	}
 
 	/*
@@ -155,7 +177,7 @@ public class Sensors
 	public void HoodSensors()
 	{
 		hoodPot = new AnalogPotentiometer((int) Robot.config.get("HOOD_POT"),
-				(double) Robot.config.get("HOOD_POT_FULL_RANGE"), (double) Robot.config.get("hood_Pot_Offset"));
+				(double) Robot.config.get("HOOD_POT_FULL_RANGE"), 0);
 	}
 
 	/*
@@ -164,7 +186,8 @@ public class Sensors
 	public void ClimbingSensors()
 	{
 		climbingPot = new AnalogPotentiometer((int) config.get("CLIMBING_POT"),
-				(double) config.get("CLIMBING_POT_FULL_RANGE"), (double) config.get("CLIMBING_POT_OFFSET"));
+				(double) config.get("CLIMBING_POT_FULL_RANGE"),
+				(double) config.get("CLIMBING_POT_OFFSET"));
 		climbingSwitch = new DigitalInput((int) config.get("CLIMBING_SWITCH"));
 	}
 }

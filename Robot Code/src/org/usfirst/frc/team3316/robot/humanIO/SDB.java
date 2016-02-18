@@ -68,9 +68,6 @@ public class SDB
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
-			put("Hood Voltage", Robot.sensors.hoodPot.get() / (double) Robot.config.get("HOOD_POT_FULL_RANGE"));
-			put("Turret Voltage", Robot.sensors.turretPot.getVoltage());
-			
 			try
 			{
 				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
@@ -222,6 +219,12 @@ public class SDB
 		
 		// Turret
 		SmartDashboard.putData(new TurretJoysticks());
+		
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
+		
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
 
 		/*
 		 * Remove these after finishing testing on prototype

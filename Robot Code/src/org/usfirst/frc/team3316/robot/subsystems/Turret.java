@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 public class Turret extends DBugSubsystemCC
 {
 	private DBugSpeedController turretMotor;
-	private AnalogInput turretPot;
+	private AnalogPotentiometer turretPot;
 	private double potOffset;
 
 	public Turret()
@@ -64,11 +64,11 @@ public class Turret extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		return turretPot.getValue() + potOffset;
+		return turretPot.get() + potOffset;
 	}
 	
 	public void setAngle(double angle) {
-		potOffset = (angle - turretPot.getValue());
+		potOffset = (angle - turretPot.get());
 		logger.fine("The offset of the turret is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
 	}
 

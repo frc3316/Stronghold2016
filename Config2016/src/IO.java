@@ -185,9 +185,9 @@ public class IO
 
 					putPWMA("FLYWHEEL_MOTOR", 1);
 
-					putPWMA("TURRET_MOTOR", 3);
+					putPWMA("TURRET_MOTOR", 2);
 
-					putCANA("HOOD_MOTOR", 2);
+					putCANA("HOOD_MOTOR", 3);
 
 					putCANA("CLIMBING_MOTOR_1", 11);
 					putCANA("CLIMBING_MOTOR_2", 12);

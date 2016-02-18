@@ -19,8 +19,6 @@ public class FlywheelPID extends DBugCommand
 	{
 		requires(Robot.flywheel);
 
-		// TODO: Add F term to PID
-
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
