@@ -334,9 +334,9 @@ public class Config
 				addToVariables("flywheel_PID_Setpoint", 47.5);
 				addToVariables("flywheel_PID_Tolerance", 1.0);
 				addToVariables("flywheel_PID_KP", 0.5);
-				addToVariables("flywheel_PID_KI", 0.014);
-				addToVariables("flywheel_PID_KD", 0.001);
-				addToVariables("flywheel_PID_KF", 11.0);
+				addToVariables("flywheel_PID_KI", 0.013);
+				addToVariables("flywheel_PID_KD", 0.011);
+				addToVariables("flywheel_PID_KF", 5.0);
 			}
 		}
 
@@ -426,7 +426,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("hood_Pot_Offset", 225.69833969788263);
+				addToVariables("hood_Pot_Offset", 108.4091603287355);
 				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
@@ -440,7 +440,7 @@ public class Config
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 
 				addToVariables("hood_Pot_BottomThresh", -1.0);
-				addToVariables("hood_Pot_TopThresh", 40.0);
+				addToVariables("hood_Pot_TopThresh", 68.0);
 			}
 			
 			/*
