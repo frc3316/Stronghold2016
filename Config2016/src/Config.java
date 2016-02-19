@@ -435,6 +435,9 @@ public class Config
 			{
 				addToVariables("hood_Pot_Offset", 108.4091603287355);
 				
+				addToVariables("hood_PotFilter_MaxChange", 1.0);
+				addToVariables("hood_PotFilter_Period", 10);
+				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
 				addToVariables("hood_PID_Tolerance", 0.3);
