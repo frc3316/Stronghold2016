@@ -401,7 +401,7 @@ public class Config
 				addToVariablesB("turret_Pot_Offset", 0.0);
 				
 				addToVariables("turret_PotFilter_MaxChange", 1.0);
-				addToVariables("turret_PotFilter_Period", 10);
+				addToVariables("turret_PotFilter_Period", (long) 10);
 				
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
@@ -441,10 +441,10 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 108.4091603287355);
-				addToVariablesB("hood_Pot_Offset", 108.4091603287355);
+				addToVariablesB("hood_Pot_Offset", 16.475693696202693);
 				
 				addToVariables("hood_PotFilter_MaxChange", 1.0);
-				addToVariables("hood_PotFilter_Period", 10);
+				addToVariables("hood_PotFilter_Period", (long) 10);
 				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
@@ -457,8 +457,8 @@ public class Config
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 
-				addToVariables("hood_Pot_BottomThresh", -1.0);
-				addToVariables("hood_Pot_TopThresh", 68.0);
+				addToVariables("hood_Pot_BottomThresh", 1.0);
+				addToVariables("hood_Pot_TopThresh", 70.0);
 			}
 			
 			/*
