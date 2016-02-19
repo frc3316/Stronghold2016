@@ -27,7 +27,7 @@ class DistanceHelper(object):
 
         remainder = float(self.knownHeight * self.focalLength) / float(objectHeight)
         try:
-            return sqrt(remainder**2 - (towerHeight-(self.knownHeight/2)-robotObject.height)**2)
+            return sqrt(remainder**2 - (towerHeight-(self.knownHeight/2.0)-robotObject.height)**2)
         except:
             return 3316.00
     def getXRobotPosition(self,robotObject):
@@ -61,7 +61,7 @@ class DistanceHelper(object):
         '''
         (xC, yC) = (cameraSize[0]/2, cameraSize[1]/2) # Center of the frame
         # Center of the object:
-        (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2, imageObject.objectY + imageObject.objectHeight/2)
+        (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2.0, imageObject.objectY + imageObject.objectHeight/2.0)
         return float((xO-xC)*HAX)/float(cameraSize[0]) # x,y plane.
     
     def getPolarAngle(self,cameraSize,imageObject,HAY):
@@ -77,7 +77,7 @@ class DistanceHelper(object):
 
         (xC, yC) = (cameraSize[0]/2, cameraSize[1]/2) # Center of the frame
         # Center of the object:
-        (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2, imageObject.objectY + imageObject.objectHeight/2)
+        (xO, yO) = (imageObject.objectX + imageObject.objectWidth/2.0, imageObject.objectY + imageObject.objectHeight/2.0)
         return float((yO-yC)*HAY)/float(cameraSize[1]) # Azimuthal, z plane.
 
    

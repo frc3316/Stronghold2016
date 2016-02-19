@@ -6,6 +6,7 @@ from DistanceHelper import *
 from ImageObject import *
 from RobotObject import *
 from Utils import *
+from math import cos, degrees, radians
 class VisionManager(object):
     '''
     A class that manages all the computer vision for the FRC 2016.
@@ -83,7 +84,8 @@ class VisionManager(object):
             self.currentImageObject.didUpdateVar = False	
 
         didGetImage,frame = self.cam.read()
-        frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight), interpolation = cv2.INTER_AREA)
+        # maybe resize changes edges of u? causing the u to be smaller of bigger
+        frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight))
         frame = self.rotateImage(frame)
         if didGetImage:
             if self.currentImage == None and self.imageHeight == None and self.imageWidth == None:
@@ -105,6 +107,7 @@ class VisionManager(object):
             return np.rot90(img,1)
         else:
             return np.rot90(img,3)
+
     def updateMaskThresh(self):
         '''
         This method updates self.maskedImage, self.threshImage, using self.currentImage.
@@ -155,6 +158,7 @@ class VisionManager(object):
         boundingRect = self.calculateBoundingRect()
         if boundingRect is not None:
             (x, y, w, h) = boundingRect
+            # Changing the object height according to the camera angle
             if self.currentImageObject is None:
                 DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject,self.TOWER_HEIGHT)
                 self.currentImageObject = ImageObject(w,h,x,y,DFC)

@@ -89,3 +89,12 @@ def getCameraNumber():
         return int(fullName[startIndex + len("video"):])
     else:
         return 0 # Default camera value
+
+def goMagic(DFC):
+    '''
+    modifies the distance from camera using magic constants
+    :param DFC: the distance of the robot from the tower.
+    :return: a new distance that is more accurate.
+    '''
+    f = lambda x: -0.0015*x**2 + 2.2809*x -256.93 # From excel
+    return f(DFC)
