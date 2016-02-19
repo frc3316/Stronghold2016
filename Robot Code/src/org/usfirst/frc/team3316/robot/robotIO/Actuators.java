@@ -60,7 +60,6 @@ public class Actuators
 		 * General
 		 */
 		compressor = new Compressor();
-
 		/*
 		 * Chassis
 		 */

@@ -9,8 +9,6 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
 import org.usfirst.frc.team3316.robot.commands.chassis.ExtendOmni;
@@ -20,7 +18,6 @@ import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallIn;
 import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallOut;
 import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
->>>>>>> master
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -31,11 +28,8 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
-<<<<<<< HEAD
-=======
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
->>>>>>> master
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SDB
@@ -68,6 +62,7 @@ public class SDB
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
 			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
+			put("Flywheel Motor Power Sum", Robot.flywheel.getPowerSum());
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
