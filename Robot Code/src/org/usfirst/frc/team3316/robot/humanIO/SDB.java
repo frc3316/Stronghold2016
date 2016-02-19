@@ -33,7 +33,6 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -66,6 +65,7 @@ public class SDB
 			put("Flywheel speed", Robot.flywheel.getRate());
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
+			put("Flywheel Motor Power Sum", Robot.flywheel.getPowerSum());
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			

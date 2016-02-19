@@ -12,6 +12,7 @@ public class Flywheel extends DBugSubsystemCC
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
 	private double rate = 0;
+	private double powerSum = 0;
 
 	/**
 	 * Class for filtering out noise from the FPGA rate calculation. Essentially, this is a low pass filter.
@@ -31,6 +32,10 @@ public class Flywheel extends DBugSubsystemCC
 			{
 				rate = counter.getRate();
 			}
+
+			// For power sum
+			powerSum =+ Robot.actuators.flywheelMotor.getCurrent()
+					* Robot.actuators.flywheelMotor.getVoltage() * Robot.sensors.pdp.getVoltage();
 		}
 	}
 
@@ -64,5 +69,10 @@ public class Flywheel extends DBugSubsystemCC
 	public double getRate()
 	{
 		return rate;
+	}
+
+	public double getPowerSum()
+	{
+		return powerSum;
 	}
 }
