@@ -346,7 +346,7 @@ public class Config
 			 * Accelerate Flywheel
 			 */
 			{
-				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.15);
+				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.2);
 			}
 		}
 
@@ -397,7 +397,8 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("turret_Pot_Offset", 0.0);
+				addToVariablesA("turret_Pot_Offset", 0.0);
+				addToVariablesB("turret_Pot_Offset", 0.0);
 				
 				addToVariables("turret_PotFilter_MaxChange", 1.0);
 				addToVariables("turret_PotFilter_Period", 10);
@@ -439,7 +440,8 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("hood_Pot_Offset", 108.4091603287355);
+				addToVariablesA("hood_Pot_Offset", 108.4091603287355);
+				addToVariablesB("hood_Pot_Offset", 108.4091603287355);
 				
 				addToVariables("hood_PotFilter_MaxChange", 1.0);
 				addToVariables("hood_PotFilter_Period", 10);
