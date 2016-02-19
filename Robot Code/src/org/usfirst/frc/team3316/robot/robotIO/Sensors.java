@@ -11,7 +11,6 @@ import org.usfirst.frc.team3316.robot.vision.VisionServer;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -39,7 +38,7 @@ public class Sensors
 	public AnalogPotentiometer intakePot;
 
 	// Transport
-	public Encoder transportEncoder;
+	public Counter transportCounter;
 
 	// Flywheel
 	public Counter flywheelCounter;
@@ -122,8 +121,7 @@ public class Sensors
 	 */
 	public void TransportSensors()
 	{
-		transportEncoder = new Encoder((int) config.get("TRANSPORT_ENCODER_A"), (int) config.get("TRANSPORT_ENCODER_B"),
-				(boolean) config.get("TRANSPORT_ENCODER_REVERSE_DIRECTION"), CounterBase.EncodingType.k4X);
+		transportCounter = new Counter((int) config.get("TRANSPORT_ENCODER"));
 
 		// transportEncoder.setDistancePerPulse(???);
 		// TODO: check the distance per pulse of the transport encoder

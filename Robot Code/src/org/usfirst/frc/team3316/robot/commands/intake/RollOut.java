@@ -3,8 +3,6 @@ package org.usfirst.frc.team3316.robot.commands.intake;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class RollOut extends DBugCommand
 {
 	private double speed;

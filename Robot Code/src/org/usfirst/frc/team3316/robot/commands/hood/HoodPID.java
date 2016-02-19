@@ -3,7 +3,6 @@ package org.usfirst.frc.team3316.robot.commands.hood;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
-import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;

@@ -2,13 +2,6 @@ package org.usfirst.frc.team3316.robot.commands.flywheel;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
-
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Bang-bang control to reach a the speed specified in the config.
