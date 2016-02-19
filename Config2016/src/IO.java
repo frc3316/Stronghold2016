@@ -241,7 +241,7 @@ public class IO
 				putDIO("CHASSIS_HALL_EFFECT_RIGHT_BACK", 7);
 
 				putDIO("INTAKE_LEFT_SWITCH", 10);
-				putDIO("INTAKE_RIGHT_SWITCH", 11);
+				putDIO("INTAKE_RIGHT_SWITCH", 13);
 
 				putDIO("TRANSPORT_ENCODER", 9);
 
@@ -296,16 +296,21 @@ public class IO
 			 */
 			{
 				// Module 0
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_SOLENOID_MODULE", 0);
+				Config.addToConstants("CHASSIS_LONG_PISTONS_MODULE", 0);
 				
 				Config.addToConstants("CHASSIS_LONG_PISTONS_FORWARD", 0);
 				Config.addToConstants("CHASSIS_LONG_PISTONS_REVERSE", 1);
 
 				// Module 1
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_SOLENOID_MODULE", 1);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 1);
 				
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_SOLENOID_FORWARD", 0);
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_SOLENOID_REVERSE", 1);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 0);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 1);
+				
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 1);
+				
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 6);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 7);
 				
 				Config.addToConstants("INTAKE_SOLENOID_MODULE", 1);
 
