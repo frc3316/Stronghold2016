@@ -22,6 +22,9 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
+import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
+import org.usfirst.frc.team3316.robot.commands.transport.RollIn;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
@@ -56,23 +59,16 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Left encoder displacement", Robot.chassis.getLeftDistance());
-			put("Right encoder displacement", Robot.chassis.getRightDistance());
-			
 			put("Hall effect left front", Robot.chassis.getHELeftFront());
 			put("Hall effect left back", Robot.chassis.getHELeftBack());
 			put("Hall effect right front", Robot.chassis.getHERightFront());
 			put("Hall effect right back", Robot.chassis.getHERightBack());
 			
-			try
-			{
-				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
-			}
-			catch (Exception e)
-			{
-				//e.printStackTrace();
-				put("DistanceFromCamera", "null");
-			}
+			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
+			put("Transport Current", Robot.actuators.transportMotor.getCurrent());
+			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
+			put("Hood Current", Robot.actuators.hoodMotor.getCurrent());
+			put("Turret Current", Robot.actuators.turretMotor.getCurrent());
 		}
 
 		private void put(String name, double d)
@@ -199,7 +195,20 @@ public class SDB
 		
 		putConfigVariableInSDB("hood_Pot_BottomThresh");
 		putConfigVariableInSDB("hood_Pot_TopThresh");
-
+		
+		//Intake
+		SmartDashboard.putData("Intake roll in", new org.usfirst.frc.team3316.robot.commands.intake.RollIn());
+		SmartDashboard.putData("Intake roll out", new org.usfirst.frc.team3316.robot.commands.intake.RollOut());
+		
+		putConfigVariableInSDB("intake_RollIn_Speed");
+		putConfigVariableInSDB("intake_RollOut_Speed");
+		
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
+		
+		SmartDashboard.putData(new RollIn());
+		putConfigVariableInSDB("transport_RollIn_Speed");
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
