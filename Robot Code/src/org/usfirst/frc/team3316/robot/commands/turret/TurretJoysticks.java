@@ -14,7 +14,7 @@ public class TurretJoysticks extends DBugCommand {
 	protected void init() {}
 
 	protected void execute() {
-		speed = Robot.joysticks.joystickOperator.getX();
+		speed = 0.3 * Robot.joysticks.joystickOperator.getX(); //We want less power
 		
 		isFin = !Robot.turret.setMotors(speed);
 	}

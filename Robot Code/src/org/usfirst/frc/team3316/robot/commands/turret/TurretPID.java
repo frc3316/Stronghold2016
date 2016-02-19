@@ -85,6 +85,8 @@ public class TurretPID extends DBugCommand
 
 	protected void fin()
 	{
+		pid.reset();
+		
 		Robot.turret.setMotors(0);
 	}
 

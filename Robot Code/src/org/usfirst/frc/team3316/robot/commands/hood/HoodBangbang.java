@@ -21,6 +21,16 @@ public class HoodBangbang extends DBugCommand
 
 	protected void execute()
 	{
+		double setPoint = (double) config.get("hood_Angle_SetPoint");
+		if (Robot.hood.getAngle() <= setPoint)
+		{
+			isFin = !Robot.hood.setMotors(onVoltage);
+		}
+		else
+		{
+			isFin = !Robot.hood.setMotors(offVoltage);
+		}
+		/*
 		if (AlignShooter.isObjectDetected())
 		{
 			double setPoint = (double) AlignShooter.getHoodAngle();
@@ -37,6 +47,7 @@ public class HoodBangbang extends DBugCommand
 		{
 			isFin = !Robot.hood.setMotors(0);
 		}
+		*/
 	}
 
 	protected boolean isFinished()

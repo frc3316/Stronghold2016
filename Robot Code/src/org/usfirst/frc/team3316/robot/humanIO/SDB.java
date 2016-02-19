@@ -23,9 +23,11 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
@@ -54,25 +56,16 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Chassis Yaw", Robot.chassis.getYaw());
-			put("Chassis Pitch", Robot.chassis.getPitch());
-			put("Chassis Roll", Robot.chassis.getRoll());
-			put("isOnDefense", Robot.chassis.isOnDefense());
-
 			put("Hood Angle", Robot.hood.getAngle());
+			put("Hood current", Robot.actuators.hoodMotor.getCurrent());
+			
 			put("Turret Angle", Robot.turret.getAngle());
+			put("Turret current", Robot.actuators.turretMotor.getCurrent());
 			
 			put("Flywheel speed", Robot.flywheel.getRate());
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
-			
-			put("Left encoder displacement", Robot.chassis.getLeftDistance());
-			put("Right encoder displacement", Robot.chassis.getRightDistance());
-			
-			put("HE Left Front", Robot.chassis.getHELeftFront());
-			put("HE Left Back", Robot.chassis.getHELeftBack());
-			put("HE Right Front", Robot.chassis.getHERightFront());
-			put("HE Right Back", Robot.chassis.getHERightBack());
+			put("Flywheel Motor Power Sum", Robot.flywheel.getPowerSum());
 			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
@@ -209,7 +202,12 @@ public class SDB
 		putConfigVariableInSDB("flywheel_PID_KD");
 		putConfigVariableInSDB("flywheel_PID_KF");
 		
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
+		
 		SmartDashboard.putData(new FlywheelPID());
+		
+		putConfigVariableInSDB("flywheel_AccelerateFlywheel_Timeout");
+		SmartDashboard.putData(new WarmShooter());
 		
 		// Hood
 		putConfigVariableInSDB("hood_PID_KP");
@@ -224,16 +222,16 @@ public class SDB
 		SmartDashboard.putData(new HoodBangbang());
 		SmartDashboard.putData(new HoodPID());
 		SmartDashboard.putData(new HoodJoysticks());
+		
+		// Turret
+		SmartDashboard.putData(new TurretJoysticks());
+		
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
+		
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
 
-		SmartDashboard.putData(new ExtendOmni());
-		SmartDashboard.putData(new RetractOmni());
-		SmartDashboard.putData(new WaitForDefense());
-		
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseShortPistons());
-		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
