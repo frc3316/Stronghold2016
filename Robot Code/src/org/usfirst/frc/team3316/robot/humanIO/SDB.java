@@ -70,11 +70,6 @@ public class SDB
 			put("Left encoder displacement", Robot.chassis.getLeftDistance());
 			put("Right encoder displacement", Robot.chassis.getRightDistance());
 			
-			put("isHELeftFrontOn", Robot.chassis.isHELeftFrontOn);
-			put("isHERightFrontOn", Robot.chassis.isHERightFrontOn);
-			put("isHELeftBackOn", Robot.chassis.isHELeftBackOn);
-			put("isHERightBackOn", Robot.chassis.isHERightBackOn);
-			
 			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
 			try

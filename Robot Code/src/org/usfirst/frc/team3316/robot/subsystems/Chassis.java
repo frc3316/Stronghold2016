@@ -61,8 +61,6 @@ public class Chassis extends DBugSubsystem
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
-	public boolean isHELeftFrontOn = false, isHERightFrontOn = false,
-			isHELeftBackOn = false, isHERightBackOn = false;
 
 	// Other
 	private MovingAverage movingAvgPitch; // For the navX
@@ -70,18 +68,6 @@ public class Chassis extends DBugSubsystem
 	private TimerTask navXTasker; // For the navX
 	private TimerTask HETasker;
 	
-	private class HETimerTask extends TimerTask
-	{
-
-		public void run()
-		{
-			if (getHELeftBack()) isHELeftBackOn = true;
-			if (getHELeftFront()) isHELeftFrontOn = true;
-			if (getHERightBack()) isHERightBackOn = true;
-			if (getHERightFront()) isHERightFrontOn = true;
-		}
-		
-	}
 	public Chassis()
 	{
 		// Actuators
@@ -120,8 +106,6 @@ public class Chassis extends DBugSubsystem
 
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
-		HETasker = new HETimerTask();
-		Robot.timer.schedule(HETasker, 0, 10);
 				
 	}
 
