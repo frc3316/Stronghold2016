@@ -324,6 +324,9 @@ public class Config
 			 * Variables
 			 */
 			{
+				
+				addToVariables("flywheel_CounterFilter_MaxChange", 5.0);
+				addToVariables("flywheel_CounterFilter_Period", (long) 10);
 
 				// Bangbang
 				addToVariables("flywheel_Bangbang_Setpoint", 45.0);
@@ -395,6 +398,9 @@ public class Config
 			 */
 			{
 				addToVariables("turret_Pot_Offset", 0.0);
+				
+				addToVariables("turret_PotFilter_MaxChange", 1.0);
+				addToVariables("turret_PotFilter_Period", 10);
 				
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
