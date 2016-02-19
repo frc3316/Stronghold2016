@@ -437,7 +437,7 @@ public class Config
 				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 1.0);
+				addToVariables("hood_PID_Tolerance", 0.3);
 				addToVariables("hood_PID_KP", 0.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.0);
