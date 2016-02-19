@@ -209,6 +209,8 @@ public class SDB
 		SmartDashboard.putData(new RollIn());
 		putConfigVariableInSDB("transport_RollIn_Speed");
 		
+		SmartDashboard.putData(new JoystickFlywheel());
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */

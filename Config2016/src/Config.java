@@ -146,7 +146,7 @@ public class Config
 				/*
 				 * Intake
 				 */
-				addToConstants("INTAKE_MOTOR_REVERSE", false);
+				addToConstants("INTAKE_MOTOR_REVERSE", true);
 
 				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
 
@@ -165,7 +165,7 @@ public class Config
 				/*
 				 * Transport
 				 */
-				addToConstants("TRANSPORT_MOTOR_REVERSE", false);
+				addToConstants("TRANSPORT_MOTOR_REVERSE", true);
 				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0);
 
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
