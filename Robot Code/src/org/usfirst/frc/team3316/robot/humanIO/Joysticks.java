@@ -9,6 +9,8 @@ import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
+import org.usfirst.frc.team3316.robot.sequences.CollectBall;
+import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -61,11 +63,19 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
+		// Climbing
 		JoystickButton climbButton = new JoystickButton(joystickRight, (int) Robot.config.get("CLIMB_BUTTON"));
 		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
 
+		// Chassis
 		JoystickButton toggleOmni = new JoystickButton(joystickRight,
 				(int) config.get("BUTTON_TOGGLE_OMNI"));
 		toggleOmni.whenPressed(new ToggleOmni());
+		
+		// Intake
+		JoystickButton collectBall = new JoystickButton(joystickOperator, (int) Robot.config.get("BUTTON_COLLECT_BALL"));
+		collectBall.whenPressed(new CollectBall());
+		JoystickButton ejectBall = new JoystickButton(joystickOperator, (int) Robot.config.get("BUTTON_EJECT_BALL"));
+		collectBall.whenPressed(new EjectBall());
 	}
 }
