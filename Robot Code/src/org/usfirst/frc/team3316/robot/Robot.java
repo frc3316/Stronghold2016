@@ -90,13 +90,13 @@ public class Robot extends IterativeRobot
 		/*
 		 * Subsystems
 		 */
-//		chassis = new Chassis();
-//		intake = new Intake();
-//		transport = new Transport();
+		chassis = new Chassis();
+		intake = new Intake();
+		transport = new Transport();
 		flywheel = new Flywheel();
 		turret = new Turret();
 		hood = new Hood();
-//		climbing = new Climbing();
+		climbing = new Climbing();
 		
 		/*
 		 * Human IO (that requires subsystems)

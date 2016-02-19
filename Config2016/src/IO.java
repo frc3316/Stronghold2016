@@ -181,11 +181,11 @@ public class IO
 
 					putPWMA("INTAKE_MOTOR", 6);
 
-					putPWMA("TRANSPORT_MOTOR", 0);
+					putPWMA("TRANSPORT_MOTOR", 7);
 
-					putPWMA("FLYWHEEL_MOTOR", 1);
+					putPWMA("FLYWHEEL_MOTOR", 8);
 
-					putPWMA("TURRET_MOTOR", 2);
+					putPWMA("TURRET_MOTOR", 9);
 
 					putCANA("HOOD_MOTOR", 5);
 
@@ -206,7 +206,7 @@ public class IO
 					putCANB("CHASSIS_MOTOR_RIGHT_1", 11);
 					putCANB("CHASSIS_MOTOR_RIGHT_2", 12);
 
-					putPWMB("INTAKE_MOTOR", 11);
+					putPWMB("INTAKE_MOTOR", 0);
 
 					putCANB("TRANSPORT_MOTOR", 1);
 
@@ -214,14 +214,14 @@ public class IO
 
 					putPWMB("TURRET_MOTOR", 8);
 
-					putCANB("HOOD_MOTOR", 4);
+					putCANB("HOOD_MOTOR", 9);
 
 					putCANB("CLIMBING_MOTOR_1", 2);
 					putCANB("CLIMBING_MOTOR_2", 13);
 					putCANB("CLIMBING_MOTOR_3", 14);
 					putCANB("CLIMBING_MOTOR_4", 15);
 					
-					putPWMB("SPARE_MOTOR", 9);
+					putPWMB("SPARE_MOTOR", 4);
 				}
 			}
 
@@ -235,16 +235,15 @@ public class IO
 				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
 				putDIO("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);
 
-				putDIO("CHASSIS_HALL_EFFECT_LEFT_FRONT", 10);
-				putDIO("CHASSIS_HALL_EFFECT_LEFT_BACK", 11);
-				putDIO("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 12);
-				putDIO("CHASSIS_HALL_EFFECT_RIGHT_BACK", 13);
+				putDIO("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
+				putDIO("CHASSIS_HALL_EFFECT_LEFT_BACK", 13);
+				putDIO("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 11);
+				putDIO("CHASSIS_HALL_EFFECT_RIGHT_BACK", 10);
 
 				putDIO("INTAKE_LEFT_SWITCH", 7);
 				putDIO("INTAKE_RIGHT_SWITCH", 5);
 
-				putDIO("TRANSPORT_ENCODER_A", 9);
-				putDIO("TRANSPORT_ENCODER_B", 14);
+				putDIO("TRANSPORT_ENCODER", 9);
 
 				putDIO("CLIMBING_SWITCH", 6);
 
@@ -274,7 +273,7 @@ public class IO
 				putPDP("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 11);
 				putPDP("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 12);
 
-				putPDP("INTAKE_MOTOR_PDP_CHANNEL", 11);
+				putPDP("INTAKE_MOTOR_PDP_CHANNEL", 10);
 
 				putPDP("TRANSPORT_MOTOR_PDP_CHANNEL", 1);
 
@@ -282,14 +281,14 @@ public class IO
 
 				putPDP("TURRET_MOTOR_PDP_CHANNEL", 8);
 
-				putPDP("HOOD_MOTOR_PDP_CHANNEL", 4);
+				putPDP("HOOD_MOTOR_PDP_CHANNEL", 9);
 
 				putPDP("CLIMBING_MOTOR_1_PDP_CHANNEL", 2);
 				putPDP("CLIMBING_MOTOR_2_PDP_CHANNEL", 13);
 				putPDP("CLIMBING_MOTOR_3_PDP_CHANNEL", 14);
 				putPDP("CLIMBING_MOTOR_4_PDP_CHANNEL", 15);
 				
-				putPDP("SPARE_MOTOR_PDP_CHANNEL", 9);
+				putPDP("SPARE_MOTOR_PDP_CHANNEL", 4);
 			}
 
 			/*
@@ -299,24 +298,24 @@ public class IO
 				// Module 0
 				Config.addToConstants("CHASSIS_LONG_PISTONS_MODULE", 0);
 				
-				Config.addToConstants("CHASSIS_LONG_PISTONS_FORWARD", 0);
-				Config.addToConstants("CHASSIS_LONG_PISTONS_REVERSE", 1);
+				Config.addToConstants("CHASSIS_LONG_PISTONS_FORWARD", 1);
+				Config.addToConstants("CHASSIS_LONG_PISTONS_REVERSE", 6);
 
 				// Module 1
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 1);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 0);
 				
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 0);
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 1);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 3);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 5);
 				
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 1);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 0);
 				
-				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 6);
+				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 0);
 				Config.addToConstants("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 7);
 				
 				Config.addToConstants("INTAKE_SOLENOID_MODULE", 1);
 
-				Config.addToConstants("INTAKE_SOLENOID_FORWARD", 2);
-				Config.addToConstants("INTAKE_SOLENOID_REVERSE", 3);
+				Config.addToConstants("INTAKE_SOLENOID_FORWARD", 0);
+				Config.addToConstants("INTAKE_SOLENOID_REVERSE", 1);
 				
 				Config.addToConstants("CLIMBING_SOLENOID_MODULE", 1);
 

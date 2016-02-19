@@ -59,6 +59,11 @@ public class SDB
 			put("Left encoder displacement", Robot.chassis.getLeftDistance());
 			put("Right encoder displacement", Robot.chassis.getRightDistance());
 			
+			put("Hall effect left front", Robot.chassis.getHELeftFront());
+			put("Hall effect left back", Robot.chassis.getHELeftBack());
+			put("Hall effect right front", Robot.chassis.getHERightFront());
+			put("Hall effect right back", Robot.chassis.getHERightBack());
+			
 			try
 			{
 				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
@@ -177,6 +182,12 @@ public class SDB
 		
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());
+		
+		SmartDashboard.putData(new OpenLongPistons());
+		SmartDashboard.putData(new OpenShortPistons());
+		
+		SmartDashboard.putData(new CloseLongPistons());
+		SmartDashboard.putData(new CloseShortPistons());
 		
 		SmartDashboard.putData(new WaitForDefense());
 		
