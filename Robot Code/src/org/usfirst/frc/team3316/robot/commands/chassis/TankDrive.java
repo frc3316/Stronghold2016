@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3316.robot.commands.chassis;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.config.Config.ConfigException;
-//TODO: Fix ConfigException import
 
 import edu.wpi.first.wpilibj.Joystick;
 

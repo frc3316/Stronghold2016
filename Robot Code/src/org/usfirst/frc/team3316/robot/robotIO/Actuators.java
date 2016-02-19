@@ -67,7 +67,7 @@ public class Actuators
 
 	private void GeneralActuatorsB()
 	{
-		spareMotorSC = new CANTalon((int) Robot.config.get("SPARE_MOTOR"));
+		spareMotorSC = new Talon((int) Robot.config.get("SPARE_MOTOR"));
 	}
 
 	public void GeneralActuators()
@@ -100,9 +100,9 @@ public class Actuators
 	private void ChassisActuatorsB()
 	{
 		chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-		chassisLeft2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
-		chassisRight1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-		chassisRight2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		chassisLeft2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+		chassisRight1SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+		chassisRight2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 	}
 
 	public void ChassisActuators()
@@ -210,7 +210,7 @@ public class Actuators
 
 	private void FlywheelActuatorsB()
 	{
-		flywheelSC = new CANTalon((int) Robot.config.get("FLYWHEEL_MOTOR"));
+		flywheelSC = new Talon((int) Robot.config.get("FLYWHEEL_MOTOR"));
 	}
 
 	public void FlywheelActuators()
@@ -238,7 +238,7 @@ public class Actuators
 
 	private void TurretActuatorsB()
 	{
-		turretSC = new CANTalon((int) Robot.config.get("TURRET_MOTOR"));
+		turretSC = new Talon((int) Robot.config.get("TURRET_MOTOR"));
 	}
 
 	public void TurretActuators()

@@ -23,9 +23,11 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
@@ -175,13 +177,18 @@ public class SDB
 		
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());
+		
 		SmartDashboard.putData(new WaitForDefense());
 		
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseShortPistons());
+		// Turret
+		SmartDashboard.putData(new TurretJoysticks());
 		
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
+		
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
+
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
@@ -245,7 +252,7 @@ public class SDB
 		LiveWindow.addSensor("Intake", "intakeRightSwitch", (LiveWindowSendable) Robot.sensors.intakeRightSwitch);
 		LiveWindow.addSensor("Intake", "intakePot", (LiveWindowSendable) Robot.sensors.intakePot);
 		// Transport
-		LiveWindow.addSensor("Transport", "transportEncoder", (LiveWindowSendable) Robot.sensors.transportEncoder);
+		LiveWindow.addSensor("Transport", "transportEncoder", (LiveWindowSendable) Robot.sensors.transportCounter);
 		// Flywheel
 		LiveWindow.addSensor("Flywheel", "flywheelCounter", (LiveWindowSendable) Robot.sensors.flywheelCounter);
 		LiveWindow.addSensor("Flywheel", "hallEffect", (LiveWindowSendable) Robot.sensors.flywheelHE);

@@ -18,12 +18,10 @@ import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
 import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -92,13 +90,13 @@ public class Robot extends IterativeRobot
 		/*
 		 * Subsystems
 		 */
-		chassis = new Chassis();
-		intake = new Intake();
-		transport = new Transport();
+//		chassis = new Chassis();
+//		intake = new Intake();
+//		transport = new Transport();
 		flywheel = new Flywheel();
 		turret = new Turret();
 		hood = new Hood();
-		climbing = new Climbing();
+//		climbing = new Climbing();
 		
 		/*
 		 * Human IO (that requires subsystems)
@@ -155,11 +153,6 @@ public class Robot extends IterativeRobot
 	public void testPeriodic()
 	{
 		LiveWindow.run();
-	}
-
-	private void printTheTruth()
-	{
-		System.out.println("Vita is the Melech!!");
 	}
 
 	private String returnTheTruth()
