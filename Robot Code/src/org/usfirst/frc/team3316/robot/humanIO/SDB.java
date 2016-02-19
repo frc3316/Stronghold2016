@@ -64,7 +64,6 @@ public class SDB
 			
 			put("Flywheel speed", Robot.flywheel.getRate());
 			put("Flywheel HE", Robot.sensors.flywheelHE.get());
-			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
 			
 			put("Left encoder displacement", Robot.chassis.getLeftDistance());
