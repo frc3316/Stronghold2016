@@ -43,7 +43,7 @@ public class ExtendOmni extends DBugCommand
 	}
 
 	/**
-	 * Task for opening the short pistons of the left side. We want to pass this as a parameter to a timer
+	 * Tasks for opening the short pistons of each side. We want to pass this as a parameter to a timer
 	 * object (to create a delay)
 	 * 
 	 * @author D-Bug
@@ -56,14 +56,7 @@ public class ExtendOmni extends DBugCommand
 			Robot.chassis.openShortPistonsLeft();
 		}
 	}
-
-	/**
-	 * Task for opening the short pistons of the right side. We want to pass this as a parameter to a timer
-	 * object (to create a delay)
-	 * 
-	 * @author D-Bug
-	 *
-	 */
+	
 	private class LiftRightSide extends TimerTask
 	{
 		public void run()
@@ -135,7 +128,7 @@ public class ExtendOmni extends DBugCommand
 		if (!rightSet && rightFront && rightBack)
 		{
 
-			Robot.chassis.openShortPistonsRight();
+			timer.schedule(new LiftRightSide(), liftTimeout);
 			rightSet = true;
 		}
 
