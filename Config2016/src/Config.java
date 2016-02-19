@@ -96,8 +96,7 @@ public class Config
 	 * NOTE: constants and variables that are common to both robot A and robot B should be added with
 	 * addToConstants() or addToVariables()
 	 * 
-	 * <<<<<<< HEAD Use different constants and variables for the two robots only if there is a difference.
-	 * ======= Use different constants and variables for the two robots only if there is a difference. >>>>>>>
+	 * Use different constants and variables for the two robots only if there is a difference.
 	 * TestModeStuff
 	 */
 	private static void initConfig()
@@ -136,15 +135,13 @@ public class Config
 				 */
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
-
+				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
-
-				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", 4 * ((6 * Math.PI) / 32) * 0.0254);
-				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", 4 * ((6 * Math.PI) / 32) * 0.0254);
-
-				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
-				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+				
+				//For some reason the encoders give 4 times less the correct speed
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
 
 				/*
 				 * Intake
@@ -155,6 +152,15 @@ public class Config
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
+				
+				addToConstants("INTAKE_POT", 5);
+				
+				addToConstants("INTAKE_LEFT_SWITCH", 10);
+				addToConstants("INTAKE_RIGHT_SWITCH", 11);
+				
+				addToConstants("INTAKE_SOLENOID_MODULE", 0);
+				addToConstants("INTAKE_SOLENOID_FORWARD", 0);
+				addToConstants("INTAKE_SOLENOID_REVERSE", 1);
 
 				/*
 				 * Transport
@@ -169,7 +175,7 @@ public class Config
 				 */
 				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
 
-				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 10.0);
+				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 1000.0);
 
 				/*
 				 * Turret
@@ -179,36 +185,34 @@ public class Config
 				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
 																	// the stall
 																	// current
-
 				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
-				addToConstants("TURRET_POT_OFFSET", 0.0);
+				
 
 				/*
 				 * Hood
 				 */
-				addToConstants("HOOD_MOTOR_REVERSE", false);
+				addToConstants("HOOD_MOTOR_REVERSE", true);
 
-				addToConstants("HOOD_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check
 																// the stall
 																// current
 
-				addToConstants("HOOD_POT_FULL_RANGE", 100.0);
-				addToConstants("HOOD_POT_OFFSET", 30.0);
+				addToConstants("HOOD_POT_FULL_RANGE", 300.0);
 
 				/*
 				 * Climbing
 				 */
 				addToConstants("CLIMBING_MOTOR_1_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_1_MAX_CURRENT", 50.0);
 
 				addToConstants("CLIMBING_MOTOR_2_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_2_MAX_CURRENT", 50.0);
 
 				addToConstants("CLIMBING_MOTOR_3_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_3_MAX_CURRENT", 50.0);
 
 				addToConstants("CLIMBING_MOTOR_4_REVERSE", false);
-				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 10.0);
+				addToConstants("CLIMBING_MOTOR_4_MAX_CURRENT", 50.0);
 
 				addToConstants("CLIMBING_POT_FULL_RANGE", 3600.0);
 				addToConstants("CLIMBING_POT_OFFSET", 0.0);
@@ -286,15 +290,14 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_PIDRight_KP", 100.0);
-				addToVariables("chassis_PIDRight_KI", 0.00);
-				addToVariables("chassis_PIDRight_KD", 75.0);
-				addToVariables("chassis_PIDRight_KF", 450.0);
-
-				addToVariables("chassis_PIDLeft_KP", 100.0);
-				addToVariables("chassis_PIDLeft_KI", 0.0);
-				addToVariables("chassis_PIDLeft_KD", 75.0);
-				addToVariables("chassis_PIDLeft_KF", 450.0);
+				addToVariables("chassis_DriveDistance_PID_KP", 80.0);
+				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KD", 12300.0);
+				
+				addToVariables("chassis_DriveDistance_KV", 0.5);
+				
+				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
+				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
 			}
 
 			/*
@@ -322,13 +325,14 @@ public class Config
 			 */
 			{
 
-				// Bangbang - TO REMOVE AFTER TESTINGS
+				// Bangbang
 				addToVariables("flywheel_Bangbang_Setpoint", 40.0);
 				addToVariables("flywheel_Bangbang_OnVoltage", 1.0);
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
-				// PID - TO REMOVE AFTER TESTINGS
+				// PID
 				addToVariables("flywheel_PID_Setpoint", 0.0);
+				addToVariables("flywheel_PID_Tolerance", 1.0);
 				addToVariables("flywheel_PID_KP", 0.0);
 				addToVariables("flywheel_PID_KI", 0.0);
 				addToVariables("flywheel_PID_KD", 0.0);
@@ -383,9 +387,11 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("turret_Angle_SetPoint", 0.0);
-
+				addToVariables("turret_Pot_Offset", 0.0);
+				
 				// PID Control
+				addToVariables("turret_Angle_SetPoint", 0.0);
+				addToVariables("turret_PID_Tolerance", 1.0);
 				addToVariables("turret_PID_KP", 0.0);
 				addToVariables("turret_PID_KI", 0.0);
 				addToVariables("turret_PID_KD", 0.0);
@@ -396,6 +402,13 @@ public class Config
 
 				addToVariables("turret_Pot_LeftThresh", 0.0);
 				addToVariables("turret_Pot_RightThresh", 400.0);
+			}
+			
+			/*
+			 * Set Hood Angle
+			 */
+			{
+				addToVariables("turret_SetTurretAngle_Angle", 0.0);
 			}
 		}
 
@@ -413,7 +426,11 @@ public class Config
 			 * Variables
 			 */
 			{
+				addToVariables("hood_Pot_Offset", 0.0);
+				
 				// PID Control
+				addToVariables("hood_Angle_SetPoint", 0.0);
+				addToVariables("hood_PID_Tolerance", 1.0);
 				addToVariables("hood_PID_KP", 0.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.0);
@@ -421,10 +438,16 @@ public class Config
 				// Bangbang Control
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
-				addToVariables("hood_Angle_SetPoint", 0.0);
 
-				addToVariables("hood_Pot_BottomThresh", 0.0);
-				addToVariables("hood_Pot_TopThresh", 400.0);
+				addToVariables("hood_Pot_BottomThresh", 39.0);
+				addToVariables("hood_Pot_TopThresh", 81.0);
+			}
+			
+			/*
+			 * Set Hood Angle
+			 */
+			{
+				addToVariables("hood_SetHoodAngle_Angle", 0.0);
 			}
 		}
 
@@ -483,8 +506,8 @@ public class Config
 				addToVariables("climbing_Pot_HighThresh", 3400.0); // Check this
 																	// value
 
-				addToVariables("climbing_UpSpeed", 0.0); // Check this value
-				addToVariables("climbing_DownSpeed", -0.0); // Check this value
+				addToVariables("climbing_UpSpeed", 1.0); // Check this value
+				addToVariables("climbing_DownSpeed", -1.0); // Check this value
 				addToVariables("climbing_Setpoint", 900.0);
 			}
 		}

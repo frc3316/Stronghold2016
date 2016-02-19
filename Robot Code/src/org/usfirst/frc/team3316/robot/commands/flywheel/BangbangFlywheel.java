@@ -29,7 +29,6 @@ public class BangbangFlywheel extends DBugCommand
 
 	protected void init()
 	{
-		setpoint = (double) config.get("flywheel_Bangbang_Setpoint");
 		onVoltage = (double) config.get("flywheel_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("flywheel_Bangbang_OffVoltage");
 
@@ -38,6 +37,7 @@ public class BangbangFlywheel extends DBugCommand
 
 	protected void execute()
 	{
+		setpoint = (double) config.get("flywheel_Bangbang_Setpoint");
 		if (Robot.flywheel.getRate() < setpoint)
 		{
 			v = onVoltage;

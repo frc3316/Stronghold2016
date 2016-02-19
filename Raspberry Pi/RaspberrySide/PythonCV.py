@@ -119,9 +119,9 @@ if __name__ == "__main__":
 
             # display:
             if isShowingImage:
-                # cv2.imshow("Current Image", visionManager.currentImage)
+                cv2.imshow("Current Image", visionManager.currentImage)
                 # cv2.imshow("Thresh Image", visionManager.threshImage)
-                cv2.imshow("Masked Image", visionManager.maskedImage)
+                # cv2.imshow("Masked Image", visionManager.maskedImage)
 
             #########################
             # Wait for key pressing #

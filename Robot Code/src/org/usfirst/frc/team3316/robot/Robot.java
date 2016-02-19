@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot
 	public static Joysticks joysticks;
 	public static SDB sdb;
 	/*
-	 * Robot IO
+	 * Robot IO 
 	 */
 	public static Actuators actuators;
 	public static Sensors sensors;
@@ -82,8 +82,12 @@ public class Robot extends IterativeRobot
 		/*
 		 * Robot IO
 		 */
-		sensors = new Sensors();
 		actuators = new Actuators();
+		sensors = new Sensors();
+		
+		Robot.actuators.GeneralActuators();
+		Robot.sensors.GeneralSensors();
+		Robot.sensors.VisionSensors();
 
 		/*
 		 * Subsystems
@@ -95,7 +99,7 @@ public class Robot extends IterativeRobot
 		turret = new Turret();
 		hood = new Hood();
 		climbing = new Climbing();
-
+		
 		/*
 		 * Human IO (that requires subsystems)
 		 */

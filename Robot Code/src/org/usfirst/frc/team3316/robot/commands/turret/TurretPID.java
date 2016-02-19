@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class TurretPID extends DBugCommand
 {
-	private PIDController pid;
+	private static PIDController pid;
 	private double pidOutput;
 
 	public TurretPID()
@@ -59,6 +59,8 @@ public class TurretPID extends DBugCommand
 				(double) config.get("turret_PID_KI"),
 				(double) config.get("turret_PID_KD"));
 		
+		pid.setAbsoluteTolerance((double) config.get("turret_PID_Tolerance"));
+		
 		if (AlignShooter.isObjectDetected())
 		{
 			double setPoint = (double) AlignShooter.getTurretAngle();
@@ -70,6 +72,10 @@ public class TurretPID extends DBugCommand
 		{
 			isFin = !Robot.turret.setMotors(0);
 		}
+	}
+	
+	public static boolean onTarget() {
+		return pid.onTarget();
 	}
 
 	protected boolean isFinished()

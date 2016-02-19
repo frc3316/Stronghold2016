@@ -11,56 +11,29 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
-import org.usfirst.frc.team3316.robot.commands.chassis.AutoPistonsToggle;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.ExtendOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
-import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
-import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
-import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallIn;
-import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallOut;
-import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
-import org.usfirst.frc.team3316.robot.commands.chassis.auton.CrossDefense;
-import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
-import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
-import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
-import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
-import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
-import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
-import org.usfirst.frc.team3316.robot.commands.transport.BangbangTransport;
-import org.usfirst.frc.team3316.robot.commands.turret.StopTurret;
-import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
-import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
-import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
-import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
-import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
-import org.usfirst.frc.team3316.robot.commands.climbing.StopWinch;
-import org.usfirst.frc.team3316.robot.commands.climbing.WaitForRung;
-import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
-import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
-import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
+import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
+import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
-import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
-import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 
 public class SDB
 {
@@ -85,19 +58,34 @@ public class SDB
 			put("Chassis Pitch", Robot.chassis.getPitch());
 			put("Chassis Roll", Robot.chassis.getRoll());
 			put("isOnDefense", Robot.chassis.isOnDefense());
+
+			put("Hood Angle", Robot.hood.getAngle());
+			put("Turret Angle", Robot.turret.getAngle());
+			
+			put("Flywheel speed", Robot.flywheel.getRate());
+			put("Flywheel HE", Robot.sensors.flywheelHE.get());
+			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
+			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
 			
 			put("Left encoder displacement", Robot.chassis.getLeftDistance());
 			put("Right encoder displacement", Robot.chassis.getRightDistance());
-			
-			// put("HE Left Front", Robot.chassis.getHELeftFront());
-			// put("HE Left Back", Robot.chassis.getHELeftBack());
-			// put("HE Right Front", Robot.chassis.getHERightFront());
-			// put("HE Right Back", Robot.chassis.getHERightBack());
 			
 			put("isHELeftFrontOn", Robot.chassis.isHELeftFrontOn);
 			put("isHERightFrontOn", Robot.chassis.isHERightFrontOn);
 			put("isHELeftBackOn", Robot.chassis.isHELeftBackOn);
 			put("isHERightBackOn", Robot.chassis.isHERightBackOn);
+			
+			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
+			
+			try
+			{
+				put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
+			}
+			catch (Exception e)
+			{
+				//e.printStackTrace();
+				put("DistanceFromCamera", "null");
+			}
 		}
 
 		private void put(String name, double d)
@@ -198,29 +186,49 @@ public class SDB
 		
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
-
-		/*
-		 * Remove these after finishing testing on prototype
-		 */		
-		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
-		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
-		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
-		putConfigVariableInSDB("chassis_CrossDefense_BrakeV");
-		putConfigVariableInSDB("chassis_CrossBrake_Timeout");
-		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
-		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
-		putConfigVariableInSDB("chassis_CrossDefense_DownV");
+		
+		putConfigVariableInSDB("hood_SetHoodAngle_Angle");
+		putConfigVariableInSDB("turret_SetTurretAngle_Angle");
+		
+		SmartDashboard.putData(new SetHoodAngle());
+		SmartDashboard.putData(new SetTurretAngle());
 		
 		/*
 		 * For testing
 		 */
-		SmartDashboard.putData(new CrossingForwardSequence());
-		SmartDashboard.putData(new CrossingBackSequence());
+		
+		// Flywheel
+		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
+		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
+		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
+		
+		SmartDashboard.putData(new BangbangFlywheel());
+		SmartDashboard.putData(new JoystickFlywheel());
+
+		putConfigVariableInSDB("flywheel_PID_KP");
+		putConfigVariableInSDB("flywheel_PID_KI");
+		putConfigVariableInSDB("flywheel_PID_KD");
+		putConfigVariableInSDB("flywheel_PID_KF");
+		
+		SmartDashboard.putData(new FlywheelPID());
+		
+		// Hood
+		putConfigVariableInSDB("hood_PID_KP");
+		putConfigVariableInSDB("hood_PID_KI");
+		putConfigVariableInSDB("hood_PID_KD");
+
+		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
+		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
+		
+		putConfigVariableInSDB("hood_Angle_SetPoint");
+		
+		SmartDashboard.putData(new HoodBangbang());
+		SmartDashboard.putData(new HoodPID());
+		SmartDashboard.putData(new HoodJoysticks());
+
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());
-		SmartDashboard.putData(new ToggleOmni());
 		SmartDashboard.putData(new WaitForDefense());
-		SmartDashboard.putData(new AutoPistonsToggle());
 		
 		SmartDashboard.putData(new OpenLongPistons());
 		SmartDashboard.putData(new CloseLongPistons());
@@ -230,7 +238,6 @@ public class SDB
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
-
 		logger.info("Finished initSDB()");
 	}
 
@@ -253,6 +260,24 @@ public class SDB
 		LiveWindow.addActuator("Chassis", "chassisLongPistons", (LiveWindowSendable) Robot.actuators.chassisLongPistons);
 		LiveWindow.addActuator("Chassis", "chassisShortPistonsLeft", (LiveWindowSendable) Robot.actuators.chassisShortPistonsLeft);
 		LiveWindow.addActuator("Chassis", "chassisShortPistonsRight", (LiveWindowSendable) Robot.actuators.chassisShortPistonsRight);
+		// Intake
+		LiveWindow.addActuator("Intake", "intakeSolenoid", (LiveWindowSendable) Robot.actuators.intakeSolenoid);
+		LiveWindow.addActuator("Intake", "intakeSC", (LiveWindowSendable) Robot.actuators.intakeSC);
+		// Transport
+		LiveWindow.addActuator("Transport", "transportSC", (LiveWindowSendable) Robot.actuators.transportSC);
+		// Flywheel
+		LiveWindow.addActuator("Flywheel", "flywheelSC", (LiveWindowSendable) Robot.actuators.flywheelSC);
+		// Turret
+		LiveWindow.addActuator("Turret", "turretSC", (LiveWindowSendable) Robot.actuators.turretSC);
+		// Hood
+		LiveWindow.addActuator("Hood", "hoodSC", (LiveWindowSendable) Robot.actuators.hoodSC);
+		// Climbing
+		LiveWindow.addActuator("Climbing", "climbingSolenoid", (LiveWindowSendable) Robot.actuators.climbingSolenoid);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC1", (LiveWindowSendable) Robot.actuators.climbingMotorSC1);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC2", (LiveWindowSendable) Robot.actuators.climbingMotorSC2);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC3", (LiveWindowSendable) Robot.actuators.climbingMotorSC3);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC4", (LiveWindowSendable) Robot.actuators.climbingMotorSC4);
+		// Spare
 		LiveWindow.addActuator("Spare", "spareMotorSC", (LiveWindowSendable) Robot.actuators.spareMotorSC);
 
 		/*
@@ -268,6 +293,22 @@ public class SDB
 		LiveWindow.addSensor("Chassis", "chassisHELeftBack", (LiveWindowSendable) Robot.sensors.chassisHELeftBack);
 		LiveWindow.addSensor("Chassis", "chassisHERightFront", (LiveWindowSendable) Robot.sensors.chassisHERightFront);
 		LiveWindow.addSensor("Chassis", "chassisHERightBack", (LiveWindowSendable) Robot.sensors.chassisHERightBack);
+		// Intake
+		LiveWindow.addSensor("Intake", "intakeLeftSwitch", (LiveWindowSendable) Robot.sensors.intakeLeftSwitch);
+		LiveWindow.addSensor("Intake", "intakeRightSwitch", (LiveWindowSendable) Robot.sensors.intakeRightSwitch);
+		LiveWindow.addSensor("Intake", "intakePot", (LiveWindowSendable) Robot.sensors.intakePot);
+		// Transport
+		LiveWindow.addSensor("Transport", "transportEncoder", (LiveWindowSendable) Robot.sensors.transportEncoder);
+		// Flywheel
+		LiveWindow.addSensor("Flywheel", "flywheelCounter", (LiveWindowSendable) Robot.sensors.flywheelCounter);
+		LiveWindow.addSensor("Flywheel", "hallEffect", (LiveWindowSendable) Robot.sensors.flywheelHE);
+		// Turret
+		LiveWindow.addSensor("Turret", "turretPot", (LiveWindowSendable) Robot.sensors.turretPot);
+		// Hood
+		LiveWindow.addSensor("Hood", "hoodPot", (LiveWindowSendable) Robot.sensors.hoodPot);
+		// Climbing
+		LiveWindow.addSensor("Climbing", "climbingPot", (LiveWindowSendable) Robot.sensors.climbingPot);
+		LiveWindow.addSensor("Climbing", "climbingSwitch", (LiveWindowSendable) Robot.sensors.climbingSwitch);
 		
 		logger.info("Finished initLiveWindow()");
 	}

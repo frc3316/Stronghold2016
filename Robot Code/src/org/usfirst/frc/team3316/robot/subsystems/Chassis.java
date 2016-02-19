@@ -85,6 +85,8 @@ public class Chassis extends DBugSubsystem
 	public Chassis()
 	{
 		// Actuators
+		Robot.actuators.ChassisActuators();
+		
 		leftMotor1 = Robot.actuators.chassisLeft1;
 		rightMotor2 = Robot.actuators.chassisRight2;
 		leftMotor2 = Robot.actuators.chassisLeft2;
@@ -95,6 +97,8 @@ public class Chassis extends DBugSubsystem
 		shortPistonsRight = Robot.actuators.chassisShortPistonsRight;
 
 		// Sensors
+		Robot.sensors.ChassisSensors();
+		
 		navx = Robot.sensors.navx;
 		leftEncoder = Robot.sensors.chassisLeftEncoder;
 		rightEncoder = Robot.sensors.chassisRightEncoder;
