@@ -54,23 +54,8 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Chassis Yaw", Robot.chassis.getYaw());
-			put("Chassis Pitch", Robot.chassis.getPitch());
-			put("Chassis Roll", Robot.chassis.getRoll());
-			put("isOnDefense", Robot.chassis.isOnDefense());
-
-			put("Hood Angle", Robot.hood.getAngle());
-			put("Turret Angle", Robot.turret.getAngle());
-			
-			put("Flywheel speed", Robot.flywheel.getRate());
-			put("Flywheel HE", Robot.sensors.flywheelHE.get());
-			put("Flywheel SC voltage", Robot.actuators.flywheelMotor.getVoltage());
-			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
-			
 			put("Left encoder displacement", Robot.chassis.getLeftDistance());
 			put("Right encoder displacement", Robot.chassis.getRightDistance());
-			
-			put("Joystick Y", Robot.joysticks.joystickOperator.getY());
 			
 			try
 			{
@@ -188,39 +173,6 @@ public class SDB
 		SmartDashboard.putData(new SetHoodAngle());
 		SmartDashboard.putData(new SetTurretAngle());
 		
-		/*
-		 * For testing
-		 */
-		
-		// Flywheel
-		putConfigVariableInSDB("flywheel_Bangbang_Setpoint");
-		putConfigVariableInSDB("flywheel_Bangbang_OnVoltage");
-		putConfigVariableInSDB("flywheel_Bangbang_OffVoltage");
-		
-		SmartDashboard.putData(new BangbangFlywheel());
-		SmartDashboard.putData(new JoystickFlywheel());
-
-		putConfigVariableInSDB("flywheel_PID_KP");
-		putConfigVariableInSDB("flywheel_PID_KI");
-		putConfigVariableInSDB("flywheel_PID_KD");
-		putConfigVariableInSDB("flywheel_PID_KF");
-		
-		SmartDashboard.putData(new FlywheelPID());
-		
-		// Hood
-		putConfigVariableInSDB("hood_PID_KP");
-		putConfigVariableInSDB("hood_PID_KI");
-		putConfigVariableInSDB("hood_PID_KD");
-
-		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
-		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
-		
-		putConfigVariableInSDB("hood_Angle_SetPoint");
-		
-		SmartDashboard.putData(new HoodBangbang());
-		SmartDashboard.putData(new HoodPID());
-		SmartDashboard.putData(new HoodJoysticks());
-
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());
 		SmartDashboard.putData(new WaitForDefense());
