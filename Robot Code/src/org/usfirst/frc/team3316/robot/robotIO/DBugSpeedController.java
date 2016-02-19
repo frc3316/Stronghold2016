@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3316.robot.robotIO;
 
+import java.util.Timer;
+
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -25,6 +27,9 @@ public class DBugSpeedController
 	private boolean isSetLimit;
 	private int pdpChannel; // The channel in the PDP of the speed controller
 	private double maxCurrent; // The high threshold for current control
+	
+	private double stallTimeout;
+	private double stallInitTime = 0.0; // The FTGA time when the current turns to stall
 
 	/**
 	 * This method is using for adding a new speed controller to this subsystem.
@@ -48,6 +53,8 @@ public class DBugSpeedController
 		this.isSetLimit = true;
 		this.pdpChannel = pdpChannel;
 		this.maxCurrent = maxCurrent;
+		stallTimeout = (double) config.get("sc_Stall_Timeout");
+		stallInitTime = 0.0;
 
 		sc.setInverted(reverse);
 	}
@@ -72,6 +79,8 @@ public class DBugSpeedController
 		this.reverse = reverse;
 		this.pdpChannel = pdpChannel;
 		isSetLimit = false;
+		stallTimeout = (double) config.get("sc_Stall_Timeout");
+		stallInitTime = 0.0;
 
 		sc.setInverted(reverse);
 	}
@@ -88,6 +97,11 @@ public class DBugSpeedController
 	{
 		if (!isSetLimit || getCurrent() < maxCurrent)
 		{
+			sc.set(v);
+			stallInitTime = edu.wpi.first.wpilibj.Timer.getFPGATimestamp();
+			return true;
+		}
+		else if (edu.wpi.first.wpilibj.Timer.getFPGATimestamp() - stallInitTime < stallTimeout) {
 			sc.set(v);
 			return true;
 		}

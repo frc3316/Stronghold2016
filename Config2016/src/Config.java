@@ -224,6 +224,11 @@ public class Config
 
 				addToConstants("SPARE_MOTOR_PDP_MAX_CURRENT", 10.0);
 			}
+			
+			/*
+			 * Variables
+			 */
+			addToVariables("sc_Stall_Timeout", 0.5);
 		}
 
 		/*
