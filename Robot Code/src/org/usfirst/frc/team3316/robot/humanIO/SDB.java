@@ -28,6 +28,7 @@ import org.usfirst.frc.team3316.robot.commands.transport.RollIn;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
@@ -214,10 +215,12 @@ public class SDB
 		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
 		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
 		
+		SmartDashboard.putData(new TurretPID());
 		putConfigVariableInSDB("turret_PID_KP");
 		putConfigVariableInSDB("turret_PID_KI");
 		putConfigVariableInSDB("turret_PID_KD");
 		
+		putConfigVariableInSDB("turret_PID_Tolerance");
 		/*
 		 * Remove these after finishing testing on prototype
 		 */

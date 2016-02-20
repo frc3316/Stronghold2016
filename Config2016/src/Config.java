@@ -148,7 +148,7 @@ public class Config
 				 */
 				addToConstants("INTAKE_MOTOR_REVERSE", true);
 
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 50.0);
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 15.0);
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
@@ -166,7 +166,7 @@ public class Config
 				 * Transport
 				 */
 				addToConstants("TRANSPORT_MOTOR_REVERSE", true);
-				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 10.0);
+				addToConstants("TRANSPORT_MOTOR_MAX_CURRENT", 30.0);
 
 				addToConstants("TRANSPORT_ENCODER_REVERSE_DIRECTION", false);
 
@@ -182,10 +182,10 @@ public class Config
 				 */
 				addToConstants("TURRET_MOTOR_REVERSE", false);
 
-				addToConstants("TURRET_MOTOR_MAX_CURRENT", 10.0); // TODO: Check
+				addToConstants("TURRET_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
 																	// the stall
 																	// current
-				addToConstants("TURRET_POT_FULL_RANGE", 400.0);
+				addToConstants("TURRET_POT_FULL_RANGE", -400.0);
 				
 
 				/*
@@ -193,7 +193,7 @@ public class Config
 				 */
 				addToConstants("HOOD_MOTOR_REVERSE", true);
 
-				addToConstants("HOOD_MOTOR_MAX_CURRENT", 1000.0); // TODO: Check
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
 																// the stall
 																// current
 
@@ -375,7 +375,7 @@ public class Config
 			 * Roll In
 			 */
 			{
-				addToVariables("intake_RollIn_Speed", 0.5);
+				addToVariables("intake_RollIn_Speed", 1.0);
 			}
 
 			/*
@@ -400,25 +400,25 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariablesA("turret_Pot_Offset", 0.0);
-				addToVariablesB("turret_Pot_Offset", 0.0);
+				addToVariablesA("turret_Pot_Offset", 107.9930935901017);
+				addToVariablesB("turret_Pot_Offset", 107.9930935901017);
 				
 				addToVariables("turret_PotFilter_MaxChange", 4.0);
 				addToVariables("turret_PotFilter_Period", (long) 10);
 				
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 1.0);
+				addToVariables("turret_PID_Tolerance", 0.3);
 				addToVariables("turret_PID_KP", 0.0);
 				addToVariables("turret_PID_KI", 0.0);
 				addToVariables("turret_PID_KD", 0.0);
 
 				// Bangbang Control
-				addToVariables("turret_Bangbang_OnVoltage", 0.0);
-				addToVariables("turret_Bangbang_OffVoltage", 0.0);
+				addToVariables("turret_Bangbang_OnVoltage", 0.13);
+				addToVariables("turret_Bangbang_OffVoltage", -0.13);
 
-				addToVariables("turret_Pot_LeftThresh", 0.0);
-				addToVariables("turret_Pot_RightThresh", 400.0);
+				addToVariables("turret_Pot_LeftThresh", -180.0);
+				addToVariables("turret_Pot_RightThresh", 180.0);
 			}
 			
 			/*
@@ -444,7 +444,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 108.4091603287355);
-				addToVariablesB("hood_Pot_Offset", 158.03099700851652);
+				addToVariablesB("hood_Pot_Offset", 156.47294478246684);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
@@ -460,7 +460,7 @@ public class Config
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 
-				addToVariables("hood_Pot_BottomThresh", 2.0);
+				addToVariables("hood_Pot_BottomThresh", 4.0);
 				addToVariables("hood_Pot_TopThresh", 70.0);
 			}
 			
