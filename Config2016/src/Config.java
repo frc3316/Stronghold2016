@@ -148,7 +148,7 @@ public class Config
 				 */
 				addToConstants("INTAKE_MOTOR_REVERSE", true);
 
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 50.0);
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
@@ -444,7 +444,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 108.4091603287355);
-				addToVariablesB("hood_Pot_Offset", 16.475693696202693);
+				addToVariablesB("hood_Pot_Offset", 197.60768800088746);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
