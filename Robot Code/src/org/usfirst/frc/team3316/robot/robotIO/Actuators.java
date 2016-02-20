@@ -72,7 +72,7 @@ public class Actuators
 
 	public void GeneralActuators()
 	{
-		compressor = new Compressor();
+		compressor = new Compressor(1);
 		if (config.robotA)
 		{
 			GeneralActuatorsA();

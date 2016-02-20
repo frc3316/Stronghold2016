@@ -444,7 +444,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 108.4091603287355);
-				addToVariablesB("hood_Pot_Offset", 197.60768800088746);
+				addToVariablesB("hood_Pot_Offset", 158.03099700851652);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
@@ -460,7 +460,7 @@ public class Config
 				addToVariables("hood_Bangbang_OnVoltage", 0.0);
 				addToVariables("hood_Bangbang_OffVoltage", 0.0);
 
-				addToVariables("hood_Pot_BottomThresh", 1.0);
+				addToVariables("hood_Pot_BottomThresh", 2.0);
 				addToVariables("hood_Pot_TopThresh", 70.0);
 			}
 			
