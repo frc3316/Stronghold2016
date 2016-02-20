@@ -6,8 +6,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 
 public class TurretBangbang extends DBugCommand
 {
-
-	private double setPoint, onVoltage, offVoltage;
+	private double setPoint, onVoltage, offVoltage, tolerance;
 
 	public TurretBangbang()
 	{
@@ -18,12 +17,14 @@ public class TurretBangbang extends DBugCommand
 	{
 		onVoltage = (double) config.get("turret_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("turret_Bangbang_OffVoltage");
+		tolerance = (double) config.get("turret_PID_Tolerance");
 	}
 
 	protected void execute()
 	{
-		setPoint = (double) AlignShooter.getTurretAngle();
-
+//		setPoint = (double) AlignShooter.getTurretAngle();
+		setPoint = (double) config.get("turret_Angle_SetPoint");
+		
 		if (Robot.turret.getAngle() <= setPoint)
 		{
 			isFin = !Robot.turret.setMotors(onVoltage);
@@ -36,7 +37,7 @@ public class TurretBangbang extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return isFin;
+		return isFin || onTarget();
 	}
 
 	protected void fin()
@@ -49,4 +50,17 @@ public class TurretBangbang extends DBugCommand
 		fin();
 	}
 
+	private boolean onTarget ()
+	{
+		if (Math.abs(Robot.turret.getAngle() - setPoint) < tolerance)
+		{
+			logger.fine("Turret banbang on target: " + true);
+			return true;
+		}
+		else
+		{
+			logger.fine("Turret banbang on target: " + false);
+			return false;
+		}
+	}
 }

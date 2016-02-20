@@ -74,13 +74,15 @@ public class TurretPID extends DBugCommand
 		}
 	}
 	
-	public static boolean onTarget() {
+	public static boolean onTarget() 
+	{
+		logger.fine("Turret PID on target: " + pid.onTarget());
 		return pid.onTarget();
 	}
 
 	protected boolean isFinished()
 	{
-		return isFin;
+		return isFin || onTarget();
 	}
 
 	protected void fin()
@@ -94,5 +96,4 @@ public class TurretPID extends DBugCommand
 	{
 		fin();
 	}
-
 }
