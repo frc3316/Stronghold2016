@@ -67,6 +67,9 @@ public class SDB
 			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
 			put("Transport Current", Robot.actuators.transportMotor.getCurrent());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
+			put("Flywheel speed", Robot.flywheel.getRate());
+			put("Flywheel power", Robot.flywheel.getPowerSum());
+			
 			put("Hood Current", Robot.actuators.hoodMotor.getCurrent());
 			put("Turret Current", Robot.actuators.turretMotor.getCurrent());
 		}
@@ -209,7 +212,8 @@ public class SDB
 		SmartDashboard.putData(new RollIn());
 		putConfigVariableInSDB("transport_RollIn_Speed");
 		
-		SmartDashboard.putData(new JoystickFlywheel());
+		SmartDashboard.putData(new WarmShooter());
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
 		
 		/*
 		 * Remove these after finishing testing on prototype

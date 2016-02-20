@@ -40,11 +40,12 @@ public class LowPassFilter
 	
 	private void updateValue ()
 	{
-		double delta = Math.abs(value - supplier.getAsDouble());
+		double currentValue = supplier.getAsDouble();
+		double delta = Math.abs(value - currentValue);
 		
 		if (delta <= maxChange)
 		{
-			value = supplier.getAsDouble();
+			value = currentValue;
 		}
 	}
 	

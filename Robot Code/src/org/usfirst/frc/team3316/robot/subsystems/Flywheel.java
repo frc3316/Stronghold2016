@@ -53,7 +53,7 @@ public class Flywheel extends DBugSubsystemCC
 		counterFilter = new LowPassFilter((double) config.get("flywheel_CounterFilter_MaxChange"),
 				(long) config.get("flywheel_CounterFilter_Period"), () ->
 				{
-					return counter.getRate();
+					return counter.getRate() > 200  ? Double.MAX_VALUE : counter.getRate();
 				});
 		
 		// Other stuff

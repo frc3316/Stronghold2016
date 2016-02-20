@@ -328,7 +328,7 @@ public class Config
 			 */
 			{
 				
-				addToVariables("flywheel_CounterFilter_MaxChange", 5.0);
+				addToVariables("flywheel_CounterFilter_MaxChange", 50.0);
 				addToVariables("flywheel_CounterFilter_Period", (long) 10);
 
 				// Bangbang
@@ -403,7 +403,7 @@ public class Config
 				addToVariablesA("turret_Pot_Offset", 0.0);
 				addToVariablesB("turret_Pot_Offset", 0.0);
 				
-				addToVariables("turret_PotFilter_MaxChange", 1.0);
+				addToVariables("turret_PotFilter_MaxChange", 4.0);
 				addToVariables("turret_PotFilter_Period", (long) 10);
 				
 				// PID Control
@@ -446,7 +446,7 @@ public class Config
 				addToVariablesA("hood_Pot_Offset", 108.4091603287355);
 				addToVariablesB("hood_Pot_Offset", 16.475693696202693);
 				
-				addToVariables("hood_PotFilter_MaxChange", 1.0);
+				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
 				
 				// PID Control
