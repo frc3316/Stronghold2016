@@ -3,12 +3,15 @@ package org.usfirst.frc.team3316.robot.commands.intake;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
+import edu.wpi.first.wpilibj.Timer;
+
 public class OpenIntake extends DBugCommand
 {
-	//TODO: Add commenting
-
+	private double timeout;
 	protected void init()
-	{}
+	{
+		timeout = (double) config.get("intake_OpenIntake_Timeout"); // In seconds
+	}
 
 	protected void execute()
 	{
@@ -17,7 +20,7 @@ public class OpenIntake extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return Robot.intake.isIntakeOpen();
+		return timeSinceInitialized() >= timeout;
 	}
 
 	protected void fin()

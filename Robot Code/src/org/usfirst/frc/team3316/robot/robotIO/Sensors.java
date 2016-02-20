@@ -128,10 +128,6 @@ public class Sensors
 				(int) config.get("INTAKE_LEFT_SWITCH"));
 		intakeRightSwitch = new DigitalInput(
 				(int) config.get("INTAKE_RIGHT_SWITCH"));
-
-		intakePot = new AnalogPotentiometer((int) config.get("INTAKE_POT"),
-				(double) config.get("INTAKE_POT_FULL_RANGE"),
-				(double) config.get("INTAKE_POT_OFFSET"));
 	}
 
 	/*

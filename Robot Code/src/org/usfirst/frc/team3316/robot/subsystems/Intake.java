@@ -3,7 +3,6 @@ package org.usfirst.frc.team3316.robot.subsystems;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -17,7 +16,6 @@ public class Intake extends DBugSubsystemCC
 
 	// Sensors
 	private DigitalInput intakeLeftSwitch, intakeRightSwitch;
-	private AnalogPotentiometer intakePot;
 
 	public Intake()
 	{
@@ -34,8 +32,6 @@ public class Intake extends DBugSubsystemCC
 
 		intakeLeftSwitch = Robot.sensors.intakeLeftSwitch;
 		intakeRightSwitch = Robot.sensors.intakeRightSwitch;
-
-		intakePot = Robot.sensors.intakePot;
 	}
 
 	public void initDefaultCommand()
@@ -69,12 +65,12 @@ public class Intake extends DBugSubsystemCC
 
 	public boolean isIntakeOpen()
 	{
-		return intakePot.get() >= (double) config.get("intake_Pot_HighThresh");
+		return intakeSolendoid.get().equals(Value.kForward);
 	}
 
 	public boolean isIntakeClose()
 	{
-		return intakePot.get() <= (double) config.get("intake_Pot_LowThresh");
+		return intakeSolendoid.get().equals(Value.kReverse);
 	}
 	
 	public boolean isReadyToIntake()

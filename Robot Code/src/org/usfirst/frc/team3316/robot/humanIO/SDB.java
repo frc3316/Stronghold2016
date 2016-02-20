@@ -24,7 +24,7 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
-import org.usfirst.frc.team3316.robot.commands.transport.RollIn;
+import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
@@ -197,16 +197,19 @@ public class SDB
 		putConfigVariableInSDB("hood_Pot_TopThresh");
 		
 		//Intake
-		SmartDashboard.putData("Intake roll in", new org.usfirst.frc.team3316.robot.commands.intake.RollIn());
-		SmartDashboard.putData("Intake roll out", new org.usfirst.frc.team3316.robot.commands.intake.RollOut());
+		SmartDashboard.putData("Intake roll in", new org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn());
+		SmartDashboard.putData("Intake roll out", new org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut());
 		
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
 		
+		putConfigVariableInSDB("transport_RollIn_Speed");
+		putConfigVariableInSDB("transport_RollOut_Speed");
+		
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
 		
-		SmartDashboard.putData(new RollIn());
+		SmartDashboard.putData(new TransportRollIn());
 		putConfigVariableInSDB("transport_RollIn_Speed");
 		
 		/*

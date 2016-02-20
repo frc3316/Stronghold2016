@@ -254,8 +254,6 @@ public class IO
 			 * AIO initialization
 			 */
 			{
-				putAIO("INTAKE_POT", 2);
-
 				putAIO("TURRET_POT", 0);
 
 				putAIO("HOOD_POT", 1);

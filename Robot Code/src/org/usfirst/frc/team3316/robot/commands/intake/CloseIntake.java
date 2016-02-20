@@ -5,10 +5,11 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class CloseIntake extends DBugCommand
 {
-	//TODO: Add commenting
-
+	private double timeout;
 	protected void init()
-	{}
+	{
+		timeout = (double) config.get("intake_CloseIntake_Timeout"); // In seconds
+	}
 
 	protected void execute()
 	{
@@ -17,7 +18,7 @@ public class CloseIntake extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return Robot.intake.isIntakeClose();
+		return timeSinceInitialized() > timeout;
 	}
 
 	protected void fin()

@@ -9,23 +9,23 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
  * @author D-Bug
  *
  */
-public class RollIn extends DBugCommand
+public class TransportRollOut extends DBugCommand
 {
-	private double rollInSpeed;
+	private double rollOutSpeed;
 
-	public RollIn()
+	public TransportRollOut()
 	{
 		requires(Robot.transport);
 	}
 
 	protected void init()
 	{
-		rollInSpeed = (double) Robot.config.get("transport_RollIn_Speed");
+		rollOutSpeed = (double) Robot.config.get("transport_RollOut_Speed");
 	}
 
 	protected void execute()
 	{
-		isFin = !Robot.transport.setMotors(rollInSpeed);
+		isFin = !Robot.transport.setMotors(rollOutSpeed);
 	}
 
 	protected boolean isFinished()
