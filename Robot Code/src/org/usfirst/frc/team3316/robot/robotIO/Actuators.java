@@ -266,7 +266,7 @@ public class Actuators
 
 	private void HoodActuatorsB()
 	{
-		hoodSC = new CANTalon((int) Robot.config.get("HOOD_MOTOR"));
+		hoodSC = new Talon((int) Robot.config.get("HOOD_MOTOR"));
 	}
 
 	public void HoodActuators()
