@@ -18,11 +18,6 @@ public class Transport extends DBugSubsystemCC
 		
 		motor = Robot.actuators.transportMotor;
 		addSpeedController(motor);
-		
-		// Sensors
-		Robot.sensors.TransportSensors();
-
-		counter = Robot.sensors.transportCounter;
 	}
 
 	public void initDefaultCommand()

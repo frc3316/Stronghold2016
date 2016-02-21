@@ -37,10 +37,6 @@ public class Sensors
 
 	// Intake
 	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
-	public AnalogPotentiometer intakePot;
-
-	// Transport
-	public Counter transportCounter;
 
 	// Flywheel
 	public Counter flywheelCounter;
@@ -128,21 +124,6 @@ public class Sensors
 				(int) config.get("INTAKE_LEFT_SWITCH"));
 		intakeRightSwitch = new DigitalInput(
 				(int) config.get("INTAKE_RIGHT_SWITCH"));
-
-		intakePot = new AnalogPotentiometer((int) config.get("INTAKE_POT"),
-				(double) config.get("INTAKE_POT_FULL_RANGE"),
-				(double) config.get("INTAKE_POT_OFFSET"));
-	}
-
-	/*
-	 * Transport
-	 */
-	public void TransportSensors()
-	{
-		transportCounter = new Counter((int) config.get("TRANSPORT_ENCODER"));
-
-		// transportEncoder.setDistancePerPulse(???);
-		// TODO: check the distance per pulse of the transport encoder
 	}
 
 	/*

@@ -17,7 +17,6 @@ public class Intake extends DBugSubsystemCC
 
 	// Sensors
 	private DigitalInput intakeLeftSwitch, intakeRightSwitch;
-	private AnalogPotentiometer intakePot;
 
 	public Intake()
 	{
@@ -34,8 +33,6 @@ public class Intake extends DBugSubsystemCC
 
 		intakeLeftSwitch = Robot.sensors.intakeLeftSwitch;
 		intakeRightSwitch = Robot.sensors.intakeRightSwitch;
-
-		intakePot = Robot.sensors.intakePot;
 	}
 
 	public void initDefaultCommand()
