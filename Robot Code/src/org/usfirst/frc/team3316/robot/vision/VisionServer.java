@@ -21,19 +21,21 @@ public class VisionServer implements Runnable
 
 	private Map<String, Double> parseLine(String s)
 	{
-		// Input e.g.: {"Var1":33.16,"Var2":22.12}
+		// Input e.g.: {'Var1':'33.16','Var2':'22.12'}
 		Map<String, Double> data = new HashMap<String, Double>();
 
 		String vars[] = s.split(",");
 		for (String var : vars)
 		{
-			String parts[] = var.split(":", 3);
+			String parts[] = var.split(":", 4);
 
 			String key = parts[0].substring(parts[0].indexOf('\'') + 1, parts[0].lastIndexOf('\''));
 
 			double value = Double
 					.parseDouble(parts[1].substring(parts[1].indexOf('\'') + 1, parts[1].lastIndexOf('\'')));
 
+			logger.finest("Parsing vision data. Key: " + key + ", Value: " + value);
+			
 			data.put(key, value);
 		}
 
@@ -56,9 +58,6 @@ public class VisionServer implements Runnable
 
 		while (true)
 		{
-			logger.info("Datagram socket connected: " + serverSocket.isConnected());
-			logger.info("Datagram socket closed: " + serverSocket.isClosed());
-			
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 			try
 			{
@@ -69,7 +68,6 @@ public class VisionServer implements Runnable
 				
 				String sentence = new String(receivePacket.getData());
 				VisionServer.Data = parseLine(sentence);
-				logger.finest(Data.toString());
 			}
 			catch (Exception e)
 			{
