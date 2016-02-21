@@ -5,13 +5,18 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+
 public class VisionServer implements Runnable
 {
 	public static Map<String, Double> Data;
+	private static DBugLogger logger;
 
 	static
 	{
 		Data = new HashMap<String, Double>();
+		logger = Robot.logger;
 	}
 
 	private Map<String, Double> parseLine(String s)
@@ -22,12 +27,12 @@ public class VisionServer implements Runnable
 		String vars[] = s.split(",");
 		for (String var : vars)
 		{
-			String parts[] = var.split(":", 2);
+			String parts[] = var.split(":", 3);
 
-			String key = parts[0].substring(parts[0].indexOf('\'') + 1, parts[0].lastIndexOf('\'') - 1);
+			String key = parts[0].substring(parts[0].indexOf('\'') + 1, parts[0].lastIndexOf('\''));
 
 			double value = Double
-					.parseDouble(parts[1].substring(parts[1].indexOf('\'') + 1, parts[1].lastIndexOf('\'') - 1));
+					.parseDouble(parts[1].substring(parts[1].indexOf('\'') + 1, parts[1].lastIndexOf('\'')));
 
 			data.put(key, value);
 		}
@@ -37,7 +42,6 @@ public class VisionServer implements Runnable
 
 	public void run()
 	{
-
 		DatagramSocket serverSocket = null;
 		try
 		{
@@ -50,22 +54,28 @@ public class VisionServer implements Runnable
 
 		byte[] receiveData = new byte[1024];
 
-		while (!Thread.interrupted())
+		while (true)
 		{
+			logger.info("Datagram socket connected: " + serverSocket.isConnected());
+			logger.info("Datagram socket closed: " + serverSocket.isClosed());
+			
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-
 			try
 			{
+				logger.finest("Vision server is trying to receive a packet");
+				serverSocket.setSoTimeout(10000);
 				serverSocket.receive(receivePacket);
+				logger.finest("Vision server received a packet");
+				
+				String sentence = new String(receivePacket.getData());
+				VisionServer.Data = parseLine(sentence);
+				logger.finest(Data.toString());
 			}
-			catch (IOException e)
+			catch (Exception e)
 			{
-				System.err.println("Error receiving data.");
+				logger.severe("Vision server couldn't receive a packet");
+				logger.severe(e);
 			}
-
-			String sentence = new String(receivePacket.getData());
-			VisionServer.Data = parseLine(sentence);
 		}
-
 	}
 }

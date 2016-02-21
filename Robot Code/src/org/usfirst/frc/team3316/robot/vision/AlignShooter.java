@@ -12,12 +12,17 @@ public class AlignShooter
 		return (turretAngle - towerAngle);
 	}
 
+	/**
+	 * This returns the DFC
+	 */
 	public static double getHoodAngle()
 	{
 		double distance = VisionServer.Data.get("DFC"); // DFC = Distance From
 														// Camera
-		double table[][] = new double[][] { { 0 }, { 0 } };
-		return (Utils.valueInterpolation(distance, table));
+//		double table[][] = new double[][] { { 0 }, { 0 } };
+//		return (Utils.valueInterpolation(distance, table));
+		
+		return distance;
 	}
 	public static boolean isObjectDetected()
 	{
