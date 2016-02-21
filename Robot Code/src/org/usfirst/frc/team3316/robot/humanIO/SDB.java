@@ -62,11 +62,11 @@ public class SDB
 			 * Insert put methods here
 			 */
 			
-			logger.finest("SDB is running");
-			
 			put("Vision Is object detected", AlignShooter.isObjectDetected());
 			put("Vision Distance", AlignShooter.getHoodAngle());
-			put("Vision Turret angle", AlignShooter.getTurretAngle());
+			put("Vision Turret angle", AlignShooter.getTowerAngle());
+			
+			put("Turret angle", Robot.turret.getAngle());
 		}
 
 		private void put(String name, double d)
@@ -167,6 +167,15 @@ public class SDB
 		
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
+		
+		SmartDashboard.putData(new TurretBangbang());
+		
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
+		
+		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
+		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
+		putConfigVariableInSDB("turret_PID_Tolerance");
 		
 		/*
 		 * Remove these after finishing testing on prototype

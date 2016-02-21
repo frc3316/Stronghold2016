@@ -7,6 +7,8 @@ import org.usfirst.frc.team3316.robot.Robot;
 public class TurretBangbang extends DBugCommand
 {
 	private double setPoint, onVoltage, offVoltage, tolerance;
+	
+	private double lastTowerAngle = Double.MAX_VALUE;
 
 	public TurretBangbang()
 	{
@@ -22,22 +24,44 @@ public class TurretBangbang extends DBugCommand
 
 	protected void execute()
 	{
-//		setPoint = (double) AlignShooter.getTurretAngle();
-		setPoint = (double) config.get("turret_Angle_SetPoint");
-		
-		if (Robot.turret.getAngle() <= setPoint)
+		if (AlignShooter.isObjectDetected())
 		{
-			isFin = !Robot.turret.setMotors(onVoltage);
+			logger.finest("Object detected");
+			
+			double towerAngle = (double) AlignShooter.getTowerAngle();
+			
+			if (towerAngle != lastTowerAngle)
+			{
+				lastTowerAngle = towerAngle;
+				setPoint = towerAngle + Robot.turret.getAngle();
+
+				logger.finest("Setpoint is: " + setPoint);
+//				setPoint = (double) config.get("turret_Angle_SetPoint");
+				
+				if (towerAngle != 3316.0)
+				{
+					if (Robot.turret.getAngle() <= setPoint)
+					{
+						logger.finest("Giving on voltage");
+						isFin = !Robot.turret.setMotors(onVoltage);
+					}
+					else
+					{
+						logger.finest("Giving off voltage");
+						isFin = !Robot.turret.setMotors(offVoltage);
+					}
+				}
+			}
 		}
 		else
 		{
-			isFin = !Robot.turret.setMotors(offVoltage);
+			Robot.turret.setMotors(0);
 		}
 	}
 
 	protected boolean isFinished()
 	{
-		return isFin || onTarget();
+		return isFin;
 	}
 
 	protected void fin()
@@ -50,7 +74,7 @@ public class TurretBangbang extends DBugCommand
 		fin();
 	}
 
-	private boolean onTarget ()
+	private boolean onTarget()
 	{
 		if (Math.abs(Robot.turret.getAngle() - setPoint) < tolerance)
 		{
