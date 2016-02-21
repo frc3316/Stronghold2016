@@ -178,11 +178,20 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 		
+		// Hood
 		putConfigVariableInSDB("hood_SetHoodAngle_Angle");
 		putConfigVariableInSDB("turret_SetTurretAngle_Angle");
 		
 		SmartDashboard.putData(new SetHoodAngle());
 		SmartDashboard.putData(new SetTurretAngle());
+		
+		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
+		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
+		
+		putConfigVariableInSDB("hood_PID_Tolerance");
+		putConfigVariableInSDB("hood_Angle_SetPoint");
+		
+		SmartDashboard.putData(new HoodBangbang());
 		
 		// Turret
 		SmartDashboard.putData(new TurretJoysticks());
