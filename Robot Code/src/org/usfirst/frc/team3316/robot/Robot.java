@@ -18,12 +18,10 @@ import org.usfirst.frc.team3316.robot.subsystems.Intake;
 import org.usfirst.frc.team3316.robot.subsystems.Transport;
 import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -44,7 +42,7 @@ public class Robot extends IterativeRobot
 	public static Joysticks joysticks;
 	public static SDB sdb;
 	/*
-	 * Robot IO
+	 * Robot IO 
 	 */
 	public static Actuators actuators;
 	public static Sensors sensors;
@@ -82,8 +80,12 @@ public class Robot extends IterativeRobot
 		/*
 		 * Robot IO
 		 */
-		sensors = new Sensors();
 		actuators = new Actuators();
+		sensors = new Sensors();
+		
+		Robot.actuators.GeneralActuators();
+		Robot.sensors.GeneralSensors();
+		Robot.sensors.VisionSensors();
 
 		/*
 		 * Subsystems
@@ -95,7 +97,7 @@ public class Robot extends IterativeRobot
 		turret = new Turret();
 		hood = new Hood();
 		climbing = new Climbing();
-
+		
 		/*
 		 * Human IO (that requires subsystems)
 		 */
@@ -151,11 +153,6 @@ public class Robot extends IterativeRobot
 	public void testPeriodic()
 	{
 		LiveWindow.run();
-	}
-
-	private void printTheTruth()
-	{
-		System.out.println("Vita is the Melech!!");
 	}
 
 	private String returnTheTruth()

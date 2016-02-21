@@ -66,10 +66,13 @@ public class Chassis extends DBugSubsystem
 	private MovingAverage movingAvgPitch; // For the navX
 	private MovingAverage movingAvgRoll; // For the navX
 	private TimerTask navXTasker; // For the navX
-
+	private TimerTask HETasker;
+	
 	public Chassis()
 	{
 		// Actuators
+		Robot.actuators.ChassisActuators();
+		
 		leftMotor1 = Robot.actuators.chassisLeft1;
 		rightMotor2 = Robot.actuators.chassisRight2;
 		leftMotor2 = Robot.actuators.chassisLeft2;
@@ -80,6 +83,8 @@ public class Chassis extends DBugSubsystem
 		shortPistonsRight = Robot.actuators.chassisShortPistonsRight;
 
 		// Sensors
+		Robot.sensors.ChassisSensors();
+		
 		navx = Robot.sensors.navx;
 		leftEncoder = Robot.sensors.chassisLeftEncoder;
 		rightEncoder = Robot.sensors.chassisRightEncoder;
@@ -101,6 +106,7 @@ public class Chassis extends DBugSubsystem
 
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
+				
 	}
 
 	public void initDefaultCommand()
@@ -235,7 +241,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHELeftFront()
 	{
-		return heLeftFront.get();
+		return !heLeftFront.get();
 	}
 
 	/**
@@ -243,7 +249,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHELeftBack()
 	{
-		return heLeftBack.get();
+		return !heLeftBack.get();
 	}
 
 	/**
@@ -251,7 +257,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHERightFront()
 	{
-		return heRightFront.get();
+		return !heRightFront.get();
 	}
 
 	/**
@@ -259,7 +265,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean getHERightBack()
 	{
-		return heRightBack.get();
+		return !heRightBack.get();
 	}
 
 	/*

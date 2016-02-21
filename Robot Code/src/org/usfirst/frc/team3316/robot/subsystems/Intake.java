@@ -22,12 +22,16 @@ public class Intake extends DBugSubsystemCC
 	public Intake()
 	{
 		// Actuators
+		Robot.actuators.IntakeActuators();
+
 		intakeSolendoid = Robot.actuators.intakeSolenoid;
 		intakeMotor = Robot.actuators.intakeMotor;
 
 		addSpeedController(intakeMotor);
 
 		// Sensors
+		Robot.sensors.IntakeSensors();
+
 		intakeLeftSwitch = Robot.sensors.intakeLeftSwitch;
 		intakeRightSwitch = Robot.sensors.intakeRightSwitch;
 
@@ -65,12 +69,26 @@ public class Intake extends DBugSubsystemCC
 
 	public boolean isIntakeOpen()
 	{
-		return intakePot.get() >= (double) config.get("intake_Pot_HighThresh");
+		return intakeSolendoid.get().equals(Value.kForward);
+//		return intakePot.get() >= (double) config.get("intake_Pot_HighThresh");
 	}
 
 	public boolean isIntakeClose()
 	{
-		return intakePot.get() <= (double) config.get("intake_Pot_LowThresh");
+		return intakeSolendoid.get().equals(Value.kReverse);
+//		return intakePot.get() <= (double) config.get("intake_Pot_LowThresh");
+	}
+	
+	public boolean isReadyToIntake()
+	{
+		// When the ball is out and the intake is open, returns true.
+		return isBallOut() && isIntakeOpen();
+	}
+	
+	public boolean isReadyToTransfer()
+	{
+		// When the ball is in and the intake is close, returns true.
+		return isBallIn() && isIntakeClose();
 	}
 
 	public double getCurrent()
