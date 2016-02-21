@@ -11,47 +11,34 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.ExtendOmni;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
-import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
-import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallIn;
-import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallOut;
-import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
-import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
+import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
-import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
-import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
-import org.usfirst.frc.team3316.robot.commands.transport.BangbangTransport;
-import org.usfirst.frc.team3316.robot.commands.turret.StopTurret;
-import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
+import org.usfirst.frc.team3316.robot.commands.transport.RollIn;
+import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
-import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
-import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseArmPiston;
-import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
-import org.usfirst.frc.team3316.robot.commands.climbing.StopWinch;
-import org.usfirst.frc.team3316.robot.commands.climbing.WaitForRung;
-import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
-import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
-import org.usfirst.frc.team3316.robot.commands.climbing.lockArmPiston;
 import org.usfirst.frc.team3316.robot.commands.flywheel.BangbangFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
-import org.usfirst.frc.team3316.robot.commands.flywheel.PIDFlywheel;
+import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
-import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
-import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
 
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 
 public class SDB
 {
@@ -72,26 +59,19 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Intake Current", Robot.intake.getCurrent());
+			put("Hall effect left front", Robot.chassis.getHELeftFront());
+			put("Hall effect left back", Robot.chassis.getHELeftBack());
+			put("Hall effect right front", Robot.chassis.getHERightFront());
+			put("Hall effect right back", Robot.chassis.getHERightBack());
 			
-			put("Chassis Yaw", Robot.chassis.getYaw());
-			put("Chassis Pitch", Robot.chassis.getPitch());
-			put("isOnDefense", Robot.chassis.isOnDefense());
-
-			put("Hood Angle", Robot.hood.getAngle());
-			put("Turret Angle", Robot.turret.getAngle());
-			try
-			{
-				//put("DistanceFromCamera", VisionServer.Data.get("DistanceFromCamera"));
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-				put("DistanceFromCamera", "null");
-			}
+			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
+			put("Transport Current", Robot.actuators.transportMotor.getCurrent());
+			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
+			put("Flywheel speed", Robot.flywheel.getRate());
+			put("Flywheel power", Robot.flywheel.getPowerSum());
 			
-			// Drive Distance
-			SmartDashboard.putNumber("Chassis voltage", Robot.actuators.chassisLeft1.getVoltage());
+			put("Hood Current", Robot.actuators.hoodMotor.getCurrent());
+			put("Turret Current", Robot.actuators.turretMotor.getCurrent());
 		}
 
 		private void put(String name, double d)
@@ -189,9 +169,55 @@ public class SDB
 	private void initSDB()
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE THIS COMMAND
+		
 		SmartDashboard.putData(new StartCompressor());
-		SmartDashboard.putData(new StopCompressor());	
-
+		SmartDashboard.putData(new StopCompressor());
+		
+		putConfigVariableInSDB("hood_SetHoodAngle_Angle");
+		putConfigVariableInSDB("turret_SetTurretAngle_Angle");
+		
+		SmartDashboard.putData(new SetHoodAngle());
+		SmartDashboard.putData(new SetTurretAngle());
+		
+		SmartDashboard.putData(new ExtendOmni());
+		SmartDashboard.putData(new RetractOmni());
+		
+		SmartDashboard.putData(new OpenLongPistons());
+		SmartDashboard.putData(new OpenShortPistons());
+		
+		SmartDashboard.putData(new CloseLongPistons());
+		SmartDashboard.putData(new CloseShortPistons());
+		
+		SmartDashboard.putData(new WaitForDefense());
+		
+		// Turret
+		SmartDashboard.putData(new TurretJoysticks());
+		
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
+		
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
+		
+		//Intake
+		SmartDashboard.putData("Intake roll in", new org.usfirst.frc.team3316.robot.commands.intake.RollIn());
+		SmartDashboard.putData("Intake roll out", new org.usfirst.frc.team3316.robot.commands.intake.RollOut());
+		
+		putConfigVariableInSDB("intake_RollIn_Speed");
+		putConfigVariableInSDB("intake_RollOut_Speed");
+		
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
+		
+		SmartDashboard.putData(new RollIn());
+		putConfigVariableInSDB("transport_RollIn_Speed");
+		
+		SmartDashboard.putData(new WarmShooter());
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
+		
+		/*
+		 * Remove these after finishing testing on prototype
+		 */
 		logger.info("Finished initSDB()");
 	}
 
@@ -252,10 +278,10 @@ public class SDB
 		LiveWindow.addSensor("Intake", "intakeRightSwitch", (LiveWindowSendable) Robot.sensors.intakeRightSwitch);
 		LiveWindow.addSensor("Intake", "intakePot", (LiveWindowSendable) Robot.sensors.intakePot);
 		// Transport
-		LiveWindow.addSensor("Transport", "transportEncoder", (LiveWindowSendable) Robot.sensors.transportEncoder);
+		LiveWindow.addSensor("Transport", "transportEncoder", (LiveWindowSendable) Robot.sensors.transportCounter);
 		// Flywheel
 		LiveWindow.addSensor("Flywheel", "flywheelCounter", (LiveWindowSendable) Robot.sensors.flywheelCounter);
-		LiveWindow.addSensor("Flywheel", "hallEffect", (LiveWindowSendable) Robot.sensors.hallEffect);
+		LiveWindow.addSensor("Flywheel", "hallEffect", (LiveWindowSendable) Robot.sensors.flywheelHE);
 		// Turret
 		LiveWindow.addSensor("Turret", "turretPot", (LiveWindowSendable) Robot.sensors.turretPot);
 		// Hood

@@ -61,11 +61,11 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		JoystickButton climbButton = new JoystickButton(joystickRight, (int) Robot.config.get("CLIMB_BUTTON"));
-		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
-
-		JoystickButton toggleOmni = new JoystickButton(joystickRight,
-				(int) config.get("BUTTON_TOGGLE_OMNI"));
-		toggleOmni.whenPressed(new ToggleOmni());
+//		JoystickButton climbButton = new JoystickButton(joystickRight, (int) Robot.config.get("CLIMB_BUTTON"));
+//		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
+//
+//		JoystickButton toggleOmni = new JoystickButton(joystickRight,
+//				(int) config.get("BUTTON_TOGGLE_OMNI"));
+//		toggleOmni.whenPressed(new ToggleOmni());
 	}
 }

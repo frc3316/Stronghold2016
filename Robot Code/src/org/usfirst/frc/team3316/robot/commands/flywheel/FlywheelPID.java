@@ -7,19 +7,20 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class PIDFlywheel extends DBugCommand
+public class FlywheelPID extends DBugCommand
 {
 	// TODO: Add commenting
 
-	private PIDController pid;
+	private static PIDController pid;
 	private double v = 0;
+	
+	private boolean reachedTarget;
 
-	public PIDFlywheel()
+	public FlywheelPID()
 	{
 		requires(Robot.flywheel);
-
-		// TODO: Add F term to PID
 
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
@@ -35,7 +36,7 @@ public class PIDFlywheel extends DBugCommand
 
 			public PIDSourceType getPIDSourceType()
 			{
-				return PIDSourceType.kRate;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
@@ -53,8 +54,12 @@ public class PIDFlywheel extends DBugCommand
 				(double) config.get("flywheel_PID_KD") / 1000,
 				(double) config.get("flywheel_PID_KF") / 1000);
 		
+		pid.setAbsoluteTolerance((double) config.get("flywheel_PID_Tolerance")); 
+		
 		v = 0;
 
+		reachedTarget = false;
+		
 		pid.enable();
 	}
 
@@ -62,7 +67,22 @@ public class PIDFlywheel extends DBugCommand
 	{
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 
+		logger.finest("This is flywheel's v: " + v);
+		SmartDashboard.putBoolean("PID on target", onTarget());
+		
 		isFin = !Robot.flywheel.setMotors(v);
+		
+		if (onTarget() && !reachedTarget)
+		{
+			logger.info("Flywheel PID has reached target after " + timeSinceInitialized() + " seconds.");
+			reachedTarget = true;
+		}
+	}
+	
+	public static boolean onTarget() 
+	{
+		logger.fine("Someone asked if I'm on target. Answer: " + pid.onTarget());
+		return pid.onTarget();
 	}
 
 	protected boolean isFinished()
@@ -72,7 +92,7 @@ public class PIDFlywheel extends DBugCommand
 
 	protected void fin()
 	{
-		pid.disable();
+		pid.reset();
 
 		Robot.flywheel.setMotors(0);
 	}
