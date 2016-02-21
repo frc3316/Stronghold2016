@@ -20,14 +20,14 @@ CUW = 260 # (Center U Width) The U width as it looks in the camera when it is in
 CUWD = 220 # The distance which the CUW was calculated from.
 
 # Camera:
-CAMERA_ANGLE = 25 # in degrees
+CAMERA_ANGLE = 0 # in degrees
 HAX = 53 # The head angle of the camera (x)
-HAY = 40 # The head angle of the camera (y)
+HAY = 39.75 # The head angle of the camera (y)
 
 # Camera Settings:
-brightness = -0.1
-saturation = 15
-exposure = -1
+brightness = 0
+saturation = 255
+exposure = 0
 rotateClockwise = True # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
-resizedImageWidth = 640
+resizedImageWidth = 480
 resizedImageHeight = 360

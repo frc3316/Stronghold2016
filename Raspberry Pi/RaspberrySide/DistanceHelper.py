@@ -26,6 +26,7 @@ class DistanceHelper(object):
         '''
 
         remainder = float(self.knownHeight * self.focalLength) / float(objectHeight)
+
         try:
             return sqrt(remainder**2 - (towerHeight-(self.knownHeight/2.0)-robotObject.height)**2)
         except:

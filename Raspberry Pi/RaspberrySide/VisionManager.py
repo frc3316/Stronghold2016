@@ -162,6 +162,10 @@ class VisionManager(object):
             if self.currentImageObject is None:
                 DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject,self.TOWER_HEIGHT)
                 self.currentImageObject = ImageObject(w,h,x,y,DFC)
+                azimuthalAngle = self.distanceHelper.getAzimuthalAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAX)
+                polarAngle = self.distanceHelper.getPolarAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAY)
+                self.currentImageObject.azimuthalAngle = azimuthalAngle
+                self.currentImageObject.polarAngle = polarAngle
             else:
                 DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject,self.TOWER_HEIGHT)
                 self.currentImageObject.objectHeight = h

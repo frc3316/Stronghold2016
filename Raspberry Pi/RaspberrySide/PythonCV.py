@@ -43,8 +43,8 @@ if __name__ == "__main__":
         cam = cv2.VideoCapture(getCameraNumber())
         if not cam.isOpened():
             logger.error("No Camera Found!!!")
-        #cam.set(3,1280)
-        #cam.set(4,720)
+        cam.set(3,1280)
+        cam.set(4,720)
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
@@ -113,7 +113,8 @@ if __name__ == "__main__":
                 logger.debug("Y Robot Position: " + str(visionManager.robotObject.Yposition))
                 logger.debug("AzimuthalAngle: " + str(visionManager.currentImageObject.azimuthalAngle))
                 logger.debug("PolarAngle: " + str(visionManager.currentImageObject.polarAngle))
-                print(visionManager.currentImageObject.distanceFromCamera)
+                print("AzimuthalAngle: " + str(visionManager.currentImageObject.azimuthalAngle))
+                print("Distance: " + str(visionManager.currentImageObject.distanceFromCamera))
                 # put the FPS on the picture
                 # cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
                 #       (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
@@ -127,7 +128,7 @@ if __name__ == "__main__":
             if isShowingImage:
                 cv2.imshow("Current Image", visionManager.currentImage)
                 # cv2.imshow("Thresh Image", visionManager.threshImage)
-                # cv2.imshow("Masked Image", visionManager.maskedImage)
+                cv2.imshow("Masked Image", visionManager.maskedImage)
 
             #########################
             # Wait for key pressing #

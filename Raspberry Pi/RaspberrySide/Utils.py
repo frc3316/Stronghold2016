@@ -96,5 +96,5 @@ def goMagic(DFC):
     :param DFC: the distance of the robot from the tower.
     :return: a new distance that is more accurate.
     '''
-    f = lambda x: -0.0015*x**2 + 2.2809*x -256.93 # From excel
-    return f(DFC)
+    # f = lambda x: -0.0015*x**2 + 2.2809*x -256.93 # From excel
+    return DFC
