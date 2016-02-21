@@ -19,12 +19,12 @@ public class RollIn extends DBugCommand
 
 	protected void execute()
 	{
-		isFin = !Robot.intake.setMotors(speed);
+		Robot.intake.setMotors(speed);
 	}
 
 	protected boolean isFinished()
 	{
-		return isFin;
+		return false;
 	}
 
 	protected void fin()

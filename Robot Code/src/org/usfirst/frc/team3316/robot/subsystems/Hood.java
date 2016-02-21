@@ -72,12 +72,13 @@ public class Hood extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		return potFilter.get() + potOffset;
+		return hoodPot.get() + potOffset;
+//		return potFilter.get() + potOffset;
 	}
 
 	public void setAngle(double angle)
 	{
-		potOffset = (angle - potFilter.get());
+		potOffset = (angle - hoodPot.get());
 		logger.fine(
 				"The offset of the hood is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
 	}

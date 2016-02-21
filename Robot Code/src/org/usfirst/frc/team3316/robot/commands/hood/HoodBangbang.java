@@ -6,7 +6,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 
 public class HoodBangbang extends DBugCommand
 {
-	private double onVoltage, offVoltage;
+	private double onVoltage, offVoltage, setPoint, tolerance;
 
 	public HoodBangbang()
 	{
@@ -17,11 +17,12 @@ public class HoodBangbang extends DBugCommand
 	{
 		onVoltage = (double) config.get("hood_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("hood_Bangbang_OffVoltage");
+		tolerance = (double) config.get("hood_PID_Tolerance");
 	}
 
 	protected void execute()
 	{
-		double setPoint = (double) config.get("hood_Angle_SetPoint");
+		setPoint = (double) config.get("hood_Angle_SetPoint");
 		if (Robot.hood.getAngle() <= setPoint)
 		{
 			isFin = !Robot.hood.setMotors(onVoltage);
@@ -52,7 +53,7 @@ public class HoodBangbang extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return isFin;
+		return isFin || onTarget();
 	}
 
 	protected void fin()
@@ -63,5 +64,19 @@ public class HoodBangbang extends DBugCommand
 	protected void interr()
 	{
 		fin();
+	}
+	
+	private boolean onTarget ()
+	{
+		if (Math.abs(Robot.hood.getAngle() - setPoint) < tolerance)
+		{
+			logger.fine("Hood banbang on target: " + true);
+			return true;
+		}
+		else
+		{
+			logger.fine("Hood banbang on target: " + false);
+			return false;
+		}
 	}
 }

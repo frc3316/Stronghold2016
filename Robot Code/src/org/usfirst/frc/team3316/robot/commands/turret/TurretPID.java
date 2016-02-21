@@ -47,40 +47,44 @@ public class TurretPID extends DBugCommand
 
 	protected void init()
 	{
-		pid.setPID((double) config.get("turret_PID_KP"), (double) config.get("turret_PID_KI"),
-				(double) config.get("turret_PID_KD"));
-
+		double setPoint = (double) config.get("turret_Angle_SetPoint");
+		pid.setSetpoint(setPoint);
+		
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("turret_PID_KP"),
-				(double) config.get("turret_PID_KI"),
-				(double) config.get("turret_PID_KD"));
+		pid.setPID((double) config.get("turret_PID_KP") / 1000,
+				(double) config.get("turret_PID_KI") / 1000,
+				(double) config.get("turret_PID_KD") / 1000);
 		
 		pid.setAbsoluteTolerance((double) config.get("turret_PID_Tolerance"));
 		
-		if (AlignShooter.isObjectDetected())
-		{
-			double setPoint = (double) AlignShooter.getTurretAngle();
-			pid.setSetpoint(setPoint);
-			
-			isFin = !Robot.turret.setMotors(pidOutput);
-		}
-		else
-		{
-			isFin = !Robot.turret.setMotors(0);
-		}
+//		if (AlignShooter.isObjectDetected())
+//		{
+//			double setPoint = (double) AlignShooter.getTurretAngle();
+//			pid.setSetpoint(setPoint);
+//			
+//			isFin = !Robot.turret.setMotors(pidOutput);
+//		}
+//		else
+//		{
+//			isFin = !Robot.turret.setMotors(0);
+//		}
+		
+		isFin = !Robot.turret.setMotors(pidOutput);
 	}
 	
-	public static boolean onTarget() {
+	public static boolean onTarget() 
+	{
+		logger.fine("Turret PID on target: " + pid.onTarget());
 		return pid.onTarget();
 	}
 
 	protected boolean isFinished()
 	{
-		return isFin;
+		return isFin || onTarget();
 	}
 
 	protected void fin()
@@ -94,5 +98,4 @@ public class TurretPID extends DBugCommand
 	{
 		fin();
 	}
-
 }
