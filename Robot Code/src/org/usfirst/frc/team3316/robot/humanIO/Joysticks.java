@@ -5,10 +5,15 @@ package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
 import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
+import org.usfirst.frc.team3316.robot.sequences.CollectBall;
+import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -61,11 +66,26 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-//		JoystickButton climbButton = new JoystickButton(joystickRight, (int) Robot.config.get("CLIMB_BUTTON"));
-//		climbButton.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
-//
-//		JoystickButton toggleOmni = new JoystickButton(joystickRight,
-//				(int) config.get("BUTTON_TOGGLE_OMNI"));
-//		toggleOmni.whenPressed(new ToggleOmni());
+		// Climbing
+		DBugJoystickButton climbBtn = new DBugJoystickButton(joystickRight, "button_Climb");
+		climbBtn.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
+
+		// Chassis
+		DBugJoystickButton toggleOmniBtn = new DBugJoystickButton(joystickRight, "button_Toggle_Omni");
+		toggleOmniBtn.whenPressed(new ToggleOmni());
+		
+		// Intake
+		DBugJoystickButton collectBallBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
+		collectBallBtn.whenPressed(new CollectBall());
+		DBugJoystickButton ejectBallBtn = new DBugJoystickButton(joystickOperator, "button_Eject_Ball");
+		ejectBallBtn.whenPressed(new EjectBall());
+		
+		DBugJoystickButton rollInBtn = new DBugJoystickButton(joystickOperator, "button_Roll_In");
+		rollInBtn.whileHeld(new RollIn());
+		DBugJoystickButton rollOutBtn = new DBugJoystickButton(joystickOperator, "button_Roll_Out");
+		rollOutBtn.whileHeld(new RollOut());
+		
+		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
+		toggleIntakeBtn.whenPressed(new ToggleIntake());
 	}
 }

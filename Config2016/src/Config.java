@@ -115,8 +115,13 @@ public class Config
 				addToConstants("JOYSTICK_OPERATOR", 2);
 
 				// Buttons
-				addToConstants("CLIMB_BUTTON", 6);
-				addToConstants("BUTTON_TOGGLE_OMNI", 2);
+				addToVariables("button_Climb", 6);
+				addToVariables("button_Toggle_Omni", 1);
+				addToVariables("button_Collect_Ball", 2);
+				addToVariables("button_Eject_Ball", 3);
+				addToVariables("button_Roll_In", 4);
+				addToVariables("button_Roll_Out", 5);
+				addToVariables("button_Intake_Toggle", 7);
 			}
 		}
 

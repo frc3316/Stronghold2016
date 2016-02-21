@@ -70,13 +70,11 @@ public class Intake extends DBugSubsystemCC
 	public boolean isIntakeOpen()
 	{
 		return intakeSolendoid.get().equals(Value.kForward);
-//		return intakePot.get() >= (double) config.get("intake_Pot_HighThresh");
 	}
 
 	public boolean isIntakeClose()
 	{
 		return intakeSolendoid.get().equals(Value.kReverse);
-//		return intakePot.get() <= (double) config.get("intake_Pot_LowThresh");
 	}
 	
 	public boolean isReadyToIntake()
