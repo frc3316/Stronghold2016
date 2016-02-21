@@ -451,14 +451,14 @@ public class Config
 				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 0.3);
+				addToVariables("hood_PID_Tolerance", 0.35);
 				addToVariables("hood_PID_KP", 0.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.0);
 
 				// Bangbang Control
-				addToVariables("hood_Bangbang_OnVoltage", 0.0);
-				addToVariables("hood_Bangbang_OffVoltage", 0.0);
+				addToVariables("hood_Bangbang_OnVoltage", 0.33);
+				addToVariables("hood_Bangbang_OffVoltage", -0.33);
 
 				addToVariables("hood_Pot_BottomThresh", 4.0);
 				addToVariables("hood_Pot_TopThresh", 70.0);
