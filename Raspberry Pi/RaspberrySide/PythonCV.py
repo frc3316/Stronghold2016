@@ -9,8 +9,7 @@ from FPSCounter import *
 from time import sleep
 import cv2
 import numpy as np
-from Utils import logger
-from Utils import LockFile
+from Utils import *
 from Constants import *
 # Lock File:
 lockFile = LockFile("LockFile.loc")
@@ -41,9 +40,10 @@ if __name__ == "__main__":
         FPSCounter = FPS()
         FPSCounter.start()
 
-        cam = cv2.VideoCapture(0)
-        cam.set(3,1280)
-        cam.set(4,960)
+        cam = cv2.VideoCapture(getCameraNumber())
+        if not cam.isOpened():
+            logger.error("No Camera Found!!!")
+
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
@@ -54,15 +54,19 @@ if __name__ == "__main__":
         ###################
         # The code itself #
         ###################
-
         while True:
-
             visionManager.updateImage()
             visionManager.updateTowerScales()
             visionManager.updateRobotScales()
             FPSCounter.update()
 
             if visionManager.isObjectDetected: # if an object was detected
+                #######################
+                #   Magic Constants   #
+                #######################
+                DFC = goMagic(visionManager.currentImageObject.distanceFromCamera)
+                visionManager.currentImageObject.distanceFromCamera = DFC
+                visionManager.robotObject.distanceFromTower = DFC
 
                 ######################
                 # Rectangle creation #
@@ -119,7 +123,8 @@ if __name__ == "__main__":
 
             # display:
             if isShowingImage:
-                cv2.imshow("Current Image", visionManager.currentImage)
+                pass
+                # cv2.imshow("Current Image", visionManager.currentImage)
                 # cv2.imshow("Thresh Image", visionManager.threshImage)
                 # cv2.imshow("Masked Image", visionManager.maskedImage)
 

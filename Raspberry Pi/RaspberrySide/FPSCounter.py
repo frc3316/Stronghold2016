@@ -46,4 +46,4 @@ class FPS:
         compute the (approximate) frames per second
         '''
 
-        return self._numFrames / self.elapsed()
+        return float(self._numFrames) / float(self.elapsed())

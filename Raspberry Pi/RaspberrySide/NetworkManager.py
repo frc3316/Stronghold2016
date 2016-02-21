@@ -15,6 +15,7 @@ class NetworkManager(object):
         self.PORT = PORT
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.bind(('', PORT))
+        self.connect()
 
     def sendData(self,values,names):
         '''
@@ -24,18 +25,21 @@ class NetworkManager(object):
         :param names: a list of the names of the values.
         :return: None
         '''
-        try: # try parsing data:
-            resultDic = {}
-            for i in range(len(names)):
-                if values[i] is None:
-                    strValue = '3316.00'
-                else:
-                    strValue = '{0:.2f}'.format(float(values[i]))
-                resultDic[names[i]] = strValue
-            stringToSend = str(resultDic).replace(" ","")
-            self.sock.sendto(stringToSend + "\n", (self.HOST, self.PORT))
-        except ValueError:
-            logger.warning('Input for sendData invalid, or error in sending data')
+        if not self.isConnected:
+            self.connect()
+        if self.isConnected:
+            try: # try parsing data:
+                resultDic = {}
+                for i in range(len(names)):
+                    if values[i] is None:
+                        strValue = '3316.00'
+                    else:
+                        strValue = '{0:.2f}'.format(float(values[i]))
+                    resultDic[names[i]] = strValue
+                stringToSend = str(resultDic).replace(" ","")
+                self.sock.sendto(stringToSend + "\n", (self.HOST, self.PORT))
+            except ValueError:
+                logger.warning('Input for sendData invalid, or error in sending data')
 			
     def connect(self):
         '''
