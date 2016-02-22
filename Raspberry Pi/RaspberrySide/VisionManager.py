@@ -11,6 +11,7 @@ class VisionManager(object):
     '''
     A class that manages all the computer vision for the FRC 2016.
     '''
+    READ_BUFFER_AMOUNT = 6  # Amount of frames to read in each update in order to clear buffer
 
     def __init__(self,minColor,maxColor,minimumBoundingRectSize,cam,knownHeight,knownWidth,focalLength,
                  robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance,HAX,HAY):
@@ -83,18 +84,28 @@ class VisionManager(object):
         if self.isObjectDetected:
             self.currentImageObject.didUpdateVar = False	
 
-        didGetImage,frame = self.cam.read()
+        didGetImage, new_frame = self.cam.read()
+        if not didGetImage:  # Can't event grab one frame - might be a problem
+            logger.error("Couldn't Read Image from self.cam!")
+            return
+        
+        for _ in xrange(self.READ_BUFFER_AMOUNT - 1):  # minus one, since we already grabbed one frame.
+            frame = new_frame
+            didGetImage, new_frame = self.cam.read()  # Grab another frame
+            if not didGetImage:
+                break  # Seems like the buffer is empty - lets use the last frame
+            
+        else:  # this occours if the loop wasn't broken - lets use the new frame
+            frame = new_frame
+            
         # maybe resize changes edges of u? causing the u to be smaller of bigger
         frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight))
         frame = self.rotateImage(frame)
-        if didGetImage:
-            if self.currentImage == None and self.imageHeight == None and self.imageWidth == None:
-                self.currentImage = frame
-                self.__setImageScales()
-            else:
-                self.currentImage = frame
-        else:
-            logger.error("Couldn't Read Image from self.cam!")
+    
+        if self.currentImage == None and self.imageHeight == None and self.imageWidth == None:
+            self.__setImageScales()
+        
+        self.currentImage = frame
 
     def rotateImage(self,img):
         '''
