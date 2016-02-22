@@ -41,7 +41,6 @@ if __name__ == "__main__":
     try:
 
         FPSCounter = FPS()
-        FPSCounter.start()
 
         cam = cv2.VideoCapture(getCameraNumber())
         if not cam.isOpened():
@@ -59,12 +58,9 @@ if __name__ == "__main__":
         ###################
         while True:
             visionManager.updateImage()
-            logger.debug("Updated Image")
             visionManager.updateTowerScales()
-            logger.debug("Updated Tower Scales")
             visionManager.updateRobotScales()
-            logger.debug("Updated Robot Scaled")
-            FPSCounter.update()
+            FPSCounter.start()
             logger.debug("Updated FPS Counter")
 
             if visionManager.isObjectDetected: # if an object was detected
