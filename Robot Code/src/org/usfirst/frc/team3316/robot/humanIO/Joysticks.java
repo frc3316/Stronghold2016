@@ -5,8 +5,8 @@ package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
-import org.usfirst.frc.team3316.robot.commands.intake.RollIn;
-import org.usfirst.frc.team3316.robot.commands.intake.RollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
 import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.config.Config;
@@ -81,9 +81,9 @@ public class Joysticks
 		ejectBallBtn.whenPressed(new EjectBall());
 		
 		DBugJoystickButton rollInBtn = new DBugJoystickButton(joystickOperator, "button_Roll_In");
-		rollInBtn.whileHeld(new RollIn());
+		rollInBtn.whileHeld(new IntakeRollIn());
 		DBugJoystickButton rollOutBtn = new DBugJoystickButton(joystickOperator, "button_Roll_Out");
-		rollOutBtn.whileHeld(new RollOut());
+		rollOutBtn.whileHeld(new IntakeRollOut());
 		
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
 		toggleIntakeBtn.whenPressed(new ToggleIntake());

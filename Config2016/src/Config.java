@@ -380,7 +380,8 @@ public class Config
 			 * Roll In
 			 */
 			{
-				addToVariables("intake_RollIn_Speed", 1.0);
+				addToVariables("intake_RollIn_Speed", 0.5);
+				addToVariables("intake_OpenIntake_Timeout", 0.5); // In seconds
 			}
 
 			/*
@@ -388,6 +389,7 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollOut_Speed", -0.5);
+				addToVariables("intake_CloseIntake_Timeout", 0.5); // In seconds
 			}
 		}
 
@@ -501,6 +503,14 @@ public class Config
 
 			{
 				addToVariables("transport_RollIn_Speed", 0.5);
+			}
+			
+			/*
+			 * Roll Out
+			 */
+
+			{
+				addToVariables("transport_RollOut_Speed", 0.5);
 			}
 
 			/*

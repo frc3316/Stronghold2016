@@ -3,28 +3,28 @@ package org.usfirst.frc.team3316.robot.commands.intake;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class RollIn extends DBugCommand
+public class IntakeRollOut extends DBugCommand
 {
 	private double speed;
-	
-	public RollIn()
+
+	public IntakeRollOut()
 	{
 		requires(Robot.intake);
 	}
 
 	protected void init()
 	{
-		speed = (double) config.get("intake_RollIn_Speed");
+		speed = (double) config.get("intake_RollOut_Speed");
 	}
 
 	protected void execute()
 	{
-		Robot.intake.setMotors(speed);
+		isFin = !Robot.intake.setMotors(speed);
 	}
 
 	protected boolean isFinished()
 	{
-		return false;
+		return isFin;
 	}
 
 	protected void fin()
@@ -36,4 +36,5 @@ public class RollIn extends DBugCommand
 	{
 		fin();
 	}
+
 }
