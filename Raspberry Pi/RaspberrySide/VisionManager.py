@@ -93,6 +93,7 @@ class VisionManager(object):
             frame = new_frame
             didGetImage, new_frame = self.cam.read()  # Grab another frame
             if not didGetImage:
+                logger.debug("Seems like the buffer is empty")
                 break  # Seems like the buffer is empty - lets use the last frame
             
         else:  # this occours if the loop wasn't broken - lets use the new frame
@@ -102,10 +103,10 @@ class VisionManager(object):
         frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight))
         frame = self.rotateImage(frame)
     
-        if self.currentImage == None and self.imageHeight == None and self.imageWidth == None:
-            self.__setImageScales()
-        
         self.currentImage = frame
+        if self.currentImage == None or self.imageHeight == None or self.imageWidth == None:
+            self.__setImageScales()
+
 
     def rotateImage(self,img):
         '''

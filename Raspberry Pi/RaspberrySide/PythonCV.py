@@ -47,7 +47,7 @@ if __name__ == "__main__":
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
-        cam.set(cv2.cv.CV_CAP_PROP_BUFFERSIZE, 1)  # Eliminates cv buffer, this way we always recv the latest image
+        # cam.set(cv2.cv.CV_CAP_PROP_BUFFERSIZE, 1)  # Eliminates cv buffer, this way we always recv the latest image
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
         networkManager = NetworkManager(JAVA_HOST,8080)
@@ -57,9 +57,13 @@ if __name__ == "__main__":
         ###################
         while True:
             visionManager.updateImage()
+            logger.debug("Updated Image")
             visionManager.updateTowerScales()
+            logger.debug("Updated Tower Scales")
             visionManager.updateRobotScales()
+            logger.debug("Updated Robot Scaled")
             FPSCounter.update()
+            logger.debug("Updated FPS Counter")
 
             if visionManager.isObjectDetected: # if an object was detected
                 #######################
@@ -116,6 +120,8 @@ if __name__ == "__main__":
                 # put the FPS on the picture
                 # cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
                 #       (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
+            else:
+                logger.debug("Object not detected")
 
             FPSCounter.stop()
             logger.debug("------------------")
@@ -147,6 +153,8 @@ if __name__ == "__main__":
             #    break
 
             # sleep(0.01) # so the pi won't crush
+    except ValueError:
+	logger.error("Error!" + str(ValueError))
     finally:
         logger.debug("----------------")
         logger.debug("Finished Running")
