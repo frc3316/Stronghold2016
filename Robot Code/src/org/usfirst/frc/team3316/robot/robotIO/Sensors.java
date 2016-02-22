@@ -131,17 +131,6 @@ public class Sensors
 	}
 
 	/*
-	 * Transport
-	 */
-	public void TransportSensors()
-	{
-		transportCounter = new Counter((int) config.get("TRANSPORT_ENCODER"));
-
-		// transportEncoder.setDistancePerPulse(???);
-		// TODO: check the distance per pulse of the transport encoder
-	}
-
-	/*
 	 * Flywheel
 	 */
 	public void FlywheelSensors()

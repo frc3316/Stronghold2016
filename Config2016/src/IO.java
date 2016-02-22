@@ -243,8 +243,6 @@ public class IO
 				putDIO("INTAKE_LEFT_SWITCH", 7);
 				putDIO("INTAKE_RIGHT_SWITCH", 5);
 
-				putDIO("TRANSPORT_ENCODER", 9);
-
 				putDIO("CLIMBING_SWITCH", 6);
 
 				putDIO("FLYWHEEL_HALL_EFFECT_COUNTER", 8);
