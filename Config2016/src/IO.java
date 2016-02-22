@@ -279,8 +279,8 @@ public class IO
 					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 6);
 					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_BACK", 7);
 
-					putDIOA("INTAKE_LEFT_SWITCH", 11);
-					putDIOA("INTAKE_RIGHT_SWITCH", 10);
+					putDIOA("INTAKE_LEFT_SWITCH", 10);
+					putDIOA("INTAKE_RIGHT_SWITCH", 11);
 
 					putDIOA("CLIMBING_SWITCH", 9);
 
@@ -322,8 +322,6 @@ public class IO
 					putAIOA("TURRET_POT", 0);
 
 					putAIOA("HOOD_POT", 1);
-
-					putAIOA("INTAKE_POT", 2);
 					
 					putAIOA("CLIMBING_POT", 3);
 				}
@@ -335,8 +333,6 @@ public class IO
 					putAIOB("TURRET_POT", 0);
 
 					putAIOB("HOOD_POT", 1);
-
-					putAIOB("INTAKE_POT", 2);
 					
 					putAIOB("CLIMBING_POT", 3);
 				}
@@ -423,8 +419,8 @@ public class IO
 
 					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 1); // FAKE
 					
-					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 6);
-					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 7);
+					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 4);
+					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 5);
 
 					Config.addToConstantsA("INTAKE_SOLENOID_MODULE", 0);
 

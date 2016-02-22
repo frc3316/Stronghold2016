@@ -23,8 +23,13 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.CloseIntakeTransport;
+import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
+import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
+import org.usfirst.frc.team3316.robot.commands.intake.OpenIntakeTransport;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
+import org.usfirst.frc.team3316.robot.commands.transport.TransportRollOut;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretBangbang;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
@@ -69,14 +74,18 @@ public class SDB
 			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
 			put("Transport Current", Robot.actuators.transportMotor.getCurrent());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
-			put("Flywheel speed", Robot.flywheel.getRate());
-			put("Flywheel power", Robot.flywheel.getPowerSum());
-			
 			put("Hood Current", Robot.actuators.hoodMotor.getCurrent());
 			put("Turret Current", Robot.actuators.turretMotor.getCurrent());
 			
+			put("Flywheel speed", Robot.flywheel.getRate());
+			
 			put("Turret angle", Robot.turret.getAngle());
 			put("Hood angle", Robot.hood.getAngle());
+			
+			put("Intake left switch", Robot.sensors.intakeLeftSwitch.get());
+			put("Intake right switch", Robot.sensors.intakeRightSwitch.get());
+			
+			put("Is ball in", Robot.intake.isBallIn());
 		}
 
 		private void put(String name, double d)
@@ -185,17 +194,11 @@ public class SDB
 		SmartDashboard.putData(new SetHoodAngle());
 		SmartDashboard.putData(new SetTurretAngle());
 		
-		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
-		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
-		
-		putConfigVariableInSDB("hood_PID_Tolerance");
+		SmartDashboard.putData(new HoodBangbang());
 		putConfigVariableInSDB("hood_Angle_SetPoint");
 		
-		SmartDashboard.putData(new HoodBangbang());
-		
-		// Turret
-		SmartDashboard.putData(new TurretJoysticks());
 		SmartDashboard.putData(new HoodJoysticks());
+		SmartDashboard.putData(new TurretJoysticks());
 		
 		putConfigVariableInSDB("turret_Pot_LeftThresh");
 		putConfigVariableInSDB("turret_Pot_RightThresh");
@@ -203,9 +206,11 @@ public class SDB
 		putConfigVariableInSDB("hood_Pot_BottomThresh");
 		putConfigVariableInSDB("hood_Pot_TopThresh");
 		
-		//Intake
-		SmartDashboard.putData("Intake roll in", new org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn());
-		SmartDashboard.putData("Intake roll out", new org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut());
+		SmartDashboard.putData(new IntakeRollIn());
+		SmartDashboard.putData(new IntakeRollOut());
+		
+		SmartDashboard.putData(new TransportRollIn());
+		SmartDashboard.putData(new TransportRollOut());
 		
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
@@ -216,23 +221,20 @@ public class SDB
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
 		
-		SmartDashboard.putData(new TransportRollIn());
-		putConfigVariableInSDB("transport_RollIn_Speed");
-		
 		SmartDashboard.putData(new WarmShooter());
 		putConfigVariableInSDB("flywheel_PID_Setpoint");
 		
 		SmartDashboard.putData(new TurretBangbang());
 		putConfigVariableInSDB("turret_Angle_SetPoint");
-		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
-		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
 		
-		SmartDashboard.putData(new TurretPID());
-		putConfigVariableInSDB("turret_PID_KP");
-		putConfigVariableInSDB("turret_PID_KI");
-		putConfigVariableInSDB("turret_PID_KD");
+		SmartDashboard.putData(new OpenIntakeTransport());
+		SmartDashboard.putData(new CloseIntakeTransport());
 		
-		putConfigVariableInSDB("turret_PID_Tolerance");
+		SmartDashboard.putData(new OpenLongPistons());
+		SmartDashboard.putData(new OpenShortPistons());
+		SmartDashboard.putData(new CloseLongPistons());
+		SmartDashboard.putData(new CloseShortPistons());
+
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
