@@ -37,10 +37,6 @@ public class Sensors
 
 	// Intake
 	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
-	public AnalogPotentiometer intakePot;
-
-	// Transport
-	public Counter transportCounter;
 
 	// Flywheel
 	public Counter flywheelCounter;
