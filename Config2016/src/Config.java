@@ -158,15 +158,6 @@ public class Config
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
 				
-				addToConstants("INTAKE_POT", 5);
-				
-				addToConstants("INTAKE_LEFT_SWITCH", 10);
-				addToConstants("INTAKE_RIGHT_SWITCH", 11);
-				
-				addToConstants("INTAKE_SOLENOID_MODULE", 0);
-				addToConstants("INTAKE_SOLENOID_FORWARD", 0);
-				addToConstants("INTAKE_SOLENOID_REVERSE", 1);
-
 				/*
 				 * Transport
 				 */
