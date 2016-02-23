@@ -442,7 +442,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariablesA("hood_Pot_Offset", 254.78990487026547);
+				addToVariablesA("hood_Pot_Offset", 195.48938556557982);
 				addToVariablesB("hood_Pot_Offset", 156.47294478246684);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
@@ -463,7 +463,7 @@ public class Config
 				addToVariablesB("hood_Pot_TopThresh", 70.0);
 				
 				addToVariablesA("hood_Pot_BottomThresh", 6.6);
-				addToVariablesA("hood_Pot_TopThresh", 75.0);
+				addToVariablesA("hood_Pot_TopThresh", 79.0);
 			}
 			
 			/*

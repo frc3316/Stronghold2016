@@ -111,7 +111,7 @@ public class Chassis extends DBugSubsystem
 
 	public void initDefaultCommand()
 	{
-//		setDefaultCommand(new TankDrive());
+		setDefaultCommand(new TankDrive());
 	}
 
 	/*

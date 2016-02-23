@@ -362,10 +362,10 @@ public class IO
 
 					putPDPA("HOOD_MOTOR_PDP_CHANNEL", 1); 
 
-					putPDPA("CLIMBING_MOTOR_1_PDP_CHANNEL", 12); //should be 12
+					putPDPA("CLIMBING_MOTOR_1_PDP_CHANNEL", 7); //should be 12
 					putPDPA("CLIMBING_MOTOR_2_PDP_CHANNEL", 13);
 					putPDPA("CLIMBING_MOTOR_3_PDP_CHANNEL", 14);
-					putPDPA("CLIMBING_MOTOR_4_PDP_CHANNEL", 15); //should be 15
+					putPDPA("CLIMBING_MOTOR_4_PDP_CHANNEL", 6); //should be 15
 
 					putPDPA("SPARE_MOTOR_PDP_CHANNEL", 10);
 				}
