@@ -41,16 +41,18 @@ if __name__ == "__main__":
     try:
 
         FPSCounter = FPS()
-
+        FPSCounter.start()
         cam = cv2.VideoCapture(getCameraNumber())
         if not cam.isOpened():
             logger.error("No Camera Found!!!")
-
+        cam.set(3, resizedImageWidth)
+        cam.set(4, resizedImageHeight)
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
+        # cam.set(cv2.cv.CV_CAP_PROP_FPS, 3)
         # cam.set(cv2.cv.CV_CAP_PROP_BUFFERSIZE, 1)  # Eliminates cv buffer, this way we always recv the latest image
-		
+
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
         networkManager = NetworkManager(JAVA_HOST,8080)
         ###################
@@ -60,7 +62,7 @@ if __name__ == "__main__":
             visionManager.updateImage()
             visionManager.updateTowerScales()
             visionManager.updateRobotScales()
-            FPSCounter.start()
+            FPSCounter.update()
             logger.debug("Updated FPS Counter")
 
             if visionManager.isObjectDetected: # if an object was detected
@@ -109,7 +111,6 @@ if __name__ == "__main__":
             ###################
             # Results logger  #
             ###################
-
             if visionManager.isObjectDetected:
                 logger.debug("------------------")
                 logger.debug("Robot Information:")
@@ -126,7 +127,6 @@ if __name__ == "__main__":
             else:
                 logger.debug("Object not detected")
 
-            FPSCounter.stop()
             logger.debug("------------------")
             logger.debug("FPS: " + str(FPSCounter.fps()))
             logger.debug("------------------")
@@ -136,10 +136,12 @@ if __name__ == "__main__":
             # display:
             if isShowingImage:
                 pass
+                #cv2.imwrite("masked.png",visionManager.maskedImage)
                 #cv2.imshow("Current Image", visionManager.currentImage)
-                # cv2.imshow("Thresh Image", visionManager.threshImage)
+                #cv2.imshow("Thresh Image", visionManager.threshImage)
                 #cv2.imshow("Masked Image", visionManager.maskedImage)
-            
+                #print visionManager.currentImageObject.azimuthalAngle
+
             #########################
             # Wait for key pressing #
             #########################

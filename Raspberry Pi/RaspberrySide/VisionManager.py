@@ -11,7 +11,7 @@ class VisionManager(object):
     '''
     A class that manages all the computer vision for the FRC 2016.
     '''
-    READ_BUFFER_AMOUNT = 6  # Amount of frames to read in each update in order to clear buffer
+    READ_BUFFER_AMOUNT = 3  # Amount of frames to read in each update in order to clear buffer
 
     def __init__(self,minColor,maxColor,minimumBoundingRectSize,cam,knownHeight,knownWidth,focalLength,
                  robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance,HAX,HAY):
@@ -61,8 +61,8 @@ class VisionManager(object):
         self.robotObject = RobotObject(robotMeasurements[0],robotMeasurements[1],robotMeasurements[2])
 
         self.focalLength = focalLength
-        self.HAX = HAX
-        self.HAY = HAY
+        self.HAX = HAY # because we are flipping the image.
+        self.HAY = HAX
 
     def __setImageScales(self):
         '''
@@ -86,21 +86,21 @@ class VisionManager(object):
 
         didGetImage, new_frame = self.cam.read()
         if not didGetImage:  # Can't event grab one frame - might be a problem
-            logger.error("Couldn't Read Image from self.cam!")
-            return
-        
+             logger.error("Couldn't Read Image from self.cam!")
+             return
+
         for _ in xrange(self.READ_BUFFER_AMOUNT - 1):  # minus one, since we already grabbed one frame.
-            frame = new_frame
-            didGetImage, new_frame = self.cam.read()  # Grab another frame
-            if not didGetImage:
-                logger.debug("Seems like the buffer is empty")
-                break  # Seems like the buffer is empty - lets use the last frame
-            
+             frame = new_frame
+             didGetImage, new_frame = self.cam.read()  # Grab another frame
+             if not didGetImage:
+                 logger.debug("Seems like the buffer is empty")
+                 break  # Seems like the buffer is empty - lets use the last frame
+
         else:  # this occours if the loop wasn't broken - lets use the new frame
-            frame = new_frame
+             frame = new_frame
             
         # maybe resize changes edges of u? causing the u to be smaller of bigger
-        frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight))
+        #frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight))
         frame = self.rotateImage(frame)
     
         self.currentImage = frame
