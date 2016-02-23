@@ -8,6 +8,8 @@ import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.hal.CanTalonJNI;
 
 public class Actuators
 {
@@ -72,14 +74,15 @@ public class Actuators
 
 	public void GeneralActuators()
 	{
-		compressor = new Compressor(1);
 		if (config.robotA)
 		{
 			GeneralActuatorsA();
+			compressor = new Compressor(0);
 		}
 		else
 		{
 			GeneralActuatorsB();
+			compressor = new Compressor(1);
 		}
 		spareMotor = new DBugSpeedController(spareMotorSC, (boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
 				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
@@ -177,7 +180,7 @@ public class Actuators
 	 */
 	private void TransportActuatorsA()
 	{
-		transportSC = new CANTalon((int) Robot.config.get("TRANSPORT_MOTOR"));
+		transportSC = new VictorSP((int) Robot.config.get("TRANSPORT_MOTOR"));
 	}
 
 	private void TransportActuatorsB()
@@ -205,7 +208,7 @@ public class Actuators
 	 */
 	private void FlywheelActuatorsA()
 	{
-		flywheelSC = new CANTalon((int) Robot.config.get("FLYWHEEL_MOTOR"));
+		flywheelSC = new VictorSP((int) Robot.config.get("FLYWHEEL_MOTOR"));
 	}
 
 	private void FlywheelActuatorsB()
@@ -288,10 +291,10 @@ public class Actuators
 	 */
 	private void ClimbingActuatorsA()
 	{
-		climbingMotorSC1 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_1"));
+		climbingMotorSC1 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_1"));
 		climbingMotorSC2 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_2"));
 		climbingMotorSC3 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_3"));
-		climbingMotorSC4 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_4"));
+		climbingMotorSC4 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_4"));
 	}
 
 	private void ClimbingActuatorsB()

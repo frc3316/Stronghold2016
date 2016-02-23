@@ -1,168 +1,239 @@
 <xml version="1.0">
 <dashboard>
-	<widget field="Hood Angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
-		<location x="952" y="29"/>
+	<widget field="Hood Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
+		<location x="1025" y="441"/>
+		<width>326</width>
+		<height>222</height>
 	</widget>
-	<widget field="Turret Angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
-		<location x="949" y="363"/>
+	<widget field="EjectBall" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="523" y="170"/>
 	</widget>
-	<widget field="Flywheel speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.LinePlot">
-		<location x="519" y="351"/>
+	<widget field="CollectBall" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="547" y="136"/>
 	</widget>
-	<widget field="OpenLongPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="550" y="259"/>
+	<widget field="Is ball in" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="835" y="542"/>
 	</widget>
-	<widget field="SetTurretAngle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="552" y="225"/>
+	<widget field="Intake right switch" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="610" y="477"/>
 	</widget>
-	<widget field="ExtendOmni" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="553" y="191"/>
+	<widget field="Intake left switch" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="603" y="453"/>
 	</widget>
-	<widget field="UpdateVariablesInConfig" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="570" y="157"/>
+	<widget field="TransportRollOut" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="1007" y="45"/>
 	</widget>
-	<widget field="TurretJoysticks" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="570" y="123"/>
+	<widget field="IntakeRollOut" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="805" y="51"/>
 	</widget>
-	<widget field="CloseLongPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="545" y="89"/>
+	<widget field="IntakeRollIn" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="808" y="15"/>
 	</widget>
-	<widget field="FlywheelPID" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="576" y="55"/>
+	<widget field="TransportRollIn" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="964" y="13"/>
 	</widget>
-	<widget field="CloseShortPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="555" y="21"/>
+	<widget field="transport_RollOut_Speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="358" y="525"/>
 	</widget>
-	<widget field="StopCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="331" y="634"/>
+	<widget field="Hood angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="844" y="377"/>
+		<height>20</height>
 	</widget>
-	<widget field="WaitForDefense" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="324" y="600"/>
+	<widget field="Vision Turret angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="358" y="504"/>
 	</widget>
-	<widget field="ClimbingSequence" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="324" y="566"/>
+	<widget field="Vision Distance" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="205" y="632"/>
+	</widget>
+	<widget field="turret_Bangbang_OffVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="358" y="483"/>
+	</widget>
+	<widget field="Intake Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="201" y="611"/>
+	</widget>
+	<widget field="Hall effect right back" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1108" y="280"/>
+	</widget>
+	<widget field="turret_PID_Tolerance" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="327" y="441"/>
+	</widget>
+	<widget field="Flywheel speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="201" y="590"/>
 	</widget>
 	<widget field="HoodBangbang" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="324" y="532"/>
+		<location x="814" y="227"/>
 	</widget>
-	<widget field="PullUpTimeout" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="343" y="498"/>
+	<widget field="Hall effect left front" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1123" y="317"/>
 	</widget>
-	<widget field="lockArmPiston" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="343" y="464"/>
-	</widget>
-	<widget field="PullUp" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="324" y="430"/>
-	</widget>
-	<widget field="StartCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="331" y="396"/>
-	</widget>
-	<widget field="OpenShortPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="334" y="362"/>
-	</widget>
-	<widget field="JoystickFlywheel" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="334" y="328"/>
-	</widget>
-	<widget field="BangbangFlywheel" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="324" y="294"/>
+	<widget field="TurretBangbang" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="829" y="418"/>
 	</widget>
 	<widget field="HoodJoysticks" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="184" y="635"/>
+		<location x="201" y="467"/>
 	</widget>
-	<widget field="ReleaseArmPiston" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="157" y="601"/>
+	<widget field="TurretPID" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="201" y="433"/>
 	</widget>
-	<widget field="HoodPID" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="150" y="567"/>
+	<widget field="hood_Bangbang_OnVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="343" y="398"/>
 	</widget>
-	<widget field="RetractOmni" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="204" y="483"/>
+	<widget field="Flywheel Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="324" y="378"/>
 	</widget>
-	<widget field="ReleaseDown" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="187" y="383"/>
+	<widget field="turret_Bangbang_OnVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="324" y="357"/>
 	</widget>
-	<widget field="JoystickWinchControl" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="369" y="231"/>
+	<widget field="climbing_DownSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="324" y="318"/>
+	</widget>
+	<widget field="Turret angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="162" y="317"/>
+	</widget>
+	<widget field="Flywheel power" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="162" y="296"/>
+	</widget>
+	<widget field="Hall effect left back" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1092" y="187"/>
+	</widget>
+	<widget field="hood_Bangbang_OffVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="319" y="251"/>
+	</widget>
+	<widget field="turret_PID_KP" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="162" y="275"/>
+	</widget>
+	<widget field="turret_PID_KD" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="162" y="254"/>
+	</widget>
+	<widget field="Hall effect right front" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1084" y="216"/>
+	</widget>
+	<widget field="turret_PID_KI" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="162" y="233"/>
+	</widget>
+	<widget field="hood_Angle_SetPoint" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="817" y="318"/>
+	</widget>
+	<widget field="hood_PID_Tolerance" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="823" y="346"/>
+	</widget>
+	<widget field="turret_Angle_SetPoint" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="353" y="118"/>
+	</widget>
+	<widget field="Transport Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="353" y="97"/>
+	</widget>
+	<widget field="PullUp" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="173" y="55"/>
+	</widget>
+	<widget field="Turret Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="178"/>
+	</widget>
+	<widget field="Vision Is object detected" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="652"/>
+	</widget>
+	<widget field="climbing_UpSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="68"/>
+	</widget>
+	<widget field="Chassis HE Right Back" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="381" y="342"/>
+	</widget>
+	<widget field="Chassis HE Right Front" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="374" y="303"/>
+	</widget>
+	<widget field="Chassis HE Left Back" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="381" y="215"/>
+	</widget>
+	<widget field="Chassis HE Left Front" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="378" y="184"/>
+	</widget>
+	<widget field="CloseLongPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="185" y="199"/>
 	</widget>
 	<widget field="SetHoodAngle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="187" y="349"/>
+		<location x="814" y="260"/>
 	</widget>
 	<widget field="WarmShooter" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="168" y="315"/>
+		<location x="162" y="131"/>
 	</widget>
-	<widget field="Chassis Pitch" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="294"/>
-	</widget>
-	<widget field="flywheel_Bangbang_Setpoint" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="325" y="210"/>
-	</widget>
-	<widget field="Climbing motor 3 current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="349" y="189"/>
-	</widget>
-	<widget field="Climbing motor 1 current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="323" y="168"/>
-	</widget>
-	<widget field="Turret Voltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="213" y="252"/>
-	</widget>
-	<widget field="Chassis Roll" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="231"/>
+	<widget field="SetTurretAngle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="623" y="354"/>
 	</widget>
 	<widget field="turret_SetTurretAngle_Angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="343" y="147"/>
+		<location x="300" y="76"/>
 	</widget>
-	<widget field="hood_PID_KP" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="210"/>
+	<widget field="OpenShortPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="300" y="42"/>
 	</widget>
 	<widget field="hood_Pot_BottomThresh" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="726" y="78"/>
+		<location x="300" y="21"/>
 	</widget>
-	<widget field="HE Right Back" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="196" y="189"/>
+	<widget field="navx" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="162" y="34"/>
 	</widget>
 	<widget field="hood_Pot_TopThresh" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="743" y="103"/>
+		<location x="300" y="0"/>
 	</widget>
-	<widget field="hood_PID_KI" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="168"/>
-	</widget>
-	<widget field="hood_PID_KD" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="190" y="147"/>
+	<widget field="flywheel_PID_Setpoint" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="631"/>
 	</widget>
 	<widget field="turret_Pot_LeftThresh" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="350" y="84"/>
+		<location x="0" y="610"/>
 	</widget>
-	<widget field="Turret current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="126"/>
+	<widget field="Intake Left Switch" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="589"/>
 	</widget>
-	<widget field="flywheel_Bangbang_OffVoltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="337" y="63"/>
+	<widget field="ExtendOmni" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="555"/>
+	</widget>
+	<widget field="WaitForDefense" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="521"/>
+	</widget>
+	<widget field="CloseShortPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="487"/>
+	</widget>
+	<widget field="intake_RollOut_Speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="466"/>
+	</widget>
+	<widget field="UpdateVariablesInConfig" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="1148" y="8"/>
 	</widget>
 	<widget field="hood_SetHoodAngle_Angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="337" y="42"/>
-	</widget>
-	<widget field="HE Left Back" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="105"/>
-	</widget>
-	<widget field="Joystick Y" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="216" y="84"/>
+		<location x="0" y="377"/>
 	</widget>
 	<widget field="turret_Pot_RightThresh" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="324" y="21"/>
+		<location x="0" y="356"/>
 	</widget>
-	<widget field="Motor 3 Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="63"/>
+	<widget field="StartCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="322"/>
 	</widget>
-	<widget field="Motor 1 Current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="42"/>
+	<widget field="StopCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="1159" y="114"/>
 	</widget>
-	<widget field="Hood Voltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="21"/>
+	<widget field="intake_RollIn_Speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="199"/>
 	</widget>
-	<widget field="Right encoder displacement" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="318" y="0"/>
+	<widget field="TurretJoysticks" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="144"/>
 	</widget>
-	<widget field="Flywheel HE" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="173" y="0"/>
+	<widget field="RetractOmni" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="110"/>
 	</widget>
-	<widget field="Flywheel SC voltage" type
+	<widget field="transport_RollIn_Speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="89"/>
+	</widget>
+	<widget field="OpenLongPistons" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="0"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+	<hidden field="CloseIntake"/>
+	<hidden field="OpenIntake"/>
+	<hidden field="ReleaseDown"/>
+	<hidden field="Intake roll in"/>
+	<hidden field="OpenIntakeTransport"/>
+	<hidden field="RollIn"/>
+	<hidden field="Intake roll out"/>
+	<hidden field="CloseIntakeTransport"/>
+</xml>

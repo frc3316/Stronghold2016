@@ -208,27 +208,27 @@ public class IO
 				 * Robot A
 				 */
 				{
-					putPWMA("CHASSIS_MOTOR_LEFT_1", 2);
+					putPWMA("CHASSIS_MOTOR_LEFT_1", 3);
 					putCANA("CHASSIS_MOTOR_LEFT_2", 14);
-					putPWMA("CHASSIS_MOTOR_RIGHT_1", 3);
+					putPWMA("CHASSIS_MOTOR_RIGHT_1", 2);
 					putCANA("CHASSIS_MOTOR_RIGHT_2", 15);
 
 					putPWMA("INTAKE_MOTOR", 4);
 
-					putCANA("TRANSPORT_MOTOR", 7);
+					putPWMA("TRANSPORT_MOTOR", 5); //should be PWMA 6
 
-					putCANA("FLYWHEEL_MOTOR", 6);
+					putPWMA("FLYWHEEL_MOTOR", 8); //should be PWMA
 
 					putPWMA("TURRET_MOTOR", 0);
 
 					putPWMA("HOOD_MOTOR", 1);
 
-					putPWMA("CLIMBING_MOTOR_1", 5);
+					putCANA("CLIMBING_MOTOR_1", 7);
 					putPWMA("CLIMBING_MOTOR_2", 6);
 					putPWMA("CLIMBING_MOTOR_3", 7);
-					putPWMA("CLIMBING_MOTOR_4", 8);
+					putCANA("CLIMBING_MOTOR_4", 6);
 
-					putPWMA("SPARE_MOTOR", 10); // Check this with electronics
+					putPWMA("SPARE_MOTOR", 9);
 				}
 
 				/*
@@ -279,7 +279,7 @@ public class IO
 					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 6);
 					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_BACK", 7);
 
-					putDIOA("INTAKE_LEFT_SWITCH", 10);
+					putDIOA("INTAKE_LEFT_SWITCH", 12);
 					putDIOA("INTAKE_RIGHT_SWITCH", 11);
 
 					putDIOA("CLIMBING_SWITCH", 9);
@@ -350,22 +350,22 @@ public class IO
 					putPDPA("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 3);
 
 					putPDPA("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 4);
-					putPDPA("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 5);
+					putPDPA("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 5); 
 
 					putPDPA("INTAKE_MOTOR_PDP_CHANNEL", 11);
 
-					putPDPA("TRANSPORT_MOTOR_PDP_CHANNEL", 7);
+					putPDPA("TRANSPORT_MOTOR_PDP_CHANNEL", 12); //should be 7
 
-					putPDPA("FLYWHEEL_MOTOR_PDP_CHANNEL", 6);
+					putPDPA("FLYWHEEL_MOTOR_PDP_CHANNEL", 15); //should 6
 
 					putPDPA("TURRET_MOTOR_PDP_CHANNEL", 0);
 
-					putPDPA("HOOD_MOTOR_PDP_CHANNEL", 1);
+					putPDPA("HOOD_MOTOR_PDP_CHANNEL", 1); 
 
-					putPDPA("CLIMBING_MOTOR_1_PDP_CHANNEL", 12);
+					putPDPA("CLIMBING_MOTOR_1_PDP_CHANNEL", 12); //should be 12
 					putPDPA("CLIMBING_MOTOR_2_PDP_CHANNEL", 13);
 					putPDPA("CLIMBING_MOTOR_3_PDP_CHANNEL", 14);
-					putPDPA("CLIMBING_MOTOR_4_PDP_CHANNEL", 15);
+					putPDPA("CLIMBING_MOTOR_4_PDP_CHANNEL", 15); //should be 15
 
 					putPDPA("SPARE_MOTOR_PDP_CHANNEL", 10);
 				}
