@@ -250,6 +250,9 @@ public class SDB
 		SmartDashboard.putData(new EjectBall());
 
 		SmartDashboard.putData(new TransportJoysticks());
+		
+		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
+		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
