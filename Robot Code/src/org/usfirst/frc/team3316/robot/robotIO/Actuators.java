@@ -72,14 +72,15 @@ public class Actuators
 
 	public void GeneralActuators()
 	{
-		compressor = new Compressor(1);
 		if (config.robotA)
 		{
 			GeneralActuatorsA();
+			compressor = new Compressor(0);
 		}
 		else
 		{
 			GeneralActuatorsB();
+			compressor = new Compressor(1);
 		}
 		spareMotor = new DBugSpeedController(spareMotorSC, (boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
 				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),

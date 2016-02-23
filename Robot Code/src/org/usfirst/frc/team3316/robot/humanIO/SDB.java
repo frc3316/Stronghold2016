@@ -72,20 +72,12 @@ public class SDB
 			put("Hall effect right back", Robot.chassis.getHERightBack());
 			
 			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
-			put("Transport Current", Robot.actuators.transportMotor.getCurrent());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
-			put("Hood Current", Robot.actuators.hoodMotor.getCurrent());
-			put("Turret Current", Robot.actuators.turretMotor.getCurrent());
 			
 			put("Flywheel speed", Robot.flywheel.getRate());
 			
 			put("Turret angle", Robot.turret.getAngle());
 			put("Hood angle", Robot.hood.getAngle());
-			
-			put("Intake left switch", Robot.sensors.intakeLeftSwitch.get());
-			put("Intake right switch", Robot.sensors.intakeRightSwitch.get());
-			
-			put("Is ball in", Robot.intake.isBallIn());
 		}
 
 		private void put(String name, double d)
@@ -188,23 +180,8 @@ public class SDB
 		SmartDashboard.putData(new StopCompressor());
 		
 		// Hood
-		putConfigVariableInSDB("hood_SetHoodAngle_Angle");
-		putConfigVariableInSDB("turret_SetTurretAngle_Angle");
-		
-		SmartDashboard.putData(new SetHoodAngle());
-		SmartDashboard.putData(new SetTurretAngle());
-		
-		SmartDashboard.putData(new HoodBangbang());
-		putConfigVariableInSDB("hood_Angle_SetPoint");
-		
 		SmartDashboard.putData(new HoodJoysticks());
 		SmartDashboard.putData(new TurretJoysticks());
-		
-		putConfigVariableInSDB("turret_Pot_LeftThresh");
-		putConfigVariableInSDB("turret_Pot_RightThresh");
-		
-		putConfigVariableInSDB("hood_Pot_BottomThresh");
-		putConfigVariableInSDB("hood_Pot_TopThresh");
 		
 		SmartDashboard.putData(new IntakeRollIn());
 		SmartDashboard.putData(new IntakeRollOut());
@@ -223,9 +200,6 @@ public class SDB
 		
 		SmartDashboard.putData(new WarmShooter());
 		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		
-		SmartDashboard.putData(new TurretBangbang());
-		putConfigVariableInSDB("turret_Angle_SetPoint");
 		
 		SmartDashboard.putData(new OpenIntakeTransport());
 		SmartDashboard.putData(new CloseIntakeTransport());
