@@ -215,9 +215,9 @@ public class IO
 
 					putPWMA("INTAKE_MOTOR", 4);
 
-					putCANA("TRANSPORT_MOTOR", 7);
+					putPWMA("TRANSPORT_MOTOR", 9);
 
-					putCANA("FLYWHEEL_MOTOR", 6);
+					putPWMA("FLYWHEEL_MOTOR", 8);
 
 					putPWMA("TURRET_MOTOR", 0);
 
@@ -226,9 +226,9 @@ public class IO
 					putPWMA("CLIMBING_MOTOR_1", 5);
 					putPWMA("CLIMBING_MOTOR_2", 6);
 					putPWMA("CLIMBING_MOTOR_3", 7);
-					putPWMA("CLIMBING_MOTOR_4", 8);
+					putCANA("CLIMBING_MOTOR_4", 8);
 
-					putPWMA("SPARE_MOTOR", 10); // Check this with electronics
+					putCANA("SPARE_MOTOR", 10); // Check this with electronics
 				}
 
 				/*
@@ -279,7 +279,7 @@ public class IO
 					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 6);
 					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_BACK", 7);
 
-					putDIOA("INTAKE_LEFT_SWITCH", 10);
+					putDIOA("INTAKE_LEFT_SWITCH", 12);
 					putDIOA("INTAKE_RIGHT_SWITCH", 11);
 
 					putDIOA("CLIMBING_SWITCH", 9);
@@ -354,9 +354,9 @@ public class IO
 
 					putPDPA("INTAKE_MOTOR_PDP_CHANNEL", 11);
 
-					putPDPA("TRANSPORT_MOTOR_PDP_CHANNEL", 7);
+					putPDPA("TRANSPORT_MOTOR_PDP_CHANNEL", 10);
 
-					putPDPA("FLYWHEEL_MOTOR_PDP_CHANNEL", 6);
+					putPDPA("FLYWHEEL_MOTOR_PDP_CHANNEL", 15);
 
 					putPDPA("TURRET_MOTOR_PDP_CHANNEL", 0);
 
@@ -365,9 +365,9 @@ public class IO
 					putPDPA("CLIMBING_MOTOR_1_PDP_CHANNEL", 12);
 					putPDPA("CLIMBING_MOTOR_2_PDP_CHANNEL", 13);
 					putPDPA("CLIMBING_MOTOR_3_PDP_CHANNEL", 14);
-					putPDPA("CLIMBING_MOTOR_4_PDP_CHANNEL", 15);
+					putPDPA("CLIMBING_MOTOR_4_PDP_CHANNEL", 6);
 
-					putPDPA("SPARE_MOTOR_PDP_CHANNEL", 10);
+					putPDPA("SPARE_MOTOR_PDP_CHANNEL", 7);
 				}
 
 				/*

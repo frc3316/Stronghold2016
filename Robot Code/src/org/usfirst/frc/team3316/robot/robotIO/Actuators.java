@@ -177,7 +177,7 @@ public class Actuators
 	 */
 	private void TransportActuatorsA()
 	{
-		transportSC = new CANTalon((int) Robot.config.get("TRANSPORT_MOTOR"));
+		transportSC = new VictorSP((int) Robot.config.get("TRANSPORT_MOTOR"));
 	}
 
 	private void TransportActuatorsB()
@@ -205,7 +205,7 @@ public class Actuators
 	 */
 	private void FlywheelActuatorsA()
 	{
-		flywheelSC = new CANTalon((int) Robot.config.get("FLYWHEEL_MOTOR"));
+		flywheelSC = new VictorSP((int) Robot.config.get("FLYWHEEL_MOTOR"));
 	}
 
 	private void FlywheelActuatorsB()
@@ -291,7 +291,7 @@ public class Actuators
 		climbingMotorSC1 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_1"));
 		climbingMotorSC2 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_2"));
 		climbingMotorSC3 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_3"));
-		climbingMotorSC4 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_4"));
+		climbingMotorSC4 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_4"));
 	}
 
 	private void ClimbingActuatorsB()
