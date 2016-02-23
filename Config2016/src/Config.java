@@ -413,14 +413,17 @@ public class Config
 				
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 0.5);
+				addToVariables("turret_PID_Tolerance", 1.5);
 				addToVariables("turret_PID_KP", 0.0);
 				addToVariables("turret_PID_KI", 0.0);
 				addToVariables("turret_PID_KD", 0.0);
 
 				// Bangbang Control
-				addToVariables("turret_Bangbang_OnVoltage", 0.13);
-				addToVariables("turret_Bangbang_OffVoltage", -0.13);
+				addToVariables("turret_Bangbang_OnVoltage", 0.075);
+				addToVariables("turret_Bangbang_OffVoltage", -0.08);
+				
+				addToVariables("turret_TurretBangbang_BigError", 5.0);
+				addToVariables("turret_TurretBangbang_VScale", 2.5);
 
 				addToVariables("turret_Pot_LeftThresh", -180.0);
 				addToVariables("turret_Pot_RightThresh", 180.0);

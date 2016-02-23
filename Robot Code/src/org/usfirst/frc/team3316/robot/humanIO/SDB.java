@@ -186,7 +186,16 @@ public class SDB
 		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
 		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
 		putConfigVariableInSDB("turret_PID_Tolerance");
-
+		
+		putConfigVariableInSDB("turret_TurretBangbang_BigError");
+		putConfigVariableInSDB("turret_TurretBangbang_VScale");
+		
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
+		
+		SmartDashboard.putData("Intake roll in", new org.usfirst.frc.team3316.robot.commands.intake.RollIn());
+		SmartDashboard.putData("Intake roll out", new org.usfirst.frc.team3316.robot.commands.intake.RollOut());
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
