@@ -414,8 +414,8 @@ public class IO
 
 					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 0);
 
-					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 2);
-					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 3);
+					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 3);
+					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 2);
 
 					Config.addToConstantsA("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 1); // FAKE
 					
