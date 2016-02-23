@@ -215,7 +215,7 @@ public class IO
 
 					putPWMA("INTAKE_MOTOR", 4);
 
-					putPWMA("TRANSPORT_MOTOR", 5); //should be PWMA 6
+					putPWMA("TRANSPORT_MOTOR", 7); //should be PWMA 6
 
 					putPWMA("FLYWHEEL_MOTOR", 8); //should be PWMA
 
@@ -225,7 +225,7 @@ public class IO
 
 					putCANA("CLIMBING_MOTOR_1", 7);
 					putPWMA("CLIMBING_MOTOR_2", 6);
-					putPWMA("CLIMBING_MOTOR_3", 7);
+					putPWMA("CLIMBING_MOTOR_3", 5);
 					putCANA("CLIMBING_MOTOR_4", 6);
 
 					putPWMA("SPARE_MOTOR", 9);
