@@ -8,6 +8,8 @@ import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.hal.CanTalonJNI;
 
 public class Actuators
 {
@@ -289,7 +291,7 @@ public class Actuators
 	 */
 	private void ClimbingActuatorsA()
 	{
-		climbingMotorSC1 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_1"));
+		climbingMotorSC1 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_1"));
 		climbingMotorSC2 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_2"));
 		climbingMotorSC3 = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR_3"));
 		climbingMotorSC4 = new CANTalon((int) Robot.config.get("CLIMBING_MOTOR_4"));

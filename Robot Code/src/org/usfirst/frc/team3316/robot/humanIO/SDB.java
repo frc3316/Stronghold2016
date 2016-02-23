@@ -28,6 +28,7 @@ import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntakeTransport;
+import org.usfirst.frc.team3316.robot.commands.transport.TransportJoysticks;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollOut;
 import org.usfirst.frc.team3316.robot.commands.turret.SetTurretAngle;
@@ -40,7 +41,8 @@ import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
-
+import org.usfirst.frc.team3316.robot.sequences.CollectBall;
+import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -208,7 +210,14 @@ public class SDB
 		SmartDashboard.putData(new OpenShortPistons());
 		SmartDashboard.putData(new CloseLongPistons());
 		SmartDashboard.putData(new CloseShortPistons());
+		
+		SmartDashboard.putData(new CollectBall());
+		SmartDashboard.putData(new EjectBall());
 
+		SmartDashboard.putData(new TransportJoysticks());
+		
+		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
+		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
 		/*
 		 * Remove these after finishing testing on prototype
 		 */

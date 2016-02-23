@@ -138,8 +138,8 @@ public class Config
 				/*
 				 * Chassis
 				 */
-				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", false);
-				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", true);
+				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", false);
 				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
@@ -153,7 +153,7 @@ public class Config
 				 */
 				addToConstants("INTAKE_MOTOR_REVERSE", true);
 
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 15.0);
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
@@ -187,7 +187,8 @@ public class Config
 				/*
 				 * Hood
 				 */
-				addToConstants("HOOD_MOTOR_REVERSE", true);
+				addToConstantsA("HOOD_MOTOR_REVERSE", false);
+				addToConstantsB("HOOD_MOTOR_REVERSE", true);
 
 				addToConstants("HOOD_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
 																// the stall
@@ -398,7 +399,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariablesA("turret_Pot_Offset", 107.9930935901017);
+				addToVariablesA("turret_Pot_Offset", 189.54671547503355);
 				addToVariablesB("turret_Pot_Offset", 107.9930935901017);
 				
 				addToVariables("turret_PotFilter_MaxChange", 4.0);
@@ -441,7 +442,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariablesA("hood_Pot_Offset", 108.4091603287355);
+				addToVariablesA("hood_Pot_Offset", 193.51227018845623);
 				addToVariablesB("hood_Pot_Offset", 156.47294478246684);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
@@ -449,7 +450,7 @@ public class Config
 				
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 0.35);
+				addToVariables("hood_PID_Tolerance", 0.2);
 				addToVariables("hood_PID_KP", 0.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.0);
@@ -458,8 +459,11 @@ public class Config
 				addToVariables("hood_Bangbang_OnVoltage", 0.33);
 				addToVariables("hood_Bangbang_OffVoltage", -0.33);
 
-				addToVariables("hood_Pot_BottomThresh", 4.0);
-				addToVariables("hood_Pot_TopThresh", 70.0);
+				addToVariablesB("hood_Pot_BottomThresh", 4.0);
+				addToVariablesB("hood_Pot_TopThresh", 70.0);
+				
+				addToVariablesA("hood_Pot_BottomThresh", 6.6);
+				addToVariablesA("hood_Pot_TopThresh", 79.0);
 			}
 			
 			/*
