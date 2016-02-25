@@ -8,6 +8,10 @@ import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
+import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.ToggleOmni;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -87,5 +91,11 @@ public class Joysticks
 		
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
 		toggleIntakeBtn.whenPressed(new ToggleIntake());
+		
+		DBugJoystickButton shortPistons = new DBugJoystickButton(joystickRight, "button_Open_Short_Pistons");
+		shortPistons.whenPressed(new DBugToggleCommand(new OpenShortPistons(), new CloseShortPistons()));
+		
+		DBugJoystickButton longPistons = new DBugJoystickButton(joystickRight, "button_Open_Long_Pistons");
+		longPistons.whenPressed(new DBugToggleCommand(new OpenLongPistons(), new CloseLongPistons()));
 	}
 }

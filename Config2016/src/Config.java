@@ -1,5 +1,7 @@
 import java.util.Hashtable;
 
+import javax.xml.ws.soap.AddressingFeature;
+
 public class Config
 {
 	public static Hashtable<String, Object> variablesB;
@@ -121,7 +123,9 @@ public class Config
 				addToVariables("button_Eject_Ball", 3);
 				addToVariables("button_Roll_In", 4);
 				addToVariables("button_Roll_Out", 5);
-				addToVariables("button_Intake_Toggle", 7);
+				addToVariables("button_Intake_Toggle", 1);
+				addToVariables("button_Open_Long_Pistons", 1);
+				addToVariables("button_Open_Short_Pistons", 2);
 			}
 		}
 
