@@ -275,10 +275,6 @@ public class Config
 			 * Extend Omni
 			 */
 			{
-				addToVariables("chassis_ExtendOmni_Timeout", 0.0);
-				addToVariables("chassis_ExtendOmni_CancelTimeout", 1.5);
-				
-				addToVariables("chassis_ExtendOmni_HETaskPeriod", (long) 2);
 				addToVariables("chassis_ExtendOmni_LiftTimeout", (long) 100);
 			}
 

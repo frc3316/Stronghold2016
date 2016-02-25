@@ -57,8 +57,6 @@ public class Chassis extends DBugSubsystem
 	private Encoder leftEncoder;
 	private Encoder rightEncoder;
 
-	private DigitalInput heLeftFront, heLeftBack, heRightFront, heRightBack;
-
 	// Variables
 	private boolean isOnDefense = false; // For the navX
 
@@ -88,11 +86,6 @@ public class Chassis extends DBugSubsystem
 		navx = Robot.sensors.navx;
 		leftEncoder = Robot.sensors.chassisLeftEncoder;
 		rightEncoder = Robot.sensors.chassisRightEncoder;
-
-		heLeftFront = Robot.sensors.chassisHELeftFront;
-		heLeftBack = Robot.sensors.chassisHELeftBack;
-		heRightFront = Robot.sensors.chassisHERightFront;
-		heRightBack = Robot.sensors.chassisHERightBack;
 
 		// Create moving average
 		movingAvgPitch = new MovingAverage((int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
@@ -230,42 +223,6 @@ public class Chassis extends DBugSubsystem
 	public boolean areShortPistonsRightExtended()
 	{
 		return shortPistonsRight.get().equals(Value.kForward);
-	}
-
-	/*
-	 * Hall effect get methods
-	 */
-
-	/**
-	 * Returns whether the left front hall effect is on (on is when magnet is in front of it)
-	 */
-	public boolean getHELeftFront()
-	{
-		return !heLeftFront.get();
-	}
-
-	/**
-	 * Returns whether the left back hall effect is on (on is when magnet is in front of it)
-	 */
-	public boolean getHELeftBack()
-	{
-		return !heLeftBack.get();
-	}
-
-	/**
-	 * Returns whether the right front hall effect is on (on is when magnet is in front of it)
-	 */
-	public boolean getHERightFront()
-	{
-		return !heRightFront.get();
-	}
-
-	/**
-	 * Returns whether the right back hall effect is on (on is when magnet is in front of it)
-	 */
-	public boolean getHERightBack()
-	{
-		return !heRightBack.get();
 	}
 
 	/*

@@ -273,12 +273,6 @@ public class IO
 					putDIOA("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 0);
 					putDIOA("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 1);
 
-					// Check the order
-					putDIOA("CHASSIS_HALL_EFFECT_LEFT_FRONT", 4);
-					putDIOA("CHASSIS_HALL_EFFECT_LEFT_BACK", 5);
-					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 6);
-					putDIOA("CHASSIS_HALL_EFFECT_RIGHT_BACK", 7);
-
 					putDIOA("INTAKE_LEFT_SWITCH", 12);
 					putDIOA("INTAKE_RIGHT_SWITCH", 11);
 
@@ -296,11 +290,6 @@ public class IO
 
 					putDIOB("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 0);
 					putDIOB("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 1);
-
-					putDIOB("CHASSIS_HALL_EFFECT_LEFT_FRONT", 12);
-					putDIOB("CHASSIS_HALL_EFFECT_LEFT_BACK", 13);
-					putDIOB("CHASSIS_HALL_EFFECT_RIGHT_FRONT", 11);
-					putDIOB("CHASSIS_HALL_EFFECT_RIGHT_BACK", 10);
 
 					putDIOB("INTAKE_LEFT_SWITCH", 5);
 					putDIOB("INTAKE_RIGHT_SWITCH", 4);
@@ -439,23 +428,23 @@ public class IO
 				{
 					Config.addToConstantsB("CHASSIS_LONG_PISTONS_MODULE", 0);
 
-					Config.addToConstantsB("CHASSIS_LONG_PISTONS_FORWARD", 2);
-					Config.addToConstantsB("CHASSIS_LONG_PISTONS_REVERSE", 3);
+					Config.addToConstantsB("CHASSIS_LONG_PISTONS_FORWARD", 6);
+					Config.addToConstantsB("CHASSIS_LONG_PISTONS_REVERSE", 1);
 
 					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_LEFT_MODULE", 0);
 
-					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 0);
-					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 1);
+					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_LEFT_FORWARD", 5);
+					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_LEFT_REVERSE", 2);
 
-					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 1);
+					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_RIGHT_MODULE", 0);
 
-					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 0);
-					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 1);
+					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_RIGHT_FORWARD", 7);
+					Config.addToConstantsB("CHASSIS_SHORT_PISTONS_RIGHT_REVERSE", 0);
 
 					Config.addToConstantsB("INTAKE_SOLENOID_MODULE", 0);
 
 					Config.addToConstantsB("INTAKE_SOLENOID_FORWARD", 4);
-					Config.addToConstantsB("INTAKE_SOLENOID_REVERSE", 5);
+					Config.addToConstantsB("INTAKE_SOLENOID_REVERSE", 3);
 
 					Config.addToConstantsB("CLIMBING_SOLENOID_MODULE", 1);
 
