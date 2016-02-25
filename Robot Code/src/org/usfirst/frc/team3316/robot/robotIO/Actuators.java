@@ -102,10 +102,10 @@ public class Actuators
 
 	private void ChassisActuatorsB()
 	{
-		chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+		chassisLeft1SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
 		chassisLeft2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
 		chassisRight1SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-		chassisRight2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		chassisRight2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 	}
 
 	public void ChassisActuators()

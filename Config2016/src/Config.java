@@ -143,7 +143,7 @@ public class Config
 				 * Chassis
 				 */
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", true);
-				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", false);
+				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
@@ -275,7 +275,7 @@ public class Config
 			 * Extend Omni
 			 */
 			{
-				addToVariables("chassis_ExtendOmni_LiftTimeout", (long) 100);
+				addToVariables("chassis_ExtendOmni_LiftTimeout", 500);
 			}
 
 			// TODO: Check what the following variables should be, and

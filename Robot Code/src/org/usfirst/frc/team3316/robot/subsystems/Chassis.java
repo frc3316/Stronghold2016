@@ -124,16 +124,16 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean openLongPistons()
 	{
-//		if (areShortPistonsLeftExtended() || areShortPistonsRightExtended())
-//		{
-//			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
-//			return false;
-//		}
-//		else
-//		{
+		if (areShortPistonsLeftExtended() || areShortPistonsRightExtended())
+		{
+			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
+			return false;
+		}
+		else
+		{
 			longPistons.set(Value.kForward);
 			return true;
-//		} 
+		} 
 	}
 
 	public boolean closeLongPistons()
@@ -144,30 +144,30 @@ public class Chassis extends DBugSubsystem
 
 	public boolean openShortPistonsLeft()
 	{
-//		if (!areLongPistonsExtended())
-//		{
-//			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
-//			return false;
-//		}
-//		else
-//		{
+		if (!areLongPistonsExtended())
+		{
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			return false;
+		}
+		else
+		{
 			shortPistonsLeft.set(Value.kForward);
 			return true;
-//		}
+		}
 	}
 
 	public boolean openShortPistonsRight()
 	{
-//		if (!areLongPistonsExtended())
-//		{
-//			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
-//			return false;
-//		}
-//		else
-//		{
+		if (!areLongPistonsExtended())
+		{
+			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
+			return false;
+		}
+		else
+		{
 			shortPistonsRight.set(Value.kForward);
 			return true;
-//		}
+		}
 	}
 
 	public boolean closeShortPistonsLeft()

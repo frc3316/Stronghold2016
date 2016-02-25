@@ -30,7 +30,7 @@ public class ExtendOmni extends DBugCommand
 		}
 	}
 
-	private long liftTimeout; // The delay from when the hall effects are triggered to when we open the
+	private int liftTimeout; // The delay from when the hall effects are triggered to when we open the
 								// pistons
 
 	private boolean leftSet, rightSet; // booleans for whether we've set already
@@ -58,7 +58,7 @@ public class ExtendOmni extends DBugCommand
 		leftSet = false;
 		rightSet = false;
 		
-		liftTimeout = (long) config.get("chassis_ExtendOmni_LiftTimeout");
+		liftTimeout = (int) config.get("chassis_ExtendOmni_LiftTimeout");
 
 		timer = new java.util.Timer();
 		

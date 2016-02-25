@@ -218,6 +218,10 @@ public class SDB
 		
 		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
 		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
+
+		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
+		putConfigVariableInSDB("chassis_RetractOmni_Timeout");
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
