@@ -1,7 +1,7 @@
 import numpy as np
 # Colors:
-LB = np.array([50,150,50]) # Lower bond
-UB = np.array([70,255,250]) # Upper bond
+LB = np.array([50,150,100]) # Lower bond
+UB = np.array([100,255,250]) # Upper bond
 
 # Bounding rectangle
 MBR = 200 # Minimum bounding rectangle
@@ -29,5 +29,5 @@ brightness = 0
 saturation = 1
 exposure = 0
 rotateClockwise = True # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
-resizedImageWidth = 480
-resizedImageHeight = 360
+resizedImageWidth = 160
+resizedImageHeight = 120

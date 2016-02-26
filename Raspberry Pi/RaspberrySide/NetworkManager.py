@@ -38,8 +38,8 @@ class NetworkManager(object):
                     resultDic[names[i]] = strValue
                 stringToSend = str(resultDic).replace(' ', '')
                 logger.info(stringToSend)
-		self.sock.sendto(stringToSend + '\n', (self.HOST, self.PORT))    
-       	    except:
+                self.sock.sendto(stringToSend + '\n', (self.HOST, self.PORT))
+            except:
                 logger.warning('Input for sendData invalid, or error in sending data')
 			
     def connect(self):
