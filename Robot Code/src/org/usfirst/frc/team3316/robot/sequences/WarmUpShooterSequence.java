@@ -9,9 +9,9 @@ import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
 
-public class PrepareToShootSequence extends DBugCommandGroup
+public class WarmUpShooterSequence extends DBugCommandGroup
 {
-	public PrepareToShootSequence()
+	public WarmUpShooterSequence()
 	{
 		addParallel(new HoodBangbang());
 		addParallel(new TurretPID());

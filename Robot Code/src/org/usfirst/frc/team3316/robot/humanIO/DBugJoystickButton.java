@@ -19,7 +19,7 @@ public class DBugJoystickButton extends Button {
 	   *$
 	   * @param joystick The GenericHID object that has the button (e.g. Joystick,
 	   *        KinectStick, etc)
-	   * @param Config variable of joystick button number.
+	   * @param configButtonNumber Config variable of joystick button number.
 	   */
 	  public DBugJoystickButton(GenericHID joystick, String configButtonNumber) {
 	    m_joystick = joystick;

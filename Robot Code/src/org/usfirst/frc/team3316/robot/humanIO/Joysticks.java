@@ -18,6 +18,8 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 import org.usfirst.frc.team3316.robot.sequences.CollectBall;
 import org.usfirst.frc.team3316.robot.sequences.EjectBall;
+import org.usfirst.frc.team3316.robot.sequences.TriggerShootingSequence;
+import org.usfirst.frc.team3316.robot.sequences.WarmUpShooterSequence;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -70,10 +72,6 @@ public class Joysticks
 	 */
 	public void initButtons()
 	{
-		// Climbing
-		DBugJoystickButton climbBtn = new DBugJoystickButton(joystickRight, "button_Climb");
-		climbBtn.whenPressed(new DBugToggleCommand(new ClimbingSequence(), new PullUp()));
-
 		// Chassis
 		DBugJoystickButton toggleOmniBtn = new DBugJoystickButton(joystickRight, "button_Toggle_Omni");
 		toggleOmniBtn.whenPressed(new ToggleOmni());
@@ -92,10 +90,11 @@ public class Joysticks
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
 		toggleIntakeBtn.whenPressed(new ToggleIntake());
 		
-		DBugJoystickButton shortPistons = new DBugJoystickButton(joystickRight, "button_Open_Short_Pistons");
-		shortPistons.whenPressed(new DBugToggleCommand(new OpenShortPistons(), new CloseShortPistons()));
+		// Shooter
+		DBugJoystickButton prepareToShootBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
+		prepareToShootBtn.whileHeld(new WarmUpShooterSequence());
 		
-		DBugJoystickButton longPistons = new DBugJoystickButton(joystickRight, "button_Open_Long_Pistons");
-		longPistons.whenPressed(new DBugToggleCommand(new OpenLongPistons(), new CloseLongPistons()));
+		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
+		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());
 	}
 }
