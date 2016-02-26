@@ -54,9 +54,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SDB
 {
 	/*
-	 * Runnable that periodically updates values from the robot into the
-	 * SmartDashboard This is the place where all of the robot data should be
-	 * displayed from
+	 * Runnable that periodically updates values from the robot into the SmartDashboard This is the place
+	 * where all of the robot data should be displayed from
 	 */
 	private class UpdateSDBTask extends TimerTask
 	{
@@ -84,10 +83,11 @@ public class SDB
 			put("Is flywheel on target", Robot.flywheel.isOnTarget());
 			put("Is hood on target", Robot.hood.isOnTarget());
 			put("Is turret on target", Robot.turret.isOnTarget());
-			put("Is ready to shoot",
-					Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget()
-							&& Robot.turret.isOnTarget()
-							&& Robot.intake.isReadyToTransfer());
+			// put("Is ready to shoot",
+			// Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget()
+			// && Robot.turret.isOnTarget()
+			// && Robot.intake.isReadyToTransfer());
+			put("Is ready to shoot", Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer());
 		}
 
 		private void put(String name, double d)
@@ -164,8 +164,7 @@ public class SDB
 			if (!constant)
 			{
 				variablesInSDB.put(key, type);
-				logger.info("Added to SDB " + key + " of type " + type
-						+ " and allows for its modification");
+				logger.info("Added to SDB " + key + " of type " + type + " and allows for its modification");
 			}
 			else
 			{
@@ -232,6 +231,16 @@ public class SDB
 		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
 		putConfigVariableInSDB("chassis_RetractOmni_Timeout");
 
+		putConfigVariableInSDB("button_Intake_Toggle");
+		putConfigVariableInSDB("button_Collect_Ball");
+		putConfigVariableInSDB("button_Eject_Ball");
+		putConfigVariableInSDB("button_Roll_In");
+		putConfigVariableInSDB("button_Roll_Out");
+		putConfigVariableInSDB("button_Climb");
+		putConfigVariableInSDB("button_Warm_Up_Shooter");
+		putConfigVariableInSDB("button_Shooting_Trigger");
+		putConfigVariableInSDB("button_Warm_Up_Flywheel");
+
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
@@ -239,8 +248,8 @@ public class SDB
 	}
 
 	/**
-	 * This method puts in the live window of the test mode all of the robot's
-	 * actuators and sensors. It is disgusting.
+	 * This method puts in the live window of the test mode all of the robot's actuators and sensors. It is
+	 * disgusting.
 	 */
 	public void initLiveWindow()
 	{
@@ -248,8 +257,7 @@ public class SDB
 		 * Actuators
 		 */
 		// General
-		LiveWindow.addActuator("General", "compressor",
-				Robot.actuators.compressor);
+		LiveWindow.addActuator("General", "compressor", Robot.actuators.compressor);
 		// Chassis
 		LiveWindow.addActuator("Chassis", "chassisLeft1SC",
 				(LiveWindowSendable) Robot.actuators.chassisLeft1SC);
@@ -268,20 +276,15 @@ public class SDB
 		// Intake
 		LiveWindow.addActuator("Intake", "intakeSolenoid",
 				(LiveWindowSendable) Robot.actuators.intakeSolenoid);
-		LiveWindow.addActuator("Intake", "intakeSC",
-				(LiveWindowSendable) Robot.actuators.intakeSC);
+		LiveWindow.addActuator("Intake", "intakeSC", (LiveWindowSendable) Robot.actuators.intakeSC);
 		// Transport
-		LiveWindow.addActuator("Transport", "transportSC",
-				(LiveWindowSendable) Robot.actuators.transportSC);
+		LiveWindow.addActuator("Transport", "transportSC", (LiveWindowSendable) Robot.actuators.transportSC);
 		// Flywheel
-		LiveWindow.addActuator("Flywheel", "flywheelSC",
-				(LiveWindowSendable) Robot.actuators.flywheelSC);
+		LiveWindow.addActuator("Flywheel", "flywheelSC", (LiveWindowSendable) Robot.actuators.flywheelSC);
 		// Turret
-		LiveWindow.addActuator("Turret", "turretSC",
-				(LiveWindowSendable) Robot.actuators.turretSC);
+		LiveWindow.addActuator("Turret", "turretSC", (LiveWindowSendable) Robot.actuators.turretSC);
 		// Hood
-		LiveWindow.addActuator("Hood", "hoodSC",
-				(LiveWindowSendable) Robot.actuators.hoodSC);
+		LiveWindow.addActuator("Hood", "hoodSC", (LiveWindowSendable) Robot.actuators.hoodSC);
 		// Climbing
 		LiveWindow.addActuator("Climbing", "climbingSolenoid",
 				(LiveWindowSendable) Robot.actuators.climbingSolenoid);
@@ -294,18 +297,15 @@ public class SDB
 		LiveWindow.addActuator("Climbing", "climbingMotorSC4",
 				(LiveWindowSendable) Robot.actuators.climbingMotorSC4);
 		// Spare
-		LiveWindow.addActuator("Spare", "spareMotorSC",
-				(LiveWindowSendable) Robot.actuators.spareMotorSC);
+		LiveWindow.addActuator("Spare", "spareMotorSC", (LiveWindowSendable) Robot.actuators.spareMotorSC);
 
 		/*
 		 * Sensors
 		 */
 		// General
-		LiveWindow.addSensor("General", "pdp",
-				(LiveWindowSendable) Robot.sensors.pdp);
+		LiveWindow.addSensor("General", "pdp", (LiveWindowSendable) Robot.sensors.pdp);
 		// Chassis
-		LiveWindow.addSensor("Chassis", "navx",
-				(LiveWindowSendable) Robot.sensors.navx);
+		LiveWindow.addSensor("Chassis", "navx", (LiveWindowSendable) Robot.sensors.navx);
 		LiveWindow.addSensor("Chassis", "chassisLeftEncoder",
 				(LiveWindowSendable) Robot.sensors.chassisLeftEncoder);
 		LiveWindow.addSensor("Chassis", "chassisRighttEncoder",
@@ -318,19 +318,14 @@ public class SDB
 		// Flywheel
 		LiveWindow.addSensor("Flywheel", "flywheelCounter",
 				(LiveWindowSendable) Robot.sensors.flywheelCounter);
-		LiveWindow.addSensor("Flywheel", "hallEffect",
-				(LiveWindowSendable) Robot.sensors.flywheelHE);
+		LiveWindow.addSensor("Flywheel", "hallEffect", (LiveWindowSendable) Robot.sensors.flywheelHE);
 		// Turret
-		LiveWindow.addSensor("Turret", "turretPot",
-				(LiveWindowSendable) Robot.sensors.turretPot);
+		LiveWindow.addSensor("Turret", "turretPot", (LiveWindowSendable) Robot.sensors.turretPot);
 		// Hood
-		LiveWindow.addSensor("Hood", "hoodPot",
-				(LiveWindowSendable) Robot.sensors.hoodPot);
+		LiveWindow.addSensor("Hood", "hoodPot", (LiveWindowSendable) Robot.sensors.hoodPot);
 		// Climbing
-		LiveWindow.addSensor("Climbing", "climbingPot",
-				(LiveWindowSendable) Robot.sensors.climbingPot);
-		LiveWindow.addSensor("Climbing", "climbingSwitch",
-				(LiveWindowSendable) Robot.sensors.climbingSwitch);
+		LiveWindow.addSensor("Climbing", "climbingPot", (LiveWindowSendable) Robot.sensors.climbingPot);
+		LiveWindow.addSensor("Climbing", "climbingSwitch", (LiveWindowSendable) Robot.sensors.climbingSwitch);
 
 		logger.info("Finished initLiveWindow()");
 	}

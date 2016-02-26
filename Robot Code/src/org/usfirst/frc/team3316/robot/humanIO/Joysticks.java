@@ -5,6 +5,7 @@ package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
@@ -91,8 +92,11 @@ public class Joysticks
 		toggleIntakeBtn.whenPressed(new ToggleIntake());
 		
 		// Shooter
-		DBugJoystickButton prepareToShootBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
-		prepareToShootBtn.whileHeld(new WarmUpShooterSequence());
+		// DBugJoystickButton prepareToShootBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
+		// prepareToShootBtn.whileHeld(new WarmUpShooterSequence());
+		
+		DBugJoystickButton warmUpFlywheelBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Flywheel");
+		warmUpFlywheelBtn.whileHeld(new WarmShooter());
 		
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());

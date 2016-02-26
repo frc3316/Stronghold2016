@@ -140,6 +140,7 @@ public class Config
 					addToVariables("button_Climb", 6);
 					addToVariables("button_Warm_Up_Shooter", 7);
 					addToVariables("button_Shooting_Trigger", 8);
+					addToVariables("button_Warm_Up_Flywheel", 10);
 				}
 			}
 		}
