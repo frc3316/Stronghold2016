@@ -97,7 +97,8 @@ class VisionManager(object):
                  break  # Seems like the buffer is empty - lets use the last frame
 
         else:  # this occours if the loop wasn't broken - lets use the new frame
-             frame = new_frame
+            logger.debug("buffer isn't empty")
+            frame = new_frame
             
         # maybe resize changes edges of u? causing the u to be smaller of bigger
         #frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight))

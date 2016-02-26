@@ -27,7 +27,7 @@ else:
     isShowingImage = 1
 
 # are we going to send data to the java process:
-shouldNetwork = True
+shouldNetwork = False
 
 ##################################
 # Camera and FPS counter setting #
@@ -54,7 +54,8 @@ if __name__ == "__main__":
         # cam.set(cv2.cv.CV_CAP_PROP_BUFFERSIZE, 1)  # Eliminates cv buffer, this way we always recv the latest image
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
-        networkManager = NetworkManager(JAVA_HOST,8080)
+        if shouldNetwork:
+            networkManager = NetworkManager(JAVA_HOST,8080)
         ###################
         # The code itself #
         ###################
@@ -161,11 +162,12 @@ if __name__ == "__main__":
 
             # sleep(0.01) # so the pi won't crush
     except ValueError:
-	logger.error("Error!" + str(ValueError))
+        logger.error("Error!" + str(ValueError))
     finally:
         logger.debug("----------------")
         logger.debug("Finished Running")
         logger.debug("----------------")
         cv2.destroyAllWindows()
         visionManager.cam.release()
-        networkManager.sock.close()
+        if shouldNetwork:
+            networkManager.sock.close()
