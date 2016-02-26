@@ -202,11 +202,6 @@ public class SDB
 		SmartDashboard.putData(new OpenIntakeTransport());
 		SmartDashboard.putData(new CloseIntakeTransport());
 		
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new CloseShortPistons());
-		
 		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());

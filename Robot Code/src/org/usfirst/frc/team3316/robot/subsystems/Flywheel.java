@@ -3,6 +3,7 @@ package org.usfirst.frc.team3316.robot.subsystems;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
 
@@ -13,15 +14,18 @@ public class Flywheel extends DBugSubsystemCC
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
 	private double powerSum = 0;
-	
+
 	private LowPassFilter counterFilter;
 
 	/**
-	 * Class for filtering out noise from the FPGA rate calculation. Essentially, this is a low pass filter.
+	 * Class for filtering out noise from the FPGA rate calculation.
+	 * Essentially, this is a low pass filter.
 	 * 
-	 * This class doesn't do now anything important because we have the generic LowPassFilter.
+	 * This class doesn't do now anything important because we have the generic
+	 * LowPassFilter.
 	 * 
-	 * This class can be deleted when we won't need the power calculation anymore.
+	 * This class can be deleted when we won't need the power calculation
+	 * anymore.
 	 * 
 	 * @author D-Bug
 	 *
@@ -31,8 +35,9 @@ public class Flywheel extends DBugSubsystemCC
 		public void run()
 		{
 			// For power sum
-			powerSum =+ Robot.actuators.flywheelMotor.getCurrent()
-					* Robot.actuators.flywheelMotor.getVoltage() * Robot.sensors.pdp.getVoltage();
+			powerSum = +Robot.actuators.flywheelMotor.getCurrent()
+					* Robot.actuators.flywheelMotor.getVoltage()
+					* Robot.sensors.pdp.getVoltage();
 		}
 	}
 
@@ -40,22 +45,24 @@ public class Flywheel extends DBugSubsystemCC
 	{
 		// Actuators
 		Robot.actuators.FlywheelActuators();
-		
+
 		flywheelMotor = Robot.actuators.flywheelMotor;
 
 		addSpeedController(flywheelMotor);
 
 		// Sensors
 		Robot.sensors.FlywheelSensors();
-		
+
 		counter = Robot.sensors.flywheelCounter;
 
-		counterFilter = new LowPassFilter((double) config.get("flywheel_CounterFilter_MaxChange"),
+		counterFilter = new LowPassFilter(
+				(double) config.get("flywheel_CounterFilter_MaxChange"),
 				(long) config.get("flywheel_CounterFilter_Period"), () ->
 				{
-					return counter.getRate() > 200  ? Double.MAX_VALUE : counter.getRate();
+					return counter.getRate() > 200 ? Double.MAX_VALUE
+							: counter.getRate();
 				});
-		
+
 		// Other stuff
 		Robot.timer.schedule(new RateTask(), 0, 10);
 	}
@@ -77,5 +84,10 @@ public class Flywheel extends DBugSubsystemCC
 	public double getPowerSum()
 	{
 		return powerSum;
+	}
+
+	public boolean isOnTarget()
+	{
+		return FlywheelPID.onTarget();
 	}
 }

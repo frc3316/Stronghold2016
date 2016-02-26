@@ -6,7 +6,9 @@ import org.usfirst.frc.team3316.robot.Robot;
 
 public class HoodBangbang extends DBugCommand
 {
-	private double onVoltage, offVoltage, setPoint, tolerance;
+	private double onVoltage, offVoltage;
+	private static double setPoint;
+	private static double tolerance;
 
 	public HoodBangbang()
 	{
@@ -66,7 +68,7 @@ public class HoodBangbang extends DBugCommand
 		fin();
 	}
 	
-	private boolean onTarget ()
+	public static boolean onTarget()
 	{
 		if (Math.abs(Robot.hood.getAngle() - setPoint) < tolerance)
 		{

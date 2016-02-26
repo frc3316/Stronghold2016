@@ -4,7 +4,7 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommandGroup;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.OpenIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
-import org.usfirst.frc.team3316.robot.commands.intake.StopRoll;
+import org.usfirst.frc.team3316.robot.commands.intake.IntakeStopRoll;
 import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallIn;
 
 public class CollectBall extends DBugCommandGroup
@@ -15,7 +15,7 @@ public class CollectBall extends DBugCommandGroup
 		addSequential(new OpenIntake());
 		addParallel(new IntakeRollIn());
 		addSequential(new WaitForBallIn());
-		addSequential(new StopRoll());
+		addSequential(new IntakeStopRoll());
 		addSequential(new CloseIntake());
 	}
 }

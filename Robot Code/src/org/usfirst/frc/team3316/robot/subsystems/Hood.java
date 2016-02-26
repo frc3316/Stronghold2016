@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
@@ -81,6 +82,11 @@ public class Hood extends DBugSubsystemCC
 		potOffset = (angle - hoodPot.get());
 		logger.fine(
 				"The offset of the hood is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
+	}
+	
+	public boolean isOnTarget()
+	{
+		return HoodBangbang.onTarget();
 	}
 
 }
