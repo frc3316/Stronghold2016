@@ -5,43 +5,8 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-import edu.wpi.first.wpilibj.Timer;
-
 public class ExtendOmni extends DBugCommand
 {
-	/**
-	 * Task that updates the hall effects values faster than the update rate of the command. We're simply
-	 * afraid that we will miss the hall effects' readings.
-	 * 
-	 * @author D-Bug
-	 *
-	 */
-	private class HETask extends TimerTask
-	{
-		public void run()
-		{
-			if (Robot.chassis.getHELeftBack())
-			{
-				leftBack = true;
-			}
-
-			if (Robot.chassis.getHELeftFront())
-			{
-				leftFront = true;
-			}
-
-			if (Robot.chassis.getHERightBack())
-			{
-				rightBack = true;
-			}
-
-			if (Robot.chassis.getHERightFront())
-			{
-				rightFront = true;
-			}
-		}
-	}
-
 	/**
 	 * Tasks for opening the short pistons of each side. We want to pass this as a parameter to a timer
 	 * object (to create a delay)
@@ -53,7 +18,7 @@ public class ExtendOmni extends DBugCommand
 	{
 		public void run()
 		{
-			Robot.chassis.openShortPistonsLeft();
+			leftSet = Robot.chassis.openShortPistonsLeft();
 		}
 	}
 	
@@ -61,22 +26,15 @@ public class ExtendOmni extends DBugCommand
 	{
 		public void run()
 		{
-			Robot.chassis.openShortPistonsRight();
+			rightSet = Robot.chassis.openShortPistonsRight();
 		}
 	}
 
-	private double timeout;
-	private double cancelTimeout;
-	private long liftTimeout; // The delay from when the hall effects are triggered to when we open the
+	private int liftTimeout; // The delay from when the hall effects are triggered to when we open the
 								// pistons
-
-	private double timeoutStartTime;
-	private boolean isTimeoutStarted;
 
 	private boolean leftSet, rightSet; // booleans for whether we've set already
 										// the pistons to open
-	private boolean leftFront, leftBack, rightFront, rightBack; // Booleans to mark if the according hall
-																// effects have been triggered
 	
 	private java.util.Timer timer;
 	
@@ -99,62 +57,21 @@ public class ExtendOmni extends DBugCommand
 
 		leftSet = false;
 		rightSet = false;
-
-		leftFront = false;
-		leftBack = false;
-		rightFront = false;
-		rightBack = false;
-
-		timeout = (double) config.get("chassis_ExtendOmni_Timeout");
-		cancelTimeout = (double) config.get("chassis_ExtendOmni_CancelTimeout");
-		liftTimeout = (long) config.get("chassis_ExtendOmni_LiftTimeout");
-
-		timeoutStartTime = 0;
-		isTimeoutStarted = false;
+		
+		liftTimeout = (int) config.get("chassis_ExtendOmni_LiftTimeout");
 
 		timer = new java.util.Timer();
 		
-		timer.schedule(new HETask(), 0, (long) config.get("chassis_ExtendOmni_HETaskPeriod"));
+		timer.schedule(new LiftLeftSide(), liftTimeout);
+		timer.schedule(new LiftRightSide(), liftTimeout);
 	}
 
 	protected void execute()
-	{
-		if (!leftSet && leftFront && leftBack)
-		{
-			timer.schedule(new LiftLeftSide(), liftTimeout);
-			leftSet = true;
-		}
-
-		if (!rightSet && rightFront && rightBack)
-		{
-
-			timer.schedule(new LiftRightSide(), liftTimeout);
-			rightSet = true;
-		}
-
-		if (leftSet && rightSet && !isTimeoutStarted)
-		{
-			/*
-			 * We can't use here the isTimedOut method because it measures the time since the command was
-			 * initialized, rather than from when the timeout was started
-			 */
-			timeoutStartTime = Timer.getFPGATimestamp();
-			isTimeoutStarted = true;
-		}
-	}
+	{}
 
 	protected boolean isFinished()
 	{
-		if (timeSinceInitialized() > cancelTimeout)
-		{
-			// Too much time has passed and the short pistons didn't open.
-			// Something is wrong and we're aborting.
-			Robot.chassis.closeAllPistons();
-			return true;
-		}
-
-		// This is a timer
-		return (Timer.getFPGATimestamp() >= timeoutStartTime + timeout) && isTimeoutStarted;
+		return leftSet && rightSet;
 	}
 
 	protected void fin()
@@ -165,6 +82,7 @@ public class ExtendOmni extends DBugCommand
 	protected void interr()
 	{
 		fin();
+		
 		// If the command didn't finish for some reason we're aborting as well
 		Robot.chassis.closeAllPistons();
 	}

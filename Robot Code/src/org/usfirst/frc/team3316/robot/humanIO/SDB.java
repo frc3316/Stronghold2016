@@ -68,10 +68,6 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Hall effect left front", Robot.chassis.getHELeftFront());
-			put("Hall effect left back", Robot.chassis.getHELeftBack());
-			put("Hall effect right front", Robot.chassis.getHERightFront());
-			put("Hall effect right back", Robot.chassis.getHERightBack());
 			
 			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
@@ -211,6 +207,10 @@ public class SDB
 		SmartDashboard.putData(new CloseLongPistons());
 		SmartDashboard.putData(new CloseShortPistons());
 		
+		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
+		SmartDashboard.putData(new ExtendOmni());
+		SmartDashboard.putData(new RetractOmni());
+		
 		SmartDashboard.putData(new CollectBall());
 		SmartDashboard.putData(new EjectBall());
 
@@ -218,6 +218,10 @@ public class SDB
 		
 		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
 		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
+
+		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
+		putConfigVariableInSDB("chassis_RetractOmni_Timeout");
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
@@ -272,10 +276,6 @@ public class SDB
 		LiveWindow.addSensor("Chassis", "navx", (LiveWindowSendable) Robot.sensors.navx);
 		LiveWindow.addSensor("Chassis", "chassisLeftEncoder", (LiveWindowSendable) Robot.sensors.chassisLeftEncoder);
 		LiveWindow.addSensor("Chassis", "chassisRighttEncoder", (LiveWindowSendable) Robot.sensors.chassisRightEncoder);
-		LiveWindow.addSensor("Chassis", "chassisHELeftFront", (LiveWindowSendable) Robot.sensors.chassisHELeftFront);
-		LiveWindow.addSensor("Chassis", "chassisHELeftBack", (LiveWindowSendable) Robot.sensors.chassisHELeftBack);
-		LiveWindow.addSensor("Chassis", "chassisHERightFront", (LiveWindowSendable) Robot.sensors.chassisHERightFront);
-		LiveWindow.addSensor("Chassis", "chassisHERightBack", (LiveWindowSendable) Robot.sensors.chassisHERightBack);
 		// Intake
 		LiveWindow.addSensor("Intake", "intakeLeftSwitch", (LiveWindowSendable) Robot.sensors.intakeLeftSwitch);
 		LiveWindow.addSensor("Intake", "intakeRightSwitch", (LiveWindowSendable) Robot.sensors.intakeRightSwitch);

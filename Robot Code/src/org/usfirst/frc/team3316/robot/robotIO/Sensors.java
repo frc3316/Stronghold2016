@@ -32,9 +32,6 @@ public class Sensors
 
 	public Encoder chassisLeftEncoder, chassisRightEncoder;
 
-	public DigitalInput chassisHELeftFront, chassisHELeftBack,
-			chassisHERightFront, chassisHERightBack;
-
 	// Intake
 	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
 
@@ -104,15 +101,6 @@ public class Sensors
 				EncodingType.k4X);
 		chassisRightEncoder.setDistancePerPulse((double) config
 				.get("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE"));
-
-		chassisHELeftFront = new DigitalInput(
-				(int) config.get("CHASSIS_HALL_EFFECT_LEFT_FRONT"));
-		chassisHELeftBack = new DigitalInput(
-				(int) config.get("CHASSIS_HALL_EFFECT_LEFT_BACK"));
-		chassisHERightFront = new DigitalInput(
-				(int) config.get("CHASSIS_HALL_EFFECT_RIGHT_FRONT"));
-		chassisHERightBack = new DigitalInput(
-				(int) config.get("CHASSIS_HALL_EFFECT_RIGHT_BACK"));
 	}
 
 	/*
