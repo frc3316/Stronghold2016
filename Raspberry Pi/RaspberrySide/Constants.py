@@ -7,7 +7,7 @@ UB = np.array([100,255,250]) # Upper bond
 MBR = 200 # Minimum bounding rectangle
 KH = 36 # Known height (of U).
 KW = 50.8 # Known width  (of U).
-FL = 362 # Focal length.
+FL = 972 # Focal length.
 
 # Robot:
 RW = 100 # Robot width.
@@ -29,5 +29,5 @@ brightness = 0
 saturation = 1
 exposure = 0
 rotateClockwise = True # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
-resizedImageWidth = 320
-resizedImageHeight = 240
+resizedImageWidth = 160
+resizedImageHeight = 120
