@@ -14,7 +14,7 @@ public class TriggerShootingSequence extends DBugCommandGroup
 	public TriggerShootingSequence()
 	{
 		addParallel(new TransportRollIn());
-		addSequential(new WaitCommand(0.5));
+		addSequential(new WaitCommand(0.25));
 		addParallel(new IntakeRollOut());
 		addSequential(new WaitCommand(0.5));
 		addParallel(new TransportStopRoll());

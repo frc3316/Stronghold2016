@@ -9,6 +9,8 @@ import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
+import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
+import org.usfirst.frc.team3316.robot.commands.transport.TransportRollOut;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
@@ -78,10 +80,6 @@ public class Joysticks
 		toggleOmniBtn.whenPressed(new ToggleOmni());
 		
 		// Intake
-		DBugJoystickButton collectBallBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
-		collectBallBtn.whenPressed(new CollectBall());
-		DBugJoystickButton ejectBallBtn = new DBugJoystickButton(joystickOperator, "button_Eject_Ball");
-		ejectBallBtn.whenPressed(new EjectBall());
 		
 		DBugJoystickButton rollInBtn = new DBugJoystickButton(joystickOperator, "button_Roll_In");
 		rollInBtn.whileHeld(new IntakeRollIn());
@@ -100,5 +98,10 @@ public class Joysticks
 		
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());
+		
+		JoystickButton transportRollInBtn = new JoystickButton(joystickOperator, 2);
+		transportRollInBtn.whileHeld(new TransportRollIn());
+		JoystickButton transportRollOutBtn = new JoystickButton(joystickOperator, 3);
+		transportRollOutBtn.whileHeld(new TransportRollOut());
 	}
 }

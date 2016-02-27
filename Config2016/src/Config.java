@@ -176,7 +176,7 @@ public class Config
 				 */
 				addToConstants("INTAKE_MOTOR_REVERSE", true);
 
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 30.0);
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);

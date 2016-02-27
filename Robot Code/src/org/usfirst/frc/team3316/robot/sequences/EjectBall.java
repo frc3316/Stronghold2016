@@ -13,13 +13,24 @@ public class EjectBall extends DBugCommandGroup
 {
 	public EjectBall()
 	{
-		addSequential(new CloseIntake());
-		addParallel(new IntakeRollIn());
-		addSequential(new WaitForBallIn());
+//		addSequential(new CloseIntake());
+//		addParallel(new IntakeRollIn());
+//		addSequential(new WaitForBallIn());
 		addSequential(new OpenIntake());
 		addParallel(new IntakeRollOut());
 		addSequential(new WaitForBallOut());
+//		addSequential(new IntakeStopRoll());
+//		addSequential(new CloseIntake());
+	}
+	
+	protected void fin ()
+	{
 		addSequential(new IntakeStopRoll());
 		addSequential(new CloseIntake());
+	}
+	
+	protected void interr ()
+	{
+		fin();
 	}
 }
