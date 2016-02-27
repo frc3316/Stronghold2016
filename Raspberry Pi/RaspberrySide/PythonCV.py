@@ -45,17 +45,34 @@ if __name__ == "__main__":
         cam = cv2.VideoCapture(getCameraNumber())
         if not cam.isOpened():
             logger.error("No Camera Found!!!")
-        cam.set(3, resizedImageWidth)
-        cam.set(4, resizedImageHeight)
-        cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
-        cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
-        cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
+
+        if not cam.set(3, resizedImageWidth):
+            logger.warning("Set width failed")
+
+        if not cam.set(4, resizedImageHeight):
+            logger.warning("Set height failed")
+
+        if not cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness):
+            logger.warning("Set brightness failed")
+
+        if not cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation):
+            logger.warning("Set saturation failed")
+
+        if not cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure): # not working on the old camera
+            logger.warning("Set exposure failed")
+
+	if not cam.set(cv2.cv.CV_CAP_PROP_CONTRAST, contrast):
+            logger.warning("Set contrast failed")
+
         # cam.set(cv2.cv.CV_CAP_PROP_FPS, 3)
         # cam.set(cv2.cv.CV_CAP_PROP_BUFFERSIZE, 1)  # Eliminates cv buffer, this way we always recv the latest image
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
         if shouldNetwork:
             networkManager = NetworkManager(JAVA_HOST,8080)
+	
+	framesRead = 0 # the number of frames read so far
+
         ###################
         # The code itself #
         ###################
@@ -64,7 +81,8 @@ if __name__ == "__main__":
             visionManager.updateTowerScales()
             visionManager.updateRobotScales()
             FPSCounter.update()
-            logger.debug("Updated FPS Counter")
+            framesRead += 1
+	    logger.debug("Updated FPS Counter")
 
             if visionManager.isObjectDetected: # if an object was detected
                 #######################
@@ -136,8 +154,10 @@ if __name__ == "__main__":
                #cv2.imwrite("masked.jpg", visionManager.maskedImage)
             # display:
             if isShowingImage:
-                pass
-                #cv2.imwrite("masked.png",visionManager.maskedImage)
+		if framesRead % 30 == 0:
+               		logger.debug("image writen")
+                	cv2.imwrite("masked.png",visionManager.maskedImage)
+                	cv2.imwrite("current.png", visionManager.currentImage)
                 #cv2.imshow("Current Image", visionManager.currentImage)
                 #cv2.imshow("Thresh Image", visionManager.threshImage)
                 #cv2.imshow("Masked Image", visionManager.maskedImage)

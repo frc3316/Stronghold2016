@@ -1,7 +1,7 @@
 import numpy as np
 # Colors:
-LB = np.array([50,150,100]) # Lower bond
-UB = np.array([100,255,250]) # Upper bond
+LB = np.array([80,210,180]) # Lower bond
+UB = np.array([95,255,255]) # Upper bond
 
 # Bounding rectangle
 MBR = 200 # Minimum bounding rectangle
@@ -28,9 +28,10 @@ HAX = 53 # The head angle of the camera (x)
 HAY = 39.75 # The head angle of the camera (y)
 
 # Camera Settings:
-brightness = 0
+brightness = 0.01
 saturation = 1
-exposure = 0
-rotateClockwise = True # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
-resizedImageWidth = 160
-resizedImageHeight = 120
+exposure = 0.9
+contrast = 0.01
+rotateClockwise = False # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
+resizedImageWidth = 320
+resizedImageHeight = 240
