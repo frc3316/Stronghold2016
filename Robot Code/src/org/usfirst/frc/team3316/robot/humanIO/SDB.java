@@ -220,6 +220,7 @@ public class SDB
 		
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
+		SmartDashboard.putData(new TurretPID());
 		
 		SmartDashboard.putData(new WarmShooter());
 		putConfigVariableInSDB("flywheel_PID_Setpoint");
@@ -247,6 +248,11 @@ public class SDB
 		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
 		putConfigVariableInSDB("chassis_RetractOmni_Timeout");
 		
+		putConfigVariableInSDB("turret_Angle_SetPoint");
+		putConfigVariableInSDB("turret_PID_Tolerance");
+		putConfigVariableInSDB("turret_PID_KP");
+		putConfigVariableInSDB("turret_PID_KI");
+		putConfigVariableInSDB("turret_PID_KD");
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
