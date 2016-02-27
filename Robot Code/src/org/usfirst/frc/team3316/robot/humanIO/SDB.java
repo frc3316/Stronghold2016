@@ -69,7 +69,6 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
 			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
 			
 			put("Flywheel speed", Robot.flywheel.getRate());
@@ -86,6 +85,7 @@ public class SDB
 				logger.severe(e);
 			}
 			put("Turret angle", Robot.turret.getAngle());
+			put("Hood angle", Robot.hood.getAngle());
 		}
 
 		private void put(String name, double d)
@@ -194,32 +194,18 @@ public class SDB
 		SmartDashboard.putData(new HoodJoysticks());
 		SmartDashboard.putData(new TurretJoysticks());
 		
-		SmartDashboard.putData(new IntakeRollIn());
-		SmartDashboard.putData(new IntakeRollOut());
-		
-		SmartDashboard.putData(new TransportRollIn());
-		SmartDashboard.putData(new TransportRollOut());
-		
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
-
-		SmartDashboard.putData(new TurretBangbang());
+		SmartDashboard.putData(new SetTurretAngle());
+		SmartDashboard.putData(new SetHoodAngle());
 
 		putConfigVariableInSDB("turret_Pot_LeftThresh");
 		putConfigVariableInSDB("turret_Pot_RightThresh");
+		putConfigVariableInSDB("hood_Pot_TopThresh");
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
 
 		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
 		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
 		putConfigVariableInSDB("turret_PID_Tolerance");
 		
-		putConfigVariableInSDB("turret_TurretBangbang_BigError");
-		putConfigVariableInSDB("turret_TurretBangbang_VScale");
-		
-		putConfigVariableInSDB("transport_RollIn_Speed");
-		putConfigVariableInSDB("transport_RollOut_Speed");
-		
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
 		SmartDashboard.putData(new TurretPID());
 		
 		SmartDashboard.putData(new WarmShooter());
@@ -228,25 +214,15 @@ public class SDB
 		SmartDashboard.putData(new OpenIntakeTransport());
 		SmartDashboard.putData(new CloseIntakeTransport());
 		
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new CloseShortPistons());
-		
-		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());
-		
-		SmartDashboard.putData(new CollectBall());
-		SmartDashboard.putData(new EjectBall());
 
 		SmartDashboard.putData(new TransportJoysticks());
 		
 		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
 		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
-
-		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
-		putConfigVariableInSDB("chassis_RetractOmni_Timeout");
+		putConfigVariableInSDB("hood_Angle_SetPoint");
+		putConfigVariableInSDB("hood_PID_Tolerance");
 		
 		putConfigVariableInSDB("turret_Angle_SetPoint");
 		putConfigVariableInSDB("turret_PID_Tolerance");

@@ -67,6 +67,8 @@ public class FlywheelPID extends DBugCommand
 	{
 		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
 
+		logger.finest("Flywheel Speed: " + Robot.flywheel.getRate());
+		
 		logger.finest("This is flywheel's v: " + v);
 		SmartDashboard.putBoolean("PID on target", onTarget());
 		

@@ -296,7 +296,7 @@ public class IO
 
 					putDIOB("CLIMBING_SWITCH", 6);
 
-					putDIOB("FLYWHEEL_HALL_EFFECT_COUNTER", 8);
+					putDIOB("FLYWHEEL_HALL_EFFECT_COUNTER", 7);
 				}
 			}
 
