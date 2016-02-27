@@ -5,6 +5,9 @@ UB = np.array([100,255,250]) # Upper bond
 
 # Bounding rectangle
 MBR = 200 # Minimum bounding rectangle
+maximumBoundingRectangle = 10000
+HWR = 1 # The maximum ratio of height/width of the bounding rectangle.
+
 KH = 36 # Known height (of U).
 KW = 50.8 # Known width  (of U).
 FL = 972 # Focal length.

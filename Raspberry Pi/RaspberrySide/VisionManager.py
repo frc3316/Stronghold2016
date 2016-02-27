@@ -153,10 +153,17 @@ class VisionManager(object):
         (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         if cnts:
             c = max(cnts, key = cv2.contourArea)
-            if cv2.contourArea(c) > self.minimumBoundingRectSize:
+            if self.minimumBoundingRectSize < cv2.contourArea(c) < maximumBoundingRectangle:
                 self.isObjectDetected = True
-                return cv2.boundingRect(c)
+                (x, y, w, h) =  cv2.boundingRect(c)
+                if h/w > HWR: # checking if we see the target and not an object that reflects
+                    logger.debug("object is NOT in the maximum ratio of height/width")
+                    self.isObjectDetected = False
+                    return None
+                else:
+                    return (x, y, w, h)
             else:
+                logger.debug("bounding area is too big or too small")
                 self.isObjectDetected = False
         else:
             self.isObjectDetected = False
