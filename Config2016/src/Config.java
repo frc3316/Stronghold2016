@@ -185,7 +185,7 @@ public class Config
 				addToConstants("TURRET_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
 																	// the stall
 																	// current
-				addToConstants("TURRET_POT_FULL_RANGE", -400.0);
+				addToConstants("TURRET_POT_FULL_RANGE", -821.269);
 				
 
 				/*
@@ -402,7 +402,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("turret_Pot_Offset", 189.54671547503355);
-				addToVariablesB("turret_Pot_Offset", 118.2781510422728);
+				addToVariablesB("turret_Pot_Offset", 192.357);
 				
 				addToVariables("turret_PotFilter_MaxChange", 4.0);
 				addToVariables("turret_PotFilter_Period", (long) 10);

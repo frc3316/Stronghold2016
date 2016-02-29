@@ -12,7 +12,9 @@ public class SetTurretAngle extends DBugCommand
 	
 	protected void init()
 	{
-		Robot.turret.setAngle((double) config.get("turret_SetTurretAngle_Angle"));
+//		Robot.turret.setAngle((double) config.get("turret_SetTurretAngle_A?ngle"));
+		
+		logger.info("Current turret angle: " + Robot.turret.getAngle()); 
 	}
 
 	protected void execute()

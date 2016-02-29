@@ -67,7 +67,6 @@ public class Hood extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		logger.finest("Someone asked for hood angle. Pot angle: " + hoodPot.get() + ", Pot offset: " + potOffset);
 		return hoodPot.get() + potOffset;
 	}
 
