@@ -96,7 +96,7 @@ public class Joysticks
 		// prepareToShootBtn.whileHeld(new WarmUpShooterSequence());
 		
 		DBugJoystickButton warmUpFlywheelBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Flywheel");
-		warmUpFlywheelBtn.whileHeld(new WarmShooter());
+		warmUpFlywheelBtn.whenPressed(new WarmShooter());
 		
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());

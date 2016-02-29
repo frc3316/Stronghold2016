@@ -137,10 +137,10 @@ public class Config
 					addToVariables("button_Eject_Ball", 3);
 					addToVariables("button_Roll_In", 4);
 					addToVariables("button_Roll_Out", 5);
-					addToVariables("button_Climb", 6);
+					addToVariables("button_Climb", 10);
 					addToVariables("button_Warm_Up_Shooter", 7);
 					addToVariables("button_Shooting_Trigger", 8);
-					addToVariables("button_Warm_Up_Flywheel", 10);
+					addToVariables("button_Warm_Up_Flywheel", 6);
 				}
 			}
 		}

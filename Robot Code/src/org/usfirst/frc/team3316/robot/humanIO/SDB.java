@@ -203,6 +203,9 @@ public class SDB
 
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
+		
+		putConfigVariableInSDB("intake_CloseIntake_Timeout");
+		putConfigVariableInSDB("intake_OpenIntake_Timeout");
 
 		putConfigVariableInSDB("transport_RollIn_Speed");
 		putConfigVariableInSDB("transport_RollOut_Speed");
