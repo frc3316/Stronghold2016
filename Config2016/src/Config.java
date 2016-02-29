@@ -198,8 +198,10 @@ public class Config
 																// the stall
 																// current
 
-				addToConstants("HOOD_POT_FULL_RANGE", -300.0); // negative to flip incrementing direction
+				addToConstantsA("HOOD_POT_FULL_RANGE", -300.0); // negative to flip incrementing direction
 
+				addToConstantsB("HOOD_POT_FULL_RANGE", -270.0); // negative to flip incrementing direction
+				
 				/*
 				 * Climbing
 				 */
@@ -451,7 +453,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 193.51227018845623);
-				addToVariablesB("hood_Pot_Offset", 156.47294478246684);
+				addToVariablesB("hood_Pot_Offset", 110.0791488362001);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);

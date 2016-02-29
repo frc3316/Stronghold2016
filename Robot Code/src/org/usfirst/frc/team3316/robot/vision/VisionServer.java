@@ -24,20 +24,20 @@ public class VisionServer implements Runnable
 		// Input e.g.: {'Var1':'33.16','Var2':'22.12'}
 		Map<String, Double> data = new HashMap<String, Double>();
 
-		logger.finest(s);
+//		logger.finest(s);
 		
 		String vars[] = s.split(",");
 		
 		for (String var : vars)
 		{
-			logger.info(var);
+//			logger.info(var);
 			
 			String parts[] = var.split(":", 0);
 
 			String key = parts[0].substring(parts[0].indexOf('\'') + 1,
 					parts[0].lastIndexOf('\''));
 
-			logger.finest("Key: " + key);
+//			logger.finest("Key: " + key);
 			
 			String valueString = parts[1].substring(parts[1].indexOf('\'') + 1,
 					parts[1].lastIndexOf('\''));
@@ -49,12 +49,12 @@ public class VisionServer implements Runnable
 			
 			double value = Double.parseDouble(valueString);
 			
-			logger.finest("Value: " + value);
+//			logger.finest("Value: " + value);
 
 			data.put(key, value);
 		}
 
-		logger.fine("data: " + data.toString());
+//		logger.fine("data: " + data.toString());
 		
 		return data;
 	}
@@ -82,7 +82,7 @@ public class VisionServer implements Runnable
 				lastTime = System.currentTimeMillis();
 			}
 			
-			logger.finest("Time difference from last while: " + (System.currentTimeMillis() - lastTime));
+//			logger.finest("Time difference from last while: " + (System.currentTimeMillis() - lastTime));
 			lastTime = System.currentTimeMillis();
 			
 			DatagramPacket receivePacket = new DatagramPacket(receiveData,
@@ -95,15 +95,15 @@ public class VisionServer implements Runnable
 				logger.finest("Received packet");
 				
 				String sentence = new String(receivePacket.getData());
-				logger.finest("Packet data length: " + receivePacket.getLength());
+//				logger.finest("Packet data length: " + receivePacket.getLength());
 				VisionServer.Data = parseLine(sentence);
 				
-				logger.finest("Parsed line");
+//				logger.finest("Parsed line");
 			}
 			catch (Exception e)
 			{
-				logger.severe("Vision server couldn't receive a packet");
-				logger.severe(e);
+//				logger.severe("Vision server couldn't receive a packet");
+//				logger.severe(e);
 			}
 		}
 	}
