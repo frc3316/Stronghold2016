@@ -85,7 +85,7 @@ public class SDB
 			}
 			catch (Exception e)
 			{
-//				logger.severe(e);
+				logger.severe(e);
 			}
 			put("Turret angle", Robot.turret.getAngle());
 		}
