@@ -22,7 +22,7 @@ public class CloseIntakeTransport extends DBugCommand
 	{}
 	
 	protected boolean isFinished() {
-		return !closeIntake.isRunning();
+		return timeSinceInitialized() >= (double) config.get("intake_CloseIntake_Timeout");
 	}
 	
 	protected void fin() {

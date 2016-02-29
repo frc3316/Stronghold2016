@@ -385,8 +385,6 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("intake_Pot_LowThresh", 1.0);
-				addToVariables("intake_Pot_HighThresh", 130.5);
 			}
 
 			/*
@@ -394,7 +392,8 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollIn_Speed", 1.0);
-				addToVariables("intake_OpenIntake_Timeout", 0.5); // In seconds
+				addToVariablesA("intake_OpenIntake_Timeout", 0.5); // In seconds
+				addToVariablesB("intake_OpenIntake_Timeout", 0.5); // In seconds
 			}
 
 			/*
@@ -402,7 +401,8 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollOut_Speed", -0.5);
-				addToVariables("intake_CloseIntake_Timeout", 0.5); // In seconds
+				addToVariablesA("intake_CloseIntake_Timeout", 0.5); // In seconds
+				addToVariablesB("intake_CloseIntake_Timeout", 0.5); // In seconds
 			}
 		}
 
