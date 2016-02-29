@@ -18,6 +18,8 @@ import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
+import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
+import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -83,7 +85,7 @@ public class SDB
 			}
 			catch (Exception e)
 			{
-				logger.severe(e);
+//				logger.severe(e);
 			}
 			put("Turret angle", Robot.turret.getAngle());
 		}
@@ -190,62 +192,11 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 		
-		// Hood
-		SmartDashboard.putData(new HoodJoysticks());
-		SmartDashboard.putData(new TurretJoysticks());
+		SmartDashboard.putData(new JoystickWinchControl());
 		
-		SmartDashboard.putData(new IntakeRollIn());
-		SmartDashboard.putData(new IntakeRollOut());
-		
-		SmartDashboard.putData(new TransportRollIn());
-		SmartDashboard.putData(new TransportRollOut());
-		
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
-
-		SmartDashboard.putData(new TurretBangbang());
-
-		putConfigVariableInSDB("turret_Pot_LeftThresh");
-		putConfigVariableInSDB("turret_Pot_RightThresh");
-
-		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
-		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
-		putConfigVariableInSDB("turret_PID_Tolerance");
-		
-		putConfigVariableInSDB("turret_TurretBangbang_BigError");
-		putConfigVariableInSDB("turret_TurretBangbang_VScale");
-		
-		putConfigVariableInSDB("transport_RollIn_Speed");
-		putConfigVariableInSDB("transport_RollOut_Speed");
-		
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
-		
-		SmartDashboard.putData(new WarmShooter());
-		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		
-		SmartDashboard.putData(new OpenIntakeTransport());
-		SmartDashboard.putData(new CloseIntakeTransport());
-		
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new CloseShortPistons());
-		
-		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
-		SmartDashboard.putData(new ExtendOmni());
-		SmartDashboard.putData(new RetractOmni());
-		
-		SmartDashboard.putData(new CollectBall());
-		SmartDashboard.putData(new EjectBall());
-
-		SmartDashboard.putData(new TransportJoysticks());
-		
-		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
-		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
-
-		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
-		putConfigVariableInSDB("chassis_RetractOmni_Timeout");
+		SmartDashboard.putData(new PullUp());
+		putConfigVariableInSDB("climbing_UpSpeed");
+		putConfigVariableInSDB("climbing_DownSpeed");
 		
 		/*
 		 * Remove these after finishing testing on prototype
