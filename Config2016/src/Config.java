@@ -338,17 +338,17 @@ public class Config
 				// PID
 				addToVariables("flywheel_PID_Setpoint", 45.0);
 				addToVariables("flywheel_PID_Tolerance", 2.0);
-				addToVariables("flywheel_PID_KP", 10.0);
+				addToVariables("flywheel_PID_KP", 16.0);
 				addToVariables("flywheel_PID_KI", 0.54);
 				addToVariables("flywheel_PID_KD", 0.010);
-				addToVariables("flywheel_PID_KF", 10.0);
+				addToVariables("flywheel_PID_KF", 16.0);
 			}
 			
 			/*
 			 * Accelerate Flywheel
 			 */
 			{
-				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.2);
+				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.15);
 			}
 		}
 
@@ -402,7 +402,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("turret_Pot_Offset", 189.54671547503355);
-				addToVariablesB("turret_Pot_Offset", 107.9930935901017);
+				addToVariablesB("turret_Pot_Offset", 118.2781510422728);
 				
 				addToVariables("turret_PotFilter_MaxChange", 4.0);
 				addToVariables("turret_PotFilter_Period", (long) 10);
@@ -473,7 +473,7 @@ public class Config
 				addToVariablesB("hood_Bangbang_OffVoltage", -0.33);
 
 				addToVariablesB("hood_Pot_BottomThresh", 4.0);
-				addToVariablesB("hood_Pot_TopThresh", 70.0);
+				addToVariablesB("hood_Pot_TopThresh", 65.0);
 				
 				addToVariablesA("hood_Pot_BottomThresh", 6.6);
 				addToVariablesA("hood_Pot_TopThresh", 79.0);

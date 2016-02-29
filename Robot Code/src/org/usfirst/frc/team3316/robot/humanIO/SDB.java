@@ -208,9 +208,6 @@ public class SDB
 		
 		SmartDashboard.putData(new TurretPID());
 		
-		SmartDashboard.putData(new WarmShooter());
-		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		
 		SmartDashboard.putData(new OpenIntakeTransport());
 		SmartDashboard.putData(new CloseIntakeTransport());
 		
@@ -229,6 +226,20 @@ public class SDB
 		putConfigVariableInSDB("turret_PID_KP");
 		putConfigVariableInSDB("turret_PID_KI");
 		putConfigVariableInSDB("turret_PID_KD");
+		
+		SmartDashboard.putData(new WarmShooter());
+		
+		putConfigVariableInSDB("flywheel_PID_KP");
+		putConfigVariableInSDB("flywheel_PID_KI");
+		putConfigVariableInSDB("flywheel_PID_KD");
+		putConfigVariableInSDB("flywheel_PID_KF");
+		
+		putConfigVariableInSDB("flywheel_PID_Tolerance");
+		putConfigVariableInSDB("flywheel_PID_Setpoint");
+		
+		putConfigVariableInSDB("flywheel_AccelerateFlywheel_Timeout");
+		
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
