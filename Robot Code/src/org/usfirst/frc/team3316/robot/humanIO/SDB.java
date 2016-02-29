@@ -216,10 +216,15 @@ public class SDB
 
 		SmartDashboard.putData(new TransportJoysticks());
 		
+		SmartDashboard.putData(new HoodBangbang());
+		
 		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
 		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
+		putConfigVariableInSDB("hood_Bangbang_DownOffset");
 		putConfigVariableInSDB("hood_Angle_SetPoint");
 		putConfigVariableInSDB("hood_PID_Tolerance");
+		
+		
 		
 		putConfigVariableInSDB("turret_Angle_SetPoint");
 		putConfigVariableInSDB("turret_PID_Tolerance");
