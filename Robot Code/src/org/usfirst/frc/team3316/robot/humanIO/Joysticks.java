@@ -6,8 +6,10 @@ package org.usfirst.frc.team3316.robot.humanIO;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
+import org.usfirst.frc.team3316.robot.commands.intake.CloseIntakeTransport;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
+import org.usfirst.frc.team3316.robot.commands.intake.OpenIntakeTransport;
 import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
@@ -89,7 +91,7 @@ public class Joysticks
 		rollOutBtn.whileHeld(new IntakeRollOut());
 		
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
-		toggleIntakeBtn.whenPressed(new ToggleIntake());
+		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new OpenIntakeTransport(), new CloseIntakeTransport()));
 		
 		// Shooter
 		// DBugJoystickButton prepareToShootBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
