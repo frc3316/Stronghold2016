@@ -7,6 +7,14 @@ public class Utils
         return ((x - a.x)*(a.y - b.y)/(a.x - b.x) + a.y);
     }
 	
+	public static boolean isOnTarget(double currentValue, double setpoint, double tolerance)
+	{
+		if (Math.abs(currentValue - setpoint) <= tolerance) {
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Converts a analog sensor output to digital values.
 	 * @param value The current read from the sensor.
