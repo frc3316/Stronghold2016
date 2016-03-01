@@ -30,6 +30,8 @@ class FPS:
         increment the total number of frames examined during the
         start and end intervals
         '''
+        if self._end is not None:
+            self._start = self._end
         self._end = datetime.datetime.now()
         self._numFrames += 1
 
@@ -46,4 +48,4 @@ class FPS:
         compute the (approximate) frames per second
         '''
 
-        return self._numFrames / float(self.elapsed())
+        return 1 / self.elapsed()
