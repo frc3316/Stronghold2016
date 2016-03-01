@@ -88,6 +88,9 @@ public class SDB
 				logger.severe(e);
 			}
 			put("Turret angle", Robot.turret.getAngle());
+			
+			put("Current 14", Robot.sensors.pdp.getCurrent(14));
+			put("Current 15", Robot.sensors.pdp.getCurrent(15));
 		}
 
 		private void put(String name, double d)
@@ -191,6 +194,9 @@ public class SDB
 
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
+		
+		SmartDashboard.putData(new RetractOmni());
+		SmartDashboard.putData(new ExtendOmni());
 		
 		SmartDashboard.putData(new JoystickWinchControl());
 		
