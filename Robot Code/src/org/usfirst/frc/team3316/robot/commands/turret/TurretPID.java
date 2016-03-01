@@ -54,45 +54,52 @@ public class TurretPID extends DBugCommand
 		pidOutput = 0.0;
 		lastTowerAngle = Double.MAX_VALUE;
 		tolerance = (double) config.get("turret_PID_Tolerance");
-		
+
 		pid.setAbsoluteTolerance(tolerance);
-		
+
 		pid.setSetpoint(setPoint);
-		
+
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("turret_PID_KP") / 1000,
-				(double) config.get("turret_PID_KI") / 1000,
+		pid.setPID((double) config.get("turret_PID_KP") / 1000, (double) config.get("turret_PID_KI") / 1000,
 				(double) config.get("turret_PID_KD") / 1000);
-		
+
 		double towerAngle = AlignShooter.getTowerAngle();
 		double currentAngle = Robot.turret.getAngle();
-		
-		if (AlignShooter.isObjectDetected())
-		{
-			if (towerAngle != lastTowerAngle && towerAngle != 3316.0)
-			{
-				logger.finest("Frame updated, so I'm updating ");
-				setPoint = towerAngle + currentAngle;
-				lastTowerAngle = towerAngle;
-				
-				pid.setSetpoint(setPoint);
-			}
-			
-			isFin = !Robot.turret.setMotors(pidOutput);
-		}
-		else
-		{
-			isFin = !Robot.turret.setMotors(0);
-		}
-		
+
+//		if (AlignShooter.isObjectDetected())
+//		{
+//			if (towerAngle != lastTowerAngle && towerAngle != 3316.0)
+//			{
+//				logger.finest("Frame updated, so I'm updating ");
+//				setPoint = towerAngle + currentAngle;
+//				lastTowerAngle = towerAngle;
+//
+//				// For PID Testing purposes, need to be changed back
+//				setPoint = (double) config.get("turret_Angle_SetPoint");
+//
+//				pid.setSetpoint(setPoint);
+//			}
+//
+//			isFin = !Robot.turret.setMotors(pidOutput);
+//			logger.finest("PIDOutput: " + pidOutput);
+//		}
+//		else
+//		{
+//			isFin = !Robot.turret.setMotors(0);
+//			logger.finest("isFin cockblocked me");
+//		}
+
+		setPoint = (double) config.get("turret_Angle_SetPoint");
+
+		pid.setSetpoint(setPoint);
 		isFin = !Robot.turret.setMotors(pidOutput);
 	}
-	
-	public static boolean onTarget() 
+
+	public static boolean onTarget()
 	{
 		if (Math.abs(Robot.turret.getAngle() - setPoint) < tolerance)
 		{
@@ -112,7 +119,7 @@ public class TurretPID extends DBugCommand
 	protected void fin()
 	{
 		pid.reset();
-		
+
 		Robot.turret.setMotors(0);
 	}
 

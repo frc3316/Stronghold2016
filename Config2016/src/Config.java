@@ -416,8 +416,8 @@ public class Config
 				addToVariablesA("turret_PID_KD", -0.01);
 				
 				addToVariablesB("turret_PID_KP", 10.0);
-				addToVariablesB("turret_PID_KI", 0.5);
-				addToVariablesB("turret_PID_KD", 0.1);
+				addToVariablesB("turret_PID_KI", 0.64);
+				addToVariablesB("turret_PID_KD", 6.0);
 
 				// Bangbang Control
 				addToVariables("turret_Bangbang_OnVoltage", 0.075);
@@ -469,8 +469,8 @@ public class Config
 				addToVariablesA("hood_Bangbang_OnVoltage", 0.33);
 				addToVariablesA("hood_Bangbang_OffVoltage", -0.33);
 				
-				addToVariablesB("hood_Bangbang_OnVoltage", 0.33);
-				addToVariablesB("hood_Bangbang_OffVoltage", -0.33);
+				addToVariablesB("hood_Bangbang_OnVoltage", 0.21);
+				addToVariablesB("hood_Bangbang_OffVoltage", -0.21);
 				
 				addToVariablesA("hood_Bangbang_DownOffset", 0.5);
 				addToVariablesB("hood_Bangbang_DownOffset", 0.5);
