@@ -1,13 +1,13 @@
 import numpy as np
 # Colors:
-LB = np.array([50,250,50]) # Lower bond
-UB = np.array([70,255,250]) # Upper bond
+LB = np.array([50,150,100]) # Lower bond
+UB = np.array([100,255,250]) # Upper bond
 
 # Bounding rectangle
 MBR = 200 # Minimum bounding rectangle
 KH = 36 # Known height (of U).
 KW = 50.8 # Known width  (of U).
-FL = 972 # Focal length.
+FL = 362 # Focal length.
 
 # Robot:
 RW = 100 # Robot width.
@@ -26,8 +26,8 @@ HAY = 39.75 # The head angle of the camera (y)
 
 # Camera Settings:
 brightness = 0
-saturation = 255
+saturation = 1
 exposure = 0
 rotateClockwise = True # Is the image rotated by 90 degrees clockwise or counter clockwise. True is clockwise.
-resizedImageWidth = 480
-resizedImageHeight = 360
+resizedImageWidth = 320
+resizedImageHeight = 240

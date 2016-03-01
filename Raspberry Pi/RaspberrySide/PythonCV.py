@@ -26,6 +26,9 @@ if len(sys.argv) > 2:
 else:
     isShowingImage = 1
 
+# are we going to send data to the java process:
+shouldNetwork = True
+
 ##################################
 # Camera and FPS counter setting #
 ##################################
@@ -39,18 +42,19 @@ if __name__ == "__main__":
 
         FPSCounter = FPS()
         FPSCounter.start()
-
         cam = cv2.VideoCapture(getCameraNumber())
         if not cam.isOpened():
             logger.error("No Camera Found!!!")
-
+        cam.set(3, resizedImageWidth)
+        cam.set(4, resizedImageHeight)
         cam.set(cv2.cv.CV_CAP_PROP_BRIGHTNESS, brightness)
         cam.set(cv2.cv.CV_CAP_PROP_SATURATION, saturation)
         cam.set(cv2.cv.CV_CAP_PROP_EXPOSURE, exposure) # not working on the old camera
+        # cam.set(cv2.cv.CV_CAP_PROP_FPS, 3)
+        # cam.set(cv2.cv.CV_CAP_PROP_BUFFERSIZE, 1)  # Eliminates cv buffer, this way we always recv the latest image
 
         visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
         networkManager = NetworkManager(JAVA_HOST,8080)
-
         ###################
         # The code itself #
         ###################
@@ -59,6 +63,7 @@ if __name__ == "__main__":
             visionManager.updateTowerScales()
             visionManager.updateRobotScales()
             FPSCounter.update()
+            logger.debug("Updated FPS Counter")
 
             if visionManager.isObjectDetected: # if an object was detected
                 #######################
@@ -90,18 +95,22 @@ if __name__ == "__main__":
             # Send data to java process #
             #############################
 
-            if visionManager.isObjectDetected and visionManager.robotObject is not None:
-                values = [visionManager.currentImageObject.distanceFromCamera,
-                          visionManager.currentImageObject.azimuthalAngle,
-                          visionManager.currentImageObject.polarAngle,
-                          visionManager.isObjectDetected]
-                names = ["DFC", "AA", "PA", "IOD"]
-                networkManager.sendData(values, names)
+            if shouldNetwork:
+                if visionManager.isObjectDetected:
+                    values = [visionManager.currentImageObject.distanceFromCamera,
+                              visionManager.currentImageObject.azimuthalAngle,
+                              visionManager.currentImageObject.polarAngle,
+                              visionManager.isObjectDetected]
+                    names = ['DFC', 'AA', 'PA', 'IOD']
+                    networkManager.sendData(values, names)
+                else:
+                    values = ['3316.00','3316.00','3316.00','0.00']
+                    names = ['DFC', 'AA', 'PA', 'IOD']
+                    networkManager.sendData(values, names)
 
             ###################
             # Results logger  #
             ###################
-
             if visionManager.isObjectDetected:
                 logger.debug("------------------")
                 logger.debug("Robot Information:")
@@ -115,18 +124,23 @@ if __name__ == "__main__":
                 # put the FPS on the picture
                 # cv2.putText(visionManager.currentImage, "fps=%s" % (FPSCounter.fps()),
                 #       (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
+            else:
+                logger.debug("Object not detected")
 
-            FPSCounter.stop()
             logger.debug("------------------")
             logger.debug("FPS: " + str(FPSCounter.fps()))
             logger.debug("------------------")
-
+            #if visionManager.isObjectDetected:
+               #print visionManager.currentImageObject.distanceFromCamera
+               #cv2.imwrite("masked.jpg", visionManager.maskedImage)
             # display:
             if isShowingImage:
                 pass
-                # cv2.imshow("Current Image", visionManager.currentImage)
-                # cv2.imshow("Thresh Image", visionManager.threshImage)
-                # cv2.imshow("Masked Image", visionManager.maskedImage)
+                #cv2.imwrite("masked.png",visionManager.maskedImage)
+                #cv2.imshow("Current Image", visionManager.currentImage)
+                #cv2.imshow("Thresh Image", visionManager.threshImage)
+                #cv2.imshow("Masked Image", visionManager.maskedImage)
+                #print visionManager.currentImageObject.azimuthalAngle
 
             #########################
             # Wait for key pressing #
@@ -146,9 +160,12 @@ if __name__ == "__main__":
             #    break
 
             # sleep(0.01) # so the pi won't crush
+    except ValueError:
+	logger.error("Error!" + str(ValueError))
     finally:
         logger.debug("----------------")
         logger.debug("Finished Running")
         logger.debug("----------------")
         cv2.destroyAllWindows()
         visionManager.cam.release()
+        networkManager.sock.close()

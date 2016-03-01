@@ -43,6 +43,7 @@ import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.sequences.CollectBall;
 import org.usfirst.frc.team3316.robot.sequences.EjectBall;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import com.sun.media.sound.RIFFInvalidDataException;
@@ -164,7 +165,8 @@ public class SDB
 			if (!constant)
 			{
 				variablesInSDB.put(key, type);
-				logger.info("Added to SDB " + key + " of type " + type + " and allows for its modification");
+				logger.info("Added to SDB " + key + " of type " + type
+						+ " and allows for its modification");
 			}
 			else
 			{
@@ -243,10 +245,10 @@ public class SDB
 		putConfigVariableInSDB("button_Warm_Up_Shooter");
 		putConfigVariableInSDB("button_Shooting_Trigger");
 		putConfigVariableInSDB("button_Warm_Up_Flywheel");
-
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
+
 		logger.info("Finished initSDB()");
 	}
 

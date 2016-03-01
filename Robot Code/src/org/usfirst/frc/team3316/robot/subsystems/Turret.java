@@ -14,8 +14,6 @@ public class Turret extends DBugSubsystemCC
 	private DBugSpeedController turretMotor;
 	private AnalogPotentiometer turretPot;
 	
-	private LowPassFilter potFilter;
-	
 	private double potOffset;
 
 	public Turret()
@@ -31,12 +29,6 @@ public class Turret extends DBugSubsystemCC
 		
 		turretPot = Robot.sensors.turretPot;
 		potOffset = (double) config.get("turret_Pot_Offset");
-		
-		potFilter = new LowPassFilter((double) config.get("turret_PotFilter_MaxChange"),
-				(long) config.get("turret_PotFilter_Period"), () ->
-				{
-					return turretPot.get();
-				});
 	}
 
 	public void initDefaultCommand()
@@ -75,11 +67,11 @@ public class Turret extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		return potFilter.get() + potOffset;
+		return turretPot.get() + potOffset;
 	}
 	
 	public void setAngle(double angle) {
-		potOffset = (angle - potFilter.get());
+		potOffset = (angle - turretPot.get());
 		logger.fine("The offset of the turret is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
 	}
 	

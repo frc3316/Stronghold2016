@@ -3,8 +3,11 @@
  */
 package org.usfirst.frc.team3316.robot.humanIO;
 
+import java.util.TimerTask;
+
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntakeTransport;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollIn;
@@ -13,6 +16,8 @@ import org.usfirst.frc.team3316.robot.commands.intake.OpenIntakeTransport;
 import org.usfirst.frc.team3316.robot.commands.intake.ToggleIntake;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollOut;
+import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.commands.DBugCommandGroup;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.CloseShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
@@ -27,8 +32,10 @@ import org.usfirst.frc.team3316.robot.sequences.TriggerShootingSequence;
 import org.usfirst.frc.team3316.robot.sequences.WarmUpShooterSequence;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Joysticks
 {
@@ -80,27 +87,28 @@ public class Joysticks
 		// Chassis
 		DBugJoystickButton toggleOmniBtn = new DBugJoystickButton(joystickRight, "button_Toggle_Omni");
 		toggleOmniBtn.whenPressed(new ToggleOmni());
-		
+
 		// Intake
-		
+
 		DBugJoystickButton rollInBtn = new DBugJoystickButton(joystickOperator, "button_Roll_In");
 		rollInBtn.whileHeld(new IntakeRollIn());
 		DBugJoystickButton rollOutBtn = new DBugJoystickButton(joystickOperator, "button_Roll_Out");
 		rollOutBtn.whileHeld(new IntakeRollOut());
-		
+
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
 		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new OpenIntakeTransport(), new CloseIntakeTransport()));
-		
+
 		// Shooter
-		// DBugJoystickButton prepareToShootBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
+		// DBugJoystickButton prepareToShootBtn = new
+		// DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
 		// prepareToShootBtn.whileHeld(new WarmUpShooterSequence());
-		
+
 		DBugJoystickButton warmUpFlywheelBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Flywheel");
-		warmUpFlywheelBtn.whenPressed(new WarmShooter());
-		
+		warmUpFlywheelBtn.whileHeld(new WarmUpShooterSequence());
+
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());
-		
+
 		JoystickButton transportRollInBtn = new JoystickButton(joystickOperator, 2);
 		transportRollInBtn.whileHeld(new TransportRollIn());
 		JoystickButton transportRollOutBtn = new JoystickButton(joystickOperator, 3);

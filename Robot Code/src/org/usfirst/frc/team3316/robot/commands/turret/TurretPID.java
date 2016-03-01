@@ -8,11 +8,15 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurretPID extends DBugCommand
 {
 	private static PIDController pid;
 	private double pidOutput;
+	private static double setPoint;
+	private double lastTowerAngle;
+	private static double tolerance;
 
 	public TurretPID()
 	{
@@ -47,50 +51,86 @@ public class TurretPID extends DBugCommand
 
 	protected void init()
 	{
-		double setPoint = (double) config.get("turret_Angle_SetPoint");
+		setPoint = 0.0;
+		pidOutput = 0.0;
+		lastTowerAngle = Double.MAX_VALUE;
+		tolerance = (double) config.get("turret_PID_Tolerance");
+
+		pid.setAbsoluteTolerance(tolerance);
+
 		pid.setSetpoint(setPoint);
-		
+
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("turret_PID_KP") / 1000,
-				(double) config.get("turret_PID_KI") / 1000,
+		pid.setPID((double) config.get("turret_PID_KP") / 1000, (double) config.get("turret_PID_KI") / 1000,
 				(double) config.get("turret_PID_KD") / 1000);
-		
-		pid.setAbsoluteTolerance((double) config.get("turret_PID_Tolerance"));
-		
-//		if (AlignShooter.isObjectDetected())
-//		{
-//			double setPoint = (double) AlignShooter.getTurretAngle();
-//			pid.setSetpoint(setPoint);
-//			
-//			isFin = !Robot.turret.setMotors(pidOutput);
-//		}
-//		else
-//		{
-//			isFin = !Robot.turret.setMotors(0);
-//		}
-		
-		isFin = !Robot.turret.setMotors(pidOutput);
+
+		double towerAngle = AlignShooter.getTowerAngle();
+		double currentAngle = Robot.turret.getAngle();
+
+		/*
+		 * This code is with setpoint set by the vision
+		 */
+		if (AlignShooter.isObjectDetected())
+		{
+			if (towerAngle != lastTowerAngle && towerAngle != 3316.0)
+			{
+				
+				setPoint = towerAngle + currentAngle;
+				logger.finest("Frame updated. New setpoint: " + setPoint);
+				lastTowerAngle = towerAngle;
+
+				pid.setSetpoint(setPoint);
+			}
+
+			isFin = !Robot.turret.setMotors(pidOutput);
+			logger.finest("PIDOutput: " + pidOutput);
+		}
+		else
+		{
+			pid.reset();
+			pid.enable();
+			
+			isFin = !Robot.turret.setMotors(0);
+			
+			logger.finest("isFin cockblocked me");
+		}
+
+		/*
+		 * This code is with setpoint set by the config
+		 */
+//		setPoint = (double) config.get("turret_Angle_SetPoint");
+//
+//		pid.setSetpoint(setPoint);
+//		isFin = !Robot.turret.setMotors(pidOutput);
 	}
-	
-	public static boolean onTarget() 
+
+	public static boolean onTarget()
 	{
-		logger.fine("Turret PID on target: " + pid.onTarget());
-		return pid.onTarget();
+		if (Math.abs(Robot.turret.getAngle() - setPoint) < tolerance)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	protected boolean isFinished()
 	{
-		return isFin || onTarget();
+		SmartDashboard.putBoolean("Turret PID on target", this.onTarget());
+		
+		return isFin;
 	}
 
 	protected void fin()
 	{
 		pid.reset();
-		
+
 		Robot.turret.setMotors(0);
 	}
 

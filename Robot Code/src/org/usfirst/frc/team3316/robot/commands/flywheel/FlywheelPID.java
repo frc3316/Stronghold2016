@@ -15,6 +15,7 @@ public class FlywheelPID extends DBugCommand
 
 	private static PIDController pid;
 	private double v = 0;
+	private static double tolerance, setpoint;
 	
 	private boolean reachedTarget;
 
@@ -31,6 +32,7 @@ public class FlywheelPID extends DBugCommand
 
 			public double pidGet()
 			{
+				logger.fine("flywheel pid get: " + Robot.flywheel.getRate());
 				return Robot.flywheel.getRate();
 			}
 
@@ -42,7 +44,8 @@ public class FlywheelPID extends DBugCommand
 		{
 			public void pidWrite(double output)
 			{
-				v = output;
+				isFin = !Robot.flywheel.setMotors(output);
+				logger.finest("This is flywheel's v: " + output);
 			}
 		});
 	}
@@ -54,23 +57,24 @@ public class FlywheelPID extends DBugCommand
 				(double) config.get("flywheel_PID_KD") / 1000,
 				(double) config.get("flywheel_PID_KF") / 1000);
 		
-		pid.setAbsoluteTolerance((double) config.get("flywheel_PID_Tolerance")); 
+		tolerance = (double) config.get("flywheel_PID_Tolerance");
+		pid.setAbsoluteTolerance(tolerance); 
 		
 		v = 0;
 
 		reachedTarget = false;
+		
+		logger.fine("Flywheel PID initialized.");
 		
 		pid.enable();
 	}
 
 	protected void execute()
 	{
-		pid.setSetpoint((double) config.get("flywheel_PID_Setpoint"));
-
-		logger.finest("This is flywheel's v: " + v);
-		SmartDashboard.putBoolean("PID on target", onTarget());
+		setpoint = (double) config.get("flywheel_PID_Setpoint");
+		pid.setSetpoint(setpoint);
 		
-		isFin = !Robot.flywheel.setMotors(v);
+		SmartDashboard.putBoolean("PID on target", onTarget());
 		
 		if (onTarget() && !reachedTarget)
 		{
@@ -81,8 +85,18 @@ public class FlywheelPID extends DBugCommand
 	
 	public static boolean onTarget() 
 	{
-		logger.fine("Someone asked if I'm on target. Answer: " + pid.onTarget());
-		return pid.onTarget();
+		pid.onTarget();
+		
+		boolean onTarget;
+		if (Robot.flywheel.getRate() > setpoint + tolerance || Robot.flywheel.getRate() < setpoint - tolerance)
+		{
+			onTarget = false;
+		}
+		else {
+			onTarget = true;
+		}
+		logger.fine("Someone asked if I'm on target. Answer: " + onTarget);
+		return onTarget;
 	}
 
 	protected boolean isFinished()
@@ -100,5 +114,6 @@ public class FlywheelPID extends DBugCommand
 	protected void interr()
 	{
 		fin();
+		logger.fine("Flywheel PID interrupted.");
 	}
 }

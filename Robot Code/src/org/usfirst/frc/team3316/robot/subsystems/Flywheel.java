@@ -8,6 +8,7 @@ import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
 
 import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Flywheel extends DBugSubsystemCC
 {
@@ -16,30 +17,6 @@ public class Flywheel extends DBugSubsystemCC
 	private double powerSum = 0;
 
 	private LowPassFilter counterFilter;
-
-	/**
-	 * Class for filtering out noise from the FPGA rate calculation.
-	 * Essentially, this is a low pass filter.
-	 * 
-	 * This class doesn't do now anything important because we have the generic
-	 * LowPassFilter.
-	 * 
-	 * This class can be deleted when we won't need the power calculation
-	 * anymore.
-	 * 
-	 * @author D-Bug
-	 *
-	 */
-	private class RateTask extends TimerTask
-	{
-		public void run()
-		{
-			// For power sum
-			powerSum = +Robot.actuators.flywheelMotor.getCurrent()
-					* Robot.actuators.flywheelMotor.getVoltage()
-					* Robot.sensors.pdp.getVoltage();
-		}
-	}
 
 	public Flywheel()
 	{
@@ -62,9 +39,6 @@ public class Flywheel extends DBugSubsystemCC
 					return counter.getRate() > 200 ? Double.MAX_VALUE
 							: counter.getRate();
 				});
-
-		// Other stuff
-		Robot.timer.schedule(new RateTask(), 0, 10);
 	}
 
 	public void initDefaultCommand()

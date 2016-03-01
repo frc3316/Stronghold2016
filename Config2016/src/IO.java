@@ -296,7 +296,7 @@ public class IO
 
 					putDIOB("CLIMBING_SWITCH", 6);
 
-					putDIOB("FLYWHEEL_HALL_EFFECT_COUNTER", 8);
+					putDIOB("FLYWHEEL_HALL_EFFECT_COUNTER", 7);
 				}
 			}
 
@@ -443,8 +443,8 @@ public class IO
 
 					Config.addToConstantsB("INTAKE_SOLENOID_MODULE", 0);
 
-					Config.addToConstantsB("INTAKE_SOLENOID_FORWARD", 4);
-					Config.addToConstantsB("INTAKE_SOLENOID_REVERSE", 3);
+					Config.addToConstantsB("INTAKE_SOLENOID_FORWARD", 3);
+					Config.addToConstantsB("INTAKE_SOLENOID_REVERSE", 4);
 
 					Config.addToConstantsB("CLIMBING_SOLENOID_MODULE", 1);
 

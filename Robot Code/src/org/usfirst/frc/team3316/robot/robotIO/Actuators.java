@@ -82,7 +82,7 @@ public class Actuators
 		else
 		{
 			GeneralActuatorsB();
-			compressor = new Compressor(0); //lol
+			compressor = new Compressor(0);
 		}
 		spareMotor = new DBugSpeedController(spareMotorSC, (boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
 				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
