@@ -28,7 +28,8 @@ public class Config
 
 	public static void addToConstantsA(String key, Object value)
 	{
-		System.out.println("Trying to add to constants A: key " + key + " value " + value);
+		System.out.println(
+				"Trying to add to constants A: key " + key + " value " + value);
 
 		if (constantsA.containsKey(key))
 		{
@@ -42,7 +43,8 @@ public class Config
 
 	public static void addToVariablesA(String key, Object value)
 	{
-		System.out.println("Trying to add to variables A: key " + key + " value " + value);
+		System.out.println(
+				"Trying to add to variables A: key " + key + " value " + value);
 
 		if (variablesA.containsKey(key))
 		{
@@ -56,7 +58,8 @@ public class Config
 
 	public static void addToConstantsB(String key, Object value)
 	{
-		System.out.println("Trying to add to constants B: key " + key + " value " + value);
+		System.out.println(
+				"Trying to add to constants B: key " + key + " value " + value);
 
 		if (constantsB.containsKey(key))
 		{
@@ -70,7 +73,8 @@ public class Config
 
 	public static void addToVariablesB(String key, Object value)
 	{
-		System.out.println("Trying to add to variables B: key " + key + " value " + value);
+		System.out.println(
+				"Trying to add to variables B: key " + key + " value " + value);
 
 		if (variablesB.containsKey(key))
 		{
@@ -95,11 +99,11 @@ public class Config
 	}
 
 	/*
-	 * NOTE: constants and variables that are common to both robot A and robot B should be added with
-	 * addToConstants() or addToVariables()
+	 * NOTE: constants and variables that are common to both robot A and robot B
+	 * should be added with addToConstants() or addToVariables()
 	 * 
-	 * Use different constants and variables for the two robots only if there is a difference.
-	 * TestModeStuff
+	 * Use different constants and variables for the two robots only if there is
+	 * a difference. TestModeStuff
 	 */
 	private static void initConfig()
 	{
@@ -111,21 +115,33 @@ public class Config
 			 * Constants
 			 */
 			{
-				// Joysticks
-				addToConstants("JOYSTICK_LEFT", 0);
-				addToConstants("JOYSTICK_RIGHT", 1);
-				addToConstants("JOYSTICK_OPERATOR", 2);
+				/*
+				 * Joysticks
+				 */
+				{
+					addToConstants("JOYSTICK_LEFT", 0);
+					addToConstants("JOYSTICK_RIGHT", 1);
+					addToConstants("JOYSTICK_OPERATOR", 2);
+				}
 
-				// Buttons
-				addToVariables("button_Climb", 6);
-				addToVariables("button_Toggle_Omni", 1);
-				addToVariables("button_Collect_Ball", 2);
-				addToVariables("button_Eject_Ball", 3);
-				addToVariables("button_Roll_In", 4);
-				addToVariables("button_Roll_Out", 5);
-				addToVariables("button_Intake_Toggle", 1);
-				addToVariables("button_Open_Long_Pistons", 1);
-				addToVariables("button_Open_Short_Pistons", 2);
+				/*
+				 * Buttons
+				 */
+				{
+					// Joystick right
+					addToVariables("button_Toggle_Omni", 1);
+					
+					// Joystick operator
+					addToVariables("button_Intake_Toggle", 1);
+					addToVariables("button_Collect_Ball", 8);
+					addToVariables("button_Eject_Ball", 6);
+					addToVariables("button_Roll_In", 2);
+					addToVariables("button_Roll_Out", 3);
+					addToVariables("button_Climb", 10);
+					addToVariables("button_Warm_Up_Shooter", 7);
+					addToVariables("button_Shooting_Trigger", 4);
+					addToVariables("button_Warm_Up_Flywheel", 5);
+				}
 			}
 		}
 
@@ -144,24 +160,27 @@ public class Config
 				 */
 				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", true);
 				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
-				
+
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
-				
-				//For some reason the encoders give 4 times less the correct speed
-				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
-				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE", (4 * (6*Math.PI) / 32) * 0.0254);
+
+				// For some reason the encoders give 4 times less the correct
+				// speed
+				addToConstants("CHASSIS_LEFT_ENCODER_DISTANCE_PER_PULSE",
+						(4 * (6 * Math.PI) / 32) * 0.0254);
+				addToConstants("CHASSIS_RIGHT_ENCODER_DISTANCE_PER_PULSE",
+						(4 * (6 * Math.PI) / 32) * 0.0254);
 
 				/*
 				 * Intake
 				 */
 				addToConstants("INTAKE_MOTOR_REVERSE", true);
 
-				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 10.0);
+				addToConstants("INTAKE_MOTOR_MAX_CURRENT", 30.0);
 
 				addToConstants("INTAKE_POT_FULL_RANGE", 270.0);
 				addToConstants("INTAKE_POT_OFFSET", 0.0);
-				
+
 				/*
 				 * Transport
 				 */
@@ -184,9 +203,8 @@ public class Config
 
 				addToConstants("TURRET_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
 																	// the stall
-																	// current
-				addToConstants("TURRET_POT_FULL_RANGE", -400.0);
-				
+
+				addToConstants("TURRET_POT_FULL_RANGE", -821.269);
 
 				/*
 				 * Hood
@@ -198,8 +216,9 @@ public class Config
 																// the stall
 																// current
 
-				addToConstants("HOOD_POT_FULL_RANGE", -300.0); // negative to flip incrementing direction
-
+				addToConstantsA("HOOD_POT_FULL_RANGE", -300.0); // negative to flip incrementing direction
+				addToConstantsB("HOOD_POT_FULL_RANGE", -270.0); // negative to flip incrementing direction
+				
 				/*
 				 * Climbing
 				 */
@@ -293,9 +312,9 @@ public class Config
 				addToVariables("chassis_DriveDistance_PID_KP", 80.0);
 				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
 				addToVariables("chassis_DriveDistance_PID_KD", 12300.0);
-				
+
 				addToVariables("chassis_DriveDistance_KV", 0.5);
-				
+
 				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
 			}
@@ -324,7 +343,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				
+
 				addToVariables("flywheel_CounterFilter_MaxChange", 50.0);
 				addToVariables("flywheel_CounterFilter_Period", (long) 10);
 
@@ -336,17 +355,17 @@ public class Config
 				// PID
 				addToVariables("flywheel_PID_Setpoint", 45.0);
 				addToVariables("flywheel_PID_Tolerance", 2.0);
-				addToVariables("flywheel_PID_KP", 10.0);
+				addToVariables("flywheel_PID_KP", 16.0);
 				addToVariables("flywheel_PID_KI", 0.54);
 				addToVariables("flywheel_PID_KD", 0.010);
-				addToVariables("flywheel_PID_KF", 10.0);
+				addToVariables("flywheel_PID_KF", 16.0);
 			}
-			
+
 			/*
 			 * Accelerate Flywheel
 			 */
 			{
-				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.2);
+				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.15);
 			}
 		}
 
@@ -364,8 +383,6 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("intake_Pot_LowThresh", 1.0);
-				addToVariables("intake_Pot_HighThresh", 130.5);
 			}
 
 			/*
@@ -373,7 +390,8 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollIn_Speed", 1.0);
-				addToVariables("intake_OpenIntake_Timeout", 0.5); // In seconds
+				addToVariablesA("intake_OpenIntake_Timeout", 2.0); // In seconds
+				addToVariablesB("intake_OpenIntake_Timeout", 2.0); // In seconds
 			}
 
 			/*
@@ -381,7 +399,8 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollOut_Speed", -0.5);
-				addToVariables("intake_CloseIntake_Timeout", 0.5); // In seconds
+				addToVariablesA("intake_CloseIntake_Timeout", 2.5); // In seconds
+				addToVariablesB("intake_CloseIntake_Timeout", 2.5); // In seconds
 			}
 		}
 
@@ -400,17 +419,22 @@ public class Config
 			 */
 			{
 				addToVariablesA("turret_Pot_Offset", 189.54671547503355);
-				addToVariablesB("turret_Pot_Offset", 107.9930935901017);
+				addToVariablesB("turret_Pot_Offset", 399.4483151915127);
 				
 				addToVariables("turret_PotFilter_MaxChange", 4.0);
 				addToVariables("turret_PotFilter_Period", (long) 10);
-				
+
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 1.5);
-				addToVariables("turret_PID_KP", 0.0);
-				addToVariables("turret_PID_KI", 0.0);
-				addToVariables("turret_PID_KD", 0.0);
+				addToVariables("turret_PID_Tolerance", 0.5);
+				
+				addToVariablesA("turret_PID_KP", 10.0);
+				addToVariablesA("turret_PID_KI", 0.0);
+				addToVariablesA("turret_PID_KD", -0.01);
+				
+				addToVariablesB("turret_PID_KP", 15.0);
+				addToVariablesB("turret_PID_KI", 1.2);
+				addToVariablesB("turret_PID_KD", 0.8);
 
 				// Bangbang Control
 				addToVariables("turret_Bangbang_OnVoltage", 0.075);
@@ -422,7 +446,7 @@ public class Config
 				addToVariables("turret_Pot_LeftThresh", -180.0);
 				addToVariables("turret_Pot_RightThresh", 180.0);
 			}
-			
+
 			/*
 			 * Set Hood Angle
 			 */
@@ -446,11 +470,11 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 193.51227018845623);
-				addToVariablesB("hood_Pot_Offset", 156.47294478246684);
+				addToVariablesB("hood_Pot_Offset", 110.31008456258901);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
-				
+
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
 				addToVariables("hood_PID_Tolerance", 0.2);
@@ -459,16 +483,22 @@ public class Config
 				addToVariables("hood_PID_KD", 0.0);
 
 				// Bangbang Control
-				addToVariables("hood_Bangbang_OnVoltage", 0.33);
-				addToVariables("hood_Bangbang_OffVoltage", -0.33);
+				addToVariablesA("hood_Bangbang_OnVoltage", 0.33);
+				addToVariablesA("hood_Bangbang_OffVoltage", -0.33);
+				
+				addToVariablesB("hood_Bangbang_OnVoltage", 0.21);
+				addToVariablesB("hood_Bangbang_OffVoltage", -0.21);
+				
+				addToVariablesA("hood_Bangbang_DownOffset", 0.5);
+				addToVariablesB("hood_Bangbang_DownOffset", 0.5);
 
 				addToVariablesB("hood_Pot_BottomThresh", 4.0);
-				addToVariablesB("hood_Pot_TopThresh", 70.0);
+				addToVariablesB("hood_Pot_TopThresh", 65.0);
 				
 				addToVariablesA("hood_Pot_BottomThresh", 6.6);
 				addToVariablesA("hood_Pot_TopThresh", 79.0);
 			}
-			
+
 			/*
 			 * Set Hood Angle
 			 */
@@ -502,7 +532,7 @@ public class Config
 			{
 				addToVariables("transport_RollIn_Speed", 0.5);
 			}
-			
+
 			/*
 			 * Roll Out
 			 */

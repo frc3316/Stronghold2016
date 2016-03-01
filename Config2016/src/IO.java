@@ -296,7 +296,7 @@ public class IO
 
 					putDIOB("CLIMBING_SWITCH", 6);
 
-					putDIOB("FLYWHEEL_HALL_EFFECT_COUNTER", 8);
+					putDIOB("FLYWHEEL_HALL_EFFECT_COUNTER", 7);
 				}
 			}
 
@@ -347,9 +347,9 @@ public class IO
 
 					putPDPA("FLYWHEEL_MOTOR_PDP_CHANNEL", 15); 
 
-					putPDPA("TURRET_MOTOR_PDP_CHANNEL", 10);
+					putPDPA("TURRET_MOTOR_PDP_CHANNEL", 0);
 
-					putPDPA("HOOD_MOTOR_PDP_CHANNEL", 15); 
+					putPDPA("HOOD_MOTOR_PDP_CHANNEL", 1); 
 
 					putPDPA("CLIMBING_MOTOR_1_PDP_CHANNEL", 8); 
 					putPDPA("CLIMBING_MOTOR_2_PDP_CHANNEL", 13);
@@ -443,8 +443,8 @@ public class IO
 
 					Config.addToConstantsB("INTAKE_SOLENOID_MODULE", 0);
 
-					Config.addToConstantsB("INTAKE_SOLENOID_FORWARD", 4);
-					Config.addToConstantsB("INTAKE_SOLENOID_REVERSE", 3);
+					Config.addToConstantsB("INTAKE_SOLENOID_FORWARD", 3);
+					Config.addToConstantsB("INTAKE_SOLENOID_REVERSE", 4);
 
 					Config.addToConstantsB("CLIMBING_SOLENOID_MODULE", 1);
 

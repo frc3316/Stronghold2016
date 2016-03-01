@@ -46,6 +46,8 @@ import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
+import com.sun.media.sound.RIFFInvalidDataException;
+
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -53,9 +55,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SDB
 {
 	/*
-	 * Runnable that periodically updates values from the robot into the
-	 * SmartDashboard This is the place where all of the robot data should be
-	 * displayed from
+	 * Runnable that periodically updates values from the robot into the SmartDashboard This is the place
+	 * where all of the robot data should be displayed from
 	 */
 	private class UpdateSDBTask extends TimerTask
 	{
@@ -69,23 +70,25 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-			put("Intake Current", Robot.actuators.intakeMotor.getCurrent());
-			put("Flywheel Current", Robot.actuators.flywheelMotor.getCurrent());
-			
+
 			put("Flywheel speed", Robot.flywheel.getRate());
-			
-			try
-			{
-				put("Vision Is object detected",
-						AlignShooter.isObjectDetected());
-				put("Vision Distance", AlignShooter.getHoodAngle());
-				put("Vision Turret angle", AlignShooter.getTowerAngle());
-			}
-			catch (Exception e)
-			{
-				logger.severe(e);
-			}
+
 			put("Turret angle", Robot.turret.getAngle());
+			put("Hood angle", Robot.hood.getAngle());
+
+			// For drivers
+			put("Is ball in", Robot.intake.isBallIn());
+			put("Is intake close", Robot.intake.isIntakeClose());
+			put("Is ready to transfer", Robot.intake.isReadyToTransfer());
+
+			put("Is flywheel on target", Robot.flywheel.isOnTarget());
+			put("Is hood on target", Robot.hood.isOnTarget());
+			put("Is turret on target", Robot.turret.isOnTarget());
+			// put("Is ready to shoot",
+			// Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget()
+			// && Robot.turret.isOnTarget()
+			// && Robot.intake.isReadyToTransfer());
+			put("Is ready to shoot", Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer());
 		}
 
 		private void put(String name, double d)
@@ -189,64 +192,59 @@ public class SDB
 
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
-		
+
 		// Hood
 		SmartDashboard.putData(new HoodJoysticks());
 		SmartDashboard.putData(new TurretJoysticks());
-		
+
 		SmartDashboard.putData(new IntakeRollIn());
 		SmartDashboard.putData(new IntakeRollOut());
-		
+
 		SmartDashboard.putData(new TransportRollIn());
 		SmartDashboard.putData(new TransportRollOut());
-		
+
 		putConfigVariableInSDB("intake_RollIn_Speed");
 		putConfigVariableInSDB("intake_RollOut_Speed");
-
-		SmartDashboard.putData(new TurretBangbang());
-
-		putConfigVariableInSDB("turret_Pot_LeftThresh");
-		putConfigVariableInSDB("turret_Pot_RightThresh");
-
-		putConfigVariableInSDB("turret_Bangbang_OnVoltage");
-		putConfigVariableInSDB("turret_Bangbang_OffVoltage");
-		putConfigVariableInSDB("turret_PID_Tolerance");
 		
-		putConfigVariableInSDB("turret_TurretBangbang_BigError");
-		putConfigVariableInSDB("turret_TurretBangbang_VScale");
-		
+		putConfigVariableInSDB("intake_CloseIntake_Timeout");
+		putConfigVariableInSDB("intake_OpenIntake_Timeout");
+
 		putConfigVariableInSDB("transport_RollIn_Speed");
 		putConfigVariableInSDB("transport_RollOut_Speed");
-		
+
 		SmartDashboard.putData(new OpenIntake());
 		SmartDashboard.putData(new CloseIntake());
-		
+
 		SmartDashboard.putData(new WarmShooter());
 		putConfigVariableInSDB("flywheel_PID_Setpoint");
-		
+
 		SmartDashboard.putData(new OpenIntakeTransport());
 		SmartDashboard.putData(new CloseIntakeTransport());
-		
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new CloseShortPistons());
-		
+
 		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());
-		
+
 		SmartDashboard.putData(new CollectBall());
 		SmartDashboard.putData(new EjectBall());
 
 		SmartDashboard.putData(new TransportJoysticks());
-		
+
 		putConfigVariableInSDB("hood_Bangbang_OnVoltage");
 		putConfigVariableInSDB("hood_Bangbang_OffVoltage");
 
 		putConfigVariableInSDB("chassis_ExtendOmni_LiftTimeout");
 		putConfigVariableInSDB("chassis_RetractOmni_Timeout");
-		
+
+		putConfigVariableInSDB("button_Intake_Toggle");
+		putConfigVariableInSDB("button_Collect_Ball");
+		putConfigVariableInSDB("button_Eject_Ball");
+		putConfigVariableInSDB("button_Roll_In");
+		putConfigVariableInSDB("button_Roll_Out");
+		putConfigVariableInSDB("button_Climb");
+		putConfigVariableInSDB("button_Warm_Up_Shooter");
+		putConfigVariableInSDB("button_Shooting_Trigger");
+		putConfigVariableInSDB("button_Warm_Up_Flywheel");
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
@@ -255,98 +253,84 @@ public class SDB
 	}
 
 	/**
-	 * This method puts in the live window of the test mode all of the robot's
-	 * actuators and sensors. It is disgusting.
+	 * This method puts in the live window of the test mode all of the robot's actuators and sensors. It is
+	 * disgusting.
 	 */
 	public void initLiveWindow()
 	{
 		/*
 		 * Actuators
 		 */
-		 // General
-		 LiveWindow.addActuator("General", "compressor",
-		 Robot.actuators.compressor);
-		 // Chassis
-		 LiveWindow.addActuator("Chassis", "chassisLeft1SC",
-		 (LiveWindowSendable) Robot.actuators.chassisLeft1SC);
-		 LiveWindow.addActuator("Chassis", "chassisLeft2SC",
-		 (LiveWindowSendable) Robot.actuators.chassisLeft2SC);
-		 LiveWindow.addActuator("Chassis", "chassisRight1SC",
-		 (LiveWindowSendable) Robot.actuators.chassisRight1SC);
-		 LiveWindow.addActuator("Chassis", "chassisRight2SC",
-		 (LiveWindowSendable) Robot.actuators.chassisRight2SC);
-		 LiveWindow.addActuator("Chassis", "chassisLongPistons",
-		 (LiveWindowSendable) Robot.actuators.chassisLongPistons);
-		 LiveWindow.addActuator("Chassis", "chassisShortPistonsLeft",
-		 (LiveWindowSendable) Robot.actuators.chassisShortPistonsLeft);
-		 LiveWindow.addActuator("Chassis", "chassisShortPistonsRight",
-		 (LiveWindowSendable) Robot.actuators.chassisShortPistonsRight);
-		 // Intake
-		 LiveWindow.addActuator("Intake", "intakeSolenoid",
-		 (LiveWindowSendable) Robot.actuators.intakeSolenoid);
-		 LiveWindow.addActuator("Intake", "intakeSC", (LiveWindowSendable)
-		 Robot.actuators.intakeSC);
-		 // Transport
-		 LiveWindow.addActuator("Transport", "transportSC",
-		 (LiveWindowSendable) Robot.actuators.transportSC);
-		 // Flywheel
-		 LiveWindow.addActuator("Flywheel", "flywheelSC", (LiveWindowSendable)
-		 Robot.actuators.flywheelSC);
-		 // Turret
-		 LiveWindow.addActuator("Turret", "turretSC", (LiveWindowSendable)
-		 Robot.actuators.turretSC);
-		 // Hood
-		 LiveWindow.addActuator("Hood", "hoodSC", (LiveWindowSendable)
-		 Robot.actuators.hoodSC);
-		 // Climbing
-		 LiveWindow.addActuator("Climbing", "climbingSolenoid",
-		 (LiveWindowSendable) Robot.actuators.climbingSolenoid);
-		 LiveWindow.addActuator("Climbing", "climbingMotorSC1",
-		 (LiveWindowSendable) Robot.actuators.climbingMotorSC1);
-		 LiveWindow.addActuator("Climbing", "climbingMotorSC2",
-		 (LiveWindowSendable) Robot.actuators.climbingMotorSC2);
-		 LiveWindow.addActuator("Climbing", "climbingMotorSC3",
-		 (LiveWindowSendable) Robot.actuators.climbingMotorSC3);
-		 LiveWindow.addActuator("Climbing", "climbingMotorSC4",
-		 (LiveWindowSendable) Robot.actuators.climbingMotorSC4);
-		 // Spare
-		 LiveWindow.addActuator("Spare", "spareMotorSC", (LiveWindowSendable)
-		 Robot.actuators.spareMotorSC);
-		
-		 /*
+		// General
+		LiveWindow.addActuator("General", "compressor", Robot.actuators.compressor);
+		// Chassis
+		LiveWindow.addActuator("Chassis", "chassisLeft1SC",
+				(LiveWindowSendable) Robot.actuators.chassisLeft1SC);
+		LiveWindow.addActuator("Chassis", "chassisLeft2SC",
+				(LiveWindowSendable) Robot.actuators.chassisLeft2SC);
+		LiveWindow.addActuator("Chassis", "chassisRight1SC",
+				(LiveWindowSendable) Robot.actuators.chassisRight1SC);
+		LiveWindow.addActuator("Chassis", "chassisRight2SC",
+				(LiveWindowSendable) Robot.actuators.chassisRight2SC);
+		LiveWindow.addActuator("Chassis", "chassisLongPistons",
+				(LiveWindowSendable) Robot.actuators.chassisLongPistons);
+		LiveWindow.addActuator("Chassis", "chassisShortPistonsLeft",
+				(LiveWindowSendable) Robot.actuators.chassisShortPistonsLeft);
+		LiveWindow.addActuator("Chassis", "chassisShortPistonsRight",
+				(LiveWindowSendable) Robot.actuators.chassisShortPistonsRight);
+		// Intake
+		LiveWindow.addActuator("Intake", "intakeSolenoid",
+				(LiveWindowSendable) Robot.actuators.intakeSolenoid);
+		LiveWindow.addActuator("Intake", "intakeSC", (LiveWindowSendable) Robot.actuators.intakeSC);
+		// Transport
+		LiveWindow.addActuator("Transport", "transportSC", (LiveWindowSendable) Robot.actuators.transportSC);
+		// Flywheel
+		LiveWindow.addActuator("Flywheel", "flywheelSC", (LiveWindowSendable) Robot.actuators.flywheelSC);
+		// Turret
+		LiveWindow.addActuator("Turret", "turretSC", (LiveWindowSendable) Robot.actuators.turretSC);
+		// Hood
+		LiveWindow.addActuator("Hood", "hoodSC", (LiveWindowSendable) Robot.actuators.hoodSC);
+		// Climbing
+		LiveWindow.addActuator("Climbing", "climbingSolenoid",
+				(LiveWindowSendable) Robot.actuators.climbingSolenoid);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC1",
+				(LiveWindowSendable) Robot.actuators.climbingMotorSC1);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC2",
+				(LiveWindowSendable) Robot.actuators.climbingMotorSC2);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC3",
+				(LiveWindowSendable) Robot.actuators.climbingMotorSC3);
+		LiveWindow.addActuator("Climbing", "climbingMotorSC4",
+				(LiveWindowSendable) Robot.actuators.climbingMotorSC4);
+		// Spare
+		LiveWindow.addActuator("Spare", "spareMotorSC", (LiveWindowSendable) Robot.actuators.spareMotorSC);
+
+		/*
 		 * Sensors
 		 */
-		 // General
-		 LiveWindow.addSensor("General", "pdp", (LiveWindowSendable)
-		 Robot.sensors.pdp);
-		 // Chassis
-		 LiveWindow.addSensor("Chassis", "navx", (LiveWindowSendable)
-		 Robot.sensors.navx);
-		 LiveWindow.addSensor("Chassis", "chassisLeftEncoder",
-		 (LiveWindowSendable) Robot.sensors.chassisLeftEncoder);
-		 LiveWindow.addSensor("Chassis", "chassisRighttEncoder",
-		 (LiveWindowSendable) Robot.sensors.chassisRightEncoder);
-		 // Intake
-		 LiveWindow.addSensor("Intake", "intakeLeftSwitch",
-		 (LiveWindowSendable) Robot.sensors.intakeLeftSwitch);
-		 LiveWindow.addSensor("Intake", "intakeRightSwitch",
-		 (LiveWindowSendable) Robot.sensors.intakeRightSwitch);
-		 // Flywheel
-		 LiveWindow.addSensor("Flywheel", "flywheelCounter",
-		 (LiveWindowSendable) Robot.sensors.flywheelCounter);
-		 LiveWindow.addSensor("Flywheel", "hallEffect", (LiveWindowSendable)
-		 Robot.sensors.flywheelHE);
-		 // Turret
-		 LiveWindow.addSensor("Turret", "turretPot", (LiveWindowSendable)
-		 Robot.sensors.turretPot);
-		 // Hood
-		 LiveWindow.addSensor("Hood", "hoodPot", (LiveWindowSendable)
-		 Robot.sensors.hoodPot);
-		 // Climbing
-		 LiveWindow.addSensor("Climbing", "climbingPot", (LiveWindowSendable)
-		 Robot.sensors.climbingPot);
-		 LiveWindow.addSensor("Climbing", "climbingSwitch",
-		 (LiveWindowSendable) Robot.sensors.climbingSwitch);
+		// General
+		LiveWindow.addSensor("General", "pdp", (LiveWindowSendable) Robot.sensors.pdp);
+		// Chassis
+		LiveWindow.addSensor("Chassis", "navx", (LiveWindowSendable) Robot.sensors.navx);
+		LiveWindow.addSensor("Chassis", "chassisLeftEncoder",
+				(LiveWindowSendable) Robot.sensors.chassisLeftEncoder);
+		LiveWindow.addSensor("Chassis", "chassisRighttEncoder",
+				(LiveWindowSendable) Robot.sensors.chassisRightEncoder);
+		// Intake
+		LiveWindow.addSensor("Intake", "intakeLeftSwitch",
+				(LiveWindowSendable) Robot.sensors.intakeLeftSwitch);
+		LiveWindow.addSensor("Intake", "intakeRightSwitch",
+				(LiveWindowSendable) Robot.sensors.intakeRightSwitch);
+		// Flywheel
+		LiveWindow.addSensor("Flywheel", "flywheelCounter",
+				(LiveWindowSendable) Robot.sensors.flywheelCounter);
+		LiveWindow.addSensor("Flywheel", "hallEffect", (LiveWindowSendable) Robot.sensors.flywheelHE);
+		// Turret
+		LiveWindow.addSensor("Turret", "turretPot", (LiveWindowSendable) Robot.sensors.turretPot);
+		// Hood
+		LiveWindow.addSensor("Hood", "hoodPot", (LiveWindowSendable) Robot.sensors.hoodPot);
+		// Climbing
+		LiveWindow.addSensor("Climbing", "climbingPot", (LiveWindowSendable) Robot.sensors.climbingPot);
+		LiveWindow.addSensor("Climbing", "climbingSwitch", (LiveWindowSendable) Robot.sensors.climbingSwitch);
 
 		logger.info("Finished initLiveWindow()");
 	}

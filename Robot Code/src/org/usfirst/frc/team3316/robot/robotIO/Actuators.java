@@ -82,7 +82,7 @@ public class Actuators
 		else
 		{
 			GeneralActuatorsB();
-			compressor = new Compressor(1);
+			compressor = new Compressor(0);
 		}
 		spareMotor = new DBugSpeedController(spareMotorSC, (boolean) Robot.config.get("SPARE_MOTOR_PDP_REVERSE"),
 				(int) Robot.config.get("SPARE_MOTOR_PDP_CHANNEL"),
@@ -213,7 +213,7 @@ public class Actuators
 
 	private void FlywheelActuatorsB()
 	{
-		flywheelSC = new Talon((int) Robot.config.get("FLYWHEEL_MOTOR"));
+		flywheelSC = new CANTalon((int) Robot.config.get("FLYWHEEL_MOTOR"));
 	}
 
 	public void FlywheelActuators()
@@ -269,7 +269,7 @@ public class Actuators
 
 	private void HoodActuatorsB()
 	{
-		hoodSC = new Talon((int) Robot.config.get("HOOD_MOTOR"));
+		hoodSC = new CANTalon((int) Robot.config.get("HOOD_MOTOR"));
 	}
 
 	public void HoodActuators()

@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team3316.robot.commands.hood;
 
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
@@ -6,7 +7,11 @@ import org.usfirst.frc.team3316.robot.Robot;
 
 public class HoodBangbang extends DBugCommand
 {
-	private double onVoltage, offVoltage, setPoint, tolerance;
+	private double onVoltage, offVoltage;
+	private static double setPoint;
+	private static double tolerance;
+	private double downOffset;
+	private boolean movingUp = false;
 
 	public HoodBangbang()
 	{
@@ -18,23 +23,19 @@ public class HoodBangbang extends DBugCommand
 		onVoltage = (double) config.get("hood_Bangbang_OnVoltage");
 		offVoltage = (double) config.get("hood_Bangbang_OffVoltage");
 		tolerance = (double) config.get("hood_PID_Tolerance");
+		downOffset = (double) config.get("hood_Bangbang_DownOffset");
+		
+		movingUp = false;
 	}
 
 	protected void execute()
 	{
 		setPoint = (double) config.get("hood_Angle_SetPoint");
-		if (Robot.hood.getAngle() <= setPoint)
-		{
-			isFin = !Robot.hood.setMotors(onVoltage);
-		}
-		else
-		{
-			isFin = !Robot.hood.setMotors(offVoltage);
-		}
+
 		/*
 		if (AlignShooter.isObjectDetected())
 		{
-			double setPoint = (double) AlignShooter.getHoodAngle();
+			setPoint = (double) AlignShooter.getHoodAngle();
 			if (Robot.hood.getAngle() <= setPoint)
 			{
 				isFin = !Robot.hood.setMotors(onVoltage);
@@ -49,6 +50,16 @@ public class HoodBangbang extends DBugCommand
 			isFin = !Robot.hood.setMotors(0);
 		}
 		*/
+		
+		if ((movingUp == true && Robot.hood.getAngle() <= setPoint) || Robot.hood.getAngle() <= setPoint - downOffset)
+		{
+			isFin = !Robot.hood.setMotors(onVoltage);
+			movingUp = true;
+		}
+		else
+		{
+			isFin = !Robot.hood.setMotors(offVoltage);
+		}
 	}
 
 	protected boolean isFinished()
@@ -66,7 +77,7 @@ public class HoodBangbang extends DBugCommand
 		fin();
 	}
 	
-	private boolean onTarget ()
+	public static boolean onTarget()
 	{
 		if (Math.abs(Robot.hood.getAngle() - setPoint) < tolerance)
 		{

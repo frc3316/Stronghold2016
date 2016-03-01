@@ -1,23 +1,21 @@
-package org.usfirst.frc.team3316.robot.commands.transport;
+package org.usfirst.frc.team3316.robot.commands.intake;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class StopRoll extends DBugCommand
+public class IntakeStopRoll extends DBugCommand
 {
-	//TODO: Add commenting
-
-	public StopRoll()
-	{
-		requires(Robot.transport);
+	public IntakeStopRoll() {
+		requires(Robot.intake);
 	}
-	
+
 	protected void init()
-	{}
+	{
+	}
 
 	protected void execute()
 	{
-		Robot.transport.setMotors(0.0);
+		Robot.intake.setMotors(0);
 	}
 
 	protected boolean isFinished()
@@ -26,9 +24,11 @@ public class StopRoll extends DBugCommand
 	}
 
 	protected void fin()
-	{}
+	{
+	}
 
 	protected void interr()
-	{}
+	{
+	}
 
 }

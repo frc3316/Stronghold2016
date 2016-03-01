@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
@@ -11,8 +12,6 @@ public class Hood extends DBugSubsystemCC
 {
 	private DBugSpeedController hoodMotor;
 	private AnalogPotentiometer hoodPot;
-
-	private LowPassFilter potFilter;
 
 	private double potOffset;
 
@@ -29,12 +28,8 @@ public class Hood extends DBugSubsystemCC
 
 		hoodPot = Robot.sensors.hoodPot;
 		potOffset = (double) config.get("hood_Pot_Offset");
-
-		potFilter = new LowPassFilter((double) config.get("hood_PotFilter_MaxChange"),
-				(long) config.get("hood_PotFilter_Period"), () ->
-				{
-					return hoodPot.get();
-				});
+		
+		logger.info("Pot offset is initially set to " + potOffset);
 	}
 
 	public void initDefaultCommand()
@@ -43,8 +38,9 @@ public class Hood extends DBugSubsystemCC
 	}
 
 	/**
-	 * Set the voltage for the motors of this subsystem. If the hood is past the allowed position (about to
-	 * break itself) it allows movement only in one direction.
+	 * Set the voltage for the motors of this subsystem. If the hood is past the
+	 * allowed position (about to break itself) it allows movement only in one
+	 * direction.
 	 * 
 	 * @par v - The voltage for the motors (between 1.0 to -1.0).
 	 */
@@ -73,14 +69,17 @@ public class Hood extends DBugSubsystemCC
 	public double getAngle()
 	{
 		return hoodPot.get() + potOffset;
-//		return potFilter.get() + potOffset;
 	}
 
 	public void setAngle(double angle)
 	{
 		potOffset = (angle - hoodPot.get());
-		logger.fine(
-				"The offset of the hood is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
+		logger.fine("The offset of the hood is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
+	}
+	
+	public boolean isOnTarget()
+	{
+		return HoodBangbang.onTarget();
 	}
 
 }
