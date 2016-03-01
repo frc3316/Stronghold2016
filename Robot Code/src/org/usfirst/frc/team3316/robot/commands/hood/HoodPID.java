@@ -47,7 +47,7 @@ public class HoodPID extends DBugCommand
 	protected void init()
 	{
 		pid.setAbsoluteTolerance((double) config.get("hood_PID_Tolerance"));
-		
+
 		pid.setPID((double) config.get("hood_PID_KP") / 1000.0, (double) config.get("hood_PID_KI") / 1000.0,
 				(double) config.get("hood_PID_KD") / 1000.0);
 
@@ -55,24 +55,18 @@ public class HoodPID extends DBugCommand
 	}
 
 	protected void execute()
-	{		
+	{
 		pid.setSetpoint((double) config.get("hood_Angle_SetPoint"));
-		
+
 		/*
-		if (AlignShooter.isObjectDetected())
-		{
-			double setPoint = (double) AlignShooter.getHoodAngle();
-			pid.setSetpoint(setPoint);
-			
-			isFin = !Robot.hood.setMotors(pidOutput);
-		}
-		else
-		{
-			isFin = !Robot.hood.setMotors(0);
-		}
-		*/
+		 * if (AlignShooter.isObjectDetected()) { double setPoint = (double)
+		 * AlignShooter.getHoodAngle(); pid.setSetpoint(setPoint);
+		 * 
+		 * isFin = !Robot.hood.setMotors(pidOutput); } else { isFin =
+		 * !Robot.hood.setMotors(0); }
+		 */
 		logger.finest("This is the pid output for the hood: " + pidOutput);
-		
+
 		isFin = !Robot.hood.setMotors(pidOutput);
 	}
 
@@ -80,15 +74,16 @@ public class HoodPID extends DBugCommand
 	{
 		return isFin || onTarget();
 	}
-	
-	public static boolean onTarget() {
+
+	public static boolean onTarget()
+	{
 		return pid.onTarget();
 	}
 
 	protected void fin()
 	{
 		pid.reset();
-		
+
 		Robot.hood.setMotors(0);
 	}
 

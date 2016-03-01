@@ -85,7 +85,7 @@ public class SDB
 //				logger.severe(e);
 			}
 			put("Turret angle", Robot.turret.getAngle());
-//			put("Hood angle", Robot.hood.getAngle());
+			put("Hood angle", Robot.hood.getAngle());
 		}
 
 		private void put(String name, double d)
@@ -191,11 +191,15 @@ public class SDB
 		SmartDashboard.putData(new StopCompressor());
 		
 		SmartDashboard.putData(new TurretJoysticks());
+		SmartDashboard.putData(new HoodJoysticks());
 		
 		SmartDashboard.putData(new SetTurretAngle());
 
 		putConfigVariableInSDB("turret_Pot_LeftThresh");
 		putConfigVariableInSDB("turret_Pot_RightThresh");
+		
+		putConfigVariableInSDB("hood_Pot_TopThresh");
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
 
 		SmartDashboard.putData(new TurretPID());
 		
