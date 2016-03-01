@@ -199,6 +199,16 @@ public class SDB
 
 		SmartDashboard.putData(new IntakeRollIn());
 		SmartDashboard.putData(new IntakeRollOut());
+		
+		SmartDashboard.putData(new HoodJoysticks());
+		
+		SmartDashboard.putData(new SetTurretAngle());
+
+		putConfigVariableInSDB("turret_Pot_LeftThresh");
+		putConfigVariableInSDB("turret_Pot_RightThresh");
+		
+		putConfigVariableInSDB("hood_Pot_TopThresh");
+		putConfigVariableInSDB("hood_Pot_BottomThresh");
 
 		SmartDashboard.putData(new TransportRollIn());
 		SmartDashboard.putData(new TransportRollOut());
