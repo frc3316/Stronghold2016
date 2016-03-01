@@ -15,7 +15,7 @@ public class Intake extends DBugSubsystemCC
 	private DBugSpeedController intakeMotor;
 
 	// Sensors
-	private DigitalInput intakeLeftSwitch, intakeRightSwitch;
+	private DigitalInput intakeSwitch;
 
 	public Intake()
 	{
@@ -30,8 +30,7 @@ public class Intake extends DBugSubsystemCC
 		// Sensors
 		Robot.sensors.IntakeSensors();
 
-		intakeLeftSwitch = Robot.sensors.intakeLeftSwitch;
-		intakeRightSwitch = Robot.sensors.intakeRightSwitch;
+		intakeSwitch = Robot.sensors.intakeSwitch;
 	}
 
 	public void initDefaultCommand()
@@ -50,7 +49,7 @@ public class Intake extends DBugSubsystemCC
 
 	public boolean isBallIn()
 	{
-		if ((intakeLeftSwitch.get() && intakeRightSwitch.get()))
+		if (intakeSwitch.get())
 		{
 			return true;
 		}

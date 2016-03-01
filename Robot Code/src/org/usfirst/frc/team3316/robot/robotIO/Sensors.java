@@ -33,7 +33,7 @@ public class Sensors
 	public Encoder chassisLeftEncoder, chassisRightEncoder;
 
 	// Intake
-	public DigitalInput intakeLeftSwitch, intakeRightSwitch;
+	public DigitalInput intakeSwitch;
 
 	// Flywheel
 	public Counter flywheelCounter;
@@ -108,10 +108,8 @@ public class Sensors
 	 */
 	public void IntakeSensors()
 	{
-		intakeLeftSwitch = new DigitalInput(
-				(int) config.get("INTAKE_LEFT_SWITCH"));
-		intakeRightSwitch = new DigitalInput(
-				(int) config.get("INTAKE_RIGHT_SWITCH"));
+		intakeSwitch = new DigitalInput(
+				(int) config.get("INTAKE_SWITCH"));
 	}
 
 	/*

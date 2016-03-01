@@ -327,9 +327,7 @@ public class SDB
 				(LiveWindowSendable) Robot.sensors.chassisRightEncoder);
 		// Intake
 		LiveWindow.addSensor("Intake", "intakeLeftSwitch",
-				(LiveWindowSendable) Robot.sensors.intakeLeftSwitch);
-		LiveWindow.addSensor("Intake", "intakeRightSwitch",
-				(LiveWindowSendable) Robot.sensors.intakeRightSwitch);
+				(LiveWindowSendable) Robot.sensors.intakeSwitch);
 		// Flywheel
 		LiveWindow.addSensor("Flywheel", "flywheelCounter",
 				(LiveWindowSendable) Robot.sensors.flywheelCounter);
