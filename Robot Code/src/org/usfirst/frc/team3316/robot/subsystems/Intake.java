@@ -2,7 +2,9 @@ package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -15,7 +17,7 @@ public class Intake extends DBugSubsystemCC
 	private DBugSpeedController intakeMotor;
 
 	// Sensors
-	private DigitalInput intakeSwitch;
+	private AnalogInput intakeSwitch;
 
 	public Intake()
 	{
@@ -49,7 +51,7 @@ public class Intake extends DBugSubsystemCC
 
 	public boolean isBallIn()
 	{
-		if (intakeSwitch.get())
+		if (Utils.AnalogToDigitalInput(intakeSwitch.getValue(), 2500.0))
 		{
 			return true;
 		}

@@ -12,6 +12,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.AnalogTrigger;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -33,7 +34,9 @@ public class Sensors
 	public Encoder chassisLeftEncoder, chassisRightEncoder;
 
 	// Intake
-	public DigitalInput intakeSwitch;
+	public AnalogInput intakeSwitch;
+	public AnalogTrigger intakeSwitchGood;
+	
 
 	// Flywheel
 	public Counter flywheelCounter;
@@ -108,7 +111,7 @@ public class Sensors
 	 */
 	public void IntakeSensors()
 	{
-		intakeSwitch = new DigitalInput(
+		intakeSwitch = new AnalogInput(
 				(int) config.get("INTAKE_SWITCH"));
 	}
 

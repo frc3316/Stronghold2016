@@ -290,8 +290,7 @@ public class IO
 					putDIOB("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 0);
 					putDIOB("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 1);
 
-					putDIOB("INTAKE_LEFT_SWITCH", 5);
-					putDIOB("INTAKE_RIGHT_SWITCH", 4);
+					// putDIOB("INTAKE_SWITCH", 5);
 
 					putDIOB("CLIMBING_SWITCH", 6);
 
@@ -322,7 +321,9 @@ public class IO
 
 					putAIOB("HOOD_POT", 1);
 					
-					putAIOB("CLIMBING_POT", 3);
+					putAIOB("CLIMBING_POT", 2);
+					
+					putAIOB("INTAKE_SWITCH", 3);
 				}
 			}
 

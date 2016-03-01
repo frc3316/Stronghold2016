@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot
 	public static Joysticks joysticks;
 	public static SDB sdb;
 	/*
-	 * Robot IO 
+	 * Robot IO
 	 */
 	public static Actuators actuators;
 	public static Sensors sensors;
@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot
 		 */
 		actuators = new Actuators();
 		sensors = new Sensors();
-		
+
 		Robot.actuators.GeneralActuators();
 		Robot.sensors.GeneralSensors();
 		Robot.sensors.VisionSensors();
@@ -97,7 +97,7 @@ public class Robot extends IterativeRobot
 		turret = new Turret();
 		hood = new Hood();
 		climbing = new Climbing();
-		
+
 		/*
 		 * Human IO (that requires subsystems)
 		 */
@@ -148,7 +148,9 @@ public class Robot extends IterativeRobot
 		Scheduler.getInstance().run();
 	}
 
-	public void testInit() {}
+	public void testIniwt()
+	{
+	}
 
 	public void testPeriodic()
 	{

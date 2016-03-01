@@ -7,6 +7,16 @@ public class Utils
         return ((x - a.x)*(a.y - b.y)/(a.x - b.x) + a.y);
     }
 	
+	/**
+	 * Converts a analog sensor output to digital values.
+	 * @param value The current read from the sensor.
+	 * @param thresh The point that separates between TRUE and FALSE.
+	 * @return The converted value.
+	 */
+	public static boolean AnalogToDigitalInput(double value, double thresh) {
+		return value > thresh;
+	}
+	
 	/*
      * returns a linear interpolation from a lookup table
      * assuming x=0 is for x values and x=1 is for y values

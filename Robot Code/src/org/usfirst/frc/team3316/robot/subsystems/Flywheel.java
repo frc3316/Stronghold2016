@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
+import java.util.Timer;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
@@ -12,9 +13,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Flywheel extends DBugSubsystemCC
 {
+	private class updateSetpoint extends TimerTask {
+		public void run()
+		{
+			setpoint = (double) config.get("flywheel_PID_Setpoint");
+			tolerance = (double) config.get("flywheel_PID_Tolerance");
+		}	
+	}
+	
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
-	private double powerSum = 0;
+	private double powerSum = 0, setpoint, tolerance;
+	private static Timer timer;
+	static {
+		timer = new Timer();
+	}
 
 	private LowPassFilter counterFilter;
 
@@ -39,6 +52,8 @@ public class Flywheel extends DBugSubsystemCC
 					return counter.getRate() > 200 ? Double.MAX_VALUE
 							: counter.getRate();
 				});
+		
+		timer.schedule(new updateSetpoint(), 0, 20);
 	}
 
 	public void initDefaultCommand()
@@ -59,9 +74,23 @@ public class Flywheel extends DBugSubsystemCC
 	{
 		return powerSum;
 	}
-
-	public boolean isOnTarget()
-	{
-		return FlywheelPID.onTarget();
+	
+	public double getSetPoint() {
+		return setpoint;
+	}
+	
+	public double getTolerance() {
+		return tolerance;
+	}
+	
+	public boolean isOnTarget() {
+		if (Math.abs(getRate() - setpoint) < tolerance)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

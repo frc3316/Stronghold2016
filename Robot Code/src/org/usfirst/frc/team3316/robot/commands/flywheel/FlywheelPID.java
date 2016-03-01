@@ -57,7 +57,7 @@ public class FlywheelPID extends DBugCommand
 				(double) config.get("flywheel_PID_KD") / 1000,
 				(double) config.get("flywheel_PID_KF") / 1000);
 		
-		tolerance = (double) config.get("flywheel_PID_Tolerance");
+		tolerance = Robot.flywheel.getTolerance();
 		pid.setAbsoluteTolerance(tolerance); 
 		
 		v = 0;
@@ -71,7 +71,7 @@ public class FlywheelPID extends DBugCommand
 
 	protected void execute()
 	{
-		setpoint = (double) config.get("flywheel_PID_Setpoint");
+		setpoint = Robot.flywheel.getSetPoint();
 		pid.setSetpoint(setpoint);
 		
 		SmartDashboard.putBoolean("PID on target", onTarget());
@@ -85,18 +85,7 @@ public class FlywheelPID extends DBugCommand
 	
 	public static boolean onTarget() 
 	{
-		pid.onTarget();
-		
-		boolean onTarget;
-		if (Robot.flywheel.getRate() > setpoint + tolerance || Robot.flywheel.getRate() < setpoint - tolerance)
-		{
-			onTarget = false;
-		}
-		else {
-			onTarget = true;
-		}
-		logger.fine("Someone asked if I'm on target. Answer: " + onTarget);
-		return onTarget;
+		return pid.onTarget();
 	}
 
 	protected boolean isFinished()

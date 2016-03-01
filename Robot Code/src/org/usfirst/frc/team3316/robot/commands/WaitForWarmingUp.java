@@ -15,7 +15,9 @@ public class WaitForWarmingUp extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget()
+		return 
+//				Robot.flywheel.isOnTarget() && 
+				Robot.hood.isOnTarget()
 				&& Robot.turret.isOnTarget()
 				&& Robot.intake.isReadyToTransfer();
 	}

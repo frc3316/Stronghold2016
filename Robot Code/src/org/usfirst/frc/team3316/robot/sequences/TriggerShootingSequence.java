@@ -28,9 +28,9 @@ public class TriggerShootingSequence extends DBugCommandGroup
 		 * Robot.intake.isReadyToTransfer())) { this.cancel(); }
 		 */
 
-		if (!(Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer()))
-		{
-			this.cancel();
-		}
+//		if (!(Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer()))
+//		{
+//			this.cancel();
+//		}
 	}
 }
