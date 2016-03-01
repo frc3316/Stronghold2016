@@ -11,26 +11,22 @@ import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallOut;
 
 public class EjectBall extends DBugCommandGroup
 {
-	public EjectBall()
+	public EjectBall ()
 	{
-//		addSequential(new CloseIntake());
-//		addParallel(new IntakeRollIn());
-//		addSequential(new WaitForBallIn());
 		addSequential(new OpenIntake());
 		addParallel(new IntakeRollOut());
 		addSequential(new WaitForBallOut());
-//		addSequential(new IntakeStopRoll());
-//		addSequential(new CloseIntake());
-	}
-	
-	protected void fin ()
-	{
 		addSequential(new IntakeStopRoll());
 		addSequential(new CloseIntake());
 	}
 	
+	protected void fin ()
+	{
+	}
+	
 	protected void interr ()
 	{
-		fin();
+		(new IntakeStopRoll()).start();
+		(new CloseIntake()).start();
 	}
 }
