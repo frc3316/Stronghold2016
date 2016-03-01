@@ -211,6 +211,15 @@ public class SDB
 		SmartDashboard.putData(new OpenIntakeTransport());
 		SmartDashboard.putData(new CloseIntakeTransport());
 		
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
+		
+		SmartDashboard.putData(new TransportRollIn());
+		SmartDashboard.putData(new TransportRollOut());
+		
+		SmartDashboard.putData(new IntakeRollIn());
+		SmartDashboard.putData(new IntakeRollOut());
+		
 		SmartDashboard.putData(new ExtendOmni());
 		SmartDashboard.putData(new RetractOmni());
 
