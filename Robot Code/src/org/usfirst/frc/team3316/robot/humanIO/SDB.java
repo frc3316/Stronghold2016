@@ -193,7 +193,6 @@ public class SDB
 		SmartDashboard.putData(new TurretJoysticks());
 		
 		SmartDashboard.putData(new SetTurretAngle());
-		SmartDashboard.putData(new SetHoodAngle());
 
 		putConfigVariableInSDB("turret_Pot_LeftThresh");
 		putConfigVariableInSDB("turret_Pot_RightThresh");
@@ -205,6 +204,16 @@ public class SDB
 		putConfigVariableInSDB("turret_PID_KP");
 		putConfigVariableInSDB("turret_PID_KI");
 		putConfigVariableInSDB("turret_PID_KD");
+		
+		SmartDashboard.putData(new HoodPID());
+		
+		putConfigVariableInSDB("hood_PID_Tolerance");
+		putConfigVariableInSDB("hood_PID_KP");
+		putConfigVariableInSDB("hood_PID_KI");
+		putConfigVariableInSDB("hood_PID_KD");
+		putConfigVariableInSDB("hood_Angle_SetPoint");
+		
+		SmartDashboard.putData(new SetHoodAngle());
 		
 		/*
 		 * Remove these after finishing testing on prototype

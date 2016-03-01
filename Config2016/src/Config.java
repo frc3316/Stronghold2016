@@ -402,7 +402,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("turret_Pot_Offset", 189.54671547503355);
-				addToVariablesB("turret_Pot_Offset", 192.357);
+				addToVariablesB("turret_Pot_Offset", 399.4483151915127);
 				
 				addToVariables("turret_PotFilter_MaxChange", 4.0);
 				addToVariables("turret_PotFilter_Period", (long) 10);
@@ -415,9 +415,9 @@ public class Config
 				addToVariablesA("turret_PID_KI", 0.0);
 				addToVariablesA("turret_PID_KD", -0.01);
 				
-				addToVariablesB("turret_PID_KP", 10.0);
-				addToVariablesB("turret_PID_KI", 0.64);
-				addToVariablesB("turret_PID_KD", 6.0);
+				addToVariablesB("turret_PID_KP", 15.0);
+				addToVariablesB("turret_PID_KI", 1.2);
+				addToVariablesB("turret_PID_KD", 0.8);
 
 				// Bangbang Control
 				addToVariables("turret_Bangbang_OnVoltage", 0.075);

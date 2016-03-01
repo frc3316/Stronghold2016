@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurretPID extends DBugCommand
 {
@@ -70,33 +71,41 @@ public class TurretPID extends DBugCommand
 		double towerAngle = AlignShooter.getTowerAngle();
 		double currentAngle = Robot.turret.getAngle();
 
-//		if (AlignShooter.isObjectDetected())
-//		{
-//			if (towerAngle != lastTowerAngle && towerAngle != 3316.0)
-//			{
-//				logger.finest("Frame updated, so I'm updating ");
-//				setPoint = towerAngle + currentAngle;
-//				lastTowerAngle = towerAngle;
-//
-//				// For PID Testing purposes, need to be changed back
-//				setPoint = (double) config.get("turret_Angle_SetPoint");
-//
-//				pid.setSetpoint(setPoint);
-//			}
-//
-//			isFin = !Robot.turret.setMotors(pidOutput);
-//			logger.finest("PIDOutput: " + pidOutput);
-//		}
-//		else
-//		{
-//			isFin = !Robot.turret.setMotors(0);
-//			logger.finest("isFin cockblocked me");
-//		}
+		/*
+		 * This code is with setpoint set by the vision
+		 */
+		if (AlignShooter.isObjectDetected())
+		{
+			if (towerAngle != lastTowerAngle && towerAngle != 3316.0)
+			{
+				
+				setPoint = towerAngle + currentAngle;
+				logger.finest("Frame updated. New setpoint: " + setPoint);
+				lastTowerAngle = towerAngle;
 
-		setPoint = (double) config.get("turret_Angle_SetPoint");
+				pid.setSetpoint(setPoint);
+			}
 
-		pid.setSetpoint(setPoint);
-		isFin = !Robot.turret.setMotors(pidOutput);
+			isFin = !Robot.turret.setMotors(pidOutput);
+			logger.finest("PIDOutput: " + pidOutput);
+		}
+		else
+		{
+			pid.reset();
+			pid.enable();
+			
+			isFin = !Robot.turret.setMotors(0);
+			
+			logger.finest("isFin cockblocked me");
+		}
+
+		/*
+		 * This code is with setpoint set by the config
+		 */
+//		setPoint = (double) config.get("turret_Angle_SetPoint");
+//
+//		pid.setSetpoint(setPoint);
+//		isFin = !Robot.turret.setMotors(pidOutput);
 	}
 
 	public static boolean onTarget()
@@ -113,6 +122,8 @@ public class TurretPID extends DBugCommand
 
 	protected boolean isFinished()
 	{
+		SmartDashboard.putBoolean("Turret PID on target", this.onTarget());
+		
 		return isFin;
 	}
 
