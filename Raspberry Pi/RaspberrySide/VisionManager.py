@@ -11,7 +11,7 @@ class VisionManager(object):
     '''
     A class that manages all the computer vision for the FRC 2016.
     '''
-    READ_BUFFER_AMOUNT = 3  # Amount of frames to read in each update in order to clear buffer
+    READ_BUFFER_AMOUNT = 1  # Amount of frames to read in each update in order to clear buffer
 
     def __init__(self,minColor,maxColor,minimumBoundingRectSize,cam,knownHeight,knownWidth,focalLength,
                  robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance,HAX,HAY):
@@ -89,15 +89,19 @@ class VisionManager(object):
              logger.error("Couldn't Read Image from self.cam!")
              return
 
+        logger.info("Got frame shape: %r" % (new_frame.shape,))
+
         for _ in xrange(self.READ_BUFFER_AMOUNT - 1):  # minus one, since we already grabbed one frame.
              frame = new_frame
              didGetImage, new_frame = self.cam.read()  # Grab another frame
+             
              if not didGetImage:
                  logger.debug("Seems like the buffer is empty")
                  break  # Seems like the buffer is empty - lets use the last frame
 
         else:  # this occours if the loop wasn't broken - lets use the new frame
-             frame = new_frame
+            logger.debug("buffer isn't empty")
+            frame = new_frame
             
         # maybe resize changes edges of u? causing the u to be smaller of bigger
         #frame = cv2.resize(frame, (resizedImageWidth,resizedImageHeight))
@@ -151,12 +155,19 @@ class VisionManager(object):
         thresh = self.threshImage
         (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         if cnts:
-            c = max(cnts, key = cv2.contourArea)
-            if cv2.contourArea(c) > self.minimumBoundingRectSize:
-                self.isObjectDetected = True
-                return cv2.boundingRect(c)
-            else:
-                self.isObjectDetected = False
+            for c in cnts:
+                if self.minimumBoundingRectSize < cv2.contourArea(c) < maximumBoundingRectangle:
+                    self.isObjectDetected = True
+                    (x, y, w, h) =  cv2.boundingRect(c)
+                    if h/w > HWR: # checking if we see the target and not an object that reflects
+                        logger.debug("object is NOT in the maximum ratio of height/width")
+                        self.isObjectDetected = False
+                        return None
+                    else:
+                        return (x, y, w, h)
+                else:
+                    logger.debug("bounding area is too big or too small")
+                    self.isObjectDetected = False
         else:
             self.isObjectDetected = False
         return None

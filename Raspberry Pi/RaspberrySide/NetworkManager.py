@@ -1,5 +1,6 @@
 import socket
 from Utils import *
+from time import time
 class NetworkManager(object):
     '''
     A class that handles the networking to the Java process.
@@ -39,6 +40,7 @@ class NetworkManager(object):
                 stringToSend = str(resultDic).replace(' ', '')
                 logger.info(stringToSend)
                 self.sock.sendto(stringToSend + '\n', (self.HOST, self.PORT))
+                logger.debug("Data sent to java side! in time " + str(time()))
             except:
                 logger.warning('Input for sendData invalid, or error in sending data')
 			
