@@ -7,11 +7,15 @@ from ImageObject import *
 from RobotObject import *
 from Utils import *
 from math import cos, degrees, radians
+from collections import namedtuple
+
+BoundingRect = namedtuple('BoundingRect', ('contour', 'width', 'height', 'x', 'y'))
+
 class VisionManager(object):
     '''
     A class that manages all the computer vision for the FRC 2016.
     '''
-    READ_BUFFER_AMOUNT = 1  # Amount of frames to read in each update in order to clear buffer
+    READ_BUFFER_AMOUNT = 4  # Amount of frames to read in each update in order to clear buffer
 
     def __init__(self,minColor,maxColor,minimumBoundingRectSize,cam,knownHeight,knownWidth,focalLength,
                  robotMeasurements,TOWER_HEIGHT,centerUWidth,currentUWidthDistance,HAX,HAY):
@@ -141,10 +145,10 @@ class VisionManager(object):
 
         thresh = cv2.threshold(mask, 25, 255, cv2.THRESH_BINARY)[1]
         # dilate the threshed image to fill in holes, then find contours on thresholded image.
-        thresh = cv2.dilate(thresh, None, iterations=1)
+        thresh = cv2.dilate(thresh, None, iterations = 0)
         self.threshImage = thresh
 
-    def calculateBoundingRect(self):
+    def calculateBoundingRects(self):
         '''
         This method calculates the bounding rect of the biggest object that matches the min-max colors in
         self.current_image.
@@ -154,55 +158,92 @@ class VisionManager(object):
         self.updateMaskThresh()
         thresh = self.threshImage
         (cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
         if cnts:
             for c in cnts:
-                if self.minimumBoundingRectSize < cv2.contourArea(c) < maximumBoundingRectangle:
-                    self.isObjectDetected = True
-                    (x, y, w, h) =  cv2.boundingRect(c)
-                    if h/w > HWR: # checking if we see the target and not an object that reflects
-                        logger.debug("object is NOT in the maximum ratio of height/width")
-                        self.isObjectDetected = False
-                        return None
-                    else:
-                        return (x, y, w, h)
-                else:
-                    logger.debug("bounding area is too big or too small")
-                    self.isObjectDetected = False
-        else:
-            self.isObjectDetected = False
-        return None
+                if cv2.contourArea(c) < self.minimumBoundingRectSize:
+                    continue
+
+                if cv2.contourArea(c) > maximumBoundingRectangle:
+                    continue
+                (x, y, w, h) = cv2.boundingRect(c)
+                if w == 0:
+                    continue
+                
+                ratio = h/w
+                if HWR < ratio:
+                    continue
+
+                yield BoundingRect(contour=c, height=h, width=w, x=x, y=y)
+
+    @staticmethod
+    def filterBoundingRects(boundingRects):
+        """
+        Filters the bounding rectangle with the largest area.
+        :param boundingRects: List of bounding rectangles
+        :return: single bounding rectangle tuple
+        """
+        # Sort the list by <rectangle_area> from large to small and return the largest value
+        return sorted(boundingRects, key=lambda r: r.height * r.width, reverse=True)[0]
 
     def updateTowerScales(self):
         '''
         This method updates the vars holding the scales and distance from camera of the object.
         :return: None
         '''
+        self.isObjectDetected = False
 
-        boundingRect = self.calculateBoundingRect()
-        if boundingRect is not None:
-            (x, y, w, h) = boundingRect
-            # Changing the object height according to the camera angle
-            if self.currentImageObject is None:
-                DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject,self.TOWER_HEIGHT)
-                self.currentImageObject = ImageObject(w,h,x,y,DFC)
-                azimuthalAngle = self.distanceHelper.getAzimuthalAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAX)
-                polarAngle = self.distanceHelper.getPolarAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAY)
-                self.currentImageObject.azimuthalAngle = azimuthalAngle
-                self.currentImageObject.polarAngle = polarAngle
-            else:
-                DFC = self.distanceHelper.getDistanceFromTower(h,self.robotObject,self.TOWER_HEIGHT)
-                self.currentImageObject.objectHeight = h
-                self.currentImageObject.objectWidth = w
-                self.currentImageObject.objectX = x
-                self.currentImageObject.objectY = y
-                self.currentImageObject.distanceFromCamera = DFC
+        # Filter rectangles
+        boundingRects = list(self.calculateBoundingRects())
 
-                azimuthalAngle = self.distanceHelper.getAzimuthalAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAX)
-                polarAngle = self.distanceHelper.getPolarAngle([self.imageWidth, self.imageHeight], self.currentImageObject,self.HAY)
-                self.currentImageObject.azimuthalAngle = azimuthalAngle
-                self.currentImageObject.polarAngle = polarAngle
+        if len(boundingRects) == 0:
+            # There are no rects to calculate area for
+            return
 
-            self.currentImageObject.didUpdateVar = True
+        bestBoundingRect = self.filterBoundingRects(boundingRects)
+
+
+        if bestBoundingRect is None:
+            return
+
+        self.isObjectDetected = True
+
+        min_rect = cv2.minAreaRect(bestBoundingRect.contour)
+        min_rect_angle = min_rect[2]
+
+        actual_height = self.distanceHelper.normalize_rectangle_height(bestBoundingRect, min_rect_angle)
+
+        if actual_height == 3316: # error code of normalize_rectangle_height function
+            self.isObjectDetected = False
+            logger.warning("Error code in normalize_rectangle_height function")
+            return
+
+        distance_from_tower = self.distanceHelper.getDistanceFromTower(actual_height,
+                                                                       self.robotObject, self.TOWER_HEIGHT)
+
+
+        # Changing the object height according to the camera angle
+        if self.currentImageObject is None:
+            self.currentImageObject = ImageObject(bestBoundingRect.width, actual_height,
+                                                  bestBoundingRect.x, bestBoundingRect.y, distance_from_tower)
+
+        else:
+            self.currentImageObject.objectHeight = actual_height
+            self.currentImageObject.objectWidth = bestBoundingRect.width
+            self.currentImageObject.objectX = bestBoundingRect.x
+            self.currentImageObject.objectY = bestBoundingRect.y
+            self.currentImageObject.distanceFromCamera = distance_from_tower
+
+        azimuthalAngle = self.distanceHelper.getAzimuthalAngle([self.imageWidth, self.imageHeight],
+                                                               self.currentImageObject, self.HAX)
+
+        polarAngle = self.distanceHelper.getPolarAngle([self.imageWidth, self.imageHeight],
+                                                       self.currentImageObject, self.HAY)
+
+        self.currentImageObject.azimuthalAngle = azimuthalAngle
+        self.currentImageObject.polarAngle = polarAngle
+
+        self.currentImageObject.didUpdateVar = True
 
     def updateRobotScales(self):
         '''
