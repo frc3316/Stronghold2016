@@ -241,6 +241,9 @@ public class SDB
 
 		SmartDashboard.putData(new CollectBall());
 		SmartDashboard.putData(new EjectBall());
+		
+		SmartDashboard.putData(new CollectBall());
+		SmartDashboard.putData(new EjectBall());
 
 		SmartDashboard.putData(new TransportJoysticks());
 
