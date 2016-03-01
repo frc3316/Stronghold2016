@@ -23,14 +23,15 @@ public class TriggerShootingSequence extends DBugCommandGroup
 
 	protected void init()
 	{
-		/*
-		 * if (!(Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget() && Robot.turret.isOnTarget() &&
-		 * Robot.intake.isReadyToTransfer())) { this.cancel(); }
-		 */
+//		/*
+//		 * if (!(Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget() && Robot.turret.isOnTarget() &&
+//		 * Robot.intake.isReadyToTransfer())) { this.cancel(); }
+//		 */
 
-//		if (!(Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer()))
-//		{
-//			this.cancel();
-//		}
+		// Need to check if hood is on target 
+		if (!(Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer() && Robot.turret.isOnTarget()))
+		{
+			this.cancel();
+		}
 	}
 }

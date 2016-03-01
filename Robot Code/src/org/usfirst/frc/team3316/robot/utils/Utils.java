@@ -9,10 +9,7 @@ public class Utils
 	
 	public static boolean isOnTarget(double currentValue, double setpoint, double tolerance)
 	{
-		if (Math.abs(currentValue - setpoint) <= tolerance) {
-			return true;
-		}
-		return false;
+		return (Math.abs(currentValue - setpoint) <= tolerance);
 	}
 	
 	/**

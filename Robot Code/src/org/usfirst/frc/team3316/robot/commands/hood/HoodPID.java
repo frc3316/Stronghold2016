@@ -72,12 +72,7 @@ public class HoodPID extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return isFin || onTarget();
-	}
-
-	public static boolean onTarget()
-	{
-		return pid.onTarget();
+		return isFin;
 	}
 
 	protected void fin()

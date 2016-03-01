@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Flywheel extends DBugSubsystemCC
 {
-	
+
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
-	private double powerSum = 0, setpoint, tolerance;
+	private double powerSum = 0;
 
 	private LowPassFilter counterFilter;
 
@@ -35,12 +35,10 @@ public class Flywheel extends DBugSubsystemCC
 
 		counter = Robot.sensors.flywheelCounter;
 
-		counterFilter = new LowPassFilter(
-				(double) config.get("flywheel_CounterFilter_MaxChange"),
+		counterFilter = new LowPassFilter((double) config.get("flywheel_CounterFilter_MaxChange"),
 				(long) config.get("flywheel_CounterFilter_Period"), () ->
 				{
-					return counter.getRate() > 200 ? Double.MAX_VALUE
-							: counter.getRate();
+					return counter.getRate() > 200 ? Double.MAX_VALUE : counter.getRate();
 				});
 	}
 
@@ -62,20 +60,22 @@ public class Flywheel extends DBugSubsystemCC
 	{
 		return powerSum;
 	}
-	
-	public double getSetPoint() {
-		return setpoint;
-	}
-	
-	public double getTolerance() {
-		return tolerance;
-	}
-	
-	public boolean isOnTarget() 
+
+	public double getSetPoint()
 	{
-		setpoint = (double) config.get("flywheel_PID_Setpoint");
-		tolerance = (double) config.get("flywheel_PID_Tolerance");
-		
+		return (double) config.get("flywheel_PID_Setpoint");
+	}
+
+	public double getTolerance()
+	{
+		return (double) config.get("flywheel_PID_Tolerance");
+	}
+
+	public boolean isOnTarget()
+	{
+		double setpoint = (double) config.get("flywheel_PID_Setpoint");
+		double tolerance = (double) config.get("flywheel_PID_Tolerance");
+
 		return Utils.isOnTarget(getRate(), setpoint, tolerance);
 	}
 }
