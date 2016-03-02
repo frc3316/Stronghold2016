@@ -132,6 +132,7 @@ public class Config
 					addToVariables("button_Toggle_Omni", 1);
 					
 					// Joystick operator
+			
 					addToVariables("button_Intake_Toggle", 1);
 					addToVariables("button_Collect_Ball", 8);
 					addToVariables("button_Eject_Ball", 6);
