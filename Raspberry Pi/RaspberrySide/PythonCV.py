@@ -65,7 +65,8 @@ if __name__ == "__main__":
             goal_image = vision_manager.get_goal_image(save_frame_path=save_frame_path,
                                                        save_mask_path=save_mask_path)
             if not goal_image:
-                network_manager.send_no_data()
+                if network_manager:
+                    network_manager.send_no_data()
 
             FPSCounter.update()
             read_frames += 1

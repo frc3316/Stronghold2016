@@ -74,10 +74,7 @@ class VisionManager(object):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
         # Threshold the HSV image to get only blue colors.
-        mask = cv2.inRange(hsv, LOWER_COLOR_BOUND, UPPER_COLOR_BOUND)
-
-        # Bitwise-AND mask and original image.
-        return cv2.bitwise_and(frame, frame, mask=mask)
+        return cv2.inRange(hsv, LOWER_COLOR_BOUND, UPPER_COLOR_BOUND)
 
     @staticmethod
     def get_masked_frame_threshold(masked_frame):
@@ -101,7 +98,7 @@ class VisionManager(object):
         (contours, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         if not contours:
-            return
+            return []
 
         rects = []
         for contour in contours:
@@ -125,12 +122,21 @@ class VisionManager(object):
         :return: None
         """
         frame = self.capture_frame()
-        masked_frame = VisionManager.get_masked_frame(frame)
-        thresh = VisionManager.get_masked_frame_threshold(masked_frame)
+        if save_frame_path:
+            logger.debug("Writing frame to path: %s", save_frame_path)
+            cv2.imwrite(save_frame_path, frame)
+
+        mask = VisionManager.get_masked_frame(frame)
+        thresh = VisionManager.get_masked_frame_threshold(mask)
 
         bounding_rects = self.get_bounding_rects(thresh)
         if len(bounding_rects) == 0:
             # There are no rects to calculate area for
+            if save_mask_path:
+                try:
+                    os.remove(save_mask_path)
+                except OSError, ex:
+                    pass
             return
 
         bounding_rects = sorted(bounding_rects, key=lambda r: r.height * r.width, reverse=True)
@@ -166,15 +172,12 @@ class VisionManager(object):
             logger.warning("Failed normalizing rectangle height: %s", ex.message)
             return
 
-        if save_frame_path:
-            cv2.imwrite(save_frame_path, frame)
-
         if save_mask_path:
             self.draw_target_square(x_offset=best_bounding_rect.x_offset,
                                     y_offset=best_bounding_rect.y_offset,
                                     height=best_bounding_rect.height,
                                     width=best_bounding_rect.width)
-            cv2.imwrite(save_mask_path, masked_frame)
+            cv2.imwrite(save_mask_path, cv2.bitwise_and(frame, frame, mask=mask))
 
         return ImageObject(tower_distance=distance_from_tower,
                            azimuth_angle=azimuth_angle,
