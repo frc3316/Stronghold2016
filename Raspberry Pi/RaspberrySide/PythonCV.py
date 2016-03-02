@@ -27,7 +27,7 @@ else:
     isShowingImage = 1
 
 # are we going to send data to the java process:
-shouldNetwork = False
+shouldNetwork = True
 
 ##################################
 # Camera and FPS counter setting #
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         # cam.set(cv2.cv.CV_CAP_PROP_FPS, 3)
         # cam.set(cv2.cv.CV_CAP_PROP_BUFFERSIZE, 1)  # Eliminates cv buffer, this way we always recv the latest image
 
-        visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, FL, [RH,RW,RL], TH, CUW, CUWD, HAX, HAY)
+        visionManager = VisionManager(LB, UB, MBR, cam, KH, KW, enlargementFactor, [RH, RW, RL], TH, CUW, CUWD, HAX, HAY)
         if shouldNetwork:
             networkManager = NetworkManager(JAVA_HOST,8080)
 	
@@ -108,7 +108,7 @@ if __name__ == "__main__":
                 logger.debug("Current U X In Pixels: "+str(x))
                 logger.debug("Current U Y In Pixels: "+str(y))
                 # (x, y) = top left corner, h+ is down, w+ is right
-                cv2.rectangle(visionManager.maskedImage, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                cv2.rectangle(visionManager.maskedImage, (x, y), (x + w, y + int(h)), (0, 0, 255), 2)
 
             #############################
             # Send data to java process #
@@ -180,7 +180,7 @@ if __name__ == "__main__":
             # if k == 27:
             #    break
 
-            # sleep(0.01) # so the pi won't crush
+            # sleep(0.01) # so the pi won't crash
     except ValueError:
         logger.error("Error!" + str(ValueError))
     finally:
