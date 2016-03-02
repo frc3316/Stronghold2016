@@ -55,8 +55,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SDB
 {
 	/*
-	 * Runnable that periodically updates values from the robot into the SmartDashboard This is the place
-	 * where all of the robot data should be displayed from
+	 * Runnable that periodically updates values from the robot into the
+	 * SmartDashboard This is the place where all of the robot data should be
+	 * displayed from
 	 */
 	private class UpdateSDBTask extends TimerTask
 	{
@@ -71,29 +72,35 @@ public class SDB
 			 * Insert put methods here
 			 */
 
+			put("Flywheel speed", Math.abs(Robot.flywheel.getRate()));
+
+			put("Turret angle", Robot.turret.getAngle());
+			put("Hood angle", Robot.hood.getAngle());
+
+			// Vision
 			try
 			{
-				put("Flywheel speed", Robot.flywheel.getRate());
-
-				put("Turret angle", Robot.turret.getAngle());
-				put("Hood angle", Robot.hood.getAngle());
-
-				// Vision
 				put("Is object detected", AlignShooter.isObjectDetected());
 				put("Turret vision angle", AlignShooter.getTowerAngle());
-				put("Vision distance", AlignShooter.getHoodAngle()); // This actually returns the distance
-
-				// For drivers
-				put("Is ready to transfer", Robot.intake.isReadyToTransfer());
-				put("Flywheel on target", Robot.flywheel.isOnTarget());
-				put("Turret on target", Robot.turret.isOnTarget());
-
-				// TODO: add is hood on target
+				put("Vision distance", AlignShooter.getHoodAngle()); // This
+																		// actually
+																		// returns
+																		// the
+																		// distance
 			}
 			catch (Exception e)
 			{
-				logger.severe(e);
+				// logger.severe(e);
 			}
+
+			// For drivers
+			put("Is ready to transfer", Robot.intake.isReadyToTransfer());
+			put("Flywheel on target", Robot.flywheel.isOnTarget());
+			put("Turret on target", Robot.turret.isOnTarget());
+
+			put("Is ball in", Robot.intake.isBallIn());
+
+			// TODO: add is hood on target
 		}
 
 		private void put(String name, double d)
@@ -198,6 +205,7 @@ public class SDB
 
 		// Hood
 		SmartDashboard.putData(new HoodJoysticks());
+		SmartDashboard.putData(new TurretJoysticks());
 
 		SmartDashboard.putData(new SetTurretAngle());
 
@@ -206,15 +214,6 @@ public class SDB
 
 		putConfigVariableInSDB("hood_Pot_TopThresh");
 		putConfigVariableInSDB("hood_Pot_BottomThresh");
-
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
-
-		putConfigVariableInSDB("intake_CloseIntake_Timeout");
-		putConfigVariableInSDB("intake_OpenIntake_Timeout");
-
-		SmartDashboard.putData(new CollectBall());
-		SmartDashboard.putData(new EjectBall());
 
 		putConfigVariableInSDB("button_Intake_Toggle");
 		putConfigVariableInSDB("button_Collect_Ball");
@@ -225,16 +224,45 @@ public class SDB
 		putConfigVariableInSDB("button_Warm_Up_Shooter");
 		putConfigVariableInSDB("button_Shooting_Trigger");
 		putConfigVariableInSDB("button_Warm_Up_Flywheel");
+		
 		/*
 		 * Remove these after finishing testing on prototype
 		 */
+		SmartDashboard.putData(new CollectBall());
+		SmartDashboard.putData(new EjectBall());
+		
+		SmartDashboard.putData(new ExtendOmni());
+		SmartDashboard.putData(new RetractOmni());
+
+		SmartDashboard.putData(new IntakeRollIn());
+		SmartDashboard.putData(new IntakeRollOut());
+
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
+
+		SmartDashboard.putData(new OpenIntakeTransport());
+		SmartDashboard.putData(new CloseIntakeTransport());
+		
+		SmartDashboard.putData(new WarmShooter());
+		
+		SmartDashboard.putData(new TransportRollIn());
+		SmartDashboard.putData(new TransportRollOut());
+		
+		putConfigVariableInSDB("intake_RollIn_Speed");
+		putConfigVariableInSDB("intake_RollOut_Speed");
+
+		putConfigVariableInSDB("transport_RollIn_Speed");
+		putConfigVariableInSDB("transport_RollOut_Speed");
+
+		putConfigVariableInSDB("intake_CloseIntake_Timeout");
+		putConfigVariableInSDB("intake_OpenIntake_Timeout");
 
 		logger.info("Finished initSDB()");
 	}
 
 	/**
-	 * This method puts in the live window of the test mode all of the robot's actuators and sensors. It is
-	 * disgusting.
+	 * This method puts in the live window of the test mode all of the robot's
+	 * actuators and sensors. It is disgusting.
 	 */
 	public void initLiveWindow()
 	{

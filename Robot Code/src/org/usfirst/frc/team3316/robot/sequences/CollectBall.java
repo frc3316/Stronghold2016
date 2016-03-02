@@ -16,7 +16,7 @@ public class CollectBall extends DBugCommandGroup
 		addParallel(new IntakeRollIn());
 		addSequential(new WaitForBallIn());
 		addSequential(new IntakeStopRoll());
-		addSequential(new CloseIntakeTransport());
+		addSequential(new CloseIntake());
 	}
 
 	protected void fin ()

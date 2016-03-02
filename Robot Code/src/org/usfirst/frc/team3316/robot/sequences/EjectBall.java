@@ -10,13 +10,16 @@ import org.usfirst.frc.team3316.robot.commands.intake.IntakeStopRoll;
 import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallIn;
 import org.usfirst.frc.team3316.robot.commands.intake.WaitForBallOut;
 
+import edu.wpi.first.wpilibj.command.WaitCommand;
+
 public class EjectBall extends DBugCommandGroup
 {
 	public EjectBall ()
 	{
-		addSequential(new OpenIntakeTransport());
+		addSequential(new OpenIntake());
 		addParallel(new IntakeRollOut());
 		addSequential(new WaitForBallOut());
+		addSequential(new WaitCommand(0.5));
 		addSequential(new IntakeStopRoll());
 		addSequential(new CloseIntake());
 	}
