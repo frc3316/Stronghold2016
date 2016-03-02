@@ -55,7 +55,15 @@ if __name__ == "__main__":
         read_frames = 0  # the number of frames read so far
 
         while True:
-            goal_image = vision_manager.get_goal_image()
+            if args.dump_image and (read_frames % 30 == 0):
+                save_frame_path = "current.png"
+                save_mask_path = "masked.png"
+            else:
+                save_frame_path = None
+                save_mask_path = None
+
+            goal_image = vision_manager.get_goal_image(save_frame_path=save_frame_path,
+                                                       save_mask_path=save_mask_path)
             if not goal_image:
                 network_manager.send_no_data()
 
@@ -64,11 +72,6 @@ if __name__ == "__main__":
 
             if network_manager:
                 network_manager.send_data(goal_image)
-
-            if args.dump_image:
-                if read_frames % 30 == 0:
-                    cv2.imwrite("masked.png", vision_manager.maskedImage)
-                    cv2.imwrite("current.png", vision_manager.currentImage)
 
     except Exception, ex:
         logger.error("Unhandled Exception:\n" + traceback.format_exc())

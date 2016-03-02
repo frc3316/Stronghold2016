@@ -46,7 +46,7 @@ class VisionManager(object):
 
         return cam
 
-    def capture_image(self):
+    def capture_frame(self):
         """
         This method updates the current image of the VisionManager instance.
         :return: None.
@@ -69,35 +69,35 @@ class VisionManager(object):
 
         return np.rot90(frame, 1) if ROTATE_CLOCKWISE else np.rot90(frame, 3)
 
-    def get_mask_thresh(self):
-        """
-        This method updates self.maskedImage, self.threshImage, using self.currentImage.
-        :return: None
-        """
-
-        hsv = cv2.cvtColor(self.currentImage, cv2.COLOR_BGR2HSV)
+    @staticmethod
+    def get_masked_frame(frame):
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
         # Threshold the HSV image to get only blue colors.
         mask = cv2.inRange(hsv, LOWER_COLOR_BOUND, UPPER_COLOR_BOUND)
 
         # Bitwise-AND mask and original image.
-        res = cv2.bitwise_and(self.currentImage, self.currentImage, mask=mask)
-        self.maskedImage = res
+        return cv2.bitwise_and(frame, frame, mask=mask)
 
-        thresh = cv2.threshold(mask, 25, 255, cv2.THRESH_BINARY)[1]
+    @staticmethod
+    def get_masked_frame_threshold(masked_frame):
+        """
+        This method updates self.maskedImage, self.threshImage, using self.currentImage.
+        :return: None
+        """
+        thresh = cv2.threshold(masked_frame, 25, 255, cv2.THRESH_BINARY)[1]
         # dilate the threshed image to fill in holes, then find contours on thresholded image.
         thresh = cv2.dilate(thresh, None, iterations=0)
 
         return thresh
 
-    def get_bounding_rects(self):
+    def get_bounding_rects(self, thresh):
         """
         This method calculates the bounding rect of the biggest object that matches the min-max colors in
         self.current_image.
         :return: None if no object, else the bounding rect in the format of (x, y, w, h).
         """
 
-        thresh = self.get_mask_thresh()
         (contours, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
         if not contours:
@@ -119,12 +119,16 @@ class VisionManager(object):
 
         return rects
 
-    def get_goal_image(self):
+    def get_goal_image(self, save_frame_path=None, save_mask_path=None):
         """
         This method updates the vars holding the scales and distance from camera of the object.
         :return: None
         """
-        bounding_rects = self.get_bounding_rects()
+        frame = self.capture_frame()
+        masked_frame = VisionManager.get_masked_frame(frame)
+        thresh = VisionManager.get_masked_frame_threshold(masked_frame)
+
+        bounding_rects = self.get_bounding_rects(thresh)
         if len(bounding_rects) == 0:
             # There are no rects to calculate area for
             return
@@ -137,12 +141,12 @@ class VisionManager(object):
         try:
             azimuth_angle = get_azimuth_angle(x_offset=best_bounding_rect.x_offset,
                                               image_width=best_bounding_rect.width,
-                                              frame_width=self.currentImage.shape[1],
+                                              frame_width=frame.shape[1],
                                               viewing_angle=CAMERA_VIEW_ANGLE_X)
 
             polar_angle = get_polar_angle(y_offset=best_bounding_rect.y_offset,
                                           image_height=best_bounding_rect.height,
-                                          frame_height=self.currentImage.shape[0],
+                                          frame_height=frame.shape[0],
                                           viewing_angle=CAMERA_VIEW_ANGLE_Y)
 
             best_bounding_rect.height = normalize_rectangle_skew(
@@ -162,10 +166,15 @@ class VisionManager(object):
             logger.warning("Failed normalizing rectangle height: %s", ex.message)
             return
 
-        self.draw_target_square(x_offset=best_bounding_rect.x_offset,
-                                y_offset=best_bounding_rect.y_offset,
-                                height=best_bounding_rect.height,
-                                width=best_bounding_rect.width)
+        if save_frame_path:
+            cv2.imwrite(save_frame_path, frame)
+
+        if save_mask_path:
+            self.draw_target_square(x_offset=best_bounding_rect.x_offset,
+                                    y_offset=best_bounding_rect.y_offset,
+                                    height=best_bounding_rect.height,
+                                    width=best_bounding_rect.width)
+            cv2.imwrite(save_mask_path, masked_frame)
 
         return ImageObject(tower_distance=distance_from_tower,
                            azimuth_angle=azimuth_angle,
