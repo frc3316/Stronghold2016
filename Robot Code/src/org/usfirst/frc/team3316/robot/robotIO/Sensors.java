@@ -36,7 +36,6 @@ public class Sensors
 	// Intake
 	public AnalogInput intakeSwitch;
 	public AnalogTrigger intakeSwitchGood;
-	
 
 	// Flywheel
 	public Counter flywheelCounter;
@@ -111,8 +110,7 @@ public class Sensors
 	 */
 	public void IntakeSensors()
 	{
-		intakeSwitch = new AnalogInput(
-				(int) config.get("INTAKE_SWITCH"));
+		intakeSwitch = new AnalogInput((int) config.get("INTAKE_SWITCH"));
 	}
 
 	/*
