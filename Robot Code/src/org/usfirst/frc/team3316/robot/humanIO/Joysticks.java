@@ -114,5 +114,8 @@ public class Joysticks
 		
 		DBugJoystickButton collectionBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
 		collectionBtn.whenPressed(new CollectBall());
+		
+		DBugJoystickButton ejectionBtn = new DBugJoystickButton(joystickOperator, "button_Eject_Ball");
+		ejectionBtn.whenPressed(new EjectBall());
 	}
 }

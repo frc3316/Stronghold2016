@@ -134,10 +134,10 @@ public class Config
 					// Joystick operator
 			
 					addToVariables("button_Intake_Toggle", 1);
-					addToVariables("button_Collect_Ball", 8);
-					addToVariables("button_Eject_Ball", 6);
-					addToVariables("button_Roll_In", 2);
-					addToVariables("button_Roll_Out", 3);
+					addToVariables("button_Collect_Ball", 2);
+					addToVariables("button_Eject_Ball", 3);
+					addToVariables("button_Roll_In", 6);
+					addToVariables("button_Roll_Out", 8);
 					addToVariables("button_Climb", 10);
 					addToVariables("button_Warm_Up_Shooter", 7);
 					addToVariables("button_Shooting_Trigger", 4);

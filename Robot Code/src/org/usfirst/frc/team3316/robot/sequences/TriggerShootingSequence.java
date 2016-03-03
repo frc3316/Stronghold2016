@@ -29,7 +29,9 @@ public class TriggerShootingSequence extends DBugCommandGroup
 //		 */
 
 		// Need to check if hood is on target 
-		if (!(Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer() && Robot.turret.isOnTarget()))
+		if (!(Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer() 
+				//&& Robot.turret.isOnTarget()
+				))
 		{
 			this.cancel();
 		}
