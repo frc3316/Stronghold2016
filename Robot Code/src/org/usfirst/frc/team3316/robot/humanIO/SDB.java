@@ -90,13 +90,16 @@ public class SDB
 			}
 			catch (Exception e)
 			{
-				// logger.severe(e);
+				 logger.severe(e);
 			}
 
 			// For drivers
 			put("Is ready to transfer", Robot.intake.isReadyToTransfer());
 			put("Flywheel on target", Robot.flywheel.isOnTarget());
 			put("Turret on target", Robot.turret.isOnTarget());
+			put("Hood on target", Robot.hood.isOnTarget());
+			
+			put("Hood angle setpoint", AlignShooter.getHoodAngle());
 
 			put("Is ball in", Robot.intake.isBallIn());
 
@@ -208,55 +211,22 @@ public class SDB
 		SmartDashboard.putData(new TurretJoysticks());
 
 		SmartDashboard.putData(new SetTurretAngle());
-
-		putConfigVariableInSDB("turret_Pot_LeftThresh");
-		putConfigVariableInSDB("turret_Pot_RightThresh");
-
-		putConfigVariableInSDB("hood_Pot_TopThresh");
-		putConfigVariableInSDB("hood_Pot_BottomThresh");
-
-		putConfigVariableInSDB("button_Intake_Toggle");
-		putConfigVariableInSDB("button_Collect_Ball");
-		putConfigVariableInSDB("button_Eject_Ball");
-		putConfigVariableInSDB("button_Roll_In");
-		putConfigVariableInSDB("button_Roll_Out");
-		putConfigVariableInSDB("button_Climb");
-		putConfigVariableInSDB("button_Warm_Up_Shooter");
-		putConfigVariableInSDB("button_Shooting_Trigger");
-		putConfigVariableInSDB("button_Warm_Up_Flywheel");
 		
-		/*
-		 * Remove these after finishing testing on prototype
-		 */
-		SmartDashboard.putData(new CollectBall());
-		SmartDashboard.putData(new EjectBall());
+		SmartDashboard.putData(new HoodPID());
 		
-		SmartDashboard.putData(new ExtendOmni());
-		SmartDashboard.putData(new RetractOmni());
-
-		SmartDashboard.putData(new IntakeRollIn());
-		SmartDashboard.putData(new IntakeRollOut());
-
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
-
-		SmartDashboard.putData(new OpenIntakeTransport());
-		SmartDashboard.putData(new CloseIntakeTransport());
+		putConfigVariableInSDB("hood_Angle_SetPoint");
 		
-		SmartDashboard.putData(new WarmShooter());
+		putConfigVariableInSDB("hood_PID_KP");
+		putConfigVariableInSDB("hood_PID_KI");
+		putConfigVariableInSDB("hood_PID_KD");
 		
-		SmartDashboard.putData(new TransportRollIn());
-		SmartDashboard.putData(new TransportRollOut());
+		putConfigVariableInSDB("hood_PID_Tolerance");
 		
-		putConfigVariableInSDB("intake_RollIn_Speed");
-		putConfigVariableInSDB("intake_RollOut_Speed");
-
-		putConfigVariableInSDB("transport_RollIn_Speed");
-		putConfigVariableInSDB("transport_RollOut_Speed");
-
-		putConfigVariableInSDB("intake_CloseIntake_Timeout");
-		putConfigVariableInSDB("intake_OpenIntake_Timeout");
-
+		putConfigVariableInSDB("turret_PID_Tolerance");
+		putConfigVariableInSDB("turret_PID_KP");
+		putConfigVariableInSDB("turret_PID_KI");
+		putConfigVariableInSDB("turret_PID_KD");
+		
 		logger.info("Finished initSDB()");
 	}
 

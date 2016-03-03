@@ -428,14 +428,14 @@ public class Config
 
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 0.5);
+				addToVariables("turret_PID_Tolerance", 0.6);
 				
 				addToVariablesA("turret_PID_KP", 10.0);
 				addToVariablesA("turret_PID_KI", 0.0);
 				addToVariablesA("turret_PID_KD", -0.01);
 				
-				addToVariablesB("turret_PID_KP", 15.0);
-				addToVariablesB("turret_PID_KI", 1.2);
+				addToVariablesB("turret_PID_KP", 30.0);
+				addToVariablesB("turret_PID_KI", 0.5);
 				addToVariablesB("turret_PID_KD", 0.8);
 
 				// Bangbang Control
@@ -479,7 +479,7 @@ public class Config
 
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 0.2);
+				addToVariables("hood_PID_Tolerance", 0.4);
 				addToVariables("hood_PID_KP", 90.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.001);

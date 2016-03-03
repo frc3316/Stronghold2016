@@ -5,6 +5,7 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
@@ -79,7 +80,10 @@ public class Hood extends DBugSubsystemCC
 	
 	public boolean isOnTarget()
 	{
-		return HoodBangbang.onTarget();
+		double setpoint = (double) config.get("hood_Angle_SetPoint");
+		double tolerance = (double) config.get("hood_PID_Tolerance");
+		
+		return Utils.isOnTarget(getAngle(), setpoint, tolerance);
 	}
 
 }

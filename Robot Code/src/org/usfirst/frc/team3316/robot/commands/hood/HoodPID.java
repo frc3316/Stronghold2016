@@ -2,12 +2,14 @@ package org.usfirst.frc.team3316.robot.commands.hood;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class HoodPID extends DBugCommand
 {
@@ -56,18 +58,26 @@ public class HoodPID extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setSetpoint((double) config.get("hood_Angle_SetPoint"));
+		logger.finest("PID KP: " + pid.getP() +", KI: " + pid.getI() + ", KD: " + pid.getD());
+		
+		if (AlignShooter.isObjectDetected())
+		{
+//			double setPoint = (double) config.get("hood_Angle_SetPoint");
+			
+			double setPoint = (double) AlignShooter.getHoodAngle();
+			
+			pid.setSetpoint(setPoint);
 
-		/*
-		 * if (AlignShooter.isObjectDetected()) { double setPoint = (double)
-		 * AlignShooter.getHoodAngle(); pid.setSetpoint(setPoint);
-		 * 
-		 * isFin = !Robot.hood.setMotors(pidOutput); } else { isFin =
-		 * !Robot.hood.setMotors(0); }
-		 */
+			isFin = !Robot.hood.setMotors(pidOutput);
+		}
+		else
+		{
+			isFin = !Robot.hood.setMotors(0);
+		}
+		
+		config.add("hood_Angle_SetPoint", pid.getSetpoint());
+
 		logger.finest("This is the pid output for the hood: " + pidOutput);
-
-		isFin = !Robot.hood.setMotors(pidOutput);
 	}
 
 	protected boolean isFinished()
