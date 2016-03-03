@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class HoodPID extends DBugCommand
 {
 	private static PIDController pid;
-	private double pidOutput;
 
 	public HoodPID()
 	{
@@ -39,7 +38,10 @@ public class HoodPID extends DBugCommand
 		{
 			public void pidWrite(double output)
 			{
-				pidOutput = output;
+				isFin = !Robot.hood.setMotors(output);
+				config.add("hood_Angle_SetPoint", pid.getSetpoint());
+				
+				logger.finest("This is the pid output for the hood: ");
 			}
 		});
 
@@ -67,17 +69,13 @@ public class HoodPID extends DBugCommand
 			double setPoint = (double) AlignShooter.getHoodAngle();
 			
 			pid.setSetpoint(setPoint);
-
-			isFin = !Robot.hood.setMotors(pidOutput);
 		}
 		else
 		{
 			isFin = !Robot.hood.setMotors(0);
 		}
 		
-		config.add("hood_Angle_SetPoint", pid.getSetpoint());
-
-		logger.finest("This is the pid output for the hood: " + pidOutput);
+		logger.finest("Hood PID error: " + pid.getError());
 	}
 
 	protected boolean isFinished()

@@ -20,7 +20,6 @@ public class TurretPID extends DBugCommand
 
 	public TurretPID()
 	{
-
 		requires(Robot.turret);
 
 		pid = new PIDController(0, 0, 0, new PIDSource()

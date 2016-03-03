@@ -17,7 +17,6 @@ public class AlignShooter
 	public static double getTowerAngle()
 	{
 		double towerAngle = VisionServer.Data.get("AA"); // AA = Azimuthal Angle
-		logger.finest("Someone asked for turret angle. Tower angle: " + towerAngle);
 		return (towerAngle);
 	}
 

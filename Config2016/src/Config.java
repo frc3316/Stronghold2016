@@ -435,7 +435,7 @@ public class Config
 				addToVariablesA("turret_PID_KD", -0.01);
 				
 				addToVariablesB("turret_PID_KP", 30.0);
-				addToVariablesB("turret_PID_KI", 0.5);
+				addToVariablesB("turret_PID_KI", 0.7);
 				addToVariablesB("turret_PID_KD", 0.8);
 
 				// Bangbang Control

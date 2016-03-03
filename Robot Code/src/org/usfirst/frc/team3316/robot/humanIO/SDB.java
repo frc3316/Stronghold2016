@@ -82,11 +82,7 @@ public class SDB
 			{
 				put("Is object detected", AlignShooter.isObjectDetected());
 				put("Turret vision angle", AlignShooter.getTowerAngle());
-				put("Vision distance", AlignShooter.getHoodAngle()); // This
-																		// actually
-																		// returns
-																		// the
-																		// distance
+				put("Vision distance", VisionServer.Data.get("DFC"));
 			}
 			catch (Exception e)
 			{
