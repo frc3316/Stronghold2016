@@ -5,6 +5,8 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
+import org.usfirst.frc.team3316.robot.utils.MovingAverage;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
@@ -12,6 +14,7 @@ public class Hood extends DBugSubsystemCC
 {
 	private DBugSpeedController hoodMotor;
 	private AnalogPotentiometer hoodPot;
+	private MovingAverage potAverage;
 
 	private double potOffset;
 
@@ -27,6 +30,8 @@ public class Hood extends DBugSubsystemCC
 		Robot.sensors.HoodSensors();
 
 		hoodPot = Robot.sensors.hoodPot;
+		potAverage = new MovingAverage(25, 10, () -> {return hoodPot.get();});
+		
 		potOffset = (double) config.get("hood_Pot_Offset");
 		
 		logger.info("Pot offset is initially set to " + potOffset);
@@ -68,18 +73,21 @@ public class Hood extends DBugSubsystemCC
 	 */
 	public double getAngle()
 	{
-		return hoodPot.get() + potOffset;
+		return potAverage.get() + potOffset;
 	}
 
 	public void setAngle(double angle)
 	{
-		potOffset = (angle - hoodPot.get());
+		potOffset = (angle - potAverage.get());
 		logger.fine("The offset of the hood is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
 	}
 	
 	public boolean isOnTarget()
 	{
-		return HoodBangbang.onTarget();
+		double setpoint = (double) config.get("hood_Angle_SetPoint");
+		double tolerance = (double) config.get("hood_PID_Tolerance");
+		
+		return Utils.isOnTarget(getAngle(), setpoint, tolerance);
 	}
 
 }

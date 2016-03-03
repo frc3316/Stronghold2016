@@ -66,7 +66,7 @@ public class VisionServer implements Runnable
 		DatagramSocket serverSocket = null;
 		try
 		{
-			serverSocket = new DatagramSocket(8080);
+			serverSocket = new DatagramSocket(8000);
 		}
 		catch (SocketException e)
 		{
@@ -92,7 +92,7 @@ public class VisionServer implements Runnable
 				serverSocket.setSoTimeout(100);
 				serverSocket.receive(receivePacket);
 
-				logger.finest("Received packet");
+//				logger.finest("Received packet");
 				
 				String sentence = new String(receivePacket.getData());
 //				logger.finest("Packet data length: " + receivePacket.getLength());

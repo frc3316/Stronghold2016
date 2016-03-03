@@ -132,11 +132,12 @@ public class Config
 					addToVariables("button_Toggle_Omni", 1);
 					
 					// Joystick operator
+			
 					addToVariables("button_Intake_Toggle", 1);
-					addToVariables("button_Collect_Ball", 8);
-					addToVariables("button_Eject_Ball", 6);
-					addToVariables("button_Roll_In", 2);
-					addToVariables("button_Roll_Out", 3);
+					addToVariables("button_Collect_Ball", 2);
+					addToVariables("button_Eject_Ball", 3);
+					addToVariables("button_Roll_In", 6);
+					addToVariables("button_Roll_Out", 8);
 					addToVariables("button_Climb", 10);
 					addToVariables("button_Warm_Up_Shooter", 7);
 					addToVariables("button_Shooting_Trigger", 4);
@@ -192,7 +193,8 @@ public class Config
 				/*
 				 * Flywheel
 				 */
-				addToConstants("FLYWHEEL_MOTOR_REVERSE", false);
+				addToConstantsA("FLYWHEEL_MOTOR_REVERSE", false);
+				addToConstantsB("FLYWHEEL_MOTOR_REVERSE", true);
 
 				addToConstants("FLYWHEEL_MOTOR_MAX_CURRENT", 70.0);
 
@@ -426,14 +428,14 @@ public class Config
 
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 0.5);
+				addToVariables("turret_PID_Tolerance", 0.6);
 				
 				addToVariablesA("turret_PID_KP", 10.0);
 				addToVariablesA("turret_PID_KI", 0.0);
 				addToVariablesA("turret_PID_KD", -0.01);
 				
-				addToVariablesB("turret_PID_KP", 15.0);
-				addToVariablesB("turret_PID_KI", 1.2);
+				addToVariablesB("turret_PID_KP", 30.0);
+				addToVariablesB("turret_PID_KI", 0.7);
 				addToVariablesB("turret_PID_KD", 0.8);
 
 				// Bangbang Control
@@ -477,7 +479,7 @@ public class Config
 
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 0.2);
+				addToVariables("hood_PID_Tolerance", 0.4);
 				addToVariables("hood_PID_KP", 90.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 0.001);

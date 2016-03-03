@@ -3,37 +3,21 @@ import time
 import os.path
 from os import getpid
 from glob import glob
+
 ##################
 #     Logger     #
 ##################
 loggerFileName = (str(time.ctime()) + ".log").replace(" ", "_")
 if not os.path.exists('/var/log/roboticsVision'):
     os.mkdir('/var/log/roboticsVision')
-logging.basicConfig(filename='/var/log/roboticsVision/'+loggerFileName,level=logging.DEBUG)
+logging.basicConfig(filename='/var/log/roboticsVision/' + loggerFileName, level=logging.DEBUG)
 logger = logging.getLogger()
-
-##################
-#   Logger Keys  #
-##################
-
-# Current U Width In Pixels:
-# Current U Height In Pixels:
-# Current U X In Pixels:
-# Current U Y In Pixels:
-# Distance From Tower:
-# Angle From tower:
-# X Robot Position:
-# Y Robot Position:
-# AzimuthalAngle:
-# PolarAngle:
-# FPS:
-
 #################
 # Sections Keys #
 #################
 
-#Image Object (U):
-#Robot Information:
+# Image Object (U):
+# Robot Information:
 
 ##################
 #    Lock File   #
@@ -44,7 +28,8 @@ class LockFile():
     A class helps handling a lock file.
     1 is locked, 0 is unlocked.
     '''
-    def __init__(self,pathToFile):
+
+    def __init__(self, pathToFile):
         '''
         Init the variables of the class.
         :param pathToFile: The path to the lock file
@@ -53,7 +38,7 @@ class LockFile():
         self.pathToFile = pathToFile
 
     def lock(self):
-        with open(self.pathToFile,"w") as f:
+        with open(self.pathToFile, "w") as f:
             f.write(str(os.getpid()))
 
     def is_locked(self):
@@ -69,6 +54,7 @@ class LockFile():
                 return False
             return check_pid(firstLine)
 
+
 def check_pid(pid):
     """ Check For the existence of a unix pid. """
     try:
@@ -77,6 +63,8 @@ def check_pid(pid):
         return False
     else:
         return True
+
+
 def getCameraNumber():
     '''
     finds the camera number from /dev
@@ -88,13 +76,4 @@ def getCameraNumber():
         startIndex = fullName.find("video")
         return int(fullName[startIndex + len("video"):])
     else:
-        return 0 # Default camera value
-
-def goMagic(DFC):
-    '''
-    modifies the distance from camera using magic constants
-    :param DFC: the distance of the robot from the tower.
-    :return: a new distance that is more accurate.
-    '''
-    # f = lambda x: -0.0015*x**2 + 2.2809*x -256.93 # From excel
-    return DFC
+        return 0  # Default camera value

@@ -5,6 +5,7 @@ import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -33,7 +34,7 @@ public class Turret extends DBugSubsystemCC
 
 	public void initDefaultCommand()
 	{
-//		setDefaultCommand(new TurretJoysticks());
+		setDefaultCommand(new TurretJoysticks());
 	}
 
 	/**
@@ -75,8 +76,12 @@ public class Turret extends DBugSubsystemCC
 		logger.fine("The offset of the turret is set to be " + potOffset + ". UPDATE THIS VALUE IN THE CONFIG.");
 	}
 	
-	public boolean isOnTarget() {
-		return TurretPID.onTarget();
+	public boolean isOnTarget() 
+	{
+		double setpoint = (double) config.get("turret_Angle_SetPoint");
+		double tolerance = (double) config.get("turret_PID_Tolerance");
+		
+		return Utils.isOnTarget(getAngle(), setpoint, tolerance);
 	}
 
 }

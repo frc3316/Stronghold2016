@@ -2,17 +2,18 @@ package org.usfirst.frc.team3316.robot.commands.hood;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class HoodPID extends DBugCommand
 {
 	private static PIDController pid;
-	private double pidOutput;
 
 	public HoodPID()
 	{
@@ -37,7 +38,10 @@ public class HoodPID extends DBugCommand
 		{
 			public void pidWrite(double output)
 			{
-				pidOutput = output;
+				isFin = !Robot.hood.setMotors(output);
+				config.add("hood_Angle_SetPoint", pid.getSetpoint());
+				
+				logger.finest("This is the pid output for the hood: ");
 			}
 		});
 
@@ -56,28 +60,27 @@ public class HoodPID extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setSetpoint((double) config.get("hood_Angle_SetPoint"));
-
-		/*
-		 * if (AlignShooter.isObjectDetected()) { double setPoint = (double)
-		 * AlignShooter.getHoodAngle(); pid.setSetpoint(setPoint);
-		 * 
-		 * isFin = !Robot.hood.setMotors(pidOutput); } else { isFin =
-		 * !Robot.hood.setMotors(0); }
-		 */
-		logger.finest("This is the pid output for the hood: " + pidOutput);
-
-		isFin = !Robot.hood.setMotors(pidOutput);
+		logger.finest("PID KP: " + pid.getP() +", KI: " + pid.getI() + ", KD: " + pid.getD());
+		
+		if (AlignShooter.isObjectDetected())
+		{
+//			double setPoint = (double) config.get("hood_Angle_SetPoint");
+			
+			double setPoint = (double) AlignShooter.getHoodAngle();
+			
+			pid.setSetpoint(setPoint);
+		}
+		else
+		{
+			isFin = !Robot.hood.setMotors(0);
+		}
+		
+		logger.finest("Hood PID error: " + pid.getError());
 	}
 
 	protected boolean isFinished()
 	{
-		return isFin || onTarget();
-	}
-
-	public static boolean onTarget()
-	{
-		return pid.onTarget();
+		return isFin;
 	}
 
 	protected void fin()

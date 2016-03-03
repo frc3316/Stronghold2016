@@ -18,7 +18,7 @@ public class OpenIntake extends DBugCommand
 		Robot.intake.openIntake();
 	}
 
-	protected boolean isFinished()
+	public boolean isFinished()
 	{
 		return timeSinceInitialized() >= timeout;
 	}

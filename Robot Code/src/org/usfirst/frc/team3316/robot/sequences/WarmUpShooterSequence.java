@@ -14,8 +14,8 @@ public class WarmUpShooterSequence extends DBugCommandGroup
 {
 	public WarmUpShooterSequence()
 	{
-		//addParallel(new HoodBangbang());
-		//addParallel(new TurretPID());
+		addParallel(new HoodPID());
+		addParallel(new TurretPID());
 		addParallel(new WarmShooter());
 	}
 }

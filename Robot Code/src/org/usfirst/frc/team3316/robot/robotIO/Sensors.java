@@ -35,7 +35,6 @@ public class Sensors
 
 	// Intake
 	public AnalogInput intakeSwitch;
-	public AnalogTrigger intakeSwitchGood;
 
 	// Flywheel
 	public Counter flywheelCounter;

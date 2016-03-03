@@ -7,27 +7,17 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Flywheel extends DBugSubsystemCC
 {
-	private class updateSetpoint extends TimerTask {
-		public void run()
-		{
-			setpoint = (double) config.get("flywheel_PID_Setpoint");
-			tolerance = (double) config.get("flywheel_PID_Tolerance");
-		}	
-	}
-	
+
 	private DBugSpeedController flywheelMotor;
 	private Counter counter;
-	private double powerSum = 0, setpoint, tolerance;
-	private static Timer timer;
-	static {
-		timer = new Timer();
-	}
+	private double powerSum = 0;
 
 	private LowPassFilter counterFilter;
 
@@ -45,15 +35,11 @@ public class Flywheel extends DBugSubsystemCC
 
 		counter = Robot.sensors.flywheelCounter;
 
-		counterFilter = new LowPassFilter(
-				(double) config.get("flywheel_CounterFilter_MaxChange"),
+		counterFilter = new LowPassFilter((double) config.get("flywheel_CounterFilter_MaxChange"),
 				(long) config.get("flywheel_CounterFilter_Period"), () ->
 				{
-					return counter.getRate() > 200 ? Double.MAX_VALUE
-							: counter.getRate();
+					return counter.getRate() > 200 ? Double.MAX_VALUE : counter.getRate();
 				});
-		
-		timer.schedule(new updateSetpoint(), 0, 20);
 	}
 
 	public void initDefaultCommand()
@@ -74,23 +60,22 @@ public class Flywheel extends DBugSubsystemCC
 	{
 		return powerSum;
 	}
-	
-	public double getSetPoint() {
-		return setpoint;
+
+	public double getSetPoint()
+	{
+		return (double) config.get("flywheel_PID_Setpoint");
 	}
-	
-	public double getTolerance() {
-		return tolerance;
+
+	public double getTolerance()
+	{
+		return (double) config.get("flywheel_PID_Tolerance");
 	}
-	
-	public boolean isOnTarget() {
-		if (Math.abs(getRate() - setpoint) < tolerance)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+
+	public boolean isOnTarget()
+	{
+		double setpoint = (double) config.get("flywheel_PID_Setpoint");
+		double tolerance = (double) config.get("flywheel_PID_Tolerance");
+
+		return Utils.isOnTarget(getRate(), setpoint, tolerance);
 	}
 }

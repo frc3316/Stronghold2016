@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class FlywheelPID extends DBugCommand
 {
-	// TODO: Add commenting
-
 	private static PIDController pid;
 	private double v = 0;
 	private static double tolerance, setpoint;
@@ -32,7 +30,6 @@ public class FlywheelPID extends DBugCommand
 
 			public double pidGet()
 			{
-				logger.fine("flywheel pid get: " + Robot.flywheel.getRate());
 				return Robot.flywheel.getRate();
 			}
 
@@ -45,7 +42,6 @@ public class FlywheelPID extends DBugCommand
 			public void pidWrite(double output)
 			{
 				isFin = !Robot.flywheel.setMotors(output);
-				logger.finest("This is flywheel's v: " + output);
 			}
 		});
 	}
@@ -64,8 +60,6 @@ public class FlywheelPID extends DBugCommand
 
 		reachedTarget = false;
 		
-		logger.fine("Flywheel PID initialized.");
-		
 		pid.enable();
 	}
 
@@ -74,18 +68,11 @@ public class FlywheelPID extends DBugCommand
 		setpoint = Robot.flywheel.getSetPoint();
 		pid.setSetpoint(setpoint);
 		
-		SmartDashboard.putBoolean("PID on target", onTarget());
-		
-		if (onTarget() && !reachedTarget)
+		if (Robot.flywheel.isOnTarget() && !reachedTarget)
 		{
 			logger.info("Flywheel PID has reached target after " + timeSinceInitialized() + " seconds.");
 			reachedTarget = true;
 		}
-	}
-	
-	public static boolean onTarget() 
-	{
-		return pid.onTarget();
 	}
 
 	protected boolean isFinished()
@@ -103,6 +90,5 @@ public class FlywheelPID extends DBugCommand
 	protected void interr()
 	{
 		fin();
-		logger.fine("Flywheel PID interrupted.");
 	}
 }

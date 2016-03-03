@@ -20,7 +20,6 @@ public class TurretPID extends DBugCommand
 
 	public TurretPID()
 	{
-
 		requires(Robot.turret);
 
 		pid = new PIDController(0, 0, 0, new PIDSource()
@@ -65,7 +64,8 @@ public class TurretPID extends DBugCommand
 
 	protected void execute()
 	{
-		pid.setPID((double) config.get("turret_PID_KP") / 1000, (double) config.get("turret_PID_KI") / 1000,
+		pid.setPID((double) config.get("turret_PID_KP") / 1000, 
+				(double) config.get("turret_PID_KI") / 1000,
 				(double) config.get("turret_PID_KD") / 1000);
 
 		double towerAngle = AlignShooter.getTowerAngle();
@@ -80,14 +80,12 @@ public class TurretPID extends DBugCommand
 			{
 				
 				setPoint = towerAngle + currentAngle;
-				logger.finest("Frame updated. New setpoint: " + setPoint);
 				lastTowerAngle = towerAngle;
 
 				pid.setSetpoint(setPoint);
 			}
 
 			isFin = !Robot.turret.setMotors(pidOutput);
-			logger.finest("PIDOutput: " + pidOutput);
 		}
 		else
 		{
@@ -95,10 +93,10 @@ public class TurretPID extends DBugCommand
 			pid.enable();
 			
 			isFin = !Robot.turret.setMotors(0);
-			
-			logger.finest("isFin cockblocked me");
 		}
 
+		config.add("turret_Angle_SetPoint", pid.getSetpoint());
+		
 		/*
 		 * This code is with setpoint set by the config
 		 */
@@ -108,22 +106,8 @@ public class TurretPID extends DBugCommand
 //		isFin = !Robot.turret.setMotors(pidOutput);
 	}
 
-	public static boolean onTarget()
-	{
-		if (Math.abs(Robot.turret.getAngle() - setPoint) < tolerance)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
 	protected boolean isFinished()
 	{
-		SmartDashboard.putBoolean("Turret PID on target", this.onTarget());
-		
 		return isFin;
 	}
 

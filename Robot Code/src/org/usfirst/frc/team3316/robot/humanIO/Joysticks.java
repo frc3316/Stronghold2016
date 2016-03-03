@@ -85,33 +85,37 @@ public class Joysticks
 	public void initButtons()
 	{
 		// Chassis
+		
 		DBugJoystickButton toggleOmniBtn = new DBugJoystickButton(joystickRight, "button_Toggle_Omni");
 		toggleOmniBtn.whenPressed(new ToggleOmni());
 
 		// Intake
 
-		DBugJoystickButton rollInBtn = new DBugJoystickButton(joystickOperator, "button_Roll_In");
-		rollInBtn.whileHeld(new IntakeRollIn());
-		DBugJoystickButton rollOutBtn = new DBugJoystickButton(joystickOperator, "button_Roll_Out");
-		rollOutBtn.whileHeld(new IntakeRollOut());
+//		DBugJoystickButton rollInBtn = new DBugJoystickButton(joystickOperator, "button_Roll_In");
+//		rollInBtn.whileHeld(new IntakeRollIn());
+//		DBugJoystickButton rollOutBtn = new DBugJoystickButton(joystickOperator, "button_Roll_Out");
+//		rollOutBtn.whileHeld(new IntakeRollOut());
 
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
 		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new OpenIntakeTransport(), new CloseIntakeTransport()));
-
-		// Shooter
-		// DBugJoystickButton prepareToShootBtn = new
-		// DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
-		// prepareToShootBtn.whileHeld(new WarmUpShooterSequence());
-
+		
+		//Shooting
+		
 		DBugJoystickButton warmUpFlywheelBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Flywheel");
 		warmUpFlywheelBtn.whileHeld(new WarmUpShooterSequence());
 
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());
 
-		JoystickButton transportRollInBtn = new JoystickButton(joystickOperator, 2);
-		transportRollInBtn.whileHeld(new TransportRollIn());
-		JoystickButton transportRollOutBtn = new JoystickButton(joystickOperator, 3);
-		transportRollOutBtn.whileHeld(new TransportRollOut());
+//		JoystickButton transportRollInBtn = new JoystickButton(joystickOperator, 2);
+//		transportRollInBtn.whileHeld(new TransportRollIn());
+//		JoystickButton transportRollOutBtn = new JoystickButton(joystickOperator, 3);
+//		transportRollOutBtn.whileHeld(new TransportRollOut());
+		
+		DBugJoystickButton collectionBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
+		collectionBtn.whenPressed(new CollectBall());
+		
+		DBugJoystickButton ejectionBtn = new DBugJoystickButton(joystickOperator, "button_Eject_Ball");
+		ejectionBtn.whenPressed(new EjectBall());
 	}
 }

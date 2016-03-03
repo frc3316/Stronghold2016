@@ -14,7 +14,12 @@ public class TurretJoysticks extends DBugCommand {
 	protected void init() {}
 
 	protected void execute() {
-		speed = 0.3 * Robot.joysticks.joystickOperator.getX(); //We want less power
+		speed = 0.5 * Robot.joysticks.joystickOperator.getRawAxis(4); //We want less power
+		
+		if (Math.abs(speed) < 0.12) //Deadband
+		{
+			speed = 0;
+		}
 		
 		isFin = !Robot.turret.setMotors(speed);
 	}
