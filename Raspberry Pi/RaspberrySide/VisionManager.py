@@ -115,9 +115,8 @@ class VisionManager(object):
 
             rects.append(
                 BoundingRect(contour=contour, height=height, width=width, x_offset=x_offset, y_offset=y_offset))
-
         return rects
-
+		
     def get_goal_image(self, save_frame_path=None, save_mask_path=None):
         """
         This method updates the vars holding the scales and distance from camera of the object.
@@ -157,12 +156,12 @@ class VisionManager(object):
                                           image_height=best_bounding_rect.height,
                                           frame_height=frame.shape[0],
                                           viewing_angle=CAMERA_VIEW_ANGLE_Y)
-
-            normalize_skew = normalize_rectangle_skew(
+            
+			normalize_skew = normalize_rectangle_skew(
                 bounding_rectangle_height=best_bounding_rect.height,
                 bounding_rectangle_width=best_bounding_rect.width,
                 min_area_bounding_rectangle_angle=min_area_bounding_rect[2])
-
+				
             actual_height = normalize_rectangle_keystone(
                 bounding_rectangle_height=normalize_skew,
                 polar_angle=polar_angle,
@@ -196,7 +195,6 @@ class VisionManager(object):
         return ImageObject(tower_distance=distance_from_tower,
                            azimuth_angle=azimuth_angle,
                            polar_angle=polar_angle)
-
 
     def draw_target_square(self, frameToDraw, x_offset, y_offset, height, width, color=(0, 0, 255), stroke=2):
         """

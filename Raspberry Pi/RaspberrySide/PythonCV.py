@@ -34,7 +34,7 @@ if __name__ == "__main__":
         raise ValueError("Lock File Locked!")
     else:
         lockFile.lock()
-
+		
     args = parse_arguments()
 	
     try:
