@@ -18,6 +18,8 @@ import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
+import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
+import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -92,9 +94,11 @@ public class SDB
 			// For drivers
 			put("Is ready to transfer", Robot.intake.isReadyToTransfer());
 			put("Flywheel on target", Robot.flywheel.isOnTarget());
-			put("Turret on target", Robot.turret.isOnTarget());
-			put("Hood on target", Robot.hood.isOnTarget());
 			
+			put("Turret angle", Robot.turret.getAngle());
+			put("Turret on target", Robot.turret.isOnTarget());
+			
+			put("Hood on target", Robot.hood.isOnTarget());
 			put("Hood angle setpoint", AlignShooter.getHoodAngle());
 
 			put("Is ball in", Robot.intake.isBallIn());
@@ -202,11 +206,12 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 
+		// Chassis
+		SmartDashboard.putData(new RetractOmni());
+		SmartDashboard.putData(new ExtendOmni());
+		
 		// Hood
 		SmartDashboard.putData(new HoodJoysticks());
-		SmartDashboard.putData(new TurretJoysticks());
-
-		SmartDashboard.putData(new SetTurretAngle());
 		
 		SmartDashboard.putData(new HoodPID());
 		
@@ -218,10 +223,20 @@ public class SDB
 		
 		putConfigVariableInSDB("hood_PID_Tolerance");
 		
+		// Turret
+		SmartDashboard.putData(new TurretJoysticks());
+		SmartDashboard.putData(new SetTurretAngle());
+		
 		putConfigVariableInSDB("turret_PID_Tolerance");
 		putConfigVariableInSDB("turret_PID_KP");
 		putConfigVariableInSDB("turret_PID_KI");
 		putConfigVariableInSDB("turret_PID_KD");
+		
+		// Climbing
+		SmartDashboard.putData(new PullUp());
+		putConfigVariableInSDB("climbing_UpSpeed");
+		putConfigVariableInSDB("climbing_DownSpeed");
+		SmartDashboard.putData(new JoystickWinchControl());
 		
 		logger.info("Finished initSDB()");
 	}
