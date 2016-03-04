@@ -269,7 +269,9 @@ public class Config
 				addToVariables("chassis_TankDrive_InvertY", true);
 			}
 
-			// Cross Defense
+			/*
+			 * Cross Defense
+			 */
 			{
 				addToConstants("chassis_Defense_Angle_Timeout", 400.0);
 
@@ -319,6 +321,13 @@ public class Config
 
 				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
+			}
+			
+			/*
+			 * Autonomous
+			 */
+			{
+				addToVariables("chassis_Autonomous_Distance", 0.5); // In meters
 			}
 
 			/*
