@@ -129,7 +129,8 @@ public class Config
 				 */
 				{
 					// Joystick right
-					addToVariables("button_Toggle_Omni", 1);
+					addToVariables("button_Toggle_Omni_1", 1);
+					addToVariables("button_Toggle_Omni_2", 11);
 					
 					// Joystick operator
 			
@@ -387,8 +388,8 @@ public class Config
 				addToVariablesA("triggetShooting_IntakeRollIn_Timeout", 0.25);
 				addToVariablesB("triggetShooting_IntakeRollIn_Timeout", 0.25);
 				
-				addToVariablesA("triggetShooting_IntakeRollOut_Timeout", 0.25);
-				addToVariablesB("triggetShooting_IntakeRollOut_Timeout", 0.25);
+				addToVariablesA("triggetShooting_IntakeRollOut_Timeout", 0.5);
+				addToVariablesB("triggetShooting_IntakeRollOut_Timeout", 0.5);
 			}
 		}
 

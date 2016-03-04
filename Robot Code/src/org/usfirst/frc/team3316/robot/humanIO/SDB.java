@@ -48,6 +48,7 @@ import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import com.sun.media.sound.RIFFInvalidDataException;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -72,34 +73,40 @@ public class SDB
 			 * Insert put methods here
 			 */
 
-			put("Flywheel speed", Math.abs(Robot.flywheel.getRate()));
+				put("Flywheel speed", Math.abs(Robot.flywheel.getRate()));
 
-			put("Turret angle", Robot.turret.getAngle());
-			put("Hood angle", Robot.hood.getAngle());
+				put("Turret angle", Robot.turret.getAngle());
+				put("Hood angle", Robot.hood.getAngle());
 
-			// Vision
-			try
-			{
-				put("Is object detected", AlignShooter.isObjectDetected());
-				put("Turret vision angle", AlignShooter.getTowerAngle());
-				put("Vision distance", VisionServer.Data.get("DFC"));
-				put("Hood angle setpoint", AlignShooter.getHoodAngle());
-			}
-			catch (Exception e)
-			{
-//				 logger.severe(e);
-			}
+				// Vision
+				try
+				{
+					put("Object detected", AlignShooter.isObjectDetected());
+					put("Turret vision angle", AlignShooter.getTowerAngle());
+					put("Vision distance", VisionServer.Data.get("DFC"));
+					put("Hood angle setpoint", AlignShooter.getHoodAngle());
 
-			// For drivers
-			put("Is ready to transfer", Robot.intake.isReadyToTransfer());
-			put("Flywheel on target", Robot.flywheel.isOnTarget());
-			put("Turret on target", Robot.turret.isOnTarget());
-			put("Hood on target", Robot.hood.isOnTarget());
-			put("Intake open", Robot.intake.isIntakeClose());
+					put("Ready to shoot",
+							Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget() && Robot.turret.isOnTarget()
+									&& Robot.intake.isReadyToTransfer() && AlignShooter.isObjectDetected());
+				}
+				catch (Exception e)
+				{
+					// logger.severe(e);
+				}
 
-			put("Is ball in", Robot.intake.isBallIn());
-			
-			put("Turret current", Robot.actuators.turretMotor.getCurrent());
+				// For drivers
+				put("Ready to transfer", Robot.intake.isReadyToTransfer());
+				put("Flywheel on target", Robot.flywheel.isOnTarget());
+				put("Turret on target", Robot.turret.isOnTarget());
+				put("Hood on target", Robot.hood.isOnTarget());
+				put("Intake open", Robot.intake.isIntakeClose());
+
+				put("Is ball in", Robot.intake.isBallIn());
+
+				put("Turret current", Robot.actuators.turretMotor.getCurrent());
+
+				put("On defence", Robot.chassis.isOnDefense());
 		}
 
 		private void put(String name, double d)
@@ -130,12 +137,22 @@ public class SDB
 
 	private Hashtable<String, Class<?>> variablesInSDB;
 
+	private CameraServer server;
+
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
 		initLiveWindow();
 		initSDB();
+		// initDriverCamera();
 	}
+
+	/*
+	 * private void initDriverCamera() { try { server =
+	 * CameraServer.getInstance(); server.setQuality(50);
+	 * server.startAutomaticCapture("cam0"); } catch (Exception e) {
+	 * logger.severe(e); } }
+	 */
 
 	public void timerInit()
 	{
@@ -202,26 +219,39 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 
+		SmartDashboard.putData(new OpenLongPistons());
+		SmartDashboard.putData(new CloseLongPistons());
+		SmartDashboard.putData(new OpenShortPistons());
+		SmartDashboard.putData(new CloseShortPistons());
+
+		//
+		SmartDashboard.putData(new CollectBall());
+		SmartDashboard.putData(new EjectBall());
+		SmartDashboard.putData(new OpenIntake());
+		SmartDashboard.putData(new CloseIntake());
+		SmartDashboard.putData(new IntakeRollIn());
+		SmartDashboard.putData(new IntakeRollOut());
+
 		// Hood
 		SmartDashboard.putData(new HoodJoysticks());
 		SmartDashboard.putData(new TurretJoysticks());
 
 		SmartDashboard.putData(new SetTurretAngle());
-		
+
 		SmartDashboard.putData(new HoodPID());
-		
+
 		putConfigVariableInSDB("hood_PID_KP");
 		putConfigVariableInSDB("hood_PID_KI");
 		putConfigVariableInSDB("hood_PID_KD");
 		putConfigVariableInSDB("hood_PID_Tolerance");
 
 		SmartDashboard.putData(new TurretPID());
-		
+
 		putConfigVariableInSDB("turret_PID_Tolerance");
 		putConfigVariableInSDB("turret_PID_KP");
 		putConfigVariableInSDB("turret_PID_KI");
 		putConfigVariableInSDB("turret_PID_KD");
-		
+
 		logger.info("Finished initSDB()");
 	}
 

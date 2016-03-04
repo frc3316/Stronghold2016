@@ -85,9 +85,12 @@ public class Joysticks
 	public void initButtons()
 	{
 		// Chassis
-		
-		DBugJoystickButton toggleOmniBtn = new DBugJoystickButton(joystickRight, "button_Toggle_Omni");
-		toggleOmniBtn.whenPressed(new ToggleOmni());
+
+		DBugJoystickButton toggleOmniBtn1 = new DBugJoystickButton(joystickRight, "button_Toggle_Omni_1");
+		toggleOmniBtn1.whenPressed(new ToggleOmni());
+
+		DBugJoystickButton toggleOmniBtn2 = new DBugJoystickButton(joystickRight, "button_Toggle_Omni_2");
+		toggleOmniBtn2.whenPressed(new ToggleOmni());
 
 		// Intake
 
@@ -98,18 +101,18 @@ public class Joysticks
 
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
 		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new OpenIntakeTransport(), new CloseIntakeTransport()));
-		
+
 		// Shooting
-		
+
 		DBugJoystickButton warmUpFlywheelBtn = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Flywheel");
 		warmUpFlywheelBtn.whileHeld(new WarmShooter());
-		
+
 		DBugJoystickButton warmUpShooter = new DBugJoystickButton(joystickOperator, "button_Warm_Up_Shooter");
 		warmUpShooter.whileHeld(new WarmUpShooterSequence());
 
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());
-		
+
 		DBugJoystickButton collectionBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
 		collectionBtn.whenPressed(new CollectBall());
 	}
