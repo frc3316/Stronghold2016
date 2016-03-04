@@ -369,6 +369,28 @@ public class Config
 				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.15);
 			}
 		}
+		
+		/*
+		 * Shooter
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+				addToVariablesA("triggetShooting_IntakeRollIn_Timeout", 0.25);
+				addToVariablesB("triggetShooting_IntakeRollIn_Timeout", 0.25);
+				
+				addToVariablesA("triggetShooting_IntakeRollOut_Timeout", 0.25);
+				addToVariablesB("triggetShooting_IntakeRollOut_Timeout", 0.25);
+			}
+		}
 
 		/*
 		 * Intake
@@ -402,6 +424,22 @@ public class Config
 				addToVariables("intake_RollOut_Speed", -0.5);
 				addToVariablesA("intake_CloseIntake_Timeout", 2.5); // In seconds
 				addToVariablesB("intake_CloseIntake_Timeout", 2.5); // In seconds
+			}
+			
+			/*
+			 * Collect Ball
+			 */
+			{
+				addToVariablesA("collectBall_CloseIntake_Timeout", 1.642); // In seconds
+				addToVariablesB("collectBall_CloseIntake_Timeout", 1.642); // In seocnds
+			}
+			
+			/*
+			 * Eject Ball
+			 */
+			{
+				addToVariablesA("ejectBall_WaitForBallIn_Timeout", 0.5); // In seconds
+				addToVariablesB("ejectBall_WaitForBallIn_Timeout", 0.5); // In seconds
 			}
 		}
 
