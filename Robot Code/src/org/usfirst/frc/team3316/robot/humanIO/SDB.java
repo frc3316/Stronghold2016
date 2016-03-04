@@ -83,10 +83,11 @@ public class SDB
 				put("Is object detected", AlignShooter.isObjectDetected());
 				put("Turret vision angle", AlignShooter.getTowerAngle());
 				put("Vision distance", VisionServer.Data.get("DFC"));
+				put("Hood angle setpoint", AlignShooter.getHoodAngle());
 			}
 			catch (Exception e)
 			{
-				 logger.severe(e);
+//				 logger.severe(e);
 			}
 
 			// For drivers
@@ -94,12 +95,11 @@ public class SDB
 			put("Flywheel on target", Robot.flywheel.isOnTarget());
 			put("Turret on target", Robot.turret.isOnTarget());
 			put("Hood on target", Robot.hood.isOnTarget());
-			
-			put("Hood angle setpoint", AlignShooter.getHoodAngle());
+			put("Intake open", Robot.intake.isIntakeClose());
 
 			put("Is ball in", Robot.intake.isBallIn());
-
-			// TODO: add is hood on target
+			
+			put("Turret current", Robot.actuators.turretMotor.getCurrent());
 		}
 
 		private void put(String name, double d)
@@ -210,13 +210,12 @@ public class SDB
 		
 		SmartDashboard.putData(new HoodPID());
 		
-		putConfigVariableInSDB("hood_Angle_SetPoint");
-		
 		putConfigVariableInSDB("hood_PID_KP");
 		putConfigVariableInSDB("hood_PID_KI");
 		putConfigVariableInSDB("hood_PID_KD");
-		
 		putConfigVariableInSDB("hood_PID_Tolerance");
+
+		SmartDashboard.putData(new TurretPID());
 		
 		putConfigVariableInSDB("turret_PID_Tolerance");
 		putConfigVariableInSDB("turret_PID_KP");

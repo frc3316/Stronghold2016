@@ -40,8 +40,6 @@ public class HoodPID extends DBugCommand
 			{
 				isFin = !Robot.hood.setMotors(output);
 				config.add("hood_Angle_SetPoint", pid.getSetpoint());
-				
-				logger.finest("This is the pid output for the hood: ");
 			}
 		});
 
@@ -60,21 +58,27 @@ public class HoodPID extends DBugCommand
 
 	protected void execute()
 	{
-		logger.finest("PID KP: " + pid.getP() +", KI: " + pid.getI() + ", KD: " + pid.getD());
-		
-		if (AlignShooter.isObjectDetected())
+		try
 		{
-//			double setPoint = (double) config.get("hood_Angle_SetPoint");
-			
-			double setPoint = (double) AlignShooter.getHoodAngle();
-			
-			pid.setSetpoint(setPoint);
+			if (AlignShooter.isObjectDetected())
+			{
+				// double setPoint = (double) config.get("hood_Angle_SetPoint");
+
+				double setPoint = (double) AlignShooter.getHoodAngle();
+
+				pid.setSetpoint(setPoint);
+			}
+			else
+			{
+				isFin = !Robot.hood.setMotors(0);
+			}
 		}
-		else
+		catch (Exception e)
 		{
+			logger.severe(e);
 			isFin = !Robot.hood.setMotors(0);
 		}
-		
+
 		logger.finest("Hood PID error: " + pid.getError());
 	}
 

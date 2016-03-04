@@ -133,15 +133,14 @@ public class Config
 					
 					// Joystick operator
 			
-					addToVariables("button_Intake_Toggle", 1);
-					addToVariables("button_Collect_Ball", 2);
-					addToVariables("button_Eject_Ball", 3);
-					addToVariables("button_Roll_In", 6);
-					addToVariables("button_Roll_Out", 8);
+					addToVariables("button_Intake_Toggle", 3);
+					addToVariables("button_Collect_Ball", 1);
+					addToVariables("button_Roll_In", 8);
+					addToVariables("button_Roll_Out", 2);
 					addToVariables("button_Climb", 10);
-					addToVariables("button_Warm_Up_Shooter", 7);
+					addToVariables("button_Warm_Up_Shooter", 5);
 					addToVariables("button_Shooting_Trigger", 4);
-					addToVariables("button_Warm_Up_Flywheel", 5);
+					addToVariables("button_Warm_Up_Flywheel", 6);
 				}
 			}
 		}
@@ -203,7 +202,7 @@ public class Config
 				 */
 				addToConstants("TURRET_MOTOR_REVERSE", false);
 
-				addToConstants("TURRET_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
+				addToConstants("TURRET_MOTOR_MAX_CURRENT", 50.0); // TODO: Check
 																	// the stall
 
 				addToConstants("TURRET_POT_FULL_RANGE", -821.269);
@@ -428,15 +427,15 @@ public class Config
 
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 0.6);
+				addToVariables("turret_PID_Tolerance", 0.5);
 				
 				addToVariablesA("turret_PID_KP", 10.0);
 				addToVariablesA("turret_PID_KI", 0.0);
 				addToVariablesA("turret_PID_KD", -0.01);
 				
-				addToVariablesB("turret_PID_KP", 30.0);
-				addToVariablesB("turret_PID_KI", 0.7);
-				addToVariablesB("turret_PID_KD", 0.8);
+				addToVariablesB("turret_PID_KP", 20.0);
+				addToVariablesB("turret_PID_KI", 2.0);
+				addToVariablesB("turret_PID_KD", 50.0);
 
 				// Bangbang Control
 				addToVariables("turret_Bangbang_OnVoltage", 0.075);
@@ -480,9 +479,9 @@ public class Config
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
 				addToVariables("hood_PID_Tolerance", 0.4);
-				addToVariables("hood_PID_KP", 90.0);
+				addToVariables("hood_PID_KP", 96.0);
 				addToVariables("hood_PID_KI", 0.0);
-				addToVariables("hood_PID_KD", 0.001);
+				addToVariables("hood_PID_KD", 168.75); //Calculated using Z-N method
 
 				// Bangbang Control
 				addToVariablesA("hood_Bangbang_OnVoltage", 0.33);

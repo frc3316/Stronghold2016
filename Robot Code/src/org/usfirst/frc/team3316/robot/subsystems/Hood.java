@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
@@ -33,13 +34,12 @@ public class Hood extends DBugSubsystemCC
 		potAverage = new MovingAverage(25, 10, () -> {return hoodPot.get();});
 		
 		potOffset = (double) config.get("hood_Pot_Offset");
-		
-		logger.info("Pot offset is initially set to " + potOffset);
 	}
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new StopHood());
+//		setDefaultCommand(new StopHood());
+		setDefaultCommand(new HoodJoysticks()); // TODO: REMOVE AFTER TESTINGS
 	}
 
 	/**
