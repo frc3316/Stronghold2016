@@ -23,7 +23,7 @@ public class HoodPID extends DBugCommand
 	public HoodPID()
 	{
 		requires(Robot.hood);
-
+		setRunWhenDisabled(true);
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
@@ -43,7 +43,7 @@ public class HoodPID extends DBugCommand
 		{
 			public void pidWrite(double output)
 			{
-				isFin = !Robot.hood.setMotors(output);
+				//isFin = !Robot.hood.setMotors(output);
 				config.add("hood_Angle_SetPoint", pid.getSetpoint());
 			}
 		});
@@ -53,7 +53,7 @@ public class HoodPID extends DBugCommand
 
 	protected void init()
 	{
-		angles = new double[6];
+		angles = new double[20];
 
 		for (int i = 0; i < angles.length; i++)
 		{
@@ -77,22 +77,29 @@ public class HoodPID extends DBugCommand
 				// double setPoint = (double) config.get("hood_Angle_SetPoint");
 
 				double currentAngle = (double) AlignShooter.getHoodAngle();
+				SmartDashboard.putNumber("HOOD PID angle", currentAngle);
+				
 				angles[index] = currentAngle;
 				index++;
 				index %= angles.length;
-				double setPoint = getCorrectSetpoint(angles, 17.5);
+				
+				logger.finest("Hood angles array: " + angles);
+				double setPoint = getCorrectSetpoint(angles, 15);
+				logger.finest("Hood angle setpoint: " + setPoint);
+				
+				SmartDashboard.putNumber("HOOD PID setpoint", setPoint);
 
 				pid.setSetpoint(setPoint);
 			}
 			else
 			{
-				isFin = !Robot.hood.setMotors(0);
+//				isFin = !Robot.hood.setMotors(0);
 			}
 		}
 		catch (Exception e)
 		{
 			logger.severe(e);
-			isFin = !Robot.hood.setMotors(0);
+//			isFin = !Robot.hood.setMotors(0);
 		}
 
 		logger.finest("Hood PID error: " + pid.getError());
@@ -107,7 +114,7 @@ public class HoodPID extends DBugCommand
 	{
 		pid.reset();
 
-		Robot.hood.setMotors(0);
+//		Robot.hood.setMotors(0);
 	}
 
 	protected void interr()
@@ -144,7 +151,7 @@ public class HoodPID extends DBugCommand
 
 		for (int i = 0; i < setpoints.length; i++)
 		{
-			if (Math.abs(setpointsAvg - setpoints[i]) < thresh)
+			if (Math.pow(setpointsAvg - setpoints[i], 2) < thresh)
 			{
 				elementsPassed.add(setpoints[i]);
 			}
