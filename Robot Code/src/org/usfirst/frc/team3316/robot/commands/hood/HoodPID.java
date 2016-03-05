@@ -17,7 +17,7 @@ public class HoodPID extends DBugCommand
 {
 	private static PIDController pid;
 
-	private double [] distances;
+	private double[] angles;
 	private int index = 0;
 
 	public HoodPID()
@@ -53,11 +53,11 @@ public class HoodPID extends DBugCommand
 
 	protected void init()
 	{
-		distances = new double [0];
+		angles = new double[6];
 
-		for (int i = 0; i < distances.length; i++)
+		for (int i = 0; i < angles.length; i++)
 		{
-			distances[i] = 0;
+			angles[i] = 0;
 		}
 
 		pid.setAbsoluteTolerance((double) config.get("hood_PID_Tolerance"));
@@ -76,13 +76,11 @@ public class HoodPID extends DBugCommand
 			{
 				// double setPoint = (double) config.get("hood_Angle_SetPoint");
 
-				double distance = (double) AlignShooter.getHoodAngle();
-				distances[index] = distance;
+				double currentAngle = (double) AlignShooter.getHoodAngle();
+				angles[index] = currentAngle;
 				index++;
-				index %= distances.length;
-
-
-				double setPoint = getCorrectDistance(distances, 17.5);
+				index %= angles.length;
+				double setPoint = getCorrectSetpoint(angles, 17.5);
 
 				pid.setSetpoint(setPoint);
 			}
@@ -118,34 +116,52 @@ public class HoodPID extends DBugCommand
 	}
 
 	/**
-	 * calculates the most accurate distance from a given ArrayList of distances using the thresh thresh
-	 * @param distances the distances to use for the calculations
-	 * @param thresh the thresh to check: if delta distance and avg of distances is less than thresh
-     * @return double, the most accurate distance
-     */
-	protected double getCorrectDistance(double [] distances, double thresh) {
+	 * calculates the most accurate distance from a given ArrayList of distances
+	 * using the thresh thresh
+	 * 
+	 * @param angles
+	 *            the distances to use for the calculations
+	 * @param thresh
+	 *            the thresh to check: if delta distance and avg of distances is
+	 *            less than thresh
+	 * @return double, the most accurate distance
+	 */
+	protected double getCorrectSetpoint(double[] setpoints, double thresh)
+	{
 		// a good thresh will be around 15 - 20.
-		double distancesSum = 0.0;
-		for ( double d : distances) { distancesSum += d; }
-		double distancesAvg = distancesSum/distances.length;
-
-		ArrayList<Double> elementsPassed = new ArrayList<>(); // the elements that passed the delta avg distance < thresh.
-
-		for (int i = 0; i < distances.length; i ++)
+		double sum = 0.0;
+		for (double d : setpoints)
 		{
-			if (Math.pow(distancesAvg - distances[i], 2) < thresh) {
-				elementsPassed.add(distances[i]);
+			sum += d;
+		}
+		double setpointsAvg = sum / setpoints.length;
+
+		ArrayList<Double> elementsPassed = new ArrayList<>(); // the elements
+																// that passed
+																// the delta avg
+																// distance <
+																// thresh.
+
+		for (int i = 0; i < setpoints.length; i++)
+		{
+			if (Math.abs(setpointsAvg - setpoints[i]) < thresh)
+			{
+				elementsPassed.add(setpoints[i]);
 			}
 		}
 
 		if (elementsPassed.size() > 0)
 		{
-			double newDistancesSum = 0.0;
-			for ( double d : elementsPassed) { newDistancesSum += d; }
-			return newDistancesSum/elementsPassed.size();
+			double newSum = 0.0;
+			for (double d : elementsPassed)
+			{
+				newSum += d;
+			}
+			return newSum / elementsPassed.size();
 		}
-		else {
-			return distances[distances.length - 1];
+		else
+		{
+			return setpoints[setpoints.length - 1];
 		}
 
 	}
