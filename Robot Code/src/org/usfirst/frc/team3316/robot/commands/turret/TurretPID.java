@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurretPID extends DBugCommand
 {
 	private static PIDController pid;
-	private double pidOutput;
 	private static double setPoint;
 	private double lastTowerAngle;
 	private static double tolerance;
@@ -41,7 +40,7 @@ public class TurretPID extends DBugCommand
 		{
 			public void pidWrite(double output)
 			{
-				pidOutput = output;
+				isFin = !Robot.turret.setMotors(output);
 			}
 		});
 
@@ -51,7 +50,6 @@ public class TurretPID extends DBugCommand
 	protected void init()
 	{
 		setPoint = 0.0;
-		pidOutput = 0.0;
 		lastTowerAngle = Double.MAX_VALUE;
 		tolerance = (double) config.get("turret_PID_Tolerance");
 
@@ -68,7 +66,6 @@ public class TurretPID extends DBugCommand
 				(double) config.get("turret_PID_KI") / 1000,
 				(double) config.get("turret_PID_KD") / 1000);
 
-		double towerAngle = AlignShooter.getTowerAngle();
 		double currentAngle = Robot.turret.getAngle();
 
 		/*
@@ -76,16 +73,19 @@ public class TurretPID extends DBugCommand
 		 */
 		if (AlignShooter.isObjectDetected())
 		{
+			double towerAngle = AlignShooter.getTowerAngle();
+			
 			if (towerAngle != lastTowerAngle && towerAngle != 3316.0)
 			{
 				
 				setPoint = towerAngle + currentAngle;
+				
+				logger.finest("Turret setPoint: " + setPoint);
+				
 				lastTowerAngle = towerAngle;
 
 				pid.setSetpoint(setPoint);
 			}
-
-			isFin = !Robot.turret.setMotors(pidOutput);
 		}
 		else
 		{

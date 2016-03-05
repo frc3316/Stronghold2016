@@ -83,7 +83,7 @@ public class Intake extends DBugSubsystemCC
 	public boolean isReadyToTransfer()
 	{
 		// When the ball is in and the intake is close, returns true.
-		return isBallIn() && isIntakeClose();
+		return isBallIn() && !isIntakeOpen();
 	}
 
 	public double getCurrent()

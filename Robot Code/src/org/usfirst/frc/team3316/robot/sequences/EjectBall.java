@@ -19,7 +19,7 @@ public class EjectBall extends DBugCommandGroup
 		addSequential(new OpenIntakeTransport());
 		addParallel(new IntakeRollOut());
 		addSequential(new WaitForBallOut());
-		addSequential(new WaitCommand(0.5));
+		addSequential(new WaitCommand((double) config.get("ejectBall_WaitForBallIn_Timeout")));
 		addSequential(new IntakeStopRoll());
 		addSequential(new CloseIntake());
 	}

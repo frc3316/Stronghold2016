@@ -50,6 +50,7 @@ import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import com.sun.media.sound.RIFFInvalidDataException;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -82,28 +83,32 @@ public class SDB
 			// Vision
 			try
 			{
-				put("Is object detected", AlignShooter.isObjectDetected());
+				put("Object detected", AlignShooter.isObjectDetected());
 				put("Turret vision angle", AlignShooter.getTowerAngle());
 				put("Vision distance", VisionServer.Data.get("DFC"));
+				put("Hood angle setpoint", AlignShooter.getHoodAngle());
+
+				put("Ready to shoot",
+						Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget() && Robot.turret.isOnTarget()
+								&& Robot.intake.isReadyToTransfer() && AlignShooter.isObjectDetected());
 			}
 			catch (Exception e)
 			{
-				 logger.severe(e);
+				// logger.severe(e);
 			}
 
 			// For drivers
-			put("Is ready to transfer", Robot.intake.isReadyToTransfer());
+			put("Ready to transfer", Robot.intake.isReadyToTransfer());
 			put("Flywheel on target", Robot.flywheel.isOnTarget());
-			
-			put("Turret angle", Robot.turret.getAngle());
 			put("Turret on target", Robot.turret.isOnTarget());
-			
 			put("Hood on target", Robot.hood.isOnTarget());
-			put("Hood angle setpoint", AlignShooter.getHoodAngle());
+			put("Intake open", Robot.intake.isIntakeClose());
 
 			put("Is ball in", Robot.intake.isBallIn());
 
-			// TODO: add is hood on target
+			put("Turret current", Robot.actuators.turretMotor.getCurrent());
+
+			put("On defence", Robot.chassis.isOnDefense());
 		}
 
 		private void put(String name, double d)
@@ -134,12 +139,22 @@ public class SDB
 
 	private Hashtable<String, Class<?>> variablesInSDB;
 
+	private CameraServer server;
+
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
 		initLiveWindow();
 		initSDB();
+		// initDriverCamera();
 	}
+
+	/*
+	 * private void initDriverCamera() { try { server =
+	 * CameraServer.getInstance(); server.setQuality(50);
+	 * server.startAutomaticCapture("cam0"); } catch (Exception e) {
+	 * logger.severe(e); } }
+	 */
 
 	public void timerInit()
 	{
@@ -206,38 +221,12 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 
-		// Chassis
-		SmartDashboard.putData(new RetractOmni());
-		SmartDashboard.putData(new ExtendOmni());
-		
-		// Hood
-		SmartDashboard.putData(new HoodJoysticks());
-		
-		SmartDashboard.putData(new HoodPID());
-		
-		putConfigVariableInSDB("hood_Angle_SetPoint");
-		
-		putConfigVariableInSDB("hood_PID_KP");
-		putConfigVariableInSDB("hood_PID_KI");
-		putConfigVariableInSDB("hood_PID_KD");
-		
-		putConfigVariableInSDB("hood_PID_Tolerance");
-		
-		// Turret
-		SmartDashboard.putData(new TurretJoysticks());
-		SmartDashboard.putData(new SetTurretAngle());
-		
-		putConfigVariableInSDB("turret_PID_Tolerance");
-		putConfigVariableInSDB("turret_PID_KP");
-		putConfigVariableInSDB("turret_PID_KI");
-		putConfigVariableInSDB("turret_PID_KD");
-		
 		// Climbing
 		SmartDashboard.putData(new PullUp());
 		putConfigVariableInSDB("climbing_UpSpeed");
 		putConfigVariableInSDB("climbing_DownSpeed");
 		SmartDashboard.putData(new JoystickWinchControl());
-		
+
 		logger.info("Finished initSDB()");
 	}
 

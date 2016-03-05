@@ -6,6 +6,7 @@ import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.LowPassFilter;
 import org.usfirst.frc.team3316.robot.utils.Utils;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -78,10 +79,23 @@ public class Turret extends DBugSubsystemCC
 	
 	public boolean isOnTarget() 
 	{
-		double setpoint = (double) config.get("turret_Angle_SetPoint");
 		double tolerance = (double) config.get("turret_PID_Tolerance");
+
+		double setpoint;
+		double currentValue;
 		
-		return Utils.isOnTarget(getAngle(), setpoint, tolerance);
+		if (AlignShooter.isObjectDetected())
+		{
+			setpoint = (double) AlignShooter.getTowerAngle();
+			currentValue = 0;
+		}
+		else
+		{
+			setpoint = (double) config.get("turret_Angle_SetPoint");
+			currentValue = getAngle();
+		}
+		
+		return Utils.isOnTarget(currentValue, setpoint, tolerance);
 	}
 
 }
