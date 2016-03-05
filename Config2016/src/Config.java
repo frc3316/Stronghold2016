@@ -129,19 +129,19 @@ public class Config
 				 */
 				{
 					// Joystick right
-					addToVariables("button_Toggle_Omni", 1);
+					addToVariables("button_Toggle_Omni_1", 1);
+					addToVariables("button_Toggle_Omni_2", 11);
 					
 					// Joystick operator
 			
-					addToVariables("button_Intake_Toggle", 1);
-					addToVariables("button_Collect_Ball", 2);
-					addToVariables("button_Eject_Ball", 3);
-					addToVariables("button_Roll_In", 6);
-					addToVariables("button_Roll_Out", 8);
+					addToVariables("button_Intake_Toggle", 3);
+					addToVariables("button_Collect_Ball", 1);
+					addToVariables("button_Roll_In", 8);
+					addToVariables("button_Roll_Out", 2);
 					addToVariables("button_Climb", 10);
-					addToVariables("button_Warm_Up_Shooter", 7);
+					addToVariables("button_Warm_Up_Shooter", 5);
 					addToVariables("button_Shooting_Trigger", 4);
-					addToVariables("button_Warm_Up_Flywheel", 5);
+					addToVariables("button_Warm_Up_Flywheel", 6);
 				}
 			}
 		}
@@ -203,7 +203,7 @@ public class Config
 				 */
 				addToConstants("TURRET_MOTOR_REVERSE", false);
 
-				addToConstants("TURRET_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
+				addToConstants("TURRET_MOTOR_MAX_CURRENT", 50.0); // TODO: Check
 																	// the stall
 
 				addToConstants("TURRET_POT_FULL_RANGE", -821.269);
@@ -370,6 +370,28 @@ public class Config
 				addToVariables("flywheel_AccelerateFlywheel_Timeout", 0.15);
 			}
 		}
+		
+		/*
+		 * Shooter
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{
+			}
+			
+			/*
+			 * Variables
+			 */
+			{
+				addToVariablesA("triggetShooting_IntakeRollIn_Timeout", 0.25);
+				addToVariablesB("triggetShooting_IntakeRollIn_Timeout", 0.25);
+				
+				addToVariablesA("triggetShooting_IntakeRollOut_Timeout", 0.5);
+				addToVariablesB("triggetShooting_IntakeRollOut_Timeout", 0.5);
+			}
+		}
 
 		/*
 		 * Intake
@@ -404,6 +426,22 @@ public class Config
 				addToVariablesA("intake_CloseIntake_Timeout", 2.5); // In seconds
 				addToVariablesB("intake_CloseIntake_Timeout", 2.5); // In seconds
 			}
+			
+			/*
+			 * Collect Ball
+			 */
+			{
+				addToVariablesA("collectBall_CloseIntake_Timeout", 1.642); // In seconds
+				addToVariablesB("collectBall_CloseIntake_Timeout", 1.642); // In seocnds
+			}
+			
+			/*
+			 * Eject Ball
+			 */
+			{
+				addToVariablesA("ejectBall_WaitForBallIn_Timeout", 0.5); // In seconds
+				addToVariablesB("ejectBall_WaitForBallIn_Timeout", 0.5); // In seconds
+			}
 		}
 
 		/*
@@ -428,15 +466,15 @@ public class Config
 
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 0.6);
+				addToVariables("turret_PID_Tolerance", 0.5);
 				
 				addToVariablesA("turret_PID_KP", 10.0);
 				addToVariablesA("turret_PID_KI", 0.0);
 				addToVariablesA("turret_PID_KD", -0.01);
 				
-				addToVariablesB("turret_PID_KP", 30.0);
-				addToVariablesB("turret_PID_KI", 0.7);
-				addToVariablesB("turret_PID_KD", 0.8);
+				addToVariablesB("turret_PID_KP", 20.0);
+				addToVariablesB("turret_PID_KI", 2.0);
+				addToVariablesB("turret_PID_KD", 50.0);
 
 				// Bangbang Control
 				addToVariables("turret_Bangbang_OnVoltage", 0.075);
@@ -472,7 +510,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 193.51227018845623);
-				addToVariablesB("hood_Pot_Offset", 110.31008456258901);
+				addToVariablesB("hood_Pot_Offset", 106.16511774357181);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
@@ -480,9 +518,9 @@ public class Config
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
 				addToVariables("hood_PID_Tolerance", 0.4);
-				addToVariables("hood_PID_KP", 90.0);
+				addToVariables("hood_PID_KP", 96.0);
 				addToVariables("hood_PID_KI", 0.0);
-				addToVariables("hood_PID_KD", 0.001);
+				addToVariables("hood_PID_KD", 168.75); //Calculated using Z-N method
 
 				// Bangbang Control
 				addToVariablesA("hood_Bangbang_OnVoltage", 0.33);

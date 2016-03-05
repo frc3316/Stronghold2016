@@ -45,6 +45,13 @@ public class Flywheel extends DBugSubsystemCC
 	public void initDefaultCommand()
 	{
 	}
+	
+	public boolean setMotors (double v)
+	{
+		logger.finest("Flywheel set: " + v);
+		logger.finest("Current rate: " + getRate());
+		return super.setMotors(v);
+	}
 
 	/**
 	 * Returns the turning rate of the flywheel.

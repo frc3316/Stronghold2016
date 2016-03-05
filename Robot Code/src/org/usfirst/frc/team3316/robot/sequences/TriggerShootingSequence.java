@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.sequences;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommandGroup;
+import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeStopRoll;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
@@ -14,9 +15,9 @@ public class TriggerShootingSequence extends DBugCommandGroup
 	public TriggerShootingSequence()
 	{
 		addParallel(new TransportRollIn());
-		addSequential(new WaitCommand(0.25));
+		addSequential(new WaitCommand((double) config.get("triggetShooting_IntakeRollIn_Timeout")));
 		addParallel(new IntakeRollOut());
-		addSequential(new WaitCommand(0.5));
+		addSequential(new WaitCommand((double) config.get("triggetShooting_IntakeRollOut_Timeout")));
 		addParallel(new TransportStopRoll());
 		addParallel(new IntakeStopRoll());
 	}
