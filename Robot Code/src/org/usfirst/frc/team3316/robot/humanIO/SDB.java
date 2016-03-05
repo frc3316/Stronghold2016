@@ -77,7 +77,8 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-
+			try
+			{
 				put("Flywheel speed", Math.abs(Robot.flywheel.getRate()));
 
 				put("Turret angle", Robot.turret.getAngle());
@@ -112,12 +113,17 @@ public class SDB
 				put("Turret current", Robot.actuators.turretMotor.getCurrent());
 
 				put("On defense", Robot.chassis.isOnDefense());
-				
+
 				put("Pitch", Robot.chassis.getPitch());
 				put("Roll", Robot.chassis.getRoll());
-				
+
 				put("Robot left speed", Robot.chassis.getLeftSpeed());
 				put("Robot right speed", Robot.chassis.getRightSpeed());
+			}
+			catch (Exception e)
+			{
+				logger.severe(e);
+			}
 		}
 
 		private void put(String name, double d)
@@ -234,9 +240,9 @@ public class SDB
 		SmartDashboard.putData(new CrossingForwardSequence());
 		SmartDashboard.putData(new CrossingBackSequence());
 		SmartDashboard.putData(new AutonShootingSequence());
-		
+
 		SmartDashboard.putData(new DriveDistanceCamera(3));
-		
+
 		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
 
 		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
@@ -249,9 +255,9 @@ public class SDB
 
 		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
 		putConfigVariableInSDB("chassis_CrossDefense_DownV");
-		
+
 		putConfigVariableInSDB("chassis_DriveDistanceCamera_Speed");
-		
+
 		logger.info("Finished initSDB()");
 	}
 

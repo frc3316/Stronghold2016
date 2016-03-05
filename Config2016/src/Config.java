@@ -256,7 +256,7 @@ public class Config
 			 * Constants
 			 */
 			{
-				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
+				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 25);
 			}
 
 			/*
@@ -275,16 +275,15 @@ public class Config
 			{
 				addToConstants("chassis_Defense_Angle_Timeout", 400.0);
 
-				addToVariables("chassis_CrossDefense_Voltage", 0.5);
-
-				addToVariables("chassis_Defense_Pitch_Thresh", 2.5);
+				addToVariables("chassis_CrossDefense_Voltage", 0.8);
+				addToVariables("chassis_CrossDefense_MinSpeed", 0.5);
+				addToVariables("chassis_CrossDefense_DownV", 0.001);
+				
+				addToVariables("chassis_Defense_Pitch_Thresh", 4.0);
 				addToVariables("chassis_Defense_Roll_Thresh", 4.0);
 
-				addToVariables("chassis_CrossBrake_Timeout", 400.0);
-				addToVariables("chassis_CrossDefense_BrakeV", -0.32);
-
-				addToVariables("chassis_CrossDefense_MinSpeed", 0.35);
-				addToVariables("chassis_CrossDefense_DownV", 0.001);
+				addToVariables("chassis_CrossBrake_Timeout", 0.0);
+				addToVariables("chassis_CrossDefense_BrakeV", -0.0);
 			}
 
 			/*
