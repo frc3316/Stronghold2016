@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.util.ArrayList;
+
 public class HoodPID extends DBugCommand
 {
 	private static PIDController pid;
@@ -97,6 +99,39 @@ public class HoodPID extends DBugCommand
 	protected void interr()
 	{
 		fin();
+	}
+
+	/**
+	 * calculates the most accurate distance from a given ArrayList of distances using the thresh thresh
+	 * @param distances the distances to use for the calculations
+	 * @param thresh the thresh to check: if delta distance and avg of distances is less than thresh
+     * @return Double, the most accurate distance
+     */
+	protected double getCorrectDistance(ArrayList<Double> distances, Double thresh) {
+		// a good thresh will be around 15 - 20.
+		Double distancesSum = 0.0;
+		for ( Double d : distances) { distancesSum += d; }
+		Double distancesAvg = distancesSum/distances.size();
+
+		ArrayList<Double> elementsPassed = new ArrayList<>(); // the elements that passed the delta avg distance < thresh.
+
+		for (int i = 0; i < distances.size(); i ++)
+		{
+			if (Math.abs(distancesAvg - distances.get(i)) < thresh) {
+				elementsPassed.add(distances.get(i));
+			}
+		}
+
+		if (elementsPassed.size() > 0)
+		{
+			Double newDistancesSum = 0.0;
+			for ( Double d : elementsPassed) { newDistancesSum += d; }
+			return newDistancesSum/elementsPassed.size();
+		}
+		else {
+			return distances.get(distances.size()-1);
+		}
+
 	}
 
 }
