@@ -273,7 +273,7 @@ public class Config
 			 * Cross Defense
 			 */
 			{
-				addToConstants("chassis_Defense_Angle_Timeout", 400.0);
+				addToConstants("chassis_Defense_Angle_Timeout", 400.0); // In milliseconds
 
 				addToVariables("chassis_CrossDefense_Voltage", 0.8);
 				addToVariables("chassis_CrossDefense_MinSpeed", 0.5);
@@ -284,6 +284,14 @@ public class Config
 
 				addToVariables("chassis_CrossBrake_Timeout", 0.0);
 				addToVariables("chassis_CrossDefense_BrakeV", -0.0);
+			}
+			
+			/*
+			 * Reach Defense
+			 */
+			{
+				addToVariables("chassis_ReachDefense_Speed", 0.7);
+				addToVariables("chassis_ReachDefense_Timeout", 0.0);
 			}
 
 			/*

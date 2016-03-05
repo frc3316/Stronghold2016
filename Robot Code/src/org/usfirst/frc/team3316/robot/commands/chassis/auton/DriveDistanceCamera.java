@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.commands.chassis.auton;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.subsystems.Chassis;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 
 public class DriveDistanceCamera extends DBugCommand
@@ -10,6 +11,8 @@ public class DriveDistanceCamera extends DBugCommand
 
 	public DriveDistanceCamera(double dist)
 	{
+		requires(Robot.chassis);
+		
 		this.dist = dist;
 	}
 
