@@ -1,5 +1,5 @@
 from math import sin, radians, tan
-from Constants import *
+
 def normalize_rectangle_skew(bounding_rectangle_height, bounding_rectangle_width,
                              min_area_bounding_rectangle_angle):
     """
@@ -67,14 +67,23 @@ def get_polar_angle(y_offset, image_height, frame_height, viewing_angle):
     return (-1) * get_angle(y_offset, image_height, frame_height, viewing_angle)
 
 
-def get_azimuth_angle(x_offset, image_width, frame_width, viewing_angle, rotated_rect_angle):
-
+def get_azimuth_angle(x_offset, image_width, frame_width, viewing_angle, rotated_rect_angle, azimuthal_go_magic):
+    """
+    calculates the right azimuthal angle using the angle of the rotated bounding rect of the contour
+    :param x_offset: offset from start of frame in pixels
+    :param image_width: the width of the image of the object
+    :param frame_width: the width of the frame
+    :param viewing_angle: viewing angle for frame
+    :param rotated_rect_angle: the angle for the rotated bounding rectangle
+    :param azimuthal_go_magic: the coefficient for the azimuth correction
+    :return:
+    """
     if rotated_rect_angle < -45:
         rotated_rect_angle += 90
     if rotated_rect_angle > 45:
         rotated_rect_angle -= 90
 
-    offset = ((rotated_rect_angle/90.0)*frame_width/2.0) * AZIMUTHAL_GO_MAGIC
+    offset = ((rotated_rect_angle/90.0)*frame_width/2.0) * azimuthal_go_magic
     return get_angle(x_offset, image_width + offset, frame_width, viewing_angle)
 
 

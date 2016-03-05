@@ -104,13 +104,13 @@ class VisionManager(object):
         for contour in contours:
             area = cv2.contourArea(contour)
             if (MIN_BOUND_RECT_AREA > area) or (MAX_BOUND_RECT_AREA < area):
-                logger.debug("Rect denied, min-max rect area")
+                logger.debug("Rect denied, min-max rect area with area: " + str(area))
                 continue
 
             (x_offset, y_offset, width, height) = cv2.boundingRect(contour)
             ratio = height / width
             if (MIN_HIGHT_WIDTH_RATIO > ratio) or (MIN_HIGHT_WIDTH_RATIO < ratio):
-                logger.debug("Rect denied, min-max ratio")
+                logger.debug("Rect denied, height/width ratio")
                 continue
 
             rects.append(
@@ -144,14 +144,21 @@ class VisionManager(object):
 
         bounding_rects = sorted(bounding_rects, key=lambda r: r.height * r.width, reverse=True)
         best_bounding_rect = bounding_rects[0]
-
+        self.draw_target_square(mask,
+                                best_bounding_rect.x_offset,
+                                best_bounding_rect.y_offset,
+                                best_bounding_rect.height,
+                                best_bounding_rect.width,
+                                color=(255, 0, 0))
         min_area_bounding_rect = cv2.minAreaRect(best_bounding_rect.contour)
 
         try:
             azimuth_angle = get_azimuth_angle(x_offset=best_bounding_rect.x_offset,
                                               image_width=best_bounding_rect.width,
                                               frame_width=frame.shape[1],
-                                              viewing_angle=CAMERA_VIEW_ANGLE_X)
+                                              viewing_angle=CAMERA_VIEW_ANGLE_X,
+                                              rotated_rect_angle=min_area_bounding_rect[2],
+                                              azimuthal_go_magic=AZIMUTHAL_GO_MAGIC)
 
             polar_angle = get_polar_angle(y_offset=best_bounding_rect.y_offset,
                                           image_height=best_bounding_rect.height,

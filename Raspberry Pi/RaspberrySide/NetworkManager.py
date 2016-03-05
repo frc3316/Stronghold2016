@@ -46,8 +46,6 @@ class NetworkManager(object):
         :return: None
         """
         formatted_data = str(self.format_data(goal_image))
-        logger.debug(str(formatted_data))
-        logger.debug("Address: " + str(self._address))
         self.sock.sendto(formatted_data.replace(' ', '') + '\n', self._address)
 
     def send_no_data(self):

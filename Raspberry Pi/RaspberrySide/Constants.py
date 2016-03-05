@@ -8,9 +8,9 @@ ROBORIO_MDNS = "roborio-3316-frc.local"
 ROBORIO_PORT = 8080
 
 # Bounding rectangle
-MIN_BOUND_RECT_AREA = 700 # The minimum area of a contour to be considered as a possible object (U). the area is calculated using
+MIN_BOUND_RECT_AREA = 150 # The minimum area of a contour to be considered as a possible object (U). the area is calculated using
 # cv2.contourArea
-MAX_BOUND_RECT_AREA = 5000 # The maximum area of a contour to be considered as a possible object (U). the area is calculated using
+MAX_BOUND_RECT_AREA = 3600 # The maximum area of a contour to be considered as a possible object (U). the area is calculated using
 # cv2.contourArea
 MAX_HIGHT_WIDTH_RATIO = 10 # The maximum ratio of height/width of the bounding rectangle of a contour to be considered as a potential contour.
 MIN_HIGHT_WIDTH_RATIO = 0 # The maximum ratio of height/width of the bounding rectangle of a contour to be considered as a potential contour.
