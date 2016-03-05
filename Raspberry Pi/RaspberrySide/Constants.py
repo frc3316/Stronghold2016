@@ -1,8 +1,8 @@
 import numpy as np
 
 # Color Filter:
-LOWER_COLOR_BOUND = np.array([50, 160, 100]) # Lower bond
-UPPER_COLOR_BOUND = np.array([120, 255, 255]) # Upper bond
+LOWER_COLOR_BOUND = np.array([65, 150, 120]) # Lower bond
+UPPER_COLOR_BOUND = np.array([95, 255, 255]) # Upper bond
 
 ROBORIO_MDNS = "roborio-3316-frc.local"
 ROBORIO_PORT = 8080
