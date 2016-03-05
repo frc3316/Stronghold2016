@@ -1,5 +1,5 @@
 from math import sin, radians, tan
-
+from Constants import *
 def normalize_rectangle_skew(bounding_rectangle_height, bounding_rectangle_width,
                              min_area_bounding_rectangle_angle):
     """
@@ -67,8 +67,20 @@ def get_polar_angle(y_offset, image_height, frame_height, viewing_angle):
     return (-1) * get_angle(y_offset, image_height, frame_height, viewing_angle)
 
 
-def get_azimuth_angle(x_offset, image_width, frame_width, viewing_angle):
-    return get_angle(x_offset, image_width, frame_width, viewing_angle)
+def get_azimuth_angle(x_offset, image_width, frame_width, viewing_angle, rotated_rect_angle):
+
+    if rotated_rect_angle < -45:
+        rotated_rect_angle += 90
+    if rotated_rect_angle > 45:
+        rotated_rect_angle -= 90
+
+    offset = ((rotated_rect_angle/90.0)*frame_width/2.0) * AZIMUTHAL_GO_MAGIC
+    return get_angle(x_offset, image_width + offset, frame_width, viewing_angle)
+
 
 def go_magic(distance):
-    return 0.5417 * distance + 27.142
+    #return 0.5417 * distance + 15 # 30/2 function, doesn't work well in very close distance and in very far distance.
+    a1 = -68.952
+    a2 = 0.8194
+    a3 = -0.0001
+    return a3 * (distance ** 2) + a2 * distance + a1

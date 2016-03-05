@@ -1,16 +1,16 @@
 import numpy as np
 
 # Color Filter:
-LOWER_COLOR_BOUND = np.array([50, 160, 100]) # Lower bond
-UPPER_COLOR_BOUND = np.array([120, 255, 255]) # Upper bond
+LOWER_COLOR_BOUND = np.array([65, 150, 120]) # Lower bond
+UPPER_COLOR_BOUND = np.array([95, 255, 255]) # Upper bond
 
 ROBORIO_MDNS = "roborio-3316-frc.local"
 ROBORIO_PORT = 8080
 
 # Bounding rectangle
-MIN_BOUND_RECT_AREA = 100 # The minimum area of a contour to be considered as a possible object (U). the area is calculated using
+MIN_BOUND_RECT_AREA = 700 # The minimum area of a contour to be considered as a possible object (U). the area is calculated using
 # cv2.contourArea
-MAX_BOUND_RECT_AREA = 10000 # The maximum area of a contour to be considered as a possible object (U). the area is calculated using
+MAX_BOUND_RECT_AREA = 5000 # The maximum area of a contour to be considered as a possible object (U). the area is calculated using
 # cv2.contourArea
 MAX_HIGHT_WIDTH_RATIO = 10 # The maximum ratio of height/width of the bounding rectangle of a contour to be considered as a potential contour.
 MIN_HIGHT_WIDTH_RATIO = 0 # The maximum ratio of height/width of the bounding rectangle of a contour to be considered as a potential contour.
@@ -42,3 +42,5 @@ CONTRAST = 0.01
 ROTATE_CLOCKWISE = False # Is the image rotated by 90 degrees rotateClockWise or counter rotateClockWise. True is rotateClockWise.
 RESIZE_IMAGE_WIDTH = 320 # the width of the resized image.
 RESIZE_IMAGE_HEIGHT = 240
+
+AZIMUTHAL_GO_MAGIC = 0.7 # the constant for the go magic method of the azimuthal angle.
