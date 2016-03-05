@@ -324,6 +324,13 @@ public class Config
 			}
 			
 			/*
+			 * Drive Distance (using camera)
+			 */
+			{
+				addToVariables("chassis_DriveDistanceCamera_Speed", 0.5);
+			}
+			
+			/*
 			 * Drive Distance Camera
 			 */
 			{

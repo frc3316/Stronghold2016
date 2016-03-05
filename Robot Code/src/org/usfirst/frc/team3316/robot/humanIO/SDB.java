@@ -18,6 +18,7 @@ import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.DriveDistanceCamera;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -41,7 +42,11 @@ import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.AutonShootingSequence;
+import org.usfirst.frc.team3316.robot.sequences.AutonomousSequence;
 import org.usfirst.frc.team3316.robot.sequences.CollectBall;
+import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
+import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
 import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
@@ -106,7 +111,13 @@ public class SDB
 
 				put("Turret current", Robot.actuators.turretMotor.getCurrent());
 
-				put("On defence", Robot.chassis.isOnDefense());
+				put("On defense", Robot.chassis.isOnDefense());
+				
+				put("Pitch", Robot.chassis.getPitch());
+				put("Roll", Robot.chassis.getRoll());
+				
+				put("Robot left speed", Robot.chassis.getLeftSpeed());
+				put("Robot right speed", Robot.chassis.getRightSpeed());
 		}
 
 		private void put(String name, double d)
@@ -219,40 +230,28 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 
-		SmartDashboard.putData(new OpenLongPistons());
-		SmartDashboard.putData(new CloseLongPistons());
-		SmartDashboard.putData(new OpenShortPistons());
-		SmartDashboard.putData(new CloseShortPistons());
+		SmartDashboard.putData(new AutonomousSequence());
+		SmartDashboard.putData(new CrossingForwardSequence());
+		SmartDashboard.putData(new CrossingBackSequence());
+		SmartDashboard.putData(new AutonShootingSequence());
+		
+		SmartDashboard.putData(new DriveDistanceCamera(3));
+		
+		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
 
-		// Intake
-		SmartDashboard.putData(new CollectBall());
-		SmartDashboard.putData(new EjectBall());
-		SmartDashboard.putData(new OpenIntake());
-		SmartDashboard.putData(new CloseIntake());
-		SmartDashboard.putData(new IntakeRollIn());
-		SmartDashboard.putData(new IntakeRollOut());
+		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
 
-		// Hood
-		SmartDashboard.putData(new HoodJoysticks());
-		SmartDashboard.putData(new TurretJoysticks());
+		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
+		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
 
-		SmartDashboard.putData(new SetTurretAngle());
-		SmartDashboard.putData(new SetHoodAngle());
+		putConfigVariableInSDB("chassis_CrossBrake_Timeout");
+		putConfigVariableInSDB("chassis_CrossDefense_BrakeV");
 
-		SmartDashboard.putData(new HoodPID());
-
-		putConfigVariableInSDB("hood_PID_KP");
-		putConfigVariableInSDB("hood_PID_KI");
-		putConfigVariableInSDB("hood_PID_KD");
-		putConfigVariableInSDB("hood_PID_Tolerance");
-
-		SmartDashboard.putData(new TurretPID());
-
-		putConfigVariableInSDB("turret_PID_Tolerance");
-		putConfigVariableInSDB("turret_PID_KP");
-		putConfigVariableInSDB("turret_PID_KI");
-		putConfigVariableInSDB("turret_PID_KD");
-
+		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
+		putConfigVariableInSDB("chassis_CrossDefense_DownV");
+		
+		putConfigVariableInSDB("chassis_DriveDistanceCamera_Speed");
+		
 		logger.info("Finished initSDB()");
 	}
 

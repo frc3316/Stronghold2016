@@ -8,12 +8,9 @@ import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 
 public class AutonomousSequence extends DBugCommandGroup {
 	public AutonomousSequence() {
-//		addParallel(new WarmShooter());
 		addSequential(new CrossingForwardSequence());
-		addParallel(new WarmUpShooterSequence());
-		addSequential(new WaitForWarmingUp());
-		addSequential(new TriggerShootingSequence());
+		addSequential(new AutonShootingSequence());
 		addSequential(new CrossingBackSequence());
-		addSequential(new DriveDistance((double) config.get("chassis_Autonomous_Distance")));
+//		addSequential(new DriveDistance((double) config.get("chassis_Autonomous_Distance")));
 	}
 }

@@ -58,6 +58,7 @@ public class Chassis extends DBugSubsystem
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
+	private double pitchOffset, rollOffset;
 
 	// Other
 	private MovingAverage movingAvgPitch; // For the navX
@@ -98,7 +99,9 @@ public class Chassis extends DBugSubsystem
 
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
-				
+		
+		pitchOffset = 0;
+		rollOffset = 0;
 	}
 
 	public void initDefaultCommand()
@@ -234,12 +237,22 @@ public class Chassis extends DBugSubsystem
 
 	public double getPitch()
 	{
-		return navx.getRoll();
+		return navx.getRoll() + pitchOffset;
 	}
 
 	public double getRoll()
 	{
-		return navx.getPitch();
+		return navx.getPitch() + rollOffset;
+	}
+	
+	public void resetPitch() 
+	{
+		pitchOffset = getPitch() - pitchOffset;
+	}
+	
+	public void resetRoll() 
+	{
+		rollOffset = getRoll() - rollOffset;
 	}
 
 	public double getYaw()

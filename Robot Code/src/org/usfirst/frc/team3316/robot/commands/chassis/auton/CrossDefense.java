@@ -17,6 +17,9 @@ public class CrossDefense extends DBugCommand
 
 	protected void init()
 	{
+		Robot.chassis.resetPitch();
+		Robot.chassis.resetRoll();
+		
 		speed = (reverse ? -1 : 1)
 				* (double) config.get("chassis_CrossDefense_Voltage");
 		minSpeed = (double) config.get("chassis_CrossDefense_MinSpeed");
