@@ -224,7 +224,7 @@ public class SDB
 		SmartDashboard.putData(new OpenShortPistons());
 		SmartDashboard.putData(new CloseShortPistons());
 
-		//
+		// Intake
 		SmartDashboard.putData(new CollectBall());
 		SmartDashboard.putData(new EjectBall());
 		SmartDashboard.putData(new OpenIntake());
@@ -237,6 +237,7 @@ public class SDB
 		SmartDashboard.putData(new TurretJoysticks());
 
 		SmartDashboard.putData(new SetTurretAngle());
+		SmartDashboard.putData(new SetHoodAngle());
 
 		SmartDashboard.putData(new HoodPID());
 

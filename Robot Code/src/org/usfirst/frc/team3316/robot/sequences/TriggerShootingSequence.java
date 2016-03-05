@@ -2,12 +2,14 @@ package org.usfirst.frc.team3316.robot.sequences;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommandGroup;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.StopHood;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeRollOut;
 import org.usfirst.frc.team3316.robot.commands.intake.IntakeStopRoll;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportRollIn;
 import org.usfirst.frc.team3316.robot.commands.transport.TransportStopRoll;
 import org.usfirst.frc.team3316.robot.commands.turret.StopTurret;
+import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -29,10 +31,6 @@ public class TriggerShootingSequence extends DBugCommandGroup
 				&& Robot.hood.isOnTarget()))
 		{
 			this.cancel();
-		}
-		else {
-			(new StopTurret()).start();
-			(new StopHood()).start();
 		}
 	}
 }
