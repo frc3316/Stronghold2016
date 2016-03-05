@@ -510,7 +510,7 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 193.51227018845623);
-				addToVariablesB("hood_Pot_Offset", 110.31008456258901);
+				addToVariablesB("hood_Pot_Offset", 106.16511774357181);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
