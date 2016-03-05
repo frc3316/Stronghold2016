@@ -102,12 +102,11 @@ class VisionManager(object):
 
         rects = []
         for contour in contours:
-            area = cv2.contourArea(contour)
-            if (MIN_BOUND_RECT_AREA > area) or (MAX_BOUND_RECT_AREA < area):
-                logger.debug("Rect denied, min-max rect area with area: " + str(area))
+            (x_offset, y_offset, width, height) = cv2.boundingRect(contour)
+            if (MIN_BOUND_RECT_AREA > width*height) or (MAX_BOUND_RECT_AREA < width*height):
+                logger.debug("Rect denied, min-max rect area with area: " + str(width*height))
                 continue
 
-            (x_offset, y_offset, width, height) = cv2.boundingRect(contour)
             ratio = height / width
             if (MIN_HIGHT_WIDTH_RATIO > ratio) or (MIN_HIGHT_WIDTH_RATIO < ratio):
                 logger.debug("Rect denied, height/width ratio")
