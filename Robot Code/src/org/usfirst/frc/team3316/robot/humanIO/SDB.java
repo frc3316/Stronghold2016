@@ -151,13 +151,10 @@ public class SDB
 	private Hashtable<String, Class<?>> variablesInSDB;
 
 	private CameraServer server;
-	
-	public SendableChooser autonChooser;
 
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
-		autonChooser = new SendableChooser();
 		
 		initLiveWindow();
 		initSDB();
@@ -252,12 +249,7 @@ public class SDB
 		SmartDashboard.putData(new CrossingForwardSequence());
 		SmartDashboard.putData(new CrossingBackSequence());
 		SmartDashboard.putData(new AutonShootingSequence());
-		
-		// Auton Chooser
-		autonChooser.addDefault("Cross and reach", new AutonomousSequence());
-		autonChooser.addObject("Cross, shoot and reach", new AutonomousShootingSequence());
-		SmartDashboard.putData((NamedSendable) autonChooser);
-		
+				
 		SmartDashboard.putData("Reach Backwards", new ReachDefense(Direction.BACKWARDS));
 
 		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");

@@ -9,7 +9,8 @@ import org.usfirst.frc.team3316.robot.humanIO.SDB;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
-
+import org.usfirst.frc.team3316.robot.sequences.AutonomousSequence;
+import org.usfirst.frc.team3316.robot.sequences.AutonomousShootingSequence;
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
 import org.usfirst.frc.team3316.robot.subsystems.Climbing;
 import org.usfirst.frc.team3316.robot.subsystems.Flywheel;
@@ -19,9 +20,13 @@ import org.usfirst.frc.team3316.robot.subsystems.Transport;
 import org.usfirst.frc.team3316.robot.subsystems.Turret;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.NamedSendable;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -58,6 +63,7 @@ public class Robot extends IterativeRobot
 	public static Climbing climbing;
 
 	Command autonomousCommand;
+	SendableChooser autonChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -104,8 +110,6 @@ public class Robot extends IterativeRobot
 		joysticks.initButtons();
 
 		sdb = new SDB();
-		
-		autonomousCommand = (Command) sdb.autonChooser.getSelected();
 
 		/*
 		 * Timer
@@ -116,6 +120,14 @@ public class Robot extends IterativeRobot
 		 * La verite (turns out that apostrophes makes errors)
 		 */
 		logger.info(returnTheTruth());
+		
+		/*
+		 * Choosers
+		 */
+		autonChooser = new SendableChooser();
+		autonChooser.addDefault("Cross and reach", new AutonomousSequence());
+		autonChooser.addObject("Cross, shoot and reach", new AutonomousShootingSequence());
+		SmartDashboard.putData("Auton Chooser", autonChooser);
 	}
 
 	public void disabledInit()
@@ -130,8 +142,8 @@ public class Robot extends IterativeRobot
 
 	public void autonomousInit()
 	{
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		if ((autonChooser.getSelected()) != null)
+			((Command) autonChooser.getSelected()).start();
 	}
 
 	public void autonomousPeriodic()
@@ -141,8 +153,8 @@ public class Robot extends IterativeRobot
 
 	public void teleopInit()
 	{
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		if ((autonChooser.getSelected()) != null)
+			((Command) autonChooser.getSelected()).cancel();
 	}
 
 	public void teleopPeriodic()
