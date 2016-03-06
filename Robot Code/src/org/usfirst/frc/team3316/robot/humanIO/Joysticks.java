@@ -121,7 +121,7 @@ public class Joysticks
 		DBugJoystickButton allowClimbingBtn = new DBugJoystickButton(joystickOperator, "button_Allow_Climbing");
 		allowClimbingBtn.whenPressed(new AllowClimbing());
 	
-		DBugJoystickButton pullUpBtn = new DBugJoystickButton(joystickOperator, "button_Pull_Up");
-		pullUpBtn.whenPressed(new PullUp());
+		POVButton pullUpBtn = new POVButton(joystickOperator, (int) Robot.config.get("button_Pull_Up"));
+		pullUpBtn.whileHeld(new PullUp());
 	}
 }

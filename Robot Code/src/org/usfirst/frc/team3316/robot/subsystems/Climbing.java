@@ -54,16 +54,19 @@ public class Climbing extends DBugSubsystemCC {
 
 	public boolean setMotors(double v)
 	{
-		if (getWinchAngle() < (double) config.get("climbing_Pot_LowThresh"))
+		if(canClimb)
 		{
-			logger.severe("Someone is trying to break climbing pot. Aborting");
-			v = Math.max(v, 0);
-		} else if (getWinchAngle() > (double) config.get("climbing_Pot_HighThresh"))
-		{
-			logger.severe("Someone is trying to break climbing pot. Aborting");
-			v = Math.min(v, 0);
+			if (getWinchAngle() < (double) config.get("climbing_Pot_LowThresh"))
+			{
+				logger.severe("Someone is trying to break climbing pot. Aborting");
+				v = Math.max(v, 0);
+			}
+			else if (getWinchAngle() > (double) config.get("climbing_Pot_HighThresh"))
+			{
+				logger.severe("Someone is trying to break climbing pot. Aborting");
+				v = Math.min(v, 0);
+			}
 		}
-
 		return super.setMotors(v);
 	}
 
