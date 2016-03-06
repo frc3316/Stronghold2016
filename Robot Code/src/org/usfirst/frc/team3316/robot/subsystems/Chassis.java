@@ -105,6 +105,9 @@ public class Chassis extends DBugSubsystem
 		
 		pitchOffset = 0;
 		rollOffset = 0;
+		
+		resetPitch();
+		resetRoll();
 	}
 
 	public void initDefaultCommand()

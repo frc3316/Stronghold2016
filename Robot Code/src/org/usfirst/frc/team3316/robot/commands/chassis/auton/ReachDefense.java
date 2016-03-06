@@ -24,7 +24,7 @@ public class ReachDefense extends DBugCommand
 
 	protected void execute()
 	{
-		if (Robot.chassis.isOnDefense())
+		if (!Robot.chassis.isOnDefense())
 		{
 			if (reverse)
 			{
@@ -34,6 +34,8 @@ public class ReachDefense extends DBugCommand
 			{
 				Robot.chassis.setMotors(speed, speed);
 			}
+		}
+		else {
 			counter++;
 		}
 	}

@@ -18,7 +18,9 @@ import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.DriveDistanceCamera;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.ReachDefense;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -242,6 +244,8 @@ public class SDB
 		SmartDashboard.putData(new AutonShootingSequence());
 
 		SmartDashboard.putData(new DriveDistanceCamera(3));
+		
+		SmartDashboard.putData("Reach Backwards", new ReachDefense(Direction.BACKWARDS));
 
 		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
 
@@ -257,6 +261,9 @@ public class SDB
 		putConfigVariableInSDB("chassis_CrossDefense_DownV");
 
 		putConfigVariableInSDB("chassis_DriveDistanceCamera_Speed");
+		
+		putConfigVariableInSDB("chassis_ReachDefense_Speed");
+		putConfigVariableInSDB("chassis_ReachDefense_Timeout");
 
 		logger.info("Finished initSDB()");
 	}
