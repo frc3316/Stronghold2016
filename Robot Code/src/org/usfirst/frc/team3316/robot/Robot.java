@@ -104,6 +104,8 @@ public class Robot extends IterativeRobot
 		joysticks.initButtons();
 
 		sdb = new SDB();
+		
+		autonomousCommand = (Command) sdb.autonChooser.getSelected();
 
 		/*
 		 * Timer
