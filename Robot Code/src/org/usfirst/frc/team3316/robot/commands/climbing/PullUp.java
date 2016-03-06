@@ -16,7 +16,6 @@ public class PullUp extends DBugCommand
 	
 	public PullUp()
 	{
-		requires(Robot.chassis);
 		requires(Robot.climbing);
 		requires(Robot.flywheel);
 		requires(Robot.intake);

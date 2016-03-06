@@ -20,6 +20,7 @@ import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
 import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.ReleaseDown;
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.DriveDistanceCamera;
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.ReachDefense;
@@ -231,6 +232,7 @@ public class SDB
 
 		// Climbing
 		SmartDashboard.putData(new PullUp());
+		SmartDashboard.putData(new ReleaseDown());
 		putConfigVariableInSDB("climbing_UpSpeed");
 		putConfigVariableInSDB("climbing_DownSpeed");
 		SmartDashboard.putData(new JoystickWinchControl());
