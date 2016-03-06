@@ -12,8 +12,6 @@ public class AccelerateFlywheel extends DBugCommand
 {
 	double[][] accelTable;
 	double timeToAccel;
-	
-	boolean finish = false;
 
 	public AccelerateFlywheel()
 	{
@@ -28,14 +26,6 @@ public class AccelerateFlywheel extends DBugCommand
 		accelTable = new double[][] { { 0, timeToAccel }, { 0, 0.5 } };
 
 		setTimeout(timeToAccel);
-		
-		finish = false;
-		
-		if (Robot.flywheel.getRate() != 0)
-		{
-			finish = true; //We can't cancel the command because it may be a part of a command sequence
-			return;
-		}
 	}
 
 	protected void execute()
@@ -46,7 +36,7 @@ public class AccelerateFlywheel extends DBugCommand
 
 	protected boolean isFinished()
 	{
-		return isTimedOut() || finish;
+		return isTimedOut();
 	}
 
 	protected void fin()

@@ -33,6 +33,14 @@ public class AlignShooter
 	}
 	public static boolean isObjectDetected()
 	{
-		return VisionServer.Data.get("IOD") == 1.0;
+		try
+		{
+			return VisionServer.Data.get("IOD") == 1.0;
+		}
+		catch (Exception e)
+		{
+//			logger.severe(e);
+			return false;
+		}
 	}
 }

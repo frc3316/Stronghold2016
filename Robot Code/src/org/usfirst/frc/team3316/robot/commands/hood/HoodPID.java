@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HoodPID extends DBugCommand
@@ -23,7 +24,6 @@ public class HoodPID extends DBugCommand
 	public HoodPID()
 	{
 		requires(Robot.hood);
-		setRunWhenDisabled(true);
 		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
 			public void setPIDSourceType(PIDSourceType pidSource)
@@ -43,7 +43,7 @@ public class HoodPID extends DBugCommand
 		{
 			public void pidWrite(double output)
 			{
-				//isFin = !Robot.hood.setMotors(output);
+				isFin = !Robot.hood.setMotors(output);
 				config.add("hood_Angle_SetPoint", pid.getSetpoint());
 			}
 		});
@@ -78,31 +78,36 @@ public class HoodPID extends DBugCommand
 
 				double currentAngle = (double) AlignShooter.getHoodAngle();
 				SmartDashboard.putNumber("HOOD PID angle", currentAngle);
-				
+
 				angles[index] = currentAngle;
 				index++;
 				index %= angles.length;
-				
-				logger.finest("Hood angles array: " + angles);
-				double setPoint = getCorrectSetpoint(angles, 15);
-				logger.finest("Hood angle setpoint: " + setPoint);
-				
-				SmartDashboard.putNumber("HOOD PID setpoint", setPoint);
 
-				pid.setSetpoint(setPoint);
+				for (double a : angles)
+				{
+//					logger.finest("Angle: " + a);
+				}
+				double setPoint = getCorrectSetpoint(angles, 0.19); //we found out that this magic constant works
+//				logger.finest("Hood angle setpoint: " + setPoint);
+
+				SmartDashboard.putNumber("HOOD PID setpoint", setPoint);
+				if (setPoint > 20)
+				{
+					pid.setSetpoint(setPoint);
+				}
 			}
 			else
 			{
-//				isFin = !Robot.hood.setMotors(0);
+				isFin = !Robot.hood.setMotors(0);
 			}
 		}
 		catch (Exception e)
 		{
 			logger.severe(e);
-//			isFin = !Robot.hood.setMotors(0);
+			isFin = !Robot.hood.setMotors(0);
 		}
 
-		logger.finest("Hood PID error: " + pid.getError());
+//		logger.finest("Hood PID error: " + pid.getError());
 	}
 
 	protected boolean isFinished()
@@ -114,7 +119,7 @@ public class HoodPID extends DBugCommand
 	{
 		pid.reset();
 
-//		Robot.hood.setMotors(0);
+		 Robot.hood.setMotors(0);
 	}
 
 	protected void interr()
@@ -139,9 +144,12 @@ public class HoodPID extends DBugCommand
 		double sum = 0.0;
 		for (double d : setpoints)
 		{
+//			logger.finest("Received setpoint " + d);
 			sum += d;
 		}
 		double setpointsAvg = sum / setpoints.length;
+
+//		logger.finest("Setpoints average " + setpointsAvg);
 
 		ArrayList<Double> elementsPassed = new ArrayList<>(); // the elements
 																// that passed
@@ -151,11 +159,15 @@ public class HoodPID extends DBugCommand
 
 		for (int i = 0; i < setpoints.length; i++)
 		{
+//			logger.finest(
+//					"Deviation for setpoint " + setpoints[i] + "is " + Math.pow(setpointsAvg - setpoints[i], 2));
 			if (Math.pow(setpointsAvg - setpoints[i], 2) < thresh)
 			{
 				elementsPassed.add(setpoints[i]);
 			}
 		}
+
+//		logger.finest("Elements passed: " + elementsPassed);
 
 		if (elementsPassed.size() > 0)
 		{
@@ -164,10 +176,14 @@ public class HoodPID extends DBugCommand
 			{
 				newSum += d;
 			}
+
+//			logger.finest("Return successful: " + newSum / elementsPassed.size());
+
 			return newSum / elementsPassed.size();
 		}
 		else
 		{
+//			logger.finest("Return failed: " + setpoints[setpoints.length - 1]);
 			return setpoints[setpoints.length - 1];
 		}
 

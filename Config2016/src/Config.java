@@ -357,10 +357,10 @@ public class Config
 				// PID
 				addToVariables("flywheel_PID_Setpoint", 45.0);
 				addToVariables("flywheel_PID_Tolerance", 2.0);
-				addToVariables("flywheel_PID_KP", 16.0);
-				addToVariables("flywheel_PID_KI", 0.54);
-				addToVariables("flywheel_PID_KD", 0.010);
-				addToVariables("flywheel_PID_KF", 16.0);
+				addToVariables("flywheel_PID_KP", 180.0);
+				addToVariables("flywheel_PID_KI", 332.5);
+				addToVariables("flywheel_PID_KD", 83.125); //Calibrated using Z-N method
+				addToVariables("flywheel_PID_KF", 0.0);
 			}
 
 			/*
@@ -466,7 +466,7 @@ public class Config
 
 				// PID Control
 				addToVariables("turret_Angle_SetPoint", 0.0);
-				addToVariables("turret_PID_Tolerance", 0.5);
+				addToVariables("turret_PID_Tolerance", 0.6);
 				
 				addToVariablesA("turret_PID_KP", 10.0);
 				addToVariablesA("turret_PID_KI", 0.0);
@@ -510,14 +510,14 @@ public class Config
 			 */
 			{
 				addToVariablesA("hood_Pot_Offset", 193.51227018845623);
-				addToVariablesB("hood_Pot_Offset", 106.16511774357181);
+				addToVariablesB("hood_Pot_Offset", 103.00425942695641);
 				
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
 				addToVariables("hood_PotFilter_Period", (long) 10);
 
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 0.4);
+				addToVariables("hood_PID_Tolerance", 0.55);
 				addToVariables("hood_PID_KP", 96.0);
 				addToVariables("hood_PID_KI", 0.0);
 				addToVariables("hood_PID_KD", 168.75); //Calculated using Z-N method
