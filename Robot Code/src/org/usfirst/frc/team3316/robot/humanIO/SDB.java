@@ -18,14 +18,11 @@ import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
-<<<<<<< HEAD
 import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
-=======
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.DriveDistanceCamera;
 import org.usfirst.frc.team3316.robot.commands.chassis.auton.ReachDefense;
->>>>>>> autonomous
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
