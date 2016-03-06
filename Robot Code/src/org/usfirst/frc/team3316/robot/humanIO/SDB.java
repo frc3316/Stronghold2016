@@ -217,7 +217,9 @@ public class SDB
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 																// THIS COMMAND
-
+		
+		SmartDashboard.putData(new HoodPID());
+		
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 
@@ -226,6 +228,11 @@ public class SDB
 		putConfigVariableInSDB("climbing_UpSpeed");
 		putConfigVariableInSDB("climbing_DownSpeed");
 		SmartDashboard.putData(new JoystickWinchControl());
+		
+		SmartDashboard.putData(new SetHoodAngle());
+		
+		putConfigVariableInSDB("hood_PID_Tolerance");
+		putConfigVariableInSDB("turret_PID_Tolerance");
 
 		logger.info("Finished initSDB()");
 	}

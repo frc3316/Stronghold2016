@@ -12,10 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class FlywheelPID extends DBugCommand
 {
 	private static PIDController pid;
-	private double v = 0;
-	private static double tolerance, setpoint;
+	private static double setpoint;
 	
-	private boolean reachedTarget;
+	private boolean reachedTarget = false;
 
 	public FlywheelPID()
 	{
@@ -53,14 +52,9 @@ public class FlywheelPID extends DBugCommand
 				(double) config.get("flywheel_PID_KD") / 1000,
 				(double) config.get("flywheel_PID_KF") / 1000);
 		
-		tolerance = Robot.flywheel.getTolerance();
-		pid.setAbsoluteTolerance(tolerance); 
-		
-		v = 0;
-
-		reachedTarget = false;
-		
 		pid.enable();
+		
+		reachedTarget = false;
 	}
 
 	protected void execute()
@@ -70,7 +64,7 @@ public class FlywheelPID extends DBugCommand
 		
 		if (Robot.flywheel.isOnTarget() && !reachedTarget)
 		{
-			logger.info("Flywheel PID has reached target after " + timeSinceInitialized() + " seconds.");
+			logger.info("Flywheel PID reached target after " + timeSinceInitialized());
 			reachedTarget = true;
 		}
 	}
