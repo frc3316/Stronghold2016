@@ -253,7 +253,7 @@ public class Config
 			 * Constants
 			 */
 			{
-				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 10);
+				addToConstants("CHASSIS_ANGLE_MOVING_AVG_SIZE", 45);
 			}
 
 			/*
@@ -266,20 +266,29 @@ public class Config
 				addToVariables("chassis_TankDrive_InvertY", true);
 			}
 
-			// Cross Defense
+			/*
+			 * Cross Defense
+			 */
 			{
-				addToConstants("chassis_Defense_Angle_Timeout", 400.0);
+				addToConstants("chassis_Defense_Angle_Timeout", 750.0); // In milliseconds
 
-				addToVariables("chassis_CrossDefense_Voltage", 0.5);
-
-				addToVariables("chassis_Defense_Pitch_Thresh", 2.5);
+				addToVariables("chassis_CrossDefense_Voltage", 0.65);
+				addToVariables("chassis_CrossDefense_MinSpeed", 0.5);
+				addToVariables("chassis_CrossDefense_DownV", 0.001);
+				
+				addToVariables("chassis_Defense_Pitch_Thresh", 4.0);
 				addToVariables("chassis_Defense_Roll_Thresh", 4.0);
 
-				addToVariables("chassis_CrossBrake_Timeout", 400.0);
-				addToVariables("chassis_CrossDefense_BrakeV", -0.32);
-
-				addToVariables("chassis_CrossDefense_MinSpeed", 0.35);
-				addToVariables("chassis_CrossDefense_DownV", 0.001);
+				addToVariables("chassis_CrossBrake_Timeout", 0.0);
+				addToVariables("chassis_CrossDefense_BrakeV", -0.0);
+			}
+			
+			/*
+			 * Reach Defense
+			 */
+			{
+				addToVariables("chassis_ReachDefense_Speed", 0.7);
+				addToVariables("chassis_ReachDefense_Timeout", 0.0);
 			}
 
 			/*
@@ -316,6 +325,27 @@ public class Config
 
 				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
+			}
+			
+			/*
+			 * Drive Distance (using camera)
+			 */
+			{
+				addToVariables("chassis_DriveDistanceCamera_Speed", 0.5);
+			}
+			
+			/*
+			 * Drive Distance Camera
+			 */
+			{
+				
+			}
+			
+			/*
+			 * Autonomous
+			 */
+			{
+				addToVariables("chassis_Autonomous_Distance", 0.5); // In meters
 			}
 
 			/*

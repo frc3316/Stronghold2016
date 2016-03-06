@@ -18,8 +18,14 @@ import org.usfirst.frc.team3316.robot.commands.chassis.OpenLongPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.OpenShortPistons;
 import org.usfirst.frc.team3316.robot.commands.chassis.RetractOmni;
 import org.usfirst.frc.team3316.robot.commands.chassis.WaitForDefense;
+<<<<<<< HEAD
 import org.usfirst.frc.team3316.robot.commands.climbing.JoystickWinchControl;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
+=======
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.Direction;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.DriveDistanceCamera;
+import org.usfirst.frc.team3316.robot.commands.chassis.auton.ReachDefense;
+>>>>>>> autonomous
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
@@ -43,7 +49,11 @@ import org.usfirst.frc.team3316.robot.commands.flywheel.JoystickFlywheel;
 import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.AutonShootingSequence;
+import org.usfirst.frc.team3316.robot.sequences.AutonomousSequence;
 import org.usfirst.frc.team3316.robot.sequences.CollectBall;
+import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
+import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
 import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
@@ -74,7 +84,6 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-
 			put("Flywheel speed", Math.abs(Robot.flywheel.getRate()));
 
 			put("Turret angle", Robot.turret.getAngle());
@@ -108,7 +117,7 @@ public class SDB
 
 			put("Turret current", Robot.actuators.turretMotor.getCurrent());
 
-			put("On defence", Robot.chassis.isOnDefense());
+			put("On defense", Robot.chassis.isOnDefense());
 		}
 
 		private void put(String name, double d)
@@ -233,6 +242,32 @@ public class SDB
 		
 		putConfigVariableInSDB("hood_PID_Tolerance");
 		putConfigVariableInSDB("turret_PID_Tolerance");
+		SmartDashboard.putData(new AutonomousSequence());
+		SmartDashboard.putData(new CrossingForwardSequence());
+		SmartDashboard.putData(new CrossingBackSequence());
+		SmartDashboard.putData(new AutonShootingSequence());
+
+		SmartDashboard.putData(new DriveDistanceCamera(3));
+		
+		SmartDashboard.putData("Reach Backwards", new ReachDefense(Direction.BACKWARDS));
+
+		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
+
+		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
+
+		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
+		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
+
+		putConfigVariableInSDB("chassis_CrossBrake_Timeout");
+		putConfigVariableInSDB("chassis_CrossDefense_BrakeV");
+
+		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
+		putConfigVariableInSDB("chassis_CrossDefense_DownV");
+
+		putConfigVariableInSDB("chassis_DriveDistanceCamera_Speed");
+		
+		putConfigVariableInSDB("chassis_ReachDefense_Speed");
+		putConfigVariableInSDB("chassis_ReachDefense_Timeout");
 
 		logger.info("Finished initSDB()");
 	}

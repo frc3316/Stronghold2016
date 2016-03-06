@@ -11,7 +11,7 @@ public class AlignShooter
 	private static Config config;
 	
 	private static double [][] hoodTable;
-	
+
 	static
 	{
 		logger = Robot.logger;
@@ -19,8 +19,7 @@ public class AlignShooter
 		
 		hoodTable = (double[][]) config.get("alignShooter_HoodTable");
 	}
-	
-	
+
 	public static double getTowerAngle()
 	{
 		double towerAngle = VisionServer.Data.get("AA"); // AA = Azimuthal Angle
@@ -36,6 +35,14 @@ public class AlignShooter
 														// Camera
 		return (Utils.valueInterpolation(distance, hoodTable));
 	}
+
+	public static double getDistanceFromTower()
+	{
+		double distance = VisionServer.Data.get("DFC"); // DFC = Distance From
+		// Camera
+		return distance;
+	}
+
 	public static boolean isObjectDetected()
 	{
 		try

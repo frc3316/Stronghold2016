@@ -11,6 +11,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 
 public class Chassis extends DBugSubsystem
@@ -22,9 +23,8 @@ public class Chassis extends DBugSubsystem
 
 		public void run()
 		{
-			if (Math.abs(movingAvgPitch.get()) <= (double) Robot.config.get("chassis_Defense_Pitch_Thresh")
-					&& Math.abs(
-							movingAvgRoll.get()) <= (double) Robot.config.get("chassis_Defense_Roll_Thresh"))
+			if (movingAvgPitch.get() <= (double) Robot.config.get("chassis_Defense_Pitch_Thresh")
+					&& movingAvgRoll.get() <= (double) Robot.config.get("chassis_Defense_Roll_Thresh"))
 			{
 				counter++;
 			}
@@ -43,6 +43,9 @@ public class Chassis extends DBugSubsystem
 			{
 				isOnDefense = true;
 			}
+			
+			SmartDashboard.putNumber("MovingAvg Pitch", movingAvgPitch.get());
+			SmartDashboard.putNumber("MovingAvg Roll", movingAvgRoll.get());
 		}
 	}
 
@@ -58,6 +61,7 @@ public class Chassis extends DBugSubsystem
 
 	// Variables
 	private boolean isOnDefense = false; // For the navX
+	private double pitchOffset, rollOffset;
 
 	// Other
 	private MovingAverage movingAvgPitch; // For the navX
@@ -89,16 +93,21 @@ public class Chassis extends DBugSubsystem
 		// Create moving average
 		movingAvgPitch = new MovingAverage((int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
 		{
-			return getPitch();
+			return Math.abs(getPitch());
 		});
 		movingAvgRoll = new MovingAverage((int) config.get("CHASSIS_ANGLE_MOVING_AVG_SIZE"), 20, () ->
 		{
-			return getRoll();
+			return Math.abs(getRoll());
 		});
 
 		navXTasker = new navX();
 		Robot.timer.schedule(navXTasker, 0, 20);
-				
+		
+		pitchOffset = 0;
+		rollOffset = 0;
+		
+		resetPitch();
+		resetRoll();
 	}
 
 	public void initDefaultCommand()
@@ -111,6 +120,8 @@ public class Chassis extends DBugSubsystem
 	 */
 	public void setMotors(double left, double right)
 	{
+		logger.finest("Setting chassis. left: " + left + ", right: " + right);
+		
 		leftMotor1.setMotor(left);
 		leftMotor2.setMotor(left);
 
@@ -234,12 +245,24 @@ public class Chassis extends DBugSubsystem
 
 	public double getPitch()
 	{
-		return navx.getRoll();
+		return navx.getRoll() + pitchOffset;
 	}
 
 	public double getRoll()
 	{
-		return navx.getPitch();
+		return navx.getPitch() + rollOffset;
+	}
+	
+	public void resetPitch() 
+	{
+		pitchOffset = pitchOffset - getPitch();
+		SmartDashboard.putNumber("Pitch offset", pitchOffset);
+	}
+	
+	public void resetRoll() 
+	{
+		rollOffset = rollOffset - getRoll();
+		SmartDashboard.putNumber("Roll offset", rollOffset);
 	}
 
 	public double getYaw()
