@@ -16,7 +16,7 @@ public class AutonomousSequence extends DBugCommandGroup {
 	public AutonomousSequence() {
 		addSequential(new RetractOmni());
 		addSequential(new CrossDefense(Direction.FORWARDS));
-		addSequential(new WaitCommand(1.0));
+		addSequential(new WaitCommand(2.0));
 		addSequential(new ReachDefense(Direction.BACKWARDS));
 	}
 }

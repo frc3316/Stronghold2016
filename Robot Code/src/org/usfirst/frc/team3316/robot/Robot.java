@@ -3,6 +3,7 @@ package org.usfirst.frc.team3316.robot;
 
 import java.util.Timer;
 
+import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.humanIO.Joysticks;
 import org.usfirst.frc.team3316.robot.humanIO.SDB;
@@ -125,7 +126,30 @@ public class Robot extends IterativeRobot
 		 * Choosers
 		 */
 		autonChooser = new SendableChooser();
-		autonChooser.addDefault("Cross and reach", new AutonomousSequence());
+		autonChooser.addDefault("Empty Auton", new DBugCommand()
+		{
+			protected boolean isFinished()
+			{
+				return false;
+			}
+			
+			protected void interr()
+			{
+			}
+			
+			protected void init()
+			{
+			}
+			
+			protected void fin()
+			{
+			}
+			
+			protected void execute()
+			{
+			}
+		});
+		autonChooser.addObject("Cross and reach", new AutonomousSequence());
 		autonChooser.addObject("Cross, shoot and reach", new AutonomousShootingSequence());
 		SmartDashboard.putData("Auton Chooser", autonChooser);
 	}
