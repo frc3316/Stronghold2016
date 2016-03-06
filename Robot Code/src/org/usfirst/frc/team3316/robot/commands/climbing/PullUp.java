@@ -13,7 +13,7 @@ public class PullUp extends DBugCommand
 {
 	private double speed, initAngle;
 	private boolean onTarget;
-
+	
 	public PullUp()
 	{
 		requires(Robot.chassis);

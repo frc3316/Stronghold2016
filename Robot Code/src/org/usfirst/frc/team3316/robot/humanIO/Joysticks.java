@@ -6,6 +6,7 @@ package org.usfirst.frc.team3316.robot.humanIO;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.climbing.AllowClimbing;
 import org.usfirst.frc.team3316.robot.commands.climbing.PullUp;
 import org.usfirst.frc.team3316.robot.commands.flywheel.FlywheelPID;
 import org.usfirst.frc.team3316.robot.commands.flywheel.WarmShooter;
@@ -115,5 +116,12 @@ public class Joysticks
 
 		DBugJoystickButton collectionBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
 		collectionBtn.whenPressed(new CollectBall());
+		
+		// Climbing
+		DBugJoystickButton allowClimbingBtn = new DBugJoystickButton(joystickOperator, "button_Allow_Climbing");
+		allowClimbingBtn.whenPressed(new AllowClimbing());
+	
+		DBugJoystickButton pullUpBtn = new DBugJoystickButton(joystickOperator, "button_Pull_Up");
+		pullUpBtn.whenPressed(new PullUp());
 	}
 }

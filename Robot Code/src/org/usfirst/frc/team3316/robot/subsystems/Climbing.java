@@ -20,6 +20,8 @@ public class Climbing extends DBugSubsystemCC {
 
 	private DoubleSolenoid climbingSolenoid;
 
+	public static boolean canClimb = false;
+	
 	public Climbing()
 	{
 		// Actuators
