@@ -116,9 +116,11 @@ public class SDB
 
 			put("Is ball in", Robot.intake.isBallIn());
 
-			put("Turret current", Robot.actuators.turretMotor.getCurrent());
-
 			put("On defense", Robot.chassis.isOnDefense());
+			
+			put("ON OMNI", Robot.chassis.areShortPistonsExtended());
+			
+			put("Operator POV", Robot.joysticks.joystickOperator.getPOV());
 		}
 
 		private void put(String name, double d)
@@ -230,6 +232,7 @@ public class SDB
 																// THIS COMMAND
 		
 		SmartDashboard.putData(new HoodPID());
+		SmartDashboard.putData(new TurretPID());
 		
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
@@ -243,33 +246,6 @@ public class SDB
 		
 		SmartDashboard.putData(new SetHoodAngle());
 		
-		putConfigVariableInSDB("hood_PID_Tolerance");
-		putConfigVariableInSDB("turret_PID_Tolerance");
-		SmartDashboard.putData(new AutonomousSequence());
-		SmartDashboard.putData(new CrossingForwardSequence());
-		SmartDashboard.putData(new CrossingBackSequence());
-		SmartDashboard.putData(new AutonShootingSequence());
-				
-		SmartDashboard.putData("Reach Backwards", new ReachDefense(Direction.BACKWARDS));
-
-		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");
-
-		putConfigVariableInSDB("chassis_CrossDefense_Voltage");
-
-		putConfigVariableInSDB("chassis_Defense_Pitch_Thresh");
-		putConfigVariableInSDB("chassis_Defense_Roll_Thresh");
-
-		putConfigVariableInSDB("chassis_CrossBrake_Timeout");
-		putConfigVariableInSDB("chassis_CrossDefense_BrakeV");
-
-		putConfigVariableInSDB("chassis_CrossDefense_MinSpeed");
-		putConfigVariableInSDB("chassis_CrossDefense_DownV");
-
-		putConfigVariableInSDB("chassis_DriveDistanceCamera_Speed");
-		
-		putConfigVariableInSDB("chassis_ReachDefense_Speed");
-		putConfigVariableInSDB("chassis_ReachDefense_Timeout");
-
 		logger.info("Finished initSDB()");
 	}
 
