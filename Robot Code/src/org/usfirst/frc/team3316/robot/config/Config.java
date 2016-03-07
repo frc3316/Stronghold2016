@@ -89,6 +89,7 @@ public class Config
 			return variables.get(key);
 		}
 		
+		logger.severe("Key " + key + " not found in config.");
 		return null;
 	}
 	

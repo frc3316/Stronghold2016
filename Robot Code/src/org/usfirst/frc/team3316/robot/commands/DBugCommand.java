@@ -17,6 +17,11 @@ public abstract class DBugCommand extends Command
 	protected boolean isFin = false; 
 	//TODO: Eliminate the isFinished method by changing it here: return isFin. 
 
+	public DBugCommand ()
+	{
+		logger.info(this.getName() + " instantiated");
+	}
+	
     protected final void initialize() 
     {
     	logger.fine(this.getName() + " initialize");

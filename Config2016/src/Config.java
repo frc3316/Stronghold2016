@@ -155,6 +155,9 @@ public class Config
 				 */
 				addToConstantsB("CHASSIS_MOTOR_LEFT_REVERSE", true);
 				addToConstantsB("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				
+				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
+				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
 				addToConstantsA("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstantsA("CHASSIS_RIGHT_ENCODER_REVERSE", false);

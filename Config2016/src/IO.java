@@ -308,7 +308,9 @@ public class IO
 
 					putAIOA("HOOD_POT", 1);
 					
-					putAIOA("CLIMBING_POT", 3);
+					putAIOA("CLIMBING_POT", 2);
+					
+					putAIOA("INTAKE_SWITCH", 3);
 				}
 
 				/*

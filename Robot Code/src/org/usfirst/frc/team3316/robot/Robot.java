@@ -75,6 +75,8 @@ public class Robot extends IterativeRobot
 		/*
 		 * Above all else
 		 */
+		try
+		{
 		logger = new DBugLogger();
 		timer = new Timer();
 		config = new Config();
@@ -152,6 +154,11 @@ public class Robot extends IterativeRobot
 		autonChooser.addObject("Cross and reach", new AutonomousSequence());
 		autonChooser.addObject("Cross, shoot and reach", new AutonomousShootingSequence());
 		SmartDashboard.putData("Auton Chooser", autonChooser);
+		}
+		catch (Exception e)
+		{
+			logger.severe(e);
+		}
 	}
 
 	public void disabledInit()
