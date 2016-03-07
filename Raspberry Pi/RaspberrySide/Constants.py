@@ -1,8 +1,8 @@
 import numpy as np
 
 # Color Filter:
-LOWER_COLOR_BOUND = np.array([65, 150, 120]) # Lower bond
-UPPER_COLOR_BOUND = np.array([95, 255, 255]) # Upper bond
+LOWER_COLOR_BOUND = np.array([65, 140, 110]) # Lower bond
+UPPER_COLOR_BOUND = np.array([97, 255, 255]) # Upper bond
 
 ROBORIO_MDNS = "roborio-3316-frc.local"
 ROBORIO_PORT = 8080
@@ -10,12 +10,12 @@ ROBORIO_PORT = 8080
 # Bounding rectangle
 MIN_BOUND_RECT_AREA = 550 # The minimum area of a contour to be considered as a possible object (U). the area is calculated using
 # cv2.contourArea
-MAX_BOUND_RECT_AREA = 3600 # The maximum area of a contour to be considered as a possible object (U). the area is calculated using
+MAX_BOUND_RECT_AREA = 4800 # The maximum area of a contour to be considered as a possible object (U). the area is calculated using
 # cv2.contourArea
 MAX_HIGHT_WIDTH_RATIO = 10 # The maximum ratio of height/width of the bounding rectangle of a contour to be considered as a potential contour.
 MIN_HIGHT_WIDTH_RATIO = 0 # The maximum ratio of height/width of the bounding rectangle of a contour to be considered as a potential contour.
 
-OBJECT_HEIGHT = 36 # Known height (of U). The real height of the U in cm.
+OBJECT_HEIGHT = 30.48 # Known height (of U). The real height of the U in cm.
 OBJECT_WIDTH = 50.8 # Known width  (of U). The real width of the U in cm.
 ENLARGEMENT_FACTOR = 180 * 500 / 170 # Enlargement factor in px -- 180px (height of image) * 500cm (distance to object) / 170cm (height of object)
 # object in pixels in the distance D, and W is the real height of the object.

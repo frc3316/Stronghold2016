@@ -159,6 +159,9 @@ class VisionManager(object):
                                               rotated_rect_angle=min_area_bounding_rect[2],
                                               azimuthal_go_magic=AZIMUTHAL_GO_MAGIC)
 
+            azimuth_angle_pixel = ((azimuth_angle / CAMERA_VIEW_ANGLE_X) + 0.5) * frame.shape[1]
+            cv2.line(mask, (int(azimuth_angle_pixel) , 0), (int(azimuth_angle_pixel), 0), color=(0,0,255))
+
             polar_angle = get_polar_angle(y_offset=best_bounding_rect.y_offset,
                                           image_height=best_bounding_rect.height,
                                           frame_height=frame.shape[0],
