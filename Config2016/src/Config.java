@@ -131,7 +131,8 @@ public class Config
 					addToVariables("button_Collect_Ball", 1);
 					addToVariables("button_Roll_In", 8);
 					addToVariables("button_Roll_Out", 2);
-					addToVariables("button_Climb", 10);
+					addToVariables("button_Allow_Climbing", 7);
+					addToVariables("button_Pull_Up", 0);
 					addToVariables("button_Warm_Up_Shooter", 5);
 					addToVariables("button_Shooting_Trigger", 4);
 					addToVariables("button_Warm_Up_Flywheel", 6);
@@ -658,8 +659,8 @@ public class Config
 				addToVariables("climbing_Pot_HighThresh", 3400.0); // Check this
 																	// value
 
-				addToVariables("climbing_UpSpeed", 1.0); // Check this value
-				addToVariables("climbing_DownSpeed", -1.0); // Check this value
+				addToVariables("climbing_UpSpeed", -1.0); // Check this value
+				addToVariables("climbing_DownSpeed", 1.0); // Check this value
 				addToVariables("climbing_Setpoint", 900.0);
 			}
 		}
