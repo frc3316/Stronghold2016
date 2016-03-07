@@ -153,11 +153,11 @@ public class Config
 				/*
 				 * Chassis
 				 */
-				addToConstants("CHASSIS_MOTOR_LEFT_REVERSE", true);
-				addToConstants("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				addToConstantsB("CHASSIS_MOTOR_LEFT_REVERSE", true);
+				addToConstantsB("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
-				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
-				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+				addToConstantsA("CHASSIS_LEFT_ENCODER_REVERSE", true);
+				addToConstantsA("CHASSIS_RIGHT_ENCODER_REVERSE", false);
 
 				// For some reason the encoders give 4 times less the correct
 				// speed
@@ -503,13 +503,9 @@ public class Config
 				addToVariables("turret_Angle_SetPoint", 0.0);
 				addToVariables("turret_PID_Tolerance", 0.6);
 
-				addToVariablesA("turret_PID_KP", 10.0);
-				addToVariablesA("turret_PID_KI", 0.0);
-				addToVariablesA("turret_PID_KD", -0.01);
-
-				addToVariablesB("turret_PID_KP", 20.0);
-				addToVariablesB("turret_PID_KI", 2.0);
-				addToVariablesB("turret_PID_KD", 50.0);
+				addToVariables("turret_PID_KP", 20.0);
+				addToVariables("turret_PID_KI", 2.0);
+				addToVariables("turret_PID_KD", 50.0);
 
 				// Bangbang Control
 				addToVariables("turret_Bangbang_OnVoltage", 0.075);
