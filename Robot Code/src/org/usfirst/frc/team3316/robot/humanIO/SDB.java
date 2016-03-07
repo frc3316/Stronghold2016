@@ -49,6 +49,7 @@ import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.sequences.AutonShootingSequence;
 import org.usfirst.frc.team3316.robot.sequences.AutonomousSequence;
+import org.usfirst.frc.team3316.robot.sequences.AutonomousShootingSequence;
 import org.usfirst.frc.team3316.robot.sequences.CollectBall;
 import org.usfirst.frc.team3316.robot.sequences.CrossingBackSequence;
 import org.usfirst.frc.team3316.robot.sequences.CrossingForwardSequence;
@@ -56,12 +57,14 @@ import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
-import com.sun.media.sound.RIFFInvalidDataException;
-
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.NamedSendable;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.tables.ITable;
 
 public class SDB
 {
@@ -151,6 +154,7 @@ public class SDB
 	public SDB()
 	{
 		variablesInSDB = new Hashtable<String, Class<?>>();
+		
 		initLiveWindow();
 		initSDB();
 		// initDriverCamera();
@@ -245,9 +249,7 @@ public class SDB
 		SmartDashboard.putData(new CrossingForwardSequence());
 		SmartDashboard.putData(new CrossingBackSequence());
 		SmartDashboard.putData(new AutonShootingSequence());
-
-		SmartDashboard.putData(new DriveDistanceCamera(3));
-		
+				
 		SmartDashboard.putData("Reach Backwards", new ReachDefense(Direction.BACKWARDS));
 
 		putConfigVariableInSDB("chassis_Defense_Angle_Timeout");

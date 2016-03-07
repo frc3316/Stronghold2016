@@ -9,7 +9,7 @@ public class AutonShootingSequence extends DBugCommandGroup
 	{
 		addParallel(new WarmUpShooterSequence());
 		addSequential(new WaitForWarmingUp());
-		addSequential(new TriggerShootingSequence());
+		addSequential(new AutonTriggerShootingSequence());
 	}
 
 	protected void init()
