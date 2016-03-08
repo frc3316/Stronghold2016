@@ -245,6 +245,7 @@ public class SDB
 		SmartDashboard.putData(new JoystickWinchControl());
 		
 		SmartDashboard.putData(new SetHoodAngle());
+		SmartDashboard.putData(new SetTurretAngle());
 		
 		logger.info("Finished initSDB()");
 	}

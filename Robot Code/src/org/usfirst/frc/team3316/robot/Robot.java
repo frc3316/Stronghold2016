@@ -1,6 +1,10 @@
 
 package org.usfirst.frc.team3316.robot;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Timer;
 
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
@@ -159,6 +163,26 @@ public class Robot extends IterativeRobot
 		{
 			logger.severe(e);
 		}
+		
+		String g = "";
+		try
+		{
+			Process p = Runtime.getRuntime().exec(new String[] {"ipconfig", g});
+			InputStream s = p.getInputStream();
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(s));
+			
+			String temp;
+			
+			while ((temp = in.readLine()) != null)
+			{
+				logger.info(temp);
+			}
+		}
+		catch (IOException e)
+		{
+			logger.severe(e);
+		}  
 	}
 
 	public void disabledInit()

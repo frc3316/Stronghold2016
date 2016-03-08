@@ -92,6 +92,12 @@ public class Joysticks
 
 		DBugJoystickButton toggleOmniBtn2 = new DBugJoystickButton(joystickRight, "button_Toggle_Omni_2");
 		toggleOmniBtn2.whenPressed(new ToggleOmni());
+		
+		JoystickButton toggleOmniBtn3 = new JoystickButton(joystickLeft, 11);
+		toggleOmniBtn3.whenPressed(new ToggleOmni());
+		
+		JoystickButton toggleOmniBtn4 = new JoystickButton(joystickLeft, 1);
+		toggleOmniBtn4.whenPressed(new ToggleOmni());
 
 		// Intake
 

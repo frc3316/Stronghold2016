@@ -217,11 +217,11 @@ public class IO
 
 					putPWMA("TRANSPORT_MOTOR", 7); 
 
-					putPWMA("FLYWHEEL_MOTOR", 0); //was 8
+					putPWMA("FLYWHEEL_MOTOR", 1); //was 0
 
-					putPWMA("TURRET_MOTOR", 1); //was 0
+					putPWMA("TURRET_MOTOR", 8); //was 1
 
-					putPWMA("HOOD_MOTOR", 8); //was 1
+					putPWMA("HOOD_MOTOR", 0); //was 8
 
 					putCANA("CLIMBING_MOTOR_1", 7);
 					putPWMA("CLIMBING_MOTOR_2", 6);
@@ -345,14 +345,14 @@ public class IO
 
 					putPDPA("TRANSPORT_MOTOR_PDP_CHANNEL", 10); 
 
-					putPDPA("FLYWHEEL_MOTOR_PDP_CHANNEL", 1); //was 15 
+					putPDPA("FLYWHEEL_MOTOR_PDP_CHANNEL",15); //was 1 
 
-					putPDPA("TURRET_MOTOR_PDP_CHANNEL", 15); //was 0
+					putPDPA("TURRET_MOTOR_PDP_CHANNEL", 0); //was 15
 
-					putPDPA("HOOD_MOTOR_PDP_CHANNEL", 0); //was 1
+					putPDPA("HOOD_MOTOR_PDP_CHANNEL", 1); //was 0
 
 					putPDPA("CLIMBING_MOTOR_1_PDP_CHANNEL", 8); 
-					putPDPA("CLIMBING_MOTOR_2_PDP_CHANNEL", 13);
+					putPDPA("CLIMBING_MOTOR_2_PDP_CHANNEL", 12);
 					putPDPA("CLIMBING_MOTOR_3_PDP_CHANNEL", 14);
 					putPDPA("CLIMBING_MOTOR_4_PDP_CHANNEL", 6); 
 

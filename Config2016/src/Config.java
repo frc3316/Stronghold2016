@@ -156,8 +156,8 @@ public class Config
 				addToConstantsB("CHASSIS_MOTOR_LEFT_REVERSE", true);
 				addToConstantsB("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 				
-				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
-				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", true);
+				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", false);
 
 				addToConstantsA("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstantsA("CHASSIS_RIGHT_ENCODER_REVERSE", false);
@@ -496,7 +496,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariablesA("turret_Pot_Offset", 189.54671547503355);
+				addToVariablesA("turret_Pot_Offset", 632.8565501587938);
 				addToVariablesB("turret_Pot_Offset", 399.4483151915127);
 
 				addToVariables("turret_PotFilter_MaxChange", 4.0);
@@ -543,7 +543,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariablesA("hood_Pot_Offset", 193.51227018845623);
+				addToVariablesA("hood_Pot_Offset", 170.574220260749);
 				addToVariablesB("hood_Pot_Offset", 103.00425942695641);
 
 				addToVariables("hood_PotFilter_MaxChange", 4.0);

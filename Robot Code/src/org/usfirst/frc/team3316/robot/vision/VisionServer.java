@@ -92,7 +92,7 @@ public class VisionServer implements Runnable
 				serverSocket.setSoTimeout(100);
 				serverSocket.receive(receivePacket);
 
-//				logger.finest("Received packet");
+				logger.finest("Received packet");
 				
 				String sentence = new String(receivePacket.getData());
 //				logger.finest("Packet data length: " + receivePacket.getLength());
@@ -102,7 +102,7 @@ public class VisionServer implements Runnable
 			}
 			catch (Exception e)
 			{
-//				logger.severe("Vision server couldn't receive a packet");
+				logger.severe("Vision server couldn't receive a packet");
 //				logger.severe(e);
 			}
 		}
