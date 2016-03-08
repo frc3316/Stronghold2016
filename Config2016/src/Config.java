@@ -292,7 +292,7 @@ public class Config
 			 */
 			{
 				addToVariables("chassis_ReachDefense_Speed", 0.7);
-				addToVariables("chassis_ReachDefense_Timeout", 0.0);
+				addToVariables("chassis_ReachDefense_Timeout", 0.5);
 			}
 
 			/*
