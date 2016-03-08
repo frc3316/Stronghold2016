@@ -5,6 +5,7 @@ LOWER_COLOR_BOUND = np.array([65, 140, 110]) # Lower bond
 UPPER_COLOR_BOUND = np.array([97, 255, 255]) # Upper bond
 
 ROBORIO_MDNS = "roborio-3316-frc.local"
+ROBORIO_DNS = "roborio-3316-frc"
 ROBORIO_PORT = 8080
 
 # Bounding rectangle

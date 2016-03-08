@@ -18,7 +18,7 @@ lockFile = LockFile("LockFile.loc")
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", type=str, default=ROBORIO_MDNS,
+    parser.add_argument("--host", type=str, default=ROBORIO_DNS,
                         help="Roborio host address")
     parser.add_argument("--port", type=int, default=ROBORIO_PORT,
                         help="Roborio host port")
@@ -43,7 +43,11 @@ if __name__ == "__main__":
         raise
 	
     if args.enable_network:
-        network_manager = NetworkManager(args.host, args.port)
+	    try:
+            network_manager = NetworkManager(args.host, args.port)
+		except Exception, ex:
+            logger.error("Unhandled Exception:\n" + traceback.format_exc())
+            raise
     else:
         network_manager = None
 
