@@ -12,6 +12,8 @@ public class VisionServer implements Runnable
 {
 	public static Map<String, Double> Data;
 	private static DBugLogger logger;
+	
+	public static boolean isConnected = false;
 
 	static
 	{
@@ -94,6 +96,8 @@ public class VisionServer implements Runnable
 
 				logger.finest("Received packet");
 				
+				isConnected = true;
+				
 				String sentence = new String(receivePacket.getData());
 //				logger.finest("Packet data length: " + receivePacket.getLength());
 				VisionServer.Data = parseLine(sentence);
@@ -103,6 +107,7 @@ public class VisionServer implements Runnable
 			catch (Exception e)
 			{
 				logger.severe("Vision server couldn't receive a packet");
+				isConnected = false;
 //				logger.severe(e);
 			}
 		}

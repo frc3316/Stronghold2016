@@ -43,9 +43,9 @@ if __name__ == "__main__":
         raise
 	
     if args.enable_network:
-	    try:
+        try:
             network_manager = NetworkManager(args.host, args.port)
-		except Exception, ex:
+        except Exception, ex:
             logger.error("Unhandled Exception:\n" + traceback.format_exc())
             raise
     else:

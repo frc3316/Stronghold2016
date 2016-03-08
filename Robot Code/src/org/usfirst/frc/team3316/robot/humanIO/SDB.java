@@ -121,6 +121,8 @@ public class SDB
 			put("ON OMNI", Robot.chassis.areShortPistonsExtended());
 			
 			put("Operator POV", Robot.joysticks.joystickOperator.getPOV());
+			
+			put("Vision Connected", VisionServer.isConnected);
 		}
 
 		private void put(String name, double d)

@@ -6,7 +6,7 @@ UPPER_COLOR_BOUND = np.array([97, 255, 255]) # Upper bond
 
 ROBORIO_MDNS = "roborio-3316-frc.local"
 ROBORIO_DNS = "roborio-3316-frc"
-ROBORIO_PORT = 8080
+ROBORIO_PORT = 8000
 
 # Bounding rectangle
 MIN_BOUND_RECT_AREA = 550 # The minimum area of a contour to be considered as a possible object (U). the area is calculated using
