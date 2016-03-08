@@ -454,7 +454,7 @@ public class Config
 			 * Roll Out
 			 */
 			{
-				addToVariables("intake_RollOut_Speed", -0.5);
+				addToVariables("intake_RollOut_Speed", -1.0);
 				addToVariablesA("intake_CloseIntake_Timeout", 2.5); // In
 																	// seconds
 				addToVariablesB("intake_CloseIntake_Timeout", 2.5); // In
