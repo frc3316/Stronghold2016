@@ -446,7 +446,7 @@ public class Config
 			 */
 			{
 				addToVariables("intake_RollIn_Speed", 1.0);
-				addToVariablesA("intake_OpenIntake_Timeout", 2.0); // In seconds
+				addToVariablesA("intake_OpenIntake_Timeout", 1.0); // In seconds
 				addToVariablesB("intake_OpenIntake_Timeout", 2.0); // In seconds
 			}
 
