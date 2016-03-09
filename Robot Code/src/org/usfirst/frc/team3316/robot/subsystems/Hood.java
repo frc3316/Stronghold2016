@@ -54,6 +54,8 @@ public class Hood extends DBugSubsystemCC
 		// Checks if the hood is able to move in a certain direction. We assume
 		// forward is for moving up and negative for moving down.
 
+		logger.finest("Setting hood to " + v);
+		
 		if (getAngle() < (double) config.get("hood_Pot_BottomThresh"))
 		{
 			logger.severe("Hood trying to move lower than bottom thresh. Aborting.");
