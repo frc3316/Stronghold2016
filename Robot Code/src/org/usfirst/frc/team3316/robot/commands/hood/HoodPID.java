@@ -96,6 +96,10 @@ public class HoodPID extends DBugCommand
 				{
 					pid.setSetpoint(setPoint);
 				}
+				else
+				{
+					pid.setSetpoint(50);
+				}
 			}
 			else
 			{
@@ -149,6 +153,14 @@ public class HoodPID extends DBugCommand
 			sum += d;
 		}
 		double setpointsAvg = sum / setpoints.length;
+		
+		for (double setpoint : setpoints)
+		{
+			if (setpoint == 0)
+			{
+				return setpoints[index];
+			}
+		}
 
 		return setpointsAvg;
 		
