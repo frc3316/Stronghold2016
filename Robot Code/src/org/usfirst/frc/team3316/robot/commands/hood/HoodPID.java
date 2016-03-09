@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.lang.reflect.Array;
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 
 public class HoodPID extends DBugCommand
@@ -149,8 +150,12 @@ public class HoodPID extends DBugCommand
 		}
 		double setpointsAvg = sum / setpoints.length;
 
+		return setpointsAvg;
+		
 //		logger.finest("Setpoints average " + setpointsAvg);
 
+		
+		/*
 		ArrayList<Double> elementsPassed = new ArrayList<>(); // the elements
 																// that passed
 																// the delta avg
@@ -186,6 +191,7 @@ public class HoodPID extends DBugCommand
 //			logger.finest("Return failed: " + setpoints[setpoints.length - 1]);
 			return setpoints[setpoints.length - 1];
 		}
+		*/
 
 	}
 

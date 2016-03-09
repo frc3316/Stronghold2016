@@ -543,7 +543,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariablesA("hood_Pot_Offset", 170.574220260749);
+				addToVariablesA("hood_Pot_Offset", 164.574220260749);
 				addToVariablesB("hood_Pot_Offset", 103.00425942695641);
 
 				addToVariables("hood_PotFilter_MaxChange", 4.0);
@@ -571,7 +571,7 @@ public class Config
 				addToVariablesB("hood_Pot_TopThresh", 65.0);
 
 				addToVariablesA("hood_Pot_BottomThresh", 6.6);
-				addToVariablesA("hood_Pot_TopThresh", 79.0);
+				addToVariablesA("hood_Pot_TopThresh", 85.0);
 			}
 
 			/*
@@ -580,7 +580,7 @@ public class Config
 			{
 				addToVariablesA("alignShooter_HoodTable",
 						new double[][] { { 150.0, 200.0, 250.0, 300.0, 350.0, 400.0, 450.0, 500.0, 550.0 },
-								{ 40.0, 58.7, 63.0, 66.5, 65.5, 65.0, 62.0, 58.625, 49.5 } });
+								{ 47.0, 65.7, 70.0, 73.5, 72.5, 72.0, 69.0, 65.625, 56.5 } });
 				
 				addToVariablesB("alignShooter_HoodTable",
 						new double[][] { { 205.0, 255.0, 310.0, 357.0, 417.0, 475.0, 510.0, 560.0 },
