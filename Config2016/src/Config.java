@@ -551,10 +551,10 @@ public class Config
 
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 0.55);
-				addToVariables("hood_PID_KP", 96.0);
-				addToVariables("hood_PID_KI", 0.0);
-				addToVariables("hood_PID_KD", 168.75); // Calculated using Z-N
+				addToVariables("hood_PID_Tolerance", 0.65);
+				addToVariables("hood_PID_KP", 42.0);
+				addToVariables("hood_PID_KI", 1.4);
+				addToVariables("hood_PID_KD", 5.0); // Calculated using Z-N
 														// method
 
 				// Bangbang Control

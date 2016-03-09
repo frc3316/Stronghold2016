@@ -234,6 +234,12 @@ public class SDB
 																// THIS COMMAND
 		
 		SmartDashboard.putData(new HoodPID());
+		
+		putConfigVariableInSDB("hood_PID_Tolerance");
+		putConfigVariableInSDB("hood_PID_KP");
+		putConfigVariableInSDB("hood_PID_KI");
+		putConfigVariableInSDB("hood_PID_KD");
+		
 		SmartDashboard.putData(new TurretPID());
 		
 		SmartDashboard.putData(new StartCompressor());
