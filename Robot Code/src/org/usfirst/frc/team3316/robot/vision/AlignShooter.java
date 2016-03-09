@@ -35,6 +35,11 @@ public class AlignShooter
 														// Camera
 		return (Utils.valueInterpolation(distance, hoodTable));
 	}
+	
+	public static double interpolateHoodAngle (double distance)
+	{
+		return (Utils.valueInterpolation(distance, hoodTable));
+	}
 
 	public static double getDistanceFromTower()
 	{

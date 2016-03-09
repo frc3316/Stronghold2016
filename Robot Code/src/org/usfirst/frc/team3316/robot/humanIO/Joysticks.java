@@ -30,7 +30,9 @@ import org.usfirst.frc.team3316.robot.sequences.ClimbingSequence;
 import org.usfirst.frc.team3316.robot.sequences.CollectBall;
 import org.usfirst.frc.team3316.robot.sequences.EjectBall;
 import org.usfirst.frc.team3316.robot.sequences.TriggerShootingSequence;
+import org.usfirst.frc.team3316.robot.sequences.TriggerShootingSequenceNoCamera;
 import org.usfirst.frc.team3316.robot.sequences.WarmUpShooterSequence;
+import org.usfirst.frc.team3316.robot.sequences.WarmUpShooterSequenceNoCamera;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
@@ -119,6 +121,16 @@ public class Joysticks
 
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());
+		
+		//No Camera
+		
+		DBugJoystickButton warmUpShooterNoCamera = new DBugJoystickButton(joystickOperator, "button_WarmUpShooter_NoCamera");
+		warmUpShooterNoCamera.whileHeld(new WarmUpShooterSequenceNoCamera());
+		
+		DBugJoystickButton shootingTriggerBtnNoCamera = new DBugJoystickButton(joystickOperator, "button_ShootingTrigger_NoCamera");
+		shootingTriggerBtnNoCamera.whenPressed(new TriggerShootingSequenceNoCamera());
+		
+		//More Intake
 
 		DBugJoystickButton collectionBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
 		collectionBtn.whenPressed(new CollectBall());
