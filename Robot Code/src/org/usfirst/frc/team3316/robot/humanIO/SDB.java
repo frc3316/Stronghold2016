@@ -250,6 +250,10 @@ public class SDB
 		SmartDashboard.putData(new SetTurretAngle());
 		
 		logger.info("Finished initSDB()");
+		
+		putConfigVariableInSDB("hood_PID_KP");
+		putConfigVariableInSDB("hood_PID_KI");
+		putConfigVariableInSDB("hood_PID_KD");
 	}
 
 	/**
