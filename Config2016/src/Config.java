@@ -209,7 +209,7 @@ public class Config
 				addToConstantsA("HOOD_MOTOR_REVERSE", false);
 				addToConstantsB("HOOD_MOTOR_REVERSE", true);
 
-				addToConstants("HOOD_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 60.0); // TODO: Check
 																// the stall
 																// current
 
