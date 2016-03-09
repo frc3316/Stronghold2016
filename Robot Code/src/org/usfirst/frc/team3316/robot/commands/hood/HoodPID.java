@@ -15,35 +15,27 @@ import java.lang.reflect.Array;
 import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 
-public class HoodPID extends DBugCommand
-{
+public class HoodPID extends DBugCommand {
 	private static PIDController pid;
 
 	private double[] angles;
 	private int index = 0;
 
-	public HoodPID()
-	{
+	public HoodPID() {
 		requires(Robot.hood);
-		pid = new PIDController(0, 0, 0, new PIDSource()
-		{
-			public void setPIDSourceType(PIDSourceType pidSource)
-			{
+		pid = new PIDController(0, 0, 0, new PIDSource() {
+			public void setPIDSourceType(PIDSourceType pidSource) {
 			}
 
-			public double pidGet()
-			{
+			public double pidGet() {
 				return Robot.hood.getAngle();
 			}
 
-			public PIDSourceType getPIDSourceType()
-			{
+			public PIDSourceType getPIDSourceType() {
 				return PIDSourceType.kDisplacement;
 			}
-		}, new PIDOutput()
-		{
-			public void pidWrite(double output)
-			{
+		}, new PIDOutput() {
+			public void pidWrite(double output) {
 				isFin = !Robot.hood.setMotors(output);
 				config.add("hood_Angle_SetPoint", pid.getSetpoint());
 			}
@@ -52,12 +44,10 @@ public class HoodPID extends DBugCommand
 		pid.setOutputRange(-1, 1);
 	}
 
-	protected void init()
-	{
+	protected void init() {
 		angles = new double[20];
 
-		for (int i = 0; i < angles.length; i++)
-		{
+		for (int i = 0; i < angles.length; i++) {
 			angles[i] = 0;
 		}
 
@@ -112,23 +102,20 @@ public class HoodPID extends DBugCommand
 			isFin = !Robot.hood.setMotors(0);
 		}
 
-//		logger.finest("Hood PID error: " + pid.getError());
+		// logger.finest("Hood PID error: " + pid.getError());
 	}
 
-	protected boolean isFinished()
-	{
+	protected boolean isFinished() {
 		return isFin;
 	}
 
-	protected void fin()
-	{
+	protected void fin() {
 		pid.reset();
 
-		 Robot.hood.setMotors(0);
+		Robot.hood.setMotors(0);
 	}
 
-	protected void interr()
-	{
+	protected void interr() {
 		fin();
 	}
 
@@ -143,13 +130,11 @@ public class HoodPID extends DBugCommand
 	 *            less than thresh
 	 * @return double, the most accurate distance
 	 */
-	protected double getCorrectSetpoint(double[] setpoints, double thresh)
-	{
+	protected double getCorrectSetpoint(double[] setpoints, double thresh) {
 		// a good thresh will be around 15 - 20.
 		double sum = 0.0;
-		for (double d : setpoints)
-		{
-//			logger.finest("Received setpoint " + d);
+		for (double d : setpoints) {
+			// logger.finest("Received setpoint " + d);
 			sum += d;
 		}
 		double setpointsAvg = sum / setpoints.length;
@@ -163,47 +148,30 @@ public class HoodPID extends DBugCommand
 		}
 
 		return setpointsAvg;
-		
-//		logger.finest("Setpoints average " + setpointsAvg);
 
-		
+		// logger.finest("Setpoints average " + setpointsAvg);
+
 		/*
-		ArrayList<Double> elementsPassed = new ArrayList<>(); // the elements
-																// that passed
-																// the delta avg
-																// distance <
-																// thresh.
-
-		for (int i = 0; i < setpoints.length; i++)
-		{
-//			logger.finest(
-//					"Deviation for setpoint " + setpoints[i] + "is " + Math.pow(setpointsAvg - setpoints[i], 2));
-			if (Math.pow(setpointsAvg - setpoints[i], 2) < thresh)
-			{
-				elementsPassed.add(setpoints[i]);
-			}
-		}
-
-//		logger.finest("Elements passed: " + elementsPassed);
-
-		if (elementsPassed.size() > 0)
-		{
-			double newSum = 0.0;
-			for (double d : elementsPassed)
-			{
-				newSum += d;
-			}
-
-//			logger.finest("Return successful: " + newSum / elementsPassed.size());
-
-			return newSum / elementsPassed.size();
-		}
-		else
-		{
-//			logger.finest("Return failed: " + setpoints[setpoints.length - 1]);
-			return setpoints[setpoints.length - 1];
-		}
-		*/
+		 * ArrayList<Double> elementsPassed = new ArrayList<>(); // the elements
+		 * // that passed // the delta avg // distance < // thresh.
+		 * 
+		 * for (int i = 0; i < setpoints.length; i++) { // logger.finest( //
+		 * "Deviation for setpoint " + setpoints[i] + "is " +
+		 * Math.pow(setpointsAvg - setpoints[i], 2)); if (Math.pow(setpointsAvg
+		 * - setpoints[i], 2) < thresh) { elementsPassed.add(setpoints[i]); } }
+		 * 
+		 * // logger.finest("Elements passed: " + elementsPassed);
+		 * 
+		 * if (elementsPassed.size() > 0) { double newSum = 0.0; for (double d :
+		 * elementsPassed) { newSum += d; }
+		 * 
+		 * // logger.finest("Return successful: " + newSum /
+		 * elementsPassed.size());
+		 * 
+		 * return newSum / elementsPassed.size(); } else { // logger.finest(
+		 * "Return failed: " + setpoints[setpoints.length - 1]); return
+		 * setpoints[setpoints.length - 1]; }
+		 */
 
 	}
 
