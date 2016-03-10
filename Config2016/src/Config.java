@@ -136,6 +136,9 @@ public class Config
 					addToVariables("button_Warm_Up_Shooter", 5);
 					addToVariables("button_Shooting_Trigger", 4);
 					addToVariables("button_Warm_Up_Flywheel", 6);
+					
+					addToVariables("button_WarmUpShooter_NoCamera", 9);
+					addToVariables("button_ShootingTrigger_NoCamera", 10);
 				}
 			}
 		}

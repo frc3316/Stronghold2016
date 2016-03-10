@@ -13,9 +13,9 @@ import org.usfirst.frc.team3316.robot.commands.turret.TurretJoysticks;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class TriggerShootingSequence extends DBugCommandGroup
+public class TriggerShootingSequenceNoCamera extends DBugCommandGroup
 {
-	public TriggerShootingSequence()
+	public TriggerShootingSequenceNoCamera()
 	{
 		addParallel(new TransportRollIn());
 		addSequential(new WaitCommand((double) config.get("triggetShooting_IntakeRollIn_Timeout")));
