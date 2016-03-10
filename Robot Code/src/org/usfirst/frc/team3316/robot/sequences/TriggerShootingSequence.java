@@ -24,13 +24,4 @@ public class TriggerShootingSequence extends DBugCommandGroup
 		addParallel(new TransportStopRoll());
 		addParallel(new IntakeStopRoll());
 	}
-
-	protected void init()
-	{
-		if (!(Robot.flywheel.isOnTarget() && Robot.intake.isReadyToTransfer() && Robot.turret.isOnTarget()
-				&& Robot.hood.isOnTarget()))
-		{
-			this.cancel();
-		}
-	}
 }

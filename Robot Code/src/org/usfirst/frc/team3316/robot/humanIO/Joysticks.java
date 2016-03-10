@@ -122,14 +122,6 @@ public class Joysticks
 		DBugJoystickButton shootingTriggerBtn = new DBugJoystickButton(joystickOperator, "button_Shooting_Trigger");
 		shootingTriggerBtn.whenPressed(new TriggerShootingSequence());
 		
-		//No Camera
-		
-		DBugJoystickButton warmUpShooterNoCamera = new DBugJoystickButton(joystickOperator, "button_WarmUpShooter_NoCamera");
-		warmUpShooterNoCamera.whileHeld(new WarmUpShooterSequenceNoCamera());
-		
-		DBugJoystickButton shootingTriggerBtnNoCamera = new DBugJoystickButton(joystickOperator, "button_ShootingTrigger_NoCamera");
-		shootingTriggerBtnNoCamera.whenPressed(new TriggerShootingSequenceNoCamera());
-		
 		//More Intake
 
 		DBugJoystickButton collectionBtn = new DBugJoystickButton(joystickOperator, "button_Collect_Ball");
