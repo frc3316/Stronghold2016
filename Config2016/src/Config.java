@@ -389,7 +389,10 @@ public class Config
 				addToVariables("flywheel_Bangbang_OffVoltage", 0.0);
 
 				// PID
-				addToVariables("flywheel_PID_Setpoint", 45.0);
+				
+				//addToVariables("flywheel_PID_Setpoint", 45.0);
+				addToVariables("flywheel_PID_Setpoint", 30.0); //Lowered for presentations
+				
 				addToVariables("flywheel_PID_Tolerance", 2.0);
 				addToVariables("flywheel_PID_KP", 180.0);
 				addToVariables("flywheel_PID_KI", 332.5);
