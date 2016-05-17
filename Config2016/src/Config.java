@@ -136,6 +136,9 @@ public class Config
 					addToVariables("button_Warm_Up_Shooter", 5);
 					addToVariables("button_Shooting_Trigger", 4);
 					addToVariables("button_Warm_Up_Flywheel", 6);
+					
+					addToVariables("button_WarmUpShooter_NoCamera", 9);
+					addToVariables("button_ShootingTrigger_NoCamera", 10);
 				}
 			}
 		}
@@ -209,7 +212,7 @@ public class Config
 				addToConstantsA("HOOD_MOTOR_REVERSE", false);
 				addToConstantsB("HOOD_MOTOR_REVERSE", true);
 
-				addToConstants("HOOD_MOTOR_MAX_CURRENT", 30.0); // TODO: Check
+				addToConstants("HOOD_MOTOR_MAX_CURRENT", 60.0); // TODO: Check
 																// the stall
 																// current
 
@@ -551,17 +554,11 @@ public class Config
 
 				// PID Control
 				addToVariables("hood_Angle_SetPoint", 0.0);
-				addToVariables("hood_PID_Tolerance", 0.55);
-				/*
-				addToVariables("hood_PID_KP", 96.0);
-				addToVariables("hood_PID_KI", 0.0);
-				addToVariables("hood_PID_KD", 168.75); // Calculated using Z-N
-														// method
-														 */
-				
-				addToVariables("hood_PID_KP", 100.0);
-				addToVariables("hood_PID_KI", 0.0);
-				addToVariables("hood_PID_KD", 0.0);
+				addToVariables("hood_PID_Tolerance", 1.0);
+				addToVariables("hood_PID_KP", 90.0); // 42.0
+				addToVariables("hood_PID_KI", 0.0); // 1.4
+				addToVariables("hood_PID_KD", 90.0); // Calculated using Z-N
+														// method 5.0
 
 				// Bangbang Control
 				addToVariablesA("hood_Bangbang_OnVoltage", 0.33);

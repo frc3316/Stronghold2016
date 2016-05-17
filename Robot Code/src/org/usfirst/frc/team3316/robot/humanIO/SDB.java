@@ -27,6 +27,7 @@ import org.usfirst.frc.team3316.robot.commands.chassis.auton.ReachDefense;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodBangbang;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodJoysticks;
 import org.usfirst.frc.team3316.robot.commands.hood.HoodPID;
+import org.usfirst.frc.team3316.robot.commands.hood.HoodPIDNoCamera;
 import org.usfirst.frc.team3316.robot.commands.hood.SetHoodAngle;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.CloseIntakeTransport;
@@ -232,8 +233,7 @@ public class SDB
 	{
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 																// THIS COMMAND
-		
-		SmartDashboard.putData(new HoodPID());
+		SmartDashboard.putData(new HoodPIDNoCamera());
 		SmartDashboard.putData(new TurretPID());
 		
 		SmartDashboard.putData(new StartCompressor());

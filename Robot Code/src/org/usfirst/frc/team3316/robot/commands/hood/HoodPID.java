@@ -59,31 +59,45 @@ public class HoodPID extends DBugCommand {
 		pid.enable();
 	}
 
-	protected void execute() {
-		try {
-			/*
-			 * if (AlignShooter.isObjectDetected()) { // double setPoint =
-			 * (double) config.get("hood_Angle_SetPoint");
-			 * 
-			 * double currentAngle = (double) AlignShooter.getHoodAngle();
-			 * SmartDashboard.putNumber("HOOD PID angle", currentAngle);
-			 * 
-			 * angles[index] = currentAngle; index++; index %= angles.length;
-			 * 
-			 * for (double a : angles) { // logger.finest("Angle: " + a); }
-			 * double setPoint = getCorrectSetpoint(angles, 0.19); //we found
-			 * out that this magic constant works // logger.finest(
-			 * "Hood angle setpoint: " + setPoint);
-			 * 
-			 * SmartDashboard.putNumber("HOOD PID setpoint", setPoint); if
-			 * (setPoint > 20) { pid.setSetpoint(setPoint); }
-			 */
-			double hood_setpoint = SmartDashboard.getNumber("hood setpoint", 20.0);
-			pid.setSetpoint(hood_setpoint);
-			/*
-			 * } else { isFin = !Robot.hood.setMotors(0); }
-			 */
-		} catch (Exception e) {
+	protected void execute()
+	{
+		try
+		{
+			if (AlignShooter.isObjectDetected())
+			{
+				// double setPoint = (double) config.get("hood_Angle_SetPoint");
+
+				double currentAngle = (double) AlignShooter.getHoodAngle();
+				SmartDashboard.putNumber("HOOD PID angle", currentAngle);
+
+				angles[index] = currentAngle;
+				index++;
+				index %= angles.length;
+
+				for (double a : angles)
+				{
+//					logger.finest("Angle: " + a);
+				}
+				double setPoint = getCorrectSetpoint(angles, 0.19); //we found out that this magic constant works
+//				logger.finest("Hood angle setpoint: " + setPoint);
+
+				SmartDashboard.putNumber("HOOD PID setpoint", setPoint);
+				if (setPoint > 20)
+				{
+					pid.setSetpoint(setPoint);
+				}
+				else
+				{
+					pid.setSetpoint(50);
+				}
+			}
+			else
+			{
+				isFin = !Robot.hood.setMotors(0);
+			}
+		}
+		catch (Exception e)
+		{
 			logger.severe(e);
 			isFin = !Robot.hood.setMotors(0);
 		}
@@ -124,6 +138,14 @@ public class HoodPID extends DBugCommand {
 			sum += d;
 		}
 		double setpointsAvg = sum / setpoints.length;
+		
+		for (double setpoint : setpoints)
+		{
+			if (setpoint == 0)
+			{
+				return setpoints[index];
+			}
+		}
 
 		return setpointsAvg;
 
