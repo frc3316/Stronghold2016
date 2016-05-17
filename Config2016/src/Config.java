@@ -391,7 +391,7 @@ public class Config
 				// PID
 				
 				//addToVariables("flywheel_PID_Setpoint", 45.0);
-				addToVariables("flywheel_PID_Setpoint", 30.0); //Lowered for presentations
+				addToVariables("flywheel_PID_Setpoint", 37.5); //Lowered for presentations
 				
 				addToVariables("flywheel_PID_Tolerance", 2.0);
 				addToVariables("flywheel_PID_KP", 180.0);
