@@ -59,6 +59,7 @@ import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -116,14 +117,45 @@ public class SDB
 			put("Intake open", Robot.intake.isIntakeClose());
 
 			put("Is ball in", Robot.intake.isBallIn());
-
 			put("On defense", Robot.chassis.isOnDefense());
-			
 			put("ON OMNI", Robot.chassis.areShortPistonsExtended());
-			
 			put("Operator POV", Robot.joysticks.joystickOperator.getPOV());
-			
 			put("Vision Connected", VisionServer.isConnected);
+			
+			// THE FOLLOWING INDICATORS ARE FOR THE ROBOT SHOWCASE. TODO: REMOVE THESE AFTER THE EVENT
+			// General
+			put("Compressor current", Robot.actuators.compressor.getCompressorCurrent());
+			put("PDP voltage", Robot.sensors.pdp.getVoltage()); // The battery voltage
+			// Chassis
+			put("Chassis left front motor voltage (on range of -1 to 1)", Robot.actuators.chassisLeft1SC.get()); // TODO: is that front?
+			put("Chassis left back motor voltage (on range of -1 to 1)", Robot.actuators.chassisLeft2SC.get()); // TODO: is that back?
+			put("Chassis right front motor voltage (on range of -1 to 1)", Robot.actuators.chassisRight1SC.get()); // TODO: is that front?
+			put("Chassis right back motor voltage (on range of -1 to 1)", Robot.actuators.chassisRight2SC.get()); // TODO: is that back?
+			put("Chassis long pistons extended", Robot.chassis.areLongPistonsExtended());
+			put("Chassis pistons left extended", Robot.chassis.areShortPistonsLeftExtended());
+			put("Chassis pistons right extended", Robot.chassis.areShortPistonsRightExtended());
+			put("Chassis pitch angle (measured by NavX)", Robot.chassis.getPitch());
+			put("Chassis roll angle (measured by NavX)", Robot.chassis.getRoll());
+			put("Chassis left encoder distance)", Robot.sensors.chassisLeftEncoder.getDistance());
+			put("Chassis right encoder distance", Robot.sensors.chassisRightEncoder.getDistance()); // TODO: Add an encoder :)
+			// Intake
+			put("Intake pistons open", Robot.intake.isIntakeOpen());
+			put("Intake motor voltage (on range of -1 to 1)", Robot.actuators.intakeSC.get());
+			put("Intake ball in (switch pushed)", Robot.intake.isBallIn());
+			// Transport
+			put("Transport voltage (on range of -1 to 1)", Robot.actuators.transportSC.get());
+			// Flywheel
+			put("Flywheel hall effect value", Robot.sensors.flywheelHE.get());
+			put("Flywheel bolts counter", Robot.sensors.flywheelCounter.get());
+			put("Flywheel motor voltage (on range of -1 to 1)", Robot.actuators.flywheelSC.get());
+			put("Flywheel speed (in RPS)", Robot.sensors.flywheelCounter.getRate());
+			// Turret
+			put("Turret motor voltage (on range of -1 to 1)", Robot.actuators.turretSC.get());
+			put("Turret potentiometer value", Robot.sensors.turretPot.get());
+			// Hood
+//			put("Hood motor voltage (on range of -1 to 1)", Robot.actuators.hoodSC.get()); // The hood is temporarily disabled
+			// Climbing
+			put("Climbing motors voltage (on range of -1 to 1)", Robot.actuators.climbingMotor1.getVoltage());
 		}
 
 		private void put(String name, double d)
@@ -252,55 +284,6 @@ public class SDB
 		putConfigVariableInSDB("hood_PID_KP");
 		putConfigVariableInSDB("hood_PID_KI");
 		putConfigVariableInSDB("hood_PID_KD");
-		
-		
-		/*
-		 * Actuators
-		 */
-		// General
-		SmartDashboard.putNumber("Compressor", Robot.actuators.compressor.getCompressorCurrent());
-		// Chassis
-		SmartDashboard.putNumber("chassis left front speed", Robot.actuators.chassisLeft1SC.get()); // TODO: is that front?
-		SmartDashboard.putNumber("chassis left back speed", Robot.actuators.chassisLeft2SC.get()); // TODO: is that back?
-		SmartDashboard.putNumber("chassis right front speed", Robot.actuators.chassisRight1SC.get()); // TODO: is that front?
-		SmartDashboard.putNumber("chassis right back speed", Robot.actuators.chassisRight2SC.get()); // TODO: is that back?
-		SmartDashboard.putNumber("Long pistons", Robot.actuators.chassisLongPistons.getAll()); // TODO: is that correct?
-		SmartDashboard.putNumber("chassis pistons left", Robot.actuators.chassisShortPistonsLeft.getAll()); // TODO: is that correct?
-		SmartDashboard.putNumber("chassis pistons right", Robot.actuators.chassisShortPistonsRight.getAll()); // TODO: is that correct?
-		// Intake
-		SmartDashboard.putNumber("Intake solenoid", Robot.actuators.intakeSolenoid.getAll()); // TODO: is that correct?
-		SmartDashboard.putNumber("Intake speed", Robot.actuators.intakeSC.get());
-		// Transport
-		SmartDashboard.putNumber("Transport speed", Robot.actuators.transportSC.get());
-		// Flywheel
-		SmartDashboard.putNumber("Flywheel speed", Robot.actuators.flywheelSC.get());
-		// Turret
-		SmartDashboard.putNumber("Turret speed", Robot.actuators.turretSC.get());
-		// Hood
-		SmartDashboard.putNumber("Hood speed", Robot.actuators.hoodSC.get());
-		
-		/*
-		 * Sensors
-		 */
-		// General
-		SmartDashboard.putNumber("PDP voltage", Robot.sensors.pdp.getVoltage());
-		// Chassis
-		SmartDashboard.putNumber("NavX angle", Robot.sensors.navx.getAngle());
-		SmartDashboard.putNumber("Left Encoder Distance", Robot.sensors.chassisLeftEncoder.getDistance()); //TODO
-		SmartDashboard.putNumber("Right Encoder Distance", Robot.sensors.chassisRightEncoder.getDistance()); //TODO
-		// Intake
-		SmartDashboard.putNumber("Intake switch value", Robot.sensors.intakeSwitch.getValue());
-		// Flywheel
-		SmartDashboard.putNumber("Flywheel counter", Robot.sensors.flywheelCounter.get());
-		SmartDashboard.putBoolean("Flywheel hall effect", Robot.sensors.flywheelHE.get());
-		// Turret
-		SmartDashboard.putNumber("Turret potentiometer value", Robot.sensors.turretPot.get());
-		// Hood
-		SmartDashboard.putNumber("Hood potentiometer value", Robot.sensors.hoodPot.get());
-		// Climbing
-		SmartDashboard.putNumber("Climbing potentiometer value", Robot.sensors.climbingPot.get());
-		SmartDashboard.putBoolean("Climbing switch value", Robot.sensors.climbingSwitch.get());
-
 		
 		logger.info("Finished initSDB()");
 	}
