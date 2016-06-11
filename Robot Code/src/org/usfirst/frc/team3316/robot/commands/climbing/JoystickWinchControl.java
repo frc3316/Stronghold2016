@@ -17,10 +17,7 @@ public class JoystickWinchControl extends DBugCommand
 
 	protected void execute()
 	{
-		SmartDashboard.putNumber("Winch Y", -Robot.joysticks.joystickOperator.getRawAxis(5));
-		
 		isFin = !Robot.climbing.setMotors(-Robot.joysticks.joystickOperator.getRawAxis(5)); // Coz flight
-																							// simulators
 	}
 
 	protected boolean isFinished()

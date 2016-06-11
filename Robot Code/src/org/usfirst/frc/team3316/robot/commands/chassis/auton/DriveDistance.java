@@ -46,9 +46,6 @@ public class DriveDistance extends DBugCommand
 			{
 				double currentDist = Robot.chassis.getDistance() - initDist;
 
-				// REMOVE AFTER TESTINGS
-				SmartDashboard.putNumber("Current Distance", currentDist);
-
 				return currentDist;
 			}
 

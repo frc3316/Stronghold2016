@@ -58,7 +58,6 @@ public class HoodPIDNoCamera extends DBugCommand
 
 	protected void execute() 
 	{
-		SmartDashboard.putNumber("HOOD PID SETPOINT", pid.getSetpoint());
 	}
 
 	protected boolean isFinished() 

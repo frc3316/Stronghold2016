@@ -43,9 +43,6 @@ public class Chassis extends DBugSubsystem
 			{
 				isOnDefense = true;
 			}
-			
-			SmartDashboard.putNumber("MovingAvg Pitch", movingAvgPitch.get());
-			SmartDashboard.putNumber("MovingAvg Roll", movingAvgRoll.get());
 		}
 	}
 
@@ -256,13 +253,11 @@ public class Chassis extends DBugSubsystem
 	public void resetPitch() 
 	{
 		pitchOffset = pitchOffset - getPitch();
-		SmartDashboard.putNumber("Pitch offset", pitchOffset);
 	}
 	
 	public void resetRoll() 
 	{
 		rollOffset = rollOffset - getRoll();
-		SmartDashboard.putNumber("Roll offset", rollOffset);
 	}
 
 	public double getYaw()

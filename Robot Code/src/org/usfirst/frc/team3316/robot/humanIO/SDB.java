@@ -15,6 +15,7 @@ import org.usfirst.frc.team3316.robot.commands.hood.HoodPIDNoCamera;
 import org.usfirst.frc.team3316.robot.commands.turret.TurretPID;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -40,22 +41,17 @@ public class SDB
 			/*
 			 * Insert put methods here
 			 */
-//			put("Flywheel speed", Math.abs(Robot.flywheel.getRate()));
-//
-//			put("Turret angle", Robot.turret.getAngle());
-//			put("Hood angle", Robot.hood.getAngle());
-
 			// Vision
 			try
 			{
-//				put("Object detected", AlignShooter.isObjectDetected());
+				put("Object detected", AlignShooter.isObjectDetected());
 //				put("Turret vision angle", AlignShooter.getTowerAngle());
 //				put("Vision distance", VisionServer.Data.get("DFC"));
 //				put("Hood angle setpoint", AlignShooter.getHoodAngle());
 //
-//				put("Ready to shoot",
-//						Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget() && Robot.turret.isOnTarget()
-//								&& Robot.intake.isReadyToTransfer() && AlignShooter.isObjectDetected());
+				put("Ready to shoot",
+						Robot.flywheel.isOnTarget() && Robot.hood.isOnTarget() && Robot.turret.isOnTarget()
+								&& Robot.intake.isReadyToTransfer() && AlignShooter.isObjectDetected());
 			}
 			catch (Exception e)
 			{
@@ -64,12 +60,12 @@ public class SDB
 
 			// For drivers
 //			put("Ready to transfer", Robot.intake.isReadyToTransfer());
-//			put("Flywheel on target", Robot.flywheel.isOnTarget());
+			put("Flywheel on target", Robot.flywheel.isOnTarget());
 //			put("Turret on target", Robot.turret.isOnTarget());
 //			put("Hood on target", Robot.hood.isOnTarget());
 //			put("Intake open", Robot.intake.isIntakeClose());
 //
-//			put("Is ball in", Robot.intake.isBallIn());
+			put("Is ball in", Robot.intake.isBallIn());
 			put("On defense", Robot.chassis.isOnDefense());
 			put("ON OMNI", Robot.chassis.areShortPistonsExtended());
 //			put("Operator POV", Robot.joysticks.joystickOperator.getPOV());
@@ -81,28 +77,25 @@ public class SDB
 //			put("PDP voltage", Robot.sensors.pdp.getVoltage()); // The battery voltage
 			// Chassis
 			put("Chassis left front motor voltage (between -1 and 1)", Robot.actuators.chassisLeft1SC.get()); // TODO: is that front?
-			put("Chassis left back motor voltage (between -1 and 1)", Robot.actuators.chassisLeft2SC.get()); // TODO: is that back?
 			put("Chassis right front motor voltage (between -1 and 1)", Robot.actuators.chassisRight1SC.get()); // TODO: is that front?
-			put("Chassis right back motor voltage (between -1 and 1)", Robot.actuators.chassisRight2SC.get()); // TODO: is that back?
 			put("Chassis long pistons extended", Robot.chassis.areLongPistonsExtended());
 			put("Chassis pistons left extended", Robot.chassis.areShortPistonsLeftExtended());
 			put("Chassis pistons right extended", Robot.chassis.areShortPistonsRightExtended());
-//			put("Chassis pitch angle (measured by NavX)", Robot.chassis.getPitch());
-			put("Chassis roll angle (measured by NavX)", Robot.chassis.getRoll());
-			put("Chassis left encoder distance)", Robot.sensors.chassisLeftEncoder.getDistance());
+			put("Chassis pitch angle (measured by NavX)", Robot.chassis.getPitch());
+			put("Chassis left encoder distance", Robot.sensors.chassisLeftEncoder.getDistance());
 			put("Chassis right encoder distance", Robot.sensors.chassisRightEncoder.getDistance()); // TODO: Add an encoder :)
 			put("On defense", Robot.chassis.isOnDefense());
 //			// Intake
 //			put("Intake pistons open", Robot.intake.isIntakeOpen());
 //			put("Intake motor voltage (between -1 and 1)", Robot.actuators.intakeSC.get());
-//			put("Intake ball in (switch pushed)", Robot.intake.isBallIn());
+			put("Intake ball in (switch pushed)", Robot.intake.isBallIn());
 //			// Transport
 //			put("Transport voltage (between -1 and 1)", Robot.actuators.transportSC.get());
 //			// Flywheel
 //			put("Flywheel hall effect value", Robot.sensors.flywheelHE.get());
 //			put("Flywheel bolts counter", Robot.sensors.flywheelCounter.get());
 //			put("Flywheel motor voltage (between -1 and 1)", Robot.actuators.flywheelSC.get());
-//			put("Flywheel speed (in RPS)", Robot.sensors.flywheelCounter.getRate());
+			put("Flywheel speed (in RPS)", Robot.sensors.flywheelCounter.getRate());
 //			// Turret
 //			put("Turret motor voltage (between -1 and 1)", Robot.actuators.turretSC.get());
 //			put("Turret potentiometer value", Robot.sensors.turretPot.get());

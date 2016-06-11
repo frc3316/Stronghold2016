@@ -25,7 +25,6 @@ public class HoodJoysticks extends DBugCommand {
 		}
 		
 		isFin = !Robot.hood.setMotors(speed);
-		SmartDashboard.putNumber("Joystick Operator Y", speed);
 	}
 
 	protected boolean isFinished() {

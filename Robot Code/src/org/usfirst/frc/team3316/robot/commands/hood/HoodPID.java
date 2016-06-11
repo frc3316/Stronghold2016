@@ -68,7 +68,6 @@ public class HoodPID extends DBugCommand {
 				// double setPoint = (double) config.get("hood_Angle_SetPoint");
 
 				double currentAngle = (double) AlignShooter.getHoodAngle();
-				SmartDashboard.putNumber("HOOD PID angle", currentAngle);
 
 				angles[index] = currentAngle;
 				index++;
@@ -81,7 +80,6 @@ public class HoodPID extends DBugCommand {
 				double setPoint = getCorrectSetpoint(angles, 0.19); //we found out that this magic constant works
 //				logger.finest("Hood angle setpoint: " + setPoint);
 
-				SmartDashboard.putNumber("HOOD PID setpoint", setPoint);
 				if (setPoint > 20)
 				{
 					pid.setSetpoint(setPoint);
