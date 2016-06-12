@@ -212,8 +212,7 @@ public class Chassis extends DBugSubsystem
 	 */
 	public boolean areShortPistonsExtended()
 	{
-		return shortPistonsLeft.get().equals(Value.kForward)
-				&& shortPistonsRight.get().equals(Value.kForward);
+		return areShortPistonsLeftExtended();
 	}
 
 	/**
