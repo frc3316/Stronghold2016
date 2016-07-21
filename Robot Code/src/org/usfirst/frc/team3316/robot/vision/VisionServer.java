@@ -23,6 +23,8 @@ public class VisionServer implements Runnable
 
 	private Map<String, Double> parseLine(String s)
 	{
+		logger.fine("Parsing input: " + s);
+		
 		// Input e.g.: {'Var1':'33.16','Var2':'22.12'}
 		Map<String, Double> data = new HashMap<String, Double>();
 
@@ -58,6 +60,8 @@ public class VisionServer implements Runnable
 
 //		logger.fine("data: " + data.toString());
 		
+		logger.fine("Parsing output: " + data.toString());
+		
 		return data;
 	}
 	
@@ -68,7 +72,7 @@ public class VisionServer implements Runnable
 		DatagramSocket serverSocket = null;
 		try
 		{
-			serverSocket = new DatagramSocket(8000);
+			serverSocket = new DatagramSocket(8080);
 		}
 		catch (SocketException e)
 		{

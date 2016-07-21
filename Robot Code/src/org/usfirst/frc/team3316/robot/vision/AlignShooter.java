@@ -5,6 +5,8 @@ import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.utils.Utils;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class AlignShooter
 {
 	private static DBugLogger logger;
@@ -33,6 +35,8 @@ public class AlignShooter
 	{
 		double distance = VisionServer.Data.get("DFC"); // DFC = Distance From
 														// Camera
+		SmartDashboard.putNumber("DFC", distance); // TO REMOVE after testings
+		
 		return (Utils.valueInterpolation(distance, hoodTable));
 	}
 	
